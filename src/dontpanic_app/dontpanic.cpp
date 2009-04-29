@@ -1,7 +1,7 @@
 /*
  * dontpanic.cpp
  *
- * Copyright (C) 2004 $AUTHOR <$EMAIL>
+ * Copyright (C) 2004 Frank Habel <frank@bugplasma.de>
  */
 #include "dontpanic.h"
 #include "dontpanic.moc"

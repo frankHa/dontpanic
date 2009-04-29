@@ -18,7 +18,7 @@ int main(int argc, char **argv)
     KCmdLineArgs::init(argc, argv, &about);
 
     KCmdLineOptions options;
-    options.add("+[URL]", ki18n( "Document to open" ));
+    //options.add("+[URL]", ki18n( "Document to open" ));
     KCmdLineArgs::addCmdLineOptions( options );
     KApplication app;
 
