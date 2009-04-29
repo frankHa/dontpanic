@@ -1,3 +1,3 @@
 add_subdirectory(libdontpanic)
-add_subdirectory(dontpanic_part)
-add_subdirectory(dontpanic_app)
+add_subdirectory(dontpanicpart)
+add_subdirectory(dontpanic)

@@ -62,7 +62,7 @@ protected slots:
     void fileSaveAs();
 
 private:
-    QTextEdit *m_widget;
+    QTextEdit *_M_widget;
 };
 
 #endif // DONTPANICPART_H

@@ -23,10 +23,10 @@ DontPanicPart::DontPanicPart( QWidget *parentWidget, QObject *parent, const QStr
     setComponentData( DontPanicPartFactory::componentData() );
 
     // this should be your custom internal widget
-    m_widget = new QTextEdit( parentWidget);
+    _M_widget = new QTextEdit( parentWidget);
 
     // notify the part that this is our internal widget
-    setWidget(m_widget);
+    setWidget(_M_widget);
 
     // create our actions
     KStandardAction::saveAs(this, SLOT(fileSaveAs()), actionCollection());
@@ -49,13 +49,13 @@ DontPanicPart::~DontPanicPart()
 void DontPanicPart::setReadWrite(bool rw)
 {
     // notify your internal widget of the read-write state
-    m_widget->setReadOnly(!rw);
+    _M_widget->setReadOnly(!rw);
     if (rw)
-        connect(m_widget, SIGNAL(textChanged()),
+        connect(_M_widget, SIGNAL(textChanged()),
                 this,     SLOT(setModified()));
     else
     {
-        disconnect(m_widget, SIGNAL(textChanged()),
+        disconnect(_M_widget, SIGNAL(textChanged()),
                    this,     SLOT(setModified()));
     }
 
@@ -106,7 +106,7 @@ bool DontPanicPart::openFile()
     file.close();
 
     // now that we have the entire file, display it
-    m_widget->setPlainText(str);
+    _M_widget->setPlainText(str);
 
     // just for fun, set the status bar
     //emit setStatusBarText( m_url.prettyUrl() );
@@ -127,7 +127,7 @@ bool DontPanicPart::saveFile()
 
     // use QTextStream to dump the text to the file
     QTextStream stream(&file);
-    stream << m_widget->document();
+    stream << _M_widget->document();
 
     file.close();
 
