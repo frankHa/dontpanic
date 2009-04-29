@@ -13,7 +13,7 @@ static const char version[] = "0.0.1";
 
 int main(int argc, char **argv)
 {
-    KAboutData about("dontpanic", 0, ki18n("Don't Panic"), version, ki18n(description), KAboutData::License_GPL, ki18n("(C) 2008 %{AUTHOR}"), KLocalizedString(), 0, author_fh_email);
+    KAboutData about("dontpanic", 0, ki18n("Don't Panic"), version, ki18n(description), KAboutData::License_GPL, ki18n("(C) 2009 The Don't Panic Authors"), KLocalizedString(), 0, author_fh_email);
     about.addAuthor( ki18n(author_fh), KLocalizedString(), author_fh_email );
     KCmdLineArgs::init(argc, argv, &about);
 

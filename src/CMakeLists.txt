@@ -1,4 +1,10 @@
 #########################################################################
+# libdontpanic section
+#########################################################################
+set(libdontpanic_SRCS)
+
+#kde4_add_library(dontpaniclib SHARED ${libdontpanic_SRCS})
+#########################################################################
 # KPART SECTION
 #########################################################################
 #kde_module_LTLIBRARIES = libdontpanicpart.la
@@ -30,6 +36,3 @@ target_link_libraries(dontpanic ${KDE4_KDEUI_LIBS} ${KDE4_KPARTS_LIBS})
 install(TARGETS dontpanic ${INSTALL_TARGETS_DEFAULT_ARGS} )
 install( FILES dontpanic.desktop  DESTINATION  ${XDG_APPS_INSTALL_DIR} )
 install( FILES dontpanic_shell.rc  DESTINATION  ${DATA_INSTALL_DIR}/dontpanic )
-
-add_subdirectory(libdontpanic)
-add_subdirectory(dontpanicpart)
