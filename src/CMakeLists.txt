@@ -3,6 +3,7 @@
 #########################################################################
 set(libdontpanic_SRCS
     project.cpp
+    task.cpp
    )
 
 kde4_add_library(dontpaniclib SHARED ${libdontpanic_SRCS})
