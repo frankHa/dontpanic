@@ -5,14 +5,16 @@
 #include <klocale.h>
 
 static const char description[] =
-    I18N_NOOP("A KDE KPart Application");
+    I18N_NOOP("A personal project centered time tracking tool");
 
-static const char version[] = "%{VERSION}";
+static const char author_fh[] = "Frank Habel";
+static const char author_fh_email[] = "frank@bugplasma.de";
+static const char version[] = "0.0.1";
 
 int main(int argc, char **argv)
 {
-    KAboutData about("dontpanic", 0, ki18n("DontPanic"), version, ki18n(description), KAboutData::License_GPL, ki18n("(C) 2008 %{AUTHOR}"), KLocalizedString(), 0, "%{EMAIL}");
-    about.addAuthor( ki18n("%{AUTHOR}"), KLocalizedString(), "%{EMAIL}" );
+    KAboutData about("dontpanic", 0, ki18n("Don't Panic"), version, ki18n(description), KAboutData::License_GPL, ki18n("(C) 2008 %{AUTHOR}"), KLocalizedString(), 0, author_fh_email);
+    about.addAuthor( ki18n(author_fh), KLocalizedString(), author_fh_email );
     KCmdLineArgs::init(argc, argv, &about);
 
     KCmdLineOptions options;

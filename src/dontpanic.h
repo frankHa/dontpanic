@@ -56,7 +56,7 @@ private:
     void setupActions();
 
 private:
-    KParts::ReadWritePart *m_part;
+    KParts::ReadWritePart *_M_part;
 };
 
 #endif // DONTPANIC_H

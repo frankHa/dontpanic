@@ -38,13 +38,13 @@ DontPanic::DontPanic()
     {
         // now that the Part is loaded, we cast it to a Part to get
         // our hands on it
-        m_part = static_cast<KParts::ReadWritePart *>(factory->create(this,
+        _M_part = static_cast<KParts::ReadWritePart *>(factory->create(this,
                                 "DontPanicPart" ));
 
-        if (m_part)
+        if (_M_part)
         {
             // tell the KParts::MainWindow that this is indeed the main widget
-            setCentralWidget(m_part->widget());
+            setCentralWidget(_M_part->widget());
 
             // and integrate the part's GUI with the shell's
             setupGUI();
@@ -73,7 +73,7 @@ DontPanic::~DontPanic()
 
 void DontPanic::load(const KUrl& url)
 {
-    m_part->openUrl( url );
+    _M_part->openUrl( url );
 }
 
 void DontPanic::setupActions()
@@ -115,7 +115,7 @@ void DontPanic::fileNew()
     // http://developer.kde.org/documentation/standards/kde/style/basics/index.html )
     // says that it should open a new window if the document is _not_
     // in its initial state.  This is what we do here..
-    if ( ! m_part->url().isEmpty() || m_part->isModified() )
+    if ( ! _M_part->url().isEmpty() || _M_part->isModified() )
     {
         (new DontPanic)->show();
     };
@@ -159,7 +159,7 @@ void DontPanic::fileOpen()
         // http://developer.kde.org/documentation/standards/kde/style/basics/index.html )
         // says that it should open a new window if the document is _not_
         // in its initial state.  This is what we do here..
-        if ( m_part->url().isEmpty() && ! m_part->isModified() )
+        if ( _M_part->url().isEmpty() && ! _M_part->isModified() )
         {
             // we open the file in this window...
             load( url );
