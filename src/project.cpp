@@ -1,4 +1,4 @@
-#include "project.hpp"
+#include <dontpaniclib/project.hpp>
 // ---------------------------------------------------------------------------------
 namespace dp
 {

@@ -2,6 +2,8 @@
 # libdontpanic section
 #########################################################################
 set(libdontpanic_SRCS
+    action.cpp
+    action_template.cpp
     project.cpp
     task.cpp
    )
