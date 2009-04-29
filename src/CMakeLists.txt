@@ -1,9 +1,14 @@
 #########################################################################
 # libdontpanic section
 #########################################################################
-set(libdontpanic_SRCS)
+set(libdontpanic_SRCS
+    project.cpp
+   )
 
-#kde4_add_library(dontpaniclib SHARED ${libdontpanic_SRCS})
+kde4_add_library(dontpaniclib SHARED ${libdontpanic_SRCS})
+target_link_libraries(dontpaniclib ${KDE4_KDECORE_LIBS})
+
+install(TARGETS dontpaniclib DESTINATION ${PLUGIN_INSTALL_DIR})
 #########################################################################
 # KPART SECTION
 #########################################################################
