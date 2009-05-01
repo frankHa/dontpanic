@@ -1,6 +1,6 @@
-#include "dontpanic_part.h"
+#include <dontpanicpart/dontpanic_part.h>
 
-#include "dontpanic_part.moc"
+#include <dontpanicpart/dontpanic_part.moc>
 
 #include <kaction.h>
 #include <kactioncollection.h>
