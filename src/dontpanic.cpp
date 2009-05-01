@@ -3,8 +3,8 @@
  *
  * Copyright (C) 2004 Frank Habel <frank@bugplasma.de>
  */
-#include "dontpanic.h"
-#include "dontpanic.moc"
+#include <dontpanicshell/dontpanic.h>
+#include <dontpanicshell/dontpanic.moc>
 
 #include <kaction.h>
 #include <kactioncollection.h>
