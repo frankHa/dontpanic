@@ -1,4 +1,4 @@
-#include <dontpaniclib/action_template.hpp>
+#include "action_template.hpp"
 
 // ---------------------------------------------------------------------------------
 namespace dp

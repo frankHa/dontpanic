@@ -1,17 +1,6 @@
-#########################################################################
-# libdontpanic section
-#########################################################################
-set(libdontpanic_SRCS
-    action.cpp
-    action_template.cpp
-    project.cpp
-    task.cpp
-   )
+add_subdirectory(libdontpanic)
 
-kde4_add_library(dontpanic SHARED ${libdontpanic_SRCS})
-target_link_libraries(dontpanic ${KDE4_KDECORE_LIBS})
 
-install(TARGETS dontpanic DESTINATION ${PLUGIN_INSTALL_DIR})
 #########################################################################
 # KPART SECTION
 #########################################################################
@@ -43,6 +32,6 @@ set_target_properties(dontpanic_bin PROPERTIES OUTPUT_NAME dontpanic)
 
 
 ########### install files ###############
-install(TARGETS dontpanic ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS dontpanic_bin ${INSTALL_TARGETS_DEFAULT_ARGS} )
 install( FILES dontpanic.desktop  DESTINATION  ${XDG_APPS_INSTALL_DIR} )
 install( FILES dontpanic_shell.rc  DESTINATION  ${DATA_INSTALL_DIR}/dontpanic )

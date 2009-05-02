@@ -1,7 +1,7 @@
 #ifndef LIBDONTPANICPROJECT_HPP
 #define LIBDONTPANICPROJECT_HPP
 // ---------------------------------------------------------------------------------
-#include <dontpaniclib/defines.hpp>
+#include "defines.hpp"
 #include <QString>
 // ---------------------------------------------------------------------------------
 namespace dp
