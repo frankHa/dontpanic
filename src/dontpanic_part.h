@@ -10,6 +10,11 @@ class QTextEdit;
 class KAboutData;
 class KAction;
 
+namespace dp{
+  class dont_panic_core;
+}
+
+
 /**
  * This is a "Part".  It that does all the real work in a KPart
  * application.
@@ -62,6 +67,7 @@ protected slots:
     void fileSaveAs();
 
 private:
+    dp::dont_panic_core *_M_core;
     QTextEdit *_M_widget;
 };
 

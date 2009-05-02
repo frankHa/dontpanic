@@ -2,6 +2,8 @@
 
 #include "dontpanic_part.moc"
 
+#include "dont_panic_core.hpp"
+
 #include <kaction.h>
 #include <kactioncollection.h>
 #include <kcomponentdata.h>
@@ -21,7 +23,10 @@ DontPanicPart::DontPanicPart( QWidget *parentWidget, QObject *parent, const QStr
 {
     // we need an instance
     setComponentData( DontPanicPartFactory::componentData() );
+    
+    QWidget *canvas = new QWidget(parentWidget);
 
+    //_M_core = new dp::dont_panic_core(this, true, canvas);
     // this should be your custom internal widget
     _M_widget = new QTextEdit( parentWidget);
 
