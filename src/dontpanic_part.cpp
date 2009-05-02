@@ -14,6 +14,7 @@
 #include <QtCore/QFile>
 #include <QtCore/QTextStream>
 #include <QtGui/QTextEdit>
+#include <QVBoxLayout>
 
 typedef KParts::GenericFactory<DontPanicPart> DontPanicPartFactory;
 K_EXPORT_COMPONENT_FACTORY( libdontpanicpart, DontPanicPartFactory )
@@ -28,11 +29,13 @@ DontPanicPart::DontPanicPart( QWidget *parentWidget, QObject *parent, const QStr
 
     _M_core = new dp::dont_panic_core(this, true, canvas);
     // this should be your custom internal widget
-    _M_widget = new QTextEdit( parentWidget);
+    //_M_widget = new QTextEdit( parentWidget);
 
     // notify the part that this is our internal widget
-    setWidget(_M_widget);
+    setWidget(canvas);
+    QVBoxLayout *topLayout = new QVBoxLayout( canvas );
 
+    topLayout->addWidget(_M_core->widget());
     // create our actions
     KStandardAction::saveAs(this, SLOT(fileSaveAs()), actionCollection());
     save = KStandardAction::save(this, SLOT(save()), actionCollection());
@@ -53,17 +56,7 @@ DontPanicPart::~DontPanicPart()
 
 void DontPanicPart::setReadWrite(bool rw)
 {
-    // notify your internal widget of the read-write state
-    _M_widget->setReadOnly(!rw);
-    if (rw)
-        connect(_M_widget, SIGNAL(textChanged()),
-                this,     SLOT(setModified()));
-    else
-    {
-        disconnect(_M_widget, SIGNAL(textChanged()),
-                   this,     SLOT(setModified()));
-    }
-
+    _M_core->set_read_write(rw);
     ReadWritePart::setReadWrite(rw);
 }
 
@@ -96,47 +89,12 @@ KAboutData *DontPanicPart::createAboutData()
 
 bool DontPanicPart::openFile()
 {
-    // m_file is always local so we can use QFile on it
-    QFile file("m_file");
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-        return false;
-
-    // our example widget is text-based, so we use QTextStream instead
-    // of a raw QDataStream
-    QTextStream stream(&file);
-    QString str;
-    while (!stream.atEnd())
-        str += stream.readLine() + "\n";
-
-    file.close();
-
-    // now that we have the entire file, display it
-    _M_widget->setPlainText(str);
-
-    // just for fun, set the status bar
-    //emit setStatusBarText( m_url.prettyUrl() );
-
-    return true;
+    return _M_core->openFile();
 }
 
 bool DontPanicPart::saveFile()
 {
-    // if we aren't read-write, return immediately
-    if (isReadWrite() == false)
-        return false;
-
-    // m_file is always local, so we use QFile
-    QFile file("m_file");
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-        return false;
-
-    // use QTextStream to dump the text to the file
-    QTextStream stream(&file);
-    stream << _M_widget->document();
-
-    file.close();
-
-    return true;
+    return _M_core->saveFile();
 }
 
 void DontPanicPart::fileSaveAs()

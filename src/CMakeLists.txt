@@ -8,7 +8,7 @@ set(dontpanic_LIB_SRCS
    )
 
 kde4_add_library(dontpanicprivate SHARED ${dontpanic_LIB_SRCS})
-target_link_libraries(dontpanicprivate ${KDE4_KDECORE_LIBS})
+target_link_libraries(dontpanicprivate ${KDE4_KDEUI_LIBS})
 install(TARGETS dontpanicprivate ${INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)
 #########################################################################
 # KPART SECTION

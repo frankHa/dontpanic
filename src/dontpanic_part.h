@@ -68,7 +68,7 @@ protected slots:
 
 private:
     dp::dont_panic_core *_M_core;
-    QTextEdit *_M_widget;
+    //QTextEdit *_M_widget;
 };
 
 #endif // DONTPANICPART_H
