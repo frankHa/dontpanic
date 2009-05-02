@@ -8,10 +8,10 @@ set(libdontpanic_SRCS
     task.cpp
    )
 
-kde4_add_library(dontpaniclib SHARED ${libdontpanic_SRCS})
-target_link_libraries(dontpaniclib ${KDE4_KDECORE_LIBS})
+kde4_add_library(dontpanic SHARED ${libdontpanic_SRCS})
+target_link_libraries(dontpanic ${KDE4_KDECORE_LIBS})
 
-install(TARGETS dontpaniclib DESTINATION ${PLUGIN_INSTALL_DIR})
+install(TARGETS dontpanic DESTINATION ${PLUGIN_INSTALL_DIR})
 #########################################################################
 # KPART SECTION
 #########################################################################
@@ -36,9 +36,11 @@ set(dontpanic_SRCS
    dontpanic.cpp
  )
 
-kde4_add_executable(dontpanic ${dontpanic_SRCS})
+kde4_add_executable(dontpanic_bin ${dontpanic_SRCS})
 
-target_link_libraries(dontpanic ${KDE4_KDEUI_LIBS} ${KDE4_KPARTS_LIBS})
+target_link_libraries(dontpanic_bin ${KDE4_KDEUI_LIBS} ${KDE4_KPARTS_LIBS})
+set_target_properties(dontpanic_bin PROPERTIES OUTPUT_NAME dontpanic)
+
 
 ########### install files ###############
 install(TARGETS dontpanic ${INSTALL_TARGETS_DEFAULT_ARGS} )
