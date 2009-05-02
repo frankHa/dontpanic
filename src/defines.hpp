@@ -1,6 +1,9 @@
 #ifndef DONTPANIC_DEFINES_HPP
 #define DONTPANIC_DEFINES_HPP
 // ---------------------------------------------------------------------------------
+//dp includes
+#include "dp_export.hpp"
+// ---------------------------------------------------------------------------------
 //boost includes
 #include <boost/shared_ptr.hpp>
 #include <boost/weak_ptr.hpp>
