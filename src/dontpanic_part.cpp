@@ -16,6 +16,10 @@
 #include <QtGui/QTextEdit>
 #include <QVBoxLayout>
 
+#define DP_KPART_VERSION "0.0.1"
+#define DP_KPART_AUTHOR_FH "Frank Habel"
+#define DP_KPART_AUTHOR_FH_EMAIL "frank@bugplasma.de"
+
 typedef KParts::GenericFactory<DontPanicPart> DontPanicPartFactory;
 K_EXPORT_COMPONENT_FACTORY( libdontpanicpart, DontPanicPartFactory )
 
@@ -82,8 +86,8 @@ KAboutData *DontPanicPart::createAboutData()
     // the non-i18n name here must be the same as the directory in
     // which the part's rc file is installed ('partrcdir' in the
     // Makefile)
-    KAboutData *aboutData = new KAboutData("dontpanicpart", 0, ki18n("DontPanicPart"), "%{VERSION}");
-    aboutData->addAuthor(ki18n("%{AUTHOR}"), KLocalizedString(), "%{EMAIL}");
+    KAboutData *aboutData = new KAboutData("dontpanicpart", 0, ki18n("DontPanicPart"), DP_KPART_VERSION);
+    aboutData->addAuthor(ki18n(DP_KPART_AUTHOR_FH), KLocalizedString(), DP_KPART_AUTHOR_FH_EMAIL);
     return aboutData;
 }
 
