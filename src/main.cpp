@@ -1,4 +1,4 @@
-#include <dontpanicshell/dontpanic.h>
+#include "dontpanic.h"
 #include <kapplication.h>
 #include <kaboutdata.h>
 #include <kcmdlineargs.h>
