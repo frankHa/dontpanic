@@ -20,14 +20,14 @@
 #define DP_KPART_AUTHOR_FH "Frank Habel"
 #define DP_KPART_AUTHOR_FH_EMAIL "frank@bugplasma.de"
 
-typedef KParts::GenericFactory<DontPanicPart> DontPanicPartFactory;
-K_EXPORT_COMPONENT_FACTORY( libdontpanicpart, DontPanicPartFactory )
+typedef KParts::GenericFactory<DontPanikPart> DontPanikPartFactory;
+K_EXPORT_COMPONENT_FACTORY( libdontpanikpart, DontPanikPartFactory )
 
-DontPanicPart::DontPanicPart( QWidget *parentWidget, QObject *parent, const QStringList & /*args*/ )
+DontPanikPart::DontPanikPart( QWidget *parentWidget, QObject *parent, const QStringList & /*args*/ )
     : KParts::ReadOnlyPart(parent)
 {
     // we need an instance
-    setComponentData( DontPanicPartFactory::componentData() );
+    setComponentData( DontPanikPartFactory::componentData() );
     
     QWidget *canvas = new QWidget(parentWidget);
 
@@ -54,17 +54,17 @@ DontPanicPart::DontPanicPart( QWidget *parentWidget, QObject *parent, const QStr
     //setModified(false);
 }
 
-DontPanicPart::~DontPanicPart()
+DontPanikPart::~DontPanikPart()
 {
 }
 
-//void DontPanicPart::setReadWrite(bool rw)
+//void DontPanikPart::setReadWrite(bool rw)
 //{
 //    _M_core->set_read_write(rw);
 //    ReadWritePart::setReadWrite(rw);
 //}
 
-//void DontPanicPart::setModified(bool modified)
+//void DontPanikPart::setModified(bool modified)
 //{
     // get a handle on our Save action and make sure it is valid
 //    if (!save)
@@ -81,7 +81,7 @@ DontPanicPart::~DontPanicPart()
 //    ReadWritePart::setModified(modified);
 //}
 
-KAboutData *DontPanicPart::createAboutData()
+KAboutData *DontPanikPart::createAboutData()
 {
     // the non-i18n name here must be the same as the directory in
     // which the part's rc file is installed ('partrcdir' in the
@@ -91,17 +91,17 @@ KAboutData *DontPanicPart::createAboutData()
     return aboutData;
 }
 
-bool DontPanicPart::openFile()
+bool DontPanikPart::openFile()
 {
     return _M_core->openFile();
 }
 
-bool DontPanicPart::saveFile()
+bool DontPanikPart::saveFile()
 {
     return _M_core->saveFile();
 }
 
-//void DontPanicPart::fileSaveAs()
+//void DontPanikPart::fileSaveAs()
 //{
     // this slot is called whenever the File->Save As menu is selected,
 //    QString file_name = KFileDialog::getSaveFileName();

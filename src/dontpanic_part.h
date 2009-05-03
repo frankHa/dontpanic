@@ -23,19 +23,19 @@ namespace dp{
  * @author %{AUTHOR} <%{EMAIL}>
  * @version ${APP_VERSION}
  */
-class DontPanicPart : public KParts::ReadOnlyPart
+class DontPanikPart : public KParts::ReadOnlyPart
 {
     Q_OBJECT
 public:
     /**
      * Default constructor
      */
-    DontPanicPart(QWidget *parentWidget,QObject *parent, const QStringList &);
+    DontPanikPart(QWidget *parentWidget,QObject *parent, const QStringList &);
 
     /**
      * Destructor
      */
-    virtual ~DontPanicPart();
+    virtual ~DontPanikPart();
 
     /**
      * This is a virtual function inherited from KParts::ReadWritePart.
