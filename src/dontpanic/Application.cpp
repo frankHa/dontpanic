@@ -24,6 +24,9 @@ void Application::register_with_session_bus()
   qDebug() << "registering at the session bus now...";
   new ApplicationAdaptor ( this );
   QDBusConnection dbus = QDBusConnection::sessionBus();
+  //FH TODO: check if this one is needed or if there is some other way
+  //of service registration:
+  dbus.registerService("org.dontpanic");
   if(dbus.registerObject ( "/Application", this ))
   {
     qDebug()<<"yeah, success :)";

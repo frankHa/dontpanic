@@ -11,3 +11,4 @@ qt4_add_dbus_adaptor(dontpanic_SRCS ${CMAKE_CURRENT_BINARY_DIR}/org.dontpanic.Ap
 kde4_add_executable(dontpanic ${dontpanic_SRCS})
 target_link_libraries(dontpanic ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY})
 install(TARGETS dontpanic ${INSTALL_TARGETS_DEFAULT_ARGS} )
+#install( FILES ${CMAKE_CURRENT_BINARY_DIR}/org.dontpanic.Application.xml DESTINATION ${KDE4_DBUS_INTERFACES_DIR} )
