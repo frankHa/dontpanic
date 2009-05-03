@@ -13,14 +13,14 @@ class KAction;
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  class DP_EXPORT dont_panic_core: public QObject
+  class DP_EXPORT dont_panik_core: public QObject
   {
       // ---------------------------------------------------------------------------------
       Q_OBJECT
       // ---------------------------------------------------------------------------------
     public:
       // ---------------------------------------------------------------------------------
-      dont_panic_core ( KXMLGUIClient *gui_client, bool read_write, QWidget *parent );
+      dont_panik_core ( KXMLGUIClient *gui_client, bool read_write, QWidget *parent );
       // ---------------------------------------------------------------------------------
     public:
       // ---------------------------------------------------------------------------------

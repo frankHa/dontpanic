@@ -31,7 +31,7 @@ DontPanikPart::DontPanikPart( QWidget *parentWidget, QObject *parent, const QStr
     
     QWidget *canvas = new QWidget(parentWidget);
 
-    _M_core = new dp::dont_panic_core(this, true, canvas);
+    _M_core = new dp::dont_panik_core(this, true, canvas);
     // this should be your custom internal widget
     //_M_widget = new QTextEdit( parentWidget);
 

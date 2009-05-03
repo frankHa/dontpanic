@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 
     // see if we are starting with session management
     if (app.isSessionRestored())
-        RESTORE(DontPanic)
+        RESTORE(DontPanik)
     else
     {
         // no session.. just start up normally
@@ -32,7 +32,7 @@ int main(int argc, char **argv)
 
         if ( args->count() == 0 )
         {
-        DontPanic *widget = new DontPanic;
+        DontPanik *widget = new DontPanik();
         widget->show();
         }
         else
@@ -40,7 +40,7 @@ int main(int argc, char **argv)
             int i = 0;
             for (; i < args->count(); i++ )
             {
-                DontPanic *widget = new DontPanic;
+                DontPanik *widget = new DontPanik;
                 widget->show();
                 widget->load( args->url( i ) );
             }

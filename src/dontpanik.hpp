@@ -11,19 +11,19 @@
  * @author ${AUTHOR} <${EMAIL}>
  * @version ${APP_VERSION}
  */
-class DontPanic : public KParts::MainWindow
+class DontPanik : public KParts::MainWindow
 {
     Q_OBJECT
 public:
     /**
      * Default Constructor
      */
-    DontPanic();
+    DontPanik();
 
     /**
      * Default Destructor
      */
-    virtual ~DontPanic();
+    virtual ~DontPanik();
 
     /**
      * Use this method to load whatever file/URL you have

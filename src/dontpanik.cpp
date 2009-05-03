@@ -21,7 +21,7 @@
 
 #include <QApplication>
 
-DontPanic::DontPanic()
+DontPanik::DontPanik()
     : KParts::MainWindow( )
 {
     // set the shell's ui resource file
@@ -67,16 +67,16 @@ DontPanic::DontPanic()
     setAutoSaveSettings();
 }
 
-DontPanic::~DontPanic()
+DontPanik::~DontPanik()
 {
 }
 
-void DontPanic::load(const KUrl& url)
+void DontPanik::load(const KUrl& url)
 {
     _M_part->openUrl( url );
 }
 
-void DontPanic::setupActions()
+void DontPanik::setupActions()
 {
     KStandardAction::openNew(this, SLOT(fileNew()), actionCollection());
     KStandardAction::open(this, SLOT(fileOpen()), actionCollection());
@@ -90,14 +90,14 @@ void DontPanic::setupActions()
     //KStandardAction::configureToolbars(this, SLOT(optionsConfigureToolbars()), actionCollection());
 }
 
-void DontPanic::saveProperties(KConfigGroup & /*config*/)
+void DontPanik::saveProperties(KConfigGroup & /*config*/)
 {
     // the 'config' object points to the session managed
     // config file.  anything you write here will be available
     // later when this app is restored
 }
 
-void DontPanic::readProperties(const KConfigGroup & /*config*/)
+void DontPanik::readProperties(const KConfigGroup & /*config*/)
 {
     // the 'config' object points to the session managed
     // config file.  this function is automatically called whenever
@@ -105,7 +105,7 @@ void DontPanic::readProperties(const KConfigGroup & /*config*/)
     // in 'saveProperties'
 }
 
-void DontPanic::fileNew()
+void DontPanik::fileNew()
 {
     // this slot is called whenever the File->New menu is selected,
     // the New shortcut is pressed (usually CTRL+N) or the New toolbar
@@ -117,11 +117,11 @@ void DontPanic::fileNew()
     // in its initial state.  This is what we do here..
     //if ( ! _M_part->url().isEmpty() || _M_part->isModified() )
     //{
-        (new DontPanic)->show();
+        (new DontPanik)->show();
     //};
 }
 
-void DontPanic::optionsConfigureKeys()
+void DontPanik::optionsConfigureKeys()
 {
   /*KShortcutsDialog dlg( KKeyChooser::AllActions, KKeyChooser::LetterShortcutsDisallowed, this );
   dlg.insert( actionCollection(), "dontpanic_shell.rc" );
@@ -129,7 +129,7 @@ void DontPanic::optionsConfigureKeys()
   (void) dlg.configure( true );*/
 }
 
-void DontPanic::optionsConfigureToolbars()
+void DontPanik::optionsConfigureToolbars()
 {
     //saveMainWindowSettings(KGlobal::config(), autoSaveGroup());
 
@@ -140,12 +140,12 @@ void DontPanic::optionsConfigureToolbars()
     dlg.exec();*/
 }
 
-void DontPanic::applyNewToolbarConfig()
+void DontPanik::applyNewToolbarConfig()
 {
     //applyMainWindowSettings(KGlobal::config(), autoSaveGroup());
 }
 
-void DontPanic::fileOpen()
+void DontPanik::fileOpen()
 {
     // this slot is called whenever the File->Open menu is selected,
     // the Open shortcut is pressed (usually CTRL+O) or the Open toolbar
@@ -167,7 +167,7 @@ void DontPanic::fileOpen()
         //else
         //{
             // we open the file in a new window...
-        //    DontPanic* newWin = new DontPanic;
+        //    DontPanik* newWin = new DontPanik;
         //    newWin->load( url );
         //    newWin->show();
         //}

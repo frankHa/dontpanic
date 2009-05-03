@@ -11,7 +11,7 @@ class KAboutData;
 class KAction;
 
 namespace dp{
-  class dont_panic_core;
+  class dont_panik_core;
 }
 
 
@@ -67,7 +67,7 @@ protected slots:
     //void fileSaveAs();
 
 private:
-    dp::dont_panic_core *_M_core;
+    dp::dont_panik_core *_M_core;
 };
 
 #endif // DONTPANICPART_H
