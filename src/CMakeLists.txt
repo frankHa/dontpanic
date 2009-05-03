@@ -1,46 +1,48 @@
 add_subdirectory(libdontpanic)
+add_subdirectory(dontpanic)
 
 #########################################################################
 # PRIVATE SECTION
 #########################################################################
-set(dontpanic_LIB_SRCS
+set(dontpanikpart_LIB_SRCS
     dont_panic_core.cpp
    )
 
-kde4_add_library(dontpanicprivate SHARED ${dontpanic_LIB_SRCS})
-target_link_libraries(dontpanicprivate ${KDE4_KDEUI_LIBS})
-install(TARGETS dontpanicprivate ${INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)
+kde4_add_library(dontpanikpartprivate SHARED ${dontpanikpart_LIB_SRCS})
+target_link_libraries(dontpanikpartprivate ${KDE4_KDEUI_LIBS})
+install(TARGETS dontpanikpartprivate ${INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)
 #########################################################################
 # KPART SECTION
 #########################################################################
 #kde_module_LTLIBRARIES = libdontpanicpart.la
-set(dontpanic_PART_SRCS
+set(dontpanik_PART_SRCS
    dontpanic_part.cpp
  )
 
-kde4_add_plugin(dontpanicpart WITH_PREFIX ${dontpanic_PART_SRCS})
+kde4_add_plugin(dontpanikpart WITH_PREFIX ${dontpanik_PART_SRCS})
 
-target_link_libraries(dontpanicpart ${KDE4_KDEUI_LIBS} dontpanicprivate ${KDE4_KPARTS_LIBS} )
+target_link_libraries(dontpanikpart ${KDE4_KDEUI_LIBS} dontpanikpartprivate ${KDE4_KPARTS_LIBS} )
 
-install( FILES dontpanic_part.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR} )
-install( FILES dontpanic_part.rc  DESTINATION  ${DATA_INSTALL_DIR}/dontpanicpart )
+install( FILES dontpanik_part.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR} )
+install( FILES dontpanik_part.rc  DESTINATION  ${DATA_INSTALL_DIR}/dontpanikpart )
 
-install(TARGETS dontpanicpart  DESTINATION ${PLUGIN_INSTALL_DIR} )
+install(TARGETS dontpanikpart  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 
 ##########Application Shell#############
-set(dontpanic_SRCS
+set(dontpanik_SRCS
    main.cpp
    dontpanic.cpp
  )
 
-kde4_add_executable(dontpanic_bin ${dontpanic_SRCS})
+kde4_add_executable(dontpanik_bin ${dontpanik_SRCS})
 
-target_link_libraries(dontpanic_bin ${KDE4_KDEUI_LIBS} ${KDE4_KPARTS_LIBS})
-set_target_properties(dontpanic_bin PROPERTIES OUTPUT_NAME dontpanic)
+target_link_libraries(dontpanik_bin ${KDE4_KDEUI_LIBS} ${KDE4_KPARTS_LIBS})
+set_target_properties(dontpanik_bin PROPERTIES OUTPUT_NAME dontpanik)
 
 
 ########### install files ###############
-install(TARGETS dontpanic_bin ${INSTALL_TARGETS_DEFAULT_ARGS} )
-install( FILES dontpanic.desktop  DESTINATION  ${XDG_APPS_INSTALL_DIR} )
-install( FILES dontpanic_shell.rc  DESTINATION  ${DATA_INSTALL_DIR}/dontpanic )
+install(TARGETS dontpanik_bin ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( FILES dontpanik.desktop  DESTINATION  ${XDG_APPS_INSTALL_DIR} )
+install( FILES dontpanik_shell.rc  DESTINATION  ${DATA_INSTALL_DIR}/dontpanik )
+

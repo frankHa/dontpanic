@@ -25,7 +25,7 @@ DontPanic::DontPanic()
     : KParts::MainWindow( )
 {
     // set the shell's ui resource file
-    setXMLFile("dontpanic_shell.rc");
+    setXMLFile("dontpanik_shell.rc");
 
     // then, setup our actions
     setupActions();
@@ -33,13 +33,13 @@ DontPanic::DontPanic()
     // this routine will find and load our Part.  it finds the Part by
     // name which is a bad idea usually.. but it's alright in this
     // case since our Part is made for this Shell
-    KLibFactory *factory = KLibLoader::self()->factory("libdontpanicpart");
+    KLibFactory *factory = KLibLoader::self()->factory("libdontpanikpart");
     if (factory)
     {
         // now that the Part is loaded, we cast it to a Part to get
         // our hands on it
-        _M_part = static_cast<KParts::ReadWritePart *>(factory->create(this,
-                                "DontPanicPart" ));
+        _M_part = static_cast<KParts::ReadOnlyPart *>(factory->create(this,
+                                "DontPanikPart" ));
 
         if (_M_part)
         {
@@ -115,10 +115,10 @@ void DontPanic::fileNew()
     // http://developer.kde.org/documentation/standards/kde/style/basics/index.html )
     // says that it should open a new window if the document is _not_
     // in its initial state.  This is what we do here..
-    if ( ! _M_part->url().isEmpty() || _M_part->isModified() )
-    {
+    //if ( ! _M_part->url().isEmpty() || _M_part->isModified() )
+    //{
         (new DontPanic)->show();
-    };
+    //};
 }
 
 void DontPanic::optionsConfigureKeys()
@@ -159,17 +159,17 @@ void DontPanic::fileOpen()
         // http://developer.kde.org/documentation/standards/kde/style/basics/index.html )
         // says that it should open a new window if the document is _not_
         // in its initial state.  This is what we do here..
-        if ( _M_part->url().isEmpty() && ! _M_part->isModified() )
-        {
+        //if ( _M_part->url().isEmpty() && ! _M_part->isModified() )
+        //{
             // we open the file in this window...
             load( url );
-        }
-        else
-        {
+        //}
+        //else
+        //{
             // we open the file in a new window...
-            DontPanic* newWin = new DontPanic;
-            newWin->load( url );
-            newWin->show();
-        }
+        //    DontPanic* newWin = new DontPanic;
+        //    newWin->load( url );
+        //    newWin->show();
+        //}
     }
 }

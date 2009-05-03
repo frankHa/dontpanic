@@ -23,7 +23,7 @@ namespace dp{
  * @author %{AUTHOR} <%{EMAIL}>
  * @version ${APP_VERSION}
  */
-class DontPanicPart : public KParts::ReadWritePart
+class DontPanicPart : public KParts::ReadOnlyPart
 {
     Q_OBJECT
 public:
@@ -42,12 +42,12 @@ public:
      * A shell will use this to inform this Part if it should act
      * read-only
      */
-    virtual void setReadWrite(bool rw);
+    //virtual void setReadWrite(bool rw);
 
     /**
      * Reimplemented to disable and enable Save action
      */
-    virtual void setModified(bool modified);
+    //virtual void setModified(bool modified);
 
     static KAboutData *createAboutData();
 
@@ -64,11 +64,10 @@ protected:
     KAction *save;
 
 protected slots:
-    void fileSaveAs();
+    //void fileSaveAs();
 
 private:
     dp::dont_panic_core *_M_core;
-    //QTextEdit *_M_widget;
 };
 
 #endif // DONTPANICPART_H

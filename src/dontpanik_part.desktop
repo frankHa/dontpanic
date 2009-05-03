@@ -1,0 +1,14 @@
+[Desktop Entry]
+Name=DontPanikPart
+Name[ko]=DontPanik 부분
+Name[nds]=DontPanikKomponent
+Name[ru]=Компонент DontPanik
+Name[sr]=DontPanik део
+Name[sr@latin]=DontPanik deo
+Name[sv]=DontPanik-delprogram
+Name[x-test]=xxDontPanikPartxx
+MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;
+ServiceTypes=KParts/ReadOnlyPart
+X-KDE-Library=libdontpanikpart
+Type=Service
+X-Ubuntu-Gettext-Domain=desktop_kdesdk

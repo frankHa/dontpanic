@@ -1,10 +1,10 @@
 [Desktop Entry]
-Name=DontPanic
-Name[x-test]=xxDontPanicxx
-Exec=dontpanic %i %m -caption "%c"
-Icon=dontpanic
+Name=DontPanik
+Name[x-test]=xxDontPanikxx
+Exec=dontpanik %i %m -caption "%c"
+Icon=dontpanik
 Type=Application
-DocPath=dontpanic/index.html
+DocPath=dontpanik/index.html
 GenericName=A KDE KPart Application
 GenericName[ca]=Una aplicació KPart del KDE
 GenericName[cs]=Aplikace KDE KPart

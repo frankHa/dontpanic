@@ -22,25 +22,6 @@ namespace dp
     return _M_widget;
   }
   // ---------------------------------------------------------------------------------
-  void dont_panic_core::set_read_write ( bool rw )
-  {
-    // notify your internal widget of the read-write state
-    _M_widget->setReadOnly ( !rw );
-    if ( rw )
-      connect ( _M_widget, SIGNAL ( textChanged() ),
-                this,     SLOT ( setModified() ) );
-    else
-    {
-      disconnect ( _M_widget, SIGNAL ( textChanged() ),
-                   this,     SLOT ( setModified() ) );
-    }
-
-  }
-  // ---------------------------------------------------------------------------------
-  //void dont_panic_core::setModified ( bool modified )
-  //{
-  //}
-  // ---------------------------------------------------------------------------------
   bool dont_panic_core::openFile()
   {
     // m_file is always local so we can use QFile on it
