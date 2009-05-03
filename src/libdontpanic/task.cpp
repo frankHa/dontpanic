@@ -6,11 +6,14 @@ namespace dp
   // ---------------------------------------------------------------------------------
   ///ctor
   task::task()
-      : _M_id ( 0 )
+      : _M_id ( "0" )
       , _M_name ( "" )
-      , _M_description ( "" ) {}
+      , _M_visible ( true )
+      , _M_solo_effort ( true )
+      , _M_chargeable ( true )
+      , _M_creation_date ( QDateTime::currentDateTime() ) {}
   // ---------------------------------------------------------------------------------
-  long task::id() const
+  QString const& task::id() const
   {
     return _M_id;
   }
@@ -20,9 +23,24 @@ namespace dp
     return _M_name;
   }
   // ---------------------------------------------------------------------------------
-  QString const& task::description() const
+  bool task::visible() const
   {
-    return _M_description;
+    return _M_visible;
+  }
+  // ---------------------------------------------------------------------------------
+  bool task::solo_effort() const
+  {
+    return _M_solo_effort;
+  }
+  // ---------------------------------------------------------------------------------
+  bool task::chargeable() const
+  {
+    return _M_chargeable;
+  }
+  // ---------------------------------------------------------------------------------
+  QDateTime const& task::creation_date() const
+  {
+    return _M_creation_date;
   }
   // ---------------------------------------------------------------------------------
 }//dp
