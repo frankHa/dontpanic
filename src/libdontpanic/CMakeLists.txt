@@ -4,6 +4,7 @@
 set(libdontpanic_SRCS
     action.cpp
     action_template.cpp
+    collaboration_type.cpp
     project.cpp
     task.cpp
    )
