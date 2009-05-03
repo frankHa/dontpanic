@@ -23,17 +23,17 @@ namespace dp
     return _M_name;
   }
   // ---------------------------------------------------------------------------------
-  bool task::visible() const
+  bool task::is_visible() const
   {
     return _M_visible;
   }
   // ---------------------------------------------------------------------------------
-  bool task::solo_effort() const
+  bool task::is_solo_effort() const
   {
     return _M_solo_effort;
   }
   // ---------------------------------------------------------------------------------
-  bool task::chargeable() const
+  bool task::is_chargeable() const
   {
     return _M_chargeable;
   }
