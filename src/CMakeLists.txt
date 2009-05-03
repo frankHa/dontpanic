@@ -5,7 +5,7 @@ add_subdirectory(dontpanic)
 # PRIVATE SECTION
 #########################################################################
 set(dontpanikpart_LIB_SRCS
-    dont_panic_core.cpp
+    dont_panik_part_core.cpp
    )
 
 kde4_add_library(dontpanikpartprivate SHARED ${dontpanikpart_LIB_SRCS})
@@ -16,7 +16,7 @@ install(TARGETS dontpanikpartprivate ${INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAM
 #########################################################################
 #kde_module_LTLIBRARIES = libdontpanicpart.la
 set(dontpanik_PART_SRCS
-   dontpanic_part.cpp
+   dontpanik_part.cpp
  )
 
 kde4_add_plugin(dontpanikpart WITH_PREFIX ${dontpanik_PART_SRCS})
@@ -32,7 +32,7 @@ install(TARGETS dontpanikpart  DESTINATION ${PLUGIN_INSTALL_DIR} )
 ##########Application Shell#############
 set(dontpanik_SRCS
    main.cpp
-   dontpanic.cpp
+   dontpanik.cpp
  )
 
 kde4_add_executable(dontpanik_bin ${dontpanik_SRCS})

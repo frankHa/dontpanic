@@ -1,8 +1,8 @@
-#include "dontpanic_part.h"
+#include "dontpanik_part.hpp"
 
-#include "dontpanic_part.moc"
+#include "dontpanik_part.moc"
 
-#include "dont_panic_core.hpp"
+#include "dont_panik_part_core.hpp"
 
 #include <kaction.h>
 #include <kactioncollection.h>

@@ -1,5 +1,5 @@
-#include "dont_panic_core.hpp"
-#include "dont_panic_core.moc"
+#include "dont_panik_part_core.hpp"
+#include "dont_panik_part_core.moc"
 // ---------------------------------------------------------------------------------
 //Qt includes
 #include <QTextEdit>

@@ -1,11 +1,11 @@
-#include "dontpanic.h"
+#include "dontpanik.hpp"
 #include <kapplication.h>
 #include <kaboutdata.h>
 #include <kcmdlineargs.h>
 #include <klocale.h>
 
 static const char description[] =
-    I18N_NOOP("A personal project centered time tracking tool");
+    I18N_NOOP("The KDE interface to the personal project based time tracking tool dontpanic");
 
 static const char author_fh[] = "Frank Habel";
 static const char author_fh_email[] = "frank@bugplasma.de";
@@ -13,7 +13,7 @@ static const char version[] = "0.0.1";
 
 int main(int argc, char **argv)
 {
-    KAboutData about("dontpanic", 0, ki18n("Don't Panic"), version, ki18n(description), KAboutData::License_GPL, ki18n("(C) 2009 The Don't Panic Authors"), KLocalizedString(), 0, author_fh_email);
+    KAboutData about("dontpanic", 0, ki18n("Don't Panik"), version, ki18n(description), KAboutData::License_GPL, ki18n("(C) 2009 The Don't Panic Authors"), KLocalizedString(), 0, author_fh_email);
     about.addAuthor( ki18n(author_fh), KLocalizedString(), author_fh_email );
     KCmdLineArgs::init(argc, argv, &about);
 
