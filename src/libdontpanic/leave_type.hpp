@@ -1,0 +1,4 @@
+#ifndef DP_LEAVE_TYPE_HPP
+#define DP_LEAVE_TYPE_HPP
+
+#endif //DP_LEAVE_TYPE_HPP
