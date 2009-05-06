@@ -4,6 +4,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 set(dontpanic_SRCS
     Application.cpp
+    dbus.cpp
     main.cpp
    )
 
