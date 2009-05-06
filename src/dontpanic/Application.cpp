@@ -13,6 +13,11 @@ Application::Application ( int &argc, char** argv )
   register_with_session_bus();
 }
 // ---------------------------------------------------------------------------------
+QString Application::hello()
+{
+  return "dontpanic says 'hello'";
+}
+// ---------------------------------------------------------------------------------
 void Application::exit()
 {
   qDebug() << "exiting now!";
