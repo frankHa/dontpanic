@@ -3,7 +3,8 @@
 //Qt includes
 #include <QCoreApplication>
 // ---------------------------------------------------------------------------------
-class Application: public QCoreApplication
+class Application
+      : public QCoreApplication
 {
     // ---------------------------------------------------------------------------------
     Q_OBJECT
@@ -19,6 +20,9 @@ class Application: public QCoreApplication
     //to the DBUS interface:
     void exit();
     // ---------------------------------------------------------------------------------
+    /**
+     * \brief this method is just intended to serve for DBUS testing...
+     */
     QString hello();
     // ---------------------------------------------------------------------------------
   private:
