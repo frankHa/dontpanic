@@ -2,8 +2,6 @@
 #define DP_DBUS_HPP
 //dp includes
 #include "defines.hpp"
-//boost includes
-#include <boost/noncopyable.hpp>
 //Qt includes
 #include <QDBusConnection>
 #include <QDBusAbstractAdaptor>
@@ -22,20 +20,12 @@ namespace dp
     // ---------------------------------------------------------------------------------
   }
   // ---------------------------------------------------------------------------------
-  class DP_EXPORT dbus: public boost::noncopyable
+  class DP_EXPORT DBus
   {
-      // ---------------------------------------------------------------------------------
-    private:
-      // ---------------------------------------------------------------------------------
-      static dbus * _M_instance;
       // ---------------------------------------------------------------------------------
     public:
       // ---------------------------------------------------------------------------------
-      static dbus* self();
-      // ---------------------------------------------------------------------------------
-    private:
-      // ---------------------------------------------------------------------------------
-      dbus();
+      DBus();
       // ---------------------------------------------------------------------------------
     public:
       // ---------------------------------------------------------------------------------
@@ -43,15 +33,26 @@ namespace dp
       // ---------------------------------------------------------------------------------
       /**
        * \brief register a dbus object with dbus
-       * \example bool success = dbus::self()->register_object(this).at_session_bus().as("/path/to/object");
+       * \example bool success = dbus().register_object(this).at_session_bus().as("/path/to/object");
        */
       template<typename object_type>
-      detail::object_to_register_with_dbus<object_type> register_object ( object_type *object_ptr )
+      detail::object_to_register_with_dbus<object_type>
+      register_object ( object_type *object_ptr )
       {
         return detail::object_to_register_with_dbus<object_type> ( object_ptr );
       }
       // ---------------------------------------------------------------------------------
   };//dbus
+  // ---------------------------------------------------------------------------------
+  /**
+   * helper method to simplify the API:
+   * this allows for code like this:
+   * \example bool success = dbus().register_object(this).at_session_bus().as("/path/to/object");
+   */
+  inline DBus dbus()
+  {
+    return DBus();
+  }
   // ---------------------------------------------------------------------------------
   //implementation time:
   // ---------------------------------------------------------------------------------
@@ -60,15 +61,21 @@ namespace dp
   // ---------------------------------------------------------------------------------
 
 
+
+  // ---------------------------------------------------------------------------------
+  /**
+   * factory method to create the correct DBUS adaptor for object_type
+   * we are using template specialization here to
+   * let the build fail when we are trying to register an object
+   * with for which don't know the correct adaptor implementation.
+   * each lib/application has to provide the required specializations
+   * for the adaptor types it needs to register.
+   */
+  template<typename object_type>
+  QDBusAbstractAdaptor* create_dbus_adaptor_for ( object_type *obj );
+  // ---------------------------------------------------------------------------------
   namespace detail
   {
-    // ---------------------------------------------------------------------------------
-    //factory method to create the correct DBUS adaptor for object_type
-    //we are using template specialization here to
-    //let the build fail when we are trying to register an object
-    //with for which don't know the correct adaptor implementation.
-    template<typename object_type>
-    QDBusAbstractAdaptor* create_dbus_adaptor_for ( object_type *obj );
     // ---------------------------------------------------------------------------------
     template<typename object_type>
     class dbus_registration

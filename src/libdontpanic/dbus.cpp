@@ -7,19 +7,10 @@ namespace dp
   // ---------------------------------------------------------------------------------
   //dbus impl:
   // ---------------------------------------------------------------------------------
-  // static stuff:
+  // ctor
+  DBus::DBus() {}
   // ---------------------------------------------------------------------------------
-  dbus *dbus::_M_instance = new dbus();
-  // ---------------------------------------------------------------------------------
-  dbus *dbus::self()
-  {
-    return _M_instance;
-  }
-  // ---------------------------------------------------------------------------------
-  // ctor (private)
-  dbus::dbus() {}
-  // ---------------------------------------------------------------------------------
-  detail::service_to_register_with_dbus dbus::register_service ( QString const& service )
+  detail::service_to_register_with_dbus DBus::register_service ( QString const& service )
   {
     return detail::service_to_register_with_dbus ( service );
   }

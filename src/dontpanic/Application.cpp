@@ -27,7 +27,7 @@ void Application::exit()
 void Application::register_with_session_bus()
 {
   qDebug() << "registering at the session bus now...";
-  dp::dbus::self()->register_object(this).at_session_bus().as("/Application");
+  dp::dbus().register_object(this).at_session_bus().as("/Application");
 }
 
 // ---------------------------------------------------------------------------------

@@ -4,18 +4,13 @@
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  namespace detail
+  // implementions for the well known Adaptor types:
+  // ---------------------------------------------------------------------------------
+  template<>
+  QDBusAbstractAdaptor* create_dbus_adaptor_for<Application> ( Application *obj )
   {
-    // ---------------------------------------------------------------------------------
-    // implementions for the well known Adaptor types:
-    // ---------------------------------------------------------------------------------
-    template<>
-    QDBusAbstractAdaptor* create_dbus_adaptor_for<Application> ( Application *obj )
-    {
-      return new ApplicationAdaptor ( obj );
-    }
-    // ---------------------------------------------------------------------------------
-  }//detail
+    return new ApplicationAdaptor ( obj );
+  }
   // ---------------------------------------------------------------------------------
 }//dp
 // ---------------------------------------------------------------------------------
