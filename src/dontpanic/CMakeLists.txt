@@ -6,6 +6,7 @@ set(dontpanic_SRCS
     Application.cpp
     dbus.cpp
     main.cpp
+    sqlite.cpp
    )
 
 qt4_generate_dbus_interface(Application.hpp org.dontpanic.Application.xml)

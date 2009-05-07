@@ -26,6 +26,8 @@ class Application::ApplicationPrivate
     // ---------------------------------------------------------------------------------
     void init();
     // ---------------------------------------------------------------------------------
+    bool init_storage_backend();
+    // ---------------------------------------------------------------------------------
     void register_with_session_bus();
     // ---------------------------------------------------------------------------------
   private:
@@ -73,7 +75,14 @@ void Application::ApplicationPrivate::exit()
 // ---------------------------------------------------------------------------------
 void Application::ApplicationPrivate::init()
 {
+  init_storage_backend();
   register_with_session_bus();
+}
+// ---------------------------------------------------------------------------------
+bool Application::ApplicationPrivate::init_storage_backend()
+{
+  qWarning()<<__FUNCTION__<<" not implemented yet";
+  return true;
 }
 // ---------------------------------------------------------------------------------
 void Application::ApplicationPrivate::register_with_session_bus()
