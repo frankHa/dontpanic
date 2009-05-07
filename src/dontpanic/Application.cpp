@@ -1,7 +1,7 @@
 #include "Application.hpp"
 #include "Application.moc"
 
-#include "dbus.hpp"
+#include "libdontpanic/dbus.hpp"
 
 //Qt includes
 #include <QDebug>

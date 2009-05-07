@@ -13,13 +13,14 @@ set(libdontpanic_SRCS
     action.cpp
     action_template.cpp
     collaboration_type.cpp
+    dbus.cpp
     leave_type.cpp
     project.cpp
     task.cpp
    )
-#TODO add support for leave types!
 
-kde4_add_library(dontpanic SHARED ${libdontpanic_SRCS})
-target_link_libraries(dontpanic ${KDE4_KDECORE_LIBS} ${SQLITE_LIBRARIES})
+kde4_add_library(dontpanic_lib SHARED ${libdontpanic_SRCS})
+target_link_libraries(dontpanic_lib ${KDE4_KDECORE_LIBS} ${SQLITE_LIBRARIES})
+set_target_properties(dontpanic_lib PROPERTIES OUTPUT_NAME dontpanic)
 
-install(TARGETS dontpanic DESTINATION ${PLUGIN_INSTALL_DIR})
+install(TARGETS dontpanic_lib DESTINATION ${PLUGIN_INSTALL_DIR})
