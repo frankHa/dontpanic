@@ -85,7 +85,7 @@ bool Application::ApplicationPrivate::init_storage_backend()
   if(dp::sqlite().open_database_connection().has_failed())
   {
     qWarning()<<"unable to initialize persistance backend. exiting now";
-    exit();
+    ::exit(1);
   }
   return true;
 }
