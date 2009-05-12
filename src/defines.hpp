@@ -3,6 +3,7 @@
 // ---------------------------------------------------------------------------------
 //dp includes
 #include "dp_export.hpp"
+#include "libdontpanic/success.hpp"
 // ---------------------------------------------------------------------------------
 //boost includes
 #include <boost/shared_ptr.hpp>

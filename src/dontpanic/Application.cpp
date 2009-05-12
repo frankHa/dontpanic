@@ -2,6 +2,7 @@
 #include "Application.moc"
 
 #include "libdontpanic/dbus.hpp"
+#include "sqlite.hpp"
 
 //Qt includes
 #include <QDebug>
@@ -81,7 +82,11 @@ void Application::ApplicationPrivate::init()
 // ---------------------------------------------------------------------------------
 bool Application::ApplicationPrivate::init_storage_backend()
 {
-  qWarning()<<__FUNCTION__<<" not implemented yet";
+  if(dp::sqlite().open_database_connection().has_failed())
+  {
+    qWarning()<<"unable to initialize persistance backend. exiting now";
+    exit();
+  }
   return true;
 }
 // ---------------------------------------------------------------------------------
