@@ -13,19 +13,19 @@ namespace dp
   namespace detail
   {
     // ---------------------------------------------------------------------------------
-    QString home_dir()
+    QString storage_dir()
     {
       return QDir::homePath() + "/.dontpanic/";
     }
     // ---------------------------------------------------------------------------------
-    success prepare_home_directory()
+    success prepare_storage_directory()
     {
-      QDir _dir ( home_dir() );
+      QDir _dir ( storage_dir() );
       if ( _dir.exists() )
       {
         return successful();
       }
-      if ( _dir.mkpath ( home_dir() ) )
+      if ( _dir.mkpath ( storage_dir() ) )
       {
         return successful();
       }
@@ -34,14 +34,14 @@ namespace dp
     // ---------------------------------------------------------------------------------
     QString database_name()
     {
-      return home_dir() + DB_FILE_NAME;
+      return storage_dir() + DB_FILE_NAME;
     }
     // ---------------------------------------------------------------------------------
   }
   // ---------------------------------------------------------------------------------
   success Sqlite::open_database_connection()
   {
-    if ( detail::prepare_home_directory().has_failed() )
+    if ( detail::prepare_storage_directory().has_failed() )
     {
       return error();
     }
