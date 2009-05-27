@@ -1,34 +1,34 @@
-#ifndef DP_SQLITE_HPP
-#define DP_SQLITE_HPP
-//dp includes
+#ifndef DP_DATA_STORE_HPP
+#define DP_DATA_STORE_HPP
+// ---------------------------------------------------------------------------------
 #include "defines.hpp"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
-  // ---------------------------------------------------------------------------------
-  //forward decl:
+  //forward decl
   class action;
   // ---------------------------------------------------------------------------------
-  class Sqlite
+  /**
+   * The idea for this is to abstract from the actual storage backend, in case we
+   * want to switch it some time in the future. For now all calls are simply delegated 
+   * to the sqlite backend...
+   */
+  class DataStore
   {
       // ---------------------------------------------------------------------------------
     public:
       // ---------------------------------------------------------------------------------
-      success open_database_connection();
+      success persist(action &action);
       // ---------------------------------------------------------------------------------
-      success update_database_schema_if_necessary();
-      // ---------------------------------------------------------------------------------
-    public:
-      // ---------------------------------------------------------------------------------
-      success persist ( action &action );
+      
       // ---------------------------------------------------------------------------------
   };
   // ---------------------------------------------------------------------------------
-  inline Sqlite sqlite()
+  DataStore data_store()
   {
-    return Sqlite();
+    return DataStore();
   }
   // ---------------------------------------------------------------------------------
 }//dp
 // ---------------------------------------------------------------------------------
-#endif //DP_SQLITE_HPP
+#endif //DP_DATA_STORE_HPP
