@@ -5,12 +5,12 @@ namespace dp
   // ---------------------------------------------------------------------------------
   ///ctor
   project::project()
-      : _M_id ( "0" )
+      : _M_id ( 0 )
       , _M_name ( "" )
       , _M_visible ( true )
       , _M_creation_date ( QDateTime::currentDateTime() ) {}
   // ---------------------------------------------------------------------------------
-  QString const& project::id() const
+  uint64_t project::id() const
   {
     return _M_id;
   }

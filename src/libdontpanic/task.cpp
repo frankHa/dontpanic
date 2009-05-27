@@ -6,14 +6,14 @@ namespace dp
   // ---------------------------------------------------------------------------------
   ///ctor
   task::task()
-      : _M_id ( "0" )
+      : _M_id ( 0 )
       , _M_name ( "" )
       , _M_visible ( true )
       , _M_solo_effort ( true )
       , _M_chargeable ( true )
       , _M_creation_date ( QDateTime::currentDateTime() ) {}
   // ---------------------------------------------------------------------------------
-  QString const& task::id() const
+  uint64_t task::id() const
   {
     return _M_id;
   }

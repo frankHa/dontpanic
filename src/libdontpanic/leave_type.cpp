@@ -3,7 +3,7 @@
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  QString const& leave_type::id() const
+  uint64_t leave_type::id() const
   {
     return _M_id;
   }
