@@ -4,9 +4,9 @@
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  success DataStore::persist ( action& action )
+  success DataStore::persist ( project& _project )
   {
-    return sqlite().persist(action);
+    return sqlite().persist(_project);
   }
 
   // ---------------------------------------------------------------------------------

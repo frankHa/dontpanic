@@ -1,5 +1,7 @@
 #include "sqlite.hpp"
+#include "libdontpanic/project.hpp"
 //Qt includes
+#include <QVariant>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlError>
@@ -11,6 +13,9 @@
 #define CURRENT_SCHEMA_VERSION "1.0"
 
 //some SQL statements:
+// ---------------------------------------------------------------------------------
+// creating tables:
+// ---------------------------------------------------------------------------------
 #define CREATE_TABLE_PROJECT\
   "CREATE TABLE IF NOT EXISTS p_project \
 (p_id INTEGER PRIMARY KEY, p_name TEXT, p_visible INTEGER, p_creation_date TEXT)"
@@ -35,6 +40,11 @@ ct_creation_date TEXT, ct_solo_effort INTEGER, ct_interrupting INTEGER)"
 a_ct_collaboration_type INTEGER references ct_collaboration_type(ct_id),\
 a_name TEXT, a_comment TEXT, a_start TEXT, a_end TEXT, a_reviewed INTEGER, a_billed INTEGER )"
 // ---------------------------------------------------------------------------------
+// inserting table rows:
+// ---------------------------------------------------------------------------------
+#define INSERT_PROJECT \
+  "INSERT INTO p_project(p_name, p_visible, p_creation_date)VALUES(?, ?, ?)"
+// ---------------------------------------------------------------------------------
 namespace dp
 {
   // ---------------------------------------------------------------------------------
@@ -52,6 +62,8 @@ namespace dp
       success open_database_connection();
       // ---------------------------------------------------------------------------------
       success update_database_schema_if_necessary();
+      // ---------------------------------------------------------------------------------
+      success persist(project &_project);
       // ---------------------------------------------------------------------------------
     private:
       // ---------------------------------------------------------------------------------
@@ -84,9 +96,9 @@ namespace dp
   }
 
   // ---------------------------------------------------------------------------------
-  success Sqlite::persist ( action& action )
+  success Sqlite::persist ( project& _project )
   {
-    return successful();
+    return d->persist(_project);
   }
   // ---------------------------------------------------------------------------------
   // sqlite_private impl:
@@ -137,6 +149,23 @@ namespace dp
     return successful();
   }
   // ---------------------------------------------------------------------------------
+  success Sqlite::sqlite_private::persist ( project& _project )
+  {
+    //TODO: add support for updating existing entities:
+    //TODO: update id on referenced C++ object after an insertion
+    QSqlQuery query;
+    query.prepare(INSERT_PROJECT);
+    query.addBindValue(_project.name());
+    query.addBindValue(_project.is_visible());
+    query.addBindValue(_project.creation_date());
+    if(!query.exec())
+    {
+      qDebug()<<query.lastError();
+      return error();
+    }
+    return successful();
+  }
+
   // ---------------------------------------------------------------------------------
   QString Sqlite::sqlite_private::storage_dir()
   {

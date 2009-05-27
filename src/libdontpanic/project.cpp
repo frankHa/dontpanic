@@ -15,7 +15,7 @@ namespace dp
     return _M_id;
   }
   // ---------------------------------------------------------------------------------
-  QString const& project::name() const
+  QString project::name() const
   {
     return _M_name;
   }
