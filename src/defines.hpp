@@ -13,6 +13,10 @@
  typedef boost::shared_ptr<clazz> clazz##_ptr;\
  typedef boost::weak_ptr<clazz> clazz##_weak_ptr
 // ---------------------------------------------------------------------------------
+#define FORWARD_DECL(clazz) \
+ class clazz;\
+ DECLARE_SMARTPOINTERS(clazz)
+// ---------------------------------------------------------------------------------
 #define TYPE(clazz) \
  typedef clazz type; \
  typedef boost::shared_ptr<clazz> ptr; \

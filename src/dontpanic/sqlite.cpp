@@ -38,43 +38,67 @@ a_name TEXT, a_comment TEXT, a_start TEXT, a_end TEXT, a_reviewed INTEGER, a_bil
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  namespace detail
+  //sqlite_private declaration:
+  // ---------------------------------------------------------------------------------
+  class Sqlite::sqlite_private
   {
-    // ---------------------------------------------------------------------------------
-    QString storage_dir()
-    {
-      return QDir::homePath() + "/.dontpanic/";
-    }
-    // ---------------------------------------------------------------------------------
-    success prepare_storage_directory()
-    {
-      QDir _dir ( storage_dir() );
-      if ( _dir.exists() )
-      {
-        return successful();
-      }
-      if ( _dir.mkpath ( storage_dir() ) )
-      {
-        return successful();
-      }
-      return error();
-    }
-    // ---------------------------------------------------------------------------------
-    QString database_name()
-    {
-      return storage_dir() + DB_FILE_NAME;
-    }
-    // ---------------------------------------------------------------------------------
-  }
+      // ---------------------------------------------------------------------------------
+    public:
+      // ---------------------------------------------------------------------------------
+      sqlite_private ( Sqlite *self ) : _M_self ( self ) {}
+      // ---------------------------------------------------------------------------------
+    public:
+      // ---------------------------------------------------------------------------------
+      success open_database_connection();
+      // ---------------------------------------------------------------------------------
+      success update_database_schema_if_necessary();
+      // ---------------------------------------------------------------------------------
+    private:
+      // ---------------------------------------------------------------------------------
+      QString storage_dir();
+      // ---------------------------------------------------------------------------------
+      success prepare_storage_directory();
+      // ---------------------------------------------------------------------------------
+      QString database_name();
+      // ---------------------------------------------------------------------------------
+    private:
+      // ---------------------------------------------------------------------------------
+      Sqlite *_M_self;
+      // ---------------------------------------------------------------------------------
+
+  };//sqlite_private
+  // ---------------------------------------------------------------------------------
+  //Sqlite impl:
+  // ---------------------------------------------------------------------------------
+  Sqlite::Sqlite()
+      : d ( new sqlite_private ( this ) ) {}
   // ---------------------------------------------------------------------------------
   success Sqlite::open_database_connection()
   {
-    if ( detail::prepare_storage_directory().has_failed() )
+    return d->open_database_connection();
+  }
+  // ---------------------------------------------------------------------------------
+  success Sqlite::update_database_schema_if_necessary()
+  {
+    return d->update_database_schema_if_necessary();
+  }
+
+  // ---------------------------------------------------------------------------------
+  success Sqlite::persist ( action& action )
+  {
+    return successful();
+  }
+  // ---------------------------------------------------------------------------------
+  // sqlite_private impl:
+  // ---------------------------------------------------------------------------------
+  success Sqlite::sqlite_private::open_database_connection()
+  {
+    if ( prepare_storage_directory().has_failed() )
     {
       return error();
     }
     QSqlDatabase db = QSqlDatabase::addDatabase ( "QSQLITE" );
-    db.setDatabaseName ( detail::database_name() );
+    db.setDatabaseName ( database_name() );
     if ( db.open() )
     {
       return successful();
@@ -82,7 +106,7 @@ namespace dp
     return error();
   }
   // ---------------------------------------------------------------------------------
-  dp::success Sqlite::update_database_schema_if_necessary()
+  dp::success Sqlite::sqlite_private::update_database_schema_if_necessary()
   {
     QSqlQuery query;
     if ( !query.exec ( CREATE_TABLE_PROJECT ) )
@@ -112,13 +136,31 @@ namespace dp
     }
     return successful();
   }
-
   // ---------------------------------------------------------------------------------
-  success Sqlite::persist ( action& action )
+  // ---------------------------------------------------------------------------------
+  QString Sqlite::sqlite_private::storage_dir()
   {
-    return successful();
+    return QDir::homePath() + "/.dontpanic/";
   }
-
+  // ---------------------------------------------------------------------------------
+  success Sqlite::sqlite_private::prepare_storage_directory()
+  {
+    QDir _dir ( storage_dir() );
+    if ( _dir.exists() )
+    {
+      return successful();
+    }
+    if ( _dir.mkpath ( storage_dir() ) )
+    {
+      return successful();
+    }
+    return error();
+  }
+  // ---------------------------------------------------------------------------------
+  QString Sqlite::sqlite_private::database_name()
+  {
+    return storage_dir() + DB_FILE_NAME;
+  }
   // ---------------------------------------------------------------------------------
 }//dp
 // ---------------------------------------------------------------------------------

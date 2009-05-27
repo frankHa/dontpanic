@@ -1,5 +1,7 @@
 #ifndef DONTPANIC_APP_HPP
 #define DONTPANIC_APP_HPP
+//dp includes
+#include "defines.hpp"
 //Qt includes
 #include <QCoreApplication>
 // ---------------------------------------------------------------------------------
@@ -27,8 +29,8 @@ class Application
     // ---------------------------------------------------------------------------------
   private:
     // ---------------------------------------------------------------------------------
-    class ApplicationPrivate;
-    ApplicationPrivate *d;
+    FORWARD_DECL(ApplicationPrivate);
+    ApplicationPrivate_ptr d;
     // ---------------------------------------------------------------------------------
 };
 // ---------------------------------------------------------------------------------
