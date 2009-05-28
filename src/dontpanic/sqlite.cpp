@@ -44,6 +44,12 @@ a_name TEXT, a_comment TEXT, a_start TEXT, a_end TEXT, a_reviewed INTEGER, a_bil
 // ---------------------------------------------------------------------------------
 #define INSERT_PROJECT \
   "INSERT INTO p_project(p_name, p_visible, p_creation_date)VALUES(?, ?, ?)"
+
+#define SELECT_PROJECT \
+  "SELECT DISTINCT p_name, p_visible, p_creation_date FROM p_project WHERE (p_id=?)"
+
+#define UPDATE_PROJECT \
+  "UPDATE p_project set(p_name=?, p_visible=?, p_creation_date=?) WHERE (p_id=?)"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -59,20 +65,29 @@ namespace dp
       // ---------------------------------------------------------------------------------
     public:
       // ---------------------------------------------------------------------------------
-      success open_database_connection();
+      success open_database_connection() const;
       // ---------------------------------------------------------------------------------
-      success update_database_schema_if_necessary();
+      success update_database_schema_if_necessary() const;
       // ---------------------------------------------------------------------------------
-      success persist(project &_project);
+      success persist ( project &_project ) const;
       // ---------------------------------------------------------------------------------
     private:
       // ---------------------------------------------------------------------------------
-      QString storage_dir();
+      bool exists ( project const& _project ) const;
       // ---------------------------------------------------------------------------------
-      success prepare_storage_directory();
+      success insert ( project &_p ) const;
       // ---------------------------------------------------------------------------------
-      QString database_name();
+      success update ( project const& _p )const;
       // ---------------------------------------------------------------------------------
+      QString storage_dir()const;
+      // ---------------------------------------------------------------------------------
+      success prepare_storage_directory()const;
+      // ---------------------------------------------------------------------------------
+      QString database_name()const;
+      // ---------------------------------------------------------------------------------
+      success execute ( QSqlQuery &query )const;
+      // ---------------------------------------------------------------------------------
+
     private:
       // ---------------------------------------------------------------------------------
       Sqlite *_M_self;
@@ -98,12 +113,12 @@ namespace dp
   // ---------------------------------------------------------------------------------
   success Sqlite::persist ( project& _project )
   {
-    return d->persist(_project);
+    return d->persist ( _project );
   }
   // ---------------------------------------------------------------------------------
   // sqlite_private impl:
   // ---------------------------------------------------------------------------------
-  success Sqlite::sqlite_private::open_database_connection()
+  success Sqlite::sqlite_private::open_database_connection() const
   {
     if ( prepare_storage_directory().has_failed() )
     {
@@ -118,7 +133,7 @@ namespace dp
     return error();
   }
   // ---------------------------------------------------------------------------------
-  dp::success Sqlite::sqlite_private::update_database_schema_if_necessary()
+  dp::success Sqlite::sqlite_private::update_database_schema_if_necessary() const
   {
     QSqlQuery query;
     if ( !query.exec ( CREATE_TABLE_PROJECT ) )
@@ -149,30 +164,25 @@ namespace dp
     return successful();
   }
   // ---------------------------------------------------------------------------------
-  success Sqlite::sqlite_private::persist ( project& _project )
+  success Sqlite::sqlite_private::persist ( project& _project ) const
   {
     //TODO: add support for updating existing entities:
     //TODO: update id on referenced C++ object after an insertion
-    QSqlQuery query;
-    query.prepare(INSERT_PROJECT);
-    query.addBindValue(_project.name());
-    query.addBindValue(_project.is_visible());
-    query.addBindValue(_project.creation_date());
-    if(!query.exec())
+    if ( exists ( _project ) )
     {
-      qDebug()<<query.lastError();
-      return error();
+      return update ( _project );
     }
-    return successful();
+    return insert ( _project );
+
   }
 
   // ---------------------------------------------------------------------------------
-  QString Sqlite::sqlite_private::storage_dir()
+  QString Sqlite::sqlite_private::storage_dir() const
   {
     return QDir::homePath() + "/.dontpanic/";
   }
   // ---------------------------------------------------------------------------------
-  success Sqlite::sqlite_private::prepare_storage_directory()
+  success Sqlite::sqlite_private::prepare_storage_directory() const
   {
     QDir _dir ( storage_dir() );
     if ( _dir.exists() )
@@ -186,10 +196,63 @@ namespace dp
     return error();
   }
   // ---------------------------------------------------------------------------------
-  QString Sqlite::sqlite_private::database_name()
+  QString Sqlite::sqlite_private::database_name() const
   {
     return storage_dir() + DB_FILE_NAME;
   }
+  // ---------------------------------------------------------------------------------
+  bool Sqlite::sqlite_private::exists ( const dp::project& _project ) const
+  {
+    if ( _project.id() == 0 )
+    {
+      return false;
+    }
+    QSqlQuery query;
+    query.prepare ( SELECT_PROJECT );
+    query.addBindValue ( _project.id() );
+    if( execute ( query ).has_failed())
+    {
+      return false;
+    }
+    return query.first();
+  }
+  // ---------------------------------------------------------------------------------
+  success Sqlite::sqlite_private::insert ( project& _p ) const
+  {
+    QSqlQuery query;
+    query.prepare ( INSERT_PROJECT );
+    query.addBindValue ( _p.name() );
+    query.addBindValue ( _p.is_visible() );
+    query.addBindValue ( _p.creation_date() );
+    if( execute ( query ).has_failed())
+    {
+      return error();
+    }
+    _p.set_id(query.lastInsertId().toULongLong());
+    return successful();
+  }
+  // ---------------------------------------------------------------------------------
+  success Sqlite::sqlite_private::update ( const dp::project& _p ) const
+  {
+    QSqlQuery query;
+    query.prepare ( UPDATE_PROJECT );
+    query.addBindValue ( _p.name() );
+    query.addBindValue ( _p.is_visible() );
+    query.addBindValue ( _p.creation_date() );
+    query.addBindValue ( _p.id() );
+    return execute ( query );
+  }
+  // ---------------------------------------------------------------------------------
+  success Sqlite::sqlite_private::execute ( QSqlQuery& query ) const
+  {
+    if ( !query.exec() )
+    {
+      qDebug() << query.lastError();
+      return error();
+    }
+    return successful();
+  }
+
   // ---------------------------------------------------------------------------------
 }//dp
 // ---------------------------------------------------------------------------------
