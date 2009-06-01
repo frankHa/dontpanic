@@ -10,7 +10,7 @@ add_definitions(${SQLITE_DEFINITIONS})
 # libdontpanic section
 #########################################################################
 set(libdontpanic_SRCS
-    action.cpp
+    Action.cpp
     action_template.cpp
     collaboration_type.cpp
     dbus.cpp

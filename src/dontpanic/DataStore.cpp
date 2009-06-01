@@ -1,5 +1,5 @@
 #include "DataStore.hpp"
-#include "sqlite.hpp"
+#include "Sqlite.hpp"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
