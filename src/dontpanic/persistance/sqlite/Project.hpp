@@ -4,6 +4,8 @@
 //dp includes
 #include "defines.hpp"
 #include "libdontpanic/success.hpp"
+//Forward decl
+class QSqlQuery;
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -31,6 +33,8 @@ namespace dp
           success insert ( dp::Project &_p ) const;
           // ---------------------------------------------------------------------------------
           success update ( dp::Project const& _p ) const;
+          // ---------------------------------------------------------------------------------
+          success assign_query_values_to_entity(QSqlQuery &query, dp::Project &p) const;
           // ---------------------------------------------------------------------------------
       };//Project
       // ---------------------------------------------------------------------------------

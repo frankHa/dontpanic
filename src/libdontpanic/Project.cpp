@@ -15,7 +15,7 @@ namespace dp
     return _M_id;
   }
   // ---------------------------------------------------------------------------------
-  void Project::set_id(uint64_t id)
+  void Project::setId(uint64_t id)
   {
     _M_id = id;
   }
@@ -25,14 +25,29 @@ namespace dp
     return _M_name;
   }
   // ---------------------------------------------------------------------------------
-  bool Project::is_visible() const
+  void Project::setName ( QString name )
+  {
+    _M_name = name;
+  }
+  // ---------------------------------------------------------------------------------
+  bool Project::isVisible() const
   {
     return _M_visible;
   }
   // ---------------------------------------------------------------------------------
-  QDateTime const& Project::creation_date() const
+  void Project::setIsVisible ( bool visible )
+  {
+    _M_visible = visible;
+  }
+  // ---------------------------------------------------------------------------------
+  QDateTime const& Project::creationDate() const
   {
     return _M_creation_date;
+  }
+  // ---------------------------------------------------------------------------------
+  void Project::setCreationDate ( QDateTime date )
+  {
+    _M_creation_date = date;
   }
   // ---------------------------------------------------------------------------------
 }
