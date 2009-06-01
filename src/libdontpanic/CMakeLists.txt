@@ -12,7 +12,7 @@ add_definitions(${SQLITE_DEFINITIONS})
 set(libdontpanic_SRCS
     Action.cpp
     ActionTemplate.cpp
-    collaboration_type.cpp
+    CollaborationType.cpp
     dbus.cpp
     leave_type.cpp
     project.cpp

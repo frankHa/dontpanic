@@ -4,7 +4,7 @@
 #include "defines.hpp"
 #include "task.hpp"
 #include "project.hpp"
-#include "collaboration_type.hpp"
+#include "CollaborationType.hpp"
 
 //Qt includes
 #include <QString>
@@ -28,7 +28,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       project::ptr _M_project;
       // ---------------------------------------------------------------------------------
-      collaboration_type::ptr _M_teamwork;
+      CollaborationType::ptr _M_teamwork;
       // ---------------------------------------------------------------------------------
       //TODO person list
       // ---------------------------------------------------------------------------------

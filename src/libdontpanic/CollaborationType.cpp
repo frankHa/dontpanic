@@ -1,9 +1,9 @@
-#include "collaboration_type.hpp"
+#include "CollaborationType.hpp"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  collaboration_type::collaboration_type()
+  CollaborationType::CollaborationType()
   {}
   // ---------------------------------------------------------------------------------
 }
