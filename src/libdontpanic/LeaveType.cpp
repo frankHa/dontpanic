@@ -1,24 +1,24 @@
-#include "leave_type.hpp"
+#include "LeaveType.hpp"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  uint64_t leave_type::id() const
+  uint64_t LeaveType::id() const
   {
     return _M_id;
   }
   // ---------------------------------------------------------------------------------
-  QString const& leave_type::name() const
+  QString const& LeaveType::name() const
   {
     return _M_name;
   }
   // ---------------------------------------------------------------------------------
-  bool leave_type::is_paid() const
+  bool LeaveType::is_paid() const
   {
     return _M_paid;
   }
   // ---------------------------------------------------------------------------------
-  QString const& leave_type::description() const
+  QString const& LeaveType::description() const
   {
     return _M_description;
   }
