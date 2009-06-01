@@ -15,7 +15,7 @@ set(libdontpanic_SRCS
     CollaborationType.cpp
     DBus.cpp
     LeaveType.cpp
-    project.cpp
+    Project.cpp
     task.cpp
    )
 

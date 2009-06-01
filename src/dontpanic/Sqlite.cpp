@@ -1,5 +1,5 @@
 #include "Sqlite.hpp"
-#include "libdontpanic/project.hpp"
+#include "libdontpanic/Project.hpp"
 //Qt includes
 #include <QVariant>
 #include <QSqlDatabase>
@@ -69,15 +69,15 @@ namespace dp
       // ---------------------------------------------------------------------------------
       success update_database_schema_if_necessary() const;
       // ---------------------------------------------------------------------------------
-      success persist ( project &_project ) const;
+      success persist ( Project &_project ) const;
       // ---------------------------------------------------------------------------------
     private:
       // ---------------------------------------------------------------------------------
-      bool exists ( project const& _project ) const;
+      bool exists ( Project const& _project ) const;
       // ---------------------------------------------------------------------------------
-      success insert ( project &_p ) const;
+      success insert ( Project &_p ) const;
       // ---------------------------------------------------------------------------------
-      success update ( project const& _p )const;
+      success update ( Project const& _p )const;
       // ---------------------------------------------------------------------------------
       QString storage_dir()const;
       // ---------------------------------------------------------------------------------
@@ -111,7 +111,7 @@ namespace dp
   }
 
   // ---------------------------------------------------------------------------------
-  success Sqlite::persist ( project& _project )
+  success Sqlite::persist ( Project& _project )
   {
     return d->persist ( _project );
   }
@@ -164,7 +164,7 @@ namespace dp
     return successful();
   }
   // ---------------------------------------------------------------------------------
-  success Sqlite::sqlite_private::persist ( project& _project ) const
+  success Sqlite::sqlite_private::persist ( Project& _project ) const
   {
     //TODO: add support for updating existing entities:
     //TODO: update id on referenced C++ object after an insertion
@@ -201,7 +201,7 @@ namespace dp
     return storage_dir() + DB_FILE_NAME;
   }
   // ---------------------------------------------------------------------------------
-  bool Sqlite::sqlite_private::exists ( const dp::project& _project ) const
+  bool Sqlite::sqlite_private::exists ( const dp::Project& _project ) const
   {
     if ( _project.id() == 0 )
     {
@@ -217,7 +217,7 @@ namespace dp
     return query.first();
   }
   // ---------------------------------------------------------------------------------
-  success Sqlite::sqlite_private::insert ( project& _p ) const
+  success Sqlite::sqlite_private::insert ( Project& _p ) const
   {
     QSqlQuery query;
     query.prepare ( INSERT_PROJECT );
@@ -232,7 +232,7 @@ namespace dp
     return successful();
   }
   // ---------------------------------------------------------------------------------
-  success Sqlite::sqlite_private::update ( const dp::project& _p ) const
+  success Sqlite::sqlite_private::update ( const dp::Project& _p ) const
   {
     QSqlQuery query;
     query.prepare ( UPDATE_PROJECT );

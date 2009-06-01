@@ -1,36 +1,36 @@
-#include "project.hpp"
+#include "Project.hpp"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
   // ---------------------------------------------------------------------------------
   ///ctor
-  project::project()
+  Project::Project()
       : _M_id ( 0 )
       , _M_name ( "" )
       , _M_visible ( true )
       , _M_creation_date ( QDateTime::currentDateTime() ) {}
   // ---------------------------------------------------------------------------------
-  uint64_t project::id() const
+  uint64_t Project::id() const
   {
     return _M_id;
   }
   // ---------------------------------------------------------------------------------
-  void project::set_id(uint64_t id)
+  void Project::set_id(uint64_t id)
   {
     _M_id = id;
   }
   // ---------------------------------------------------------------------------------
-  QString project::name() const
+  QString Project::name() const
   {
     return _M_name;
   }
   // ---------------------------------------------------------------------------------
-  bool project::is_visible() const
+  bool Project::is_visible() const
   {
     return _M_visible;
   }
   // ---------------------------------------------------------------------------------
-  QDateTime const& project::creation_date() const
+  QDateTime const& Project::creation_date() const
   {
     return _M_creation_date;
   }
