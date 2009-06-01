@@ -1,11 +1,11 @@
-#include "task.hpp"
+#include "Task.hpp"
 
 // ---------------------------------------------------------------------------------
 namespace dp
 {
   // ---------------------------------------------------------------------------------
   ///ctor
-  task::task()
+  Task::Task()
       : _M_id ( 0 )
       , _M_name ( "" )
       , _M_visible ( true )
@@ -13,32 +13,32 @@ namespace dp
       , _M_chargeable ( true )
       , _M_creation_date ( QDateTime::currentDateTime() ) {}
   // ---------------------------------------------------------------------------------
-  uint64_t task::id() const
+  uint64_t Task::id() const
   {
     return _M_id;
   }
   // ---------------------------------------------------------------------------------
-  QString const& task::name() const
+  QString const& Task::name() const
   {
     return _M_name;
   }
   // ---------------------------------------------------------------------------------
-  bool task::is_visible() const
+  bool Task::is_visible() const
   {
     return _M_visible;
   }
   // ---------------------------------------------------------------------------------
-  bool task::is_solo_effort() const
+  bool Task::is_solo_effort() const
   {
     return _M_solo_effort;
   }
   // ---------------------------------------------------------------------------------
-  bool task::is_chargeable() const
+  bool Task::is_chargeable() const
   {
     return _M_chargeable;
   }
   // ---------------------------------------------------------------------------------
-  QDateTime const& task::creation_date() const
+  QDateTime const& Task::creation_date() const
   {
     return _M_creation_date;
   }
