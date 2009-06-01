@@ -2,7 +2,7 @@
 #include "Application.moc"
 
 #include "libdontpanic/DBus.hpp"
-#include "Sqlite.hpp"
+#include "persistance/Sqlite.hpp"
 
 //Qt includes
 #include <QDebug>
