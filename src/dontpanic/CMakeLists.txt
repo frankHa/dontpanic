@@ -8,6 +8,7 @@ set(dontpanic_SRCS
     main.cpp
     PersistanceBackend.cpp
     persistance/Sqlite.cpp
+    persistance/sqlite/Project.cpp
    )
 
 qt4_generate_dbus_interface(Application.hpp org.dontpanic.Application.xml)

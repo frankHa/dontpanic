@@ -82,12 +82,12 @@ void Application::ApplicationPrivate::init()
 // ---------------------------------------------------------------------------------
 bool Application::ApplicationPrivate::init_storage_backend()
 {
-  if(dp::sqlite().open_database_connection().has_failed())
+  if(dp::persistance::sqlite().open_database_connection().has_failed())
   {
     qWarning()<<"unable to initialize persistance backend. exiting now";
     ::exit(1);
   }
-  if(dp::sqlite().update_database_schema_if_necessary().has_failed())
+  if(dp::persistance::sqlite().update_database_schema_if_necessary().has_failed())
   {
     qWarning()<<"unable to initialize the required database schema. exiting now";
     ::exit(1);

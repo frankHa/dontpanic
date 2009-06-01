@@ -23,7 +23,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
   };
   // ---------------------------------------------------------------------------------
-  PersistanceBackend persistance()
+  PersistanceBackend persistance_backend()
   {
     return PersistanceBackend();
   }
