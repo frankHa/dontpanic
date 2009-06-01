@@ -11,7 +11,7 @@ add_definitions(${SQLITE_DEFINITIONS})
 #########################################################################
 set(libdontpanic_SRCS
     Action.cpp
-    action_template.cpp
+    ActionTemplate.cpp
     collaboration_type.cpp
     dbus.cpp
     leave_type.cpp
