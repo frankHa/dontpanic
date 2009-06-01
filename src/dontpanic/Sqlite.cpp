@@ -1,4 +1,4 @@
-#include "sqlite.hpp"
+#include "Sqlite.hpp"
 #include "libdontpanic/project.hpp"
 //Qt includes
 #include <QVariant>
