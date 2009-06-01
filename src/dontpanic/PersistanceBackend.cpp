@@ -1,10 +1,10 @@
-#include "DataStore.hpp"
+#include "PersistanceBackend.hpp"
 #include "Sqlite.hpp"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  success DataStore::persist ( Project& _project )
+  success PersistanceBackend::persist ( Project& _project )
   {
     return sqlite().persist(_project);
   }

@@ -1,12 +1,12 @@
-#ifndef DP_DATA_STORE_HPP
-#define DP_DATA_STORE_HPP
+#ifndef DP_PERSISTANCE_BACKEND_HPP
+#define DP_PERSISTANCE_BACKEND_HPP
 // ---------------------------------------------------------------------------------
 #include "defines.hpp"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
   //forward decl
-  class action;
+  class Action;
   class Project;
   // ---------------------------------------------------------------------------------
   /**
@@ -14,22 +14,20 @@ namespace dp
    * want to switch it some time in the future. For now all calls are simply delegated 
    * to the sqlite backend...
    */
-  class DataStore
+  class PersistanceBackend
   {
       // ---------------------------------------------------------------------------------
     public:
       // ---------------------------------------------------------------------------------
       success persist(Project &_project);
       // ---------------------------------------------------------------------------------
-      
-      // ---------------------------------------------------------------------------------
   };
   // ---------------------------------------------------------------------------------
-  DataStore data_store()
+  PersistanceBackend persistance()
   {
-    return DataStore();
+    return PersistanceBackend();
   }
   // ---------------------------------------------------------------------------------
 }//dp
 // ---------------------------------------------------------------------------------
-#endif //DP_DATA_STORE_HPP
+#endif //DP_PERSISTANCE_BACKEND_HPP
