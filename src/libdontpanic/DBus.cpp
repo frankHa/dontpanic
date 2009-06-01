@@ -1,4 +1,4 @@
-#include "dbus.hpp"
+#include "DBus.hpp"
 //Qt includes
 #include <QDebug>
 // ---------------------------------------------------------------------------------

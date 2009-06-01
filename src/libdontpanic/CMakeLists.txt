@@ -13,7 +13,7 @@ set(libdontpanic_SRCS
     Action.cpp
     ActionTemplate.cpp
     CollaborationType.cpp
-    dbus.cpp
+    DBus.cpp
     leave_type.cpp
     project.cpp
     task.cpp

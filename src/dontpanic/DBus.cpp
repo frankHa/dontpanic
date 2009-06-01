@@ -1,4 +1,4 @@
-#include "libdontpanic/dbus.hpp"
+#include "libdontpanic/DBus.hpp"
 #include "applicationadaptor.h"
 // ---------------------------------------------------------------------------------
 namespace dp

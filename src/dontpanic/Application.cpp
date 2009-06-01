@@ -1,8 +1,8 @@
 #include "Application.hpp"
 #include "Application.moc"
 
-#include "libdontpanic/dbus.hpp"
-#include "sqlite.hpp"
+#include "libdontpanic/DBus.hpp"
+#include "Sqlite.hpp"
 
 //Qt includes
 #include <QDebug>
