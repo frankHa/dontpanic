@@ -5,6 +5,7 @@
 //Qt includes
 #include <QDBusConnection>
 #include <QDBusAbstractAdaptor>
+#include <QDebug>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
