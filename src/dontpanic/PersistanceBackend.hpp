@@ -2,6 +2,8 @@
 #define DP_PERSISTANCE_BACKEND_HPP
 // ---------------------------------------------------------------------------------
 #include "defines.hpp"
+//Qt includes
+#include <QObject>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -11,7 +13,7 @@ namespace dp
   // ---------------------------------------------------------------------------------
   /**
    * The idea for this is to abstract from the actual storage backend, in case we
-   * want to switch it some time in the future. For now all calls are simply delegated 
+   * want to switch it some time in the future. For now all calls are simply delegated
    * to the sqlite backend...
    */
   class PersistanceBackend
@@ -19,11 +21,13 @@ namespace dp
       // ---------------------------------------------------------------------------------
     public:
       // ---------------------------------------------------------------------------------
-      success persist(Project &_project);
+      bool init();
+      // ---------------------------------------------------------------------------------
+      success persist ( Project &_project );
       // ---------------------------------------------------------------------------------
   };
   // ---------------------------------------------------------------------------------
-  PersistanceBackend persistance_backend()
+  inline PersistanceBackend persistance()
   {
     return PersistanceBackend();
   }
