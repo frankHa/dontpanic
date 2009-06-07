@@ -17,6 +17,7 @@ set(libdontpanic_SRCS
     LeaveType.cpp
     Project.cpp
     Task.cpp
+    dbus_support/Project.cpp
    )
 
 kde4_add_library(dontpanic_lib SHARED ${libdontpanic_SRCS})

@@ -1,6 +1,9 @@
 #include "DBus.hpp"
+#include "libdontpanic/dbus_support/Project.hpp"
 //Qt includes
 #include <QDebug>
+#include <QDBusMetaType>
+
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -14,6 +17,12 @@ namespace dp
   {
     return detail::service_to_register_with_dbus ( service );
   }
+  // ---------------------------------------------------------------------------------
+  void DBus::register_dp_custom_types()
+  {
+    qDBusRegisterMetaType<Project>();
+  }
+
   // ---------------------------------------------------------------------------------
   //service_to_register_with_dbus impl:
   // ---------------------------------------------------------------------------------
