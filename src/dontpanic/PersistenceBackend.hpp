@@ -16,7 +16,7 @@ namespace dp
    * want to switch it some time in the future. For now all calls are simply delegated
    * to the sqlite backend...
    */
-  class PersistanceBackend
+  class PersistenceBackend
   {
       // ---------------------------------------------------------------------------------
     public:
@@ -27,9 +27,9 @@ namespace dp
       // ---------------------------------------------------------------------------------
   };
   // ---------------------------------------------------------------------------------
-  inline PersistanceBackend persistance()
+  inline PersistenceBackend persistence()
   {
-    return PersistanceBackend();
+    return PersistenceBackend();
   }
   // ---------------------------------------------------------------------------------
 }//dp

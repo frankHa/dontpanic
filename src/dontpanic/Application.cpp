@@ -36,7 +36,7 @@ class Application::ApplicationPrivate
     // ---------------------------------------------------------------------------------
     Application * _M_self;
     // ---------------------------------------------------------------------------------
-    dp::PersistenceBackendDBusWrapper * _M_persistance_dbus_wrapper;
+    dp::PersistenceBackendDBusWrapper * _M_persistence_dbus_wrapper;
     // ---------------------------------------------------------------------------------
 };
 // ---------------------------------------------------------------------------------
@@ -79,14 +79,14 @@ void Application::ApplicationPrivate::exit()
 // ---------------------------------------------------------------------------------
 void Application::ApplicationPrivate::init()
 {
-  init_storage_backend();
   register_with_session_bus();
+  init_storage_backend();
 }
 // ---------------------------------------------------------------------------------
 bool Application::ApplicationPrivate::init_storage_backend()
 {
-    _M_persistance_dbus_wrapper = new dp::PersistenceBackendDBusWrapper(_M_self);
-    return dp::persistance().init();
+  _M_persistence_dbus_wrapper = new dp::PersistenceBackendDBusWrapper ( _M_self );
+  return dp::persistence().init();
 }
 // ---------------------------------------------------------------------------------
 void Application::ApplicationPrivate::register_with_session_bus()

@@ -16,7 +16,7 @@ namespace dp
   template<>
   QDBusAbstractAdaptor* create_dbus_adaptor_for<PersistenceBackendDBusWrapper> ( PersistenceBackendDBusWrapper *obj )
   {
-    return new PersistanceAdaptor ( obj );
+    return new PersistenceAdaptor ( obj );
   }
   // ---------------------------------------------------------------------------------
 }//dp

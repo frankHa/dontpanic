@@ -20,7 +20,7 @@ namespace dp
   // ---------------------------------------------------------------------------------
   void DBus::register_dp_custom_types()
   {
-    qDBusRegisterMetaType<Project>();
+    qDBusRegisterMetaType<dp::Project>();
   }
 
   // ---------------------------------------------------------------------------------

@@ -28,7 +28,7 @@ if(DP_INSTALL_SYSTEM_FILES)
   dbus_add_activation_service(org.dontpanic.service.in)
   install( FILES
            ${CMAKE_CURRENT_BINARY_DIR}/org.dontpanic.Application.xml
-           interfaces/org.dontpanic.Persistance.xml
+           interfaces/org.dontpanic.Persistence.xml
            DESTINATION
            ${KDE4_DBUS_INTERFACES_DIR} 
            )

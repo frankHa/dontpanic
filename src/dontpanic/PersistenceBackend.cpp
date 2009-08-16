@@ -7,7 +7,7 @@
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  bool PersistanceBackend::init()
+  bool PersistenceBackend::init()
   {
     if ( dp::_persistence::sqlite().open_database_connection().has_failed() )
     {
@@ -22,7 +22,7 @@ namespace dp
     return true;
   }
   // ---------------------------------------------------------------------------------
-  success PersistanceBackend::persist ( Project& _project )
+  success PersistenceBackend::persist ( Project& _project )
   {
     return _persistence::sqlite().persist ( _project );
   }

@@ -6,15 +6,16 @@
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  PersistenceBackendDBusWrapper::PersistenceBackendDBusWrapper ( QObject* parent ) : QObject ( parent )
+  PersistenceBackendDBusWrapper::PersistenceBackendDBusWrapper ( QObject* parent )
+      : QObject ( parent )
   {
-    dbus().register_object ( this ).at_session_bus().as ( "org.dontpanic.Persistance" );
+    dbus().register_object ( this ).at_session_bus().as ( "/Persistence" );
   }
 
   // ---------------------------------------------------------------------------------
   bool PersistenceBackendDBusWrapper::persist ( Project & p )
   {
-    return persistance().persist ( p ).was_successful();
+    return persistence().persist ( p ).was_successful();
   }
   // ---------------------------------------------------------------------------------
 }//dp
