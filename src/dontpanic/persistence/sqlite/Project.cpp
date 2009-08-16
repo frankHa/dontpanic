@@ -1,6 +1,6 @@
-#include "persistance/sqlite/Project.hpp"
+#include "persistence/sqlite/Project.hpp"
 #include "libdontpanic/Project.hpp"
-#include "persistance/execute_query.hpp"
+#include "persistence/execute_query.hpp"
 //Qt includes
 #include <QVariant>
 // ---------------------------------------------------------------------------------
@@ -13,7 +13,7 @@
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  namespace _persistance
+  namespace _persistence
   {
     // ---------------------------------------------------------------------------------
     namespace _sqlite

@@ -10,7 +10,7 @@ namespace dp
   class action;
   class Project;
   // ---------------------------------------------------------------------------------
-  namespace _persistance
+  namespace _persistence
   {
     // ---------------------------------------------------------------------------------
     class Sqlite

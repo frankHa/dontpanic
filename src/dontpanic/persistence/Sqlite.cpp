@@ -1,6 +1,6 @@
-#include "persistance/Sqlite.hpp"
-#include "persistance/execute_query.hpp"
-#include "persistance/sqlite/Project.hpp"
+#include "persistence/Sqlite.hpp"
+#include "persistence/execute_query.hpp"
+#include "persistence/sqlite/Project.hpp"
 #include "libdontpanic/Project.hpp"
 //Qt includes
 #include <QVariant>
@@ -45,7 +45,7 @@ a_name TEXT, a_comment TEXT, a_start TEXT, a_end TEXT, a_reviewed INTEGER, a_bil
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  namespace _persistance
+  namespace _persistence
   {
     // ---------------------------------------------------------------------------------
     //sqlite_private declaration:

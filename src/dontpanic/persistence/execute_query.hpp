@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------------
 namespace dp
 {
-  namespace _persistance
+  namespace _persistence
   {
     // ---------------------------------------------------------------------------------
     inline success execute ( QSqlQuery &query )

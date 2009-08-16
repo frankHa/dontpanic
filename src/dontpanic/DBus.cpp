@@ -1,6 +1,6 @@
 #include "libdontpanic/DBus.hpp"
 #include "applicationadaptor.h"
-#include "persistanceadaptor.h"
+#include "persistenceadaptor.h"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -14,7 +14,7 @@ namespace dp
   }
   // ---------------------------------------------------------------------------------
   template<>
-  QDBusAbstractAdaptor* create_dbus_adaptor_for<PersistanceBackendDBusWrapper> ( PersistanceBackendDBusWrapper *obj )
+  QDBusAbstractAdaptor* create_dbus_adaptor_for<PersistenceBackendDBusWrapper> ( PersistenceBackendDBusWrapper *obj )
   {
     return new PersistanceAdaptor ( obj );
   }
