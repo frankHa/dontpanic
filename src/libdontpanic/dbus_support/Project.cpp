@@ -12,6 +12,7 @@ QDBusArgument const& operator >> ( QDBusArgument const&arg, dp::Project & projec
   arg.endStructure();
   project.setId ( _id );
   project.setName ( _name );
+  project.setIsVisible(_visible);
   project.setCreationDate ( _creation_date );
   return arg;
 }
@@ -19,7 +20,7 @@ QDBusArgument const& operator >> ( QDBusArgument const&arg, dp::Project & projec
 QDBusArgument & operator << ( QDBusArgument &arg, dp::Project const& project )
 {
   arg.beginStructure();
-  arg<<project.id()<<project.isVisible()<<project<<project.creationDate();
+  arg<<project.id()<<project.name()<<project.isVisible()<<project.creationDate();
   arg.endStructure();
   return arg;
 }

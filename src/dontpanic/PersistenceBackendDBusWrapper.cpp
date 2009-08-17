@@ -18,5 +18,10 @@ namespace dp
     return persistence().persist ( p ).was_successful();
   }
   // ---------------------------------------------------------------------------------
+  bool PersistenceBackendDBusWrapper::persist ( Task & t )
+  {
+    return persistence().persist ( t ).was_successful();
+  }
+  // ---------------------------------------------------------------------------------
 }//dp
 // ---------------------------------------------------------------------------------

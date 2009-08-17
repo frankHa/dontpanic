@@ -2,7 +2,7 @@ include(DBusMacros)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-set(dontpanic_SRCS
+set(dontpanic_SRCS  
     Application.cpp
     DBus.cpp
     main.cpp
@@ -10,6 +10,7 @@ set(dontpanic_SRCS
     PersistenceBackendDBusWrapper.cpp
     persistence/Sqlite.cpp
     persistence/sqlite/Project.cpp
+    persistence/sqlite/Task.cpp
    )
 
 qt4_generate_dbus_interface(Application.hpp org.dontpanic.Application.xml)

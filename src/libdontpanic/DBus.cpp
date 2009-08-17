@@ -1,5 +1,6 @@
 #include "DBus.hpp"
 #include "libdontpanic/dbus_support/Project.hpp"
+#include "libdontpanic/dbus_support/Task.hpp"
 //Qt includes
 #include <QDebug>
 #include <QDBusMetaType>
@@ -21,6 +22,7 @@ namespace dp
   void DBus::register_dp_custom_types()
   {
     qDBusRegisterMetaType<dp::Project>();
+    qDBusRegisterMetaType<dp::Task>();
   }
 
   // ---------------------------------------------------------------------------------

@@ -6,5 +6,10 @@
       <annotation name="com.trolltech.QtDBus.QtTypeName.Out1" value="dp::Project"/>
       <arg name="project" type="(si)" direction="out"/>
     </method>
+    <method name="persist">
+      <arg type="b" direction="out"/>
+      <annotation name="com.trolltech.QtDBus.QtTypeName.Out1" value="dp::Task"/>
+      <arg name="task" type="(si)" direction="out"/>
+    </method>
   </interface>
 </node>

@@ -1,7 +1,9 @@
 #include "persistence/Sqlite.hpp"
 #include "persistence/execute_query.hpp"
 #include "persistence/sqlite/Project.hpp"
+#include "persistence/sqlite/Task.hpp"
 #include "libdontpanic/Project.hpp"
+#include "libdontpanic/Task.hpp"
 //Qt includes
 #include <QVariant>
 #include <QSqlDatabase>
@@ -65,13 +67,9 @@ namespace dp
         // ---------------------------------------------------------------------------------
         success persist ( Project &_project ) const;
         // ---------------------------------------------------------------------------------
+        success persist (Task &_task) const;
+        // ---------------------------------------------------------------------------------
       private:
-        // ---------------------------------------------------------------------------------
-        bool exists ( Project const& _project ) const;
-        // ---------------------------------------------------------------------------------
-        success insert ( Project &_p ) const;
-        // ---------------------------------------------------------------------------------
-        success update ( Project const& _p ) const;
         // ---------------------------------------------------------------------------------
         QString storage_dir() const;
         // ---------------------------------------------------------------------------------
@@ -105,6 +103,11 @@ namespace dp
     success Sqlite::persist ( Project& _project )
     {
       return d->persist ( _project );
+    }
+    // ---------------------------------------------------------------------------------
+    success Sqlite::persist(Task& _t)
+    {
+      return d->persist(_t);
     }
     // ---------------------------------------------------------------------------------
     // sqlite_private impl:
@@ -159,7 +162,11 @@ namespace dp
     {
       return _sqlite::project().persist(_project);
     }
-
+    // ---------------------------------------------------------------------------------
+    success Sqlite::sqlite_private::persist ( Task& _t ) const
+    {
+      return _sqlite::task().persist(_t);
+    }
     // ---------------------------------------------------------------------------------
     QString Sqlite::sqlite_private::storage_dir() const
     {
