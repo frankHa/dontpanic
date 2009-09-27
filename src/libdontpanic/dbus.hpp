@@ -2,6 +2,7 @@
 #define DP_DBUS_HPP
 //dp includes
 #include "defines.hpp"
+#include "dp_export.hpp"
 //Qt includes
 #include <QDBusConnection>
 #include <QDBusAbstractAdaptor>
@@ -10,12 +11,16 @@
 namespace dp
 {
   // ---------------------------------------------------------------------------------
+  enum dbus_op {REGISTER, UNREGISTER};
+  // ---------------------------------------------------------------------------------
   namespace detail
   {
     // ---------------------------------------------------------------------------------
     //forward decl:
     template<typename object_type>
     class object_to_register_with_dbus;
+    // ---------------------------------------------------------------------------------
+    class object_to_unregister_from_dbus;
     // ---------------------------------------------------------------------------------
     class service_to_register_with_dbus;
     // ---------------------------------------------------------------------------------
@@ -32,6 +37,12 @@ namespace dp
       // ---------------------------------------------------------------------------------
       detail::service_to_register_with_dbus register_service ( QString const& service );
       // ---------------------------------------------------------------------------------
+      detail::service_to_register_with_dbus unregister_service ( QString const& service );
+      // ---------------------------------------------------------------------------------
+      QDBusConnection session_bus();
+      // ---------------------------------------------------------------------------------
+      QDBusConnection system_bus();
+      // ---------------------------------------------------------------------------------
       /**
        * \brief register a dbus object with dbus
        * \example bool success = dbus().register_object(this).at_session_bus().as("/path/to/object");
@@ -42,6 +53,9 @@ namespace dp
       {
         return detail::object_to_register_with_dbus<object_type> ( object_ptr );
       }
+      // ---------------------------------------------------------------------------------
+      detail::object_to_unregister_from_dbus
+      unregister_object ( QString path );
       // ---------------------------------------------------------------------------------
       void register_dp_custom_types();
       // ---------------------------------------------------------------------------------
@@ -93,7 +107,7 @@ namespace dp
         bool as ( QString const& object_path )
         {
           create_dbus_adaptor_for ( _M_object );
-          qDebug()<<"trying to register "<<_M_object<<" for dbus path "<<object_path;
+          qDebug() << "trying to register " << _M_object << " for dbus path " << object_path;
           bool result = _M_connection.registerObject ( object_path, _M_object );
           if ( result )
           {
@@ -127,12 +141,17 @@ namespace dp
         // ---------------------------------------------------------------------------------
         dbus_registration at_system_bus()
         {
-          return dbus_registration ( _M_object, QDBusConnection::systemBus() );
+          return dbus_registration ( _M_object, dbus().system_bus() );
         }
         // ---------------------------------------------------------------------------------
         dbus_registration at_session_bus()
         {
-          return dbus_registration ( _M_object, QDBusConnection::sessionBus() );
+          return dbus_registration ( _M_object, dbus().session_bus() );
+        }
+        // ---------------------------------------------------------------------------------
+        dbus_registration at ( QDBusConnection &connection )
+        {
+          return dbus_registration ( _M_object, connection );
         }
         // ---------------------------------------------------------------------------------
       private:
@@ -141,12 +160,31 @@ namespace dp
         // ---------------------------------------------------------------------------------
     };
     // ---------------------------------------------------------------------------------
+    class DP_EXPORT object_to_unregister_from_dbus
+    {
+        // ---------------------------------------------------------------------------------
+      public:
+        // ---------------------------------------------------------------------------------
+        object_to_unregister_from_dbus ( QString path );
+        // ---------------------------------------------------------------------------------
+        void from_session_bus();
+        // ---------------------------------------------------------------------------------
+        void from_system_bus();
+        // ---------------------------------------------------------------------------------
+        void from ( QDBusConnection );
+        // ---------------------------------------------------------------------------------
+      private:
+        // ---------------------------------------------------------------------------------
+        QString _M_path;
+        // ---------------------------------------------------------------------------------
+    };
+    // ---------------------------------------------------------------------------------
     class DP_EXPORT service_to_register_with_dbus
     {
         // ---------------------------------------------------------------------------------
       public:
         // ---------------------------------------------------------------------------------
-        service_to_register_with_dbus ( QString const& service );
+        service_to_register_with_dbus ( QString const& service, dbus_op op );
         // ---------------------------------------------------------------------------------
       public:
         // ---------------------------------------------------------------------------------
@@ -158,10 +196,12 @@ namespace dp
         // ---------------------------------------------------------------------------------
         QString const& _M_service;
         // ---------------------------------------------------------------------------------
+        dbus_op _M_op;
+        // ---------------------------------------------------------------------------------
     };
     // ---------------------------------------------------------------------------------
   }//detail
   // ---------------------------------------------------------------------------------
-}//dp
+}//dontpanic
 // ---------------------------------------------------------------------------------
 #endif //DP_DBUS_HPP

@@ -2,7 +2,7 @@
 #define DP_DBUS_PROJECT_HPP
 //dp includes
 #include "defines.hpp"
-#include "libdontpanic/Project.hpp"
+#include "libdontpanic/project.hpp"
 //Qt includes
 #include <QDBusArgument>
 // ---------------------------------------------------------------------------------

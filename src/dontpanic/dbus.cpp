@@ -1,4 +1,4 @@
-#include "libdontpanic/DBus.hpp"
+#include "libdontpanic/dbus.hpp"
 #include "applicationadaptor.h"
 #include "persistenceadaptor.h"
 // ---------------------------------------------------------------------------------

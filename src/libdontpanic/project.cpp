@@ -1,77 +1,60 @@
-#include "libdontpanic/Task.hpp"
-
+#include "project.hpp"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
   // ---------------------------------------------------------------------------------
   ///ctor
-  Task::Task()
+  Project::Project()
       : _M_id ( 0 )
       , _M_name ( "" )
       , _M_visible ( true )
-      , _M_solo_effort ( true )
-      , _M_chargeable ( true )
       , _M_creation_date ( QDateTime::currentDateTime() ) {}
   // ---------------------------------------------------------------------------------
-  uint64_t Task::id() const
+  Project::Project(Project const& _p)
+      : _M_id ( _p.id() )
+      , _M_name ( _p.name() )
+      , _M_visible ( _p.isVisible() )
+      , _M_creation_date ( _p.creationDate() ) {}
+  // ---------------------------------------------------------------------------------
+  uint64_t Project::id() const
   {
     return _M_id;
   }
   // ---------------------------------------------------------------------------------
-  void Task::set_id ( uint64_t id )
+  void Project::setId ( uint64_t id )
   {
     _M_id = id;
   }
   // ---------------------------------------------------------------------------------
-  QString const& Task::name() const
+  QString Project::name() const
   {
     return _M_name;
   }
   // ---------------------------------------------------------------------------------
-  void Task::set_name ( QString name )
+  void Project::setName ( QString name )
   {
     _M_name = name;
   }
   // ---------------------------------------------------------------------------------
-  bool Task::is_visible() const
+  bool Project::isVisible() const
   {
     return _M_visible;
   }
   // ---------------------------------------------------------------------------------
-  void Task::set_is_visible ( bool v )
+  void Project::setIsVisible ( bool visible )
   {
-    _M_visible = v;
+    _M_visible = visible;
   }
   // ---------------------------------------------------------------------------------
-  bool Task::is_solo_effort() const
-  {
-    return _M_solo_effort;
-  }
-  // ---------------------------------------------------------------------------------
-  void Task::set_is_solo_effort ( bool s )
-  {
-    _M_solo_effort = s;
-  }
-  // ---------------------------------------------------------------------------------
-  bool Task::is_chargeable() const
-  {
-    return _M_chargeable;
-  }
-  // ---------------------------------------------------------------------------------
-  void Task::set_is_chargeable ( bool c )
-  {
-    _M_chargeable = c;
-  }
-  // ---------------------------------------------------------------------------------
-  QDateTime const& Task::creation_date() const
+  QDateTime const& Project::creationDate() const
   {
     return _M_creation_date;
   }
   // ---------------------------------------------------------------------------------
-  void Task::set_creation_date ( QDateTime date )
+  void Project::setCreationDate ( QDateTime date )
   {
     _M_creation_date = date;
   }
   // ---------------------------------------------------------------------------------
-}//dp
+}
 // ---------------------------------------------------------------------------------

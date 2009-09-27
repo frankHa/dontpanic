@@ -1,5 +1,5 @@
-#include "PersistenceBackend.hpp"
-#include "persistence/Sqlite.hpp"
+#include "persistencebackend.hpp"
+#include "persistence/sqlite.hpp"
 
 //Qt includes
 #include <QDebug>

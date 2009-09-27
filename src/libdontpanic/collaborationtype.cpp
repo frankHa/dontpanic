@@ -1,4 +1,4 @@
-#include "CollaborationType.hpp"
+#include "collaborationtype.hpp"
 // ---------------------------------------------------------------------------------
 namespace dp
 {

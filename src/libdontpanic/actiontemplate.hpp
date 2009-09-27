@@ -2,8 +2,8 @@
 #define DONTPANICLIB_ACTIONTEMPLATE_HPP
 // ---------------------------------------------------------------------------------
 #include "defines.hpp"
-#include "Task.hpp"
-#include "Project.hpp"
+#include "task.hpp"
+#include "project.hpp"
 // ---------------------------------------------------------------------------------
 namespace dp
 {

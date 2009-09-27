@@ -10,15 +10,15 @@ add_definitions(${SQLITE_DEFINITIONS})
 # libdontpanic section
 #########################################################################
 set(libdontpanic_SRCS
-    Action.cpp
-    ActionTemplate.cpp
-    CollaborationType.cpp
-    DBus.cpp
-    LeaveType.cpp
-    Project.cpp
-    Task.cpp
-    dbus_support/Project.cpp
-    dbus_support/Task.cpp
+    action.cpp
+    actiontemplate.cpp
+    collaborationtype.cpp
+    dbus.cpp
+    leavetype.cpp
+    project.cpp
+    task.cpp
+    dbus_support/project.cpp
+    dbus_support/task.cpp
    )
 
 kde4_add_library(dontpanic_lib SHARED ${libdontpanic_SRCS})

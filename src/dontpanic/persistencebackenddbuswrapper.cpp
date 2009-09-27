@@ -1,7 +1,7 @@
-#include "PersistenceBackendDBusWrapper.hpp"
-#include "PersistenceBackend.hpp"
-#include "libdontpanic/Project.hpp"
-#include "libdontpanic/DBus.hpp"
+#include "persistencebackenddbuswrapper.hpp"
+#include "persistencebackend.hpp"
+#include "libdontpanic/project.hpp"
+#include "libdontpanic/dbus.hpp"
 // ---------------------------------------------------------------------------------
 namespace dp
 {

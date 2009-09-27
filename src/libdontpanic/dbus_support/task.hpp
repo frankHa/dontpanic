@@ -2,7 +2,7 @@
 #define DP_DBUS_TASK_HPP
 //dp includes
 #include "defines.hpp"
-#include "libdontpanic/Task.hpp"
+#include "libdontpanic/task.hpp"
 //Qt includes
 #include <QDBusArgument>
 // ---------------------------------------------------------------------------------

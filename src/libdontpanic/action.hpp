@@ -2,9 +2,9 @@
 #define DONTPANICLIB_ACTION_HPP
 // ---------------------------------------------------------------------------------
 #include "defines.hpp"
-#include "Task.hpp"
-#include "Project.hpp"
-#include "CollaborationType.hpp"
+#include "task.hpp"
+#include "project.hpp"
+#include "collaborationtype.hpp"
 
 //Qt includes
 #include <QString>

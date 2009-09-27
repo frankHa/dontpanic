@@ -1,5 +1,5 @@
 //dp includes
-#include "libdontpanic/dbus_support/Project.hpp"
+#include "libdontpanic/dbus_support/project.hpp"
 // ---------------------------------------------------------------------------------
 QDBusArgument const& operator >> ( QDBusArgument const&arg, dp::Project & project )
 {

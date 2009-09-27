@@ -1,9 +1,9 @@
-#include "Application.hpp"
-#include "Application.moc"
+#include "application.hpp"
+#include "application.moc"
 
-#include "libdontpanic/DBus.hpp"
-#include "PersistenceBackend.hpp"
-#include "PersistenceBackendDBusWrapper.hpp"
+#include "libdontpanic/dbus.hpp"
+#include "persistencebackend.hpp"
+#include "persistencebackenddbuswrapper.hpp"
 
 //Qt includes
 #include <QDebug>

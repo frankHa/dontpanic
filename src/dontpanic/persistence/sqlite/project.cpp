@@ -1,5 +1,5 @@
-#include "persistence/sqlite/Task.hpp"
-#include "libdontpanic/Task.hpp"
+#include "persistence/sqlite/project.hpp"
+#include "libdontpanic/project.hpp"
 #include "persistence/execute_query.hpp"
 //Qt includes
 #include <QVariant>
@@ -19,24 +19,24 @@ namespace dp
     namespace _sqlite
     {
       // ---------------------------------------------------------------------------------
-      const QString INSERT_TASK =
-        "INSERT INTO t_task(t_name, t_visible, t_solo_effort, t_chargeable, t_creation_date)VALUES(?, ?, ?, ?, ?)";
+      const QString INSERT_PROJECT =
+        "INSERT INTO p_project(p_name, p_visible, p_creation_date)VALUES(?, ?, ?)";
       // ---------------------------------------------------------------------------------
-      const QString SELECT_ALL_TASKS =
-        "SELECT t_name, t_visible, t_solo_effort, t_chargeable, t_creation_date FROM t_task";
+      const QString SELECT_ALL_PROJECTS =
+        "SELECT p_id, p_name, p_visible, p_creation_date FROM p_project";
       // ---------------------------------------------------------------------------------
-      const QString SELECT_ALL_VISIBLE_TASKS =
-        SELECT_ALL_TASKS + " WHERE (t_visible <> 0)";
+      const QString SELECT_ALL_VISIBLE_PROJECTS =
+        SELECT_ALL_PROJECTS + " WHERE (p_visible <> 0)";
       // ---------------------------------------------------------------------------------
-      const QString SELECT_DISTINCT_TASK =
-        "SELECT DISTINCT t_name, t_visible, t_solo_effort, t_chargeable, t_creation_date FROM t_task WHERE (t_id=?)";
+      const QString SELECT_DISTINCT_PROJECT =
+        "SELECT DISTINCT p_id, p_name, p_visible, p_creation_date FROM p_project WHERE (p_id=?)";
       // ---------------------------------------------------------------------------------
-      const QString UPDATE_TASK =
-        "UPDATE p_project set(t_name=?, t_visible=?, t_solo_effort=?, t_chargeable=?, t_creation_date=?) WHERE (t_id=?)";
+      const QString UPDATE_PROJECT =
+        "UPDATE p_project set(p_name=?, p_visible=?, p_creation_date=?) WHERE (p_id=?)";
       // ---------------------------------------------------------------------------------
       // public stuff:
       // ---------------------------------------------------------------------------------
-      success Task::persist ( dp::Task &_project ) const
+      success Project::persist ( dp::Project &_project ) const
       {
         if ( exists ( _project ) )
         {
@@ -45,15 +45,15 @@ namespace dp
         return insert ( _project );
       }
       // ---------------------------------------------------------------------------------
-      success Task::load ( dp::Task &t ) const
+      success Project::load ( dp::Project &p ) const
       {
-        if ( t.id() == 0 )
+        if ( p.id() == 0 )
         {
           return error();
         }
         QSqlQuery query;
-        query.prepare ( SELECT_DISTINCT_TASK );
-        query.addBindValue ( t.id() );
+        query.prepare ( SELECT_DISTINCT_PROJECT );
+        query.addBindValue ( p.id() );
         if ( execute ( query ).has_failed() )
         {
           return error();
@@ -62,20 +62,20 @@ namespace dp
         {
           return error();
         }
-        return assign_query_values_to_entity ( query, t );
+        return assign_query_values_to_entity ( query, p );
       }
       // ---------------------------------------------------------------------------------
       // private stuff:
       // ---------------------------------------------------------------------------------
-      bool Task::exists ( const dp::Task& _task ) const
+      bool Project::exists ( const dp::Project& _project ) const
       {
-        if ( _task.id() == 0 )
+        if ( _project.id() == 0 )
         {
           return false;
         }
         QSqlQuery query;
-        query.prepare ( SELECT_DISTINCT_TASK );
-        query.addBindValue ( _task.id() );
+        query.prepare ( SELECT_DISTINCT_PROJECT );
+        query.addBindValue ( _project.id() );
         if ( execute ( query ).has_failed() )
         {
           return false;
@@ -83,44 +83,38 @@ namespace dp
         return query.first();
       }
       // ---------------------------------------------------------------------------------
-      success Task::insert ( dp::Task& _t ) const
+      success Project::insert ( dp::Project& _p ) const
       {
         QSqlQuery query;
-        query.prepare ( INSERT_TASK );
-        query.addBindValue ( _t.name() );
-        query.addBindValue ( _t.is_visible() );
-        query.addBindValue ( _t.is_solo_effort() );
-        query.addBindValue ( _t.is_chargeable() );
-        query.addBindValue ( _t.creation_date() );
+        query.prepare ( INSERT_PROJECT );
+        query.addBindValue ( _p.name() );
+        query.addBindValue ( _p.isVisible() );
+        query.addBindValue ( _p.creationDate() );
         if ( execute ( query ).has_failed() )
         {
           return error();
         }
-        _t.set_id ( query.lastInsertId().toULongLong() );
+        _p.setId ( query.lastInsertId().toULongLong() );
         return successful();
       }
       // ---------------------------------------------------------------------------------
-      success Task::update ( const dp::Task& _t ) const
+      success Project::update ( const dp::Project& _p ) const
       {
         QSqlQuery query;
-        query.prepare ( UPDATE_TASK );
-        query.addBindValue ( _t.name() );
-        query.addBindValue ( _t.is_visible() );
-        query.addBindValue ( _t.is_solo_effort() );
-        query.addBindValue ( _t.is_chargeable() );
-        query.addBindValue ( _t.creation_date() );
-        query.addBindValue ( _t.id() );
+        query.prepare ( UPDATE_PROJECT );
+        query.addBindValue ( _p.name() );
+        query.addBindValue ( _p.isVisible() );
+        query.addBindValue ( _p.creationDate() );
+        query.addBindValue ( _p.id() );
         return execute ( query );
       }
       // ---------------------------------------------------------------------------------
-      success Task::assign_query_values_to_entity ( QSqlQuery& query, dp::Task& t ) const
+      success Project::assign_query_values_to_entity ( QSqlQuery& query, dp::Project& p ) const
       {
-        t.set_id ( query.value ( 0 ).toULongLong() );
-        t.set_name ( query.value ( 1 ).toString() );
-        t.set_is_visible ( query.value ( 2 ).toBool() );
-        t.set_is_solo_effort ( query.value ( 3 ).toBool() );
-        t.set_is_chargeable ( query.value ( 4 ).toBool() );
-        t.set_creation_date ( query.value ( 5 ).toDateTime() );
+        p.setId ( query.value ( 0 ).toULongLong() );
+        p.setName ( query.value ( 1 ).toString() );
+        p.setIsVisible ( query.value ( 2 ).toBool() );
+        p.setCreationDate ( query.value ( 3 ).toDateTime() );
         return successful();
       }
 

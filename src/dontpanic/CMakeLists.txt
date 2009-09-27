@@ -3,22 +3,22 @@ include(DBusMacros)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 set(dontpanic_SRCS  
-    Application.cpp
-    DBus.cpp
+    application.cpp
+    dbus.cpp
     main.cpp
-    PersistenceBackend.cpp
-    PersistenceBackendDBusWrapper.cpp
-    persistence/Sqlite.cpp
-    persistence/sqlite/Project.cpp
-    persistence/sqlite/Task.cpp
+    persistencebackend.cpp
+    persistencebackenddbuswrapper.cpp
+    persistence/sqlite.cpp
+    persistence/sqlite/project.cpp
+    persistence/sqlite/task.cpp
    )
 
-qt4_generate_dbus_interface(Application.hpp org.dontpanic.Application.xml)
-qt4_add_dbus_adaptor(dontpanic_SRCS ${CMAKE_CURRENT_BINARY_DIR}/org.dontpanic.Application.xml Application.hpp Application)
+qt4_generate_dbus_interface(application.hpp org.dontpanic.Application.xml)
+qt4_add_dbus_adaptor(dontpanic_SRCS ${CMAKE_CURRENT_BINARY_DIR}/org.dontpanic.Application.xml application.hpp Application)
 
 # needs to be defined by hand due to using a customized parameter type
-#qt4_generate_dbus_interface(PersistanceBackendDBusWrapper.hpp org.dontpanic.Persistance.xml)
-qt4_add_dbus_adaptor(dontpanic_SRCS interfaces/org.dontpanic.Persistence.xml PersistenceBackendDBusWrapper.hpp dp::PersistenceBackendDBusWrapper)
+#qt4_generate_dbus_interface(persistancebackenddbuswrapper.hpp org.dontpanic.Persistance.xml)
+qt4_add_dbus_adaptor(dontpanic_SRCS interfaces/org.dontpanic.Persistence.xml persistencebackenddbuswrapper.hpp dp::PersistenceBackendDBusWrapper)
 
 kde4_add_executable(dontpanic ${dontpanic_SRCS})
 target_link_libraries(dontpanic dontpanic_lib ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTSQL_LIBRARY})

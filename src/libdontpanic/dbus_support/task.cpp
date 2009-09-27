@@ -1,5 +1,5 @@
 //dp includes
-#include "libdontpanic/dbus_support/Task.hpp"
+#include "libdontpanic/dbus_support/task.hpp"
 // ---------------------------------------------------------------------------------
 QDBusArgument const& operator >> ( QDBusArgument const&arg, dp::Task & task )
 {

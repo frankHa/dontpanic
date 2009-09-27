@@ -1,9 +1,9 @@
-#include "persistence/Sqlite.hpp"
+#include "persistence/sqlite.hpp"
 #include "persistence/execute_query.hpp"
-#include "persistence/sqlite/Project.hpp"
-#include "persistence/sqlite/Task.hpp"
-#include "libdontpanic/Project.hpp"
-#include "libdontpanic/Task.hpp"
+#include "persistence/sqlite/project.hpp"
+#include "persistence/sqlite/task.hpp"
+#include "libdontpanic/project.hpp"
+#include "libdontpanic/task.hpp"
 //Qt includes
 #include <QVariant>
 #include <QSqlDatabase>
