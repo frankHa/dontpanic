@@ -40,7 +40,7 @@ ct_creation_date TEXT, ct_solo_effort INTEGER, ct_interrupting INTEGER)"
 
 #define CREATE_TABLE_ACTION\
   "CREATE TABLE IF NOT EXISTS a_action \
-(a_id INTEGER PRIMARY KEY, a_t_task INTEGER references t_task(t_id) , a_project INTEGER references p_project(p_id),\
+(a_id INTEGER PRIMARY KEY, a_t_task INTEGER references t_task(t_id) , a_p_project INTEGER references p_project(p_id),\
 a_ct_collaboration_type INTEGER references ct_collaboration_type(ct_id),\
 a_name TEXT, a_comment TEXT, a_start TEXT, a_end TEXT, a_reviewed INTEGER, a_billed INTEGER )"
 // ---------------------------------------------------------------------------------

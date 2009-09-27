@@ -4,8 +4,8 @@ namespace dp
 {
   // ---------------------------------------------------------------------------------
   ///ctor
-  Project::Project()
-      : _M_id ( 0 )
+  Project::Project(uint64_t id)
+      : _M_id ( id )
       , _M_name ( "" )
       , _M_visible ( true )
       , _M_creation_date ( QDateTime::currentDateTime() ) {}

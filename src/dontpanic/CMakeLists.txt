@@ -2,13 +2,14 @@ include(DBusMacros)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-set(dontpanic_SRCS  
+set(dontpanic_SRCS 
     application.cpp
     dbus.cpp
     main.cpp
     persistencebackend.cpp
     persistencebackenddbuswrapper.cpp
     persistence/sqlite.cpp
+    persistence/sqlite/action.cpp
     persistence/sqlite/project.cpp
     persistence/sqlite/task.cpp
    )

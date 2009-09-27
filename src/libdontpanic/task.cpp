@@ -5,8 +5,8 @@ namespace dp
 {
   // ---------------------------------------------------------------------------------
   ///ctor
-  Task::Task()
-      : _M_id ( 0 )
+  Task::Task(uint64_t id)
+      : _M_id ( id )
       , _M_name ( "" )
       , _M_visible ( true )
       , _M_solo_effort ( true )
