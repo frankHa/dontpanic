@@ -1,6 +1,7 @@
 #include "persistence/sqlite.hpp"
 #include "persistence/execute_query.hpp"
 #include "persistence/sqlite/project.hpp"
+#include "persistence/sqlite/action.hpp"
 #include "persistence/sqlite/task.hpp"
 #include "libdontpanic/project.hpp"
 #include "libdontpanic/task.hpp"
@@ -67,7 +68,9 @@ namespace dp
         // ---------------------------------------------------------------------------------
         success persist ( Project &_project ) const;
         // ---------------------------------------------------------------------------------
-        success persist (Task &_task) const;
+        success persist ( Task &_task ) const;
+        // ---------------------------------------------------------------------------------
+        success persist ( Action &_action ) const;
         // ---------------------------------------------------------------------------------
       private:
         // ---------------------------------------------------------------------------------
@@ -105,9 +108,14 @@ namespace dp
       return d->persist ( _project );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::persist(Task& _t)
+    success Sqlite::persist ( Task& _t )
     {
-      return d->persist(_t);
+      return d->persist ( _t );
+    }
+    // ---------------------------------------------------------------------------------
+    success Sqlite::persist ( Action& _a )
+    {
+      return d->persist ( _a );
     }
     // ---------------------------------------------------------------------------------
     // sqlite_private impl:
@@ -160,12 +168,17 @@ namespace dp
     // ---------------------------------------------------------------------------------
     success Sqlite::sqlite_private::persist ( Project& _project ) const
     {
-      return _sqlite::project().persist(_project);
+      return _sqlite::project().persist ( _project );
     }
     // ---------------------------------------------------------------------------------
     success Sqlite::sqlite_private::persist ( Task& _t ) const
     {
-      return _sqlite::task().persist(_t);
+      return _sqlite::task().persist ( _t );
+    }
+    // ---------------------------------------------------------------------------------
+    success Sqlite::sqlite_private::persist ( Action& _a ) const
+    {
+      return _sqlite::action().persist ( _a );
     }
     // ---------------------------------------------------------------------------------
     QString Sqlite::sqlite_private::storage_dir() const
