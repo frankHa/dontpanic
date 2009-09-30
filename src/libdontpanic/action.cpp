@@ -2,7 +2,20 @@
 // ---------------------------------------------------------------------------------
 namespace dp
 {
-  Action::Action ( uint64_t id )
+  // ---------------------------------------------------------------------------------
+  Action::Action ()
+      : _M_id ( QUuid::createUuid() )
+      , _M_task ( new Task() )
+      , _M_project ( new Project() )
+      , _M_teamwork ( new CollaborationType() )
+      , _M_name ( "" )
+      , _M_comment ( "" )
+      , _M_start()
+      , _M_end()
+      , _M_reviewed ( false )
+      , _M_billed ( false ) {}
+  // ---------------------------------------------------------------------------------
+  Action::Action ( QUuid const& id )
       : _M_id ( id )
       , _M_task ( new Task() )
       , _M_project ( new Project() )
@@ -14,14 +27,9 @@ namespace dp
       , _M_reviewed ( false )
       , _M_billed ( false ) {}
   // ---------------------------------------------------------------------------------
-  uint64_t Action::id() const
+  QUuid const& Action::id() const
   {
     return _M_id;
-  }
-  // ---------------------------------------------------------------------------------
-  void Action::setId ( uint64_t id )
-  {
-    _M_id = id;
   }
   // ---------------------------------------------------------------------------------
   Task::ptr Action::task() const

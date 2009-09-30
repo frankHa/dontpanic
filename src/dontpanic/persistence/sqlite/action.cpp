@@ -15,8 +15,8 @@ namespace dp
     namespace _sqlite
     {
       const QString INSERT_ACTION =
-        "INSERT INTO a_action(a_t_task , a_p_project,a_ct_collaboration_type,\
-        a_name, a_comment, a_start, a_end, a_reviewed, a_billed)VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        "INSERT INTO a_action(a_id, a_t_task , a_p_project,a_ct_collaboration_type,\
+        a_name, a_comment, a_start, a_end, a_reviewed, a_billed)VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
       // ---------------------------------------------------------------------------------
       const QString SELECT_ALL_ACTIONS =
         "SELECT a_id, a_t_task , a_p_project,a_ct_collaboration_type,\
@@ -27,8 +27,8 @@ namespace dp
         a_name, a_comment, a_start, a_end, a_reviewed, a_billed FROM a_action WHERE (a_id=?)";
       // ---------------------------------------------------------------------------------
       const QString UPDATE_ACTION =
-        "UPDATE a_action set(a_t_task=?, a_p_project=?,a_ct_collaboration_type=?,\
-        a_name=?, a_comment=?, a_start=?, a_end=?, a_reviewed=?, a_billed=?) WHERE (a_id=?)";
+        "UPDATE a_action set a_t_task=?, a_p_project=?,a_ct_collaboration_type=?,\
+        a_name=?, a_comment=?, a_start=?, a_end=?, a_reviewed=?, a_billed=? WHERE (a_id=?)";
       // ---------------------------------------------------------------------------------
       success Action::persist ( dp::Action &_a ) const
       {
@@ -41,13 +41,13 @@ namespace dp
       // ---------------------------------------------------------------------------------
       success Action::load ( dp::Action &a ) const
       {
-        if ( a.id() == 0 )
+        if ( a.id().isNull() )
         {
           return error();
         }
         QSqlQuery query;
         query.prepare ( SELECT_DISTINCT_ACTION );
-        query.addBindValue ( a.id() );
+        query.addBindValue ( a.id().toString() );
         if ( execute ( query ).has_failed() )
         {
           return error();
@@ -63,13 +63,13 @@ namespace dp
       // ---------------------------------------------------------------------------------
       bool Action::exists ( dp::Action const& _a ) const
       {
-        if ( _a.id() == 0 )
+        if ( _a.id().isNull() )
         {
           return false;
         }
         QSqlQuery query;
         query.prepare ( SELECT_DISTINCT_ACTION );
-        query.addBindValue ( _a.id() );
+        query.addBindValue ( _a.id().toString() );
         if ( execute ( query ).has_failed() )
         {
           return false;
@@ -80,29 +80,29 @@ namespace dp
       success Action::insert ( dp::Action &_a ) const
       {
         {
-        QSqlQuery query;
-        query.prepare ( INSERT_ACTION );
-        query.addBindValue ( _a.task()->id() );
-        query.addBindValue ( _a.project()->id() );
-        query.addBindValue ( _a.collaborationType()->id() );
-        query.addBindValue ( _a.name() );
-        query.addBindValue ( _a.comment() );
-        query.addBindValue ( _a.startTime() );
-        query.addBindValue ( _a.endTime() );
-        query.addBindValue ( _a.reviewed() );
-        query.addBindValue ( _a.billed() );
-        if ( execute ( query ).has_failed() )
-        {
-          return error();
+          QSqlQuery query;
+          query.prepare ( INSERT_ACTION );
+          query.addBindValue ( _a.id().toString() );
+          query.addBindValue ( _a.task()->id() );
+          query.addBindValue ( _a.project()->id() );
+          query.addBindValue ( _a.collaborationType()->id() );
+          query.addBindValue ( _a.name() );
+          query.addBindValue ( _a.comment() );
+          query.addBindValue ( _a.startTime() );
+          query.addBindValue ( _a.endTime() );
+          query.addBindValue ( _a.reviewed() );
+          query.addBindValue ( _a.billed() );
+          if ( execute ( query ).has_failed() )
+          {
+            return error();
+          }
+          return successful();
         }
-        _a.setId ( query.lastInsertId().toULongLong() );
-        return successful();
-      }
       }
       // ---------------------------------------------------------------------------------
       success Action::update ( dp::Action const& _a ) const
       {
-      QSqlQuery query;
+        QSqlQuery query;
         query.prepare ( UPDATE_ACTION );
         query.addBindValue ( _a.task()->id() );
         query.addBindValue ( _a.project()->id() );
@@ -113,29 +113,29 @@ namespace dp
         query.addBindValue ( _a.endTime() );
         query.addBindValue ( _a.reviewed() );
         query.addBindValue ( _a.billed() );
-        query.addBindValue ( _a.id() );
+        query.addBindValue ( _a.id().toString() );
+        QList<QVariant> list = query.boundValues().values();
         return execute ( query );
       }
       // ---------------------------------------------------------------------------------
       success Action::assign_query_values_to_entity ( QSqlQuery &query, dp::Action &a ) const
       {
-        a.setId ( query.value ( 0 ).toULongLong() );
         uint64_t task_id = query.value ( 1 ).toULongLong();
-        dp::Task::ptr _task(new dp::Task(task_id));
-        task().load(*_task);
-        a.setTask(_task);
+        dp::Task::ptr _task ( new dp::Task ( task_id ) );
+        task().load ( *_task );
+        a.setTask ( _task );
         uint64_t project_id = query.value ( 2 ).toULongLong();
-        dp::Project::ptr _project(new dp::Project(project_id));
-        project().load(*_project);
-        a.setProject(_project);
+        dp::Project::ptr _project ( new dp::Project ( project_id ) );
+        project().load ( *_project );
+        a.setProject ( _project );
         uint64_t collaboration_id = query.value ( 3 ).toULongLong();
         //TODO load collaboration type!!!
         a.setName ( query.value ( 5 ).toString() );
         a.setComment ( query.value ( 6 ).toString() );
         a.setStartTime ( query.value ( 7 ).toDateTime() );
         a.setEndTime ( query.value ( 7 ).toDateTime() );
-        a.setReviewed(query.value(8).toBool());
-        a.setBilled(query.value(9).toBool());
+        a.setReviewed ( query.value ( 8 ).toBool() );
+        a.setBilled ( query.value ( 9 ).toBool() );
         return successful();
       }
       // ---------------------------------------------------------------------------------
