@@ -7,6 +7,7 @@ set(dontpanic_SRCS
     dbus.cpp
     main.cpp
     persistencebackend.cpp
+    timetracker.cpp
     persistence/sqlite.cpp
     persistence/sqlite/action.cpp
     persistence/sqlite/project.cpp
@@ -15,6 +16,10 @@ set(dontpanic_SRCS
 
 qt4_generate_dbus_interface(application.hpp org.dontpanic.Application.xml)
 qt4_add_dbus_adaptor(dontpanic_SRCS ${CMAKE_CURRENT_BINARY_DIR}/org.dontpanic.Application.xml application.hpp Application)
+
+qt4_add_dbus_adaptor(dontpanic_SRCS  
+                    ${DBUS_INTERFACES_PATH}/org.dontpanic.TimeTracker.xml
+                    timetracker.h dp::TimeTracker)
 
 kde4_add_executable(dontpanic ${dontpanic_SRCS})
 target_link_libraries(dontpanic dontpanic_lib ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTSQL_LIBRARY})

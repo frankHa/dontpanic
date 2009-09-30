@@ -3,6 +3,7 @@
 
 #include "libdontpanic/dbus.hpp"
 #include "persistencebackend.hpp"
+#include "timetracker.h"
 
 //Qt includes
 #include <QDebug>
@@ -29,6 +30,8 @@ class Application::ApplicationPrivate
     // ---------------------------------------------------------------------------------
     bool init_storage_backend();
     // ---------------------------------------------------------------------------------
+    void init_timetracker();
+    // ---------------------------------------------------------------------------------
     void register_with_session_bus();
     // ---------------------------------------------------------------------------------
   private:
@@ -36,6 +39,7 @@ class Application::ApplicationPrivate
     Application * _M_self;
     // ---------------------------------------------------------------------------------
     dp::PersistenceBackend * _M_persistence;
+    dp::TimeTracker *_M_timetracker;
     // ---------------------------------------------------------------------------------
 };
 // ---------------------------------------------------------------------------------
@@ -80,6 +84,7 @@ void Application::ApplicationPrivate::init()
 {
   register_with_session_bus();
   init_storage_backend();
+  init_timetracker();
 }
 // ---------------------------------------------------------------------------------
 bool Application::ApplicationPrivate::init_storage_backend()
@@ -87,10 +92,16 @@ bool Application::ApplicationPrivate::init_storage_backend()
   return dp::persistence().init();
 }
 // ---------------------------------------------------------------------------------
+void Application::ApplicationPrivate::init_timetracker()
+{
+  _M_timetracker = new dp::TimeTracker(_M_self);
+  dp::dbus().register_object(_M_timetracker).at_session_bus().as("/TimeTracker");
+}
+// ---------------------------------------------------------------------------------
 void Application::ApplicationPrivate::register_with_session_bus()
 {
-  qDebug() << "registering at the session bus now...";
-  dp::dbus().register_object ( _M_self ).at_session_bus().as ( "/Application" );
+  //qDebug() << "registering at the session bus now...";
+  //dp::dbus().register_object ( _M_self ).at_session_bus().as ( "/Application" );
 }
 
 // ---------------------------------------------------------------------------------

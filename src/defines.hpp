@@ -4,23 +4,34 @@
 //dp includes
 #include "dp_export.hpp"
 #include "libdontpanic/success.hpp"
+//Qt includes
+#include <QDebug>
+// ---------------------------------------------------------------------------------
+#ifdef __GNUC__
+#undef __FUNCTION__
+#define __FUNCTION__ __PRETTY_FUNCTION__
+#endif //__GNUC__
+// ---------------------------------------------------------------------------------
+#ifdef __SUNCC__
+#define __FUNCTION__ __func__
+#endif // __SUNCC__
 // ---------------------------------------------------------------------------------
 //boost includes
 #include <boost/shared_ptr.hpp>
 #include <boost/weak_ptr.hpp>
 // ---------------------------------------------------------------------------------
 #define DECLARE_SMARTPOINTERS(clazz)\
- typedef boost::shared_ptr<clazz> clazz##_ptr;\
- typedef boost::weak_ptr<clazz> clazz##_weak_ptr
+  typedef boost::shared_ptr<clazz> clazz##_ptr;\
+  typedef boost::weak_ptr<clazz> clazz##_weak_ptr
 // ---------------------------------------------------------------------------------
 #define FORWARD_DECL(clazz) \
- class clazz;\
- DECLARE_SMARTPOINTERS(clazz)
+  class clazz;\
+  DECLARE_SMARTPOINTERS(clazz)
 // ---------------------------------------------------------------------------------
 #define TYPE(clazz) \
- typedef clazz type; \
- typedef boost::shared_ptr<clazz> ptr; \
- typedef boost::weak_ptr<clazz> weak_ptr
+  typedef clazz type; \
+  typedef boost::shared_ptr<clazz> ptr; \
+  typedef boost::weak_ptr<clazz> weak_ptr
 // ---------------------------------------------------------------------------------
 #endif //DONTPANIC_DEFINES_HPP
 

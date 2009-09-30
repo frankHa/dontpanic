@@ -1,5 +1,6 @@
 project(dontpanic)
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
+include(AssertOutOfSourceBuild)
 find_package(Boost REQUIRED)
 find_package(KDE4 REQUIRED)
 include (KDE4Defaults)

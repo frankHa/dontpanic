@@ -10,6 +10,11 @@ set(dontpanikpart_LIB_SRCS
     dont_panik_part_core.cpp
    )
 
+qt4_add_dbus_interface(dontpanikpart_LIB_SRCS 
+                                    ${DBUS_INTERFACES_PATH}/org.dontpanic.TimeTracker.xml
+                                    timetracker
+                                    )
+
 kde4_add_library(dontpanikpartprivate SHARED ${dontpanikpart_LIB_SRCS})
 target_link_libraries(dontpanikpartprivate ${KDE4_KDEUI_LIBS})
 install(TARGETS dontpanikpartprivate ${INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)
