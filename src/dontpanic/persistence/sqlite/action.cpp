@@ -88,8 +88,8 @@ namespace dp
           query.addBindValue ( _a.collaborationType()->id() );
           query.addBindValue ( _a.name() );
           query.addBindValue ( _a.comment() );
-          query.addBindValue ( _a.startTime() );
-          query.addBindValue ( _a.endTime() );
+          query.addBindValue ( _a.startTime().toTime_t() );
+          query.addBindValue ( _a.endTime().toTime_t() );
           query.addBindValue ( _a.reviewed() );
           query.addBindValue ( _a.billed() );
           if ( execute ( query ).has_failed() )
@@ -109,8 +109,8 @@ namespace dp
         query.addBindValue ( _a.collaborationType()->id() );
         query.addBindValue ( _a.name() );
         query.addBindValue ( _a.comment() );
-        query.addBindValue ( _a.startTime() );
-        query.addBindValue ( _a.endTime() );
+        query.addBindValue ( _a.startTime().toTime_t() );
+        query.addBindValue ( _a.endTime().toTime_t() );
         query.addBindValue ( _a.reviewed() );
         query.addBindValue ( _a.billed() );
         query.addBindValue ( _a.id().toString() );
@@ -128,14 +128,17 @@ namespace dp
         dp::Project::ptr _project ( new dp::Project ( project_id ) );
         project().load ( *_project );
         a.setProject ( _project );
+        QDateTime _start, _end;
         uint64_t collaboration_id = query.value ( 3 ).toULongLong();
         //TODO load collaboration type!!!
         a.setName ( query.value ( 5 ).toString() );
         a.setComment ( query.value ( 6 ).toString() );
-        a.setStartTime ( query.value ( 7 ).toDateTime() );
-        a.setEndTime ( query.value ( 7 ).toDateTime() );
-        a.setReviewed ( query.value ( 8 ).toBool() );
-        a.setBilled ( query.value ( 9 ).toBool() );
+        _start.setTime_t(query.value ( 7 ).toUInt());
+        a.setStartTime ( _start );
+        _end.setTime_t(query.value ( 8 ).toUInt());
+        a.setEndTime ( _end );
+        a.setReviewed ( query.value ( 9 ).toBool() );
+        a.setBilled ( query.value ( 10 ).toBool() );
         return successful();
       }
       // ---------------------------------------------------------------------------------
