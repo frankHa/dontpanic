@@ -7,7 +7,6 @@ set(dontpanic_SRCS
     dbus.cpp
     main.cpp
     persistencebackend.cpp
-    persistencebackenddbuswrapper.cpp
     persistence/sqlite.cpp
     persistence/sqlite/action.cpp
     persistence/sqlite/project.cpp
@@ -16,10 +15,6 @@ set(dontpanic_SRCS
 
 qt4_generate_dbus_interface(application.hpp org.dontpanic.Application.xml)
 qt4_add_dbus_adaptor(dontpanic_SRCS ${CMAKE_CURRENT_BINARY_DIR}/org.dontpanic.Application.xml application.hpp Application)
-
-# needs to be defined by hand due to using a customized parameter type
-#qt4_generate_dbus_interface(persistancebackenddbuswrapper.hpp org.dontpanic.Persistance.xml)
-qt4_add_dbus_adaptor(dontpanic_SRCS interfaces/org.dontpanic.Persistence.xml persistencebackenddbuswrapper.hpp dp::PersistenceBackendDBusWrapper)
 
 kde4_add_executable(dontpanic ${dontpanic_SRCS})
 target_link_libraries(dontpanic dontpanic_lib ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTSQL_LIBRARY})
@@ -30,7 +25,7 @@ if(DP_INSTALL_SYSTEM_FILES)
   dbus_add_activation_service(org.dontpanic.service.in)
   install( FILES
            ${CMAKE_CURRENT_BINARY_DIR}/org.dontpanic.Application.xml
-           interfaces/org.dontpanic.Persistence.xml
+           ${DBUS_INTERFACES_PATH}/org.dontpanic.Persistence.xml
            DESTINATION
            ${KDE4_DBUS_INTERFACES_DIR} 
            )
@@ -43,4 +38,3 @@ else(DP_INSTALL_SYSTEM_FILES)
     message(STATUS "and perform the installation with root access")
     message(STATUS "******************************************************")
 endif (DP_INSTALL_SYSTEM_FILES)
-add_subdirectory(interfaces)

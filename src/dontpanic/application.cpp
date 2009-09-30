@@ -3,7 +3,6 @@
 
 #include "libdontpanic/dbus.hpp"
 #include "persistencebackend.hpp"
-#include "persistencebackenddbuswrapper.hpp"
 
 //Qt includes
 #include <QDebug>
@@ -36,7 +35,7 @@ class Application::ApplicationPrivate
     // ---------------------------------------------------------------------------------
     Application * _M_self;
     // ---------------------------------------------------------------------------------
-    dp::PersistenceBackendDBusWrapper * _M_persistence_dbus_wrapper;
+    dp::PersistenceBackend * _M_persistence;
     // ---------------------------------------------------------------------------------
 };
 // ---------------------------------------------------------------------------------
@@ -85,7 +84,6 @@ void Application::ApplicationPrivate::init()
 // ---------------------------------------------------------------------------------
 bool Application::ApplicationPrivate::init_storage_backend()
 {
-  _M_persistence_dbus_wrapper = new dp::PersistenceBackendDBusWrapper ( _M_self );
   return dp::persistence().init();
 }
 // ---------------------------------------------------------------------------------
