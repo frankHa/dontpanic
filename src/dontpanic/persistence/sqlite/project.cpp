@@ -14,7 +14,7 @@ namespace dp
     {
       // ---------------------------------------------------------------------------------
       const QString INSERT_PROJECT =
-        "INSERT INTO p_project(p_name, p_visible, p_creation_date)VALUES(?, ?, ?)";
+        "INSERT INTO p_project(p_id p_name, p_visible, p_creation_date)VALUES(?, ?, ?, ?)";
       // ---------------------------------------------------------------------------------
       const QString SELECT_ALL_PROJECTS =
         "SELECT p_id, p_name, p_visible, p_creation_date FROM p_project";
@@ -47,7 +47,7 @@ namespace dp
         }
         QSqlQuery query;
         query.prepare ( SELECT_DISTINCT_PROJECT );
-        query.addBindValue ( p.id() );
+        query.addBindValue ( p.id().toString() );
         if ( execute ( query ).has_failed() )
         {
           return error();
@@ -81,6 +81,7 @@ namespace dp
       {
         QSqlQuery query;
         query.prepare ( INSERT_PROJECT );
+        query.addBindValue ( _p.id().toString() );
         query.addBindValue ( _p.name() );
         query.addBindValue ( _p.isVisible() );
         query.addBindValue ( _p.creationDate() );
@@ -88,7 +89,6 @@ namespace dp
         {
           return error();
         }
-        _p.setId ( query.lastInsertId().toULongLong() );
         return successful();
       }
       // ---------------------------------------------------------------------------------
@@ -99,13 +99,12 @@ namespace dp
         query.addBindValue ( _p.name() );
         query.addBindValue ( _p.isVisible() );
         query.addBindValue ( _p.creationDate() );
-        query.addBindValue ( _p.id() );
+        query.addBindValue ( _p.id().toString() );
         return execute ( query );
       }
       // ---------------------------------------------------------------------------------
       success Project::assign_query_values_to_entity ( QSqlQuery& query, dp::Project& p ) const
       {
-        p.setId ( query.value ( 0 ).toULongLong() );
         p.setName ( query.value ( 1 ).toString() );
         p.setIsVisible ( query.value ( 2 ).toBool() );
         p.setCreationDate ( query.value ( 3 ).toDateTime() );

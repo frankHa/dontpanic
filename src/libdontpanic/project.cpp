@@ -4,26 +4,21 @@ namespace dp
 {
   // ---------------------------------------------------------------------------------
   ///ctor
-  Project::Project(uint64_t id)
+  Project::Project()
+      : _M_id ( QUuid::createUuid() )
+      , _M_name ( "" )
+      , _M_visible ( true )
+      , _M_creation_date ( QDateTime::currentDateTime() ) {}
+  // ---------------------------------------------------------------------------------
+  Project::Project(QUuid const& id)
       : _M_id ( id )
       , _M_name ( "" )
       , _M_visible ( true )
       , _M_creation_date ( QDateTime::currentDateTime() ) {}
   // ---------------------------------------------------------------------------------
-  Project::Project(Project const& _p)
-      : _M_id ( _p.id() )
-      , _M_name ( _p.name() )
-      , _M_visible ( _p.isVisible() )
-      , _M_creation_date ( _p.creationDate() ) {}
-  // ---------------------------------------------------------------------------------
-  uint64_t Project::id() const
+  QUuid const& Project::id() const
   {
     return _M_id;
-  }
-  // ---------------------------------------------------------------------------------
-  void Project::setId ( uint64_t id )
-  {
-    _M_id = id;
   }
   // ---------------------------------------------------------------------------------
   QString Project::name() const

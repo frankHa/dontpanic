@@ -84,7 +84,7 @@ namespace dp
           query.prepare ( INSERT_ACTION );
           query.addBindValue ( _a.id().toString() );
           query.addBindValue ( _a.task()->id().toString() );
-          query.addBindValue ( _a.project()->id() );
+          query.addBindValue ( _a.project()->id().toString() );
           query.addBindValue ( _a.collaborationType()->id() );
           query.addBindValue ( _a.name() );
           query.addBindValue ( _a.comment() );
@@ -105,7 +105,7 @@ namespace dp
         QSqlQuery query;
         query.prepare ( UPDATE_ACTION );
         query.addBindValue ( _a.task()->id().toString() );
-        query.addBindValue ( _a.project()->id() );
+        query.addBindValue ( _a.project()->id().toString() );
         query.addBindValue ( _a.collaborationType()->id() );
         query.addBindValue ( _a.name() );
         query.addBindValue ( _a.comment() );
@@ -120,11 +120,11 @@ namespace dp
       // ---------------------------------------------------------------------------------
       success Action::assign_query_values_to_entity ( QSqlQuery &query, dp::Action &a ) const
       {
-        QUuid task_id = query.value ( 1 ).toString();
+        QUuid const& task_id = query.value ( 1 ).toString();
         dp::Task::ptr _task ( new dp::Task ( task_id ) );
         task().load ( *_task );
         a.setTask ( _task );
-        uint64_t project_id = query.value ( 2 ).toULongLong();
+        QUuid const& project_id = query.value ( 2 ).toString();
         dp::Project::ptr _project ( new dp::Project ( project_id ) );
         project().load ( *_project );
         a.setProject ( _project );

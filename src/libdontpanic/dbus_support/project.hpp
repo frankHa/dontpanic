@@ -7,9 +7,12 @@
 #include <QDBusArgument>
 // ---------------------------------------------------------------------------------
 Q_DECLARE_METATYPE ( dp::Project )
-// ---------------------------------------------------------------------------------
-QDBusArgument const& operator >> ( QDBusArgument const&arg, dp::Project & project );
-// ---------------------------------------------------------------------------------
-QDBusArgument & operator << ( QDBusArgument &arg, dp::Project const& project );
-// ---------------------------------------------------------------------------------
+namespace dp
+{
+  // ---------------------------------------------------------------------------------
+  QDBusArgument const& operator >> ( QDBusArgument const&arg, dp::Project & project );
+  // ---------------------------------------------------------------------------------
+  QDBusArgument & operator << ( QDBusArgument &arg, dp::Project const& project );
+  // ---------------------------------------------------------------------------------
+}
 #endif //DP_DBUS_PROJECT_HPP
