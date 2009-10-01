@@ -5,7 +5,15 @@ namespace dp
 {
   // ---------------------------------------------------------------------------------
   ///ctor
-  Task::Task(uint64_t id)
+  Task::Task()
+      : _M_id ( QUuid::createUuid() )
+      , _M_name ( "" )
+      , _M_visible ( true )
+      , _M_solo_effort ( true )
+      , _M_chargeable ( true )
+      , _M_creation_date ( QDateTime::currentDateTime() ) {}
+  // ---------------------------------------------------------------------------------
+  Task::Task ( QUuid const& id )
       : _M_id ( id )
       , _M_name ( "" )
       , _M_visible ( true )
@@ -13,14 +21,9 @@ namespace dp
       , _M_chargeable ( true )
       , _M_creation_date ( QDateTime::currentDateTime() ) {}
   // ---------------------------------------------------------------------------------
-  uint64_t Task::id() const
+  QUuid const& Task::id() const
   {
     return _M_id;
-  }
-  // ---------------------------------------------------------------------------------
-  void Task::set_id ( uint64_t id )
-  {
-    _M_id = id;
   }
   // ---------------------------------------------------------------------------------
   QString const& Task::name() const

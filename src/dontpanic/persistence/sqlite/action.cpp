@@ -83,7 +83,7 @@ namespace dp
           QSqlQuery query;
           query.prepare ( INSERT_ACTION );
           query.addBindValue ( _a.id().toString() );
-          query.addBindValue ( _a.task()->id() );
+          query.addBindValue ( _a.task()->id().toString() );
           query.addBindValue ( _a.project()->id() );
           query.addBindValue ( _a.collaborationType()->id() );
           query.addBindValue ( _a.name() );
@@ -104,7 +104,7 @@ namespace dp
       {
         QSqlQuery query;
         query.prepare ( UPDATE_ACTION );
-        query.addBindValue ( _a.task()->id() );
+        query.addBindValue ( _a.task()->id().toString() );
         query.addBindValue ( _a.project()->id() );
         query.addBindValue ( _a.collaborationType()->id() );
         query.addBindValue ( _a.name() );
@@ -120,7 +120,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       success Action::assign_query_values_to_entity ( QSqlQuery &query, dp::Action &a ) const
       {
-        uint64_t task_id = query.value ( 1 ).toULongLong();
+        QUuid task_id = query.value ( 1 ).toString();
         dp::Task::ptr _task ( new dp::Task ( task_id ) );
         task().load ( *_task );
         a.setTask ( _task );
