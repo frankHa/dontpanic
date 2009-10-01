@@ -4,9 +4,10 @@ namespace dp
 {
   // ---------------------------------------------------------------------------------
   CollaborationType::CollaborationType()
+      : _M_id ( QUuid::createUuid() )
   {}
   // ---------------------------------------------------------------------------------
-  uint64_t CollaborationType::id() const
+  QUuid const& CollaborationType::id() const
   {
     return _M_id;
   }

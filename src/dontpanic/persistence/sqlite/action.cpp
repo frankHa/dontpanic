@@ -85,7 +85,7 @@ namespace dp
           query.addBindValue ( _a.id().toString() );
           query.addBindValue ( _a.task()->id().toString() );
           query.addBindValue ( _a.project()->id().toString() );
-          query.addBindValue ( _a.collaborationType()->id() );
+          query.addBindValue ( _a.collaborationType()->id().toString() );
           query.addBindValue ( _a.name() );
           query.addBindValue ( _a.comment() );
           query.addBindValue ( _a.startTime().toTime_t() );
@@ -106,7 +106,7 @@ namespace dp
         query.prepare ( UPDATE_ACTION );
         query.addBindValue ( _a.task()->id().toString() );
         query.addBindValue ( _a.project()->id().toString() );
-        query.addBindValue ( _a.collaborationType()->id() );
+        query.addBindValue ( _a.collaborationType()->id().toString() );
         query.addBindValue ( _a.name() );
         query.addBindValue ( _a.comment() );
         query.addBindValue ( _a.startTime().toTime_t() );

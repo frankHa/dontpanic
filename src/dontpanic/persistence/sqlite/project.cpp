@@ -69,7 +69,7 @@ namespace dp
         }
         QSqlQuery query;
         query.prepare ( SELECT_DISTINCT_PROJECT );
-        query.addBindValue ( _project.id() );
+        query.addBindValue ( _project.id().toString() );
         if ( execute ( query ).has_failed() )
         {
           return false;
