@@ -47,7 +47,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       success Task::load ( dp::Task &t ) const
       {
-        if ( t.id() == 0 )
+        if ( t.id().isNull() )
         {
           return error();
         }
@@ -69,7 +69,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       bool Task::exists ( const dp::Task& _task ) const
       {
-        if ( _task.id() == 0 )
+        if ( _task.id().isNull() )
         {
           return false;
         }
@@ -102,6 +102,10 @@ namespace dp
       // ---------------------------------------------------------------------------------
       success Task::update ( const dp::Task& _t ) const
       {
+        if(_t.id().isNull())
+        {
+          return error();
+        }
         QSqlQuery query;
         query.prepare ( UPDATE_TASK );
         query.addBindValue ( _t.name() );

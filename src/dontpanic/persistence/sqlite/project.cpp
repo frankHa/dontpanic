@@ -41,7 +41,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       success Project::load ( dp::Project &p ) const
       {
-        if ( p.id() == 0 )
+        if ( p.id().isNull())
         {
           return error();
         }
@@ -63,7 +63,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       bool Project::exists ( const dp::Project& _project ) const
       {
-        if ( _project.id() == 0 )
+        if ( _project.id().isNull() )
         {
           return false;
         }
@@ -79,6 +79,10 @@ namespace dp
       // ---------------------------------------------------------------------------------
       success Project::insert ( dp::Project& _p ) const
       {
+        if ( _p.id().isNull())
+        {
+          return error();
+        }
         QSqlQuery query;
         query.prepare ( INSERT_PROJECT );
         query.addBindValue ( _p.id().toString() );
@@ -94,6 +98,10 @@ namespace dp
       // ---------------------------------------------------------------------------------
       success Project::update ( const dp::Project& _p ) const
       {
+        if ( _p.id().isNull())
+        {
+          return error();
+        }
         QSqlQuery query;
         query.prepare ( UPDATE_PROJECT );
         query.addBindValue ( _p.name() );

@@ -80,6 +80,10 @@ namespace dp
       success Action::insert ( dp::Action &_a ) const
       {
         {
+          if ( _a.id().isNull() )
+        {
+          return error();
+        }
           QSqlQuery query;
           query.prepare ( INSERT_ACTION );
           query.addBindValue ( _a.id().toString() );
@@ -102,6 +106,10 @@ namespace dp
       // ---------------------------------------------------------------------------------
       success Action::update ( dp::Action const& _a ) const
       {
+        if ( _a.id().isNull() )
+        {
+          return error();
+        }
         QSqlQuery query;
         query.prepare ( UPDATE_ACTION );
         query.addBindValue ( _a.task()->id().toString() );

@@ -7,6 +7,10 @@ namespace dp
       : _M_id ( QUuid::createUuid() )
   {}
   // ---------------------------------------------------------------------------------
+  CollaborationType::CollaborationType(QUuid const& id)
+      : _M_id ( id )
+  {}
+  // ---------------------------------------------------------------------------------
   QUuid const& CollaborationType::id() const
   {
     return _M_id;
