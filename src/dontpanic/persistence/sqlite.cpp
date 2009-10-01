@@ -72,6 +72,8 @@ namespace dp
         // ---------------------------------------------------------------------------------
         success persist ( Action &_action ) const;
         // ---------------------------------------------------------------------------------
+        Action_ptr activeAction() const;
+        // ---------------------------------------------------------------------------------
       private:
         // ---------------------------------------------------------------------------------
         QString storage_dir() const;
@@ -116,6 +118,11 @@ namespace dp
     success Sqlite::persist ( Action& _a )
     {
       return d->persist ( _a );
+    }
+    // ---------------------------------------------------------------------------------
+    Action_ptr Sqlite::activeAction()
+    {
+      return d->activeAction();
     }
     // ---------------------------------------------------------------------------------
     // sqlite_private impl:
@@ -179,6 +186,11 @@ namespace dp
     success Sqlite::sqlite_private::persist ( Action& _a ) const
     {
       return _sqlite::action().persist ( _a );
+    }
+    // ---------------------------------------------------------------------------------
+    Action_ptr Sqlite::sqlite_private::activeAction() const
+    {
+      return _sqlite::action().findActive();
     }
     // ---------------------------------------------------------------------------------
     QString Sqlite::sqlite_private::storage_dir() const

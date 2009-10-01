@@ -23,6 +23,20 @@ namespace dp
       return successful();
     }
     // ---------------------------------------------------------------------------------
+    template<typename time_type>
+    void bindTimeValue ( QSqlQuery &query, time_type const& _t )
+    {
+      if ( _t.isValid() )
+
+      {
+        query.addBindValue ( _t.toTime_t() );
+      }
+      else
+      {
+        query.addBindValue ( QVariant("NULL") );
+      }
+    }
+    // ---------------------------------------------------------------------------------
   }//_persistance
 }//dp
 // ---------------------------------------------------------------------------------
