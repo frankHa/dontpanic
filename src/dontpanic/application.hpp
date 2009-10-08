@@ -22,11 +22,6 @@ class Application
     //to the DBUS interface:
     void exit();
     // ---------------------------------------------------------------------------------
-    /**
-     * \brief this method is just intended to serve for DBUS testing...
-     */
-    QString hello();
-    // ---------------------------------------------------------------------------------
   private:
     // ---------------------------------------------------------------------------------
     FORWARD_DECL(ApplicationPrivate);

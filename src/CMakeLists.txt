@@ -16,8 +16,15 @@ qt4_add_dbus_interface_with_includes(dontpanikpart_LIB_SRCS
                                     libdontpanic/dbus_support/quuid.h
                                     )
 
+qt4_add_dbus_interface_with_includes(dontpanikpart_LIB_SRCS
+                                    ${DBUS_INTERFACES_PATH}/org.dontpanic.ProjectManager.xml
+                                    projectmanager
+                                    libdontpanic/dbus_support/project.hpp
+                                    libdontpanic/dbus_support/quuid.h
+                                    )
+
 kde4_add_library(dontpanikpartprivate SHARED ${dontpanikpart_LIB_SRCS})
-target_link_libraries(dontpanikpartprivate ${KDE4_KDEUI_LIBS})
+target_link_libraries(dontpanikpartprivate ${KDE4_KDEUI_LIBS} dontpanic_lib)
 install(TARGETS dontpanikpartprivate ${INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)
 #########################################################################
 # KPART SECTION

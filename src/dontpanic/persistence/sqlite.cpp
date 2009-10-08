@@ -66,11 +66,11 @@ namespace dp
         // ---------------------------------------------------------------------------------
         success update_database_schema_if_necessary() const;
         // ---------------------------------------------------------------------------------
-        success persist ( Project &_project ) const;
+        success persist ( Project const&_project ) const;
         // ---------------------------------------------------------------------------------
-        success persist ( Task &_task ) const;
+        success persist ( Task const&_task ) const;
         // ---------------------------------------------------------------------------------
-        success persist ( Action &_action ) const;
+        success persist ( Action const&_action ) const;
         // ---------------------------------------------------------------------------------
         Action_ptr activeAction() const;
         // ---------------------------------------------------------------------------------
@@ -105,17 +105,17 @@ namespace dp
     }
 
     // ---------------------------------------------------------------------------------
-    success Sqlite::persist ( Project& _project )
+    success Sqlite::persist ( Project const& _project )
     {
       return d->persist ( _project );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::persist ( Task& _t )
+    success Sqlite::persist ( Task const& _t )
     {
       return d->persist ( _t );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::persist ( Action& _a )
+    success Sqlite::persist ( Action const& _a )
     {
       return d->persist ( _a );
     }
@@ -173,17 +173,17 @@ namespace dp
       return successful();
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::sqlite_private::persist ( Project& _project ) const
+    success Sqlite::sqlite_private::persist ( Project const& _project ) const
     {
       return _sqlite::project().persist ( _project );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::sqlite_private::persist ( Task& _t ) const
+    success Sqlite::sqlite_private::persist ( Task const& _t ) const
     {
       return _sqlite::task().persist ( _t );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::sqlite_private::persist ( Action& _a ) const
+    success Sqlite::sqlite_private::persist ( Action const& _a ) const
     {
       return _sqlite::action().persist ( _a );
     }

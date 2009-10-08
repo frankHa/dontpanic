@@ -22,17 +22,17 @@ namespace dp
     return true;
   }
   // ---------------------------------------------------------------------------------
-  success PersistenceBackend::persist ( Project& _project )
+  success PersistenceBackend::persist ( Project const& _project )
   {
     return _persistence::sqlite().persist ( _project );
   }
   // ---------------------------------------------------------------------------------
-  success PersistenceBackend::persist ( Task& _t )
+  success PersistenceBackend::persist ( Task const& _t )
   {
     return _persistence::sqlite().persist ( _t );
   }
   // ---------------------------------------------------------------------------------
-  success PersistenceBackend::persist ( Action& _a )
+  success PersistenceBackend::persist ( Action const& _a )
   {
     return _persistence::sqlite().persist ( _a );
   }

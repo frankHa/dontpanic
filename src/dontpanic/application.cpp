@@ -3,6 +3,7 @@
 
 #include "libdontpanic/dbus.hpp"
 #include "persistencebackend.hpp"
+#include "projectmanager.h"
 #include "timetracker.h"
 
 //Qt includes
@@ -20,8 +21,6 @@ class Application::ApplicationPrivate
     // ---------------------------------------------------------------------------------
   public:
     // ---------------------------------------------------------------------------------
-    QString hello();
-    // ---------------------------------------------------------------------------------
     void exit();
     // ---------------------------------------------------------------------------------
   private:
@@ -29,6 +28,8 @@ class Application::ApplicationPrivate
     void init();
     // ---------------------------------------------------------------------------------
     bool init_storage_backend();
+    // ---------------------------------------------------------------------------------
+    void init_projectmanager();
     // ---------------------------------------------------------------------------------
     void init_timetracker();
     // ---------------------------------------------------------------------------------
@@ -40,6 +41,7 @@ class Application::ApplicationPrivate
     // ---------------------------------------------------------------------------------
     dp::PersistenceBackend * _M_persistence;
     dp::TimeTracker *_M_timetracker;
+    dp::ProjectManager *_M_projectmanager;
     // ---------------------------------------------------------------------------------
 };
 // ---------------------------------------------------------------------------------
@@ -48,11 +50,6 @@ class Application::ApplicationPrivate
 Application::Application ( int &argc, char** argv )
     : QCoreApplication ( argc, argv )
     , d ( new ApplicationPrivate ( this ) ) {}
-// ---------------------------------------------------------------------------------
-QString Application::hello()
-{
-  return d->hello();
-}
 // ---------------------------------------------------------------------------------
 void Application::exit()
 {
@@ -67,11 +64,6 @@ Application::ApplicationPrivate::ApplicationPrivate ( Application *self )
   init();
 }
 // ---------------------------------------------------------------------------------
-QString Application::ApplicationPrivate::hello()
-{
-  return "dontpanic says 'hello'";
-}
-// ---------------------------------------------------------------------------------
 void Application::ApplicationPrivate::exit()
 {
   qDebug() << "exiting now!";
@@ -84,6 +76,7 @@ void Application::ApplicationPrivate::init()
 {
   register_with_session_bus();
   init_storage_backend();
+  init_projectmanager();
   init_timetracker();
 }
 // ---------------------------------------------------------------------------------
@@ -92,10 +85,16 @@ bool Application::ApplicationPrivate::init_storage_backend()
   return dp::persistence().init();
 }
 // ---------------------------------------------------------------------------------
+void Application::ApplicationPrivate::init_projectmanager()
+{
+  _M_projectmanager = new dp::ProjectManager ( _M_self );
+  dp::dbus().register_object ( _M_projectmanager ).at_session_bus().as ( "/ProjectManager" );
+}
+// ---------------------------------------------------------------------------------
 void Application::ApplicationPrivate::init_timetracker()
 {
-  _M_timetracker = new dp::TimeTracker(_M_self);
-  dp::dbus().register_object(_M_timetracker).at_session_bus().as("/TimeTracker");
+  _M_timetracker = new dp::TimeTracker ( _M_self );
+  dp::dbus().register_object ( _M_timetracker ).at_session_bus().as ( "/TimeTracker" );
 }
 // ---------------------------------------------------------------------------------
 void Application::ApplicationPrivate::register_with_session_bus()

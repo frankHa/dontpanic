@@ -36,13 +36,13 @@ namespace dp
       // ---------------------------------------------------------------------------------
       // public stuff:
       // ---------------------------------------------------------------------------------
-      success Task::persist ( dp::Task &_project ) const
+      success Task::persist ( dp::Task const&_task ) const
       {
-        if ( exists ( _project ) )
+        if ( exists ( _task ) )
         {
-          return update ( _project );
+          return update ( _task );
         }
-        return insert ( _project );
+        return insert ( _task );
       }
       // ---------------------------------------------------------------------------------
       success Task::load ( dp::Task &t ) const
@@ -83,7 +83,7 @@ namespace dp
         return query.first();
       }
       // ---------------------------------------------------------------------------------
-      success Task::insert ( dp::Task& _t ) const
+      success Task::insert ( dp::Task const& _t ) const
       {
         QSqlQuery query;
         query.prepare ( INSERT_TASK );

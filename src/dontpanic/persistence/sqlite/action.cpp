@@ -32,7 +32,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       const QString SELECT_ACTIVE = "SELECT a_id FROM A_ACTION WHERE (a_end = 'NULL')";
       // ---------------------------------------------------------------------------------
-      success Action::persist ( dp::Action &_a ) const
+      success Action::persist ( dp::Action const&_a ) const
       {
         if ( exists ( _a ) )
         {
@@ -102,7 +102,7 @@ namespace dp
         return query.first();
       }
       // ---------------------------------------------------------------------------------
-      success Action::insert ( dp::Action &_a ) const
+      success Action::insert ( dp::Action const&_a ) const
       {
         {
           if ( _a.id().isNull() )

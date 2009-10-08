@@ -30,7 +30,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       // public stuff:
       // ---------------------------------------------------------------------------------
-      success Project::persist ( dp::Project &_project ) const
+      success Project::persist ( dp::Project const&_project ) const
       {
         if ( exists ( _project ) )
         {
@@ -77,7 +77,7 @@ namespace dp
         return query.first();
       }
       // ---------------------------------------------------------------------------------
-      success Project::insert ( dp::Project& _p ) const
+      success Project::insert ( dp::Project const& _p ) const
       {
         if ( _p.id().isNull())
         {
