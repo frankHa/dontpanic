@@ -3,7 +3,7 @@
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  uint64_t LeaveType::id() const
+  QUuid const& LeaveType::id() const
   {
     return _M_id;
   }

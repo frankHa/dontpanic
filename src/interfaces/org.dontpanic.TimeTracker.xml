@@ -5,5 +5,9 @@
     </method>
     <method name="stopCurrentAction">
     </method>
+    <method name="startNewActionFromTemplate">
+      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="QUuid"/>
+      <arg type="(si)" />
+    </method>
   </interface>
 </node>

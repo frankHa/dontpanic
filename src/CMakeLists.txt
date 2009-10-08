@@ -10,9 +10,10 @@ set(dontpanikpart_LIB_SRCS
     dont_panik_part_core.cpp
    )
 
-qt4_add_dbus_interface(dontpanikpart_LIB_SRCS 
+qt4_add_dbus_interface_with_includes(dontpanikpart_LIB_SRCS 
                                     ${DBUS_INTERFACES_PATH}/org.dontpanic.TimeTracker.xml
                                     timetracker
+                                    libdontpanic/dbus_support/quuid.h
                                     )
 
 kde4_add_library(dontpanikpartprivate SHARED ${dontpanikpart_LIB_SRCS})
