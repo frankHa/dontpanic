@@ -34,8 +34,8 @@ install(TARGETS dontpanic ${INSTALL_TARGETS_DEFAULT_ARGS} )
 if(DP_INSTALL_SYSTEM_FILES)
   dbus_add_activation_service(org.dontpanic.service.in)
   install( FILES
-           ${CMAKE_CURRENT_BINARY_DIR}/org.dontpanic.Application.xml
-           ${DBUS_INTERFACES_PATH}/org.dontpanic.Persistence.xml
+           ${DBUS_INTERFACES_PATH}/org.dontpanic.TimeTracker.xml
+           ${DBUS_INTERFACES_PATH}/org.dontpanic.ProjectManager.xml
            DESTINATION
            ${KDE4_DBUS_INTERFACES_DIR} 
            )
