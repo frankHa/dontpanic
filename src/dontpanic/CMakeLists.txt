@@ -15,9 +15,6 @@ set(dontpanic_SRCS
     persistence/sqlite/task.cpp
    )
 
-qt4_generate_dbus_interface(application.hpp org.dontpanic.Application.xml)
-qt4_add_dbus_adaptor(dontpanic_SRCS ${CMAKE_CURRENT_BINARY_DIR}/org.dontpanic.Application.xml application.hpp Application)
-
 qt4_add_dbus_adaptor(dontpanic_SRCS  
                     ${DBUS_INTERFACES_PATH}/org.dontpanic.TimeTracker.xml
                     timetracker.h dp::TimeTracker)

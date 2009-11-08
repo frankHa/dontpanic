@@ -7,7 +7,7 @@ namespace dp
   ProjectManager::ProjectManager ( QObject *parent )
       : QObject ( parent ) {}
   // ---------------------------------------------------------------------------------
-  void ProjectManager::add ( Project const& p )
+  void ProjectManager::store ( Project const& p )
   {
     persistence().persist(p);
   }
