@@ -5,6 +5,7 @@
 #include <QTextEdit>
 #include <QTextStream>
 #include <QFile>
+#include "kmainwidget.h"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -14,7 +15,7 @@ namespace dp
       , _M_read_write ( read_write )
       , _M_gui_client ( gui_client )
   {
-    _M_widget = new QTextEdit ( parent );
+    _M_widget = new KMainWidget ( parent );
   }
   // ---------------------------------------------------------------------------------
   QWidget *dont_panik_core::widget()
@@ -24,46 +25,11 @@ namespace dp
   // ---------------------------------------------------------------------------------
   bool dont_panik_core::openFile()
   {
-    // m_file is always local so we can use QFile on it
-    QFile file ( "m_file" );
-    if ( !file.open ( QIODevice::ReadOnly | QIODevice::Text ) )
-      return false;
-
-    // our example widget is text-based, so we use QTextStream instead
-    // of a raw QDataStream
-    QTextStream stream ( &file );
-    QString str;
-    while ( !stream.atEnd() )
-      str += stream.readLine() + "\n";
-
-    file.close();
-
-    // now that we have the entire file, display it
-    _M_widget->setPlainText ( str );
-
-    // just for fun, set the status bar
-    //emit setStatusBarText( m_url.prettyUrl() );
-
     return true;
   }
   // ---------------------------------------------------------------------------------
   bool dont_panik_core::saveFile()
   {
-    // if we aren't read-write, return immediately
-    if ( is_read_write() == false )
-      return false;
-
-    // m_file is always local, so we use QFile
-    QFile file ( "m_file" );
-    if ( !file.open ( QIODevice::ReadOnly | QIODevice::Text ) )
-      return false;
-
-    // use QTextStream to dump the text to the file
-    QTextStream stream ( &file );
-    stream << _M_widget->document();
-
-    file.close();
-
     return true;
   }
   // ---------------------------------------------------------------------------------

@@ -2,8 +2,15 @@
 # PRIVATE SECTION
 #########################################################################
 set(dontpanikpart_LIB_SRCS
+    kmainwidget.cpp
     dont_panik_part_core.cpp
    )
+
+set(dontpanikpart_LIB_UIS
+    ui/kmainwidget.ui
+   )
+
+qt4_wrap_ui(dontpanikpart_LIB_SRCS ${dontpanikpart_LIB_UIS})
 
 qt4_add_dbus_interface_with_includes(dontpanikpart_LIB_SRCS 
                                     ${DBUS_INTERFACES_PATH}/org.dontpanic.TimeTracker.xml
