@@ -28,7 +28,7 @@ public:
     /**
      * Use this method to load whatever file/URL you have
      */
-    void load(const KUrl& url);
+    //void load(const KUrl& url);
 
 protected:
     /**
@@ -45,8 +45,8 @@ protected:
     void readProperties(const KConfigGroup &);
 
 private slots:
-    void fileNew();
-    void fileOpen();
+    //void fileNew();
+    //void fileOpen();
     void optionsConfigureKeys();
     void optionsConfigureToolbars();
 

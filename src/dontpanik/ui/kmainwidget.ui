@@ -6,26 +6,66 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>525</width>
-    <height>398</height>
+    <width>581</width>
+    <height>690</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout">
+  <layout class="QHBoxLayout" name="horizontalLayout_3">
    <item>
     <widget class="QSplitter" name="splitter">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QSplitter" name="splitter_3">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
      <widget class="QWidget" name="">
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QListView" name="listView"/>
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
+          <string/>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QCalendarWidget" name="calendarWidget"/>
+          </item>
+         </layout>
+        </widget>
        </item>
        <item>
-        <widget class="QListView" name="listView_2"/>
+        <widget class="QSplitter" name="splitter_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <widget class="QGroupBox" name="Favorites">
+          <property name="title">
+           <string>Favorites</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout" stretch="0">
+           <item>
+            <widget class="QListView" name="listView_2"/>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QGroupBox" name="groupBox">
+          <property name="title">
+           <string>Recent</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0">
+           <item>
+            <widget class="QListView" name="listView"/>
+           </item>
+          </layout>
+         </widget>
+        </widget>
        </item>
       </layout>
      </widget>

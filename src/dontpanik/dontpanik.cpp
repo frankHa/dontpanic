@@ -73,15 +73,15 @@ DontPanik::~DontPanik()
 {
 }
 
-void DontPanik::load(const KUrl& url)
-{
-    _M_part->openUrl( url );
-}
+// void DontPanik::load(const KUrl& url)
+// {
+//     _M_part->openUrl( url );
+// }
 
 void DontPanik::setupActions()
 {
-    KStandardAction::openNew(this, SLOT(fileNew()), actionCollection());
-    KStandardAction::open(this, SLOT(fileOpen()), actionCollection());
+    //KStandardAction::openNew(this, SLOT(fileNew()), actionCollection());
+    //KStandardAction::open(this, SLOT(fileOpen()), actionCollection());
 
     KStandardAction::quit(qApp, SLOT(closeAllWindows()), actionCollection());
 
@@ -107,21 +107,21 @@ void DontPanik::readProperties(const KConfigGroup & /*config*/)
     // in 'saveProperties'
 }
 
-void DontPanik::fileNew()
-{
-    // this slot is called whenever the File->New menu is selected,
-    // the New shortcut is pressed (usually CTRL+N) or the New toolbar
-    // button is clicked
-
-    // About this function, the style guide (
-    // http://developer.kde.org/documentation/standards/kde/style/basics/index.html )
-    // says that it should open a new window if the document is _not_
-    // in its initial state.  This is what we do here..
-    //if ( ! _M_part->url().isEmpty() || _M_part->isModified() )
-    //{
-        (new DontPanik)->show();
-    //};
-}
+// void DontPanik::fileNew()
+// {
+//     // this slot is called whenever the File->New menu is selected,
+//     // the New shortcut is pressed (usually CTRL+N) or the New toolbar
+//     // button is clicked
+// 
+//     // About this function, the style guide (
+//     // http://developer.kde.org/documentation/standards/kde/style/basics/index.html )
+//     // says that it should open a new window if the document is _not_
+//     // in its initial state.  This is what we do here..
+//     //if ( ! _M_part->url().isEmpty() || _M_part->isModified() )
+//     //{
+//         (new DontPanik)->show();
+//     //};
+// }
 
 void DontPanik::optionsConfigureKeys()
 {
@@ -147,31 +147,31 @@ void DontPanik::applyNewToolbarConfig()
     //applyMainWindowSettings(KGlobal::config(), autoSaveGroup());
 }
 
-void DontPanik::fileOpen()
-{
-    // this slot is called whenever the File->Open menu is selected,
-    // the Open shortcut is pressed (usually CTRL+O) or the Open toolbar
-    // button is clicked
-    KUrl url =
-        KFileDialog::getOpenUrl( KUrl(), QString(), this );
-
-    if (url.isEmpty() == false)
-    {
-        // About this function, the style guide (
-        // http://developer.kde.org/documentation/standards/kde/style/basics/index.html )
-        // says that it should open a new window if the document is _not_
-        // in its initial state.  This is what we do here..
-        //if ( _M_part->url().isEmpty() && ! _M_part->isModified() )
-        //{
-            // we open the file in this window...
-            load( url );
-        //}
-        //else
-        //{
-            // we open the file in a new window...
-        //    DontPanik* newWin = new DontPanik;
-        //    newWin->load( url );
-        //    newWin->show();
-        //}
-    }
-}
+// void DontPanik::fileOpen()
+// {
+//     // this slot is called whenever the File->Open menu is selected,
+//     // the Open shortcut is pressed (usually CTRL+O) or the Open toolbar
+//     // button is clicked
+//     KUrl url =
+//         KFileDialog::getOpenUrl( KUrl(), QString(), this );
+// 
+//     if (url.isEmpty() == false)
+//     {
+//         // About this function, the style guide (
+//         // http://developer.kde.org/documentation/standards/kde/style/basics/index.html )
+//         // says that it should open a new window if the document is _not_
+//         // in its initial state.  This is what we do here..
+//         //if ( _M_part->url().isEmpty() && ! _M_part->isModified() )
+//         //{
+//             // we open the file in this window...
+//             load( url );
+//         //}
+//         //else
+//         //{
+//             // we open the file in a new window...
+//         //    DontPanik* newWin = new DontPanik;
+//         //    newWin->load( url );
+//         //    newWin->show();
+//         //}
+//     }
+// }
