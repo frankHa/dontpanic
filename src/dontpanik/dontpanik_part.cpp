@@ -21,7 +21,7 @@
 #define DP_KPART_AUTHOR_FH_EMAIL "frank@bugplasma.de"
 
 typedef KParts::GenericFactory<DontPanikPart> DontPanikPartFactory;
-K_EXPORT_COMPONENT_FACTORY( libdontpanikpart, DontPanikPartFactory )
+K_EXPORT_COMPONENT_FACTORY( dontpanikpart, DontPanikPartFactory )
 
 DontPanikPart::DontPanikPart( QWidget *parentWidget, QObject *parent, const QStringList & /*args*/ )
     : KParts::ReadOnlyPart(parent)

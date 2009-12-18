@@ -29,7 +29,7 @@ set(dontpanik_PART_SRCS
    dontpanik_part.cpp
  )
 
-kde4_add_plugin(dontpanikpart WITH_PREFIX ${dontpanik_PART_SRCS})
+kde4_add_plugin(dontpanikpart ${dontpanik_PART_SRCS})
 
 target_link_libraries(dontpanikpart ${KDE4_KDEUI_LIBS} dontpanikpartprivate ${KDE4_KPARTS_LIBS} )
 
