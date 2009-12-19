@@ -2,6 +2,7 @@
 # PRIVATE SECTION
 #########################################################################
 set(dontpanikpart_LIB_SRCS
+    kprojectsdialog.cpp
     kmainwidget.cpp
     dont_panik_part_core.cpp
    )

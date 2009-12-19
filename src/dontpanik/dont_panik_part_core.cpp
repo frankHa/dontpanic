@@ -6,6 +6,7 @@
 #include <QTextStream>
 #include <QFile>
 #include "kmainwidget.h"
+#include "kprojectsdialog.h"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -23,12 +24,13 @@ namespace dp
     return _M_widget;
   }
   // ---------------------------------------------------------------------------------
-  bool dont_panik_core::openFile()
+  void dont_panik_core::editProjects()
   {
-    return true;
+    KProjectsDialog dlg(widget());
+    dlg.exec();
   }
   // ---------------------------------------------------------------------------------
-  bool dont_panik_core::saveFile()
+  bool dont_panik_core::openFile()
   {
     return true;
   }
