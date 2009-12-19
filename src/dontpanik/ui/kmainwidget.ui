@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>501</width>
-    <height>497</height>
+    <width>657</width>
+    <height>747</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -129,7 +129,14 @@
        </item>
       </layout>
      </widget>
-     <widget class="dp::KActionsTable" name="action_table"/>
+     <widget class="dp::KActionsTable" name="action_table">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>1</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
     </widget>
    </item>
   </layout>

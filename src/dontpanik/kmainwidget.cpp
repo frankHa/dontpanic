@@ -28,7 +28,7 @@ namespace dp
       , _M_ui ( new Ui::KMainWidget (  ) )
   {
     _M_ui->setupUi ( this );
-    _M_ui->main_splitter->setSizes(QList<int>()<<300<<1000);
+    _M_ui->main_splitter->setSizes(QList<int>()<<100<<500);
   }
   // ---------------------------------------------------------------------------------
   KMainWidget::~KMainWidget()
