@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>581</width>
-    <height>690</height>
+    <width>388</width>
+    <height>705</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,60 +15,113 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_3">
    <item>
-    <widget class="QSplitter" name="splitter">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QSplitter" name="splitter_3">
+    <widget class="QSplitter" name="main_splitter">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <widget class="QWidget" name="layoutWidget">
+     <widget class="QWidget" name="">
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QGroupBox" name="groupBox_2">
+        <widget class="QGroupBox" name="calendar_box">
          <property name="title">
           <string>Calendar</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout">
+         <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="sizeConstraint">
+           <enum>QLayout::SetMinimumSize</enum>
+          </property>
           <item>
-           <widget class="QCalendarWidget" name="calendarWidget"/>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QCalendarWidget" name="calendar"/>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QPushButton" name="today_button">
+            <property name="text">
+             <string>Today</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton">
-         <property name="text">
-          <string>Today</string>
+        <widget class="QSplitter" name="vertical_splitter">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>1</verstretch>
+          </sizepolicy>
          </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QSplitter" name="splitter_2">
+         <property name="sizeIncrement">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <widget class="QGroupBox" name="Favorites">
+         <widget class="QGroupBox" name="favorite_box">
+          <property name="sizeIncrement">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="title">
            <string>Favorite Activities</string>
           </property>
-          <layout class="QHBoxLayout" name="horizontalLayout" stretch="0">
+          <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
-            <widget class="QListView" name="listView_2"/>
+            <widget class="QListView" name="favorite_list"/>
            </item>
           </layout>
          </widget>
-         <widget class="QGroupBox" name="groupBox">
+         <widget class="QGroupBox" name="recent_box">
+          <property name="sizeIncrement">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="title">
            <string>Recent Activities</string>
           </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
-            <widget class="QListView" name="listView"/>
+            <widget class="QListView" name="recent_list"/>
            </item>
           </layout>
          </widget>
@@ -76,7 +129,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QTableView" name="tableView"/>
+     <widget class="QTableView" name="action_table"/>
     </widget>
    </item>
   </layout>
