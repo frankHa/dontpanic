@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>388</width>
-    <height>705</height>
+    <width>501</width>
+    <height>497</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <widget class="QGroupBox" name="calendar_box">
@@ -129,11 +129,18 @@
        </item>
       </layout>
      </widget>
-     <widget class="QTableView" name="action_table"/>
+     <widget class="dp::KActionsTable" name="action_table"/>
     </widget>
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>dp::KActionsTable</class>
+   <extends>QTableView</extends>
+   <header>kactionstable.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
