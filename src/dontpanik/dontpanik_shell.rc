@@ -1,13 +1,14 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="dontpanik_shell" version="1">
+<kpartgui name="dontpanik_shell" version="2">
 <MenuBar>
-  <Menu noMerge="1" name="file"><text>&amp;File</text>
-    <!--<Action name="file_new"/>-->
-    <!--<Action name="file_open"/>-->
-    <Separator/>
+  <Menu name="file"><text>&amp;File</text>
+  <Separator/>
     <Merge/>
     <Separator/>
     <Action name="file_quit"/>
+  </Menu>
+  <Menu noMerge="1" name="edit"><text>&amp;Edit</text>
+    <Merge/>
   </Menu>
   <Menu noMerge="1" name="settings"><text>&amp;Settings</text>
     <Action name="options_show_toolbar"/>
@@ -22,7 +23,7 @@
     <Merge/>
   </Menu>
 </MenuBar>
-<ToolBar noMerge="1" name="mainToolBar"><text>Main Toolbar</text>
+<ToolBar name="mainToolBar"><text>Main Toolbar</text>
   <!--<Action name="file_new"/>-->
   <Merge/>
   <Action name="help"/>

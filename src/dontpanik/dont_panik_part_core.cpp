@@ -10,9 +10,9 @@
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  dont_panik_core::dont_panik_core ( KXMLGUIClient *gui_client, bool read_write, QWidget *parent )
+  dont_panik_core::dont_panik_core ( KXMLGUIClient *gui_client, QWidget *parent )
       : QObject ( parent )
-      , _M_read_write ( read_write )
+      , _M_read_write ( false )
       , _M_gui_client ( gui_client )
   {
     _M_widget = new KMainWidget ( parent );

@@ -50,7 +50,7 @@ private slots:
     void optionsConfigureKeys();
     void optionsConfigureToolbars();
 
-    void applyNewToolbarConfig();
+    //void applyNewToolbarConfig();
 
 private:
     void setupActions();
