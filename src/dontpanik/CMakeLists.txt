@@ -2,6 +2,8 @@
 # PRIVATE SECTION
 #########################################################################
 set(dontpanikpart_LIB_SRCS
+    kprojectstablemodel.cpp
+    kprojectstable.cpp
     kactionstablemodel.cpp
     kactionstable.cpp
     kprojectsdialog.cpp
