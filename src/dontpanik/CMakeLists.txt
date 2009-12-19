@@ -11,6 +11,7 @@ set(dontpanikpart_LIB_SRCS
 
 set(dontpanikpart_LIB_UIS
     ui/kmainwidget.ui
+    ui/kprojectsdialog.ui
    )
 
 qt4_wrap_ui(dontpanikpart_LIB_SRCS ${dontpanikpart_LIB_UIS})
