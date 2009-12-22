@@ -1,2 +1,3 @@
 add_subdirectory(libdontpanic)
+add_subdirectory(libdontpanic_client)
 
