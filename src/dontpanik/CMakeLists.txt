@@ -1,7 +1,7 @@
 #########################################################################
 # PRIVATE SECTION
 #########################################################################
-set(dontpanikpart_LIB_SRCS
+set(dontpanikpart_LIB_SRCS 
     kprojectstablemodel.cpp
     kprojectstable.cpp
     kactionstablemodel.cpp
@@ -9,12 +9,14 @@ set(dontpanikpart_LIB_SRCS
     kprojectsdialog.cpp
     kdayview.cpp
     kmainwidget.cpp
+    kworktypesdialog.cpp
     dont_panik_part_core.cpp
    )
 
 set(dontpanikpart_LIB_UIS
     ui/kdayview.ui
     ui/kprojectsdialog.ui
+    ui/kworktypesdialog.ui
    )
 
 qt4_wrap_ui(dontpanikpart_LIB_SRCS ${dontpanikpart_LIB_UIS})

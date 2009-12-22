@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>KProjectsDialog</class>
- <widget class="QDialog" name="KProjectsDialog">
+ <class>KWorkTypesDialog</class>
+ <widget class="QDialog" name="KWorkTypesDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Projects - Don't Panik</string>
+   <string>Work Types - Don't Panik</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -45,7 +45,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>KProjectsDialog</receiver>
+   <receiver>KWorkTypesDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -61,7 +61,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>KProjectsDialog</receiver>
+   <receiver>KWorkTypesDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
