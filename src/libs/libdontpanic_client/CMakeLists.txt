@@ -7,6 +7,10 @@ set(libdontpanic_client_SRCS
     projectmanager.cpp
    )
 
+qt4_wrap_cpp(libdontpanic_client_SRCS
+             ../../include/libdontpanic_client/projectmanager.h
+             )
+
 qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS
                                     ${DBUS_INTERFACES_PATH}/org.dontpanic.TimeTracker.xml
                                     remote_timetracker

@@ -3,6 +3,7 @@
 #include "dontpanik_part.moc"
 
 #include "dont_panik_part_core.hpp"
+#include <libdontpanic/dbus.hpp>
 
 #include <kaction.h>
 #include <kactioncollection.h>
@@ -29,6 +30,8 @@ DontPanikPart::DontPanikPart ( QWidget *parentWidget, QObject *parent, const QSt
 {
   // we need an instance
   setComponentData ( DontPanikPartFactory::componentData() );
+
+  dp::dbus().register_dp_custom_types();
 
   QWidget *canvas = new QWidget ( parentWidget );
 

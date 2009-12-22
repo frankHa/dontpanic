@@ -20,7 +20,19 @@
 #ifndef DP_CLIENT_PROJECTMANAGER_H
 #define DP_CLIENT_PROJECTMANAGER_H
 
-#include <remote_projectmanager.h>
+#include <libdontpanic/dp_export.hpp>
+#include <QObject>
+#include <libdontpanic/project.hpp>
+
+class OrgDontpanicProjectManagerInterface;
+namespace org
+{
+  namespace dontpanic
+  {
+    typedef OrgDontpanicProjectManagerInterface ProjectManager;
+  }
+}
+
 
 namespace dp
 {
@@ -28,7 +40,7 @@ namespace dp
   namespace client
   {
 
-    class ProjectManager: public QObject
+    class DP_EXPORT ProjectManager: public QObject
     {
         // ---------------------------------------------------------------------------------
         Q_OBJECT
@@ -36,6 +48,7 @@ namespace dp
       public:
         // ---------------------------------------------------------------------------------
         ProjectManager ( QObject *parent = 0 );
+        ~ProjectManager ( );
         // ---------------------------------------------------------------------------------
       public:
         // ---------------------------------------------------------------------------------

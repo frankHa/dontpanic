@@ -3,8 +3,8 @@
 // ---------------------------------------------------------------------------------
 namespace dp
 {
-  // ---------------------------------------------------------------------------------
-  QDBusArgument const& operator >> ( QDBusArgument const&arg, Project & project )
+// ---------------------------------------------------------------------------------
+  QDBusArgument const& operator >> ( QDBusArgument const&arg, dp::Project & project )
   {
     QString _id;
     QString _name;
@@ -19,13 +19,13 @@ namespace dp
     project.setCreationDate ( _creation_date );
     return arg;
   }
-  // ---------------------------------------------------------------------------------
-  QDBusArgument & operator << ( QDBusArgument &arg, Project const& project )
+// ---------------------------------------------------------------------------------
+  QDBusArgument & operator << ( QDBusArgument &arg, dp::Project const& project )
   {
     arg.beginStructure();
     arg << project.id().toString() << project.name() << project.isVisible() << project.creationDate();
     arg.endStructure();
     return arg;
   }
-  // ---------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------
 }

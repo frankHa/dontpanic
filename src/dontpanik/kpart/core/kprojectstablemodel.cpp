@@ -18,6 +18,7 @@
 */
 
 #include "kprojectstablemodel.h"
+#include "context.h"
 #include <KLocalizedString>
 // ---------------------------------------------------------------------------------
 namespace dp
@@ -33,6 +34,7 @@ namespace dp
           : QAbstractTableModel ( parent )
       {
         init_header_data();
+        init_projects_list();
       }
       // ---------------------------------------------------------------------------------
       QVariant KProjectsTableModel::data ( const QModelIndex& index, int role ) const
@@ -69,6 +71,11 @@ namespace dp
       {
         _M_headers << i18n ( "Name" )
         << i18n ( "Creation Date" );
+      }
+      // ---------------------------------------------------------------------------------
+      void KProjectsTableModel::init_projects_list()
+      {
+        ProjectList list = context().projectManager().allProjects();
       }
       // ---------------------------------------------------------------------------------
     }//detail

@@ -17,7 +17,8 @@
 
 */
 
-#include "projectmanager.h"
+#include "libdontpanic_client/projectmanager.h"
+#include <remote_projectmanager.h>
 #include <QDBusConnection>
 
 namespace dp
@@ -33,6 +34,8 @@ namespace dp
       ( "org.dontpanic", "/ProjectManager", QDBusConnection::sessionBus(), this );
     }
     // ---------------------------------------------------------------------------------
+    ProjectManager::~ProjectManager ( ){}
+    // ---------------------------------------------------------------------------------
     void ProjectManager::store(Project const& p)
     {
       _M_remote->store(p);
@@ -40,7 +43,7 @@ namespace dp
     // ---------------------------------------------------------------------------------
     ProjectList ProjectManager::allProjects()
     {
-      _M_remote->allProjects();
+      return _M_remote->allProjects();
     }
     // ---------------------------------------------------------------------------------
   }//client
