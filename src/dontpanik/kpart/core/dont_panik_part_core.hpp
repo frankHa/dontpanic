@@ -1,7 +1,7 @@
 #ifndef DP_CORE_HPP
 #define DP_CORE_HPP
 //dp includes
-#include "defines.hpp"
+#include "libdontpanic/defines.hpp"
 //Qt includes
 #include <QObject>
 // ---------------------------------------------------------------------------------

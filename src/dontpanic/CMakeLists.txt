@@ -1,5 +1,13 @@
 include(DBusMacros)
 
+########################################################################
+# we are using sqlite as storage backend:
+########################################################################
+find_package(Sqlite REQUIRED)
+include_directories(${SQLITE_INCLUDE_DIR})
+add_definitions(${SQLITE_DEFINITIONS})
+
+
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 set(dontpanic_SRCS 

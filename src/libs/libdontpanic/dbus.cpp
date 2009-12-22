@@ -1,4 +1,4 @@
-#include "dbus.hpp"
+#include "libdontpanic/dbus.hpp"
 #include "libdontpanic/dbus_support/project.hpp"
 #include "libdontpanic/dbus_support/task.hpp"
 #include "libdontpanic/dbus_support/quuid.h"

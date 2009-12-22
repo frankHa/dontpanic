@@ -1,6 +1,6 @@
 #ifndef DP_PROJECTMANAGER_H
 #define DP_PROJECTMANAGER_H
-#include <defines.hpp>
+#include <libdontpanic/defines.hpp>
 #include <libdontpanic/project.hpp>
 #include <QObject>
 // ---------------------------------------------------------------------------------

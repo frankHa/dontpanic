@@ -17,7 +17,7 @@
 
 */
 
-#include <tiptools/application.h>
+#include "application.h"
 #include <KCmdLineArgs>
 #include <projectmanager.h>
 // ---------------------------------------------------------------------------------

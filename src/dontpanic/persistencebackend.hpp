@@ -1,7 +1,7 @@
 #ifndef DP_PERSISTANCE_BACKEND_HPP
 #define DP_PERSISTANCE_BACKEND_HPP
 // ---------------------------------------------------------------------------------
-#include "defines.hpp"
+#include "libdontpanic/defines.hpp"
 //Qt includes
 #include <QObject>
 // ---------------------------------------------------------------------------------

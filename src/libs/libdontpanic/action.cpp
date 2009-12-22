@@ -1,4 +1,4 @@
-#include "action.hpp"
+#include <libdontpanic/action.hpp>
 // ---------------------------------------------------------------------------------
 namespace dp
 {

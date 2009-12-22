@@ -1,7 +1,7 @@
 #ifndef DONTPANIC_APP_HPP
 #define DONTPANIC_APP_HPP
 //dp includes
-#include "defines.hpp"
+#include "libdontpanic/defines.hpp"
 //Qt includes
 #include <QCoreApplication>
 // ---------------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 #ifndef TIMETRACKER_H
 #define TIMETRACKER_H
 
-#include <defines.hpp>
+#include <libdontpanic/defines.hpp>
 #include <QObject>
 
 class QUuid;

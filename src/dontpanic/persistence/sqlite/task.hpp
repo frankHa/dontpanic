@@ -2,7 +2,7 @@
 #define DP_PERSISTANCE_SQLITE_TASK_HPP
 // ---------------------------------------------------------------------------------
 //dp includes
-#include "defines.hpp"
+#include "libdontpanic/defines.hpp"
 #include "libdontpanic/success.hpp"
 //Forward decl
 class QSqlQuery;

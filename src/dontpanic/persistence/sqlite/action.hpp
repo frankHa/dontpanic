@@ -1,7 +1,7 @@
 #ifndef DP__PERSISTENCE__SQLITE_ACTION_H
 #define DP__PERSISTENCE__SQLITE_ACTION_H
 
-#include <defines.hpp>
+#include <libdontpanic/defines.hpp>
 #include <libdontpanic/success.hpp>
 
 class QSqlQuery;

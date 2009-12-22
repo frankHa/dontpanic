@@ -1,4 +1,4 @@
-#include "collaborationtype.hpp"
+#include <libdontpanic/collaborationtype.hpp>
 // ---------------------------------------------------------------------------------
 namespace dp
 {

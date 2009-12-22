@@ -1,6 +1,6 @@
 #ifndef DP_DBUS_QUUID_H
 #define DP_DBUS_QUUID_H
-#include <defines.hpp>
+#include <libdontpanic/defines.hpp>
 #include <QUuid>
 #include <QDBusArgument>
 

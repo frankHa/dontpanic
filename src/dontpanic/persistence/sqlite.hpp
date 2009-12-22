@@ -1,7 +1,7 @@
 #ifndef DP_SQLITE_HPP
 #define DP_SQLITE_HPP
 //dp includes
-#include "defines.hpp"
+#include "libdontpanic/defines.hpp"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
