@@ -23,76 +23,81 @@
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  namespace detail
+  namespace core
   {
     // ---------------------------------------------------------------------------------
-    KActionsTableModel::KActionsTableModel ( QObject *parent )
-        : QAbstractTableModel ( parent )
+    namespace detail
     {
-      init_header_data();
-    }
-    // ---------------------------------------------------------------------------------
-    QVariant KActionsTableModel::data ( const QModelIndex& index, int role ) const
-    {
-      return QVariant();
-    }
-    // ---------------------------------------------------------------------------------
-    int KActionsTableModel::columnCount ( const QModelIndex& parent ) const
-    {
-      return _M_headers.count();
-    }
-    // ---------------------------------------------------------------------------------
-    int KActionsTableModel::rowCount ( const QModelIndex& parent ) const
-    {
-      return 0;
-    }
-    // ---------------------------------------------------------------------------------
-    bool KActionsTableModel::setData ( const QModelIndex& index, const QVariant& value, int role )
-    {
-      return QAbstractItemModel::setData ( index, value, role );
-    }
-    // ---------------------------------------------------------------------------------
-    QVariant KActionsTableModel::headerData ( int section, Qt::Orientation orientation, int role ) const
-    {
-      if ( role != Qt::DisplayRole )
+      // ---------------------------------------------------------------------------------
+      KActionsTableModel::KActionsTableModel ( QObject *parent )
+          : QAbstractTableModel ( parent )
+      {
+        init_header_data();
+      }
+      // ---------------------------------------------------------------------------------
+      QVariant KActionsTableModel::data ( const QModelIndex& index, int role ) const
       {
         return QVariant();
       }
-      if ( orientation != Qt::Horizontal )
+      // ---------------------------------------------------------------------------------
+      int KActionsTableModel::columnCount ( const QModelIndex& parent ) const
       {
-        return QVariant();
+        return _M_headers.count();
       }
-      return _M_headers.at ( section );
-    }
+      // ---------------------------------------------------------------------------------
+      int KActionsTableModel::rowCount ( const QModelIndex& parent ) const
+      {
+        return 0;
+      }
+      // ---------------------------------------------------------------------------------
+      bool KActionsTableModel::setData ( const QModelIndex& index, const QVariant& value, int role )
+      {
+        return QAbstractItemModel::setData ( index, value, role );
+      }
+      // ---------------------------------------------------------------------------------
+      QVariant KActionsTableModel::headerData ( int section, Qt::Orientation orientation, int role ) const
+      {
+        if ( role != Qt::DisplayRole )
+        {
+          return QVariant();
+        }
+        if ( orientation != Qt::Horizontal )
+        {
+          return QVariant();
+        }
+        return _M_headers.at ( section );
+      }
+      // ---------------------------------------------------------------------------------
+      bool KActionsTableModel::setItemData ( const QModelIndex& index, const QMap< int, QVariant >& roles )
+      {
+        return QAbstractItemModel::setItemData ( index, roles );
+      }
+      // ---------------------------------------------------------------------------------
+      bool KActionsTableModel::insertRows ( int row, int count, const QModelIndex& parent )
+      {
+        return QAbstractItemModel::insertRows ( row, count, parent );
+      }
+      // ---------------------------------------------------------------------------------
+      bool KActionsTableModel::removeRows ( int row, int count, const QModelIndex& parent )
+      {
+        return QAbstractItemModel::removeRows ( row, count, parent );
+      }
+      // ---------------------------------------------------------------------------------
+      //private stuff:
+      // ---------------------------------------------------------------------------------
+      void KActionsTableModel::init_header_data()
+      {
+        _M_headers << i18n ( "Start" )
+        << i18n ( "End" )
+        << i18n ( "Title" )
+        << i18n ( "Type" )
+        << i18n ( "Project" )
+        << i18n ( "Comment" );
+      }
+      // ---------------------------------------------------------------------------------
+    }//detail
     // ---------------------------------------------------------------------------------
-    bool KActionsTableModel::setItemData ( const QModelIndex& index, const QMap< int, QVariant >& roles )
-    {
-      return QAbstractItemModel::setItemData ( index, roles );
-    }
-    // ---------------------------------------------------------------------------------
-    bool KActionsTableModel::insertRows ( int row, int count, const QModelIndex& parent )
-    {
-      return QAbstractItemModel::insertRows ( row, count, parent );
-    }
-    // ---------------------------------------------------------------------------------
-    bool KActionsTableModel::removeRows ( int row, int count, const QModelIndex& parent )
-    {
-      return QAbstractItemModel::removeRows ( row, count, parent );
-    }
-    // ---------------------------------------------------------------------------------
-    //private stuff:
-    // ---------------------------------------------------------------------------------
-    void KActionsTableModel::init_header_data()
-    {
-      _M_headers << i18n ( "Start" )
-      << i18n ( "End" )
-      << i18n ( "Title" )
-      << i18n ( "Type" )
-      << i18n ( "Project" )
-      << i18n ( "Comment" );
-    }
-    // ---------------------------------------------------------------------------------
-  }//detail
+  }//core
   // ---------------------------------------------------------------------------------
 }//dp
 // ---------------------------------------------------------------------------------

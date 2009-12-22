@@ -129,16 +129,13 @@
        </item>
       </layout>
      </widget>
-     <widget class="dp::KActionsTable" name="action_table">
+     <widget class="dp::core::KActionsTable" name="action_table">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>1</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
-      <attribute name="horizontalHeaderStretchLastSection">
-       <bool>true</bool>
-      </attribute>
       <attribute name="horizontalHeaderStretchLastSection">
        <bool>true</bool>
       </attribute>
@@ -149,7 +146,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>dp::KActionsTable</class>
+   <class>dp::core::KActionsTable</class>
    <extends>QTableView</extends>
    <header>kactionstable.h</header>
   </customwidget>

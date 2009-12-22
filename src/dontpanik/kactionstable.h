@@ -23,24 +23,31 @@
 #include <QtGui/QTableView>
 #include <kactionstablemodel.h>
 
-
+// ---------------------------------------------------------------------------------
 namespace dp
 {
-  namespace detail
+  // ---------------------------------------------------------------------------------
+  namespace core
   {
-    class KActionsTableModel;
-  }//detail
+    // ---------------------------------------------------------------------------------
+    namespace detail
+    {
+      class KActionsTableModel;
+    }//detail
+    // ---------------------------------------------------------------------------------
+    class KActionsTable : public QTableView
+    {
+        Q_OBJECT
+      public:
+        KActionsTable ( QWidget *parent = 0 );
 
-  class KActionsTable : public QTableView
-  {
-      Q_OBJECT
-    public:
-      KActionsTable ( QWidget *parent = 0 );
-
-    private:
-      detail::KActionsTableModel *_M_model;
-  };
-
-}
+      private:
+        detail::KActionsTableModel *_M_model;
+    };
+    // ---------------------------------------------------------------------------------
+  }//core
+  // ---------------------------------------------------------------------------------
+}//dp
+// ---------------------------------------------------------------------------------
 
 #endif // DP_KACTIONSTABLE_H

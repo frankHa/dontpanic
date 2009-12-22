@@ -23,52 +23,57 @@
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  namespace detail
+  namespace core
   {
     // ---------------------------------------------------------------------------------
-    KProjectsTableModel::KProjectsTableModel ( QObject *parent )
-        : QAbstractTableModel ( parent )
+    namespace detail
     {
-      init_header_data();
-    }
-    // ---------------------------------------------------------------------------------
-    QVariant KProjectsTableModel::data ( const QModelIndex& index, int role ) const
-    {
-      return QVariant();
-    }
-    // ---------------------------------------------------------------------------------
-    QVariant KProjectsTableModel::headerData ( int section, Qt::Orientation orientation, int role ) const
-    {
-      if ( role != Qt::DisplayRole )
+      // ---------------------------------------------------------------------------------
+      KProjectsTableModel::KProjectsTableModel ( QObject *parent )
+          : QAbstractTableModel ( parent )
+      {
+        init_header_data();
+      }
+      // ---------------------------------------------------------------------------------
+      QVariant KProjectsTableModel::data ( const QModelIndex& index, int role ) const
       {
         return QVariant();
       }
-      if ( orientation != Qt::Horizontal )
+      // ---------------------------------------------------------------------------------
+      QVariant KProjectsTableModel::headerData ( int section, Qt::Orientation orientation, int role ) const
       {
-        return QVariant();
+        if ( role != Qt::DisplayRole )
+        {
+          return QVariant();
+        }
+        if ( orientation != Qt::Horizontal )
+        {
+          return QVariant();
+        }
+        return _M_headers.at ( section );
       }
-      return _M_headers.at ( section );
-    }
+      // ---------------------------------------------------------------------------------
+      int KProjectsTableModel::columnCount ( const QModelIndex& parent ) const
+      {
+        return _M_headers.count();
+      }
+      // ---------------------------------------------------------------------------------
+      int KProjectsTableModel::rowCount ( const QModelIndex& parent ) const
+      {
+        return 0;
+      }
+      // ---------------------------------------------------------------------------------
+      // private stuff:
+      // ---------------------------------------------------------------------------------
+      void KProjectsTableModel::init_header_data()
+      {
+        _M_headers << i18n ( "Name" )
+        << i18n ( "Creation Date" );
+      }
+      // ---------------------------------------------------------------------------------
+    }//detail
     // ---------------------------------------------------------------------------------
-    int KProjectsTableModel::columnCount ( const QModelIndex& parent ) const
-    {
-      return _M_headers.count();
-    }
-    // ---------------------------------------------------------------------------------
-    int KProjectsTableModel::rowCount ( const QModelIndex& parent ) const
-    {
-      return 0;
-    }
-    // ---------------------------------------------------------------------------------
-    // private stuff:
-    // ---------------------------------------------------------------------------------
-    void KProjectsTableModel::init_header_data()
-    {
-      _M_headers << i18n ( "Name" )
-      << i18n ( "Creation Date" );
-    }
-    // ---------------------------------------------------------------------------------
-  }//detail
+  }//core
   // ---------------------------------------------------------------------------------
 }//dp
 // ---------------------------------------------------------------------------------

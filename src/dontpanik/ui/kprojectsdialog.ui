@@ -15,10 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="dp::KProjectsTable" name="tableView">
-     <attribute name="horizontalHeaderStretchLastSection">
-      <bool>true</bool>
-     </attribute>
+    <widget class="dp::core::KProjectsTable" name="tableView">
      <attribute name="horizontalHeaderStretchLastSection">
       <bool>true</bool>
      </attribute>
@@ -38,7 +35,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>dp::KProjectsTable</class>
+   <class>dp::core::KProjectsTable</class>
    <extends>QTableView</extends>
    <header>kprojectstable.h</header>
   </customwidget>

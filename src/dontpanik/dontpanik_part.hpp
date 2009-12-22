@@ -10,8 +10,12 @@ class QTextEdit;
 class KAboutData;
 class KAction;
 
-namespace dp{
-  class dont_panik_core;
+namespace dp
+{
+  namespace core
+  {
+    class dont_panik_core;
+  }
 }
 
 
@@ -26,11 +30,11 @@ namespace dp{
 class DontPanikPart : public KParts::ReadOnlyPart
 {
     Q_OBJECT
-public:
+  public:
     /**
      * Default constructor
      */
-    DontPanikPart(QWidget *parentWidget,QObject *parent, const QStringList &);
+    DontPanikPart ( QWidget *parentWidget, QObject *parent, const QStringList & );
 
     /**
      * Destructor
@@ -39,18 +43,18 @@ public:
 
     static KAboutData *createAboutData();
 
-protected:
+  protected:
     /**
      * This must be implemented by each part
      */
     virtual bool openFile();
 
-protected slots:
+  protected slots:
     //void fileSaveAs();
     void editProjects();
 
-private:
-    dp::dont_panik_core *_M_core;
+  private:
+    dp::core::dont_panik_core *_M_core;
 };
 
 #endif // DONTPANICPART_H

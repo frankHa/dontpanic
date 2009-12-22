@@ -32,7 +32,7 @@ DontPanikPart::DontPanikPart ( QWidget *parentWidget, QObject *parent, const QSt
 
   QWidget *canvas = new QWidget ( parentWidget );
 
-  _M_core = new dp::dont_panik_core ( this, canvas );
+  _M_core = new dp::core::dont_panik_core ( this, canvas );
 
   // notify the part that this is our internal widget
   setWidget ( canvas );

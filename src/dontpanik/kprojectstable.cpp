@@ -23,12 +23,17 @@
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  KProjectsTable::KProjectsTable ( QWidget *parent )
-      : QTableView ( parent )
-      , _M_model ( new detail::KProjectsTableModel ( this ) )
+  namespace core
   {
-    setModel ( _M_model );
-    resizeColumnsToContents();
-  }
+    // ---------------------------------------------------------------------------------
+    KProjectsTable::KProjectsTable ( QWidget *parent )
+        : QTableView ( parent )
+        , _M_model ( new detail::KProjectsTableModel ( this ) )
+    {
+      setModel ( _M_model );
+      resizeColumnsToContents();
+    }
+    // ---------------------------------------------------------------------------------
+  }//core
   // ---------------------------------------------------------------------------------
 }//dp

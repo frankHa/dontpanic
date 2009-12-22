@@ -22,11 +22,15 @@
 
 namespace dp
 {
-  KActionsTable::KActionsTable(QWidget *parent)
-  :QTableView(parent)
-  , _M_model(new detail::KActionsTableModel(this))
+  namespace core
   {
-    setModel(_M_model);
-  }
+    KActionsTable::KActionsTable ( QWidget *parent )
+        : QTableView ( parent )
+        , _M_model ( new detail::KActionsTableModel ( this ) )
+    {
+      setModel ( _M_model );
+    }
+  }//core
+  // ---------------------------------------------------------------------------------
 }//dp
 
