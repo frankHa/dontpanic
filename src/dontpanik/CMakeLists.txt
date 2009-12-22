@@ -10,6 +10,8 @@ set(dontpanikpart_LIB_SRCS
     kdayview.cpp
     kmainwidget.cpp
     kworktypesdialog.cpp
+    kworktypestable.cpp
+    kworktypestablemodel.cpp
     dont_panik_part_core.cpp
    )
 
