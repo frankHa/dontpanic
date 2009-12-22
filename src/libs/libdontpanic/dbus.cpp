@@ -33,6 +33,7 @@ namespace dp
   void DBus::register_dp_custom_types()
   {
     qDBusRegisterMetaType<dp::Project>();
+    qDBusRegisterMetaType<dp::ProjectList>();
     qDBusRegisterMetaType<dp::Task>();
     qDBusRegisterMetaType<QUuid>();
   }

@@ -54,6 +54,8 @@ namespace dp
       //TODO ? modification date
   };
   // ---------------------------------------------------------------------------------
+  typedef QList<Project> ProjectList;
+  // ---------------------------------------------------------------------------------
   DECLARE_SMARTPOINTERS ( Project );
   // ---------------------------------------------------------------------------------
   class DP_EXPORT NullProject: public Project

@@ -18,6 +18,33 @@
 */
 
 #include "projectmanager.h"
+#include <QDBusConnection>
 
-using namespace dp::client;
+namespace dp
+{
+  // ---------------------------------------------------------------------------------
+  namespace client
+  {
+    // ---------------------------------------------------------------------------------
+    ProjectManager::ProjectManager ( QObject *parent )
+        : QObject ( parent )
+    {
+      _M_remote = new org::dontpanic::ProjectManager
+      ( "org.dontpanic", "/ProjectManager", QDBusConnection::sessionBus(), this );
+    }
+    // ---------------------------------------------------------------------------------
+    void ProjectManager::store(Project const& p)
+    {
+      _M_remote->store(p);
+    }
+    // ---------------------------------------------------------------------------------
+    ProjectList ProjectManager::allProjects()
+    {
+      _M_remote->allProjects();
+    }
+    // ---------------------------------------------------------------------------------
+  }//client
+  // ---------------------------------------------------------------------------------
+}//dp
+// ---------------------------------------------------------------------------------
 
