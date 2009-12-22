@@ -17,8 +17,8 @@
 
 */
 
-#include "kmainwidget.h"
 #include "kdayview.h"
+#include <ui_kdayview.h>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -26,21 +26,17 @@ namespace dp
   namespace core
   {
     // ---------------------------------------------------------------------------------
-    KMainWidget::KMainWidget ( QWidget *parent )
-        : QStackedWidget ( parent )
+    KDayView::KDayView ( QWidget *parent )
+        : QWidget ( parent )
+        , _M_ui ( new Ui::KDayView ( ) )
     {
-      init_widgets();
+      _M_ui->setupUi ( this );
+      _M_ui->main_splitter->setSizes ( QList<int>() << 100 << 500 );
     }
     // ---------------------------------------------------------------------------------
-    KMainWidget::~KMainWidget()
+    KDayView::~KDayView()
     {
-    }
-    // ---------------------------------------------------------------------------------
-    // private stuff:
-    // ---------------------------------------------------------------------------------
-    void KMainWidget::init_widgets()
-    {
-      addWidget(new KDayView(this));
+      delete _M_ui;
     }
     // ---------------------------------------------------------------------------------
   }//core

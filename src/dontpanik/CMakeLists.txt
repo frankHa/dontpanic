@@ -7,12 +7,13 @@ set(dontpanikpart_LIB_SRCS
     kactionstablemodel.cpp
     kactionstable.cpp
     kprojectsdialog.cpp
+    kdayview.cpp
     kmainwidget.cpp
     dont_panik_part_core.cpp
    )
 
 set(dontpanikpart_LIB_UIS
-    ui/kmainwidget.ui
+    ui/kdayview.ui
     ui/kprojectsdialog.ui
    )
 
