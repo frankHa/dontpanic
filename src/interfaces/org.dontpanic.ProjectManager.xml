@@ -5,9 +5,17 @@
       <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::Project"/>
       <arg type="(si)" />
     </method>
+    <method name="remove">
+      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::Project"/>
+      <arg type="(si)" />
+    </method>
     <method name="allProjects">
       <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="dp::ProjectList"/>
       <arg type="(si)" direction="out" />
     </method>
+    <signal name="stored">
+      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::Project"/>
+      <arg type="(si)" />
+    </signal>
   </interface>
 </node>

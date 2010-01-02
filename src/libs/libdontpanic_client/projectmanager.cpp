@@ -32,6 +32,8 @@ namespace dp
     {
       _M_remote = new org::dontpanic::ProjectManager
       ( "org.dontpanic", "/ProjectManager", QDBusConnection::sessionBus(), this );
+      connect(_M_remote, SIGNAL(stored(dp::Project)), this, SIGNAL(stored(dp::Project)));
+      connect(_M_remote, SIGNAL(removed(dp::Project)), this, SIGNAL(removed(dp::Project)));
     }
     // ---------------------------------------------------------------------------------
     ProjectManager::~ProjectManager ( ){}
@@ -39,6 +41,11 @@ namespace dp
     void ProjectManager::store(Project const& p)
     {
       _M_remote->store(p);
+    }
+    // ---------------------------------------------------------------------------------
+    void ProjectManager::remove(Project const& p)
+    {
+      _M_remote->remove(p);
     }
     // ---------------------------------------------------------------------------------
     ProjectList ProjectManager::allProjects()
