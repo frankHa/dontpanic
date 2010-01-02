@@ -79,6 +79,23 @@ namespace dp
         return assign_query_values_to_entity ( query, p );
       }
       // ---------------------------------------------------------------------------------
+      success Project::findAll(dp::ProjectList &l) const
+      {
+	QSqlQuery query;
+	query.prepare(SELECT_ALL_PROJECTS);
+	if ( execute ( query ).has_failed() )
+        {
+          return error();
+        }
+        while ( query.next() )
+        {
+	  dp::Project _p;
+	  assign_query_values_to_entity(query, _p);
+	  l.append(_p);
+        }
+        return successful();
+      }
+      // ---------------------------------------------------------------------------------
       // private stuff:
       // ---------------------------------------------------------------------------------
       bool Project::exists ( const dp::Project& _project ) const

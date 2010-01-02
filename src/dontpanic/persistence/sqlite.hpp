@@ -9,6 +9,7 @@ namespace dp
   //forward decl:
   FORWARD_DECL ( Action );
   class Project;
+  typedef QList<Project> ProjectList;
   class Task;
   // ---------------------------------------------------------------------------------
   namespace _persistence
@@ -32,6 +33,8 @@ namespace dp
         success persist ( Project const&_project );
 	// ---------------------------------------------------------------------------------
 	success remove (Project const& _project);
+	// ---------------------------------------------------------------------------------
+	success findAll(ProjectList &_pl);
         // ---------------------------------------------------------------------------------
         success persist ( Task const&_t );
         // ---------------------------------------------------------------------------------

@@ -68,6 +68,8 @@ namespace dp
         // ---------------------------------------------------------------------------------
         success persist ( Project const&_project ) const;
 	// ---------------------------------------------------------------------------------
+	success findAll(ProjectList &_pl) const;
+	// ---------------------------------------------------------------------------------
 	success remove(Project const& _project) const;
         // ---------------------------------------------------------------------------------
         success persist ( Task const&_task ) const;
@@ -114,6 +116,11 @@ namespace dp
     success Sqlite::remove ( Project const& _project )
     {
       return d->remove ( _project );
+    }
+    // ---------------------------------------------------------------------------------
+    success Sqlite::findAll(ProjectList & _pl)
+    {
+      return d->findAll(_pl);
     }
     // ---------------------------------------------------------------------------------
     success Sqlite::persist ( Task const& _t )
@@ -187,6 +194,11 @@ namespace dp
     success Sqlite::sqlite_private::remove ( Project const& _project ) const
     {
       return _sqlite::project().remove ( _project );
+    }
+    // ---------------------------------------------------------------------------------
+    success Sqlite::sqlite_private::findAll(ProjectList & _pl) const
+    {
+      return _sqlite::project().findAll(_pl);
     }
     // ---------------------------------------------------------------------------------
     success Sqlite::sqlite_private::persist ( Task const& _t ) const

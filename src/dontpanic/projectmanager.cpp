@@ -26,8 +26,8 @@ namespace dp
   // ---------------------------------------------------------------------------------
   ProjectList ProjectManager::allProjects()
   {
-    qDebug()<<__FUNCTION__;
     ProjectList list;
+    persistence().findAll(list);
     return list;
   }
   // ---------------------------------------------------------------------------------
