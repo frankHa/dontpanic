@@ -27,6 +27,11 @@ namespace dp
     return _persistence::sqlite().persist ( _project );
   }
   // ---------------------------------------------------------------------------------
+  success PersistenceBackend::remove(Project const& _project)
+  {
+    return _persistence::sqlite().remove(_project);
+  }
+  // ---------------------------------------------------------------------------------
   success PersistenceBackend::persist ( Task const& _t )
   {
     return _persistence::sqlite().persist ( _t );

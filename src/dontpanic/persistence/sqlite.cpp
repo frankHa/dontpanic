@@ -67,6 +67,8 @@ namespace dp
         success update_database_schema_if_necessary() const;
         // ---------------------------------------------------------------------------------
         success persist ( Project const&_project ) const;
+	// ---------------------------------------------------------------------------------
+	success remove(Project const& _project) const;
         // ---------------------------------------------------------------------------------
         success persist ( Task const&_task ) const;
         // ---------------------------------------------------------------------------------
@@ -103,11 +105,15 @@ namespace dp
     {
       return d->update_database_schema_if_necessary();
     }
-
     // ---------------------------------------------------------------------------------
     success Sqlite::persist ( Project const& _project )
     {
       return d->persist ( _project );
+    }
+    // ---------------------------------------------------------------------------------
+    success Sqlite::remove ( Project const& _project )
+    {
+      return d->remove ( _project );
     }
     // ---------------------------------------------------------------------------------
     success Sqlite::persist ( Task const& _t )
@@ -176,6 +182,11 @@ namespace dp
     success Sqlite::sqlite_private::persist ( Project const& _project ) const
     {
       return _sqlite::project().persist ( _project );
+    }
+    // ---------------------------------------------------------------------------------
+    success Sqlite::sqlite_private::remove ( Project const& _project ) const
+    {
+      return _sqlite::project().remove ( _project );
     }
     // ---------------------------------------------------------------------------------
     success Sqlite::sqlite_private::persist ( Task const& _t ) const

@@ -14,19 +14,19 @@ namespace dp
     {
       // ---------------------------------------------------------------------------------
       const QString INSERT_PROJECT =
-        "INSERT INTO p_project(p_id p_name, p_visible, p_creation_date)VALUES(?, ?, ?, ?)";
+        "INSERT INTO p_project(p_id p_name, p_visible, p_creation_date)VALUES(?, 1, ?, ?)";
       // ---------------------------------------------------------------------------------
       const QString SELECT_ALL_PROJECTS =
-        "SELECT p_id, p_name, p_visible, p_creation_date FROM p_project";
-      // ---------------------------------------------------------------------------------
-      const QString SELECT_ALL_VISIBLE_PROJECTS =
-        SELECT_ALL_PROJECTS + " WHERE (p_visible <> 0)";
+        "SELECT p_id, p_name, p_creation_date FROM p_project WHERE (p_visible <> 0)";
       // ---------------------------------------------------------------------------------
       const QString SELECT_DISTINCT_PROJECT =
-        "SELECT DISTINCT p_id, p_name, p_visible, p_creation_date FROM p_project WHERE (p_id=?)";
+        "SELECT DISTINCT p_id, p_name, p_creation_date FROM p_project WHERE (p_id=?)";
       // ---------------------------------------------------------------------------------
       const QString UPDATE_PROJECT =
-        "UPDATE p_project set(p_name=?, p_visible=?, p_creation_date=?) WHERE (p_id=?)";
+        "UPDATE p_project set(p_name=?, p_creation_date=?) WHERE (p_id=?)";
+	// ---------------------------------------------------------------------------------
+	const QString REMOVE_PROJECT = 
+	"UPDATE p_project set(p_visible=0) WHERE (p_id=?)";
       // ---------------------------------------------------------------------------------
       // public stuff:
       // ---------------------------------------------------------------------------------
@@ -37,6 +37,26 @@ namespace dp
           return update ( _project );
         }
         return insert ( _project );
+      }
+      // ---------------------------------------------------------------------------------
+      success Project::remove(dp::Project const& _project) const
+      {
+	if ( _project.id().isNull())
+        {
+          return error();
+        }
+	if(!exists(_project))
+	{
+	    return successful();
+	}
+	QSqlQuery query;
+	query.prepare(REMOVE_PROJECT);
+	query.addBindValue(_project.id().toString());
+	if(execute(query).has_failed())
+	{
+	  return error();
+	}
+	return successful();
       }
       // ---------------------------------------------------------------------------------
       success Project::load ( dp::Project &p ) const
@@ -87,7 +107,6 @@ namespace dp
         query.prepare ( INSERT_PROJECT );
         query.addBindValue ( _p.id().toString() );
         query.addBindValue ( _p.name() );
-        query.addBindValue ( _p.isVisible() );
         query.addBindValue ( _p.creationDate() );
         if ( execute ( query ).has_failed() )
         {
@@ -105,7 +124,6 @@ namespace dp
         QSqlQuery query;
         query.prepare ( UPDATE_PROJECT );
         query.addBindValue ( _p.name() );
-        query.addBindValue ( _p.isVisible() );
         query.addBindValue ( _p.creationDate() );
         query.addBindValue ( _p.id().toString() );
         return execute ( query );
@@ -114,8 +132,7 @@ namespace dp
       success Project::assign_query_values_to_entity ( QSqlQuery& query, dp::Project& p ) const
       {
         p.setName ( query.value ( 1 ).toString() );
-        p.setIsVisible ( query.value ( 2 ).toBool() );
-        p.setCreationDate ( query.value ( 3 ).toDateTime() );
+        p.setCreationDate ( query.value ( 2 ).toDateTime() );
         return successful();
       }
 
