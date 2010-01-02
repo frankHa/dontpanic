@@ -17,9 +17,9 @@ namespace dp
   // ---------------------------------------------------------------------------------
   Action::Action ( QUuid const& id )
       : _M_id ( id )
-      , _M_task ( new Task() )
-      , _M_project ( new Project() )
-      , _M_teamwork ( new CollaborationType() )
+      , _M_task ( new NullTask() )
+      , _M_project ( new NullProject() )
+      , _M_teamwork ( new NullCollaborationType() )
       , _M_name ( "" )
       , _M_comment ( "" )
       , _M_start()

@@ -8,7 +8,6 @@ namespace dp
   Task::Task()
       : _M_id ( QUuid::createUuid() )
       , _M_name ( "" )
-      , _M_visible ( true )
       , _M_solo_effort ( true )
       , _M_chargeable ( true )
       , _M_creation_date ( QDateTime::currentDateTime() ) {}
@@ -16,7 +15,6 @@ namespace dp
   Task::Task ( QUuid const& id )
       : _M_id ( id )
       , _M_name ( "" )
-      , _M_visible ( true )
       , _M_solo_effort ( true )
       , _M_chargeable ( true )
       , _M_creation_date ( QDateTime::currentDateTime() ) {}
@@ -34,16 +32,6 @@ namespace dp
   void Task::set_name ( QString name )
   {
     _M_name = name;
-  }
-  // ---------------------------------------------------------------------------------
-  bool Task::is_visible() const
-  {
-    return _M_visible;
-  }
-  // ---------------------------------------------------------------------------------
-  void Task::set_is_visible ( bool v )
-  {
-    _M_visible = v;
   }
   // ---------------------------------------------------------------------------------
   bool Task::is_solo_effort() const
