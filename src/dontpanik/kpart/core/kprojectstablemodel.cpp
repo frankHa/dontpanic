@@ -30,6 +30,8 @@ namespace dp
     namespace detail
     {
       // ---------------------------------------------------------------------------------
+      enum{NAME, DATE};
+      // ---------------------------------------------------------------------------------
       KProjectsTableModel::KProjectsTableModel ( QObject *parent )
           : QAbstractTableModel ( parent )
       {
@@ -39,7 +41,15 @@ namespace dp
       // ---------------------------------------------------------------------------------
       QVariant KProjectsTableModel::data ( const QModelIndex& index, int role ) const
       {
-        return QVariant();
+	if(!index.isValid())return QVariant();
+	if(role != Qt::DisplayRole) return QVariant();
+	Project const& p = _M_projects.at(index.row());
+	switch(index.column())
+	{
+	  case NAME: return p.name();
+	  case DATE: return p.creationDate();
+	  default: return QVariant();
+	}
       }
       // ---------------------------------------------------------------------------------
       QVariant KProjectsTableModel::headerData ( int section, Qt::Orientation orientation, int role ) const
@@ -62,7 +72,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       int KProjectsTableModel::rowCount ( const QModelIndex& parent ) const
       {
-        return 0;
+        return _M_projects.size();
       }
       // ---------------------------------------------------------------------------------
       // private stuff:
@@ -75,7 +85,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       void KProjectsTableModel::init_projects_list()
       {
-        ProjectList list = context().projectManager().allProjects();
+        _M_projects = context().projectManager().allProjects();
       }
       // ---------------------------------------------------------------------------------
     }//detail
