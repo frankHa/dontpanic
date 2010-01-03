@@ -23,6 +23,8 @@ namespace dp
       ///ctor
       Project();
       // ---------------------------------------------------------------------------------
+      Project(QString const& name);
+      // ---------------------------------------------------------------------------------
       Project ( QUuid const& id );
       // ---------------------------------------------------------------------------------
     public:
@@ -60,13 +62,13 @@ namespace dp
       // ---------------------------------------------------------------------------------
   };
   // ---------------------------------------------------------------------------------
-  inline bool operator == (dp::Project const& lhs, dp::Project const& rhs)
+  bool DP_EXPORT operator == (dp::Project const& lhs, dp::Project const& rhs);
+  // ---------------------------------------------------------------------------------
+  template<typename ostream>
+  ostream & operator<<(ostream &out, dp::Project const& p)
   {
-    if(lhs.id().isNull())
-    {
-      return (rhs.id().isNull());
-    }
-    return lhs.id() == rhs.id();
+    out<<"Project: "<<p.id().toString()<<", name: "<<p.name();
+    return out;
   }
   // ---------------------------------------------------------------------------------
 }//dp

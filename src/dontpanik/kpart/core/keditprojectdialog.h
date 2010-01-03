@@ -41,6 +41,13 @@ namespace dp
 	    KEditProjectDialog(QWidget *parent=0);
 	    ~KEditProjectDialog();
 	  private:
+	    void setup_actions();
+	    
+	  private slots:
+	    void accepted();
+	    void rejected();
+	    
+	  private:
 	    Ui::KEditProjectDialog *_M_ui;
         };
 

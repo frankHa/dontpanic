@@ -29,11 +29,11 @@ namespace dp
     // ---------------------------------------------------------------------------------
     ProjectManager::ProjectManager ( QObject *parent )
         : QObject ( parent )
+        ,_M_remote(0)
     {
-      _M_remote = new org::dontpanic::ProjectManager
-      ( "org.dontpanic", "/ProjectManager", QDBusConnection::sessionBus(), this );
-      connect(_M_remote, SIGNAL(stored(dp::Project)), this, SIGNAL(stored(dp::Project)));
-      connect(_M_remote, SIGNAL(removed(dp::Project)), this, SIGNAL(removed(dp::Project)));
+      qDebug()<<__FUNCTION__;
+      connect(remote(), SIGNAL(stored(dp::Project)), this, SLOT(onstored(dp::Project)));
+      connect(remote(), SIGNAL(removed(dp::Project)), this, SLOT(onremoved(dp::Project)));
     }
     // ---------------------------------------------------------------------------------
     ProjectManager::~ProjectManager ( ){}
@@ -51,6 +51,32 @@ namespace dp
     ProjectList ProjectManager::allProjects()
     {
       return _M_remote->allProjects();
+    }
+    // ---------------------------------------------------------------------------------
+    void ProjectManager::onstored(dp::Project p)
+    {
+      qDebug()<<__FUNCTION__;
+      emit stored(p);
+    }
+    // ---------------------------------------------------------------------------------
+    void ProjectManager::onremoved(dp::Project p)
+    {
+      qDebug()<<__FUNCTION__;
+      emit removed(p);
+    }
+    // ---------------------------------------------------------------------------------
+    org::dontpanic::ProjectManager* ProjectManager::remote()
+    {
+      if(_M_remote == 0)
+      {
+	_M_remote = new org::dontpanic::ProjectManager
+	( "org.dontpanic", "/ProjectManager", QDBusConnection::sessionBus(), this );
+	if(!_M_remote->isValid())
+	{
+	  qWarning()<<_M_remote->lastError();
+	}
+      }
+      return _M_remote;
     }
     // ---------------------------------------------------------------------------------
   }//client

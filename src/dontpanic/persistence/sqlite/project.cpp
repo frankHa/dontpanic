@@ -14,7 +14,7 @@ namespace dp
     {
       // ---------------------------------------------------------------------------------
       const QString INSERT_PROJECT =
-        "INSERT INTO p_project(p_id p_name, p_visible, p_creation_date)VALUES(?, 1, ?, ?)";
+        "INSERT INTO p_project(p_id, p_name, p_visible, p_creation_date)VALUES(?, ?, 1, ?)";
       // ---------------------------------------------------------------------------------
       const QString SELECT_ALL_PROJECTS =
         "SELECT p_id, p_name, p_creation_date FROM p_project WHERE (p_visible <> 0)";

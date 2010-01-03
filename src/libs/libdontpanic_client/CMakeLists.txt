@@ -24,7 +24,7 @@ qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS
                                     libdontpanic/dbus_support/quuid.h
                                     )
 
-kde4_add_library(dontpanic_client_lib SHARED ${libdontpanic_client_SRCS})
+kde4_add_library(dontpanic_client_lib STATIC ${libdontpanic_client_SRCS})
 target_link_libraries(dontpanic_client_lib ${KDE4_KDECORE_LIBS} dontpanic_lib)
 set_target_properties(dontpanic_client_lib PROPERTIES OUTPUT_NAME dontpanic_client)
 

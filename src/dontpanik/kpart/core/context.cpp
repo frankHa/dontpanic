@@ -25,12 +25,23 @@ namespace dp
   {
     Context _instance;
 
-    Context& context()
+    Context* context()
     {
-      return _instance;
+      return &_instance;
     }
 
-    dp::client::ProjectManager& Context::projectManager()
+    Context::Context()
+    :_M_project_manager(new dp::client::ProjectManager())
+    {
+      qDebug()<<__FUNCTION__;
+    }
+    
+    Context::~Context()
+    {
+      delete _M_project_manager;
+    }
+
+    dp::client::ProjectManager* Context::projectManager()
     {
       return _M_project_manager;
     }

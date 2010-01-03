@@ -19,7 +19,9 @@
 
 #include "keditprojectdialog.h"
 #include "ui_keditprojectdialog.h"
-
+#include <libdontpanic/project.hpp>
+#include "context.h"
+#include <QDebug>
 namespace dp
 {
   namespace core
@@ -29,12 +31,33 @@ namespace dp
     , _M_ui (new Ui::KEditProjectDialog())
     {
       _M_ui->setupUi(this);
+      setup_actions();
     }
     KEditProjectDialog::~KEditProjectDialog()
     {
       delete _M_ui;
     }
     
+    void KEditProjectDialog::setup_actions()
+    {
+      connect(_M_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accepted()));
+      connect(_M_ui->buttonBox, SIGNAL(rejected()), this, SLOT(rejected()));
+    }
+    
+    void KEditProjectDialog::accepted()
+    {
+      qDebug()<<"accepted";
+      QString const& name = _M_ui->project_name->text();
+      if(!name.isEmpty())
+      {
+	dp::Project p(name);
+	context()->projectManager()->store(p);
+      }
+    }
+    void KEditProjectDialog::rejected()
+    {
+      close();
+    }
   }//core
 }//dp
 

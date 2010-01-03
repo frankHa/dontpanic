@@ -86,18 +86,19 @@ namespace dp
       // ---------------------------------------------------------------------------------
       void KProjectsTableModel::init_projects_list()
       {
-        _M_projects = context().projectManager().allProjects();
+        _M_projects = context()->projectManager()->allProjects();
       }
       // ---------------------------------------------------------------------------------
       void KProjectsTableModel::subscribe_to_project_manager_signals()
       {
-	client::ProjectManager const& pm = context().projectManager();
-        connect(&pm, SIGNAL(stored(dp::Project)), this, SLOT(stored(dp::Project const&)));
-	connect(&pm, SIGNAL(removed(dp::Project)), this, SLOT(removed(dp::Project const&)));
+	client::ProjectManager * pm = context()->projectManager();
+        connect(pm, SIGNAL(stored(dp::Project)), this, SLOT(stored(dp::Project const&)));
+	connect(pm, SIGNAL(removed(dp::Project)), this, SLOT(removed(dp::Project const&)));
       }
       // ---------------------------------------------------------------------------------
       void KProjectsTableModel::stored(dp::Project const&p)
       {
+	qWarning()<<__FUNCTION__;
 	if(is_already_known(p))
 	{
 	  updated(p);

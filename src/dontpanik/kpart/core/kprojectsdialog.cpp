@@ -18,6 +18,7 @@
 */
 
 #include "kprojectsdialog.h"
+#include "keditprojectdialog.h"
 #include "ui_kprojectsdialog.h"
 // ---------------------------------------------------------------------------------
 namespace dp
@@ -31,11 +32,30 @@ namespace dp
         , _M_ui ( new Ui::KProjectsDialog () )
     {
       _M_ui->setupUi ( this );
+      setup_actions();
     }
     // ---------------------------------------------------------------------------------
     KProjectsDialog::~KProjectsDialog ()
     {
       delete _M_ui;
+    }
+    // ---------------------------------------------------------------------------------
+    // private stuff:
+    // ---------------------------------------------------------------------------------
+    void KProjectsDialog::setup_actions()
+    {
+      connect(_M_ui->b_add, SIGNAL(clicked()), this, SLOT(add()));
+      connect(_M_ui->b_remove, SIGNAL(clicked()), this, SLOT(remove()));
+    }
+    // ---------------------------------------------------------------------------------
+    void KProjectsDialog::add()
+    {
+      KEditProjectDialog dlg(this);
+      dlg.exec();
+    }
+    // ---------------------------------------------------------------------------------
+    void KProjectsDialog::remove()
+    {
     }
     // ---------------------------------------------------------------------------------
   }//core
