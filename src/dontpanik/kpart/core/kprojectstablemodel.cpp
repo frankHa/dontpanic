@@ -36,7 +36,8 @@ namespace dp
           : QAbstractTableModel ( parent )
       {
         init_header_data();
-        init_projects_list();
+	subscribe_to_project_manager_signals();
+        init_projects_list();	
       }
       // ---------------------------------------------------------------------------------
       QVariant KProjectsTableModel::data ( const QModelIndex& index, int role ) const
@@ -87,6 +88,55 @@ namespace dp
       {
         _M_projects = context().projectManager().allProjects();
       }
+      // ---------------------------------------------------------------------------------
+      void KProjectsTableModel::subscribe_to_project_manager_signals()
+      {
+	client::ProjectManager const& pm = context().projectManager();
+        connect(&pm, SIGNAL(stored(dp::Project)), this, SLOT(stored(dp::Project const&)));
+	connect(&pm, SIGNAL(removed(dp::Project)), this, SLOT(removed(dp::Project const&)));
+      }
+      // ---------------------------------------------------------------------------------
+      void KProjectsTableModel::stored(dp::Project const&p)
+      {
+	if(is_already_known(p))
+	{
+	  updated(p);
+	}
+	else
+	{
+	  added(p);
+	}
+      }
+      // ---------------------------------------------------------------------------------
+      void KProjectsTableModel::removed(dp::Project const&p)
+      {
+	int i = _M_projects.indexOf(p);
+	beginRemoveRows(QModelIndex(), i, i);
+	_M_projects.removeAt(i);
+	endRemoveRows();
+      }
+      // ---------------------------------------------------------------------------------
+      bool KProjectsTableModel::is_already_known(dp::Project const&p) const
+      {
+	return (_M_projects.indexOf(p)!=-1);
+      }	  
+      // ---------------------------------------------------------------------------------
+      void KProjectsTableModel::added(dp::Project const&p)
+      {
+	int index = _M_projects.size();
+	beginInsertRows(QModelIndex(), index, index);
+	_M_projects.append(p);
+	endInsertRows();
+      }	  
+      // ---------------------------------------------------------------------------------
+      void KProjectsTableModel::updated(dp::Project const&p)
+      {
+	int row = _M_projects.indexOf(p);
+	QModelIndex const& i = index(row, NAME);
+	dp::Project _p = _M_projects.at(row);
+	_p.setName(p.name());
+	emit dataChanged(i, i);
+      }	  
       // ---------------------------------------------------------------------------------
     }//detail
     // ---------------------------------------------------------------------------------
