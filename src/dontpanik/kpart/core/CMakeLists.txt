@@ -1,12 +1,13 @@
 #########################################################################
 # PRIVATE SECTION
 #########################################################################
-set(dontpanikpart_LIB_SRCS
+set(dontpanikpart_LIB_SRCS 
     context.cpp 
     kprojectstablemodel.cpp
     kprojectstable.cpp
     kactionstablemodel.cpp
     kactionstable.cpp
+    keditprojectdialog.cpp
     kprojectsdialog.cpp
     kdayview.cpp
     kmainwidget.cpp
@@ -18,6 +19,7 @@ set(dontpanikpart_LIB_SRCS
 
 set(dontpanikpart_LIB_UIS
     ui/kdayview.ui
+    ui/keditprojectdialog.ui
     ui/kprojectsdialog.ui
     ui/kworktypesdialog.ui
    )
