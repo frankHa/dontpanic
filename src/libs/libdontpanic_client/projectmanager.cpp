@@ -18,9 +18,11 @@
 */
 
 #include "libdontpanic_client/projectmanager.h"
-#include <remote_projectmanager.h>
 #include <QDBusConnection>
-
+#include <KDebug>
+#include <QMessageBox>
+#include <libdontpanic/project.hpp>
+#include <remote_projectmanager.h>
 namespace dp
 {
   // ---------------------------------------------------------------------------------
@@ -31,37 +33,47 @@ namespace dp
         : QObject ( parent )
         ,_M_remote(0)
     {
-      qDebug()<<__FUNCTION__;
-      connect(remote(), SIGNAL(stored(dp::Project)), this, SLOT(onstored(dp::Project)));
-      connect(remote(), SIGNAL(removed(dp::Project)), this, SLOT(onremoved(dp::Project)));
+      
     }
     // ---------------------------------------------------------------------------------
     ProjectManager::~ProjectManager ( ){}
     // ---------------------------------------------------------------------------------
     void ProjectManager::store(Project const& p)
     {
-      _M_remote->store(p);
+      QDBusPendingReply<> reply =remote()->store(p);
+      reply.waitForFinished();
+      if(reply.isError())
+      {
+	qWarning()<<reply.error();
+	emit error(QDBusError::errorString(reply.error().type()));
+      }
     }
     // ---------------------------------------------------------------------------------
     void ProjectManager::remove(Project const& p)
     {
-      _M_remote->remove(p);
+      QDBusPendingReply<> reply =remote()->remove(p);
+      reply.waitForFinished();
+      if(reply.isError())
+      {
+	qWarning()<<reply.error();
+	emit error(QDBusError::errorString(reply.error().type()));
+      }
     }
     // ---------------------------------------------------------------------------------
     ProjectList ProjectManager::allProjects()
     {
-      return _M_remote->allProjects();
+      return remote()->allProjects();
     }
     // ---------------------------------------------------------------------------------
     void ProjectManager::onstored(dp::Project p)
     {
-      qDebug()<<__FUNCTION__;
+      kDebug()<<"";
+      QMessageBox::information(0, "hello", "onstored here :)");
       emit stored(p);
     }
     // ---------------------------------------------------------------------------------
     void ProjectManager::onremoved(dp::Project p)
     {
-      qDebug()<<__FUNCTION__;
       emit removed(p);
     }
     // ---------------------------------------------------------------------------------
@@ -75,6 +87,9 @@ namespace dp
 	{
 	  qWarning()<<_M_remote->lastError();
 	}
+	connect(_M_remote, SIGNAL( stored ( dp::Project ) ), this, SIGNAL( stored ( dp::Project ) ));
+	connect(_M_remote, SIGNAL(removed(dp::Project)), this, SIGNAL(removed(dp::Project)));
+	connect(_M_remote, SIGNAL(error(QString const&)), this, SIGNAL(error(QString)));
       }
       return _M_remote;
     }

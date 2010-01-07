@@ -6,7 +6,7 @@
 //Qt includes
 #include <QDBusConnection>
 #include <QDBusAbstractAdaptor>
-#include <QDebug>
+#include <KDebug>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -107,15 +107,15 @@ namespace dp
         bool as ( QString const& object_path )
         {
           create_dbus_adaptor_for ( _M_object );
-          qDebug() << "trying to register " << _M_object << " for dbus path " << object_path;
+          kDebug() << "trying to register " << _M_object << " for dbus path " << object_path;
           bool result = _M_connection.registerObject ( object_path, _M_object );
           if ( result )
           {
-            qDebug() << "yeah, success :)";
+            kDebug() << "yeah, success :)";
           }
           else
           {
-            qDebug() << "uh oh, something went wrong :(";
+            kDebug() << "uh oh, something went wrong :(";
           }
           return result;
         }

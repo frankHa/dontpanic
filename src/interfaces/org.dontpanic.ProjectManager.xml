@@ -21,5 +21,8 @@
       <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::Project"/>
       <arg type="(si)" />
     </signal>
+    <signal name="error">
+      <arg type="s" />
+    </signal>
   </interface>
 </node>

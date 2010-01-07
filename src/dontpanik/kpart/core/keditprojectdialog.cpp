@@ -21,7 +21,7 @@
 #include "ui_keditprojectdialog.h"
 #include <libdontpanic/project.hpp>
 #include "context.h"
-#include <QDebug>
+#include <KDebug>
 namespace dp
 {
   namespace core
@@ -46,7 +46,7 @@ namespace dp
     
     void KEditProjectDialog::accepted()
     {
-      qDebug()<<"accepted";
+      kDebug()<<"";
       QString const& name = _M_ui->project_name->text();
       if(!name.isEmpty())
       {
