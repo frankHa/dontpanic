@@ -1,37 +1,37 @@
-#ifndef DP_PROJECTMANAGER_H
-#define DP_PROJECTMANAGER_H
+#ifndef DP_TASKMANAGER_H
+#define DP_TASKMANAGER_H
 #include <libdontpanic/defines.hpp>
-#include <libdontpanic/project.hpp>
+#include <libdontpanic/task.hpp>
 #include <QObject>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  class ProjectManager
+  class TaskManager
         : public QObject
   {
       // ---------------------------------------------------------------------------------
       Q_OBJECT
-      Q_CLASSINFO ( "D-Bus Interface", "org.dontpanic.ProjectManager" )
+      Q_CLASSINFO ( "D-Bus Interface", "org.dontpanic.TaskManager" )
       // ---------------------------------------------------------------------------------
       signals: 
-    void removed(dp::Project);
-    void stored(dp::Project);
+    void removed(dp::Task);
+    void stored(dp::Task);
     // ---------------------------------------------------------------------------------
     public:
       // ---------------------------------------------------------------------------------
-      ProjectManager ( QObject *parent = 0 );
+      TaskManager ( QObject *parent = 0 );
       // ---------------------------------------------------------------------------------
     public slots:
       // ---------------------------------------------------------------------------------
-      void store ( Project const& p );
+      void store ( Task const& p );
       // ---------------------------------------------------------------------------------
-      void remove(Project const& p);
+      void remove(Task const& p);
       // ---------------------------------------------------------------------------------
-      ProjectList allProjects();
+      TaskList allTasks();
       // ---------------------------------------------------------------------------------
   };
   // ---------------------------------------------------------------------------------
 }
 // ---------------------------------------------------------------------------------
-#endif // DP_PROJECTMANAGER_H
+#endif // DP_TASKMANAGER_H

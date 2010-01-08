@@ -1,30 +1,37 @@
-#include "libdontpanic/dbus.hpp"
-#include "timetrackeradaptor.h"
-#include "projectmanageradaptor.h"
-#include "taskmanageradaptor.h"
+#include "taskmanager.h"
+#include "persistencebackend.hpp"
+
+#include <KDebug>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  // implementions for the well known Adaptor types:
+  TaskManager::TaskManager ( QObject *parent )
+      : QObject ( parent ){}
   // ---------------------------------------------------------------------------------
-  template<>
-  QDBusAbstractAdaptor* create_dbus_adaptor_for<dp::TimeTracker> ( dp::TimeTracker *obj )
+  void TaskManager::store ( Task const& t )
   {
-    return new TimeTrackerAdaptor ( obj );
+    if(persistence().persist(t).was_successful())
+       {
+        emit stored(t);
+       }
   }
   // ---------------------------------------------------------------------------------
-  template<>
-  QDBusAbstractAdaptor* create_dbus_adaptor_for<dp::ProjectManager> ( dp::ProjectManager *obj )
+  void TaskManager::remove(Task const& t)
   {
-    return new ProjectManagerAdaptor ( obj );
+    if(persistence().remove(t).was_successful())
+    {
+      emit removed(t);
+    }
   }
   // ---------------------------------------------------------------------------------
-  template<>
-  QDBusAbstractAdaptor* create_dbus_adaptor_for<dp::TaskManager> ( dp::TaskManager *obj )
+  TaskList TaskManager::allTasks()
   {
-    return new TaskManagerAdaptor ( obj );
+    TaskList list;
+    persistence().findAll(list);
+    return list;
   }
   // ---------------------------------------------------------------------------------
-}//dp
+}//
 // ---------------------------------------------------------------------------------
+

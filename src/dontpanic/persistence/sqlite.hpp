@@ -11,6 +11,7 @@ namespace dp
   class Project;
   typedef QList<Project> ProjectList;
   class Task;
+  typedef QList<Task> TaskList;
   // ---------------------------------------------------------------------------------
   namespace _persistence
   {
@@ -24,29 +25,27 @@ namespace dp
         // ---------------------------------------------------------------------------------
       public:
         // ---------------------------------------------------------------------------------
-        success open_database_connection();
+        success open_database_connection() const;
         // ---------------------------------------------------------------------------------
-        success update_database_schema_if_necessary();
+        success update_database_schema_if_necessary() const;
         // ---------------------------------------------------------------------------------
       public:
         // ---------------------------------------------------------------------------------
-        success persist ( Project const&_project );
+        success persist ( Project const&_project ) const;
 	// ---------------------------------------------------------------------------------
-	success remove (Project const& _project);
+	success remove (Project const& _project)const;
 	// ---------------------------------------------------------------------------------
-	success findAll(ProjectList &_pl);
+	success findAll(ProjectList &_pl)const;
         // ---------------------------------------------------------------------------------
-        success persist ( Task const&_t );
+        success persist ( Task const&_t )const;	
         // ---------------------------------------------------------------------------------
-        success persist ( Action const&_a );
+	success remove (Task const& _t)const;
+	// ---------------------------------------------------------------------------------
+	success findAll(TaskList &_tl)const;
         // ---------------------------------------------------------------------------------
-        Action_ptr activeAction();
+        success persist ( Action const&_a )const;
         // ---------------------------------------------------------------------------------
-      private:
-        // ---------------------------------------------------------------------------------
-        FORWARD_DECL ( sqlite_private );
-        // ---------------------------------------------------------------------------------
-        sqlite_private_ptr d;
+        Action_ptr activeAction()const;
         // ---------------------------------------------------------------------------------
     };
     // ---------------------------------------------------------------------------------

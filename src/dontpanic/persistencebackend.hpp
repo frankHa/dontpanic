@@ -2,6 +2,8 @@
 #define DP_PERSISTANCE_BACKEND_HPP
 // ---------------------------------------------------------------------------------
 #include "libdontpanic/defines.hpp"
+#include "persistence/sqlite.hpp"
+
 //Qt includes
 #include <QObject>
 // ---------------------------------------------------------------------------------
@@ -9,9 +11,6 @@ namespace dp
 {
   //forward decl
   FORWARD_DECL(Action);
-  class Project;
-  typedef QList<Project> ProjectList;
-  class Task;
   // ---------------------------------------------------------------------------------
   /**
    * The idea for this is to abstract from the actual storage backend, in case we
@@ -25,15 +24,23 @@ namespace dp
       // ---------------------------------------------------------------------------------
       bool init();
       // ---------------------------------------------------------------------------------
-      success persist ( Project const&_project );
+      template<typename T>
+      success persist ( T const&_t )
+      {
+	return _persistence::sqlite().persist ( _t );
+      }
       // ---------------------------------------------------------------------------------
-      success remove (Project const& _project);
+      template<typename T>
+      success remove (T const& _t)
+      {
+	return _persistence::sqlite().remove(_t);
+      }
       // ---------------------------------------------------------------------------------
-      success findAll(ProjectList & _pl);
-      // ---------------------------------------------------------------------------------
-      success persist ( Task const&_t );
-      // ---------------------------------------------------------------------------------
-      success persist ( Action const&_a );
+      template<typename ListT>
+      success findAll(ListT & _l)
+      {
+	return _persistence::sqlite().findAll(_l);
+      }
       // ---------------------------------------------------------------------------------
       Action_ptr activeAction();
       // ---------------------------------------------------------------------------------

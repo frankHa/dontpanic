@@ -1,5 +1,4 @@
 #include "persistencebackend.hpp"
-#include "persistence/sqlite.hpp"
 
 //Qt includes
 #include <QDebug>
@@ -20,31 +19,6 @@ namespace dp
       ::exit ( 1 );
     }
     return true;
-  }
-  // ---------------------------------------------------------------------------------
-  success PersistenceBackend::persist ( Project const& _project )
-  {
-    return _persistence::sqlite().persist ( _project );
-  }
-  // ---------------------------------------------------------------------------------
-  success PersistenceBackend::remove(Project const& _project)
-  {
-    return _persistence::sqlite().remove(_project);
-  }
-  // ---------------------------------------------------------------------------------
-  success PersistenceBackend::findAll(ProjectList & _pl)
-  {
-    return _persistence::sqlite().findAll(_pl);
-  }
-  // ---------------------------------------------------------------------------------
-  success PersistenceBackend::persist ( Task const& _t )
-  {
-    return _persistence::sqlite().persist ( _t );
-  }
-  // ---------------------------------------------------------------------------------
-  success PersistenceBackend::persist ( Action const& _a )
-  {
-    return _persistence::sqlite().persist ( _a );
   }
   // ---------------------------------------------------------------------------------
   Action_ptr PersistenceBackend::activeAction()

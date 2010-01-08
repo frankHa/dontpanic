@@ -51,96 +51,35 @@ namespace dp
   namespace _persistence
   {
     // ---------------------------------------------------------------------------------
-    //sqlite_private declaration:
-    // ---------------------------------------------------------------------------------
-    class Sqlite::sqlite_private
+    QString storage_dir()
     {
-        // ---------------------------------------------------------------------------------
-      public:
-        // ---------------------------------------------------------------------------------
-        sqlite_private ( Sqlite *self ) : _M_self ( self ) {}
-        // ---------------------------------------------------------------------------------
-      public:
-        // ---------------------------------------------------------------------------------
-        success open_database_connection() const;
-        // ---------------------------------------------------------------------------------
-        success update_database_schema_if_necessary() const;
-        // ---------------------------------------------------------------------------------
-        success persist ( Project const&_project ) const;
-	// ---------------------------------------------------------------------------------
-	success findAll(ProjectList &_pl) const;
-	// ---------------------------------------------------------------------------------
-	success remove(Project const& _project) const;
-        // ---------------------------------------------------------------------------------
-        success persist ( Task const&_task ) const;
-        // ---------------------------------------------------------------------------------
-        success persist ( Action const&_action ) const;
-        // ---------------------------------------------------------------------------------
-        Action_ptr activeAction() const;
-        // ---------------------------------------------------------------------------------
-      private:
-        // ---------------------------------------------------------------------------------
-        QString storage_dir() const;
-        // ---------------------------------------------------------------------------------
-        success prepare_storage_directory() const;
-        // ---------------------------------------------------------------------------------
-        QString database_name() const;
-        // ---------------------------------------------------------------------------------
-      private:
-        // ---------------------------------------------------------------------------------
-        Sqlite *_M_self;
-        // ---------------------------------------------------------------------------------
-
-    };//sqlite_private
+      return QDir::homePath() + "/.dontpanic/";
+    }
+    // ---------------------------------------------------------------------------------
+    success prepare_storage_directory()
+    {
+      QDir _dir ( storage_dir() );
+      if ( _dir.exists() )
+      {
+        return successful();
+      }
+      if ( _dir.mkpath ( storage_dir() ) )
+      {
+        return successful();
+      }
+      return error();
+    }
+    // ---------------------------------------------------------------------------------
+    QString database_name()
+    {
+      return storage_dir() + DB_FILE_NAME;
+    }
     // ---------------------------------------------------------------------------------
     //Sqlite impl:
     // ---------------------------------------------------------------------------------
-    Sqlite::Sqlite()
-        : d ( new sqlite_private ( this ) ) {}
+    Sqlite::Sqlite(){}
     // ---------------------------------------------------------------------------------
-    success Sqlite::open_database_connection()
-    {
-      return d->open_database_connection();
-    }
-    // ---------------------------------------------------------------------------------
-    success Sqlite::update_database_schema_if_necessary()
-    {
-      return d->update_database_schema_if_necessary();
-    }
-    // ---------------------------------------------------------------------------------
-    success Sqlite::persist ( Project const& _project )
-    {
-      return d->persist ( _project );
-    }
-    // ---------------------------------------------------------------------------------
-    success Sqlite::remove ( Project const& _project )
-    {
-      return d->remove ( _project );
-    }
-    // ---------------------------------------------------------------------------------
-    success Sqlite::findAll(ProjectList & _pl)
-    {
-      return d->findAll(_pl);
-    }
-    // ---------------------------------------------------------------------------------
-    success Sqlite::persist ( Task const& _t )
-    {
-      return d->persist ( _t );
-    }
-    // ---------------------------------------------------------------------------------
-    success Sqlite::persist ( Action const& _a )
-    {
-      return d->persist ( _a );
-    }
-    // ---------------------------------------------------------------------------------
-    Action_ptr Sqlite::activeAction()
-    {
-      return d->activeAction();
-    }
-    // ---------------------------------------------------------------------------------
-    // sqlite_private impl:
-    // ---------------------------------------------------------------------------------
-    success Sqlite::sqlite_private::open_database_connection() const
+    success Sqlite::open_database_connection() const
     {
       if ( prepare_storage_directory().has_failed() )
       {
@@ -155,7 +94,7 @@ namespace dp
       return error();
     }
     // ---------------------------------------------------------------------------------
-    dp::success Sqlite::sqlite_private::update_database_schema_if_necessary() const
+    dp::success Sqlite::update_database_schema_if_necessary() const
     {
       QSqlQuery query;
       if ( !query.exec ( CREATE_TABLE_PROJECT ) )
@@ -186,60 +125,47 @@ namespace dp
       return successful();
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::sqlite_private::persist ( Project const& _project ) const
+    success Sqlite::persist ( Project const& _project ) const
     {
       return _sqlite::project().persist ( _project );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::sqlite_private::remove ( Project const& _project ) const
+    success Sqlite::remove ( Project const& _project ) const
     {
       return _sqlite::project().remove ( _project );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::sqlite_private::findAll(ProjectList & _pl) const
+    success Sqlite::findAll(ProjectList & _pl) const
     {
       return _sqlite::project().findAll(_pl);
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::sqlite_private::persist ( Task const& _t ) const
+    success Sqlite::persist ( Task const& _t ) const
     {
       return _sqlite::task().persist ( _t );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::sqlite_private::persist ( Action const& _a ) const
+    success Sqlite::remove ( Task const& _t ) const
+    {
+      return _sqlite::task().remove ( _t );
+    }
+    // ---------------------------------------------------------------------------------
+    success Sqlite::findAll(TaskList & _tl) const
+    {
+      return _sqlite::task().findAll(_tl);
+    }
+    // ---------------------------------------------------------------------------------
+    success Sqlite::persist ( Action const& _a ) const
     {
       return _sqlite::action().persist ( _a );
     }
     // ---------------------------------------------------------------------------------
-    Action_ptr Sqlite::sqlite_private::activeAction() const
+    Action_ptr Sqlite::activeAction() const
     {
       return _sqlite::action().findActive();
     }
     // ---------------------------------------------------------------------------------
-    QString Sqlite::sqlite_private::storage_dir() const
-    {
-      return QDir::homePath() + "/.dontpanic/";
-    }
-    // ---------------------------------------------------------------------------------
-    success Sqlite::sqlite_private::prepare_storage_directory() const
-    {
-      QDir _dir ( storage_dir() );
-      if ( _dir.exists() )
-      {
-        return successful();
-      }
-      if ( _dir.mkpath ( storage_dir() ) )
-      {
-        return successful();
-      }
-      return error();
-    }
-    // ---------------------------------------------------------------------------------
-    QString Sqlite::sqlite_private::database_name() const
-    {
-      return storage_dir() + DB_FILE_NAME;
-    }
-    // ---------------------------------------------------------------------------------
+    
   }//_persistance
   // ---------------------------------------------------------------------------------
 }//dp

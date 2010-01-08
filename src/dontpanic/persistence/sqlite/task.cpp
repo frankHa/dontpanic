@@ -31,6 +31,9 @@ namespace dp
       const QString UPDATE_TASK =
         "UPDATE p_project set t_name=?, t_solo_effort=?, t_chargeable=?, t_creation_date=? WHERE (t_id=?)";
       // ---------------------------------------------------------------------------------
+      const QString REMOVE_TASK = 
+	"UPDATE t_task set(t_visible=0) WHERE (t_id=?)";
+	// ---------------------------------------------------------------------------------
       // public stuff:
       // ---------------------------------------------------------------------------------
       success Task::persist ( dp::Task const&_task ) const
@@ -60,6 +63,43 @@ namespace dp
           return error();
         }
         return assign_query_values_to_entity ( query, t );
+      }
+      // ---------------------------------------------------------------------------------
+      success Task::remove(dp::Task const& _task) const
+      {
+	if ( _task.id().isNull())
+        {
+          return error();
+        }
+	if(!exists(_task))
+	{
+	    return successful();
+	}
+	QSqlQuery query;
+	query.prepare(REMOVE_TASK);
+	query.addBindValue(_task.id().toString());
+	if(execute(query).has_failed())
+	{
+	  return error();
+	}
+	return successful();
+      }
+      // ---------------------------------------------------------------------------------
+      success Task::findAll(dp::TaskList &l) const
+      {
+	QSqlQuery query;
+	query.prepare(SELECT_ALL_TASKS);
+	if ( execute ( query ).has_failed() )
+        {
+          return error();
+        }
+        while ( query.next() )
+        {
+	  dp::Task _t;
+	  assign_query_values_to_entity(query, _t);
+	  l.append(_t);
+        }
+        return successful();
       }
       // ---------------------------------------------------------------------------------
       // private stuff:

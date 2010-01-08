@@ -1,0 +1,28 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+  <interface name="org.dontpanic.TaskManager">
+    <method name="store">
+      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::Task"/>
+      <arg type="(si)" />
+    </method>
+    <method name="remove">
+      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::Task"/>
+      <arg type="(si)" />
+    </method>
+    <method name="allTasks">
+      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="dp::TaskList"/>
+      <arg type="(si)" direction="out" />
+    </method>
+    <signal name="stored">
+      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::Task"/>
+      <arg type="(si)" />
+    </signal>
+    <signal name="removed">
+      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::Task"/>
+      <arg type="(si)" />
+    </signal>
+    <signal name="error">
+      <arg type="s" />
+    </signal>
+  </interface>
+</node>

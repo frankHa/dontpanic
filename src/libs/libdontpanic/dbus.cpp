@@ -35,6 +35,7 @@ namespace dp
     qDBusRegisterMetaType<dp::Project>();
     qDBusRegisterMetaType<dp::ProjectList>();
     qDBusRegisterMetaType<dp::Task>();
+    qDBusRegisterMetaType<dp::TaskList>();
     qDBusRegisterMetaType<QUuid>();
   }
   // ---------------------------------------------------------------------------------

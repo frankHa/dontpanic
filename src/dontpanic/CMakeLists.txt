@@ -16,6 +16,7 @@ set(dontpanic_SRCS
     main.cpp
     persistencebackend.cpp
     projectmanager.cpp
+    taskmanager.cpp 
     timetracker.cpp
     persistence/sqlite.cpp
     persistence/sqlite/action.cpp
@@ -30,6 +31,9 @@ qt4_add_dbus_adaptor(dontpanic_SRCS
 qt4_add_dbus_adaptor(dontpanic_SRCS
                     ${DBUS_INTERFACES_PATH}/org.dontpanic.ProjectManager.xml
                     projectmanager.h dp::ProjectManager)
+qt4_add_dbus_adaptor(dontpanic_SRCS
+                    ${DBUS_INTERFACES_PATH}/org.dontpanic.TaskManager.xml
+                    taskmanager.h dp::TaskManager)
 
 kde4_add_executable(dontpanic ${dontpanic_SRCS})
 target_link_libraries(dontpanic dontpanic_lib ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTSQL_LIBRARY})
@@ -41,6 +45,7 @@ if(DP_INSTALL_SYSTEM_FILES)
   install( FILES
            ${DBUS_INTERFACES_PATH}/org.dontpanic.TimeTracker.xml
            ${DBUS_INTERFACES_PATH}/org.dontpanic.ProjectManager.xml
+	   ${DBUS_INTERFACES_PATH}/org.dontpanic.TaskManager.xml
            DESTINATION
            ${KDE4_DBUS_INTERFACES_DIR} 
            )
