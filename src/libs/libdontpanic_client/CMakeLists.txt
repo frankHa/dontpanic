@@ -5,10 +5,12 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 set(libdontpanic_client_SRCS
     projectmanager.cpp
+    taskmanager.cpp
    )
 
 qt4_wrap_cpp(libdontpanic_client_SRCS
              ../../include/libdontpanic_client/projectmanager.h
+	     ../../include/libdontpanic_client/taskmanager.h
              )
 
 qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS

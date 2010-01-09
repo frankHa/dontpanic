@@ -17,27 +17,27 @@
 
 */
 
-#include "libdontpanic_client/projectmanager.h"
+#include "libdontpanic_client/taskmanager.h"
 #include <QDBusConnection>
 #include <KDebug>
-#include <libdontpanic/project.hpp>
-#include <remote_projectmanager.h>
+#include <libdontpanic/task.hpp>
+#include <remote_taskmanager.h>
 namespace dp
 {
   // ---------------------------------------------------------------------------------
   namespace client
   {
     // ---------------------------------------------------------------------------------
-    ProjectManager::ProjectManager ( QObject *parent )
+    TaskManager::TaskManager ( QObject *parent )
         : QObject ( parent )
         ,_M_remote(0)
     {
       
     }
     // ---------------------------------------------------------------------------------
-    ProjectManager::~ProjectManager ( ){}
+    TaskManager::~TaskManager ( ){}
     // ---------------------------------------------------------------------------------
-    void ProjectManager::store(Project const& p)
+    void TaskManager::store(Task const& p)
     {
       QDBusPendingReply<> reply =remote()->store(p);
       reply.waitForFinished();
@@ -48,7 +48,7 @@ namespace dp
       }
     }
     // ---------------------------------------------------------------------------------
-    void ProjectManager::remove(Project const& p)
+    void TaskManager::remove(Task const& p)
     {
       QDBusPendingReply<> reply =remote()->remove(p);
       reply.waitForFinished();
@@ -59,23 +59,23 @@ namespace dp
       }
     }
     // ---------------------------------------------------------------------------------
-    ProjectList ProjectManager::allProjects()
+    TaskList TaskManager::allTasks()
     {
-      return remote()->allProjects();
+      return remote()->allTasks();
     }
     // ---------------------------------------------------------------------------------
-    org::dontpanic::ProjectManager* ProjectManager::remote()
+    org::dontpanic::TaskManager* TaskManager::remote()
     {
       if(_M_remote == 0)
       {
-	_M_remote = new org::dontpanic::ProjectManager
-	( "org.dontpanic", "/ProjectManager", QDBusConnection::sessionBus(), this );
+	_M_remote = new org::dontpanic::TaskManager
+	( "org.dontpanic", "/TaskManager", QDBusConnection::sessionBus(), this );
 	if(!_M_remote->isValid())
 	{
 	  qWarning()<<_M_remote->lastError();
 	}
-	connect(_M_remote, SIGNAL( stored ( dp::Project ) ), this, SIGNAL( stored ( dp::Project ) ));
-	connect(_M_remote, SIGNAL(removed(dp::Project)), this, SIGNAL(removed(dp::Project)));
+	connect(_M_remote, SIGNAL( stored ( dp::Task ) ), this, SIGNAL( stored ( dp::Task ) ));
+	connect(_M_remote, SIGNAL(removed(dp::Task)), this, SIGNAL(removed(dp::Task)));
 	connect(_M_remote, SIGNAL(error(QString const&)), this, SIGNAL(error(QString)));
       }
       return _M_remote;

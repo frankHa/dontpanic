@@ -17,23 +17,47 @@
 
 */
 
-#include "kworktypesdialog.h"
-#include "ui_kworktypesdialog.h"
+#include "kedittaskdialog.h"
+#include "ui_kedittaskdialog.h"
+#include <libdontpanic/task.hpp>
+#include "context.h"
+#include <KDebug>
 namespace dp
 {
   namespace core
   {
-    KWorkTypesDialog::KWorkTypesDialog ( QWidget* parent, Qt::WindowFlags f )
-        : QDialog ( parent, f )
-        , _M_ui ( new Ui::KWorkTypesDialog() )
+    KEditTaskDialog::KEditTaskDialog(QWidget *parent)
+    :QDialog(parent)
+    , _M_ui (new Ui::KEditTaskDialog())
     {
       _M_ui->setupUi(this);
+      setup_actions();
     }
-
-    KWorkTypesDialog::~KWorkTypesDialog ( )
+    KEditTaskDialog::~KEditTaskDialog()
     {
       delete _M_ui;
     }
-  }
-}
+    
+    void KEditTaskDialog::setup_actions()
+    {
+      connect(_M_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accepted()));
+      connect(_M_ui->buttonBox, SIGNAL(rejected()), this, SLOT(rejected()));
+    }
+    
+    void KEditTaskDialog::accepted()
+    {
+      kDebug()<<"";
+      QString const& name = _M_ui->task_name->text();
+      if(!name.isEmpty())
+      {
+	dp::Task p(name);
+	context()->taskManager()->store(p);
+      }
+    }
+    void KEditTaskDialog::rejected()
+    {
+      close();
+    }
+  }//core
+}//dp
 

@@ -89,7 +89,7 @@ namespace dp
         }
         while ( query.next() )
         {
-	  dp::Project _p;
+	  dp::Project _p(QUuid(query.value(0).toString()));
 	  assign_query_values_to_entity(query, _p);
 	  l.append(_p);
         }

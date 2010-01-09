@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>KWorkTypesDialog</class>
- <widget class="QDialog" name="KWorkTypesDialog">
+ <class>KTasksDialog</class>
+ <widget class="QDialog" name="KTasksDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,13 +11,13 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Work Types - Don't Panik</string>
+   <string>Tasks/Worktypes - Don't Panik</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="dp::core::KWorkTypesTable" name="tableView">
+      <widget class="dp::core::KTasksTable" name="tableView">
        <attribute name="horizontalHeaderStretchLastSection">
         <bool>true</bool>
        </attribute>
@@ -26,14 +26,14 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="KPushButton" name="kpushbutton">
+        <widget class="KPushButton" name="b_add">
          <property name="text">
           <string>+</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="KPushButton" name="kpushbutton_2">
+        <widget class="KPushButton" name="b_remove">
          <property name="text">
           <string>-</string>
          </property>
@@ -75,9 +75,9 @@
    <header>kpushbutton.h</header>
   </customwidget>
   <customwidget>
-   <class>dp::core::KWorkTypesTable</class>
+   <class>dp::core::KTasksTable</class>
    <extends>QTableView</extends>
-   <header>kworktypestable.h</header>
+   <header>ktaskstable.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
@@ -85,7 +85,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>KWorkTypesDialog</receiver>
+   <receiver>KTasksDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -101,7 +101,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>KWorkTypesDialog</receiver>
+   <receiver>KTasksDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

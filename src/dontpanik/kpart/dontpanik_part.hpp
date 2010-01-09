@@ -52,7 +52,7 @@ class DontPanikPart : public KParts::ReadOnlyPart
   protected slots:
     //void fileSaveAs();
     void editProjects();
-    void editWorkTypes();
+    void editTasks();
 
   private:
     dp::core::dont_panik_core *_M_core;

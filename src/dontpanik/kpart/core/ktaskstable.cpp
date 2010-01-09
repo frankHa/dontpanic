@@ -17,8 +17,8 @@
 
 */
 
-#include "kworktypestable.h"
-#include "kworktypestablemodel.h"
+#include "ktaskstable.h"
+#include "ktaskstablemodel.h"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -26,9 +26,9 @@ namespace dp
   namespace core
   {
     // ---------------------------------------------------------------------------------
-    KWorkTypesTable::KWorkTypesTable ( QWidget *parent )
+    KTasksTable::KTasksTable ( QWidget *parent )
         : QTableView ( parent )
-        , _M_model ( new detail::KWorkTypesTableModel ( this ) )
+        , _M_model ( new detail::KTasksTableModel ( this ) )
     {
       setModel ( _M_model );
       resizeColumnsToContents();

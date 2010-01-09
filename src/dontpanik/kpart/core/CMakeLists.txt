@@ -8,20 +8,22 @@ set(dontpanikpart_LIB_SRCS
     kactionstablemodel.cpp
     kactionstable.cpp
     keditprojectdialog.cpp
+    kedittaskdialog.cpp
     kprojectsdialog.cpp
     kdayview.cpp
     kmainwidget.cpp
-    kworktypesdialog.cpp
-    kworktypestable.cpp
-    kworktypestablemodel.cpp
+    ktasksdialog.cpp
+    ktaskstable.cpp
+    ktaskstablemodel.cpp
     dont_panik_part_core.cpp
    )
 
 set(dontpanikpart_LIB_UIS
     ui/kdayview.ui
     ui/keditprojectdialog.ui
+    ui/kedittaskdialog.ui
     ui/kprojectsdialog.ui
-    ui/kworktypesdialog.ui
+    ui/ktasksdialog.ui
    )
 
 qt4_wrap_ui(dontpanikpart_LIB_SRCS ${dontpanikpart_LIB_UIS})

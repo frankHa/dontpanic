@@ -7,7 +7,7 @@
 #include <QFile>
 #include "kmainwidget.h"
 #include "kprojectsdialog.h"
-#include "kworktypesdialog.h"
+#include "ktasksdialog.h"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -34,9 +34,9 @@ namespace dp
       dlg.exec();
     }
     // ---------------------------------------------------------------------------------
-    void dont_panik_core::editWorkTypes()
+    void dont_panik_core::editTasks()
     {
-      KWorkTypesDialog dlg ( widget() );
+      KTasksDialog dlg ( widget() );
       dlg.exec();
     }
     // ---------------------------------------------------------------------------------

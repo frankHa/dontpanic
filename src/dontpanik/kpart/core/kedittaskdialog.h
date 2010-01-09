@@ -17,38 +17,42 @@
 
 */
 
-#include "context.h"
+#ifndef DP_CORE_KEDITTASKDIALOG_H
+#define DP_CORE_KEDITTASKDIALOG_H
+
+#include <qt4/QtGui/QDialog>
+
+
+namespace Ui
+{
+  class KEditTaskDialog;
+}
 
 namespace dp
 {
-  namespace core
-  {
-    Context _instance;
 
-    Context* context()
+    namespace core
     {
-      return &_instance;
+
+        class KEditTaskDialog : public QDialog
+        {
+	  Q_OBJECT
+	  public:
+	    KEditTaskDialog(QWidget *parent=0);
+	    ~KEditTaskDialog();
+	  private:
+	    void setup_actions();
+	    
+	  private slots:
+	    void accepted();
+	    void rejected();
+	    
+	  private:
+	    Ui::KEditTaskDialog *_M_ui;
+        };
+
     }
 
-    Context::Context()
-    :_M_project_manager(new dp::client::ProjectManager())
-    , _M_task_manager(new dp::client::TaskManager()){}
-    
-    Context::~Context()
-    {
-      delete _M_project_manager;
-      delete _M_task_manager;
-    }
-
-    dp::client::ProjectManager* Context::projectManager()
-    {
-      return _M_project_manager;
-    }
-    
-    dp::client::TaskManager* Context::taskManager()
-    {
-      return _M_task_manager;
-    }
-  }
 }
 
+#endif // DP_CORE_KEDITTASKDIALOG_H

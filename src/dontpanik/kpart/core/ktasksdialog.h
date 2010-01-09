@@ -17,14 +17,14 @@
 
 */
 
-#ifndef DP_CORE_KWORKTYPESDIALOG_H
-#define DP_CORE_KWORKTYPESDIALOG_H
+#ifndef DP_CORE_KTASKSDIALOG_H
+#define DP_CORE_KTASKSDIALOG_H
 
 #include <QDialog>
 
 namespace Ui
 {
-  class KWorkTypesDialog;
+  class KTasksDialog;
 }
 
 namespace dp
@@ -33,20 +33,31 @@ namespace dp
   namespace core
   {
 
-    class KWorkTypesDialog : public QDialog
+    class KTasksDialog : public QDialog
     {
         Q_OBJECT
       public:
 
-        KWorkTypesDialog ( QWidget* parent = 0, Qt::WindowFlags f = 0 );
-        ~KWorkTypesDialog ( );
+        KTasksDialog ( QWidget* parent = 0, Qt::WindowFlags f = 0 );
+        ~KTasksDialog ( );
+	
+	private:
+	// ---------------------------------------------------------------------------------
+	void setup_actions();
+	// ---------------------------------------------------------------------------------
+      private slots:
+	// ---------------------------------------------------------------------------------
+	void add();
+	// ---------------------------------------------------------------------------------
+	void remove();
+	// ---------------------------------------------------------------------------------
 
       private:
-        Ui::KWorkTypesDialog *_M_ui;
+        Ui::KTasksDialog *_M_ui;
     };
 
   }
 
 }
 
-#endif // DP_CORE_KWORKTYPESDIALOG_H
+#endif // DP_CORE_KTASKSDIALOG_H

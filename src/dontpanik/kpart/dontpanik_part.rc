@@ -3,7 +3,7 @@
 <MenuBar>
   <Menu name="edit">
     <Action name="edit_projects" />
-    <Action name="edit_worktypes" />
+    <Action name="edit_tasks" />
   </Menu>
 </MenuBar>
 <ToolBar name="mainToolBar">

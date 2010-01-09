@@ -23,7 +23,7 @@ namespace dp
         "INSERT INTO t_task(t_id, t_name, t_visible, t_solo_effort, t_chargeable, t_creation_date)VALUES(?, ?, 1, ?, ?, ?)";
       // ---------------------------------------------------------------------------------
       const QString SELECT_ALL_TASKS =
-        "SELECT t_name, t_solo_effort, t_chargeable, t_creation_date FROM t_task WHERE (t_visible <> 0)";
+        "SELECT t_id, t_name, t_solo_effort, t_chargeable, t_creation_date FROM t_task WHERE (t_visible <> 0)";
       // ---------------------------------------------------------------------------------
       const QString SELECT_DISTINCT_TASK =
         "SELECT DISTINCT t_name, t_solo_effort, t_chargeable, t_creation_date FROM t_task WHERE (t_id=?)";
@@ -95,7 +95,7 @@ namespace dp
         }
         while ( query.next() )
         {
-	  dp::Task _t;
+	  dp::Task _t(QUuid(query.value(0).toString()));
 	  assign_query_values_to_entity(query, _t);
 	  l.append(_t);
         }
@@ -126,9 +126,9 @@ namespace dp
         query.prepare ( INSERT_TASK );
         query.addBindValue ( _t.id().toString() );
         query.addBindValue ( _t.name() );
-        query.addBindValue ( _t.is_solo_effort() );
-        query.addBindValue ( _t.is_chargeable() );
-        query.addBindValue ( _t.creation_date() );
+        query.addBindValue ( _t.isSoloEffort() );
+        query.addBindValue ( _t.isChargeable() );
+        query.addBindValue ( _t.creationDate() );
         if ( execute ( query ).has_failed() )
         {
           return error();
@@ -145,19 +145,19 @@ namespace dp
         QSqlQuery query;
         query.prepare ( UPDATE_TASK );
         query.addBindValue ( _t.name() );
-        query.addBindValue ( _t.is_solo_effort() );
-        query.addBindValue ( _t.is_chargeable() );
-        query.addBindValue ( _t.creation_date() );
+        query.addBindValue ( _t.isSoloEffort() );
+        query.addBindValue ( _t.isChargeable() );
+        query.addBindValue ( _t.creationDate() );
         query.addBindValue ( _t.id().toString() );
         return execute ( query );
       }
       // ---------------------------------------------------------------------------------
       success Task::assign_query_values_to_entity ( QSqlQuery& query, dp::Task& t ) const
       {
-        t.set_name ( query.value ( 1 ).toString() );
-        t.set_is_solo_effort ( query.value ( 3 ).toBool() );
-        t.set_is_chargeable ( query.value ( 4 ).toBool() );
-        t.set_creation_date ( query.value ( 5 ).toDateTime() );
+        t.setName ( query.value ( 1 ).toString() );
+        t.setIsSoloEffort ( query.value ( 2 ).toBool() );
+        t.setIsChargeable ( query.value ( 3 ).toBool() );
+        t.setCreationDate ( query.value ( 4 ).toDateTime() );
         return successful();
       }
 

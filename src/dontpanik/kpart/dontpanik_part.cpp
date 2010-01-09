@@ -50,10 +50,10 @@ DontPanikPart::DontPanikPart ( QWidget *parentWidget, QObject *parent, const QSt
   actionCollection()->addAction ( "edit_projects", edit_projects );
   connect ( edit_projects, SIGNAL ( triggered() ), this, SLOT ( editProjects() ) );
 
-  KAction *edit_worktypes = new KAction ( this );
-  edit_worktypes->setText ( i18n ( "Edit Worktypes" ) );
-  actionCollection()->addAction ( "edit_worktypes", edit_worktypes );
-  connect ( edit_worktypes, SIGNAL ( triggered() ), this, SLOT ( editWorkTypes() ) );
+  KAction *edit_tasks = new KAction ( this );
+  edit_tasks->setText ( i18n ( "Edit Tasks/Worktypes" ) );
+  actionCollection()->addAction ( "edit_tasks", edit_tasks );
+  connect ( edit_tasks, SIGNAL ( triggered() ), this, SLOT ( editTasks() ) );
 
   // set our XML-UI resource file
   setXMLFile ( "dontpanik_part.rc" );
@@ -112,9 +112,9 @@ void DontPanikPart::editProjects()
   _M_core->editProjects();
 }
 
-void DontPanikPart::editWorkTypes()
+void DontPanikPart::editTasks()
 {
-  _M_core->editWorkTypes();
+  _M_core->editTasks();
 }
 
 //void DontPanikPart::fileSaveAs()
