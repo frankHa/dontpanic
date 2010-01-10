@@ -12,6 +12,8 @@ namespace dp
   typedef QList<Project> ProjectList;
   class Task;
   typedef QList<Task> TaskList;
+  class ActionTemplate;
+  typedef QList<ActionTemplate> TemplateList;
   // ---------------------------------------------------------------------------------
   namespace _persistence
   {
@@ -42,6 +44,12 @@ namespace dp
 	success remove (Task const& _t)const;
 	// ---------------------------------------------------------------------------------
 	success findAll(TaskList &_tl)const;
+        // ---------------------------------------------------------------------------------
+	success persist ( ActionTemplate const&_t )const;	
+        // ---------------------------------------------------------------------------------
+	success remove (ActionTemplate const& _t)const;
+	// ---------------------------------------------------------------------------------
+	success findAll(TemplateList &_tl)const;
         // ---------------------------------------------------------------------------------
         success persist ( Action const&_a )const;
         // ---------------------------------------------------------------------------------

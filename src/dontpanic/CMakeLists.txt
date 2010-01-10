@@ -11,6 +11,7 @@ add_definitions(${SQLITE_DEFINITIONS})
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 set(dontpanic_SRCS 
+    actiontemplatemanager.cpp
     application.cpp
     dbus.cpp
     main.cpp
@@ -20,8 +21,9 @@ set(dontpanic_SRCS
     timetracker.cpp
     persistence/sqlite.cpp
     persistence/sqlite/action.cpp
+    persistence/sqlite/actiontemplate.cpp
     persistence/sqlite/project.cpp
-    persistence/sqlite/task.cpp
+    persistence/sqlite/task.cpp    
    )
 
 qt4_add_dbus_adaptor(dontpanic_SRCS  

@@ -5,9 +5,9 @@ namespace dp
   // ---------------------------------------------------------------------------------
   Action::Action ()
       : _M_id ( QUuid::createUuid() )
-      , _M_task ( new NullTask() )
-      , _M_project ( new NullProject() )
-      , _M_teamwork ( new NullCollaborationType() )
+      , _M_task ()
+      , _M_project ( )
+      , _M_teamwork ( )
       , _M_name ( "" )
       , _M_comment ( "" )
       , _M_start()
@@ -17,9 +17,9 @@ namespace dp
   // ---------------------------------------------------------------------------------
   Action::Action ( QUuid const& id )
       : _M_id ( id )
-      , _M_task ( new NullTask() )
-      , _M_project ( new NullProject() )
-      , _M_teamwork ( new NullCollaborationType() )
+      , _M_task ( )
+      , _M_project ( )
+      , _M_teamwork ( )
       , _M_name ( "" )
       , _M_comment ( "" )
       , _M_start()
@@ -32,32 +32,32 @@ namespace dp
     return _M_id;
   }
   // ---------------------------------------------------------------------------------
-  Task::ptr Action::task() const
+  QUuid Action::task() const
   {
     return _M_task;
   }
   // ---------------------------------------------------------------------------------
-  void Action::setTask ( Task::ptr t )
+  void Action::setTask ( QUuid t )
   {
     _M_task = t;
   }
   // ---------------------------------------------------------------------------------
-  Project::ptr Action::project() const
+  QUuid Action::project() const
   {
     return _M_project;
   }
   // ---------------------------------------------------------------------------------
-  void Action::setProject ( Project::ptr p )
+  void Action::setProject ( QUuid p )
   {
     _M_project = p;
   }
   // ---------------------------------------------------------------------------------
-  CollaborationType::ptr Action::collaborationType() const
+  QUuid Action::collaborationType() const
   {
     return _M_teamwork;
   }
   // ---------------------------------------------------------------------------------
-  void Action::setCollaborationType ( CollaborationType::ptr ct )
+  void Action::setCollaborationType ( QUuid ct )
   {
     _M_teamwork = ct;
   }

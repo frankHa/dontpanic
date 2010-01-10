@@ -3,6 +3,7 @@
 #include "persistence/sqlite/project.hpp"
 #include "persistence/sqlite/action.hpp"
 #include "persistence/sqlite/task.hpp"
+#include "persistence/sqlite/actiontemplate.hpp"
 #include "libdontpanic/project.hpp"
 #include "libdontpanic/task.hpp"
 //Qt includes
@@ -38,6 +39,12 @@ t_solo_effort INTEGER, t_chargeable INTEGER, t_creation_date TEXT)"
   "CREATE TABLE IF NOT EXISTS ct_collaboration_type \
 (ct_id TEXT PRIMARY KEY, ct_name TEXT, ct_visible INTEGER,\
 ct_creation_date TEXT, ct_solo_effort INTEGER, ct_interrupting INTEGER)"
+
+#define CREATE_TABLE_ACTION_TEMPLATE\
+  "CREATE TABLE IF NOT EXISTS at_action_template \
+(at_id TEXT PRIMARY KEY, at_t_task TEXT references t_task(t_id) , at_p_project INTEGER references p_project(p_id),\
+at_ct_collaboration_type TEXT references ct_collaboration_type(ct_id),\
+at_name TEXT, at_comment TEXT)"
 
 #define CREATE_TABLE_ACTION\
   "CREATE TABLE IF NOT EXISTS a_action \
@@ -117,6 +124,11 @@ namespace dp
         qDebug() << query.lastError();
         return error();
       }
+      if ( !query.exec ( CREATE_TABLE_ACTION_TEMPLATE ) )
+      {
+        qDebug() << query.lastError();
+        return error();
+      }
       if ( !query.exec ( CREATE_TABLE_ACTION ) )
       {
         qDebug() << query.lastError();
@@ -153,6 +165,21 @@ namespace dp
     success Sqlite::findAll(TaskList & _tl) const
     {
       return _sqlite::task().findAll(_tl);
+    }
+    // ---------------------------------------------------------------------------------
+    success Sqlite::persist ( ActionTemplate const& _t ) const
+    {
+      return _sqlite::actionTemplate().persist ( _t );
+    }
+    // ---------------------------------------------------------------------------------
+    success Sqlite::remove ( ActionTemplate const& _t ) const
+    {
+      return _sqlite::actionTemplate().remove ( _t );
+    }
+    // ---------------------------------------------------------------------------------
+    success Sqlite::findAll(TemplateList & _tl) const
+    {
+      return _sqlite::actionTemplate().findAll(_tl);
     }
     // ---------------------------------------------------------------------------------
     success Sqlite::persist ( Action const& _a ) const

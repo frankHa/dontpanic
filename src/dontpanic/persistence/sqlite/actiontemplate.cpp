@@ -1,9 +1,7 @@
-#include <persistence/sqlite/action.hpp>
+#include <persistence/sqlite/actiontemplate.hpp>
 #include "persistence/execute_query.hpp"
-#include <libdontpanic/action.hpp>
+#include <libdontpanic/actiontemplate.hpp>
 
-#include <persistence/sqlite/task.hpp>
-#include <persistence/sqlite/project.hpp>
 #include <QVariant>
 #include <QSqlQuery>
 namespace dp
@@ -14,25 +12,26 @@ namespace dp
     // ---------------------------------------------------------------------------------
     namespace _sqlite
     {
-      const QString INSERT_ACTION =
-        "INSERT INTO a_action(a_id, a_t_task , a_p_project,a_ct_collaboration_type,\
-        a_name, a_comment, a_start, a_end, a_reviewed, a_billed)VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      const QString INSERT_ACTION_TEMPLATE =
+        "INSERT INTO at_action_template(at_id, at_t_task , at_p_project,at_ct_collaboration_type,\
+        at_name, at_comment)VALUES(?, ?, ?, ?, ?, ?)";
       // ---------------------------------------------------------------------------------
-      const QString SELECT_ALL_ACTIONS =
-        "SELECT a_id, a_t_task , a_p_project,a_ct_collaboration_type,\
-        a_name, a_comment, a_start, a_end, a_reviewed, a_billed FROM a_action";
+      const QString REMOVE_ACTION_TEMPLATE = 
+      "DROP FROM at_action_template WHERE (at_id=?)";
       // ---------------------------------------------------------------------------------
-      const QString SELECT_DISTINCT_ACTION =
-        "SELECT DISTINCT a_t_task , a_p_project,a_ct_collaboration_type,\
-        a_name, a_comment, a_start, a_end, a_reviewed, a_billed FROM a_action WHERE (a_id=?)";
+      const QString SELECT_ALL_ACTION_TEMPLATES =
+        "SELECT at_id, at_t_task , at_p_project,at_ct_collaboration_type,\
+        at_name, at_comment FROM at_action_template";
       // ---------------------------------------------------------------------------------
-      const QString UPDATE_ACTION =
-        "UPDATE a_action set a_t_task=?, a_p_project=?,a_ct_collaboration_type=?,\
-        a_name=?, a_comment=?, a_start=?, a_end=?, a_reviewed=?, a_billed=? WHERE (a_id=?)";
+      const QString SELECT_DISTINCT_ACTION_TEMPLATE =
+        "SELECT DISTINCT at_id, at_t_task , at_p_project,at_ct_collaboration_type,\
+        at_name, at_comment FROM at_action_template WHERE (at_id=?)";
       // ---------------------------------------------------------------------------------
-      const QString SELECT_ACTIVE = "SELECT a_id FROM A_ACTION WHERE (a_end = 'NULL')";
+      const QString UPDATE_ACTION_TEMPLATE =
+        "UPDATE at_action_template set at_t_task=?, at_p_project=?,at_ct_collaboration_type=?,\
+        at_name=?, at_comment=? WHERE (at_id=?)";
       // ---------------------------------------------------------------------------------
-      success Action::persist ( dp::Action const&_a ) const
+      success ActionTemplate::persist ( dp::ActionTemplate const&_a ) const
       {
         if ( exists ( _a ) )
         {
@@ -41,14 +40,14 @@ namespace dp
         return insert ( _a );
       }
       // ---------------------------------------------------------------------------------
-      success Action::load ( dp::Action &a ) const
+      success ActionTemplate::load ( dp::ActionTemplate &a ) const
       {
         if ( a.id().isNull() )
         {
           return error();
         }
         QSqlQuery query;
-        query.prepare ( SELECT_DISTINCT_ACTION );
+        query.prepare ( SELECT_DISTINCT_ACTION_TEMPLATE );
         query.addBindValue ( a.id().toString() );
         if ( execute ( query ).has_failed() )
         {
@@ -61,39 +60,53 @@ namespace dp
         return assign_query_values_to_entity ( query, a );
       }
       // ---------------------------------------------------------------------------------
-      Action_ptr Action::findActive() const
+      success ActionTemplate::remove(dp::ActionTemplate const& _a) const
       {
-        QSqlQuery query;
-        query.prepare ( SELECT_ACTIVE );
-        if ( execute ( query ).has_failed() )
+	if ( _a.id().isNull())
         {
-          qWarning() << "query SELECT_ACTIVE failed";
-          return Action_ptr();
+          return error();
         }
-        if ( !query.first() )
+	if(!exists(_a))
+	{
+	    return successful();
+	}
+	QSqlQuery query;
+	query.prepare(REMOVE_ACTION_TEMPLATE);
+	query.addBindValue(_a.id().toString());
+	if(execute(query).has_failed())
+	{
+	  return error();
+	}
+	return successful();
+      }
+      // ---------------------------------------------------------------------------------
+      success ActionTemplate::findAll(dp::TemplateList &l) const
+      {
+	QSqlQuery query;
+	query.prepare(SELECT_ALL_ACTION_TEMPLATES);
+	if ( execute ( query ).has_failed() )
         {
-          qWarning() << "no active action found";
-          return Action_ptr();
+          return error();
         }
-        QUuid const&id = query.value ( 0 ).toString();
-        Action_ptr _a ( new dp::Action ( id ) );
-        if ( load ( *_a ).has_failed() )
+        while ( query.next() )
         {
-          qWarning() << "loading the active action [" << id.toString() << "]has failed";
+	  dp::ActionTemplate _p(QUuid(query.value(0).toString()));
+	  assign_query_values_to_entity(query, _p);
+	  l.append(_p);
         }
-        return _a;
+        return successful();
       }
       // ---------------------------------------------------------------------------------
       //private stuff:
       // ---------------------------------------------------------------------------------
-      bool Action::exists ( dp::Action const& _a ) const
+      bool ActionTemplate::exists ( dp::ActionTemplate const& _a ) const
       {
         if ( _a.id().isNull() )
         {
           return false;
         }
         QSqlQuery query;
-        query.prepare ( SELECT_DISTINCT_ACTION );
+        query.prepare ( SELECT_DISTINCT_ACTION_TEMPLATE );
         query.addBindValue ( _a.id().toString() );
         if ( execute ( query ).has_failed() )
         {
@@ -102,7 +115,7 @@ namespace dp
         return query.first();
       }
       // ---------------------------------------------------------------------------------
-      success Action::insert ( dp::Action const&_a ) const
+      success ActionTemplate::insert ( dp::ActionTemplate const&_a ) const
       {
         {
           if ( _a.id().isNull() )
@@ -110,17 +123,13 @@ namespace dp
             return error();
           }
           QSqlQuery query;
-          query.prepare ( INSERT_ACTION );
+          query.prepare ( INSERT_ACTION_TEMPLATE );
           query.addBindValue ( _a.id().toString() );
           query.addBindValue ( _a.task().toString() );
           query.addBindValue ( _a.project().toString() );
           query.addBindValue ( _a.collaborationType().toString() );
           query.addBindValue ( _a.name() );
           query.addBindValue ( _a.comment() );
-          bindTimeValue ( query, _a.startTime() );
-          bindTimeValue ( query, _a.endTime() );
-          query.addBindValue ( _a.reviewed() );
-          query.addBindValue ( _a.billed() );
           if ( execute ( query ).has_failed() )
           {
             return error();
@@ -129,44 +138,33 @@ namespace dp
         }
       }
       // ---------------------------------------------------------------------------------
-      success Action::update ( dp::Action const& _a ) const
+      success ActionTemplate::update ( dp::ActionTemplate const& _a ) const
       {
         if ( _a.id().isNull() )
         {
           return error();
         }
         QSqlQuery query;
-        query.prepare ( UPDATE_ACTION );
+        query.prepare ( UPDATE_ACTION_TEMPLATE );
         query.addBindValue ( _a.task().toString() );
         query.addBindValue ( _a.project().toString() );
         query.addBindValue ( _a.collaborationType().toString() );
         query.addBindValue ( _a.name() );
         query.addBindValue ( _a.comment() );
-        bindTimeValue ( query, _a.startTime() );
-        bindTimeValue ( query, _a.endTime() );
-        query.addBindValue ( _a.reviewed() );
-        query.addBindValue ( _a.billed() );
         query.addBindValue ( _a.id().toString() );
         return execute ( query );
       }
       // ---------------------------------------------------------------------------------
-      success Action::assign_query_values_to_entity ( QSqlQuery &query, dp::Action &a ) const
+      success ActionTemplate::assign_query_values_to_entity ( QSqlQuery &query, dp::ActionTemplate &a ) const
       {
         QUuid const& task_id = query.value ( 0 ).toString();
         a.setTask ( task_id );
         QUuid const& project_id = query.value ( 1 ).toString();
         a.setProject ( project_id );
-        QDateTime _start, _end;
         QUuid const& collaboration_id = query.value ( 2 ).toString();
         a.setCollaborationType(collaboration_id);
         a.setName ( query.value ( 3 ).toString() );
         a.setComment ( query.value ( 4 ).toString() );
-        _start.setTime_t ( query.value ( 5 ).toUInt() );
-        a.setStartTime ( _start );
-        _end.setTime_t ( query.value ( 6 ).toUInt() );
-        a.setEndTime ( _end );
-        a.setReviewed ( query.value ( 7 ).toBool() );
-        a.setBilled ( query.value ( 8 ).toBool() );
         return successful();
       }
       // ---------------------------------------------------------------------------------
