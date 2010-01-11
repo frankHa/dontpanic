@@ -36,6 +36,9 @@ qt4_add_dbus_adaptor(dontpanic_SRCS
 qt4_add_dbus_adaptor(dontpanic_SRCS
                     ${DBUS_INTERFACES_PATH}/org.dontpanic.TaskManager.xml
                     taskmanager.h dp::TaskManager)
+qt4_add_dbus_adaptor(dontpanic_SRCS
+                    ${DBUS_INTERFACES_PATH}/org.dontpanic.ActionTemplateManager.xml
+                    actiontemplatemanager.h dp::ActionTemplateManager)
 
 kde4_add_executable(dontpanic ${dontpanic_SRCS})
 target_link_libraries(dontpanic dontpanic_lib ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTSQL_LIBRARY})
@@ -45,6 +48,7 @@ install(TARGETS dontpanic ${INSTALL_TARGETS_DEFAULT_ARGS} )
 if(DP_INSTALL_SYSTEM_FILES)
   dbus_add_activation_service(org.dontpanic.service.in)
   install( FILES
+           ${DBUS_INTERFACES_PATH}/org.dontpanic.ActionTemplateManager.xml
            ${DBUS_INTERFACES_PATH}/org.dontpanic.TimeTracker.xml
            ${DBUS_INTERFACES_PATH}/org.dontpanic.ProjectManager.xml
 	   ${DBUS_INTERFACES_PATH}/org.dontpanic.TaskManager.xml

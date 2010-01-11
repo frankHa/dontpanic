@@ -3,6 +3,7 @@
 
 #include "libdontpanic/dbus.hpp"
 #include "persistencebackend.hpp"
+#include "actiontemplatemanager.h"
 #include "projectmanager.h"
 #include "taskmanager.h"
 #include "timetracker.h"
@@ -30,6 +31,8 @@ class Application::ApplicationPrivate
     // ---------------------------------------------------------------------------------
     bool init_storage_backend();
     // ---------------------------------------------------------------------------------
+    void init_action_template_manager();
+    // ---------------------------------------------------------------------------------
     void init_projectmanager();
     // ---------------------------------------------------------------------------------
     void init_taskmanager();
@@ -46,6 +49,7 @@ class Application::ApplicationPrivate
     dp::TimeTracker *_M_timetracker;
     dp::ProjectManager *_M_projectmanager;
     dp::TaskManager *_M_taskmanager;
+    dp::ActionTemplateManager *_M_action_template_manager;
     // ---------------------------------------------------------------------------------
 };
 // ---------------------------------------------------------------------------------
@@ -80,6 +84,7 @@ void Application::ApplicationPrivate::init()
 {
   register_with_session_bus();
   init_storage_backend();
+  init_action_template_manager();
   init_projectmanager();
   init_taskmanager();
   init_timetracker();
@@ -100,6 +105,12 @@ void Application::ApplicationPrivate::init_taskmanager()
 {
   _M_taskmanager = new dp::TaskManager ( _M_self );
   dp::dbus().register_object ( _M_taskmanager ).at_session_bus().as ( "/TaskManager" );
+}
+// ---------------------------------------------------------------------------------
+void Application::ApplicationPrivate::init_action_template_manager()
+{
+  _M_action_template_manager = new dp::ActionTemplateManager ( _M_self );
+  dp::dbus().register_object ( _M_action_template_manager ).at_session_bus().as ( "/ActionTemplateManager" );
 }
 // ---------------------------------------------------------------------------------
 void Application::ApplicationPrivate::init_timetracker()

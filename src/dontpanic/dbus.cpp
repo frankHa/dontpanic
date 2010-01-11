@@ -2,6 +2,7 @@
 #include "timetrackeradaptor.h"
 #include "projectmanageradaptor.h"
 #include "taskmanageradaptor.h"
+#include "actiontemplatemanageradaptor.h"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -24,6 +25,12 @@ namespace dp
   QDBusAbstractAdaptor* create_dbus_adaptor_for<dp::TaskManager> ( dp::TaskManager *obj )
   {
     return new TaskManagerAdaptor ( obj );
+  }
+  // ---------------------------------------------------------------------------------
+  template<>
+  QDBusAbstractAdaptor* create_dbus_adaptor_for<dp::ActionTemplateManager> ( dp::ActionTemplateManager *obj )
+  {
+    return new ActionTemplateManagerAdaptor ( obj );
   }
   // ---------------------------------------------------------------------------------
 }//dp

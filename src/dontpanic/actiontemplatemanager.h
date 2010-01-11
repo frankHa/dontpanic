@@ -12,7 +12,7 @@ namespace dp
   {
       // ---------------------------------------------------------------------------------
       Q_OBJECT
-      Q_CLASSINFO ( "D-Bus Interface", "org.dontpanic.TemplateManager" )
+      Q_CLASSINFO ( "D-Bus Interface", "org.dontpanic.ActionTemplateManager" )
       // ---------------------------------------------------------------------------------
       signals: 
     void removed(dp::ActionTemplate);
