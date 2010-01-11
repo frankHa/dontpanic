@@ -1,4 +1,5 @@
 #include "libdontpanic/dbus.hpp"
+#include "libdontpanic/dbus_support/actiontemplate.hpp"
 #include "libdontpanic/dbus_support/project.hpp"
 #include "libdontpanic/dbus_support/task.hpp"
 #include "libdontpanic/dbus_support/quuid.h"
@@ -32,6 +33,8 @@ namespace dp
   // ---------------------------------------------------------------------------------
   void DBus::register_dp_custom_types()
   {
+    qDBusRegisterMetaType<dp::ActionTemplate>();
+    qDBusRegisterMetaType<dp::TemplateList>();
     qDBusRegisterMetaType<dp::Project>();
     qDBusRegisterMetaType<dp::ProjectList>();
     qDBusRegisterMetaType<dp::Task>();

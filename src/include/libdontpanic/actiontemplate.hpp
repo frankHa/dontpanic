@@ -12,6 +12,8 @@ namespace dp
   class ActionTemplate
   {
       // ---------------------------------------------------------------------------------
+      friend QDBusArgument const& operator >> ( QDBusArgument const&arg, ActionTemplate & at );
+      // ---------------------------------------------------------------------------------
     public:
       // ---------------------------------------------------------------------------------
       TYPE ( ActionTemplate );

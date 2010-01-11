@@ -9,6 +9,7 @@ set(libdontpanic_SRCS
     leavetype.cpp
     project.cpp
     task.cpp
+    dbus_support/actiontemplate.cpp
     dbus_support/project.cpp
     dbus_support/task.cpp
     dbus_support/quuid.cpp
