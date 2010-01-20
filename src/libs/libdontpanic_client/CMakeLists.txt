@@ -4,11 +4,13 @@
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 set(libdontpanic_client_SRCS
+    actiontemplatemanager.cpp
     projectmanager.cpp
     taskmanager.cpp
    )
 
 qt4_wrap_cpp(libdontpanic_client_SRCS
+	     ../../include/libdontpanic_client/actiontemplatemanager.h
              ../../include/libdontpanic_client/projectmanager.h
 	     ../../include/libdontpanic_client/taskmanager.h
              )

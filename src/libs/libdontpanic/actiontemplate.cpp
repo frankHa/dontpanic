@@ -79,5 +79,14 @@ ActionTemplate::ActionTemplate ( QString const& name )
     _M_comment = comment;
   }
   // ---------------------------------------------------------------------------------
+  bool DP_EXPORT operator == (dp::ActionTemplate const& lhs, dp::ActionTemplate const& rhs)
+  {
+    if(lhs.id().isNull())
+    {
+      return (rhs.id().isNull());
+    }
+    return lhs.id() == rhs.id();
+  }
+  // ---------------------------------------------------------------------------------
 }//dp
 // ---------------------------------------------------------------------------------

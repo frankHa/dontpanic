@@ -31,13 +31,20 @@ namespace dp
     }
 
     Context::Context()
-    :_M_project_manager(new dp::client::ProjectManager())
+    : _M_action_template_manager(new dp::client::ActionTemplateManager())
+    , _M_project_manager(new dp::client::ProjectManager())
     , _M_task_manager(new dp::client::TaskManager()){}
     
     Context::~Context()
     {
+      delete _M_action_template_manager;
       delete _M_project_manager;
       delete _M_task_manager;
+    }
+
+    dp::client::ActionTemplateManager* Context::actionTemplateManager()
+    {
+      return _M_action_template_manager;
     }
 
     dp::client::ProjectManager* Context::projectManager()

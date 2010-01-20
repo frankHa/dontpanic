@@ -22,7 +22,7 @@
 
 #include <QAbstractListModel>
 #include <QStringList>
-#include <libdontpanic/project.hpp>
+#include <libdontpanic/actiontemplate.hpp>
 
 // ---------------------------------------------------------------------------------
 namespace dp
@@ -45,9 +45,9 @@ namespace dp
           // ---------------------------------------------------------------------------------
 	private slots:
 	  // ---------------------------------------------------------------------------------
-	  void stored(dp::Project const&);
+	  void stored(dp::ActionTemplate const&);
 	  // ---------------------------------------------------------------------------------
-	  void removed(dp::Project const&);
+	  void removed(dp::ActionTemplate const&);
 	  // ---------------------------------------------------------------------------------
         public:
           // ---------------------------------------------------------------------------------
@@ -55,29 +55,27 @@ namespace dp
           // ---------------------------------------------------------------------------------
           virtual QVariant headerData ( int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const;
           // ---------------------------------------------------------------------------------
-          virtual int columnCount ( const QModelIndex& parent = QModelIndex() ) const;
-          // ---------------------------------------------------------------------------------
           virtual int rowCount ( const QModelIndex& parent = QModelIndex() ) const;
           // ---------------------------------------------------------------------------------
         private:
           // ---------------------------------------------------------------------------------
           void init_header_data();
           // ---------------------------------------------------------------------------------
-          void init_projects_list();
+          void init_action_templates_list();
 	  // ---------------------------------------------------------------------------------
-	  void subscribe_to_project_manager_signals();
+	  void subscribe_to_action_template_manager_signals();
           // ---------------------------------------------------------------------------------
-	  bool is_already_known(dp::Project const&) const;
+	  bool is_already_known(dp::ActionTemplate const&) const;
 	  // ---------------------------------------------------------------------------------
-	  void added(dp::Project const&);
+	  void added(dp::ActionTemplate const&);
 	  // ---------------------------------------------------------------------------------
-	  void updated(dp::Project const&);
+	  void updated(dp::ActionTemplate const&);
 	  // ---------------------------------------------------------------------------------
         private:
           // ---------------------------------------------------------------------------------
           QStringList _M_headers;
 	  // ---------------------------------------------------------------------------------
-	  ProjectList _M_projects;
+	  TemplateList _M_projects;
           // ---------------------------------------------------------------------------------
       };
       // ---------------------------------------------------------------------------------

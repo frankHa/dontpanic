@@ -36,19 +36,18 @@ namespace dp
           : QAbstractListModel ( parent )
       {
         init_header_data();
-	subscribe_to_project_manager_signals();
-        init_projects_list();	
+	subscribe_to_action_template_manager_signals();
+        init_action_templates_list();	
       }
       // ---------------------------------------------------------------------------------
       QVariant KActionTemplatesListModel::data ( const QModelIndex& index, int role ) const
       {
 	if(!index.isValid())return QVariant();
 	if(role != Qt::DisplayRole) return QVariant();
-	Project const& p = _M_projects.at(index.row());
+	ActionTemplate const& p = _M_projects.at(index.row());
 	switch(index.column())
 	{
 	  case NAME: return p.name();
-	  case DATE: return p.creationDate();
 	  default: return QVariant();
 	}
       }
@@ -66,11 +65,6 @@ namespace dp
         return _M_headers.at ( section );
       }
       // ---------------------------------------------------------------------------------
-      int KActionTemplatesListModel::columnCount ( const QModelIndex& parent ) const
-      {
-        return _M_headers.count();
-      }
-      // ---------------------------------------------------------------------------------
       int KActionTemplatesListModel::rowCount ( const QModelIndex& parent ) const
       {
         return _M_projects.size();
@@ -84,19 +78,19 @@ namespace dp
         << i18n ( "Creation Date" );
       }
       // ---------------------------------------------------------------------------------
-      void KActionTemplatesListModel::init_projects_list()
+      void KActionTemplatesListModel::init_action_templates_list()
       {
-        _M_projects = context()->projectManager()->allProjects();
+        _M_projects = context()->actionTemplateManager()->allActionTemplates();
       }
       // ---------------------------------------------------------------------------------
-      void KActionTemplatesListModel::subscribe_to_project_manager_signals()
+      void KActionTemplatesListModel::subscribe_to_action_template_manager_signals()
       {
-	client::ProjectManager * pm = context()->projectManager();
-        connect(pm, SIGNAL(stored(dp::Project)), this, SLOT(stored(dp::Project const&)));
-	connect(pm, SIGNAL(removed(dp::Project)), this, SLOT(removed(dp::Project const&)));
+	client::ActionTemplateManager * pm = context()->actionTemplateManager();
+        connect(pm, SIGNAL(stored(dp::ActionTemplate)), this, SLOT(stored(dp::ActionTemplate const&)));
+	connect(pm, SIGNAL(removed(dp::ActionTemplate)), this, SLOT(removed(dp::ActionTemplate const&)));
       }
       // ---------------------------------------------------------------------------------
-      void KActionTemplatesListModel::stored(dp::Project const&p)
+      void KActionTemplatesListModel::stored(dp::ActionTemplate const&p)
       {
 	qWarning()<<__FUNCTION__;
 	if(is_already_known(p))
@@ -109,7 +103,7 @@ namespace dp
 	}
       }
       // ---------------------------------------------------------------------------------
-      void KActionTemplatesListModel::removed(dp::Project const&p)
+      void KActionTemplatesListModel::removed(dp::ActionTemplate const&p)
       {
 	int i = _M_projects.indexOf(p);
 	beginRemoveRows(QModelIndex(), i, i);
@@ -117,12 +111,12 @@ namespace dp
 	endRemoveRows();
       }
       // ---------------------------------------------------------------------------------
-      bool KActionTemplatesListModel::is_already_known(dp::Project const&p) const
+      bool KActionTemplatesListModel::is_already_known(dp::ActionTemplate const&p) const
       {
 	return (_M_projects.indexOf(p)!=-1);
       }	  
       // ---------------------------------------------------------------------------------
-      void KActionTemplatesListModel::added(dp::Project const&p)
+      void KActionTemplatesListModel::added(dp::ActionTemplate const&p)
       {
 	int index = _M_projects.size();
 	beginInsertRows(QModelIndex(), index, index);
@@ -130,11 +124,11 @@ namespace dp
 	endInsertRows();
       }	  
       // ---------------------------------------------------------------------------------
-      void KActionTemplatesListModel::updated(dp::Project const&p)
+      void KActionTemplatesListModel::updated(dp::ActionTemplate const&p)
       {
 	int row = _M_projects.indexOf(p);
 	QModelIndex const& i = index(row, NAME);
-	dp::Project _p = _M_projects.at(row);
+	dp::ActionTemplate _p = _M_projects.at(row);
 	_p.setName(p.name());
 	emit dataChanged(i, i);
       }	  

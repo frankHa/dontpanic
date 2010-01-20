@@ -17,51 +17,68 @@
 
 */
 
-#ifndef DP_CORE_CONTEXT_H
-#define DP_CORE_CONTEXT_H
+#ifndef DP_CLIENT_ACTION_TEMPLATE_MANAGER_H
+#define DP_CLIENT_ACTION_TEMPLATE_MANAGER_H
 
-#include <libdontpanic/defines.hpp>
-#include <libdontpanic_client/actiontemplatemanager.h>
-#include <libdontpanic_client/projectmanager.h>
-#include <libdontpanic_client/taskmanager.h>
+#include <libdontpanic/dp_export.hpp>
+#include <QObject>
+#include <libdontpanic/actiontemplate.hpp>
+
+
+class OrgDontpanicActionTemplateManagerInterface;
+namespace org
+{
+  namespace dontpanic
+  {
+    typedef OrgDontpanicActionTemplateManagerInterface ActionTemplateManager;
+  }
+}
 
 
 namespace dp
 {
 
-  namespace core
+  namespace client
   {
 
-    class Context
+    class DP_EXPORT ActionTemplateManager: public QObject
     {
         // ---------------------------------------------------------------------------------
+        Q_OBJECT
+        // ---------------------------------------------------------------------------------	
+      signals:
+	// ---------------------------------------------------------------------------------
+	void stored(dp::ActionTemplate);
+	// ---------------------------------------------------------------------------------
+	void removed(dp::ActionTemplate);
+	// ---------------------------------------------------------------------------------
+	void error(QString);
+	// ---------------------------------------------------------------------------------
       public:
-	// ---------------------------------------------------------------------------------
-	Context();
-	~Context();
-	// ---------------------------------------------------------------------------------
-      public:
-	// ---------------------------------------------------------------------------------
-        dp::client::ActionTemplateManager* actionTemplateManager();
         // ---------------------------------------------------------------------------------
-        dp::client::ProjectManager* projectManager();
+        ActionTemplateManager ( QObject *parent = 0 );
+        ~ActionTemplateManager ( );
+        // ---------------------------------------------------------------------------------
+      public:
+        // ---------------------------------------------------------------------------------
+        void store ( ActionTemplate const& p );
 	// ---------------------------------------------------------------------------------
-	dp::client::TaskManager* taskManager();
+	void remove(ActionTemplate const& p);
+        // ---------------------------------------------------------------------------------
+        TemplateList allActionTemplates();
         // ---------------------------------------------------------------------------------
       private:
 	// ---------------------------------------------------------------------------------
-        dp::client::ActionTemplateManager *_M_action_template_manager;
+	org::dontpanic::ActionTemplateManager *remote();
+	// ---------------------------------------------------------------------------------
+      private:
         // ---------------------------------------------------------------------------------
-        dp::client::ProjectManager *_M_project_manager;
-        // ---------------------------------------------------------------------------------
-	dp::client::TaskManager *_M_task_manager;
+        org::dontpanic::ActionTemplateManager *_M_remote;
         // ---------------------------------------------------------------------------------
     };
-    // ---------------------------------------------------------------------------------
-    Context* context();
-    // ---------------------------------------------------------------------------------
+
   }
 
 }
 
-#endif // DP_CORE_CONTEXT_H
+#endif // DP_CLIENT_PROJECTMANAGER_H
