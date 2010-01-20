@@ -3,6 +3,8 @@
 #########################################################################
 set(dontpanikpart_LIB_SRCS 
     context.cpp 
+    kactiontemplateslist.cpp
+    kactiontemplateslistmodel.cpp
     kprojectstablemodel.cpp
     kprojectstable.cpp
     kactionstablemodel.cpp
