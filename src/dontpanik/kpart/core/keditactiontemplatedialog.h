@@ -19,9 +19,35 @@
 
 #ifndef KEDITACTIONTEMPLATEDIALOG_H
 #define KEDITACTIONTEMPLATEDIALOG_H
-
-class KEditActionTemplateDialog
+#include <QDialog>
+namespace Ui
 {
-};
+  class KEditActionTemplateDialog;
+}
+
+namespace dp
+{
+  
+  namespace core
+  {
+    class KEditActionTemplateDialog
+    : public QDialog
+    {
+      Q_OBJECT
+      public:
+        KEditActionTemplateDialog(QWidget *parent=0);
+        ~KEditActionTemplateDialog();
+      private:
+        void setup_actions();
+        
+      private slots:
+        void accepted();
+        void rejected();
+        
+      private:
+        Ui::KEditActionTemplateDialog *_M_ui;        
+    };
+  }
+}
 
 #endif // KEDITACTIONTEMPLATEDIALOG_H

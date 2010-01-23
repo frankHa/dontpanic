@@ -19,6 +19,10 @@
 
 #include "kactiontemplateslist.h"
 #include "kactiontemplateslistmodel.h"
+#include "keditactiontemplatedialog.h"
+#include <QMenu>
+#include <QContextMenuEvent>
+#include <KAction>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -31,6 +35,26 @@ namespace dp
         , _M_model ( new detail::KActionTemplatesListModel ( this ) )
     {
       setModel ( _M_model );
+      init_menu_actions();
+    }
+    // ---------------------------------------------------------------------------------
+    void KActionTemplatesList::init_menu_actions()
+    {
+      _M_new_action_template = new KAction("Create new Favorite", this);
+      connect(_M_new_action_template, SIGNAL(triggered()), this, SLOT(on_create_new_action_template()));
+    }
+    // ---------------------------------------------------------------------------------
+    void KActionTemplatesList::contextMenuEvent(QContextMenuEvent *evt)
+    {
+      QMenu menu;
+      menu.addAction(_M_new_action_template);
+      menu.exec(evt->globalPos());
+    }
+    // ---------------------------------------------------------------------------------
+    void KActionTemplatesList::on_create_new_action_template()
+    {
+      KEditActionTemplateDialog dlg;
+      dlg.exec();
     }
     // ---------------------------------------------------------------------------------
   }//core

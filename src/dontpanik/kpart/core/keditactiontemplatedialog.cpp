@@ -18,4 +18,35 @@
 */
 
 #include "keditactiontemplatedialog.h"
+#include "ui_keditactiontemplatedialog.h"
 
+namespace dp
+{
+   namespace core
+   {
+     KEditActionTemplateDialog::KEditActionTemplateDialog(QWidget *parent)
+     :QDialog(parent)
+     , _M_ui(new Ui::KEditActionTemplateDialog())
+     {
+       _M_ui->setupUi(this);
+       setup_actions();
+     }
+     
+     KEditActionTemplateDialog::~KEditActionTemplateDialog()
+     {
+       delete _M_ui;
+     }
+     
+     void KEditActionTemplateDialog::setup_actions()
+     {
+     }
+     
+     void KEditActionTemplateDialog::accepted()
+     {
+     }
+     
+     void KEditActionTemplateDialog::rejected()
+     {
+     }
+   }//core
+}//dp
