@@ -9,6 +9,7 @@ set(dontpanikpart_LIB_SRCS
     kprojectstable.cpp
     kactionstablemodel.cpp
     kactionstable.cpp
+    keditactiontemplatedialog.cpp 
     keditprojectdialog.cpp
     kedittaskdialog.cpp
     kprojectsdialog.cpp
@@ -22,6 +23,7 @@ set(dontpanikpart_LIB_SRCS
 
 set(dontpanikpart_LIB_UIS
     ui/kdayview.ui
+    ui/keditactiontemplatedialog.ui
     ui/keditprojectdialog.ui
     ui/kedittaskdialog.ui
     ui/kprojectsdialog.ui
