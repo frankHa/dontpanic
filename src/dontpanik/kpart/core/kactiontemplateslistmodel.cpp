@@ -20,6 +20,7 @@
 #include "kactiontemplateslistmodel.h"
 #include "context.h"
 #include <KLocalizedString>
+#include <KDebug>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -42,14 +43,14 @@ namespace dp
       // ---------------------------------------------------------------------------------
       QVariant KActionTemplatesListModel::data ( const QModelIndex& index, int role ) const
       {
-	if(!index.isValid())return QVariant();
-	if(role != Qt::DisplayRole) return QVariant();
-	ActionTemplate const& p = _M_projects.at(index.row());
-	switch(index.column())
-	{
-	  case NAME: return p.name();
-	  default: return QVariant();
-	}
+        if(!index.isValid())return QVariant();
+        if(role != Qt::DisplayRole) return QVariant();
+        ActionTemplate const& p = _M_projects.at(index.row());
+        switch(index.column())
+        {
+          case NAME: return p.name();
+          default: return QVariant();
+        }
       }
       // ---------------------------------------------------------------------------------
       QVariant KActionTemplatesListModel::headerData ( int section, Qt::Orientation orientation, int role ) const
@@ -68,6 +69,15 @@ namespace dp
       int KActionTemplatesListModel::rowCount ( const QModelIndex& parent ) const
       {
         return _M_projects.size();
+      }
+      // ---------------------------------------------------------------------------------
+      ActionTemplate KActionTemplatesListModel::at(QModelIndex const& index)
+      {
+        if(!index.isValid())
+        {
+          return NullActionTemplate();          
+        }
+        return _M_projects.at(index.row());
       }
       // ---------------------------------------------------------------------------------
       // private stuff:
@@ -92,15 +102,15 @@ namespace dp
       // ---------------------------------------------------------------------------------
       void KActionTemplatesListModel::stored(dp::ActionTemplate const&p)
       {
-	qWarning()<<__FUNCTION__;
-	if(is_already_known(p))
-	{
-	  updated(p);
-	}
-	else
-	{
-	  added(p);
-	}
+        qWarning()<<__FUNCTION__;
+        if(is_already_known(p))
+        {
+          updated(p);
+        }
+        else
+        {
+          added(p);
+        }
       }
       // ---------------------------------------------------------------------------------
       void KActionTemplatesListModel::removed(dp::ActionTemplate const&p)
@@ -127,9 +137,9 @@ namespace dp
       void KActionTemplatesListModel::updated(dp::ActionTemplate const&p)
       {
         int row = _M_projects.indexOf(p);
-        QModelIndex const& i = index(row, NAME);
-        dp::ActionTemplate _p = _M_projects.at(row);
-        _p.setName(p.name());
+        kDebug()<<"updating action template ["<<row<<"]";
+        QModelIndex const& i = index(row);
+        _M_projects.replace(row, p);
         emit dataChanged(i, i);
       }	  
       // ---------------------------------------------------------------------------------

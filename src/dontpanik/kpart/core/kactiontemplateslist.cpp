@@ -42,18 +42,33 @@ namespace dp
     {
       _M_new_action_template = new KAction("Create new Favorite", this);
       connect(_M_new_action_template, SIGNAL(triggered()), this, SLOT(on_create_new_action_template()));
+      _M_edit_selected_action_template = new KAction("Edit", this);
+      connect(_M_edit_selected_action_template, SIGNAL(triggered()), this, SLOT(on_edit_selected_action_template()));
     }
     // ---------------------------------------------------------------------------------
     void KActionTemplatesList::contextMenuEvent(QContextMenuEvent *evt)
     {
       QMenu menu;
       menu.addAction(_M_new_action_template);
-      menu.exec(evt->globalPos());
+      if(this->selectionModel()->hasSelection())
+      {
+        menu.addSeparator();
+        menu.addAction(_M_edit_selected_action_template);
+      }
+      menu.exec(evt->globalPos());      
     }
     // ---------------------------------------------------------------------------------
     void KActionTemplatesList::on_create_new_action_template()
     {
       KEditActionTemplateDialog dlg;
+      dlg.exec();
+    }
+    // ---------------------------------------------------------------------------------
+    void KActionTemplatesList::on_edit_selected_action_template()
+    {
+      ActionTemplate current_selection = _M_model->at(currentIndex());
+      KEditActionTemplateDialog dlg;
+      dlg.setActionTemplate(current_selection);
       dlg.exec();
     }
     // ---------------------------------------------------------------------------------

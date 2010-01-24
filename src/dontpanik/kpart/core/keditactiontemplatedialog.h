@@ -19,15 +19,19 @@
 
 #ifndef KEDITACTIONTEMPLATEDIALOG_H
 #define KEDITACTIONTEMPLATEDIALOG_H
+#include <libdontpanic/defines.hpp>
+#include <libdontpanic/actiontemplate.hpp>
 #include <QDialog>
 namespace Ui
 {
   class KEditActionTemplateDialog;
 }
 
+class QUuid;
+class QComboBox;
+
 namespace dp
 {
-  
   namespace core
   {
     class KEditActionTemplateDialog
@@ -37,6 +41,8 @@ namespace dp
       public:
         KEditActionTemplateDialog(QWidget *parent=0);
         ~KEditActionTemplateDialog();
+      public:
+        void setActionTemplate(ActionTemplate const& at);
       private:
         void setup_actions();
         
@@ -46,11 +52,15 @@ namespace dp
         
       private:
         void init_combo_boxes();
-        void init_projects();
+        void init_template_list();
         void init_tasks();
+        void select_project(QUuid const&);
+        void select_task(QUuid const&);
+        void select(QComboBox *set, QUuid const &id);
         
       private:
-        Ui::KEditActionTemplateDialog *_M_ui;        
+        Ui::KEditActionTemplateDialog *_M_ui;   
+        ActionTemplate _M_current_template;
     };
   }
 }

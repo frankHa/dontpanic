@@ -101,7 +101,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       bool ActionTemplate::exists ( dp::ActionTemplate const& _a ) const
       {
-        if ( _a.id().isNull() )
+        if ( !_a.isValid() )
         {
           return false;
         }

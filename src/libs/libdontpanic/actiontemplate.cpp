@@ -24,6 +24,11 @@ ActionTemplate::ActionTemplate ( QString const& name )
       , _M_project()
       , _M_name(""){}
       // ---------------------------------------------------------------------------------
+      bool ActionTemplate::isValid() const
+      {
+        return !_M_id.isNull();
+      }
+      // ---------------------------------------------------------------------------------
       QUuid ActionTemplate::id() const
   {
     return _M_id;
