@@ -50,8 +50,8 @@ namespace dp
       QString const& name = _M_ui->project_name->text();
       if(!name.isEmpty())
       {
-	dp::Project p(name);
-	context()->projectManager()->store(p);
+        dp::Project p(name);
+        context()->projectManager()->store(p);
       }
     }
     void KEditProjectDialog::rejected()

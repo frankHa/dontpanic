@@ -26,7 +26,7 @@ namespace dp
         "SELECT t_id, t_name, t_solo_effort, t_chargeable, t_creation_date FROM t_task WHERE (t_visible <> 0)";
       // ---------------------------------------------------------------------------------
       const QString SELECT_DISTINCT_TASK =
-        "SELECT DISTINCT t_name, t_solo_effort, t_chargeable, t_creation_date FROM t_task WHERE (t_id=?)";
+      "SELECT DISTINCT t_id, t_name, t_solo_effort, t_chargeable, t_creation_date FROM t_task WHERE (t_id=?)";
       // ---------------------------------------------------------------------------------
       const QString UPDATE_TASK =
         "UPDATE p_project set t_name=?, t_solo_effort=?, t_chargeable=?, t_creation_date=? WHERE (t_id=?)";

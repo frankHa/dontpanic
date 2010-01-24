@@ -82,17 +82,17 @@ namespace dp
       // ---------------------------------------------------------------------------------
       success ActionTemplate::findAll(dp::TemplateList &l) const
       {
-	QSqlQuery query;
-	query.prepare(SELECT_ALL_ACTION_TEMPLATES);
-	if ( execute ( query ).has_failed() )
+        QSqlQuery query;
+        query.prepare(SELECT_ALL_ACTION_TEMPLATES);
+        if ( execute ( query ).has_failed() )
         {
           return error();
         }
         while ( query.next() )
         {
-	  dp::ActionTemplate _p(QUuid(query.value(0).toString()));
-	  assign_query_values_to_entity(query, _p);
-	  l.append(_p);
+          dp::ActionTemplate _p(QUuid(query.value(0).toString()));
+          assign_query_values_to_entity(query, _p);
+          l.append(_p);
         }
         return successful();
       }
@@ -157,14 +157,15 @@ namespace dp
       // ---------------------------------------------------------------------------------
       success ActionTemplate::assign_query_values_to_entity ( QSqlQuery &query, dp::ActionTemplate &a ) const
       {
-        QUuid const& task_id = query.value ( 0 ).toString();
+        //QUuid const& id = query.value ( 0 ).toString();
+        QUuid const& task_id = query.value ( 1 ).toString();
         a.setTask ( task_id );
-        QUuid const& project_id = query.value ( 1 ).toString();
+        QUuid const& project_id = query.value ( 2 ).toString();
         a.setProject ( project_id );
-        QUuid const& collaboration_id = query.value ( 2 ).toString();
+        QUuid const& collaboration_id = query.value ( 3 ).toString();
         a.setCollaborationType(collaboration_id);
-        a.setName ( query.value ( 3 ).toString() );
-        a.setComment ( query.value ( 4 ).toString() );
+        a.setName ( query.value ( 4 ).toString() );
+        a.setComment ( query.value ( 5 ).toString() );
         return successful();
       }
       // ---------------------------------------------------------------------------------

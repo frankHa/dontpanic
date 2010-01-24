@@ -21,6 +21,7 @@
 #include "ui_keditactiontemplatedialog.h"
 #include "context.h"
 #include <QVariant>
+#include <KDebug>
 namespace dp
 {
    namespace core
@@ -41,6 +42,8 @@ namespace dp
      
      void KEditActionTemplateDialog::setup_actions()
      {
+       connect(_M_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accepted()));
+       connect(_M_ui->buttonBox, SIGNAL(rejected()), this, SLOT(rejected()));
      }
      
      void KEditActionTemplateDialog::init_combo_boxes()
@@ -71,10 +74,23 @@ namespace dp
      
      void KEditActionTemplateDialog::accepted()
      {
+       kDebug()<<"";
+       QString const& name = _M_ui->name->text();
+       if(!name.isEmpty())
+       {
+         dp::ActionTemplate t(name);
+         QUuid project(_M_ui->projects->itemData(_M_ui->projects->currentIndex()).toString());
+         QUuid task(_M_ui->worktype->itemData(_M_ui->projects->currentIndex()).toString());
+         t.setProject(project);
+         t.setTask(task);
+         t.setComment(_M_ui->comment->text());
+         context()->actionTemplateManager()->store(t);
+       }
      }
      
      void KEditActionTemplateDialog::rejected()
      {
+       close();
      }
    }//core
 }//dp
