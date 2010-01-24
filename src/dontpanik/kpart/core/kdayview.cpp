@@ -32,11 +32,22 @@ namespace dp
     {
       _M_ui->setupUi ( this );
       _M_ui->main_splitter->setSizes ( QList<int>() << 100 << 500 );
+      setup_actions();
     }
     // ---------------------------------------------------------------------------------
     KDayView::~KDayView()
     {
       delete _M_ui;
+    }
+    // ---------------------------------------------------------------------------------
+    void KDayView::setup_actions()
+    {
+      connect(_M_ui->today_button, SIGNAL(pressed()), this, SLOT(on_today_pressed()));
+    }
+    // ---------------------------------------------------------------------------------
+    void KDayView::on_today_pressed()
+    {
+      _M_ui->calendar->setSelectedDate(QDate::currentDate());
     }
     // ---------------------------------------------------------------------------------
   }//core
