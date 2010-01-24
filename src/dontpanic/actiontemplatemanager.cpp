@@ -17,11 +17,11 @@ namespace dp
        }
   }
   // ---------------------------------------------------------------------------------
-  void ActionTemplateManager::remove(ActionTemplate const& p)
+  void ActionTemplateManager::remove(ActionTemplate const& at)
   {
-    if(persistence().remove(p).was_successful())
+    if(persistence().remove(at).was_successful())
     {
-      emit removed(p);
+      emit removed(at);
     }
   }
   // ---------------------------------------------------------------------------------

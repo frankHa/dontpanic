@@ -4,6 +4,7 @@
 
 #include <QVariant>
 #include <QSqlQuery>
+#include <KDebug>
 namespace dp
 {
   // ---------------------------------------------------------------------------------
@@ -17,7 +18,7 @@ namespace dp
         at_name, at_comment, at_icon)VALUES(?, ?, ?, ?, ?, ?, ?)";
       // ---------------------------------------------------------------------------------
       const QString REMOVE_ACTION_TEMPLATE = 
-      "DROP FROM at_action_template WHERE (at_id=?)";
+      "DELETE FROM at_action_template WHERE (at_id=?)";
       // ---------------------------------------------------------------------------------
       const QString SELECT_ALL_ACTION_TEMPLATES =
         "SELECT at_id, at_t_task , at_p_project,at_ct_collaboration_type,\
@@ -62,22 +63,23 @@ namespace dp
       // ---------------------------------------------------------------------------------
       success ActionTemplate::remove(dp::ActionTemplate const& _a) const
       {
-	if ( _a.id().isNull())
+        kDebug()<<_a.id().toString();
+        if ( !_a.isValid())
         {
           return error();
         }
-	if(!exists(_a))
-	{
-	    return successful();
-	}
-	QSqlQuery query;
-	query.prepare(REMOVE_ACTION_TEMPLATE);
-	query.addBindValue(_a.id().toString());
-	if(execute(query).has_failed())
-	{
-	  return error();
-	}
-	return successful();
+        if(!exists(_a))
+        {
+          return successful();
+        }
+        QSqlQuery query;
+        query.prepare(REMOVE_ACTION_TEMPLATE);
+        query.addBindValue(_a.id().toString());
+        if(execute(query).has_failed())
+        {
+          return error();
+        }
+        return successful();
       }
       // ---------------------------------------------------------------------------------
       success ActionTemplate::findAll(dp::TemplateList &l) const

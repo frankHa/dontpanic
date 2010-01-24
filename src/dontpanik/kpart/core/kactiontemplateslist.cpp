@@ -20,9 +20,12 @@
 #include "kactiontemplateslist.h"
 #include "kactiontemplateslistmodel.h"
 #include "keditactiontemplatedialog.h"
+#include "context.h"
 #include <QMenu>
 #include <QContextMenuEvent>
 #include <KAction>
+#include <KMessageBox>
+#include <KDebug>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -44,6 +47,8 @@ namespace dp
       connect(_M_new_action_template, SIGNAL(triggered()), this, SLOT(on_create_new_action_template()));
       _M_edit_selected_action_template = new KAction("Edit", this);
       connect(_M_edit_selected_action_template, SIGNAL(triggered()), this, SLOT(on_edit_selected_action_template()));
+      _M_remove_selected_action_template = new KAction("Remove", this);
+      connect(_M_remove_selected_action_template, SIGNAL(triggered()), this, SLOT(on_remove_selected_action_template()));
     }
     // ---------------------------------------------------------------------------------
     void KActionTemplatesList::contextMenuEvent(QContextMenuEvent *evt)
@@ -54,6 +59,7 @@ namespace dp
       {
         menu.addSeparator();
         menu.addAction(_M_edit_selected_action_template);
+        menu.addAction(_M_remove_selected_action_template);
       }
       menu.exec(evt->globalPos());      
     }
@@ -70,6 +76,16 @@ namespace dp
       KEditActionTemplateDialog dlg;
       dlg.setActionTemplate(current_selection);
       dlg.exec();
+    }
+    // ---------------------------------------------------------------------------------
+    void KActionTemplatesList::on_remove_selected_action_template()
+    {
+      ActionTemplate current_selection = _M_model->at(currentIndex());  
+      if(KMessageBox::questionYesNo(this, "Do you really want to remove the selected favorite definition?", "Remove Favorite")==KMessageBox::Yes)
+      {
+        kDebug()<<"attempting to delete action template "<<current_selection.id().toString();
+        context()->actionTemplateManager()->remove(current_selection);
+      }
     }
     // ---------------------------------------------------------------------------------
   }//core

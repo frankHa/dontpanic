@@ -27,19 +27,19 @@ namespace dp
       template<typename T>
       success persist ( T const&_t )
       {
-	return _persistence::sqlite().persist ( _t );
+        return _persistence::sqlite().persist ( _t );
       }
       // ---------------------------------------------------------------------------------
       template<typename T>
       success remove (T const& _t)
       {
-	return _persistence::sqlite().remove(_t);
+        return _persistence::sqlite().remove(_t);
       }
       // ---------------------------------------------------------------------------------
       template<typename ListT>
       success findAll(ListT & _l)
       {
-	return _persistence::sqlite().findAll(_l);
+        return _persistence::sqlite().findAll(_l);
       }
       // ---------------------------------------------------------------------------------
       Action_ptr activeAction();

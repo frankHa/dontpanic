@@ -32,7 +32,7 @@ namespace dp
         "UPDATE p_project set t_name=?, t_solo_effort=?, t_chargeable=?, t_creation_date=? WHERE (t_id=?)";
       // ---------------------------------------------------------------------------------
       const QString REMOVE_TASK = 
-	"UPDATE t_task set(t_visible=0) WHERE (t_id=?)";
+      "DELETE FROM t_task WHERE (t_id=?)";
 	// ---------------------------------------------------------------------------------
       // public stuff:
       // ---------------------------------------------------------------------------------

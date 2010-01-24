@@ -54,8 +54,8 @@ namespace dp
       reply.waitForFinished();
       if(reply.isError())
       {
-	qWarning()<<reply.error();
-	emit error(QDBusError::errorString(reply.error().type()));
+        qWarning()<<reply.error();
+        emit error(QDBusError::errorString(reply.error().type()));
       }
     }
     // ---------------------------------------------------------------------------------

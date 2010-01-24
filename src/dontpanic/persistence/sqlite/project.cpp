@@ -26,7 +26,7 @@ namespace dp
         "UPDATE p_project set(p_name=?, p_creation_date=?) WHERE (p_id=?)";
 	// ---------------------------------------------------------------------------------
 	const QString REMOVE_PROJECT = 
-	"UPDATE p_project set(p_visible=0) WHERE (p_id=?)";
+	"DELETE FROM p_project WHERE (p_id=?)";
       // ---------------------------------------------------------------------------------
       // public stuff:
       // ---------------------------------------------------------------------------------
