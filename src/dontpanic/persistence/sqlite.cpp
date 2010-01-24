@@ -44,7 +44,7 @@ ct_creation_date TEXT, ct_solo_effort INTEGER, ct_interrupting INTEGER)"
   "CREATE TABLE IF NOT EXISTS at_action_template \
 (at_id TEXT PRIMARY KEY, at_t_task TEXT references t_task(t_id) , at_p_project INTEGER references p_project(p_id),\
 at_ct_collaboration_type TEXT references ct_collaboration_type(ct_id),\
-at_name TEXT, at_comment TEXT)"
+at_name TEXT, at_comment TEXT, at_icon TEXT)"
 
 #define CREATE_TABLE_ACTION\
   "CREATE TABLE IF NOT EXISTS a_action \

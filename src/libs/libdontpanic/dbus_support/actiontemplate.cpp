@@ -11,8 +11,9 @@ namespace dp
     QString ct;
     QString name;
     QString comment;
+    QString icon;
     arg.beginStructure();
-    arg >> uuid >> task >> project >> ct >> name >> comment;
+    arg >> uuid >> task >> project >> ct >> name >> comment>>icon;
     arg.endStructure();
     at._M_id = uuid;
     at.setTask ( task );
@@ -20,6 +21,7 @@ namespace dp
     at.setCollaborationType( ct );
     at.setName(name);
     at.setComment(comment);
+    at.setIcon(icon);
     return arg;
   }
 // ---------------------------------------------------------------------------------
@@ -28,7 +30,7 @@ namespace dp
     arg.beginStructure();
     arg << at.id().toString() << at.task().toString()
     << at.project().toString()
-    << at.collaborationType().toString() << at.name()<<at.comment();
+    << at.collaborationType().toString() << at.name()<<at.comment()<<at.icon();
     arg.endStructure();
     return arg;
   }

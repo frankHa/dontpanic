@@ -14,22 +14,22 @@ namespace dp
     {
       const QString INSERT_ACTION_TEMPLATE =
         "INSERT INTO at_action_template(at_id, at_t_task , at_p_project,at_ct_collaboration_type,\
-        at_name, at_comment)VALUES(?, ?, ?, ?, ?, ?)";
+        at_name, at_comment, at_icon)VALUES(?, ?, ?, ?, ?, ?, ?)";
       // ---------------------------------------------------------------------------------
       const QString REMOVE_ACTION_TEMPLATE = 
       "DROP FROM at_action_template WHERE (at_id=?)";
       // ---------------------------------------------------------------------------------
       const QString SELECT_ALL_ACTION_TEMPLATES =
         "SELECT at_id, at_t_task , at_p_project,at_ct_collaboration_type,\
-        at_name, at_comment FROM at_action_template";
+        at_name, at_comment, at_icon FROM at_action_template";
       // ---------------------------------------------------------------------------------
       const QString SELECT_DISTINCT_ACTION_TEMPLATE =
         "SELECT DISTINCT at_id, at_t_task , at_p_project,at_ct_collaboration_type,\
-        at_name, at_comment FROM at_action_template WHERE (at_id=?)";
+        at_name, at_comment, at_icon FROM at_action_template WHERE (at_id=?)";
       // ---------------------------------------------------------------------------------
       const QString UPDATE_ACTION_TEMPLATE =
         "UPDATE at_action_template set at_t_task=?, at_p_project=?,at_ct_collaboration_type=?,\
-        at_name=?, at_comment=? WHERE (at_id=?)";
+        at_name=?, at_comment=?, at_icon=? WHERE (at_id=?)";
       // ---------------------------------------------------------------------------------
       success ActionTemplate::persist ( dp::ActionTemplate const&_a ) const
       {
@@ -130,6 +130,7 @@ namespace dp
           query.addBindValue ( _a.collaborationType().toString() );
           query.addBindValue ( _a.name() );
           query.addBindValue ( _a.comment() );
+          query.addBindValue ( _a.icon() );
           if ( execute ( query ).has_failed() )
           {
             return error();
@@ -151,6 +152,7 @@ namespace dp
         query.addBindValue ( _a.collaborationType().toString() );
         query.addBindValue ( _a.name() );
         query.addBindValue ( _a.comment() );
+        query.addBindValue ( _a.icon() );
         query.addBindValue ( _a.id().toString() );
         return execute ( query );
       }
@@ -166,6 +168,7 @@ namespace dp
         a.setCollaborationType(collaboration_id);
         a.setName ( query.value ( 4 ).toString() );
         a.setComment ( query.value ( 5 ).toString() );
+        a.setIcon ( query.value ( 6 ).toString() );
         return successful();
       }
       // ---------------------------------------------------------------------------------

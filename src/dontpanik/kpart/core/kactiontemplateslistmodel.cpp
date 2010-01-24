@@ -21,6 +21,8 @@
 #include "context.h"
 #include <KLocalizedString>
 #include <KDebug>
+#include <KIconLoader>
+#include <QPixmap>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -44,7 +46,16 @@ namespace dp
       QVariant KActionTemplatesListModel::data ( const QModelIndex& index, int role ) const
       {
         if(!index.isValid())return QVariant();
-        if(role != Qt::DisplayRole) return QVariant();
+        if(role != Qt::DisplayRole)
+        {
+          if(role == Qt::DecorationRole)
+          {
+            ActionTemplate const& p = _M_projects.at(index.row());
+            KIconLoader loader;
+            return QVariant(loader.loadIcon(p.icon(), KIconLoader::NoGroup));
+          }
+          return QVariant();
+        }
         ActionTemplate const& p = _M_projects.at(index.row());
         switch(index.column())
         {
@@ -56,7 +67,7 @@ namespace dp
       QVariant KActionTemplatesListModel::headerData ( int section, Qt::Orientation orientation, int role ) const
       {
         if ( role != Qt::DisplayRole )
-        {
+        {          
           return QVariant();
         }
         if ( orientation != Qt::Horizontal )

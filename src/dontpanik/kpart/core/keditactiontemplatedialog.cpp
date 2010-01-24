@@ -48,6 +48,7 @@ namespace dp
        _M_current_template = at;
        _M_ui->name->setText(at.name());
        _M_ui->comment->setText(at.comment());
+       _M_ui->icon->setIcon(at.icon());
        select_project(at.project());
        select_task(at.task());
      }
@@ -120,6 +121,7 @@ namespace dp
          t.setProject(project);
          t.setTask(task);
          t.setComment(_M_ui->comment->text());
+         t.setIcon(_M_ui->icon->icon());
          context()->actionTemplateManager()->store(t);
        }
      }
