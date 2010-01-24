@@ -19,7 +19,8 @@
 
 #include "keditactiontemplatedialog.h"
 #include "ui_keditactiontemplatedialog.h"
-
+#include "context.h"
+#include <QVariant>
 namespace dp
 {
    namespace core
@@ -30,6 +31,7 @@ namespace dp
      {
        _M_ui->setupUi(this);
        setup_actions();
+       init_combo_boxes();
      }
      
      KEditActionTemplateDialog::~KEditActionTemplateDialog()
@@ -39,6 +41,32 @@ namespace dp
      
      void KEditActionTemplateDialog::setup_actions()
      {
+     }
+     
+     void KEditActionTemplateDialog::init_combo_boxes()
+     {
+       init_projects();
+       init_tasks();
+     }
+     
+     void KEditActionTemplateDialog::init_projects()
+     {
+       ProjectList projects = context()->projectManager()->allProjects();
+       ProjectList::const_iterator it;
+       for(it=projects.begin();it!=projects.end();++it)
+       {
+         _M_ui->projects->addItem(it->name(), it->id().toString());
+       }
+     }
+     
+     void KEditActionTemplateDialog::init_tasks()
+     {
+       TaskList tasks = context()->taskManager()->allTasks();
+       TaskList::const_iterator it;
+       for(it=tasks.begin();it!=tasks.end();++it)
+       {
+         _M_ui->worktype->addItem(it->name(), it->id().toString());
+       }
      }
      
      void KEditActionTemplateDialog::accepted()

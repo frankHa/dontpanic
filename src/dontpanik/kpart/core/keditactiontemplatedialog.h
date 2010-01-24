@@ -45,6 +45,11 @@ namespace dp
         void rejected();
         
       private:
+        void init_combo_boxes();
+        void init_projects();
+        void init_tasks();
+        
+      private:
         Ui::KEditActionTemplateDialog *_M_ui;        
     };
   }
