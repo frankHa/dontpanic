@@ -31,6 +31,7 @@ namespace dp
      , _M_ui(new Ui::KEditActionTemplateDialog())
      {
        _M_ui->setupUi(this);
+       _M_ui->icon->setIconType(KIconLoader::NoGroup, KIconLoader::Emote);
        setup_actions();
        init_combo_boxes();
      }
