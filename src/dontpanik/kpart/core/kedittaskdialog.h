@@ -20,7 +20,7 @@
 #ifndef DP_CORE_KEDITTASKDIALOG_H
 #define DP_CORE_KEDITTASKDIALOG_H
 
-#include <qt4/QtGui/QDialog>
+#include <QDialog>
 
 
 namespace Ui
