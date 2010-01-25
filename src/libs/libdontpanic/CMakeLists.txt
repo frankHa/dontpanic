@@ -9,10 +9,12 @@ set(libdontpanic_SRCS
     leavetype.cpp
     project.cpp
     task.cpp
+    dbus_support/action.cpp
     dbus_support/actiontemplate.cpp
     dbus_support/project.cpp
     dbus_support/task.cpp
-    dbus_support/quuid.cpp
+    dbus_support/qdatetime.cpp
+    dbus_support/quuid.cpp    
    )
 
 kde4_add_library(dontpanic_lib STATIC ${libdontpanic_SRCS})

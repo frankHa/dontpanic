@@ -20,6 +20,8 @@
 #ifndef DP_DETAIL_KACTIONSTABLEMODEL_H
 #define DP_DETAIL_KACTIONSTABLEMODEL_H
 
+#include <libdontpanic/defines.hpp>
+#include <libdontpanic/action.hpp>
 #include <QAbstractTableModel>
 #include <QStringList>
 
@@ -67,6 +69,8 @@ namespace dp
         private:
           // ---------------------------------------------------------------------------------
           QStringList _M_headers;
+          // ---------------------------------------------------------------------------------
+          ActionList _M_actions;
           // ---------------------------------------------------------------------------------
       };
       // ---------------------------------------------------------------------------------

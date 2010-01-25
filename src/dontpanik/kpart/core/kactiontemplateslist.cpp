@@ -26,6 +26,7 @@
 #include <KAction>
 #include <KMessageBox>
 #include <KDebug>
+#include <KLocalizedString>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -89,7 +90,7 @@ namespace dp
     void KActionTemplatesList::on_remove_selected_action_template()
     {
       ActionTemplate current_selection = _M_model->at(currentIndex());  
-      if(KMessageBox::questionYesNo(this, "Do you really want to remove the selected favorite definition?", "Remove Favorite")==KMessageBox::Yes)
+      if(KMessageBox::questionYesNo(this, i18n("Do you really want to remove the selected favorite definition?"), i18n("Remove Favorite"))==KMessageBox::Yes)
       {
         kDebug()<<"attempting to delete action template "<<current_selection.id().toString();
         context()->actionTemplateManager()->remove(current_selection);

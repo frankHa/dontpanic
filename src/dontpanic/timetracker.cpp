@@ -43,6 +43,11 @@ namespace dp
     _M_current_action = NullAction();
   }
   // ---------------------------------------------------------------------------------
+  ActionList TimeTracker::findAll(QDateTime const& from, QDateTime const& to)
+  {
+    return ActionList();
+  }
+  // ---------------------------------------------------------------------------------
   //private stuff:
   // ---------------------------------------------------------------------------------
   void TimeTracker::init()

@@ -25,6 +25,16 @@ namespace dp
     }
   }
   // ---------------------------------------------------------------------------------
+  Project ProjectManager::load(QUuid const& id)
+  {
+    Project p(id);
+    if(persistence().load(p).was_successful())
+    {
+      return p;
+    }
+    return NullProject();
+  }
+  // ---------------------------------------------------------------------------------
   ProjectList ProjectManager::allProjects()
   {
     ProjectList list;

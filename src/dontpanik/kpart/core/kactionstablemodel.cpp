@@ -18,6 +18,7 @@
 */
 
 #include "kactionstablemodel.h"
+#include "context.h"
 #include <KLocalizedString>
 // ---------------------------------------------------------------------------------
 namespace dp
@@ -28,6 +29,7 @@ namespace dp
     // ---------------------------------------------------------------------------------
     namespace detail
     {
+      enum column{START, END, TITLE, TYPE, PROJECT, COMMENT};
       // ---------------------------------------------------------------------------------
       KActionsTableModel::KActionsTableModel ( QObject *parent )
           : QAbstractTableModel ( parent )
@@ -37,7 +39,19 @@ namespace dp
       // ---------------------------------------------------------------------------------
       QVariant KActionsTableModel::data ( const QModelIndex& index, int role ) const
       {
-        return QVariant();
+        if(role != Qt::DisplayRole) return QVariant();
+        if(!index.isValid())return QVariant();
+        Action const&a = _M_actions.value(index.row());
+        switch(index.column())
+        {
+          case START: return a.startTime();
+          case END:   return a.endTime();
+          case TITLE: return a.name();
+          case TYPE:  return a.task().toString();
+          case PROJECT: return context()->projectManager()->load(a.project()).name();
+          case COMMENT: return a.comment();
+          default: return QVariant();
+        }
       }
       // ---------------------------------------------------------------------------------
       int KActionsTableModel::columnCount ( const QModelIndex& parent ) const
@@ -47,7 +61,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       int KActionsTableModel::rowCount ( const QModelIndex& parent ) const
       {
-        return 0;
+        return _M_actions.count();
       }
       // ---------------------------------------------------------------------------------
       bool KActionsTableModel::setData ( const QModelIndex& index, const QVariant& value, int role )

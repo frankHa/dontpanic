@@ -147,6 +147,11 @@ namespace dp
       return _sqlite::project().remove ( _project );
     }
     // ---------------------------------------------------------------------------------
+    success Sqlite::load ( Project & _project ) const
+    {
+      return _sqlite::project().load ( _project );
+    }
+    // ---------------------------------------------------------------------------------
     success Sqlite::findAll(ProjectList & _pl) const
     {
       return _sqlite::project().findAll(_pl);

@@ -13,5 +13,13 @@
       <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::ActionTemplate"/>
       <arg type="(si)" />
     </method>
+    <method name="findAll">
+      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="QDateTime"/>
+      <arg type="(si)" direction="in"/>
+      <annotation name="com.trolltech.QtDBus.QtTypeName.In1" value="QDateTime"/>
+      <arg type="(si)" direction="in"/>
+      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="dp::ActionList"/>
+      <arg type="(si)" direction="out" />
+    </method>
   </interface>
 </node>

@@ -36,6 +36,12 @@ namespace dp
         return _persistence::sqlite().remove(_t);
       }
       // ---------------------------------------------------------------------------------
+      template<typename T>
+      success load (T & _t)
+      {
+        return _persistence::sqlite().remove(_t);
+      }
+      // ---------------------------------------------------------------------------------
       template<typename ListT>
       success findAll(ListT & _l)
       {
