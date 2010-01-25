@@ -3,13 +3,12 @@
 
 #include <libdontpanic/defines.hpp>
 #include <libdontpanic/action.hpp>
+#include <libdontpanic/actiontemplate.hpp>
 #include <QObject>
 
 class QUuid;
 namespace dp
 {
-  // ---------------------------------------------------------------------------------
-  class ActionTemplate;
   // ---------------------------------------------------------------------------------
   class TimeTracker: public QObject
   {
@@ -25,7 +24,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       void startNewAction();
       // ---------------------------------------------------------------------------------
-      void startNewActionFrom ( ActionTemplate const& _template );
+      void startNewActionFromTemplate ( ActionTemplate const& _template );
       void startNewActionFromTemplate(QUuid const& _template_id);
       // ---------------------------------------------------------------------------------
       void stopCurrentAction();
@@ -33,6 +32,8 @@ namespace dp
       private:
       // ---------------------------------------------------------------------------------
       void init();
+      // ---------------------------------------------------------------------------------
+      void start_action(Action const& a);
       // ---------------------------------------------------------------------------------
     private:
       // ---------------------------------------------------------------------------------

@@ -69,6 +69,7 @@ namespace dp
     {
       ActionTemplate const& at = _M_model->at(index);
       kDebug()<<"starting action from template "<<at.id().toString();
+      context()->timeTracker()->startActionFromTemplate(at);
     }
     // ---------------------------------------------------------------------------------
     void KActionTemplatesList::on_create_new_action_template()

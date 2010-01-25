@@ -14,19 +14,16 @@ namespace dp
   // ---------------------------------------------------------------------------------
   void TimeTracker::startNewAction()
   {
-    qDebug() << __FUNCTION__;
-    if ( _M_current_action.isValid())
-    {
-      stopCurrentAction();
-    }
-    _M_current_action = Action();
-    _M_current_action.setStartTime ( QDateTime::currentDateTime().toUTC() );
-    persistence().persist ( _M_current_action );
+     start_action(Action());
   }
   // ---------------------------------------------------------------------------------
-  void TimeTracker::startNewActionFrom ( ActionTemplate const& _template )
+  void TimeTracker::startNewActionFromTemplate ( ActionTemplate const& _template )
   {
     qDebug() << __FUNCTION__;
+    Action a;
+    a.setProject(_template.project());
+    a.setTask(_template.task());
+    start_action(a);
   }
   // ---------------------------------------------------------------------------------
   void TimeTracker::startNewActionFromTemplate ( QUuid const& _template_id )
@@ -51,6 +48,18 @@ namespace dp
   void TimeTracker::init()
   {
     _M_current_action = persistence().activeAction();
+  }
+  // ---------------------------------------------------------------------------------
+  void TimeTracker::start_action(Action const& _a)
+  {
+    qDebug() << __FUNCTION__;
+    if ( _M_current_action.isValid())
+    {
+      stopCurrentAction();
+    }
+    _M_current_action = _a;
+    _M_current_action.setStartTime ( QDateTime::currentDateTime().toUTC() );
+    persistence().persist ( _M_current_action );
   }
   // ---------------------------------------------------------------------------------
 }//dp

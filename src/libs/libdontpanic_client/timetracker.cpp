@@ -18,6 +18,7 @@
 */
 
 #include "libdontpanic_client/timetracker.h"
+#include <libdontpanic/actiontemplate.hpp>
 #include <QDBusConnection>
 #include <KDebug>
 #include <remote_timetracker.h>
@@ -32,6 +33,17 @@ namespace dp
         ,_M_remote(0) {}
     // ---------------------------------------------------------------------------------
     TimeTracker::~TimeTracker ( ){}
+    // ---------------------------------------------------------------------------------
+    void TimeTracker::startActionFromTemplate(ActionTemplate const& t)
+    {
+      QDBusPendingReply<> reply =remote()->startNewActionFromTemplate(t);
+      reply.waitForFinished();
+      if(reply.isError())
+      {
+        qWarning()<<reply.error();
+        emit error(QDBusError::errorString(reply.error().type()));
+      }
+    }
     // ---------------------------------------------------------------------------------
     org::dontpanic::TimeTracker* TimeTracker::remote()
     {
