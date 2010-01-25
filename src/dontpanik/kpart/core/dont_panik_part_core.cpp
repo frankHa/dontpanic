@@ -5,6 +5,7 @@
 #include <QTextEdit>
 #include <QTextStream>
 #include <QFile>
+#include "context.h"
 #include "kmainwidget.h"
 #include "kprojectsdialog.h"
 #include "ktasksdialog.h"
@@ -38,6 +39,11 @@ namespace dp
     {
       KTasksDialog dlg ( widget() );
       dlg.exec();
+    }
+    // ---------------------------------------------------------------------------------
+    void dont_panik_core::stopCurrentAction()
+    {
+      context()->timeTracker()->stopCurrentAction();
     }
     // ---------------------------------------------------------------------------------
     bool dont_panik_core::openFile()

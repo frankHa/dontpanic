@@ -54,6 +54,11 @@ DontPanikPart::DontPanikPart ( QWidget *parentWidget, QObject *parent, const QSt
   edit_tasks->setText ( i18n ( "Edit Tasks/Worktypes" ) );
   actionCollection()->addAction ( "edit_tasks", edit_tasks );
   connect ( edit_tasks, SIGNAL ( triggered() ), this, SLOT ( editTasks() ) );
+  
+  KAction *stop_current_action = new KAction(this);
+  stop_current_action->setText(i18n("Stop current Action"));
+  actionCollection()->addAction ( "stop_current_action", stop_current_action );
+  connect ( stop_current_action, SIGNAL ( triggered() ), this, SLOT ( stopCurrentAction() ) );
 
   // set our XML-UI resource file
   setXMLFile ( "dontpanik_part.rc" );
@@ -115,6 +120,11 @@ void DontPanikPart::editProjects()
 void DontPanikPart::editTasks()
 {
   _M_core->editTasks();
+}
+
+void DontPanikPart::stopCurrentAction()
+{
+  _M_core->stopCurrentAction();
 }
 
 //void DontPanikPart::fileSaveAs()

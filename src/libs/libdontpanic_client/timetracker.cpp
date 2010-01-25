@@ -45,6 +45,17 @@ namespace dp
       }
     }
     // ---------------------------------------------------------------------------------
+    void TimeTracker::stopCurrentAction()
+    {
+      QDBusPendingReply<> reply =remote()->stopCurrentAction();
+      reply.waitForFinished();
+      if(reply.isError())
+      {
+        qWarning()<<reply.error();
+        emit error(QDBusError::errorString(reply.error().type()));
+      }
+    }
+    // ---------------------------------------------------------------------------------
     org::dontpanic::TimeTracker* TimeTracker::remote()
     {
       if(_M_remote == 0)

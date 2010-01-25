@@ -5,6 +5,9 @@
     <Action name="edit_projects" />
     <Action name="edit_tasks" />
   </Menu>
+  <Menu name="action">
+    <Action name="stop_current_action" />
+  </Menu>
 </MenuBar>
 <ToolBar name="mainToolBar">
  <Separator/>

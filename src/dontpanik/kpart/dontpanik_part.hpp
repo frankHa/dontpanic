@@ -53,6 +53,7 @@ class DontPanikPart : public KParts::ReadOnlyPart
     //void fileSaveAs();
     void editProjects();
     void editTasks();
+    void stopCurrentAction();
 
   private:
     dp::core::dont_panik_core *_M_core;
