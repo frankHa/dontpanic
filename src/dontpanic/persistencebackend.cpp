@@ -2,6 +2,7 @@
 
 //Qt includes
 #include <QDebug>
+#include <libdontpanic/action.hpp>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -21,7 +22,7 @@ namespace dp
     return true;
   }
   // ---------------------------------------------------------------------------------
-  Action_ptr PersistenceBackend::activeAction()
+  Action PersistenceBackend::activeAction()
   {
     return _persistence::sqlite().activeAction();
   }

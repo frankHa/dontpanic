@@ -61,23 +61,23 @@ namespace dp
         return assign_query_values_to_entity ( query, a );
       }
       // ---------------------------------------------------------------------------------
-      Action_ptr Action::findActive() const
+      dp::Action Action::findActive() const
       {
         QSqlQuery query;
         query.prepare ( SELECT_ACTIVE );
         if ( execute ( query ).has_failed() )
         {
           qWarning() << "query SELECT_ACTIVE failed";
-          return Action_ptr();
+          return dp::NullAction();
         }
         if ( !query.first() )
         {
           qWarning() << "no active action found";
-          return Action_ptr();
+          return dp::NullAction();
         }
         QUuid const&id = query.value ( 0 ).toString();
-        Action_ptr _a ( new dp::Action ( id ) );
-        if ( load ( *_a ).has_failed() )
+        dp::Action _a ( id );
+        if ( load ( _a ).has_failed() )
         {
           qWarning() << "loading the active action [" << id.toString() << "]has failed";
         }

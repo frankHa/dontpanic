@@ -2,12 +2,12 @@
 #define DP_SQLITE_HPP
 //dp includes
 #include "libdontpanic/defines.hpp"
+#include <libdontpanic/action.hpp>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
   // ---------------------------------------------------------------------------------
   //forward decl:
-  FORWARD_DECL ( Action );
   class Project;
   typedef QList<Project> ProjectList;
   class Task;
@@ -53,7 +53,7 @@ namespace dp
         // ---------------------------------------------------------------------------------
         success persist ( Action const&_a )const;
         // ---------------------------------------------------------------------------------
-        Action_ptr activeAction()const;
+        Action activeAction()const;
         // ---------------------------------------------------------------------------------
     };
     // ---------------------------------------------------------------------------------

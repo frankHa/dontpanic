@@ -7,6 +7,7 @@ namespace dp
   // ---------------------------------------------------------------------------------
   TimeTracker::TimeTracker ( QObject *parent )
       : QObject ( parent )
+      , _M_current_action(NullAction())
   {
     init();
   }
@@ -14,13 +15,13 @@ namespace dp
   void TimeTracker::startNewAction()
   {
     qDebug() << __FUNCTION__;
-    if ( _M_current_action.get() != 0 )
+    if ( _M_current_action.isValid())
     {
       stopCurrentAction();
     }
-    _M_current_action.reset ( new Action() );
-    _M_current_action->setStartTime ( QDateTime::currentDateTime().toUTC() );
-    persistence().persist ( *_M_current_action );
+    _M_current_action = Action();
+    _M_current_action.setStartTime ( QDateTime::currentDateTime().toUTC() );
+    persistence().persist ( _M_current_action );
   }
   // ---------------------------------------------------------------------------------
   void TimeTracker::startNewActionFrom ( ActionTemplate const& _template )
@@ -36,13 +37,13 @@ namespace dp
   void TimeTracker::stopCurrentAction()
   {
     qDebug() << __FUNCTION__;
-    if ( _M_current_action.get() == 0 )
+    if ( !_M_current_action.isValid() )
     {
       return;
     }
-    _M_current_action->setEndTime ( QDateTime::currentDateTime().toUTC() );
-    persistence().persist ( *_M_current_action );
-    _M_current_action.reset();
+    _M_current_action.setEndTime ( QDateTime::currentDateTime().toUTC() );
+    persistence().persist ( _M_current_action );
+    _M_current_action = NullAction();
   }
   // ---------------------------------------------------------------------------------
   //private stuff:

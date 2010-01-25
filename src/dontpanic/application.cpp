@@ -58,6 +58,11 @@ class Application::ApplicationPrivate
 Application::Application ( int &argc, char** argv )
     : QCoreApplication ( argc, argv )
     , d ( new ApplicationPrivate ( this ) ) {}
+    // ---------------------------------------------------------------------------------
+    Application::~Application()
+    {
+      delete d;
+    }
 // ---------------------------------------------------------------------------------
 void Application::exit()
 {

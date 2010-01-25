@@ -187,7 +187,7 @@ namespace dp
       return _sqlite::action().persist ( _a );
     }
     // ---------------------------------------------------------------------------------
-    Action_ptr Sqlite::activeAction() const
+    Action Sqlite::activeAction() const
     {
       return _sqlite::action().findActive();
     }

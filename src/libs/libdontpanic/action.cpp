@@ -27,6 +27,11 @@ namespace dp
       , _M_reviewed ( false )
       , _M_billed ( false ) {}
   // ---------------------------------------------------------------------------------
+  bool Action::isValid()const
+  {
+    return !id().isNull();
+  }
+  // ---------------------------------------------------------------------------------
   QUuid const& Action::id() const
   {
     return _M_id;
