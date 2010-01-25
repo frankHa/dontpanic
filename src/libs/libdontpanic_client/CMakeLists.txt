@@ -7,12 +7,14 @@ set(libdontpanic_client_SRCS
     actiontemplatemanager.cpp
     projectmanager.cpp
     taskmanager.cpp
+    timetracker.cpp
    )
 
 qt4_wrap_cpp(libdontpanic_client_SRCS
 	     ../../include/libdontpanic_client/actiontemplatemanager.h
-             ../../include/libdontpanic_client/projectmanager.h
+         ../../include/libdontpanic_client/projectmanager.h
 	     ../../include/libdontpanic_client/taskmanager.h
+	     ../../include/libdontpanic_client/timetracker.h
              )
 
 qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS

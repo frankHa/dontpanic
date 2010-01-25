@@ -37,8 +37,9 @@ namespace dp
         : QListView ( parent )
         , _M_model ( new detail::KActionTemplatesListModel ( this ) )
     {
-      setModel ( _M_model );
+      setModel ( _M_model );      
       init_menu_actions();
+      connect(this, SIGNAL(doubleClicked(QModelIndex const&)), SLOT(on_double_clicked(QModelIndex const&)));
     }
     // ---------------------------------------------------------------------------------
     void KActionTemplatesList::init_menu_actions()
@@ -62,6 +63,12 @@ namespace dp
         menu.addAction(_M_remove_selected_action_template);
       }
       menu.exec(evt->globalPos());      
+    }
+    // ---------------------------------------------------------------------------------
+    void KActionTemplatesList::on_double_clicked(QModelIndex const& index)
+    {
+      ActionTemplate const& at = _M_model->at(index);
+      kDebug()<<"starting action from template "<<at.id().toString();
     }
     // ---------------------------------------------------------------------------------
     void KActionTemplatesList::on_create_new_action_template()
