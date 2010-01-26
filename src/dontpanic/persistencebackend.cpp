@@ -22,6 +22,11 @@ namespace dp
     return true;
   }
   // ---------------------------------------------------------------------------------
+  success PersistenceBackend::findAll(ActionList &actions, QDateTime const& from, QDateTime const& to)
+  {
+    return _persistence::sqlite().findAll(actions, from, to);
+  }
+  // ---------------------------------------------------------------------------------
   Action PersistenceBackend::activeAction()
   {
     return _persistence::sqlite().activeAction();

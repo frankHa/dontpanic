@@ -40,6 +40,11 @@ namespace dp
         Q_OBJECT
       public:
         KActionsTable ( QWidget *parent = 0 );
+        
+      public slots:
+        // ---------------------------------------------------------------------------------
+        void load_actions_of(QDate const& day);
+        // ---------------------------------------------------------------------------------
 
       private:
         detail::KActionsTableModel *_M_model;

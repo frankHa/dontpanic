@@ -45,7 +45,9 @@ namespace dp
   // ---------------------------------------------------------------------------------
   ActionList TimeTracker::findAll(QDateTime const& from, QDateTime const& to)
   {
-    return ActionList();
+    ActionList list;
+    persistence().findAll(list, from, to);
+    return list;
   }
   // ---------------------------------------------------------------------------------
   //private stuff:

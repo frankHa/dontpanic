@@ -3,12 +3,10 @@
 
 #include <libdontpanic/defines.hpp>
 #include <libdontpanic/success.hpp>
-
+#include <libdontpanic/action.hpp>
 class QSqlQuery;
 namespace dp
 {
-  // ---------------------------------------------------------------------------------
-  FORWARD_DECL ( Action );
   // ---------------------------------------------------------------------------------
   namespace _persistence
   {
@@ -24,6 +22,8 @@ namespace dp
           success persist ( dp::Action const&p ) const;
           // ---------------------------------------------------------------------------------
           success load ( dp::Action &p ) const;
+          // ---------------------------------------------------------------------------------
+          success findAll(dp::ActionList &l, QDateTime const& from, QDateTime const& to) const;
           // ---------------------------------------------------------------------------------
           dp::Action findActive() const;
           // ---------------------------------------------------------------------------------

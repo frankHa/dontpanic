@@ -95,6 +95,12 @@ namespace dp
       bool KActionsTableModel::removeRows ( int row, int count, const QModelIndex& parent )
       {
         return QAbstractItemModel::removeRows ( row, count, parent );
+      }      
+      // ---------------------------------------------------------------------------------
+      void KActionsTableModel::load_actions(ActionList const& list)
+      {
+        _M_actions = list;
+        reset();
       }
       // ---------------------------------------------------------------------------------
       //private stuff:

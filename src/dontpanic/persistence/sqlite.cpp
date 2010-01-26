@@ -192,6 +192,11 @@ namespace dp
       return _sqlite::action().persist ( _a );
     }
     // ---------------------------------------------------------------------------------
+    success Sqlite::findAll(ActionList & _tl, QDateTime const& from, QDateTime const& to) const
+    {
+      return _sqlite::action().findAll(_tl, from, to);
+    }
+    // ---------------------------------------------------------------------------------
     Action Sqlite::activeAction() const
     {
       return _sqlite::action().findActive();

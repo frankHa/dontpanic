@@ -43,6 +43,12 @@ namespace dp
     void KDayView::setup_actions()
     {
       connect(_M_ui->today_button, SIGNAL(pressed()), this, SLOT(on_today_pressed()));
+      connect(_M_ui->calendar, SIGNAL(selectionChanged()), this, SLOT(on_selected_day_changed()));
+    }
+    // ---------------------------------------------------------------------------------
+    void KDayView::on_selected_day_changed()
+    {
+      _M_ui->action_table->load_actions_of(_M_ui->calendar->selectedDate());
     }
     // ---------------------------------------------------------------------------------
     void KDayView::on_today_pressed()

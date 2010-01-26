@@ -6,6 +6,7 @@
 #include <persistence/sqlite/project.hpp>
 #include <QVariant>
 #include <QSqlQuery>
+#include <KDebug>
 namespace dp
 {
   // ---------------------------------------------------------------------------------
@@ -59,6 +60,12 @@ namespace dp
           return error();
         }
         return assign_query_values_to_entity ( query, a );
+      }
+      // ---------------------------------------------------------------------------------
+      success Action::findAll ( dp::ActionList &a, QDateTime const& from, QDateTime const& to ) const
+      {
+        kDebug()<<"from: "<<from<<" to: "<<to;
+        return successful();
       }
       // ---------------------------------------------------------------------------------
       dp::Action Action::findActive() const

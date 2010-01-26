@@ -48,6 +48,8 @@ namespace dp
         return _persistence::sqlite().findAll(_l);
       }
       // ---------------------------------------------------------------------------------
+      success findAll(ActionList &actions, QDateTime const& from, QDateTime const& to);
+      // ---------------------------------------------------------------------------------
       Action activeAction();
       // ---------------------------------------------------------------------------------
   };

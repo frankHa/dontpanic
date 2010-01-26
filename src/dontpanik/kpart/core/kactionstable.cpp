@@ -19,17 +19,26 @@
 
 #include "kactionstable.h"
 #include "kactionstablemodel.h"
-
+#include "context.h"
+// ---------------------------------------------------------------------------------
 namespace dp
 {
+  // ---------------------------------------------------------------------------------
   namespace core
   {
+    // ---------------------------------------------------------------------------------
     KActionsTable::KActionsTable ( QWidget *parent )
         : QTableView ( parent )
         , _M_model ( new detail::KActionsTableModel ( this ) )
     {
       setModel ( _M_model );
     }
+    // ---------------------------------------------------------------------------------
+    void KActionsTable::load_actions_of(QDate const& day)
+    {
+      _M_model->load_actions(context()->timeTracker()->findAll(day));
+    }
+    // ---------------------------------------------------------------------------------
   }//core
   // ---------------------------------------------------------------------------------
 }//dp
