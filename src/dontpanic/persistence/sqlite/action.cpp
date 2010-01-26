@@ -22,6 +22,11 @@ namespace dp
       const QString SELECT_ALL_ACTIONS =
         "SELECT a_id, a_t_task , a_p_project,a_ct_collaboration_type,\
         a_name, a_comment, a_start, a_end, a_reviewed, a_billed FROM a_action";
+        
+      const QString SELECT_RANGE_OF_ACTIONS =
+        "SELECT a_id, a_t_task , a_p_project,a_ct_collaboration_type,\
+        a_name, a_comment, a_start, a_end, a_reviewed, a_billed FROM a_action \
+        WHERE a_start>=? AND a_start<?";
       // ---------------------------------------------------------------------------------
       const QString SELECT_DISTINCT_ACTION =
         "SELECT DISTINCT a_t_task , a_p_project,a_ct_collaboration_type,\
@@ -62,9 +67,24 @@ namespace dp
         return assign_query_values_to_entity ( query, a );
       }
       // ---------------------------------------------------------------------------------
-      success Action::findAll ( dp::ActionList &a, QDateTime const& from, QDateTime const& to ) const
+      success Action::findAll ( dp::ActionList &l, QDateTime const& from, QDateTime const& to ) const
       {
         kDebug()<<"from: "<<from<<" to: "<<to;
+        QSqlQuery query;
+        query.prepare(SELECT_RANGE_OF_ACTIONS);
+        bindTimeValue ( query, from );
+        bindTimeValue ( query, to );
+        if ( execute ( query ).has_failed() )
+        {
+          kWarning()<<"last error: "<<query.lastError();
+          return error();
+        }
+        while ( query.next() )
+        {
+          dp::Action _a(QUuid(query.value(0).toString()));
+          assign_query_values_to_entity(query, _a);
+          l.append(_a);
+        }
         return successful();
       }
       // ---------------------------------------------------------------------------------
