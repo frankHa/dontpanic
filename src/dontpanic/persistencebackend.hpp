@@ -39,7 +39,7 @@ namespace dp
       template<typename T>
       success load (T & _t)
       {
-        return _persistence::sqlite().remove(_t);
+        return _persistence::sqlite().load(_t);
       }
       // ---------------------------------------------------------------------------------
       template<typename ListT>

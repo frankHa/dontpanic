@@ -162,6 +162,11 @@ namespace dp
       return _sqlite::task().persist ( _t );
     }
     // ---------------------------------------------------------------------------------
+    success Sqlite::load ( Task & _t ) const
+    {
+      return _sqlite::task().load ( _t );
+    }
+    // ---------------------------------------------------------------------------------
     success Sqlite::remove ( Task const& _t ) const
     {
       return _sqlite::task().remove ( _t );

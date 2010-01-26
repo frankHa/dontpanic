@@ -9,6 +9,12 @@
       <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::Task"/>
       <arg type="(si)" />
     </method>
+    <method name="load">
+    <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="QUuid"/>
+      <arg type="(si)" direction="in" />
+      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="dp::Task"/>
+      <arg type="(si)" direction="out" />
+    </method>
     <method name="allTasks">
       <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="dp::TaskList"/>
       <arg type="(si)" direction="out" />

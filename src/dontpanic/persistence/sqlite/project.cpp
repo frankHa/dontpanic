@@ -3,6 +3,8 @@
 #include "persistence/execute_query.hpp"
 //Qt includes
 #include <QVariant>
+//KDE includes
+#include <KDebug>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -61,6 +63,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       success Project::load ( dp::Project &p ) const
       {
+        kDebug()<<p.id().toString();
         if ( p.id().isNull())
         {
           return error();
@@ -70,10 +73,12 @@ namespace dp
         query.addBindValue ( p.id().toString() );
         if ( execute ( query ).has_failed() )
         {
+          kWarning()<<"last error: "<<query.lastError();
           return error();
         }
         if ( !query.first() )
         {
+          kWarning()<<"last error: "<<query.lastError();
           return error();
         }
         return assign_query_values_to_entity ( query, p );

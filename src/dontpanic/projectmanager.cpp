@@ -28,6 +28,7 @@ namespace dp
   Project ProjectManager::load(QUuid const& id)
   {
     Project p(id);
+    kDebug()<<id.toString();
     if(persistence().load(p).was_successful())
     {
       return p;

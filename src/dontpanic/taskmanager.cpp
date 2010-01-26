@@ -25,6 +25,17 @@ namespace dp
     }
   }
   // ---------------------------------------------------------------------------------
+  Task TaskManager::load(QUuid const& id)
+  {
+    Task p(id);
+    kDebug()<<id.toString();
+    if(persistence().load(p).was_successful())
+    {
+      return p;
+    }
+    return NullTask();
+  }
+  // ---------------------------------------------------------------------------------
   TaskList TaskManager::allTasks()
   {
     TaskList list;

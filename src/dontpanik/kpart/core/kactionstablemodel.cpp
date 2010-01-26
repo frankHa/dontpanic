@@ -44,10 +44,10 @@ namespace dp
         Action const&a = _M_actions.value(index.row());
         switch(index.column())
         {
-          case START: return a.startTime();
-          case END:   return a.endTime();
+          case START: return a.startTime().time();
+          case END:   return a.endTime().time();
           case TITLE: return a.name();
-          case TYPE:  return a.task().toString();
+          case TYPE:  return context()->taskManager()->load(a.task()).name();
           case PROJECT: return context()->projectManager()->load(a.project()).name();
           case COMMENT: return a.comment();
           default: return QVariant();

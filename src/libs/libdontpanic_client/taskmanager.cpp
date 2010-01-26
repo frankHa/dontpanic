@@ -48,6 +48,19 @@ namespace dp
       }
     }
     // ---------------------------------------------------------------------------------
+    Task TaskManager::load(QUuid const& id)
+    {
+    kDebug()<<id.toString();
+    QDBusPendingReply<Task> reply =remote()->load(id);
+    reply.waitForFinished();
+    if(reply.isError())
+    {
+      qWarning()<<reply.error();
+      emit error(QDBusError::errorString(reply.error().type()));
+    }
+    return reply.value();
+    }
+    // ---------------------------------------------------------------------------------
     void TaskManager::remove(Task const& p)
     {
       QDBusPendingReply<> reply =remote()->remove(p);
