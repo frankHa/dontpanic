@@ -33,6 +33,7 @@ namespace dp
       _M_ui->setupUi ( this );
       _M_ui->main_splitter->setSizes ( QList<int>() << 100 << 500 );
       setup_actions();
+      on_selected_day_changed();
     }
     // ---------------------------------------------------------------------------------
     KDayView::~KDayView()

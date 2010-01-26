@@ -70,8 +70,7 @@ namespace dp
     ActionList TimeTracker::findAll(QDate const& day)
     {
       QDateTime _from(day);
-      QDateTime _to(_from);
-      _to.addDays(1);
+      QDateTime _to(_from.addDays(1));
       return findAll(_from, _to);
     }
     // ---------------------------------------------------------------------------------      
