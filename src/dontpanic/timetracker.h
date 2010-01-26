@@ -16,6 +16,10 @@ namespace dp
       Q_OBJECT
       Q_CLASSINFO ( "D-Bus Interface", "org.dontpanic.TimeTracker" )
       // ---------------------------------------------------------------------------------
+    signals: 
+      void removed(dp::Action);
+      void stored(dp::Action);
+      // ---------------------------------------------------------------------------------
     public:
       // ---------------------------------------------------------------------------------
       TimeTracker ( QObject* parent = 0 );

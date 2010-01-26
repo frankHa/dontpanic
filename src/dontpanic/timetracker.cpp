@@ -40,7 +40,10 @@ namespace dp
       return;
     }
     _M_current_action.setEndTime ( QDateTime::currentDateTime().toUTC() );
-    persistence().persist ( _M_current_action );
+    if(persistence().persist ( _M_current_action ).was_successful())
+    {
+      emit stored(_M_current_action);
+    }
     _M_current_action = NullAction();
   }
   // ---------------------------------------------------------------------------------
@@ -67,7 +70,10 @@ namespace dp
     }
     _M_current_action = _a;
     _M_current_action.setStartTime ( QDateTime::currentDateTime().toUTC() );
-    persistence().persist ( _M_current_action );
+    if(persistence().persist ( _M_current_action ).was_successful())
+    {
+      emit stored(_a);
+    }
   }
   // ---------------------------------------------------------------------------------
 }//dp

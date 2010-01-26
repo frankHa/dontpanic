@@ -97,15 +97,15 @@ namespace dp
     {
       if(_M_remote == 0)
       {
-	_M_remote = new org::dontpanic::TimeTracker
-	( "org.dontpanic", "/TimeTracker", QDBusConnection::sessionBus(), this );
-	if(!_M_remote->isValid())
-	{
-	  qWarning()<<_M_remote->lastError();
-	}
-	//connect(_M_remote, SIGNAL( stored ( dp::Task ) ), this, SIGNAL( stored ( dp::Task ) ));
-	//connect(_M_remote, SIGNAL(removed(dp::Task)), this, SIGNAL(removed(dp::Task)));
-	connect(_M_remote, SIGNAL(error(QString const&)), this, SIGNAL(error(QString)));
+        _M_remote = new org::dontpanic::TimeTracker
+        ( "org.dontpanic", "/TimeTracker", QDBusConnection::sessionBus(), this );
+        if(!_M_remote->isValid())
+        {
+          qWarning()<<_M_remote->lastError();
+        }
+        connect(_M_remote, SIGNAL( stored ( dp::Action ) ), this, SIGNAL( stored ( dp::Action ) ));
+        connect(_M_remote, SIGNAL(removed(dp::Action)), this, SIGNAL(removed(dp::Action)));
+        connect(_M_remote, SIGNAL(error(QString const&)), this, SIGNAL(error(QString)));
       }
       return _M_remote;
     }

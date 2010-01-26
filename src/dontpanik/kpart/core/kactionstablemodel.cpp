@@ -35,6 +35,7 @@ namespace dp
           : QAbstractTableModel ( parent )
       {
         init_header_data();
+        subscribe_to_timetracker_signals();
       }
       // ---------------------------------------------------------------------------------
       QVariant KActionsTableModel::data ( const QModelIndex& index, int role ) const
@@ -97,9 +98,10 @@ namespace dp
         return QAbstractItemModel::removeRows ( row, count, parent );
       }      
       // ---------------------------------------------------------------------------------
-      void KActionsTableModel::load_actions(ActionList const& list)
+      void KActionsTableModel::set_current_day(QDate const& day)
       {
-        _M_actions = list;
+        _M_current_day = day;
+        _M_actions=context()->timeTracker()->findAll(day);
         reset();
       }
       // ---------------------------------------------------------------------------------
@@ -114,6 +116,60 @@ namespace dp
         << i18n ( "Project" )
         << i18n ( "Comment" );
       }
+      // ---------------------------------------------------------------------------------
+      void KActionsTableModel::subscribe_to_timetracker_signals()
+      {
+        client::TimeTracker * pm = context()->timeTracker();
+        connect(pm, SIGNAL(stored(dp::Action)), this, SLOT(stored(dp::Action const&)));
+        connect(pm, SIGNAL(removed(dp::Action)), this, SLOT(removed(dp::Action const&)));
+      }
+      // ---------------------------------------------------------------------------------
+      void KActionsTableModel::stored(dp::Action const&p)
+      {
+        if(is_already_known(p))
+        {
+          updated(p);
+        }
+        else
+        {
+          added(p);
+        }
+      }
+      // ---------------------------------------------------------------------------------
+      void KActionsTableModel::removed(dp::Action const&p)
+      {
+        int i = _M_actions.indexOf(p);
+        beginRemoveRows(QModelIndex(), i, i);
+        _M_actions.removeAt(i);
+        endRemoveRows();
+      }
+      // ---------------------------------------------------------------------------------
+      bool KActionsTableModel::is_already_known(dp::Action const&p) const
+      {
+        return (_M_actions.indexOf(p)!=-1);
+      }   
+      // ---------------------------------------------------------------------------------
+      void KActionsTableModel::added(dp::Action const&p)
+      {
+        if(p.startTime().date()!= _M_current_day){return;}
+        int index = _M_actions.size();
+        beginInsertRows(QModelIndex(), index, index);
+        _M_actions.append(p);
+        endInsertRows();
+      }   
+      // ---------------------------------------------------------------------------------
+      void KActionsTableModel::updated(dp::Action const&p)
+      {
+        if(p.startTime().date() != _M_current_day)
+        {
+          removed(p);
+          return;
+        }        
+        int row = _M_actions.indexOf(p);
+        QModelIndex const& i = index(row, 0);
+        _M_actions.replace(row, p);
+        emit dataChanged(i, i);
+      }   
       // ---------------------------------------------------------------------------------
     }//detail
     // ---------------------------------------------------------------------------------
