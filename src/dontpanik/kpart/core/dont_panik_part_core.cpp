@@ -46,6 +46,11 @@ namespace dp
       context()->timeTracker()->stopCurrentAction();
     }
     // ---------------------------------------------------------------------------------
+    void dont_panik_core::startNewAction()
+    {
+      context()->timeTracker()->startNewAction();
+    }
+    // ---------------------------------------------------------------------------------
     bool dont_panik_core::openFile()
     {
       return true;

@@ -54,6 +54,7 @@ class DontPanikPart : public KParts::ReadOnlyPart
     void editProjects();
     void editTasks();
     void stopCurrentAction();
+    void startNewAction();
 
   private:
     dp::core::dont_panik_core *_M_core;

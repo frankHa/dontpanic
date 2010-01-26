@@ -11,6 +11,7 @@
 #include <kfiledialog.h>
 #include <kparts/genericfactory.h>
 #include <kstandardaction.h>
+#include <kshortcut.h>
 #include <kdebug.h>
 
 #include <QtCore/QFile>
@@ -55,8 +56,15 @@ DontPanikPart::DontPanikPart ( QWidget *parentWidget, QObject *parent, const QSt
   actionCollection()->addAction ( "edit_tasks", edit_tasks );
   connect ( edit_tasks, SIGNAL ( triggered() ), this, SLOT ( editTasks() ) );
   
+  KAction *start_new_action = new KAction(this);
+  start_new_action->setText(i18n("Start Action"));
+  start_new_action->setShortcut( KShortcut(i18n("Ctrl+S")));
+  actionCollection()->addAction ( "start_new_action", start_new_action );
+  connect ( start_new_action, SIGNAL ( triggered() ), this, SLOT ( startNewAction() ) );
+  
   KAction *stop_current_action = new KAction(this);
   stop_current_action->setText(i18n("Stop current Action"));
+  stop_current_action->setShortcut( KShortcut(i18n("Ctrl+T")));
   actionCollection()->addAction ( "stop_current_action", stop_current_action );
   connect ( stop_current_action, SIGNAL ( triggered() ), this, SLOT ( stopCurrentAction() ) );
 
@@ -125,6 +133,11 @@ void DontPanikPart::editTasks()
 void DontPanikPart::stopCurrentAction()
 {
   _M_core->stopCurrentAction();
+}
+
+void DontPanikPart::startNewAction()
+{
+  _M_core->startNewAction();
 }
 
 //void DontPanikPart::fileSaveAs()
