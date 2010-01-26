@@ -188,9 +188,17 @@ namespace dp
         a.setCollaborationType(collaboration_id);
         a.setName ( query.value ( 4 ).toString() );
         a.setComment ( query.value ( 5 ).toString() );
-        _start.setTime_t ( query.value ( 6 ).toUInt() );
+        uint starttime = query.value ( 6 ).toUInt();
+        if(starttime > 0)
+        {
+          _start.setTime_t ( starttime );
+        }
         a.setStartTime ( _start );
-        _end.setTime_t ( query.value ( 7 ).toUInt() );
+        uint endtime = query.value ( 7 ).toUInt();
+        if(endtime>0)
+        {
+          _end.setTime_t ( endtime );
+        }
         a.setEndTime ( _end );
         a.setReviewed ( query.value ( 8 ).toBool() );
         a.setBilled ( query.value ( 9 ).toBool() );

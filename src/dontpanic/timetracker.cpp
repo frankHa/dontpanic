@@ -23,6 +23,7 @@ namespace dp
     Action a;
     a.setProject(_template.project());
     a.setTask(_template.task());
+    a.setName(_template.name());
     start_action(a);
   }
   // ---------------------------------------------------------------------------------
