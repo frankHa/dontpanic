@@ -29,7 +29,7 @@ namespace dp
         WHERE a_start>=? AND a_start<?";
       // ---------------------------------------------------------------------------------
       const QString SELECT_DISTINCT_ACTION =
-        "SELECT DISTINCT a_t_task , a_p_project,a_ct_collaboration_type,\
+        "SELECT DISTINCT a_id, a_t_task , a_p_project,a_ct_collaboration_type,\
         a_name, a_comment, a_start, a_end, a_reviewed, a_billed FROM a_action WHERE (a_id=?)";
       // ---------------------------------------------------------------------------------
       const QString UPDATE_ACTION =
@@ -94,20 +94,21 @@ namespace dp
         query.prepare ( SELECT_ACTIVE );
         if ( execute ( query ).has_failed() )
         {
-          qWarning() << "query SELECT_ACTIVE failed";
+          kWarning() << "query SELECT_ACTIVE failed";
           return dp::NullAction();
         }
         if ( !query.first() )
         {
-          qWarning() << "no active action found";
+          kWarning() << "no active action found";
           return dp::NullAction();
         }
         QUuid const&id = query.value ( 0 ).toString();
         dp::Action _a ( id );
         if ( load ( _a ).has_failed() )
         {
-          qWarning() << "loading the active action [" << id.toString() << "]has failed";
+          kWarning() << "loading the active action [" << id.toString() << "]has failed";
         }
+        kDebug()<<"loaded active action "<<id.toString();
         return _a;
       }
       // ---------------------------------------------------------------------------------

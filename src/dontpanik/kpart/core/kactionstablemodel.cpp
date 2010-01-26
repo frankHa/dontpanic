@@ -20,6 +20,7 @@
 #include "kactionstablemodel.h"
 #include "context.h"
 #include <KLocalizedString>
+#include <KDebug>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -48,8 +49,8 @@ namespace dp
           case START: return a.startTime().time();
           case END:   return a.endTime().time();
           case TITLE: return a.name();
-          case TYPE:  return context()->taskManager()->load(a.task()).name();
-          case PROJECT: return context()->projectManager()->load(a.project()).name();
+          case TYPE:  return task_of(a);
+          case PROJECT: return project_of(a);
           case COMMENT: return a.comment();
           default: return QVariant();
         }
@@ -126,6 +127,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       void KActionsTableModel::stored(dp::Action const&p)
       {
+        kDebug()<<p.id().toString()<< ", start time:"<<p.startTime();
         if(is_already_known(p))
         {
           updated(p);
@@ -138,6 +140,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       void KActionsTableModel::removed(dp::Action const&p)
       {
+        kDebug()<<p.id().toString()<< ", start time:"<<p.startTime();
         int i = _M_actions.indexOf(p);
         beginRemoveRows(QModelIndex(), i, i);
         _M_actions.removeAt(i);
@@ -146,12 +149,14 @@ namespace dp
       // ---------------------------------------------------------------------------------
       bool KActionsTableModel::is_already_known(dp::Action const&p) const
       {
+        kDebug()<<p.id().toString()<< ", start time:"<<p.startTime();
         return (_M_actions.indexOf(p)!=-1);
       }   
       // ---------------------------------------------------------------------------------
       void KActionsTableModel::added(dp::Action const&p)
       {
-        if(p.startTime().date()!= _M_current_day){return;}
+        kDebug()<<p.id().toString()<< ", start time:"<<p.startTime();
+        if(!is_interesting_for_current_day(p)){return;}
         int index = _M_actions.size();
         beginInsertRows(QModelIndex(), index, index);
         _M_actions.append(p);
@@ -160,16 +165,38 @@ namespace dp
       // ---------------------------------------------------------------------------------
       void KActionsTableModel::updated(dp::Action const&p)
       {
-        if(p.startTime().date() != _M_current_day)
+        if(!is_interesting_for_current_day(p))
         {
           removed(p);
           return;
-        }        
+        }
+        kDebug()<<p.id().toString()<< ", start time:"<<p.startTime();
         int row = _M_actions.indexOf(p);
-        QModelIndex const& i = index(row, 0);
+        QModelIndex const& begin = index(row, START);
+        QModelIndex const& end = index(row, COMMENT);
         _M_actions.replace(row, p);
-        emit dataChanged(i, i);
+        emit dataChanged(begin, end);
       }   
+      // ---------------------------------------------------------------------------------
+      bool KActionsTableModel::is_interesting_for_current_day(dp::Action const& a)
+      {
+        if(!_M_current_day.isValid()){return false;}
+        bool result = a.startTime().date() == _M_current_day;
+        kDebug()<<result;
+        return result;
+      }
+      // ---------------------------------------------------------------------------------
+      QString KActionsTableModel::project_of(Action const& a) const
+      {
+        if(a.project().isNull()){return "";}
+        return context()->projectManager()->load(a.project()).name();
+      }
+      // ---------------------------------------------------------------------------------
+      QString KActionsTableModel::task_of(Action const& a) const
+      {
+        if(a.task().isNull()){return "";}
+        return context()->taskManager()->load(a.task()).name();
+      }
       // ---------------------------------------------------------------------------------
     }//detail
     // ---------------------------------------------------------------------------------

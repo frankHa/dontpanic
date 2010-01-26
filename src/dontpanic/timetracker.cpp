@@ -1,6 +1,7 @@
 #include "timetracker.h"
 #include "libdontpanic/action.hpp"
 #include "persistencebackend.hpp"
+#include <KDebug>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -14,7 +15,8 @@ namespace dp
   // ---------------------------------------------------------------------------------
   void TimeTracker::startNewAction()
   {
-     start_action(Action());
+    Action a;
+     start_action(a);
   }
   // ---------------------------------------------------------------------------------
   void TimeTracker::startNewActionFromTemplate ( ActionTemplate const& _template )
@@ -39,9 +41,11 @@ namespace dp
     {
       return;
     }
-    _M_current_action.setEndTime ( QDateTime::currentDateTime().toUTC() );
+    _M_current_action.setEndTime ( QDateTime::currentDateTime()/*.toUTC()*/ );
     if(persistence().persist ( _M_current_action ).was_successful())
     {
+      kDebug()<<"stopped current action "
+      <<_M_current_action.id().toString()<<" from "<<_M_current_action.startTime()<<" to "<<_M_current_action.endTime();
       emit stored(_M_current_action);
     }
     _M_current_action = NullAction();
@@ -69,10 +73,11 @@ namespace dp
       stopCurrentAction();
     }
     _M_current_action = _a;
-    _M_current_action.setStartTime ( QDateTime::currentDateTime().toUTC() );
+    _M_current_action.setStartTime ( QDateTime::currentDateTime()/*.toUTC()*/ );
     if(persistence().persist ( _M_current_action ).was_successful())
     {
-      emit stored(_a);
+      kDebug()<<"started new action "<<_M_current_action.id().toString()<<"at: "<< _M_current_action.startTime();
+      emit stored(_M_current_action);
     }
   }
   // ---------------------------------------------------------------------------------

@@ -50,7 +50,6 @@ namespace dp
     // ---------------------------------------------------------------------------------
     Project ProjectManager::load(QUuid const& id)
     {
-      kDebug()<<id.toString();
       QDBusPendingReply<Project> reply =remote()->load(id);
       reply.waitForFinished();
       if(reply.isError())

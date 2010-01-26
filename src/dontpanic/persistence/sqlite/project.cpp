@@ -63,7 +63,6 @@ namespace dp
       // ---------------------------------------------------------------------------------
       success Project::load ( dp::Project &p ) const
       {
-        kDebug()<<p.id().toString();
         if ( p.id().isNull())
         {
           return error();
