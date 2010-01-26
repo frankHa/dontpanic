@@ -45,6 +45,17 @@ namespace dp
       }
     }
     // ---------------------------------------------------------------------------------
+    void TimeTracker::startNewAction()
+    {
+      QDBusPendingReply<> reply =remote()->startNewAction();
+      reply.waitForFinished();
+      if(reply.isError())
+      {
+        qWarning()<<reply.error();
+        emit error(QDBusError::errorString(reply.error().type()));
+      }
+    }
+    // ---------------------------------------------------------------------------------
     void TimeTracker::stopCurrentAction()
     {
       QDBusPendingReply<> reply =remote()->stopCurrentAction();
@@ -54,6 +65,33 @@ namespace dp
         qWarning()<<reply.error();
         emit error(QDBusError::errorString(reply.error().type()));
       }
+    }
+    // ---------------------------------------------------------------------------------
+    ActionList TimeTracker::findAll(QDate const& day)
+    {
+      QDateTime _from(day);
+      QDateTime _to(_from);
+      _to.addDays(1);
+      return findAll(_from, _to);
+    }
+    // ---------------------------------------------------------------------------------      
+    ActionList TimeTracker::findAll(QDate const& from, QDate const& to)
+    {
+      QDateTime _from(from);
+      QDateTime _to(from);
+      return findAll(_from, _to);
+    }
+    // ---------------------------------------------------------------------------------
+    ActionList TimeTracker::findAll(QDateTime const& from, QDateTime const& to)
+    {
+      QDBusPendingReply<ActionList> reply =remote()->findAll(from, to);
+      reply.waitForFinished();
+      if(reply.isError())
+      {
+        qWarning()<<reply.error();
+        emit error(QDBusError::errorString(reply.error().type()));
+      }
+      return reply.value();
     }
     // ---------------------------------------------------------------------------------
     org::dontpanic::TimeTracker* TimeTracker::remote()
