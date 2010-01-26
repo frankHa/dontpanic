@@ -179,21 +179,21 @@ namespace dp
       // ---------------------------------------------------------------------------------
       success Action::assign_query_values_to_entity ( QSqlQuery &query, dp::Action &a ) const
       {
-        QUuid const& task_id = query.value ( 0 ).toString();
+        QUuid const& task_id = query.value ( 1 ).toString();
         a.setTask ( task_id );
-        QUuid const& project_id = query.value ( 1 ).toString();
+        QUuid const& project_id = query.value ( 2 ).toString();
         a.setProject ( project_id );
         QDateTime _start, _end;
-        QUuid const& collaboration_id = query.value ( 2 ).toString();
+        QUuid const& collaboration_id = query.value ( 3 ).toString();
         a.setCollaborationType(collaboration_id);
-        a.setName ( query.value ( 3 ).toString() );
-        a.setComment ( query.value ( 4 ).toString() );
-        _start.setTime_t ( query.value ( 5 ).toUInt() );
+        a.setName ( query.value ( 4 ).toString() );
+        a.setComment ( query.value ( 5 ).toString() );
+        _start.setTime_t ( query.value ( 6 ).toUInt() );
         a.setStartTime ( _start );
-        _end.setTime_t ( query.value ( 6 ).toUInt() );
+        _end.setTime_t ( query.value ( 7 ).toUInt() );
         a.setEndTime ( _end );
-        a.setReviewed ( query.value ( 7 ).toBool() );
-        a.setBilled ( query.value ( 8 ).toBool() );
+        a.setReviewed ( query.value ( 8 ).toBool() );
+        a.setBilled ( query.value ( 9 ).toBool() );
         return successful();
       }
       // ---------------------------------------------------------------------------------
