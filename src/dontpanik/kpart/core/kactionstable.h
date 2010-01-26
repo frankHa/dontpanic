@@ -21,6 +21,7 @@
 #define DP_KACTIONSTABLE_H
 
 #include <QtGui/QTableView>
+#include <QSortFilterProxyModel>
 #include <kactionstablemodel.h>
 
 // ---------------------------------------------------------------------------------
@@ -48,6 +49,7 @@ namespace dp
 
       private:
         detail::KActionsTableModel *_M_model;
+        QSortFilterProxyModel *_M_sort_proxy_model;
     };
     // ---------------------------------------------------------------------------------
   }//core

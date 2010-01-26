@@ -28,9 +28,12 @@ namespace dp
     // ---------------------------------------------------------------------------------
     KActionsTable::KActionsTable ( QWidget *parent )
         : QTableView ( parent )
-        , _M_model ( new detail::KActionsTableModel ( this ) )
+        , _M_model ( new detail::KActionsTableModel ( this ))
+        , _M_sort_proxy_model(new QSortFilterProxyModel(this))
     {
-      setModel ( _M_model );
+      _M_sort_proxy_model->setSourceModel(_M_model);
+      _M_sort_proxy_model->setDynamicSortFilter(true);
+      setModel ( _M_sort_proxy_model );
     }
     // ---------------------------------------------------------------------------------
     void KActionsTable::load_actions_of(QDate const& day)
