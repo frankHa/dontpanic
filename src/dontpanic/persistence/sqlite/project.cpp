@@ -26,9 +26,9 @@ namespace dp
       // ---------------------------------------------------------------------------------
       const QString UPDATE_PROJECT =
         "UPDATE p_project set(p_name=?, p_creation_date=?) WHERE (p_id=?)";
-	// ---------------------------------------------------------------------------------
-	const QString REMOVE_PROJECT = 
-	"DELETE FROM p_project WHERE (p_id=?)";
+      // ---------------------------------------------------------------------------------
+      const QString REMOVE_PROJECT = 
+      "DELETE FROM p_project WHERE (p_id=?)";
       // ---------------------------------------------------------------------------------
       // public stuff:
       // ---------------------------------------------------------------------------------
@@ -43,22 +43,22 @@ namespace dp
       // ---------------------------------------------------------------------------------
       success Project::remove(dp::Project const& _project) const
       {
-	if ( _project.id().isNull())
+        if ( _project.id().isNull())
         {
           return error();
         }
-	if(!exists(_project))
-	{
-	    return successful();
-	}
-	QSqlQuery query;
-	query.prepare(REMOVE_PROJECT);
-	query.addBindValue(_project.id().toString());
-	if(execute(query).has_failed())
-	{
-	  return error();
-	}
-	return successful();
+        if(!exists(_project))
+        {
+            return successful();
+        }
+        QSqlQuery query;
+        query.prepare(REMOVE_PROJECT);
+        query.addBindValue(_project.id().toString());
+        if(execute(query).has_failed())
+        {
+          return error();
+        }
+        return successful();
       }
       // ---------------------------------------------------------------------------------
       success Project::load ( dp::Project &p ) const

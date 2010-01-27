@@ -4,8 +4,9 @@
 //dp includes
 #include "dp_export.hpp"
 #include "libdontpanic/success.hpp"
-//Qt includes
-#include <QDebug>
+//KDE includes
+#include <KDebug>
+#include <KLocalizedString>
 // ---------------------------------------------------------------------------------
 #ifdef __GNUC__
 #undef __FUNCTION__

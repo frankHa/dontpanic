@@ -19,6 +19,11 @@
 
 #include "kactionstable.h"
 #include "kactionstablemodel.h"
+#include "context.h"
+#include <QMenu>
+#include <QContextMenuEvent>
+#include <KMessageBox>
+#include <KLocalizedString>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -32,12 +37,30 @@ namespace dp
         , _M_sort_proxy_model(new QSortFilterProxyModel(this))
     {
       init_model();
+      init_menu_actions();
     }
     // ---------------------------------------------------------------------------------
     void KActionsTable::load_actions_of(QDate const& day)
     {
       _M_model->set_current_day(day);
     }
+    // ---------------------------------------------------------------------------------
+    void KActionsTable::init_menu_actions()
+    {
+      _M_remove_selected_action = new KAction("Remove", this);
+      connect(_M_remove_selected_action, SIGNAL(triggered()), this, SLOT(on_remove_selected_action()));
+    }
+    // ---------------------------------------------------------------------------------
+    // protected stuff:
+    // ---------------------------------------------------------------------------------
+    void KActionsTable::contextMenuEvent(QContextMenuEvent *evt)
+    {
+      if(!this->selectionModel()->hasSelection()){return;}
+      QMenu menu;      
+      menu.addAction(_M_remove_selected_action);
+      menu.exec(evt->globalPos());      
+    }
+    
     // ---------------------------------------------------------------------------------
     // private stuff:
     // ---------------------------------------------------------------------------------
@@ -47,6 +70,16 @@ namespace dp
       _M_sort_proxy_model->setDynamicSortFilter(true);
       setModel ( _M_sort_proxy_model );         
       this->sortByColumn(0, Qt::AscendingOrder);
+    }
+    // ---------------------------------------------------------------------------------
+    void KActionsTable::on_remove_selected_action()
+    {
+      Action const& current_selection = _M_model->at(_M_sort_proxy_model->mapToSource(currentIndex()));  
+      if(KMessageBox::questionYesNo(this, i18n("Do you really want to remove the selected action?"), i18n("Remove Action"))==KMessageBox::Yes)
+      {
+        kDebug()<<"attempting to delete action"<<current_selection.id().toString();
+        context()->timeTracker()->remove(current_selection);
+      }
     }
     // ---------------------------------------------------------------------------------
   }//core

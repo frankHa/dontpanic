@@ -22,7 +22,7 @@ namespace dp
       const QString SELECT_ALL_ACTIONS =
         "SELECT a_id, a_t_task , a_p_project,a_ct_collaboration_type,\
         a_name, a_comment, a_start, a_end, a_reviewed, a_billed FROM a_action";
-        
+      // ---------------------------------------------------------------------------------
       const QString SELECT_RANGE_OF_ACTIONS =
         "SELECT a_id, a_t_task , a_p_project,a_ct_collaboration_type,\
         a_name, a_comment, a_start, a_end, a_reviewed, a_billed FROM a_action \
@@ -33,8 +33,11 @@ namespace dp
         a_name, a_comment, a_start, a_end, a_reviewed, a_billed FROM a_action WHERE (a_id=?)";
       // ---------------------------------------------------------------------------------
       const QString UPDATE_ACTION =
-        "UPDATE a_action set a_t_task=?, a_p_project=?,a_ct_collaboration_type=?,\
-        a_name=?, a_comment=?, a_start=?, a_end=?, a_reviewed=?, a_billed=? WHERE (a_id=?)";
+      "UPDATE a_action set a_t_task=?, a_p_project=?,a_ct_collaboration_type=?,\
+      a_name=?, a_comment=?, a_start=?, a_end=?, a_reviewed=?, a_billed=? WHERE (a_id=?)";
+      // ---------------------------------------------------------------------------------
+      const QString REMOVE_ACTION = 
+      "DELETE FROM a_action WHERE (a_id=?)";
       // ---------------------------------------------------------------------------------
       const QString SELECT_ACTIVE = "SELECT a_id FROM A_ACTION WHERE (a_end = 'NULL')";
       // ---------------------------------------------------------------------------------
@@ -66,6 +69,26 @@ namespace dp
         }
         return assign_query_values_to_entity ( query, a );
       }
+      // ---------------------------------------------------------------------------------
+      success Action::remove(dp::Action const& _action) const
+      {
+        if ( _action.id().isNull())
+        {
+          return error();
+        }
+        if(!exists(_action))
+        {
+          return successful();
+        }
+        QSqlQuery query;
+        query.prepare(REMOVE_ACTION);
+        query.addBindValue(_action.id().toString());
+        if(execute(query).has_failed())
+        {
+          return error();
+        }
+        return successful();
+      }      
       // ---------------------------------------------------------------------------------
       success Action::findAll ( dp::ActionList &l, QDateTime const& from, QDateTime const& to ) const
       {

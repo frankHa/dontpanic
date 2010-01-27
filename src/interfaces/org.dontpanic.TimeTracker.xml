@@ -5,6 +5,10 @@
     </method>
     <method name="stopCurrentAction">
     </method>
+    <method name="remove">
+      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::Action"/>
+      <arg type="(si)" />
+    </method>
     <method name="startNewActionFromTemplate">
       <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="QUuid"/>
       <arg type="(si)" />

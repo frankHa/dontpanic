@@ -44,6 +44,17 @@ namespace dp
         emit error(QDBusError::errorString(reply.error().type()));
       }
     }
+    // ---------------------------------------------------------------------------------,
+    void TimeTracker::remove(Action const& a)
+    {
+      QDBusPendingReply<> reply =remote()->remove(a);
+      reply.waitForFinished();
+      if(reply.isError())
+      {
+        qWarning()<<reply.error();
+        emit error(QDBusError::errorString(reply.error().type()));
+      }
+    }
     // ---------------------------------------------------------------------------------
     void TimeTracker::startNewAction()
     {

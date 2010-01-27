@@ -19,6 +19,18 @@ namespace dp
      start_action(a);
   }
   // ---------------------------------------------------------------------------------
+  void TimeTracker::remove(Action const& a)
+  {
+    if(_M_current_action == a)
+    {
+      stopCurrentAction();
+    }
+    if(persistence().remove(a).was_successful())
+    {
+      emit removed(a);
+    }
+  }
+  // ---------------------------------------------------------------------------------
   void TimeTracker::startNewActionFromTemplate ( ActionTemplate const& _template )
   {
     qDebug() << __FUNCTION__;

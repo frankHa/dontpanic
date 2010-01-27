@@ -106,6 +106,12 @@ namespace dp
         reset();
       }
       // ---------------------------------------------------------------------------------
+      Action KActionsTableModel::at(QModelIndex const& index) const
+      {
+        if(!index.isValid()){return NullAction();}
+        return _M_actions.value(index.row());
+      }      
+      // ---------------------------------------------------------------------------------
       //private stuff:
       // ---------------------------------------------------------------------------------
       void KActionsTableModel::init_header_data()
