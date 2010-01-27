@@ -34,7 +34,6 @@ namespace dp
        _M_ui->setupUi(this);
        _M_ui->icon->setIconType(KIconLoader::NoGroup, KIconLoader::Emote);
        setup_actions();
-       init_combo_boxes();
      }
      
      KEditActionTemplateDialog::~KEditActionTemplateDialog()
@@ -75,33 +74,6 @@ namespace dp
      {
        connect(_M_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accepted()));
        connect(_M_ui->buttonBox, SIGNAL(rejected()), this, SLOT(rejected()));
-     }
-     
-     void KEditActionTemplateDialog::init_combo_boxes()
-     {
-       init_template_list();
-       init_tasks();
-     }
-     
-     void KEditActionTemplateDialog::init_template_list()
-     {
-       ProjectList projects = context()->projectManager()->allProjects();
-       ProjectList::const_iterator it;
-       for(it=projects.begin();it!=projects.end();++it)
-       {
-         _M_ui->projects->addItem(it->name(), QVariant(it->id().toString()));
-       }
-     }
-     
-     void KEditActionTemplateDialog::init_tasks()
-     {
-       TaskList tasks = context()->taskManager()->allTasks();
-       TaskList::const_iterator it;
-       for(it=tasks.begin();it!=tasks.end();++it)
-       {
-         _M_ui->worktype->addItem(it->name(), QVariant(it->id().toString()));
-         kDebug()<<"added item: "<<it->name() <<", "<<it->id().toString();
-       }
      }
      
      void KEditActionTemplateDialog::accepted()

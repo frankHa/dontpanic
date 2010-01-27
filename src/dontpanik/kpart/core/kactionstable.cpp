@@ -21,6 +21,8 @@
 #include "kactionstablemodel.h"
 #include "context.h"
 #include <QMenu>
+#include <QStyledItemDelegate>
+#include <QComboBox>
 #include <QContextMenuEvent>
 #include <KMessageBox>
 #include <KLocalizedString>

@@ -51,9 +51,6 @@ namespace dp
         void rejected();
         
       private:
-        void init_combo_boxes();
-        void init_template_list();
-        void init_tasks();
         void select_project(QUuid const&);
         void select_task(QUuid const&);
         void select(QComboBox *set, QUuid const &id);

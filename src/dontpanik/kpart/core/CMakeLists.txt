@@ -12,9 +12,11 @@ set(dontpanikpart_LIB_SRCS
     keditactiontemplatedialog.cpp 
     keditprojectdialog.cpp
     kedittaskdialog.cpp
+    kprojectscombobox.cpp 
     kprojectsdialog.cpp
     kdayview.cpp
     kmainwidget.cpp
+    ktaskscombobox.cpp 
     ktasksdialog.cpp
     ktaskstable.cpp
     ktaskstablemodel.cpp
