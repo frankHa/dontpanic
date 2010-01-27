@@ -31,6 +31,15 @@ namespace dp
     }
   }
   // ---------------------------------------------------------------------------------
+  void TimeTracker::store(Action const& a)
+  {
+    //TODO: analyze current action state
+    if(persistence().persist(a).was_successful())
+    {
+      emit stored(a);
+    }
+  }
+  // ---------------------------------------------------------------------------------
   void TimeTracker::startNewActionFromTemplate ( ActionTemplate const& _template )
   {
     qDebug() << __FUNCTION__;
@@ -54,12 +63,7 @@ namespace dp
       return;
     }
     _M_current_action.setEndTime ( QDateTime::currentDateTime()/*.toUTC()*/ );
-    if(persistence().persist ( _M_current_action ).was_successful())
-    {
-      kDebug()<<"stopped current action "
-      <<_M_current_action.id().toString()<<" from "<<_M_current_action.startTime()<<" to "<<_M_current_action.endTime();
-      emit stored(_M_current_action);
-    }
+    store(_M_current_action);
     _M_current_action = NullAction();
   }
   // ---------------------------------------------------------------------------------
@@ -86,11 +90,7 @@ namespace dp
     }
     _M_current_action = _a;
     _M_current_action.setStartTime ( QDateTime::currentDateTime()/*.toUTC()*/ );
-    if(persistence().persist ( _M_current_action ).was_successful())
-    {
-      kDebug()<<"started new action "<<_M_current_action.id().toString()<<"at: "<< _M_current_action.startTime();
-      emit stored(_M_current_action);
-    }
+    store(_M_current_action);
   }
   // ---------------------------------------------------------------------------------
 }//dp

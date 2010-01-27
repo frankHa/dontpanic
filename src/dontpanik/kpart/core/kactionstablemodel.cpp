@@ -69,11 +69,11 @@ namespace dp
       {
         switch(index.column())
         {
-          case START: return a.startTime().time();
-          case END:   return a.endTime().time();
+          case START: return a.startTime();
+          case END:   return a.endTime();
           case TITLE: return a.name();
-          case TYPE:  return task_of(a);
-          case PROJECT: return project_of(a);
+          case TYPE:  return a.task().toString();
+          case PROJECT: return a.project().toString();
           case COMMENT: return a.comment();
           default: return QVariant();
         }
@@ -91,7 +91,21 @@ namespace dp
       // ---------------------------------------------------------------------------------
       bool KActionsTableModel::setData ( const QModelIndex& index, const QVariant& value, int role )
       {
-        return QAbstractItemModel::setData ( index, value, role );
+        if(!index.isValid()) return false;
+        if(role != Qt::EditRole) return true;
+        Action a = at(index);
+        switch(index.column())
+        {
+          case START: a.setStartTime(value.toDateTime());break;
+          case END:   a.setEndTime(value.toDateTime()); break;
+          case TITLE: a.setName(value.toString()); break;
+          case TYPE:  a.setTask(value.toString()); break;
+          case PROJECT: a.setProject(value.toString()); break;
+          case COMMENT: a.setComment(value.toString()); break;
+          default: break;
+        }
+        context()->timeTracker()->store(a);
+        return true;
       }
       // ---------------------------------------------------------------------------------
       Qt::ItemFlags KActionsTableModel::flags ( const QModelIndex & index ) const

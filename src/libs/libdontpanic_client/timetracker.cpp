@@ -56,6 +56,17 @@ namespace dp
       }
     }
     // ---------------------------------------------------------------------------------
+    void TimeTracker::store(Action const& a)
+    {
+      QDBusPendingReply<> reply =remote()->store(a);
+      reply.waitForFinished();
+      if(reply.isError())
+      {
+        qWarning()<<reply.error();
+        emit error(QDBusError::errorString(reply.error().type()));
+      }
+    }
+    // ---------------------------------------------------------------------------------
     void TimeTracker::startNewAction()
     {
       QDBusPendingReply<> reply =remote()->startNewAction();
