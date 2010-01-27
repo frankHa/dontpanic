@@ -41,9 +41,32 @@ namespace dp
       // ---------------------------------------------------------------------------------
       QVariant KActionsTableModel::data ( const QModelIndex& index, int role ) const
       {
-        if(role != Qt::DisplayRole) return QVariant();
         if(!index.isValid())return QVariant();
         Action const&a = _M_actions.value(index.row());
+        switch(role)
+        {
+          case Qt::DisplayRole: return display_role(a, index);
+          case Qt::EditRole: return edit_role(a, index);
+          default: return QVariant();
+        }
+      }
+      // ---------------------------------------------------------------------------------
+      QVariant KActionsTableModel::display_role(Action const& a, QModelIndex const& index) const
+      {
+        switch(index.column())
+        {
+          case START: return a.startTime().time();
+          case END:   return a.endTime().time();
+          case TITLE: return a.name();
+          case TYPE:  return task_of(a);
+          case PROJECT: return project_of(a);
+          case COMMENT: return a.comment();
+          default: return QVariant();
+        }
+      }
+      // ---------------------------------------------------------------------------------
+      QVariant KActionsTableModel::edit_role(Action const& a, QModelIndex const& index) const
+      {
         switch(index.column())
         {
           case START: return a.startTime().time();
@@ -69,6 +92,11 @@ namespace dp
       bool KActionsTableModel::setData ( const QModelIndex& index, const QVariant& value, int role )
       {
         return QAbstractItemModel::setData ( index, value, role );
+      }
+      // ---------------------------------------------------------------------------------
+      Qt::ItemFlags KActionsTableModel::flags ( const QModelIndex & index ) const
+      {
+        return (QAbstractItemModel::flags(index) | Qt::ItemIsEditable);
       }
       // ---------------------------------------------------------------------------------
       QVariant KActionsTableModel::headerData ( int section, Qt::Orientation orientation, int role ) const

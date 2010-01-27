@@ -62,6 +62,8 @@ namespace dp
           // ---------------------------------------------------------------------------------
           virtual bool removeRows ( int row, int count, const QModelIndex& parent = QModelIndex() );
           // ---------------------------------------------------------------------------------
+          virtual Qt::ItemFlags   flags ( const QModelIndex & index ) const;
+          // ---------------------------------------------------------------------------------
         public:
           // ---------------------------------------------------------------------------------
           Action at(QModelIndex const& index) const;
@@ -91,6 +93,10 @@ namespace dp
           QString project_of(Action const& a) const;
           // ---------------------------------------------------------------------------------
           QString task_of(Action const& a) const;
+          // ---------------------------------------------------------------------------------
+          QVariant display_role(Action const& a, QModelIndex const& index) const;
+          // ---------------------------------------------------------------------------------
+          QVariant edit_role(Action const& a, QModelIndex const& index) const;
           // ---------------------------------------------------------------------------------
         private:
           // ---------------------------------------------------------------------------------
