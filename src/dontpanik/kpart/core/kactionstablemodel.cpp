@@ -110,7 +110,9 @@ namespace dp
       // ---------------------------------------------------------------------------------
       Qt::ItemFlags KActionsTableModel::flags ( const QModelIndex & index ) const
       {
-        return (QAbstractItemModel::flags(index) | Qt::ItemIsEditable);
+        Qt::ItemFlags _flags = QAbstractItemModel::flags(index);
+        _flags |= Qt::ItemIsEditable;
+        return ( _flags);
       }
       // ---------------------------------------------------------------------------------
       QVariant KActionsTableModel::headerData ( int section, Qt::Orientation orientation, int role ) const
@@ -162,7 +164,7 @@ namespace dp
         << i18n ( "End" )
         << i18n ( "Title" )
         << i18n ( "Type" )
-        << i18n ( "Project" )
+        << i18n ( "Project" )        
         << i18n ( "Comment" );
       }
       // ---------------------------------------------------------------------------------

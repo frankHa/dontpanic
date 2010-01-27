@@ -127,6 +127,21 @@ namespace dp
     _M_billed = b;
   }
   // ---------------------------------------------------------------------------------
+  QTime Action::duration() const
+  {
+    if(startTime().isNull()){return QTime();}
+    QDateTime end;
+    if(endTime().isNull())
+    {
+      end = QDateTime::currentDateTime();
+    } else
+    {
+      end = endTime();
+    }
+    QTime result(0, 0);
+    return result.addSecs(startTime().secsTo(end));    
+  }
+  // ---------------------------------------------------------------------------------
   bool operator == (dp::Action const& lhs, dp::Action const& rhs)
   {
     if(!lhs.isValid())
