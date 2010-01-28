@@ -142,6 +142,12 @@ namespace dp
     return result.addSecs(startTime().secsTo(end));    
   }
   // ---------------------------------------------------------------------------------
+  bool Action::isActive() const
+  {
+    if(!startTime().isValid())return false;
+    return endTime().isNull();
+  }
+  // ---------------------------------------------------------------------------------
   bool operator == (dp::Action const& lhs, dp::Action const& rhs)
   {
     if(!lhs.isValid())

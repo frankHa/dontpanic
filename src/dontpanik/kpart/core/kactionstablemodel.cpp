@@ -20,6 +20,7 @@
 #include "kactionstablemodel.h"
 #include "kactionstablecolumns.h"
 #include "context.h"
+#include <QFont>
 #include <KLocalizedString>
 #include <KDebug>
 // ---------------------------------------------------------------------------------
@@ -46,6 +47,7 @@ namespace dp
         Action const&a = _M_actions.value(index.row());
         switch(role)
         {
+          case Qt::FontRole: return font_role(a, index);
           case Qt::DisplayRole: return display_role(a, index);
           case Qt::EditRole: return edit_role(a, index);
           default: return QVariant();
@@ -78,6 +80,16 @@ namespace dp
           case COMMENT: return a.comment();
           default: return QVariant();
         }
+      }
+      // ---------------------------------------------------------------------------------
+      QVariant KActionsTableModel::font_role(Action const& a, QModelIndex const& index) const
+      {
+        QFont _font;
+        if(a.isActive())
+        {
+          _font.setBold(true);
+        }
+        return _font;
       }
       // ---------------------------------------------------------------------------------
       int KActionsTableModel::columnCount ( const QModelIndex& parent ) const
@@ -178,7 +190,6 @@ namespace dp
       // ---------------------------------------------------------------------------------
       void KActionsTableModel::stored(dp::Action const&p)
       {
-        kDebug()<<p.id().toString()<< ", start time:"<<p.startTime();
         if(is_already_known(p))
         {
           updated(p);
@@ -191,7 +202,6 @@ namespace dp
       // ---------------------------------------------------------------------------------
       void KActionsTableModel::removed(dp::Action const&p)
       {
-        kDebug()<<p.id().toString()<< ", start time:"<<p.startTime();
         int i = _M_actions.indexOf(p);
         beginRemoveRows(QModelIndex(), i, i);
         _M_actions.removeAt(i);
@@ -200,7 +210,6 @@ namespace dp
       // ---------------------------------------------------------------------------------
       bool KActionsTableModel::is_already_known(dp::Action const&p) const
       {
-        kDebug()<<p.id().toString()<< ", start time:"<<p.startTime();
         return (_M_actions.indexOf(p)!=-1);
       }   
       // ---------------------------------------------------------------------------------
@@ -221,7 +230,6 @@ namespace dp
           removed(p);
           return;
         }
-        kDebug()<<p.id().toString()<< ", start time:"<<p.startTime();
         int row = _M_actions.indexOf(p);
         QModelIndex const& begin = index(row, START);
         QModelIndex const& end = index(row, COMMENT);
@@ -233,7 +241,6 @@ namespace dp
       {
         if(!_M_current_day.isValid()){return false;}
         bool result = a.startTime().date() == _M_current_day;
-        kDebug()<<result;
         return result;
       }
       // ---------------------------------------------------------------------------------

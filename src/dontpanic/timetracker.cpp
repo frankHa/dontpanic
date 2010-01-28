@@ -33,7 +33,7 @@ namespace dp
   // ---------------------------------------------------------------------------------
   void TimeTracker::store(Action const& a)
   {
-    //TODO: analyze current action state
+    if(_M_current_action == a){_M_current_action = a;}
     if(persistence().persist(a).was_successful())
     {
       emit stored(a);
