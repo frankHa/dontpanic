@@ -24,6 +24,7 @@
 #include "ktaskscombobox.h"
 
 #include <QSortFilterProxyModel>
+#include <QTimeEdit>
 
 namespace dp
 {
@@ -43,6 +44,11 @@ namespace dp
       {
           switch(index.column())
           {
+            case START:
+            case END: {QDateTimeEdit *edit = new QTimeEdit(parent);
+                      edit->setCalendarPopup(true);
+                      return edit;
+            }
             case PROJECT: return new KProjectsComboBox(parent);
             case TYPE: return new KTasksComboBox(parent);
             default:return QStyledItemDelegate::createEditor ( parent, option, index );
@@ -58,6 +64,8 @@ namespace dp
         Action const& a= model->at(mappedIndex);
         switch(mappedIndex.column())
         {
+          case START: static_cast<QDateTimeEdit*>(editor)->setDateTime(a.startTime()); break;
+          case END: static_cast<QDateTimeEdit*>(editor)->setDateTime(a.startTime()); break;
           case PROJECT: static_cast<KProjectsComboBox*>(editor)->select(a.project()); break;
           case TYPE: static_cast<KTasksComboBox*>(editor)->select(a.task()); break;
           default:QStyledItemDelegate::setEditorData ( editor, index ); break;
@@ -70,6 +78,8 @@ namespace dp
         if(!index.isValid()){return;}
         switch(index.column())
         {
+          case START:
+          case END: model->setData(index, static_cast<QDateTimeEdit*>(editor)->dateTime());break;
           case PROJECT: model->setData(index, static_cast<KProjectsComboBox*>(editor)->selectedUuid().toString());break;
           case TYPE:model->setData( index, static_cast<KTasksComboBox*>(editor)->selectedUuid().toString()); break;
           default: QStyledItemDelegate::setModelData ( editor, model, index );break;
