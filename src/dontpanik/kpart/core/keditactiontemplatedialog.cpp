@@ -48,26 +48,8 @@ namespace dp
        _M_ui->name->setText(at.name());
        _M_ui->comment->setText(at.comment());
        _M_ui->icon->setIcon(at.icon());
-       select_project(at.project());
-       select_task(at.task());
-     }
-     
-     void KEditActionTemplateDialog::select_project(QUuid const& id)
-     {
-       kDebug()<<"selecting project: "<<id.toString();
-        select(_M_ui->projects, id);
-     }
-     
-     void KEditActionTemplateDialog::select_task(QUuid const& id)
-     {
-       kDebug()<<"selecting task: "<<id.toString();
-       select(_M_ui->worktype, id);
-     }
-     
-     void KEditActionTemplateDialog::select(QComboBox *set, QUuid const& id)
-     {
-       int index = set->findData(QVariant(id.toString()));
-       set->setCurrentIndex(index);
+       _M_ui->projects->select(at.project());
+       _M_ui->worktype->select(at.task());
      }
      
      void KEditActionTemplateDialog::setup_actions()

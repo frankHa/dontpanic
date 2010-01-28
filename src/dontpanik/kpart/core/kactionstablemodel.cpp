@@ -18,6 +18,7 @@
 */
 
 #include "kactionstablemodel.h"
+#include "kactionstablecolumns.h"
 #include "context.h"
 #include <KLocalizedString>
 #include <KDebug>
@@ -30,7 +31,7 @@ namespace dp
     // ---------------------------------------------------------------------------------
     namespace detail
     {
-      enum column{START, END, TITLE, TYPE, PROJECT, COMMENT};
+      
       // ---------------------------------------------------------------------------------
       KActionsTableModel::KActionsTableModel ( QObject *parent )
           : QAbstractTableModel ( parent )

@@ -7,6 +7,7 @@ set(dontpanikpart_LIB_SRCS
     kactiontemplateslistmodel.cpp
     kprojectstablemodel.cpp
     kprojectstable.cpp
+    kactionstableitemdelegate.cpp 
     kactionstablemodel.cpp
     kactionstable.cpp
     keditactiontemplatedialog.cpp 

@@ -19,6 +19,7 @@
 
 #include "ktaskscombobox.h"
 #include "context.h"
+#include <QVariant>
 namespace dp
 {
  namespace core
@@ -31,6 +32,12 @@ namespace dp
      {
        init();
      }
+     // ---------------------------------------------------------------------------------
+     void KTasksComboBox::select(QUuid const& id)
+     {
+       int index = findData(QVariant(id.toString()));
+       setCurrentIndex(index);
+     }     
      // ---------------------------------------------------------------------------------
      // private stuff:
      // ---------------------------------------------------------------------------------

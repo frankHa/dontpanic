@@ -19,6 +19,7 @@
 
 #include "kprojectscombobox.h"
 #include "context.h"
+#include <QVariant>
 namespace dp
 {
  namespace core
@@ -30,6 +31,12 @@ namespace dp
      :QComboBox(parent)
      {
        init();
+     }
+     // ---------------------------------------------------------------------------------
+     void KProjectsComboBox::select(QUuid const& id)
+     {
+       int index = findData(QVariant(id.toString()));
+       setCurrentIndex(index);
      }
      // ---------------------------------------------------------------------------------
      // private stuff:

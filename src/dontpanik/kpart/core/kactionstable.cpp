@@ -20,9 +20,8 @@
 #include "kactionstable.h"
 #include "kactionstablemodel.h"
 #include "context.h"
+#include "kactionstableitemdelegate.h"
 #include <QMenu>
-#include <QStyledItemDelegate>
-#include <QComboBox>
 #include <QContextMenuEvent>
 #include <KMessageBox>
 #include <KLocalizedString>
@@ -40,17 +39,12 @@ namespace dp
     {
       init_model();
       init_menu_actions();
+      init_item_delegate();
     }
     // ---------------------------------------------------------------------------------
     void KActionsTable::load_actions_of(QDate const& day)
     {
       _M_model->set_current_day(day);
-    }
-    // ---------------------------------------------------------------------------------
-    void KActionsTable::init_menu_actions()
-    {
-      _M_remove_selected_action = new KAction("Remove", this);
-      connect(_M_remove_selected_action, SIGNAL(triggered()), this, SLOT(on_remove_selected_action()));
     }
     // ---------------------------------------------------------------------------------
     // protected stuff:
@@ -72,6 +66,18 @@ namespace dp
       _M_sort_proxy_model->setDynamicSortFilter(true);
       setModel ( _M_sort_proxy_model );         
       this->sortByColumn(0, Qt::AscendingOrder);
+    }
+    // ---------------------------------------------------------------------------------
+    void KActionsTable::init_menu_actions()
+    {
+      _M_remove_selected_action = new KAction("Remove", this);
+      connect(_M_remove_selected_action, SIGNAL(triggered()), this, SLOT(on_remove_selected_action()));
+    }
+    // ---------------------------------------------------------------------------------
+    void KActionsTable::init_item_delegate()
+    {
+      detail::KActionsTableItemDelegate *d = new detail::KActionsTableItemDelegate(this);
+      setItemDelegate(d);
     }
     // ---------------------------------------------------------------------------------
     void KActionsTable::on_remove_selected_action()

@@ -51,11 +51,6 @@ namespace dp
         void rejected();
         
       private:
-        void select_project(QUuid const&);
-        void select_task(QUuid const&);
-        void select(QComboBox *set, QUuid const &id);
-        
-      private:
         Ui::KEditActionTemplateDialog *_M_ui;   
         ActionTemplate _M_current_template;
     };
