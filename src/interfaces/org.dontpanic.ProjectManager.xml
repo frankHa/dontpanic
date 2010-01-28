@@ -15,7 +15,7 @@
       <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="dp::Project"/>
       <arg type="(si)" direction="out" />
     </method>
-    <method name="allProjects">
+    <method name="findAll">
       <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="dp::ProjectList"/>
       <arg type="(si)" direction="out" />
     </method>

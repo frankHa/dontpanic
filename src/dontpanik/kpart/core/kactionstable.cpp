@@ -22,6 +22,7 @@
 #include "context.h"
 #include "kactionstableitemdelegate.h"
 #include <QMenu>
+#include <QHeaderView>
 #include <QContextMenuEvent>
 #include <KMessageBox>
 #include <KLocalizedString>
@@ -40,6 +41,7 @@ namespace dp
       init_model();
       init_menu_actions();
       init_item_delegate();
+      //verticalHeader()->setDefaultSectionSize(20);
     }
     // ---------------------------------------------------------------------------------
     void KActionsTable::load_actions_of(QDate const& day)
@@ -85,7 +87,6 @@ namespace dp
       Action const& current_selection = _M_model->at(_M_sort_proxy_model->mapToSource(currentIndex()));  
       if(KMessageBox::questionYesNo(this, i18n("Do you really want to remove the selected action?"), i18n("Remove Action"))==KMessageBox::Yes)
       {
-        kDebug()<<"attempting to delete action"<<current_selection.id().toString();
         context()->timeTracker()->remove(current_selection);
       }
     }

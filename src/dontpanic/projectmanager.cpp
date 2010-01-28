@@ -35,7 +35,7 @@ namespace dp
     return NullProject();
   }
   // ---------------------------------------------------------------------------------
-  ProjectList ProjectManager::allProjects()
+  ProjectList ProjectManager::findAll()
   {
     ProjectList list;
     persistence().findAll(list);

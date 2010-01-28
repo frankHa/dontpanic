@@ -33,7 +33,6 @@ DontPanikPart::DontPanikPart ( QWidget *parentWidget, QObject *parent, const QSt
   setComponentData ( DontPanikPartFactory::componentData() );
 
   dp::dbus().register_dp_custom_types();
-
   QWidget *canvas = new QWidget ( parentWidget );
 
   _M_core = new dp::core::dont_panik_core ( this, canvas );

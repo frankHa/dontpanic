@@ -32,7 +32,6 @@ namespace dp
         : QObject ( parent )
         ,_M_remote(0)
     {
-      
     }
     // ---------------------------------------------------------------------------------
     ProjectManager::~ProjectManager ( ){}
@@ -50,14 +49,7 @@ namespace dp
     // ---------------------------------------------------------------------------------
     Project ProjectManager::load(QUuid const& id)
     {
-      QDBusPendingReply<Project> reply =remote()->load(id);
-      reply.waitForFinished();
-      if(reply.isError())
-      {
-        qWarning()<<reply.error();
-        emit error(QDBusError::errorString(reply.error().type()));
-      }
-      return reply.value();
+      return _M_cache.load(id, remote());      
     }
     // ---------------------------------------------------------------------------------
     void ProjectManager::remove(Project const& p)
@@ -66,31 +58,50 @@ namespace dp
       reply.waitForFinished();
       if(reply.isError())
       {
-	qWarning()<<reply.error();
-	emit error(QDBusError::errorString(reply.error().type()));
+      kWarning()<<reply.error();
+      emit error(QDBusError::errorString(reply.error().type()));
       }
     }
     // ---------------------------------------------------------------------------------
     ProjectList ProjectManager::allProjects()
     {
-      return remote()->allProjects();
+      return _M_cache.find_all(remote());
     }
+    // ---------------------------------------------------------------------------------
+    // private stuff:
     // ---------------------------------------------------------------------------------
     org::dontpanic::ProjectManager* ProjectManager::remote()
     {
       if(_M_remote == 0)
       {
-	_M_remote = new org::dontpanic::ProjectManager
-	( "org.dontpanic", "/ProjectManager", QDBusConnection::sessionBus(), this );
-	if(!_M_remote->isValid())
-	{
-	  qWarning()<<_M_remote->lastError();
-	}
-	connect(_M_remote, SIGNAL( stored ( dp::Project ) ), this, SIGNAL( stored ( dp::Project ) ));
-	connect(_M_remote, SIGNAL(removed(dp::Project)), this, SIGNAL(removed(dp::Project)));
-	connect(_M_remote, SIGNAL(error(QString const&)), this, SIGNAL(error(QString)));
+      _M_remote = new org::dontpanic::ProjectManager
+      ( "org.dontpanic", "/ProjectManager", QDBusConnection::sessionBus(), this );
+      if(!_M_remote->isValid())
+      {
+        kWarning()<<_M_remote->lastError();
+      }
+      connect(_M_remote, SIGNAL( stored ( dp::Project ) ), this, SLOT( on_stored ( dp::Project ) ));
+      connect(_M_remote, SIGNAL(removed(dp::Project)), this, SLOT(on_removed(dp::Project)));
+      connect(_M_remote, SIGNAL(error(QString const&)), this, SIGNAL(error(QString)));
       }
       return _M_remote;
+    }
+    // ---------------------------------------------------------------------------------
+    /*void ProjectManager::init_cache()
+    {
+      _M_cache = remote()->allProjects();
+    }
+    */// ---------------------------------------------------------------------------------
+    void ProjectManager::on_stored(dp::Project p)
+    {
+      _M_cache.store(p);
+      emit stored(p);
+    }
+    // ---------------------------------------------------------------------------------
+    void ProjectManager::on_removed(dp::Project p)
+    {
+      _M_cache.remove_all(p);
+      emit removed(p);
     }
     // ---------------------------------------------------------------------------------
   }//client
