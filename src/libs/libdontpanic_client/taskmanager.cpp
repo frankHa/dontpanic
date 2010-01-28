@@ -43,21 +43,14 @@ namespace dp
       reply.waitForFinished();
       if(reply.isError())
       {
-	qWarning()<<reply.error();
-	emit error(QDBusError::errorString(reply.error().type()));
+      kWarning()<<reply.error();
+      emit error(QDBusError::errorString(reply.error().type()));
       }
     }
     // ---------------------------------------------------------------------------------
     Task TaskManager::load(QUuid const& id)
     {
-    QDBusPendingReply<Task> reply =remote()->load(id);
-    reply.waitForFinished();
-    if(reply.isError())
-    {
-      qWarning()<<reply.error();
-      emit error(QDBusError::errorString(reply.error().type()));
-    }
-    return reply.value();
+      return _M_cache.load(id, remote());      
     }
     // ---------------------------------------------------------------------------------
     void TaskManager::remove(Task const& p)
@@ -66,31 +59,43 @@ namespace dp
       reply.waitForFinished();
       if(reply.isError())
       {
-	qWarning()<<reply.error();
-	emit error(QDBusError::errorString(reply.error().type()));
+      kWarning()<<reply.error();
+      emit error(QDBusError::errorString(reply.error().type()));
       }
     }
     // ---------------------------------------------------------------------------------
     TaskList TaskManager::allTasks()
     {
-      return remote()->allTasks();
+      return _M_cache.find_all(remote());
     }
     // ---------------------------------------------------------------------------------
     org::dontpanic::TaskManager* TaskManager::remote()
     {
       if(_M_remote == 0)
       {
-	_M_remote = new org::dontpanic::TaskManager
-	( "org.dontpanic", "/TaskManager", QDBusConnection::sessionBus(), this );
-	if(!_M_remote->isValid())
-	{
-	  qWarning()<<_M_remote->lastError();
-	}
-	connect(_M_remote, SIGNAL( stored ( dp::Task ) ), this, SIGNAL( stored ( dp::Task ) ));
-	connect(_M_remote, SIGNAL(removed(dp::Task)), this, SIGNAL(removed(dp::Task)));
-	connect(_M_remote, SIGNAL(error(QString const&)), this, SIGNAL(error(QString)));
+        _M_remote = new org::dontpanic::TaskManager
+        ( "org.dontpanic", "/TaskManager", QDBusConnection::sessionBus(), this );
+        if(!_M_remote->isValid())
+        {
+          kWarning()<<_M_remote->lastError();
+        }
+        connect(_M_remote, SIGNAL( stored ( dp::Task ) ), this, SLOT( on_stored ( dp::Task ) ));
+        connect(_M_remote, SIGNAL(removed(dp::Task)), this, SLOT(on_removed(dp::Task)));
+        connect(_M_remote, SIGNAL(error(QString const&)), this, SIGNAL(error(QString)));
       }
       return _M_remote;
+    }
+    // ---------------------------------------------------------------------------------
+    void TaskManager::on_stored(dp::Task t)
+    {
+      _M_cache.store(t);
+      emit stored(t);
+    }
+    // ---------------------------------------------------------------------------------
+    void TaskManager::on_removed(dp::Task t)
+    {
+      _M_cache.remove(t);
+      emit removed(t);
     }
     // ---------------------------------------------------------------------------------
   }//client

@@ -15,7 +15,7 @@
       <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="dp::Task"/>
       <arg type="(si)" direction="out" />
     </method>
-    <method name="allTasks">
+    <method name="findAll">
       <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="dp::TaskList"/>
       <arg type="(si)" direction="out" />
     </method>

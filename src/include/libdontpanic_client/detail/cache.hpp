@@ -54,16 +54,16 @@ namespace dp
             }
           }
           
+          void remove(object const& o)
+          {
+            _M_objects.removeAll(o);
+          }
+          
           template<typename remote_ptr>
           objectlist find_all(remote_ptr remote)
           {
             assure_we_are_initialized(remote);
             return _M_objects;
-          }
-          
-          void remove_all(object const& o)
-          {
-            _M_objects.removeAll(o);
           }
           
         private:

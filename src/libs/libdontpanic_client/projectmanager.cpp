@@ -87,11 +87,6 @@ namespace dp
       return _M_remote;
     }
     // ---------------------------------------------------------------------------------
-    /*void ProjectManager::init_cache()
-    {
-      _M_cache = remote()->allProjects();
-    }
-    */// ---------------------------------------------------------------------------------
     void ProjectManager::on_stored(dp::Project p)
     {
       _M_cache.store(p);
@@ -100,7 +95,7 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void ProjectManager::on_removed(dp::Project p)
     {
-      _M_cache.remove_all(p);
+      _M_cache.remove(p);
       emit removed(p);
     }
     // ---------------------------------------------------------------------------------

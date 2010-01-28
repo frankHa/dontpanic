@@ -35,7 +35,7 @@ namespace dp
     return NullTask();
   }
   // ---------------------------------------------------------------------------------
-  TaskList TaskManager::allTasks()
+  TaskList TaskManager::findAll()
   {
     TaskList list;
     persistence().findAll(list);
