@@ -37,6 +37,11 @@ namespace dp
      {
        int index = findData(QVariant(id.toString()));
        setCurrentIndex(index);
+     }
+     // ---------------------------------------------------------------------------------
+     QUuid KTasksComboBox::selectedUuid() const
+     {
+       return QUuid(itemData(currentIndex()).toString());
      }     
      // ---------------------------------------------------------------------------------
      // private stuff:

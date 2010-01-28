@@ -23,6 +23,8 @@
 #include "kprojectscombobox.h"
 #include "ktaskscombobox.h"
 
+#include <QSortFilterProxyModel>
+
 namespace dp
 {
   // ---------------------------------------------------------------------------------
@@ -49,14 +51,15 @@ namespace dp
       // ---------------------------------------------------------------------------------
       void KActionsTableItemDelegate::setEditorData ( QWidget* editor, const QModelIndex& index ) const
       {
-        //to be implemented next :
         if(!index.isValid()){return;}
-//         KActionsTableModel const*model = static_cast<KActionsTableModel const*>(index.model());
-//         Action const& a= model->at(index);
-        switch(index.column())
+        QSortFilterProxyModel const* sm = static_cast<QSortFilterProxyModel const*>(index.model());
+        QModelIndex const& mappedIndex = sm->mapToSource(index);
+        KActionsTableModel const*model = static_cast<KActionsTableModel const*>(sm->sourceModel());
+        Action const& a= model->at(mappedIndex);
+        switch(mappedIndex.column())
         {
-//           case PROJECT: static_cast<KProjectsComboBox*>(editor)->select(a.project()); break;
-//           case TYPE: static_cast<KTasksComboBox*>(editor)->select(a.task()); break;
+          case PROJECT: static_cast<KProjectsComboBox*>(editor)->select(a.project()); break;
+          case TYPE: static_cast<KTasksComboBox*>(editor)->select(a.task()); break;
           default:QStyledItemDelegate::setEditorData ( editor, index ); break;
         }
           
@@ -64,7 +67,14 @@ namespace dp
       // ---------------------------------------------------------------------------------
       void KActionsTableItemDelegate::setModelData ( QWidget* editor, QAbstractItemModel* model, const QModelIndex& index ) const
       {
-          QStyledItemDelegate::setModelData ( editor, model, index );
+        if(!index.isValid()){return;}
+        switch(index.column())
+        {
+          case PROJECT: model->setData(index, static_cast<KProjectsComboBox*>(editor)->selectedUuid().toString());break;
+          case TYPE:model->setData( index, static_cast<KTasksComboBox*>(editor)->selectedUuid().toString()); break;
+          default: QStyledItemDelegate::setModelData ( editor, model, index );break;
+        }
+          
       }
       // ---------------------------------------------------------------------------------
     }

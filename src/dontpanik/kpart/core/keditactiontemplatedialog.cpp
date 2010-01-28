@@ -70,8 +70,8 @@ namespace dp
             t = _M_current_template;
          }
          t.setName(_M_ui->name->text());         
-         QUuid project(_M_ui->projects->itemData(_M_ui->projects->currentIndex()).toString());
-         QUuid task(_M_ui->worktype->itemData(_M_ui->worktype->currentIndex()).toString());
+         QUuid project(_M_ui->projects->selectedUuid());
+         QUuid task(_M_ui->worktype->selectedUuid());
          t.setProject(project);
          t.setTask(task);
          t.setComment(_M_ui->comment->text());
