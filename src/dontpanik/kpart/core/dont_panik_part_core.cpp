@@ -51,6 +51,16 @@ namespace dp
       context()->timeTracker()->startNewAction();
     }
     // ---------------------------------------------------------------------------------
+    void dont_panik_core::viewDayAction()
+    {
+      _M_widget->show_dayview();
+    }
+    // ---------------------------------------------------------------------------------
+    void dont_panik_core::viewReportsAction()
+    {
+      _M_widget->show_reportview();
+    }
+    // ---------------------------------------------------------------------------------
     bool dont_panik_core::openFile()
     {
       return true;

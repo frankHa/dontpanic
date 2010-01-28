@@ -5,6 +5,10 @@
     <Action name="edit_projects" />
     <Action name="edit_tasks" />
   </Menu>
+  <Menu name="view">
+    <Action name="view_day" />
+    <Action name="view_reports" />
+  </Menu>
   <Menu name="action">
     <Action name="start_new_action" />
     <Action name="stop_current_action" />

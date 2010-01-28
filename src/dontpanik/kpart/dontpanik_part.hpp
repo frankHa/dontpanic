@@ -55,6 +55,11 @@ class DontPanikPart : public KParts::ReadOnlyPart
     void editTasks();
     void stopCurrentAction();
     void startNewAction();
+    void viewDayAction();
+    void viewReportsAction();
+    
+  private:    
+    void setup_actions();
 
   private:
     dp::core::dont_panik_core *_M_core;
