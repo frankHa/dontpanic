@@ -136,9 +136,10 @@ namespace dp
     return *this;
   }
   // ---------------------------------------------------------------------------------
-  QTime Action::duration() const
+  int Action::duration() const
   {
-    if(startTime().isNull()){return QTime();}
+    QDateTime start = startTime();
+    if(start.isNull()){return 0;}    
     QDateTime end;
     if(endTime().isNull())
     {
@@ -147,8 +148,7 @@ namespace dp
     {
       end = endTime();
     }
-    QTime result(0, 0);
-    return result.addSecs(startTime().secsTo(end));    
+    return (startTime().secsTo(end));    
   }
   // ---------------------------------------------------------------------------------
   bool Action::isActive() const

@@ -41,7 +41,6 @@ namespace dp
       init_model();
       init_menu_actions();
       init_item_delegate();
-      //verticalHeader()->setDefaultSectionSize(20);
     }
     // ---------------------------------------------------------------------------------
     void KActionsTable::load_actions_of(QDate const& day)

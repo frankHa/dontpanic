@@ -9,6 +9,7 @@
 #include "kmainwidget.h"
 #include "kprojectsdialog.h"
 #include "ktasksdialog.h"
+#include <KStatusBar>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -16,12 +17,12 @@ namespace dp
   namespace core
   {
     // ---------------------------------------------------------------------------------
-    dont_panik_core::dont_panik_core ( KXMLGUIClient *gui_client, QWidget *parent )
+    dont_panik_core::dont_panik_core ( KParts::ReadOnlyPart *gui_client, QWidget *parent )
         : QObject ( parent )
         , _M_read_write ( false )
         , _M_gui_client ( gui_client )
     {
-      _M_widget = new KMainWidget ( parent );
+      _M_widget = new KMainWidget ( parent, new KParts::StatusBarExtension(gui_client) );
     }
     // ---------------------------------------------------------------------------------
     QWidget *dont_panik_core::widget()

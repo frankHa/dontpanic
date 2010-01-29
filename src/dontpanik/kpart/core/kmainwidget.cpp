@@ -20,6 +20,8 @@
 #include "kmainwidget.h"
 #include "kdayview.h"
 #include "kreportview.h"
+#include <QLabel>
+#include <QFont>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -28,8 +30,9 @@ namespace dp
   namespace core
   {
     // ---------------------------------------------------------------------------------
-    KMainWidget::KMainWidget ( QWidget *parent )
+    KMainWidget::KMainWidget ( QWidget *parent, KParts::StatusBarExtension *status_bar)
         : QStackedWidget ( parent )
+        , _M_status_bar(status_bar)
     {
       init_widgets();
     }
@@ -48,13 +51,24 @@ namespace dp
       setCurrentIndex(REPORT);
     }
     // ---------------------------------------------------------------------------------
+    KParts::StatusBarExtension* KMainWidget::statusBar()
+    {
+      return _M_status_bar;
+    }
+    // ---------------------------------------------------------------------------------
     // private stuff:
     // ---------------------------------------------------------------------------------
     void KMainWidget::init_widgets()
     {
-      addWidget(new KDayView(this));
+      addWidget(newDayView());
       addWidget(new KReportView(this));
     }    
+    // ---------------------------------------------------------------------------------
+    KDayView* KMainWidget::newDayView()
+    {
+      KDayView *v = new KDayView(this);
+      return v;
+    }
     // ---------------------------------------------------------------------------------
   }//core
   // ---------------------------------------------------------------------------------
