@@ -16,12 +16,12 @@ namespace dp
     arg >> uuid >> task >> project >> ct >> name >> comment>>icon;
     arg.endStructure();
     at._M_id = uuid;
-    at.setTask ( task );
-    at.setProject( project );
-    at.setCollaborationType( ct );
-    at.setName(name);
-    at.setComment(comment);
-    at.setIcon(icon);
+    at.setTask ( task )
+    .setProject( project )
+    .setCollaborationType( ct )
+    .setName(name)
+    .setComment(comment)
+    .setIcon(icon);
     return arg;
   }
 // ---------------------------------------------------------------------------------

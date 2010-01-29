@@ -19,15 +19,15 @@ namespace dp
     arg >> uuid >> task >> project >> ct >> name >> comment>>start>>end>>reviewed>>billed;
     arg.endStructure();
     at._M_id = uuid;
-    at.setTask ( task );
-    at.setProject( project );
-    at.setCollaborationType( ct );
-    at.setName(name);
-    at.setComment(comment);
-    at.setStartTime(start);
-    at.setEndTime(end);
-    at.setReviewed(reviewed);
-    at.setBilled(billed);
+    at.setTask ( task )
+    .setProject( project )
+    .setCollaborationType( ct )
+    .setName(name)
+    .setComment(comment)
+    .setStartTime(start)
+    .setEndTime(end)
+    .setReviewed(reviewed)
+    .setBilled(billed);
     
     return arg;
   }

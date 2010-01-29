@@ -42,9 +42,10 @@ namespace dp
     return _M_task;
   }
   // ---------------------------------------------------------------------------------
-  void Action::setTask ( QUuid t )
+  Action& Action::setTask ( QUuid t )
   {
     _M_task = t;
+    return *this;
   }
   // ---------------------------------------------------------------------------------
   QUuid Action::project() const
@@ -52,9 +53,10 @@ namespace dp
     return _M_project;
   }
   // ---------------------------------------------------------------------------------
-  void Action::setProject ( QUuid p )
+  Action& Action::setProject ( QUuid p )
   {
     _M_project = p;
+    return *this;
   }
   // ---------------------------------------------------------------------------------
   QUuid Action::collaborationType() const
@@ -62,9 +64,10 @@ namespace dp
     return _M_teamwork;
   }
   // ---------------------------------------------------------------------------------
-  void Action::setCollaborationType ( QUuid ct )
+  Action& Action::setCollaborationType ( QUuid ct )
   {
     _M_teamwork = ct;
+    return *this;
   }
   // ---------------------------------------------------------------------------------
   QString Action::name() const
@@ -72,9 +75,10 @@ namespace dp
     return _M_name;
   }
   // ---------------------------------------------------------------------------------
-  void Action::setName ( QString name )
+  Action& Action::setName ( QString name )
   {
     _M_name = name;
+    return *this;
   }
   // ---------------------------------------------------------------------------------
   QString Action::comment() const
@@ -82,9 +86,10 @@ namespace dp
     return _M_comment;
   }
   // ---------------------------------------------------------------------------------
-  void Action::setComment ( QString comment )
+  Action& Action::setComment ( QString comment )
   {
     _M_comment = comment;
+    return *this;
   }
   // ---------------------------------------------------------------------------------
   QDateTime Action::startTime() const
@@ -92,9 +97,10 @@ namespace dp
     return _M_start;
   }
   // ---------------------------------------------------------------------------------
-  void Action::setStartTime ( QDateTime const& start )
+  Action& Action::setStartTime ( QDateTime const& start )
   {
     _M_start = start;
+    return *this;
   }
   // ---------------------------------------------------------------------------------
   QDateTime Action::endTime() const
@@ -102,9 +108,10 @@ namespace dp
     return _M_end;
   }
   // ---------------------------------------------------------------------------------
-  void Action::setEndTime ( QDateTime const& end )
+  Action& Action::setEndTime ( QDateTime const& end )
   {
     _M_end = end;
+    return *this;
   }
   // ---------------------------------------------------------------------------------
   bool Action::reviewed() const
@@ -112,9 +119,10 @@ namespace dp
     return _M_reviewed;
   }
   // ---------------------------------------------------------------------------------
-  void Action::setReviewed ( bool r )
+  Action& Action::setReviewed ( bool r )
   {
     _M_reviewed = r;
+    return *this;
   }
   // ---------------------------------------------------------------------------------
   bool Action::billed() const
@@ -122,9 +130,10 @@ namespace dp
     return _M_billed;
   }
   // ---------------------------------------------------------------------------------
-  void Action::setBilled ( bool b )
+  Action& Action::setBilled ( bool b )
   {
     _M_billed = b;
+    return *this;
   }
   // ---------------------------------------------------------------------------------
   QTime Action::duration() const

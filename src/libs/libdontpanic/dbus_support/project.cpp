@@ -13,8 +13,7 @@ namespace dp
     arg >> _id >> _name >> _creation_date;
     arg.endStructure();
     project._M_id =  _id;
-    project.setName ( _name );
-    project.setCreationDate ( _creation_date );
+    project.setName ( _name ).setCreationDate ( _creation_date );
     return arg;
   }
 // ---------------------------------------------------------------------------------

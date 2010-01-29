@@ -36,9 +36,10 @@ namespace dp
     return _M_name;
   }
   // ---------------------------------------------------------------------------------
-  void Task::setName ( QString name )
+  Task& Task::setName ( QString name )
   {
     _M_name = name;
+    return *this;
   }
   // ---------------------------------------------------------------------------------
   bool Task::isSoloEffort() const
@@ -46,9 +47,10 @@ namespace dp
     return _M_solo_effort;
   }
   // ---------------------------------------------------------------------------------
-  void Task::setIsSoloEffort ( bool s )
+  Task& Task::setIsSoloEffort ( bool s )
   {
     _M_solo_effort = s;
+    return *this;
   }
   // ---------------------------------------------------------------------------------
   bool Task::isChargeable() const
@@ -56,9 +58,10 @@ namespace dp
     return _M_chargeable;
   }
   // ---------------------------------------------------------------------------------
-  void Task::setIsChargeable ( bool c )
+  Task& Task::setIsChargeable ( bool c )
   {
     _M_chargeable = c;
+    return *this;
   }
   // ---------------------------------------------------------------------------------
   QDateTime const& Task::creationDate() const
@@ -66,9 +69,10 @@ namespace dp
     return _M_creation_date;
   }
   // ---------------------------------------------------------------------------------
-  void Task::setCreationDate ( QDateTime date )
+  Task& Task::setCreationDate ( QDateTime date )
   {
     _M_creation_date = date;
+    return *this;
   }
   // ---------------------------------------------------------------------------------
   bool operator == (dp::Task const& lhs, dp::Task const& rhs)

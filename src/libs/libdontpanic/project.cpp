@@ -29,9 +29,10 @@ namespace dp
     return _M_name;
   }
   // ---------------------------------------------------------------------------------
-  void Project::setName ( QString name )
+  Project& Project::setName ( QString name )
   {
     _M_name = name;
+    return *this;
   }
   // ---------------------------------------------------------------------------------
   QDateTime const& Project::creationDate() const
@@ -39,9 +40,10 @@ namespace dp
     return _M_creation_date;
   }
   // ---------------------------------------------------------------------------------
-  void Project::setCreationDate ( QDateTime date )
+  Project& Project::setCreationDate ( QDateTime date )
   {
     _M_creation_date = date;
+    return *this;
   }
   // ---------------------------------------------------------------------------------
   bool operator == (dp::Project const& lhs, dp::Project const& rhs)

@@ -14,10 +14,10 @@ namespace dp
     arg >> uuid >> _name >> _solo >> _chargeable >> _creation_date;
     arg.endStructure();
     task._M_id = uuid;
-    task.setName ( _name );
-    task.setIsSoloEffort ( _solo );
-    task.setIsChargeable ( _chargeable );
-    task.setCreationDate ( _creation_date );
+    task.setName ( _name )
+    .setIsSoloEffort ( _solo )
+    .setIsChargeable ( _chargeable )
+    .setCreationDate ( _creation_date );
     return arg;
   }
 // ---------------------------------------------------------------------------------

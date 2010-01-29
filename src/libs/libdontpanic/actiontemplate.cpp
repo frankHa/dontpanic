@@ -42,9 +42,10 @@ ActionTemplate::ActionTemplate ( QString const& name )
     return _M_task;
   }
   // ---------------------------------------------------------------------------------
-  void ActionTemplate::setTask ( QUuid t )
+  ActionTemplate& ActionTemplate::setTask ( QUuid t )
   {
     _M_task = t;
+    return *this;
   }
   // ---------------------------------------------------------------------------------
   QUuid ActionTemplate::project() const
@@ -52,9 +53,10 @@ ActionTemplate::ActionTemplate ( QString const& name )
     return _M_project;
   }
   // ---------------------------------------------------------------------------------
-  void ActionTemplate::setProject ( QUuid p )
+  ActionTemplate& ActionTemplate::setProject ( QUuid p )
   {
     _M_project = p;
+    return *this;
   }
   // ---------------------------------------------------------------------------------
   QUuid ActionTemplate::collaborationType() const
@@ -62,9 +64,10 @@ ActionTemplate::ActionTemplate ( QString const& name )
     return _M_teamwork;
   }
   // ---------------------------------------------------------------------------------
-  void ActionTemplate::setCollaborationType ( QUuid ct )
+  ActionTemplate& ActionTemplate::setCollaborationType ( QUuid ct )
   {
     _M_teamwork = ct;
+    return *this;
   }
   // ---------------------------------------------------------------------------------
   QString ActionTemplate::name() const
@@ -72,9 +75,10 @@ ActionTemplate::ActionTemplate ( QString const& name )
     return _M_name;
   }
   // ---------------------------------------------------------------------------------
-  void ActionTemplate::setName ( QString name )
+  ActionTemplate& ActionTemplate::setName ( QString name )
   {
     _M_name = name;
+    return *this;
   }
   // ---------------------------------------------------------------------------------
   QString ActionTemplate::comment() const
@@ -82,9 +86,10 @@ ActionTemplate::ActionTemplate ( QString const& name )
     return _M_comment;
   }
   // ---------------------------------------------------------------------------------
-  void ActionTemplate::setComment ( QString comment )
+  ActionTemplate& ActionTemplate::setComment ( QString comment )
   {
     _M_comment = comment;
+    return *this;
   }
   // ---------------------------------------------------------------------------------
   QString ActionTemplate::icon() const
@@ -92,9 +97,10 @@ ActionTemplate::ActionTemplate ( QString const& name )
     return _M_icon;
   }
   // ---------------------------------------------------------------------------------
-  void ActionTemplate::setIcon ( QString icon )
+  ActionTemplate& ActionTemplate::setIcon ( QString icon )
   {
     _M_icon = icon;
+    return *this;
   }
   
   // ---------------------------------------------------------------------------------
