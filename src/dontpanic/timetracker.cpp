@@ -95,7 +95,7 @@ namespace dp
   // ---------------------------------------------------------------------------------
   void TimeTracker::start_action(Action const& _a)
   {
-    qDebug() << __FUNCTION__;
+    kDebug() << __FUNCTION__;
     if ( _M_current_action.isValid())
     {
       stopCurrentAction();
