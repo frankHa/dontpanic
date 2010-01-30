@@ -10,7 +10,7 @@ namespace dp
       : QObject ( parent )
       , _M_current_action(NullAction())
   {
-    init();
+    load_last_action();
   }
   // ---------------------------------------------------------------------------------
   void TimeTracker::startNewAction()
@@ -29,6 +29,7 @@ namespace dp
     {
       emit removed(a);
     }
+    load_last_action();
   }
   // ---------------------------------------------------------------------------------
   void TimeTracker::store(Action const& a)
@@ -85,7 +86,7 @@ namespace dp
   // ---------------------------------------------------------------------------------
   //private stuff:
   // ---------------------------------------------------------------------------------
-  void TimeTracker::init()
+  void TimeTracker::load_last_action()
   {
     _M_current_action = persistence().lastAction();
     kDebug()<<"last action:"<<_M_current_action.id().toString()

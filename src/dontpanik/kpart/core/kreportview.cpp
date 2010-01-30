@@ -29,7 +29,7 @@ namespace dp
     ,_M_ui(new Ui::KReportView())
     {
       _M_ui->setupUi(this);
-      _M_ui->splitter->setSizes ( QList<int>() << 100 << 500 );
+      _M_ui->splitter->setSizes ( QList<int>() << 150 << 500 );
     }
     
     KReportView::~KReportView(){}

@@ -46,10 +46,11 @@ namespace dp
       const QString SELECT_LAST_ACTION = 
       "SELECT DISTINCT a_id, a_t_task , a_p_project,a_ct_collaboration_type,\
       a_name, a_comment, a_start, a_end, a_reviewed, a_billed FROM a_action\
-      order by rowid desc limit 1";
+      order by a_start desc limit 1";
       // ---------------------------------------------------------------------------------
       success Action::persist ( dp::Action const&_a ) const
       {
+        if(!_a.isValid()) return error();
         if ( exists ( _a ) )
         {
           return update ( _a );
@@ -164,6 +165,7 @@ namespace dp
           {
             return error();
           }
+          kDebug()<<_a.id().toString();
           QSqlQuery query;
           query.prepare ( INSERT_ACTION );
           query.addBindValue ( _a.id().toString() );
@@ -190,6 +192,7 @@ namespace dp
         {
           return error();
         }
+        kDebug()<<_a.id().toString();
         QSqlQuery query;
         query.prepare ( UPDATE_ACTION );
         query.addBindValue ( _a.task().toString() );
