@@ -19,10 +19,9 @@
 
 #include "kreporttypeslist.h"
 #include "kreporttypeslistmodel.h"
+#include "kreportrangedialog.h"
 #include <QMenu>
 #include <QContextMenuEvent>
-#include <KAction>
-#include <KMessageBox>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -64,9 +63,9 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void KReportTypesList::on_double_clicked(QModelIndex const& index)
     {
-//       ActionTemplate const& at = _M_model->at(index);
-//       kDebug()<<"starting action from template "<<at.id().toString();
-//       context()->timeTracker()->startActionFromTemplate(at);
+      //dummy impl as there is only one fix report type!
+      KReportRangeDialog dlg;
+      dlg.exec();
     }
     // ---------------------------------------------------------------------------------
   }//core

@@ -19,11 +19,12 @@ set(dontpanikpart_LIB_SRCS
     kmainwidget.cpp
     kreporttypeslist.cpp
     kreporttypeslistmodel.cpp
+    kreportrangedialog.cpp 
     kreportview.cpp 
     ktaskscombobox.cpp 
     ktasksdialog.cpp
     ktaskstable.cpp
-    ktaskstablemodel.cpp
+    ktaskstablemodel.cpp    
     dont_panik_part_core.cpp
    )
 
@@ -33,8 +34,9 @@ set(dontpanikpart_LIB_UIS
     ui/keditprojectdialog.ui
     ui/kedittaskdialog.ui
     ui/kprojectsdialog.ui
+    ui/kreportrangedialog.ui
     ui/kreportview.ui
-    ui/ktasksdialog.ui
+    ui/ktasksdialog.ui    
    )
 
 qt4_wrap_ui(dontpanikpart_LIB_SRCS ${dontpanikpart_LIB_UIS})
