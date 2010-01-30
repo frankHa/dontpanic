@@ -22,23 +22,26 @@
 
 #include <QtGui/QWidget>
 
+namespace Ui
+{
+  class KReportView;
+}
 
 namespace dp
 {
 
-    namespace core
+  namespace core
+  {
+    class KReportView : public QWidget
     {
-
-        class KReportView : public QWidget
-        {
-          Q_OBJECT
-          public:
-            KReportView(QWidget *parent=0);
-            ~KReportView();
-        };
-
-    }
-
+      Q_OBJECT
+      public:
+        KReportView(QWidget *parent=0);
+        ~KReportView();
+      private:
+        Ui::KReportView *_M_ui;
+    };       
+  }
 }
 
 #endif // DP_CORE_KREPORTVIEW_H

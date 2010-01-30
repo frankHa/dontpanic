@@ -9,6 +9,8 @@
     </method>
     <method name="stopCurrentAction">
     </method>
+    <method name="continueLastAction">
+    </method>
     <method name="remove">
       <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::Action"/>
       <arg type="(si)" />

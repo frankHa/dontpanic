@@ -89,6 +89,11 @@ void DontPanikPart::stopCurrentAction()
   _M_core->stopCurrentAction();
 }
 
+void DontPanikPart::continueLastAction()
+{
+  _M_core->continueLastAction();
+}
+
 void DontPanikPart::startNewAction()
 {
   _M_core->startNewAction();
@@ -128,15 +133,21 @@ void DontPanikPart::setup_actions()
   actionCollection()->addAction ( "stop_current_action", stop_current_action );
   connect ( stop_current_action, SIGNAL ( triggered() ), this, SLOT ( stopCurrentAction() ) );
   
+  KAction *continue_last_action = new KAction(this);
+  continue_last_action->setText(i18n("Resume the last Action"));
+  continue_last_action->setShortcut( KShortcut(i18n("Ctrl+R")));
+  actionCollection()->addAction ( "continue_last_action", continue_last_action );
+  connect ( continue_last_action, SIGNAL ( triggered() ), this, SLOT ( continueLastAction() ) );
+  
   KAction *view_day_action = new KAction(this);
   view_day_action->setText(i18n("Day View"));
-  view_day_action->setShortcut( KShortcut(i18n("Ctrl+D")));
+  view_day_action->setShortcut( KShortcut(i18n("Ctrl+V, Ctrl+D")));
   actionCollection()->addAction ( "view_day", view_day_action );
   connect ( view_day_action, SIGNAL ( triggered() ), this, SLOT ( viewDayAction() ) );
   
   KAction *view_reports_action = new KAction(this);
   view_reports_action->setText(i18n("Reports View"));
-  view_reports_action->setShortcut( KShortcut(i18n("Ctrl+R")));
+  view_reports_action->setShortcut( KShortcut(i18n("Ctrl+V, Ctrl+R")));
   actionCollection()->addAction ( "view_reports", view_reports_action );
   connect ( view_reports_action, SIGNAL ( triggered() ), this, SLOT ( viewReportsAction() ) );
   

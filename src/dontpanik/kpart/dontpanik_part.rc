@@ -12,6 +12,7 @@
   <Menu name="action">
     <Action name="start_new_action" />
     <Action name="stop_current_action" />
+    <Action name="continue_last_action" />
   </Menu>
 </MenuBar>
 <ToolBar name="mainToolBar">

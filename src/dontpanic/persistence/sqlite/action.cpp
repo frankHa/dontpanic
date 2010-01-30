@@ -28,9 +28,13 @@ namespace dp
         a_name, a_comment, a_start, a_end, a_reviewed, a_billed FROM a_action \
         WHERE a_start>=? AND a_start<?";
       // ---------------------------------------------------------------------------------
+      const QString SELECT_DISTINCT =
+      "SELECT DISTINCT a_id, a_t_task , a_p_project,a_ct_collaboration_type,\
+      a_name, a_comment, a_start, a_end, a_reviewed, a_billed FROM a_action";
+      // ---------------------------------------------------------------------------------
       const QString SELECT_DISTINCT_ACTION =
-        "SELECT DISTINCT a_id, a_t_task , a_p_project,a_ct_collaboration_type,\
-        a_name, a_comment, a_start, a_end, a_reviewed, a_billed FROM a_action WHERE (a_id=?)";
+      "SELECT DISTINCT a_id, a_t_task , a_p_project,a_ct_collaboration_type,\
+      a_name, a_comment, a_start, a_end, a_reviewed, a_billed FROM a_action WHERE (a_id=?)";
       // ---------------------------------------------------------------------------------
       const QString UPDATE_ACTION =
       "UPDATE a_action set a_t_task=?, a_p_project=?,a_ct_collaboration_type=?,\
@@ -39,7 +43,10 @@ namespace dp
       const QString REMOVE_ACTION = 
       "DELETE FROM a_action WHERE (a_id=?)";
       // ---------------------------------------------------------------------------------
-      const QString SELECT_ACTIVE = "SELECT a_id FROM A_ACTION WHERE (a_end = 'NULL')";
+      const QString SELECT_LAST_ACTION = 
+      "SELECT DISTINCT a_id, a_t_task , a_p_project,a_ct_collaboration_type,\
+      a_name, a_comment, a_start, a_end, a_reviewed, a_billed FROM a_action\
+      WHERE (a_start = (SELECT max(a_start) FROM a_action))";
       // ---------------------------------------------------------------------------------
       success Action::persist ( dp::Action const&_a ) const
       {
@@ -111,27 +118,24 @@ namespace dp
         return successful();
       }
       // ---------------------------------------------------------------------------------
-      dp::Action Action::findActive() const
+      dp::Action Action::findLastAction() const
       {
         QSqlQuery query;
-        query.prepare ( SELECT_ACTIVE );
+        query.prepare ( SELECT_LAST_ACTION );
         if ( execute ( query ).has_failed() )
         {
-          kWarning() << "query SELECT_ACTIVE failed";
+          kWarning() << "query SELECT_LAST_ACTION failed";
           return dp::NullAction();
         }
         if ( !query.first() )
         {
-          kWarning() << "no active action found";
+          kWarning() << "no action found";
           return dp::NullAction();
         }
         QUuid const&id = query.value ( 0 ).toString();
         dp::Action _a ( id );
-        if ( load ( _a ).has_failed() )
-        {
-          kWarning() << "loading the active action [" << id.toString() << "]has failed";
-        }
-        kDebug()<<"loaded active action "<<id.toString();
+        assign_query_values_to_entity(query, _a);
+        kDebug()<<"loaded last action "<<id.toString();
         return _a;
       }
       // ---------------------------------------------------------------------------------

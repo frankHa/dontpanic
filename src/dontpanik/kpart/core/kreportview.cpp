@@ -18,13 +18,18 @@
 */
 
 #include "kreportview.h"
+#include "ui_kreportview.h"
 
 namespace dp
 {
   namespace core
   {
     KReportView::KReportView(QWidget *parent)
-    :QWidget(parent){}
+    :QWidget(parent)
+    ,_M_ui(new Ui::KReportView())
+    {
+      _M_ui->setupUi(this);
+    }
     
     KReportView::~KReportView(){}
   }

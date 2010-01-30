@@ -207,9 +207,9 @@ namespace dp
       return _sqlite::action().findAll(_tl, from, to);
     }
     // ---------------------------------------------------------------------------------
-    Action Sqlite::activeAction() const
+    Action Sqlite::lastAction() const
     {
-      return _sqlite::action().findActive();
+      return _sqlite::action().findLastAction();
     }
     // ---------------------------------------------------------------------------------
     

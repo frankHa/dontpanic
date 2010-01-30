@@ -47,6 +47,11 @@ namespace dp
       context()->timeTracker()->stopCurrentAction();
     }
     // ---------------------------------------------------------------------------------
+    void dont_panik_core::continueLastAction()
+    {
+      context()->timeTracker()->continueLastAction();
+    }
+    // ---------------------------------------------------------------------------------
     void dont_panik_core::startNewAction()
     {
       context()->timeTracker()->startNewAction();

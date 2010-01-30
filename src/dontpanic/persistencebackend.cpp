@@ -27,9 +27,9 @@ namespace dp
     return _persistence::sqlite().findAll(actions, from, to);
   }
   // ---------------------------------------------------------------------------------
-  Action PersistenceBackend::activeAction()
+  Action PersistenceBackend::lastAction()
   {
-    return _persistence::sqlite().activeAction();
+    return _persistence::sqlite().lastAction();
   }
   // ---------------------------------------------------------------------------------
 }//dp

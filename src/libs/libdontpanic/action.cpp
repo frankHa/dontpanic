@@ -153,6 +153,7 @@ namespace dp
   // ---------------------------------------------------------------------------------
   bool Action::isActive() const
   {
+    if(!isValid()) return false;
     if(!startTime().isValid())return false;
     return endTime().isNull();
   }

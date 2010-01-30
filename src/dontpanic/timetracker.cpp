@@ -58,13 +58,20 @@ namespace dp
   void TimeTracker::stopCurrentAction()
   {
     qDebug() << __FUNCTION__;
-    if ( !_M_current_action.isValid() )
+    if ( !_M_current_action.isActive() )
     {
       return;
     }
     _M_current_action.setEndTime ( QDateTime::currentDateTime()/*.toUTC()*/ );
     store(_M_current_action);
-    _M_current_action = NullAction();
+  }
+  // ---------------------------------------------------------------------------------
+  void TimeTracker::continueLastAction()
+  {
+    if(!_M_current_action.isValid()){return;}
+    if(_M_current_action.isActive()){return;}
+    _M_current_action.setEndTime(QDateTime());
+    store(_M_current_action);
   }
   // ---------------------------------------------------------------------------------
   ActionList TimeTracker::findAll(QDateTime const& from, QDateTime const& to)
@@ -78,7 +85,7 @@ namespace dp
   // ---------------------------------------------------------------------------------
   void TimeTracker::init()
   {
-    _M_current_action = persistence().activeAction();
+    _M_current_action = persistence().lastAction();
   }
   // ---------------------------------------------------------------------------------
   void TimeTracker::start_action(Action const& _a)
