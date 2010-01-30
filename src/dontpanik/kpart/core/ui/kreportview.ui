@@ -25,7 +25,7 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QListView" name="report_types"/>
+        <widget class="dp::core::KReportTypesList" name="report_types"/>
        </item>
       </layout>
      </widget>
@@ -34,6 +34,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>dp::core::KReportTypesList</class>
+   <extends>QListView</extends>
+   <header>kreporttypeslist.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
