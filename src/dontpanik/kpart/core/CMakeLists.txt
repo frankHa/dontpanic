@@ -31,6 +31,7 @@ set(dontpanikpart_LIB_UIS
     ui/keditprojectdialog.ui
     ui/kedittaskdialog.ui
     ui/kprojectsdialog.ui
+    ui/kreportview.ui
     ui/ktasksdialog.ui
    )
 
