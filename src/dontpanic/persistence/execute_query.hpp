@@ -33,7 +33,7 @@ namespace dp
       }
       else
       {
-        query.addBindValue ( QVariant("NULL") );
+        query.addBindValue ( QVariant(0) );
       }
     }
     // ---------------------------------------------------------------------------------

@@ -38,6 +38,7 @@ namespace dp
         , _M_model ( new detail::KActionsTableModel ( this ))
         , _M_sort_proxy_model(new QSortFilterProxyModel(this))
     {
+      installEventFilter(this);
       init_model();
       init_menu_actions();
       init_item_delegate();
@@ -88,6 +89,23 @@ namespace dp
       {
         context()->timeTracker()->remove(current_selection);
       }
+    }
+    // ---------------------------------------------------------------------------------
+    bool KActionsTable::eventFilter(QObject *obj, QEvent *event)
+    {
+      if(obj == this)
+      {
+        if(event->type() ==QEvent::KeyPress)
+        {
+          QKeyEvent *key_event = static_cast<QKeyEvent*>(event);
+          if(key_event->matches(QKeySequence::Delete))
+          {
+            on_remove_selected_action();
+            return true;
+          }
+        }
+      }
+      return QTableView::eventFilter(obj, event);
     }
     // ---------------------------------------------------------------------------------
   }//core

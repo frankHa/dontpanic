@@ -46,7 +46,7 @@ namespace dp
       const QString SELECT_LAST_ACTION = 
       "SELECT DISTINCT a_id, a_t_task , a_p_project,a_ct_collaboration_type,\
       a_name, a_comment, a_start, a_end, a_reviewed, a_billed FROM a_action\
-      WHERE (a_start = (SELECT max(a_start) FROM a_action))";
+      order by rowid desc limit 1";
       // ---------------------------------------------------------------------------------
       success Action::persist ( dp::Action const&_a ) const
       {

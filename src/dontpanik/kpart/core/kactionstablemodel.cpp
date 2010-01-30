@@ -225,6 +225,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       void KActionsTableModel::updated(dp::Action const&p)
       {
+        kDebug()<<p.id().toString()<< ", start time:"<<p.startTime();
         if(!is_interesting_for_current_day(p))
         {
           removed(p);
