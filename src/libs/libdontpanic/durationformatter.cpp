@@ -24,9 +24,9 @@ namespace dp
   // ---------------------------------------------------------------------------------
   QString DurationFormatter::format(int duration)
   {
-    int secs = duration%60;
-    int min = (duration-secs)/60;
-    QString result = QString("%L1:%L2").arg(min,2, 10, QChar('0')).arg(secs,2, 10, QChar('0'));
+    int mins = duration%60;
+    int h = (duration-mins)/60;
+    QString result = QString("%L1:%L2").arg(h,2, 10, QChar('0')).arg(mins,2, 10, QChar('0'));
     return result;
   }
   // ---------------------------------------------------------------------------------

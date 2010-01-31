@@ -65,7 +65,7 @@ namespace dp
     {
       end = to();
     }
-    return (start.secsTo(end));    
+    return (start.secsTo(end)/60);    
   }
   // ---------------------------------------------------------------------------------      
 }
