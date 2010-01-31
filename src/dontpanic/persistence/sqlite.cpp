@@ -24,7 +24,7 @@
 // ---------------------------------------------------------------------------------
 #define CREATE_TABLE_PROJECT\
   "CREATE TABLE IF NOT EXISTS p_project \
-(p_id TEXT PRIMARY KEY, p_name TEXT, p_visible INTEGER, p_creation_date TEXT)"
+(p_id TEXT PRIMARY KEY, p_name TEXT, p_visible INTEGER, p_creation_date TEXT, p_comment TEXT)"
 
 #define CREATE_TABLE_TASK\
   "CREATE TABLE IF NOT EXISTS t_task \

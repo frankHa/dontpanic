@@ -16,16 +16,16 @@ namespace dp
     {
       // ---------------------------------------------------------------------------------
       const QString INSERT_PROJECT =
-        "INSERT INTO p_project(p_id, p_name, p_visible, p_creation_date)VALUES(?, ?, 1, ?)";
+        "INSERT INTO p_project(p_id, p_name, p_visible, p_creation_date, p_comment)VALUES(?, ?, 1, ?, ?)";
       // ---------------------------------------------------------------------------------
       const QString SELECT_ALL_PROJECTS =
-        "SELECT p_id, p_name, p_creation_date FROM p_project WHERE (p_visible <> 0)";
+        "SELECT p_id, p_name, p_creation_date, p_comment FROM p_project WHERE (p_visible <> 0)";
       // ---------------------------------------------------------------------------------
       const QString SELECT_DISTINCT_PROJECT =
-        "SELECT DISTINCT p_id, p_name, p_creation_date FROM p_project WHERE (p_id=?)";
+        "SELECT DISTINCT p_id, p_name, p_creation_date, p_comment FROM p_project WHERE (p_id=?)";
       // ---------------------------------------------------------------------------------
       const QString UPDATE_PROJECT =
-        "UPDATE p_project set(p_name=?, p_creation_date=?) WHERE (p_id=?)";
+        "UPDATE p_project set(p_name=?, p_creation_date=?, p_comment=?) WHERE (p_id=?)";
       // ---------------------------------------------------------------------------------
       const QString REMOVE_PROJECT = 
       "DELETE FROM p_project WHERE (p_id=?)";
@@ -129,6 +129,7 @@ namespace dp
         query.addBindValue ( _p.id().toString() );
         query.addBindValue ( _p.name() );
         query.addBindValue ( _p.creationDate() );
+        query.addBindValue( _p.comment() );
         if ( execute ( query ).has_failed() )
         {
           return error();
@@ -146,6 +147,7 @@ namespace dp
         query.prepare ( UPDATE_PROJECT );
         query.addBindValue ( _p.name() );
         query.addBindValue ( _p.creationDate() );
+        query.addBindValue( _p.comment() );
         query.addBindValue ( _p.id().toString() );
         return execute ( query );
       }
@@ -154,6 +156,7 @@ namespace dp
       {
         p.setName ( query.value ( 1 ).toString() );
         p.setCreationDate ( query.value ( 2 ).toDateTime() );
+        p.setComment( query.value(3).toString() );
         return successful();
       }
 
