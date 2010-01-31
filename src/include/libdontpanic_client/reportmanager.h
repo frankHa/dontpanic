@@ -22,6 +22,7 @@
 
 #include <libdontpanic/dp_export.hpp>
 #include <libdontpanic/defines.hpp>
+#include <libdontpanic/report.h>
 #include <QObject>
 
 
@@ -37,7 +38,6 @@ namespace org
 
 namespace dp
 {
-  class Report;
   class TimeRange;
   namespace client
   {
@@ -50,6 +50,7 @@ namespace dp
       signals:
         // ---------------------------------------------------------------------------------    
         void error(QString);
+        void generated(Report);
         // ---------------------------------------------------------------------------------
       private slots:
         // ---------------------------------------------------------------------------------

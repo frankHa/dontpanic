@@ -21,6 +21,8 @@
 #define DP_CORE_KREPORTVIEW_H
 
 #include <QtGui/QWidget>
+#include <libdontpanic/defines.hpp>
+#include <libdontpanic/report.h>
 
 namespace Ui
 {
@@ -38,6 +40,8 @@ namespace dp
       public:
         KReportView(QWidget *parent=0);
         ~KReportView();
+      private slots:
+        void on_generated(Report r);
       private:
         Ui::KReportView *_M_ui;
     };       

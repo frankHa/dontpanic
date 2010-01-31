@@ -18,6 +18,7 @@
 */
 
 #include "kreportrangedialog.h"
+#include <libdontpanic/timerange.h>
 #include "ui_kreportrangedialog.h"
 
 #include <QStringList>
@@ -35,6 +36,11 @@ namespace dp
       init_presets();
       init_ui();
       
+    }
+    
+    TimeRange KReportRangeDialog::selectedRange() const
+    {
+      return TimeRange();
     }
     
     KReportRangeDialog::~KReportRangeDialog()

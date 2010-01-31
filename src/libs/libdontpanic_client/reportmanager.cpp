@@ -40,7 +40,9 @@ namespace dp
         kWarning()<<reply.error();
         emit error(QDBusError::errorString(reply.error().type()));
       }
-      return reply.value();
+      Report const& rep = reply.value();
+      emit generated(rep);
+      return rep;
     }
     // ---------------------------------------------------------------------------------
     ReportManager::~ReportManager ( ){}

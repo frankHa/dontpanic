@@ -30,6 +30,7 @@ namespace Ui
 
 namespace dp
 {
+  class TimeRange;
   namespace core
   {
     class KReportRangeDialog 
@@ -40,6 +41,8 @@ namespace dp
         KReportRangeDialog ( QWidget* parent = 0, Qt::WindowFlags f = 0 );
         ~KReportRangeDialog();
         
+      public:
+        TimeRange selectedRange() const;
       private slots:
         void init_ui();
         void init_presets();

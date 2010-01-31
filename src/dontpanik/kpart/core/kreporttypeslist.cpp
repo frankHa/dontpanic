@@ -20,6 +20,7 @@
 #include "kreporttypeslist.h"
 #include "kreporttypeslistmodel.h"
 #include "kreportrangedialog.h"
+#include "context.h"
 #include <QMenu>
 #include <QContextMenuEvent>
 // ---------------------------------------------------------------------------------
@@ -65,7 +66,11 @@ namespace dp
     {
       //dummy impl as there is only one fix report type!
       KReportRangeDialog dlg;
-      dlg.exec();
+      if(dlg.exec()==QDialog::Accepted)
+      {
+        Report r =context()->reportManager()->generateCfReport(dlg.selectedRange());
+        kDebug()<<r.reportData();
+      }
     }
     // ---------------------------------------------------------------------------------
   }//core

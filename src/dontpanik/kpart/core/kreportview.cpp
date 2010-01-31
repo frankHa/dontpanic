@@ -19,6 +19,7 @@
 
 #include "kreportview.h"
 #include "ui_kreportview.h"
+#include "context.h"
 
 namespace dp
 {
@@ -30,9 +31,15 @@ namespace dp
     {
       _M_ui->setupUi(this);
       _M_ui->splitter->setSizes ( QList<int>() << 150 << 500 );
+      connect(context()->reportManager(), SIGNAL(generated(Report)), this, SLOT(on_generated(Report)));
     }
     
-    KReportView::~KReportView(){}
+    KReportView::~KReportView(){delete _M_ui;}
+    
+    void KReportView::on_generated(Report report)
+    {
+      _M_ui->report->setText(report.reportData());
+    }
   }
 }
 
