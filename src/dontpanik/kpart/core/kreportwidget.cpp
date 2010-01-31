@@ -30,6 +30,7 @@ namespace dp
     , _M_ui(new Ui::KReportWidget())
     {
       _M_ui->setupUi(this);
+      resetReport();
       subscribe_to_report_manager_signals();
     }
     
@@ -41,6 +42,17 @@ namespace dp
     {
       _M_ui->report_type->setText(r.reportType());
       _M_ui->report->setText(r.reportData());
+      _M_ui->report_range->setText(i18n("%1 - %2")
+      .arg(r.range().from().date().toString())
+      .arg(r.range().to().date().toString())
+      );
+    }
+    
+    void KReportWidget::resetReport()
+    {
+      _M_ui->report_type->setText("");
+      _M_ui->report->setText("");
+      _M_ui->report_range->setText("");
     }
     
     // private stuff:

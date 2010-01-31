@@ -42,6 +42,7 @@ namespace dp
         
       public slots:
         void setReport(Report const& r);
+        void resetReport();
      
       private:
         void subscribe_to_report_manager_signals();
