@@ -17,6 +17,7 @@ set(dontpanic_SRCS
     main.cpp
     persistencebackend.cpp
     projectmanager.cpp
+    reportmanager.cpp
     taskmanager.cpp 
     timetracker.cpp
     persistence/sqlite.cpp
@@ -33,6 +34,9 @@ qt4_add_dbus_adaptor(dontpanic_SRCS
 qt4_add_dbus_adaptor(dontpanic_SRCS
                     ${DBUS_INTERFACES_PATH}/org.dontpanic.ProjectManager.xml
                     projectmanager.h dp::ProjectManager)
+qt4_add_dbus_adaptor(dontpanic_SRCS
+                    ${DBUS_INTERFACES_PATH}/org.dontpanic.ReportManager.xml
+                    reportmanager.h dp::ReportManager)
 qt4_add_dbus_adaptor(dontpanic_SRCS
                     ${DBUS_INTERFACES_PATH}/org.dontpanic.TaskManager.xml
                     taskmanager.h dp::TaskManager)

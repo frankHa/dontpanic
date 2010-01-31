@@ -6,6 +6,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 set(libdontpanic_client_SRCS
     actiontemplatemanager.cpp
     projectmanager.cpp
+    reportmanager.cpp
     taskmanager.cpp
     timetracker.cpp
    )
@@ -13,6 +14,7 @@ set(libdontpanic_client_SRCS
 qt4_wrap_cpp(libdontpanic_client_SRCS
 	     ../../include/libdontpanic_client/actiontemplatemanager.h
          ../../include/libdontpanic_client/projectmanager.h
+         ../../include/libdontpanic_client/reportmanager.h
 	     ../../include/libdontpanic_client/taskmanager.h
 	     ../../include/libdontpanic_client/timetracker.h
              )
@@ -32,7 +34,10 @@ qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS
                                     libdontpanic/dbus_support/project.hpp
                                     libdontpanic/dbus_support/quuid.h
                                     )
-
+qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS
+                                    ${DBUS_INTERFACES_PATH}/org.dontpanic.ReportManager.xml
+                                    remote_reportmanager
+                                    )
 qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS
                                     ${DBUS_INTERFACES_PATH}/org.dontpanic.TaskManager.xml
                                     remote_taskmanager

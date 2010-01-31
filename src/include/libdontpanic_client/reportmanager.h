@@ -17,61 +17,58 @@
 
 */
 
-#ifndef DP_CORE_CONTEXT_H
-#define DP_CORE_CONTEXT_H
+#ifndef DP_CLIENT_REPORTMANAGER_H
+#define DP_CLIENT_REPORTMANAGER_H
 
+#include <libdontpanic/dp_export.hpp>
 #include <libdontpanic/defines.hpp>
-#include <libdontpanic_client/actiontemplatemanager.h>
-#include <libdontpanic_client/projectmanager.h>
-#include <libdontpanic_client/reportmanager.h>
-#include <libdontpanic_client/taskmanager.h>
-#include <libdontpanic_client/timetracker.h>
+#include <QObject>
+
+
+class OrgDontpanicReportManagerInterface;
+namespace org
+{
+  namespace dontpanic
+  {
+    typedef OrgDontpanicReportManagerInterface ReportManager;
+  }
+}
 
 
 namespace dp
 {
 
-  namespace core
+  namespace client
   {
 
-    class Context
+    class DP_EXPORT ReportManager: public QObject
     {
         // ---------------------------------------------------------------------------------
+        Q_OBJECT
+        // ---------------------------------------------------------------------------------	
+      signals:
+        // ---------------------------------------------------------------------------------
+      private slots:
+        // ---------------------------------------------------------------------------------
       public:
         // ---------------------------------------------------------------------------------
-        Context();
-        ~Context();
+        ReportManager ( QObject *parent = 0 );
+        ~ReportManager ( );
         // ---------------------------------------------------------------------------------
       public:
-        // ---------------------------------------------------------------------------------
-        dp::client::ActionTemplateManager* actionTemplateManager();
-        // ---------------------------------------------------------------------------------
-        dp::client::ProjectManager* projectManager();
-        // ---------------------------------------------------------------------------------
-        dp::client::ReportManager* reportManager();
-        // ---------------------------------------------------------------------------------
-        dp::client::TaskManager* taskManager();
-        // ---------------------------------------------------------------------------------
-        dp::client::TimeTracker* timeTracker();
         // ---------------------------------------------------------------------------------
       private:
         // ---------------------------------------------------------------------------------
-        dp::client::ActionTemplateManager *_M_action_template_manager;
+        org::dontpanic::ReportManager *remote();
         // ---------------------------------------------------------------------------------
-        dp::client::ProjectManager *_M_project_manager;
+      private:
         // ---------------------------------------------------------------------------------
-        dp::client::ReportManager *_M_report_manager;
-        // ---------------------------------------------------------------------------------
-        dp::client::TaskManager *_M_task_manager;
-        // ---------------------------------------------------------------------------------
-        dp::client::TimeTracker *_M_timetracker;
+        org::dontpanic::ReportManager *_M_remote;
         // ---------------------------------------------------------------------------------
     };
-    // ---------------------------------------------------------------------------------
-    Context* context();
-    // ---------------------------------------------------------------------------------
+
   }
 
 }
 
-#endif // DP_CORE_CONTEXT_H
+#endif // DP_CLIENT_PROJECTMANAGER_H

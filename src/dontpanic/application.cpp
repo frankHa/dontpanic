@@ -5,6 +5,7 @@
 #include "persistencebackend.hpp"
 #include "actiontemplatemanager.h"
 #include "projectmanager.h"
+#include "reportmanager.h"
 #include "taskmanager.h"
 #include "timetracker.h"
 
@@ -35,6 +36,8 @@ class Application::ApplicationPrivate
     // ---------------------------------------------------------------------------------
     void init_projectmanager();
     // ---------------------------------------------------------------------------------
+    void init_reportmanager();
+    // ---------------------------------------------------------------------------------
     void init_taskmanager();
     // ---------------------------------------------------------------------------------
     void init_timetracker();
@@ -48,6 +51,7 @@ class Application::ApplicationPrivate
     dp::PersistenceBackend * _M_persistence;
     dp::TimeTracker *_M_timetracker;
     dp::ProjectManager *_M_projectmanager;
+    dp::ReportManager *_M_reportmanager;
     dp::TaskManager *_M_taskmanager;
     dp::ActionTemplateManager *_M_action_template_manager;
     // ---------------------------------------------------------------------------------
@@ -91,8 +95,9 @@ void Application::ApplicationPrivate::init()
   init_storage_backend();
   init_action_template_manager();
   init_projectmanager();
+  init_reportmanager();
   init_taskmanager();
-  init_timetracker();
+  init_timetracker();  
 }
 // ---------------------------------------------------------------------------------
 bool Application::ApplicationPrivate::init_storage_backend()
@@ -116,6 +121,12 @@ void Application::ApplicationPrivate::init_action_template_manager()
 {
   _M_action_template_manager = new dp::ActionTemplateManager ( _M_self );
   dp::dbus().register_object ( _M_action_template_manager ).at_session_bus().as ( "/ActionTemplateManager" );
+}
+// ---------------------------------------------------------------------------------
+void Application::ApplicationPrivate::init_reportmanager()
+{
+  _M_reportmanager = new dp::ReportManager ( _M_self );
+  dp::dbus().register_object ( _M_reportmanager ).at_session_bus().as ( "/ReportManager" );
 }
 // ---------------------------------------------------------------------------------
 void Application::ApplicationPrivate::init_timetracker()

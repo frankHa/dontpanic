@@ -33,6 +33,7 @@ namespace dp
     Context::Context()
     : _M_action_template_manager(new dp::client::ActionTemplateManager())
     , _M_project_manager(new dp::client::ProjectManager())
+    , _M_report_manager(new dp::client::ReportManager())
     , _M_task_manager(new dp::client::TaskManager())
     , _M_timetracker((new dp::client::TimeTracker())){}
     
@@ -41,6 +42,7 @@ namespace dp
     {
       delete _M_action_template_manager;
       delete _M_project_manager;
+      delete _M_report_manager;
       delete _M_task_manager;
       delete _M_timetracker;
     }
@@ -53,6 +55,11 @@ namespace dp
     dp::client::ProjectManager* Context::projectManager()
     {
       return _M_project_manager;
+    }
+    
+    dp::client::ReportManager* Context::reportManager()
+    {
+      return _M_report_manager;
     }
     
     dp::client::TaskManager* Context::taskManager()

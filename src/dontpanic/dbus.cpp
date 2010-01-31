@@ -1,6 +1,7 @@
 #include "libdontpanic/dbus.hpp"
 #include "timetrackeradaptor.h"
 #include "projectmanageradaptor.h"
+#include "reportmanageradaptor.h"
 #include "taskmanageradaptor.h"
 #include "actiontemplatemanageradaptor.h"
 // ---------------------------------------------------------------------------------
@@ -19,6 +20,12 @@ namespace dp
   QDBusAbstractAdaptor* create_dbus_adaptor_for<dp::ProjectManager> ( dp::ProjectManager *obj )
   {
     return new ProjectManagerAdaptor ( obj );
+  }
+  // ---------------------------------------------------------------------------------
+  template<>
+  QDBusAbstractAdaptor* create_dbus_adaptor_for<dp::ReportManager> ( dp::ReportManager *obj )
+  {
+    return new ReportManagerAdaptor ( obj );
   }
   // ---------------------------------------------------------------------------------
   template<>
