@@ -3,6 +3,7 @@
 #include "libdontpanic/dbus_support/actiontemplate.hpp"
 #include "libdontpanic/dbus_support/project.hpp"
 #include "libdontpanic/dbus_support/task.hpp"
+#include "libdontpanic/dbus_support/timerange.h"
 #include "libdontpanic/dbus_support/quuid.h"
 //Qt includes
 #include <QDebug>
@@ -40,6 +41,7 @@ namespace dp
     qDBusRegisterMetaType<dp::TemplateList>();
     qDBusRegisterMetaType<dp::Project>();
     qDBusRegisterMetaType<dp::ProjectList>();
+    qDBusRegisterMetaType<dp::TimeRange>();
     qDBusRegisterMetaType<dp::Task>();
     qDBusRegisterMetaType<dp::TaskList>();
     qDBusRegisterMetaType<QDateTime>();

@@ -1,18 +1,21 @@
 #########################################################################
 # libdontpanic section
 #########################################################################
-set(libdontpanic_SRCS
+set(libdontpanic_SRCS 
     action.cpp
     actiontemplate.cpp
     collaborationtype.cpp
     dbus.cpp
     leavetype.cpp
     project.cpp
+    report.cpp
     task.cpp
+    timerange.cpp 
     dbus_support/action.cpp
     dbus_support/actiontemplate.cpp
     dbus_support/project.cpp
     dbus_support/task.cpp
+    dbus_support/timerange.cpp
     dbus_support/qdatetime.cpp
     dbus_support/quuid.cpp    
    )
