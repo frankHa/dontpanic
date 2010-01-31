@@ -2,7 +2,9 @@
 #define REPORTMANAGER_H
 
 #include <libdontpanic/defines.hpp>
+#include <libdontpanic/report.h>
 #include <QObject>
+
 
 class QUuid;
 namespace dp
@@ -14,7 +16,9 @@ namespace dp
       Q_OBJECT
       Q_CLASSINFO ( "D-Bus Interface", "org.dontpanic.ReportManager" )
       // ---------------------------------------------------------------------------------
-    signals: 
+    public slots:
+      // ---------------------------------------------------------------------------------
+      Report generateCfReport(TimeRange const& time_range);
       // ---------------------------------------------------------------------------------
     public:
       // ---------------------------------------------------------------------------------      

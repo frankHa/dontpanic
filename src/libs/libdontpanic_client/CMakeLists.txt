@@ -37,6 +37,8 @@ qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS
 qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS
                                     ${DBUS_INTERFACES_PATH}/org.dontpanic.ReportManager.xml
                                     remote_reportmanager
+                                    libdontpanic/dbus_support/report.h
+                                    libdontpanic/dbus_support/timerange.h
                                     )
 qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS
                                     ${DBUS_INTERFACES_PATH}/org.dontpanic.TaskManager.xml

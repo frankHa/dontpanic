@@ -37,6 +37,11 @@ namespace dp
       TimeRange _M_time_range;
       QString   _M_report_data;
   };
+  
+  inline Report report()
+  {
+    return Report();
+  }
 }
 
 #endif // DP_REPORT_H

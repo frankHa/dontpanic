@@ -2,6 +2,7 @@
 #include "libdontpanic/dbus_support/action.hpp"
 #include "libdontpanic/dbus_support/actiontemplate.hpp"
 #include "libdontpanic/dbus_support/project.hpp"
+#include "libdontpanic/dbus_support/report.h"
 #include "libdontpanic/dbus_support/task.hpp"
 #include "libdontpanic/dbus_support/timerange.h"
 #include "libdontpanic/dbus_support/quuid.h"
@@ -41,6 +42,7 @@ namespace dp
     qDBusRegisterMetaType<dp::TemplateList>();
     qDBusRegisterMetaType<dp::Project>();
     qDBusRegisterMetaType<dp::ProjectList>();
+    qDBusRegisterMetaType<dp::Report>();
     qDBusRegisterMetaType<dp::TimeRange>();
     qDBusRegisterMetaType<dp::Task>();
     qDBusRegisterMetaType<dp::TaskList>();

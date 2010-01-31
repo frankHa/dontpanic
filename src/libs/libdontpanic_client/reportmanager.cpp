@@ -29,8 +29,18 @@ namespace dp
     ReportManager::ReportManager ( QObject *parent )
         : QObject ( parent )
         ,_M_remote(0)
+    {}
+    // ---------------------------------------------------------------------------------
+    Report ReportManager::generateCfReport(TimeRange const& range)
     {
-      
+      QDBusPendingReply<Report> reply =remote()->generateCfReport(range);
+      reply.waitForFinished();
+      if(reply.isError())
+      {
+        kWarning()<<reply.error();
+        emit error(QDBusError::errorString(reply.error().type()));
+      }
+      return reply.value();
     }
     // ---------------------------------------------------------------------------------
     ReportManager::~ReportManager ( ){}
