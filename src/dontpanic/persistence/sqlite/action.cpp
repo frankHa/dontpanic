@@ -26,7 +26,7 @@ namespace dp
       const QString SELECT_RANGE_OF_ACTIONS =
         "SELECT a_id, a_t_task , a_p_project,a_ct_collaboration_type,\
         a_name, a_comment, a_start, a_end, a_reviewed, a_billed FROM a_action \
-        WHERE a_start>=? AND a_start<?";
+        WHERE a_start>=? AND a_start<=?";
       // ---------------------------------------------------------------------------------
       const QString SELECT_DISTINCT =
       "SELECT DISTINCT a_id, a_t_task , a_p_project,a_ct_collaboration_type,\

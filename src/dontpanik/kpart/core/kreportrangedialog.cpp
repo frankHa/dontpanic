@@ -84,7 +84,10 @@ namespace dp
     
     TimeRange KReportRangeDialog::custom_range() const
     {
-      return TimeRange(_M_ui->custom_from->dateTime(), _M_ui->custom_to->dateTime());
+      QTime t(23,59,59, 99);
+      QDateTime to(_M_ui->custom_to->dateTime());
+      to.setTime(t);
+      return TimeRange(_M_ui->custom_from->dateTime(), to);
     }
     
     TimeRange KReportRangeDialog::last_month() const
@@ -92,14 +95,16 @@ namespace dp
       QDate current = QDate::currentDate();
       QDate end(current.year(), current.month(), 1);
       QDate begin(end.addMonths(-1));
-      return TimeRange(QDateTime(begin), QDateTime(end));
+      QDateTime endtime(end);
+      return TimeRange(QDateTime(begin), endtime.addMSecs(-1));
     }
     
     TimeRange KReportRangeDialog::this_month() const
     {
-      QDate current = QDate::currentDate();
-      QDate begin(current.year(), current.month(), 1);
-      return TimeRange(QDateTime(begin), QDateTime(current));
+      QDateTime current_time = QDateTime::currentDateTime();
+      QDate current_date = current_time.date();
+      QDate begin(current_date.year(), current_date.month(), 1);
+      return TimeRange(QDateTime(begin), current_time);
     }
     
     TimeRange KReportRangeDialog::last_week() const
@@ -107,14 +112,16 @@ namespace dp
       QDate current = QDate::currentDate();
       QDate end(current.addDays(-current.dayOfWeek()));
       QDate begin(end.addDays(-7));
-      return TimeRange(QDateTime(begin), QDateTime(end));
+      QDateTime endtime(end);
+      return TimeRange(QDateTime(begin), endtime.addMSecs(-1));
     }
     
     TimeRange KReportRangeDialog::this_week() const
     {
-      QDate end(QDate::currentDate());
+      QDateTime current = QDateTime::currentDateTime();
+      QDate end(current.date());
       QDate begin(end.addDays(-end.dayOfWeek()));
-      return TimeRange(QDateTime(begin), QDateTime(end));
+      return TimeRange(QDateTime(begin), current);
     }
     
     void KReportRangeDialog::on_use_preset_toggled(bool checked)

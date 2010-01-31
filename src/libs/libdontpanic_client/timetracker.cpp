@@ -103,14 +103,14 @@ namespace dp
     ActionList TimeTracker::findAll(QDate const& day)
     {
       QDateTime _from(day);
-      QDateTime _to(_from.addDays(1));
+      QDateTime _to(day, QTime(23, 59, 59, 99));
       return findAll(_from, _to);
     }
     // ---------------------------------------------------------------------------------      
     ActionList TimeTracker::findAll(QDate const& from, QDate const& to)
     {
       QDateTime _from(from);
-      QDateTime _to(from);
+      QDateTime _to(from, QTime(23, 59, 59, 99));
       return findAll(_from, _to);
     }
     // ---------------------------------------------------------------------------------
