@@ -7,17 +7,20 @@ namespace dp
   Project::Project()
       : _M_id ( QUuid::createUuid() )
       , _M_name ( "" )
-      , _M_creation_date ( QDateTime::currentDateTime() ) {}
+      , _M_creation_date ( QDateTime::currentDateTime() )
+      , _M_comment(""){}
   // ---------------------------------------------------------------------------------
    Project::Project(QString const& name)
       : _M_id ( QUuid::createUuid() )
       , _M_name ( name )
-      , _M_creation_date ( QDateTime::currentDateTime() ) {}
+      , _M_creation_date ( QDateTime::currentDateTime() ) 
+      , _M_comment(""){}
   // ---------------------------------------------------------------------------------
   Project::Project(QUuid const& id)
       : _M_id ( id )
       , _M_name ( "" )
-      , _M_creation_date ( QDateTime::currentDateTime() ) {}
+      , _M_creation_date ( QDateTime::currentDateTime() )
+      , _M_comment(""){}
   // ---------------------------------------------------------------------------------
   QUuid const& Project::id() const
   {
@@ -45,6 +48,17 @@ namespace dp
     _M_creation_date = date;
     return *this;
   }
+  // ---------------------------------------------------------------------------------
+  QString const& Project::comment() const
+  {
+    return _M_comment;
+  }
+  // ---------------------------------------------------------------------------------
+  Project& Project::setComment ( QString comment )
+  {
+    _M_comment = comment;
+    return *this;
+  }  
   // ---------------------------------------------------------------------------------
   bool operator == (dp::Project const& lhs, dp::Project const& rhs)
   {

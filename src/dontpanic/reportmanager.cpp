@@ -9,7 +9,8 @@ namespace dp
   // ---------------------------------------------------------------------------------
   Report ReportManager::generateCfReport(TimeRange const& range)
   {
-    return reports::cfreport().setRange(range).asDontPanicReport();    
+    reports::CFReport cfrep;
+    return cfrep.setRange(range).asDontPanicReport();    
   }
   // ---------------------------------------------------------------------------------
 }//dp

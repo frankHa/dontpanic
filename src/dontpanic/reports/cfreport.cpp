@@ -3,6 +3,7 @@
 #include <libdontpanic/action.hpp>
 #include <libdontpanic/project.hpp>
 #include <libdontpanic/task.hpp>
+#include <libdontpanic/durationformatter.h>
 namespace dp
 {
   // ---------------------------------------------------------------------------------
@@ -30,6 +31,7 @@ namespace dp
     class group_list
     {
       public:
+        ~group_list(){}
       void sort(ActionList const& actions);
       QString toString();
       private:
@@ -82,7 +84,7 @@ namespace dp
     {
       int result = 0;
       ActionList::const_iterator iter;
-      for(iter == _M_actions.begin(); iter != _M_actions.end();++iter)
+      for(iter = _M_actions.begin(); iter != _M_actions.end();++iter)
       {
         result+=(*iter).duration();
       }
@@ -107,9 +109,9 @@ namespace dp
       GroupList::iterator iter;
       for(iter=_M_groups.begin();iter!=_M_groups.end();++iter)
       {
-        if(iter->matches(a))
+        if((iter)->matches(a))
         {
-          iter->add(a);
+          (iter)->add(a);
           return true;
         }
       }
@@ -141,16 +143,24 @@ namespace dp
       int result(0);
       for(iter = _M_groups.begin();iter != _M_groups.end();++iter)
       {
-        result +=iter->duration();
+        result +=(iter)->duration();
       }
       return result;
     }
     
     QString group_list::dump(group const& g, int dur)
     {
-      double percentage = 0;
-      if(!dur==0){percentage = (double)g.duration()/(double)dur;}
-      return g.project().name() + ";" + g.task().name() + ";" + percentage + "%";
+      double percentage = 0.0;
+      DurationFormatter formatter;
+      if(dur!=0){percentage = (double)g.duration()/(double)dur;}
+      Project const& p = g.project();
+      QString s = QString("%1;%2;%3;%4\%;%5")
+      .arg(p.name())
+      .arg(g.task().name())
+      .arg(formatter.format(g.duration()))
+      .arg(percentage, 0, 'f', 2)
+      .arg(p.comment());
+      return s;
       
     }
     
@@ -159,10 +169,10 @@ namespace dp
       QString result= "Typ;Projekt;Dauer (Tätigkeitsgruppe);Prozent (Tätigkeitsgruppe);Projektkommentar\n";
       int complete_duration = duration();
       GroupList::const_iterator i;
-      for(i = _M_groups.begin();i!= _M_groups.end();++i)
-      {
-        result += dump(*i, complete_duration);
-      }
+       for(i = _M_groups.begin();i!= _M_groups.end();++i)
+       {
+         result += dump(*i, complete_duration) + "\n";
+       }
       return result;
     }
     // ---------------------------------------------------------------------------------
@@ -196,9 +206,13 @@ namespace dp
     // CFReport:
     // ---------------------------------------------------------------------------------
     CFReport::CFReport()
-    :d(new CFReportPrivate){}
+    :d(new CFReportPrivate())
+    {
+    }
     // ---------------------------------------------------------------------------------
-    CFReport::~CFReport(){delete d;}    
+    CFReport::~CFReport(){
+     delete d;
+    }    
     // ---------------------------------------------------------------------------------
     CFReport & CFReport::setRange(TimeRange const& range)
     {
