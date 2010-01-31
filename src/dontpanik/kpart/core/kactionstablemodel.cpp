@@ -20,6 +20,7 @@
 #include "kactionstablemodel.h"
 #include "kactionstablecolumns.h"
 #include "context.h"
+#include <libdontpanic/durationformatter.h>
 #include <QFont>
 #include <KLocalizedString>
 #include <KDebug>
@@ -50,8 +51,15 @@ namespace dp
           case Qt::FontRole: return font_role(a, index);
           case Qt::DisplayRole: return display_role(a, index);
           case Qt::EditRole: return edit_role(a, index);
+          case Qt::ToolTipRole : return tooltip_role(a, index);
           default: return QVariant();
         }
+      }
+      // ---------------------------------------------------------------------------------
+      QVariant KActionsTableModel::tooltip_role(Action const& a, QModelIndex const& index) const
+      {
+        DurationFormatter d;
+        return i18n("Duration: ") + d.format(a.duration());
       }
       // ---------------------------------------------------------------------------------
       QVariant KActionsTableModel::display_role(Action const& a, QModelIndex const& index) const

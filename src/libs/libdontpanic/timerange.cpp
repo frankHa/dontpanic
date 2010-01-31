@@ -23,8 +23,8 @@ namespace dp
 {
   // ---------------------------------------------------------------------------------
   TimeRange::TimeRange()
-  :_M_from()
-  ,_M_to(){}
+  :_M_from(QDateTime())
+  ,_M_to(QDateTime()){}
   // ---------------------------------------------------------------------------------
   TimeRange::TimeRange(QDateTime const& from, QDateTime const& to)
   :_M_from(from)

@@ -96,6 +96,8 @@ namespace dp
           // ---------------------------------------------------------------------------------
           QVariant display_role(Action const& a, QModelIndex const& index) const;
           // ---------------------------------------------------------------------------------
+          QVariant tooltip_role(Action const& a, QModelIndex const& index) const;
+          // ---------------------------------------------------------------------------------
           QVariant edit_role(Action const& a, QModelIndex const& index) const;
           // ---------------------------------------------------------------------------------
           QVariant font_role(Action const& a, QModelIndex const& index) const;

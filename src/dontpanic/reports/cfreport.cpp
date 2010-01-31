@@ -31,18 +31,23 @@ namespace dp
     {
       public:
       void sort(ActionList const& actions);
+      QString toString();
       private:
         bool added_to_existing_group(Action const& a);
         void add_to_newly_created_group(Action const& a);
+        int duration() const;        
+        QString dump(group const& g, int dur);
       private:
         GroupList _M_groups;
     };
-    // ---------------------------------------------------------------------------------
+     // ---------------------------------------------------------------------------------
     class CFReport::CFReportPrivate
     {
       public:
       void setRange(TimeRange const& r);
       Report asDontPanicReport();
+      private:
+        QString evaluate(ActionList const& actions);
       private:
       TimeRange _M_range;
     };
@@ -130,6 +135,36 @@ namespace dp
       }
     }
     
+    int group_list::duration() const
+    {
+      GroupList::const_iterator iter;
+      int result(0);
+      for(iter = _M_groups.begin();iter != _M_groups.end();++iter)
+      {
+        result +=iter->duration();
+      }
+      return result;
+    }
+    
+    QString group_list::dump(group const& g, int dur)
+    {
+      double percentage = 0;
+      if(!dur==0){percentage = (double)g.duration()/(double)dur;}
+      return g.project().name() + ";" + g.task().name() + ";" + percentage + "%";
+      
+    }
+    
+    QString group_list::toString()
+    {
+      QString result= "Typ;Projekt;Dauer (Tätigkeitsgruppe);Prozent (Tätigkeitsgruppe);Projektkommentar\n";
+      int complete_duration = duration();
+      GroupList::const_iterator i;
+      for(i = _M_groups.begin();i!= _M_groups.end();++i)
+      {
+        result += dump(*i, complete_duration);
+      }
+      return result;
+    }
     // ---------------------------------------------------------------------------------
     // CFReportPrivate imp:
     // ---------------------------------------------------------------------------------
@@ -148,10 +183,15 @@ namespace dp
       {
         return report.setValid(false);
       }
+      return report.setReportData(evaluate(actions));
+    }
+    // ---------------------------------------------------------------------------------
+    QString CFReport::CFReportPrivate::evaluate(ActionList const& actions)
+    {
       group_list gl;
       gl.sort(actions);
-      return report;
-    }
+      return gl.toString();
+    }    
     // ---------------------------------------------------------------------------------
     // CFReport:
     // ---------------------------------------------------------------------------------
