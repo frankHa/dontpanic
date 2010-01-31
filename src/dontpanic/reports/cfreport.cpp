@@ -155,14 +155,15 @@ namespace dp
       if(dur!=0){percentage = 100.0*(double)g.duration()/(double)dur;}
       Project const& p = g.project();
       QString s = QString("%1;%2;%3;%4\%;%5")
-      .arg(p.name())
       .arg(g.task().name())
+      .arg(p.name())
       .arg(formatter.format(g.duration()))
       .arg(percentage, 0, 'f', 2)
       .arg(p.comment());
       return s;
       
     }
+    
     
     QString group_list::toString()
     {
