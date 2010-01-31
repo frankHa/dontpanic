@@ -28,6 +28,10 @@ namespace dp
   class Report
   {
     public:
+      Report();
+    public:
+      Report& setValid(bool);
+      bool isValid()const;      
       Report & setReportType(QString const&);
       QString reportType()const;
       Report & setRange(TimeRange const&);
@@ -36,6 +40,7 @@ namespace dp
       QString reportData() const;
       
     private:
+      bool      _M_valid;
       QString   _M_type;
       TimeRange _M_time_range;
       QString   _M_report_data;

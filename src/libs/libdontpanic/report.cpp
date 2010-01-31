@@ -21,6 +21,21 @@
 
 namespace dp
 {
+  Report::Report()
+  :_M_valid(true)
+  , _M_type("")
+  , _M_report_data(""){}
+  
+  Report & Report::setValid(bool b)
+  {
+    _M_valid = b;
+    return *this;
+  }
+  
+  bool Report::isValid() const
+  {
+    return _M_valid;
+  }
   
   Report & Report::setReportType(QString const& t)
   {
