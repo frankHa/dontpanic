@@ -25,6 +25,7 @@ set(dontpanic_SRCS
     persistence/sqlite/actiontemplate.cpp
     persistence/sqlite/project.cpp
     persistence/sqlite/task.cpp    
+    reports/cfreport.cpp
    )
 
 qt4_add_dbus_adaptor(dontpanic_SRCS  
