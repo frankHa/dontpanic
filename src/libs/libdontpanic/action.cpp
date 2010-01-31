@@ -10,8 +10,7 @@ namespace dp
       , _M_teamwork ( )
       , _M_name ( "" )
       , _M_comment ( "" )
-      , _M_start()
-      , _M_end()
+      , _M_time_range()
       , _M_reviewed ( false )
       , _M_billed ( false ) {}
   // ---------------------------------------------------------------------------------
@@ -22,8 +21,7 @@ namespace dp
       , _M_teamwork ( )
       , _M_name ( "" )
       , _M_comment ( "" )
-      , _M_start()
-      , _M_end()
+      , _M_time_range()
       , _M_reviewed ( false )
       , _M_billed ( false ) {}
   // ---------------------------------------------------------------------------------
@@ -94,23 +92,23 @@ namespace dp
   // ---------------------------------------------------------------------------------
   QDateTime Action::startTime() const
   {
-    return _M_start;
+    return _M_time_range.from();
   }
   // ---------------------------------------------------------------------------------
   Action& Action::setStartTime ( QDateTime const& start )
   {
-    _M_start = start;
+    _M_time_range.setFrom(start);
     return *this;
   }
   // ---------------------------------------------------------------------------------
   QDateTime Action::endTime() const
   {
-    return _M_end;
+    return _M_time_range.to();
   }
   // ---------------------------------------------------------------------------------
   Action& Action::setEndTime ( QDateTime const& end )
   {
-    _M_end = end;
+    _M_time_range.setTo(end);
     return *this;
   }
   // ---------------------------------------------------------------------------------
@@ -138,17 +136,7 @@ namespace dp
   // ---------------------------------------------------------------------------------
   int Action::duration() const
   {
-    QDateTime start = startTime();
-    if(start.isNull()){return 0;}    
-    QDateTime end;
-    if(endTime().isNull())
-    {
-      end = QDateTime::currentDateTime();
-    } else
-    {
-      end = endTime();
-    }
-    return (startTime().secsTo(end));    
+    return _M_time_range.duration();
   }
   // ---------------------------------------------------------------------------------
   bool Action::isActive() const
@@ -156,7 +144,7 @@ namespace dp
     if(!isValid()) return false;
     if(!startTime().isValid())return false;
     return endTime().isNull();
-  }
+  } 
   // ---------------------------------------------------------------------------------
   bool operator == (dp::Action const& lhs, dp::Action const& rhs)
   {
