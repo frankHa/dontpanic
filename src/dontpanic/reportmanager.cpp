@@ -15,7 +15,7 @@ namespace dp
     fakeData += "\nDevelopment;CSL;04:47;2,66%;";
     fakeData += "\nITI;no project/other;15:36;8,7%;"; 
     
-    return report().setRange(range).setReportData(fakeData);
+    return report().setReportType("comForte monthly report").setRange(range).setReportData(fakeData);
   }
   // ---------------------------------------------------------------------------------
 }//dp

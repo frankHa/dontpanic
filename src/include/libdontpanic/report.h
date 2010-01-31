@@ -28,12 +28,15 @@ namespace dp
   class Report
   {
     public:
+      Report & setReportType(QString const&);
+      QString reportType()const;
       Report & setRange(TimeRange const&);
       TimeRange range()const;
       Report& setReportData(QString const& data);
       QString reportData() const;
       
     private:
+      QString   _M_type;
       TimeRange _M_time_range;
       QString   _M_report_data;
   };

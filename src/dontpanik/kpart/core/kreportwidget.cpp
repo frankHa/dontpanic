@@ -39,6 +39,7 @@ namespace dp
     
     void KReportWidget::setReport(Report const& r)
     {
+      _M_ui->report_type->setText(r.reportType());
       _M_ui->report->setText(r.reportData());
     }
     

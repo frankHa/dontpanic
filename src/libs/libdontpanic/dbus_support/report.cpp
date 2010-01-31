@@ -3,19 +3,20 @@
 // ---------------------------------------------------------------------------------
 QDBusArgument const& operator >> ( QDBusArgument const&arg, dp::Report & report )
 {
+  QString _t;
   dp::TimeRange _r;
   QString _d;
   arg.beginStructure();
-  arg >> _r >> _d;
+  arg >> _t >> _r >> _d;
   arg.endStructure();
-  report.setRange(_r).setReportData(_d);
+  report.setReportType(_t).setRange(_r).setReportData(_d);
   return arg;
 }
 // ---------------------------------------------------------------------------------
 QDBusArgument & operator << ( QDBusArgument &arg, dp::Report const& report )
 {
   arg.beginStructure();
-  arg << report.range()<<report.reportData();
+  arg << report.reportType()<<report.range()<<report.reportData();
   arg.endStructure();
   return arg;
 }

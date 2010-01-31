@@ -22,6 +22,15 @@
 namespace dp
 {
   
+  Report & Report::setReportType(QString const& t)
+  {
+    _M_type = t;
+    return *this;
+  }
+  QString Report::reportType()const
+  {
+    return _M_type;
+  }
   Report & Report::setRange(TimeRange const& range)
   {
     _M_time_range = range;
