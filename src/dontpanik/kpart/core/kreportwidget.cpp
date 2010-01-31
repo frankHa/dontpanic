@@ -17,25 +17,37 @@
 
 */
 
-#include "kreportview.h"
-#include "ui_kreportview.h"
+#include "kreportwidget.h"
+#include "ui_kreportwidget.h"
 #include "context.h"
 
 namespace dp
 {
   namespace core
   {
-    KReportView::KReportView(QWidget *parent)
-    :QWidget(parent)
-    ,_M_ui(new Ui::KReportView())
+    KReportWidget::KReportWidget( QWidget* parent, Qt::WindowFlags f)
+    :QWidget(parent, f)
+    , _M_ui(new Ui::KReportWidget())
     {
       _M_ui->setupUi(this);
-      _M_ui->splitter->setSizes ( QList<int>() << 150 << 500 );
-      
+      subscribe_to_report_manager_signals();
     }
     
-    KReportView::~KReportView(){delete _M_ui;}
+    KReportWidget::~KReportWidget()
+    {
+    }
     
+    void KReportWidget::setReport(Report const& r)
+    {
+      _M_ui->report->setText(r.reportData());
+    }
+    
+    // private stuff:
+    
+    void KReportWidget::subscribe_to_report_manager_signals()
+    {
+      connect(context()->reportManager(), SIGNAL(generated(Report)), this, SLOT(setReport(Report)));
+    }
   }
 }
 

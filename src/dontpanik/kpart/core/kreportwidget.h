@@ -17,25 +17,39 @@
 
 */
 
-#include "kreportview.h"
-#include "ui_kreportview.h"
-#include "context.h"
+#ifndef DP_CORE_KREPORTWIDGET_H
+#define DP_CORE_KREPORTWIDGET_H
+
+#include <libdontpanic/defines.hpp>
+#include <libdontpanic/report.h>
+#include <QWidget>
+
+namespace Ui
+{
+  class KReportWidget;
+}
 
 namespace dp
 {
   namespace core
   {
-    KReportView::KReportView(QWidget *parent)
-    :QWidget(parent)
-    ,_M_ui(new Ui::KReportView())
+    class KReportWidget : public QWidget
     {
-      _M_ui->setupUi(this);
-      _M_ui->splitter->setSizes ( QList<int>() << 150 << 500 );
-      
-    }
-    
-    KReportView::~KReportView(){delete _M_ui;}
-    
+      Q_OBJECT
+      public:
+        KReportWidget ( QWidget* parent = 0, Qt::WindowFlags f = 0 );
+        ~KReportWidget();
+        
+      public slots:
+        void setReport(Report const& r);
+     
+      private:
+        void subscribe_to_report_manager_signals();
+        
+      private:
+        Ui::KReportWidget *_M_ui;
+    };
   }
 }
 
+#endif // DP_CORE_KREPORTWIDGET_H

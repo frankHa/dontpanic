@@ -40,8 +40,6 @@ namespace dp
       public:
         KReportView(QWidget *parent=0);
         ~KReportView();
-      private slots:
-        void on_generated(Report r);
       private:
         Ui::KReportView *_M_ui;
     };       
