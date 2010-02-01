@@ -65,7 +65,7 @@ namespace dp
     void KActionsTable::init_model()
     {
       _M_sort_proxy_model->setSourceModel(_M_model);
-      _M_sort_proxy_model->setDynamicSortFilter(true);
+      //_M_sort_proxy_model->setDynamicSortFilter(true);
       setModel ( _M_sort_proxy_model );         
       this->sortByColumn(0, Qt::AscendingOrder);
     }

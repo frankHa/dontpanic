@@ -65,7 +65,7 @@ namespace dp
         switch(mappedIndex.column())
         {
           case START: static_cast<QDateTimeEdit*>(editor)->setDateTime(a.startTime()); break;
-          case END: static_cast<QDateTimeEdit*>(editor)->setDateTime(a.startTime()); break;
+          case END: static_cast<QDateTimeEdit*>(editor)->setDateTime(a.endTime()); break;
           case PROJECT: static_cast<KProjectsComboBox*>(editor)->select(a.project()); break;
           case TYPE: static_cast<KTasksComboBox*>(editor)->select(a.task()); break;
           default:QStyledItemDelegate::setEditorData ( editor, index ); break;
