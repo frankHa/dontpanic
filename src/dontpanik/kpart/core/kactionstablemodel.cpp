@@ -59,7 +59,8 @@ namespace dp
       QVariant KActionsTableModel::tooltip_role(Action const& a, QModelIndex const& index) const
       {
         DurationFormatter d;
-        return i18n("Duration: ") + d.format(a.duration());
+        QString tt = QString(i18n("This Task:\t%1\nToday:\t%2")).arg(d.format(a.duration())).arg(d.format(duration()));
+        return tt;
       }
       // ---------------------------------------------------------------------------------
       QVariant KActionsTableModel::display_role(Action const& a, QModelIndex const& index) const
@@ -187,6 +188,17 @@ namespace dp
         << i18n ( "Type" )
         << i18n ( "Project" )        
         << i18n ( "Comment" );
+      }
+      // ---------------------------------------------------------------------------------
+      int KActionsTableModel::duration() const
+      {
+        int result = 0;
+        ActionList::const_iterator iter;
+        for(iter = _M_actions.begin();iter != _M_actions.end();++iter)
+        {
+          result += iter->duration();
+        }
+        return result;
       }
       // ---------------------------------------------------------------------------------
       void KActionsTableModel::subscribe_to_timetracker_signals()
