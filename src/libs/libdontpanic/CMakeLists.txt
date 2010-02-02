@@ -22,6 +22,7 @@ set(libdontpanic_SRCS
     dbus_support/quuid.cpp    
    )
 
+add_definitions(-fPIC)
 kde4_add_library(dontpanic_lib STATIC ${libdontpanic_SRCS})
 target_link_libraries(dontpanic_lib ${KDE4_KDECORE_LIBS} ${SQLITE_LIBRARIES})
 set_target_properties(dontpanic_lib PROPERTIES OUTPUT_NAME dontpanic)
