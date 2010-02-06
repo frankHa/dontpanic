@@ -1,5 +1,5 @@
 #include <libdontpanic/actiontemplate.hpp>
-
+#include "uuid.h"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -7,14 +7,14 @@ namespace dp
 ///ctor:
 // ---------------------------------------------------------------------------------
   ActionTemplate::ActionTemplate()
-      : _M_id ( QUuid::createUuid() )
+      : _M_id ( uuid().generate() )
       , _M_task()
       , _M_project()
       , _M_name("")
       , _M_icon(""){}
 // ---------------------------------------------------------------------------------
 ActionTemplate::ActionTemplate ( QString const& name )
-      : _M_id ( QUuid::createUuid() )
+      : _M_id ( uuid().generate() )
       , _M_task()
       , _M_project()
       , _M_name(name)

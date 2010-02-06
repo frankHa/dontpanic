@@ -1,10 +1,11 @@
 #include <libdontpanic/action.hpp>
+#include "uuid.h"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
   // ---------------------------------------------------------------------------------
   Action::Action ()
-      : _M_id ( QUuid::createUuid() )
+      : _M_id ( uuid().generate() )
       , _M_task ()
       , _M_project ( )
       , _M_teamwork ( )

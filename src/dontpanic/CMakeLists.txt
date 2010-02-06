@@ -46,7 +46,7 @@ qt4_add_dbus_adaptor(dontpanic_SRCS
                     actiontemplatemanager.h dp::ActionTemplateManager)
 
 kde4_add_executable(dontpanic ${dontpanic_SRCS})
-target_link_libraries(dontpanic dontpanic_lib ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTSQL_LIBRARY})
+target_link_libraries(dontpanic ${libuuid_LIB} dontpanic_lib ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTSQL_LIBRARY})
 install(TARGETS dontpanic ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 

@@ -1,10 +1,11 @@
 #include <libdontpanic/collaborationtype.hpp>
+#include <uuid.h>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
   // ---------------------------------------------------------------------------------
   CollaborationType::CollaborationType()
-      : _M_id ( QUuid::createUuid() )
+      : _M_id ( uuid().generate() )
   {}
   // ---------------------------------------------------------------------------------
   CollaborationType::CollaborationType(QUuid const& id)

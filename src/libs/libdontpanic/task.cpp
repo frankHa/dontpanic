@@ -1,19 +1,19 @@
 #include "libdontpanic/task.hpp"
-
+#include "uuid.h"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
   // ---------------------------------------------------------------------------------
   ///ctor
   Task::Task()
-      : _M_id ( QUuid::createUuid() )
+      : _M_id ( uuid().generate() )
       , _M_name ( "" )
       , _M_solo_effort ( true )
       , _M_chargeable ( true )
       , _M_creation_date ( QDateTime::currentDateTime() ) {}
   // ---------------------------------------------------------------------------------
   Task::Task(QString const& name)
-      : _M_id ( QUuid::createUuid() )
+      : _M_id ( uuid().generate() )
       , _M_name ( name )
       , _M_solo_effort ( true )
       , _M_chargeable ( true )

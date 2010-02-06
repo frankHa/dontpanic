@@ -6,9 +6,14 @@ find_package(KDE4 REQUIRED)
 include (KDE4Defaults)
 
 set(DBUS_INTERFACES_PATH ${CMAKE_SOURCE_DIR}/src/interfaces)
-
+option(DP_USE_LIBUUID ON "use libuuid instead of Qt's default Uuid creator(recommended at least on linux systems!)")
 option(DP_INSTALL_SYSTEM_FILES ON "Allows disabling the installation of files which needs root access and are rarely changed")
 
+if(DP_USE_LIBUUID)
+  find_package(libuuid)
+else(DP_USE_LIBUUID)
+  #SET(libuuid_LIB "")
+endif(DP_USE_LIBUUID)
 include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
 include_directories(${CMAKE_SOURCE_DIR}/src/include)
 

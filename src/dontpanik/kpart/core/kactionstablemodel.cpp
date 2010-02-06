@@ -59,7 +59,7 @@ namespace dp
       QVariant KActionsTableModel::tooltip_role(Action const& a, QModelIndex const& index) const
       {
         DurationFormatter d;
-        QString tt = QString(i18n("This Task:\t%1\nToday:\t%2")).arg(d.format(a.duration())).arg(d.format(duration()));
+        QString tt = QString(i18n("This Task:\t%1\nToday:\t%2\nuuid:\t:%3")).arg(d.format(a.duration())).arg(d.format(duration())).arg(a.id().toString());
         return tt;
       }
       // ---------------------------------------------------------------------------------
