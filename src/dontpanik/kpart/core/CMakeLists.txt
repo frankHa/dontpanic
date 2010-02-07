@@ -10,6 +10,7 @@ set(dontpanikpart_LIB_SRCS
     kactionstableitemdelegate.cpp 
     kactionstablemodel.cpp
     kactionstable.cpp
+    keditactiondialog.cpp 
     keditactiontemplatedialog.cpp 
     keditprojectdialog.cpp
     kedittaskdialog.cpp
@@ -31,6 +32,7 @@ set(dontpanikpart_LIB_SRCS
 
 set(dontpanikpart_LIB_UIS
     ui/kdayview.ui
+    ui/keditactiondialog.ui
     ui/keditactiontemplatedialog.ui
     ui/keditprojectdialog.ui
     ui/kedittaskdialog.ui

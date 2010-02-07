@@ -21,6 +21,7 @@
 #include "kactionstablemodel.h"
 #include "context.h"
 #include "kactionstableitemdelegate.h"
+#include "keditactiondialog.h"
 #include <QMenu>
 #include <QHeaderView>
 #include <QContextMenuEvent>
@@ -56,6 +57,8 @@ namespace dp
       if(!this->selectionModel()->hasSelection()){return;}
       QMenu menu;      
       menu.addAction(_M_remove_selected_action);
+      menu.addSeparator();
+      menu.addAction(_M_edit_selected_action);
       menu.exec(evt->globalPos());      
     }
     
@@ -74,6 +77,9 @@ namespace dp
     {
       _M_remove_selected_action = new KAction("Remove", this);
       connect(_M_remove_selected_action, SIGNAL(triggered()), this, SLOT(on_remove_selected_action()));
+      _M_edit_selected_action = new KAction("Properties", this);
+      connect(_M_edit_selected_action, SIGNAL(triggered()), this, SLOT(on_edit_selected_action()));
+      
     }
     // ---------------------------------------------------------------------------------
     void KActionsTable::init_item_delegate()
@@ -89,6 +95,13 @@ namespace dp
       {
         context()->timeTracker()->remove(current_selection);
       }
+    }
+    // ---------------------------------------------------------------------------------
+    void KActionsTable::on_edit_selected_action()
+    {
+      Action const& current_selection = _M_model->at(_M_sort_proxy_model->mapToSource(currentIndex()));  
+      KEditActionDialog dlg;
+      dlg.exec();
     }
     // ---------------------------------------------------------------------------------
     bool KActionsTable::eventFilter(QObject *obj, QEvent *event)
