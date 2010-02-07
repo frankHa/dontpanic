@@ -25,7 +25,7 @@ namespace dp
     }
   }
   // ---------------------------------------------------------------------------------
-  Task TaskManager::load(QUuid const& id)
+  Task TaskManager::load(Uuid const& id)
   {
     Task p(id);
     if(persistence().load(p).was_successful())

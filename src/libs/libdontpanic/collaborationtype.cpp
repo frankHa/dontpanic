@@ -1,5 +1,5 @@
 #include <libdontpanic/collaborationtype.hpp>
-#include <uuid.h>
+#include <libdontpanic/uuid.h>
 // ---------------------------------------------------------------------------------
 namespace dp
 {

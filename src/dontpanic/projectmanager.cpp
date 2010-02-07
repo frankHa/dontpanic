@@ -25,7 +25,7 @@ namespace dp
     }
   }
   // ---------------------------------------------------------------------------------
-  Project ProjectManager::load(QUuid const& id)
+  Project ProjectManager::load(Uuid const& id)
   {
     Project p(id);
     if(persistence().load(p).was_successful())

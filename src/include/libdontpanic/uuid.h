@@ -28,7 +28,22 @@ namespace dp
     class Uuid
     {
       public:
-        QUuid generate();
+        static Uuid generate();
+      
+      public:
+        Uuid();
+        Uuid(QUuid const& id);
+        Uuid(QString const& id);
+      
+        bool isNull() const;
+        QString toString() const;
+        bool operator!=(Uuid const& rhs)const;
+        bool operator<(Uuid const& rhs) const;
+        Uuid & operator=(Uuid const& rhs);
+        bool operator==(Uuid const& rhs)const;
+        
+      private:
+        QUuid _M_impl;
     };
     
     inline Uuid uuid()

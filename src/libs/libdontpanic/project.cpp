@@ -1,29 +1,29 @@
 #include "libdontpanic/project.hpp"
-#include "uuid.h"
+#include <libdontpanic/uuid.h>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
   // ---------------------------------------------------------------------------------
   ///ctor
   Project::Project()
-      : _M_id ( uuid().generate() )
+      : _M_id ( Uuid::generate() )
       , _M_name ( "" )
       , _M_creation_date ( QDateTime::currentDateTime() )
       , _M_comment(""){}
   // ---------------------------------------------------------------------------------
    Project::Project(QString const& name)
-      : _M_id ( uuid().generate() )
+      : _M_id ( Uuid::generate() )
       , _M_name ( name )
       , _M_creation_date ( QDateTime::currentDateTime() ) 
       , _M_comment(""){}
   // ---------------------------------------------------------------------------------
-  Project::Project(QUuid const& id)
+  Project::Project(Uuid const& id)
       : _M_id ( id )
       , _M_name ( "" )
       , _M_creation_date ( QDateTime::currentDateTime() )
       , _M_comment(""){}
   // ---------------------------------------------------------------------------------
-  QUuid const& Project::id() const
+  Uuid const& Project::id() const
   {
     return _M_id;
   }

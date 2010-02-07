@@ -13,7 +13,7 @@ namespace dp
     class group
     {
       public:
-        group(QUuid const& p, QUuid const& t);
+        group(Uuid const& p, Uuid const& t);
       public:
         Project project() const;
         Task task() const;
@@ -22,8 +22,8 @@ namespace dp
         group & add(Action const& a);
       
       private:
-        QUuid _M_project;
-        QUuid _M_task;
+        Uuid _M_project;
+        Uuid _M_task;
         ActionList _M_actions;
     };
     typedef QList<group> GroupList;
@@ -56,7 +56,7 @@ namespace dp
     // ---------------------------------------------------------------------------------
     // group impl:
     // ---------------------------------------------------------------------------------
-    group::group(QUuid const& p, QUuid const& t)
+    group::group(Uuid const& p, Uuid const& t)
     :_M_project(p)
     , _M_task(t){}
     // ---------------------------------------------------------------------------------

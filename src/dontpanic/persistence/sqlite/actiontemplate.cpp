@@ -92,7 +92,7 @@ namespace dp
         }
         while ( query.next() )
         {
-          dp::ActionTemplate _p(QUuid(query.value(0).toString()));
+          dp::ActionTemplate _p(Uuid(query.value(0).toString()));
           assign_query_values_to_entity(query, _p);
           l.append(_p);
         }
@@ -162,11 +162,11 @@ namespace dp
       success ActionTemplate::assign_query_values_to_entity ( QSqlQuery &query, dp::ActionTemplate &a ) const
       {
         //QUuid const& id = query.value ( 0 ).toString();
-        QUuid const& task_id = query.value ( 1 ).toString();
+        Uuid const& task_id = query.value ( 1 ).toString();
         a.setTask ( task_id );
-        QUuid const& project_id = query.value ( 2 ).toString();
+        Uuid const& project_id = query.value ( 2 ).toString();
         a.setProject ( project_id );
-        QUuid const& collaboration_id = query.value ( 3 ).toString();
+        Uuid const& collaboration_id = query.value ( 3 ).toString();
         a.setCollaborationType(collaboration_id);
         a.setName ( query.value ( 4 ).toString() );
         a.setComment ( query.value ( 5 ).toString() );

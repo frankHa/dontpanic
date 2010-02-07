@@ -1,13 +1,13 @@
-#ifndef DP_DBUS_QUUID_H
-#define DP_DBUS_QUUID_H
+#ifndef DP_DBUS_UUID_H
+#define DP_DBUS_UUID_H
 #include <libdontpanic/defines.hpp>
-#include <QUuid>
+#include <libdontpanic/uuid.h>
 #include <QDBusArgument>
 
-Q_DECLARE_METATYPE ( QUuid )
+Q_DECLARE_METATYPE ( dp::Uuid )
 // ---------------------------------------------------------------------------------
-QDBusArgument const& operator >> ( QDBusArgument const&arg, QUuid & uuid );
+QDBusArgument const& operator >> ( QDBusArgument const&arg, dp::Uuid & uuid );
 // ---------------------------------------------------------------------------------
-QDBusArgument & operator << ( QDBusArgument &arg, QUuid const& uuid );
+QDBusArgument & operator << ( QDBusArgument &arg, dp::Uuid const& uuid );
 // ---------------------------------------------------------------------------------
-#endif //RP_DBUS_QUUID_H
+#endif //RP_DBUS_UUID_H

@@ -1,5 +1,5 @@
 #include <libdontpanic/actiontemplate.hpp>
-#include "uuid.h"
+#include <libdontpanic/uuid.h>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -7,64 +7,64 @@ namespace dp
 ///ctor:
 // ---------------------------------------------------------------------------------
   ActionTemplate::ActionTemplate()
-      : _M_id ( uuid().generate() )
+      : _M_id ( Uuid::generate() )
       , _M_task()
       , _M_project()
       , _M_name("")
       , _M_icon(""){}
-// ---------------------------------------------------------------------------------
-ActionTemplate::ActionTemplate ( QString const& name )
+  // ---------------------------------------------------------------------------------
+  ActionTemplate::ActionTemplate ( QString const& name )
       : _M_id ( uuid().generate() )
       , _M_task()
       , _M_project()
       , _M_name(name)
       , _M_icon(){}
   // ---------------------------------------------------------------------------------
-  ActionTemplate::ActionTemplate ( QUuid const& id )
+  ActionTemplate::ActionTemplate ( Uuid const& id )
       : _M_id ( id )
       , _M_task()
       , _M_project()
       , _M_name("")
       , _M_icon(""){}
-      // ---------------------------------------------------------------------------------
-      bool ActionTemplate::isValid() const
-      {
-        return !_M_id.isNull();
-      }
-      // ---------------------------------------------------------------------------------
-      QUuid ActionTemplate::id() const
+  // ---------------------------------------------------------------------------------
+  bool ActionTemplate::isValid() const
+  {
+    return !_M_id.isNull();
+  }
+  // ---------------------------------------------------------------------------------
+  Uuid ActionTemplate::id() const
   {
     return _M_id;
   }
   // ---------------------------------------------------------------------------------
-  QUuid ActionTemplate::task() const
+  Uuid ActionTemplate::task() const
   {
     return _M_task;
   }
   // ---------------------------------------------------------------------------------
-  ActionTemplate& ActionTemplate::setTask ( QUuid t )
+  ActionTemplate& ActionTemplate::setTask ( Uuid t )
   {
     _M_task = t;
     return *this;
   }
   // ---------------------------------------------------------------------------------
-  QUuid ActionTemplate::project() const
+  Uuid ActionTemplate::project() const
   {
     return _M_project;
   }
   // ---------------------------------------------------------------------------------
-  ActionTemplate& ActionTemplate::setProject ( QUuid p )
+  ActionTemplate& ActionTemplate::setProject ( Uuid p )
   {
     _M_project = p;
     return *this;
   }
   // ---------------------------------------------------------------------------------
-  QUuid ActionTemplate::collaborationType() const
+  Uuid ActionTemplate::collaborationType() const
   {
     return _M_teamwork;
   }
   // ---------------------------------------------------------------------------------
-  ActionTemplate& ActionTemplate::setCollaborationType ( QUuid ct )
+  ActionTemplate& ActionTemplate::setCollaborationType ( Uuid ct )
   {
     _M_teamwork = ct;
     return *this;

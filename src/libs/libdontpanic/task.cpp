@@ -1,5 +1,5 @@
 #include "libdontpanic/task.hpp"
-#include "uuid.h"
+#include <libdontpanic/uuid.h>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -19,14 +19,14 @@ namespace dp
       , _M_chargeable ( true )
       , _M_creation_date ( QDateTime::currentDateTime() ) {}
   // ---------------------------------------------------------------------------------
-  Task::Task ( QUuid const& id )
+  Task::Task ( Uuid const& id )
       : _M_id ( id )
       , _M_name ( "" )
       , _M_solo_effort ( true )
       , _M_chargeable ( true )
       , _M_creation_date ( QDateTime::currentDateTime() ) {}
   // ---------------------------------------------------------------------------------
-  QUuid const& Task::id() const
+  Uuid const& Task::id() const
   {
     return _M_id;
   }

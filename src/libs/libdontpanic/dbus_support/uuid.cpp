@@ -1,6 +1,6 @@
-#include <libdontpanic/dbus_support//quuid.h>
+#include <libdontpanic/dbus_support/uuid.h>
 // ---------------------------------------------------------------------------------
-QDBusArgument const& operator >> ( QDBusArgument const&arg, QUuid & uuid )
+QDBusArgument const& operator >> ( QDBusArgument const&arg, dp::Uuid & uuid )
 {
   QString _id;
   arg.beginStructure();
@@ -10,7 +10,7 @@ QDBusArgument const& operator >> ( QDBusArgument const&arg, QUuid & uuid )
   return arg;
 }
 // ---------------------------------------------------------------------------------
-QDBusArgument & operator << ( QDBusArgument &arg, QUuid const& uuid )
+QDBusArgument & operator << ( QDBusArgument &arg, dp::Uuid const& uuid )
 {
   arg.beginStructure();
   arg << uuid.toString();

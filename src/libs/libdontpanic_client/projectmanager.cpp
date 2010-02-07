@@ -47,7 +47,7 @@ namespace dp
       }
     }
     // ---------------------------------------------------------------------------------
-    Project ProjectManager::load(QUuid const& id)
+    Project ProjectManager::load(Uuid const& id)
     {
       return _M_cache.load(id, remote());      
     }

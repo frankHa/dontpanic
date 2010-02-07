@@ -33,7 +33,7 @@ namespace dp
       void remove(Action const& );
       // ---------------------------------------------------------------------------------
       void startNewActionFromTemplate ( ActionTemplate const& _template );
-      void startNewActionFromTemplate(QUuid const& _template_id);
+      void startNewActionFromTemplate(Uuid const& _template_id);
       // ---------------------------------------------------------------------------------
       void stopCurrentAction();
       // ---------------------------------------------------------------------------------

@@ -5,7 +5,7 @@
 #include "libdontpanic/dbus_support/report.h"
 #include "libdontpanic/dbus_support/task.hpp"
 #include "libdontpanic/dbus_support/timerange.h"
-#include "libdontpanic/dbus_support/quuid.h"
+#include "libdontpanic/dbus_support/uuid.h"
 //Qt includes
 #include <QDebug>
 #include <QDBusMetaType>
@@ -47,7 +47,7 @@ namespace dp
     qDBusRegisterMetaType<dp::Task>();
     qDBusRegisterMetaType<dp::TaskList>();
     qDBusRegisterMetaType<QDateTime>();
-    qDBusRegisterMetaType<QUuid>();
+    qDBusRegisterMetaType<Uuid>();
   }
   // ---------------------------------------------------------------------------------
   QDBusConnection DBus::session_bus()

@@ -95,7 +95,7 @@ namespace dp
         }
         while ( query.next() )
         {
-	  dp::Task _t(QUuid(query.value(0).toString()));
+	  dp::Task _t(Uuid(query.value(0).toString()));
 	  assign_query_values_to_entity(query, _t);
 	  l.append(_t);
         }

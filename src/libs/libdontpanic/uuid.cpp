@@ -17,7 +17,7 @@
 
 */
 
-#include "uuid.h"
+#include <libdontpanic/uuid.h>
 #include <libdontpanic/config.h>
 #ifdef HAVE_LIBUUID
 #include <uuid/uuid.h>
@@ -25,18 +25,55 @@
 
 namespace dp
 {
-  QUuid Uuid::generate()
+  // static stuff:
+  Uuid Uuid::generate()
   {
     #ifdef HAVE_LIBUUID
-     uuid_t id;
-     char id_string[37];
-     uuid_generate(id);
-     uuid_unparse(id, id_string);
-     return QUuid(id_string);
-     
+    uuid_t id;
+    char id_string[37];
+    uuid_generate(id);
+    uuid_unparse(id, id_string);
+    return Uuid(QUuid(id_string));
+    
     #else
-      return QUuid::createUuid();
+    return Uuid(QUuid::createUuid());
     #endif //HAVE_LIBUUID
+  }
+  
+  Uuid::Uuid()
+  :_M_impl(){}
+  
+  Uuid::Uuid(QUuid const& id)
+  :_M_impl(id){}
+  
+  Uuid::Uuid(QString const& id)
+  :_M_impl(id){}
+   
+  
+  bool Uuid::isNull() const
+  {
+    return _M_impl.isNull();
+  }
+  QString Uuid::toString() const
+  {
+    return _M_impl.toString();
+  }
+  bool Uuid::operator!=(Uuid const& rhs)const
+  {
+    return _M_impl != rhs._M_impl;
+  }
+  bool Uuid::operator<(Uuid const& rhs) const
+  {
+    return _M_impl < rhs._M_impl;
+  }
+  Uuid & Uuid::operator=(Uuid const& rhs)
+  {
+    _M_impl = rhs._M_impl;
+    return *this;
+  }
+  bool Uuid::operator==(Uuid const& rhs)const
+  {
+    return _M_impl == rhs._M_impl;
   }
 }
 

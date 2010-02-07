@@ -51,7 +51,7 @@ namespace dp
     start_action(a);
   }
   // ---------------------------------------------------------------------------------
-  void TimeTracker::startNewActionFromTemplate ( QUuid const& _template_id )
+  void TimeTracker::startNewActionFromTemplate ( Uuid const& _template_id )
   {
     qDebug() << __FUNCTION__;
   }

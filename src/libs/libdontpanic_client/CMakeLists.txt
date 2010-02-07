@@ -25,14 +25,14 @@ qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS
                                     libdontpanic/dbus_support/action.hpp
                                     libdontpanic/dbus_support/actiontemplate.hpp
                                     libdontpanic/dbus_support/qdatetime.h
-                                    libdontpanic/dbus_support/quuid.h
+                                    libdontpanic/dbus_support/uuid.h
                                     )
 
 qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS
                                     ${DBUS_INTERFACES_PATH}/org.dontpanic.ProjectManager.xml
                                     remote_projectmanager
                                     libdontpanic/dbus_support/project.hpp
-                                    libdontpanic/dbus_support/quuid.h
+                                    libdontpanic/dbus_support/uuid.h
                                     )
 qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS
                                     ${DBUS_INTERFACES_PATH}/org.dontpanic.ReportManager.xml
@@ -44,13 +44,13 @@ qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS
                                     ${DBUS_INTERFACES_PATH}/org.dontpanic.TaskManager.xml
                                     remote_taskmanager
                                     libdontpanic/dbus_support/task.hpp
-                                    libdontpanic/dbus_support/quuid.h
+                                    libdontpanic/dbus_support/uuid.h
                                     )
 qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS
                                     ${DBUS_INTERFACES_PATH}/org.dontpanic.ActionTemplateManager.xml
                                     remote_action_template_manager
                                     libdontpanic/dbus_support/actiontemplate.hpp
-                                    libdontpanic/dbus_support/quuid.h
+                                    libdontpanic/dbus_support/uuid.h
                                     )
 
 add_definitions(-fPIC)

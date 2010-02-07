@@ -33,7 +33,7 @@ namespace dp
        init();
      }
      // ---------------------------------------------------------------------------------
-     void KTasksComboBox::select(QUuid const& id)
+     void KTasksComboBox::select(Uuid const& id)
      {
        int index = findData(QVariant(id.toString()));
        setCurrentIndex(index);

@@ -1,5 +1,5 @@
 #include <libdontpanic/action.hpp>
-#include "uuid.h"
+#include <libdontpanic/uuid.h>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -15,7 +15,7 @@ namespace dp
       , _M_reviewed ( false )
       , _M_billed ( false ) {}
   // ---------------------------------------------------------------------------------
-  Action::Action ( QUuid const& id )
+  Action::Action ( Uuid const& id )
       : _M_id ( id )
       , _M_task ( )
       , _M_project ( )
@@ -31,39 +31,39 @@ namespace dp
     return !id().isNull();
   }
   // ---------------------------------------------------------------------------------
-  QUuid const& Action::id() const
+  Uuid const& Action::id() const
   {
     return _M_id;
   }
   // ---------------------------------------------------------------------------------
-  QUuid Action::task() const
+  Uuid Action::task() const
   {
     return _M_task;
   }
   // ---------------------------------------------------------------------------------
-  Action& Action::setTask ( QUuid t )
+  Action& Action::setTask ( Uuid t )
   {
     _M_task = t;
     return *this;
   }
   // ---------------------------------------------------------------------------------
-  QUuid Action::project() const
+  Uuid Action::project() const
   {
     return _M_project;
   }
   // ---------------------------------------------------------------------------------
-  Action& Action::setProject ( QUuid p )
+  Action& Action::setProject ( Uuid p )
   {
     _M_project = p;
     return *this;
   }
   // ---------------------------------------------------------------------------------
-  QUuid Action::collaborationType() const
+  Uuid Action::collaborationType() const
   {
     return _M_teamwork;
   }
   // ---------------------------------------------------------------------------------
-  Action& Action::setCollaborationType ( QUuid ct )
+  Action& Action::setCollaborationType ( Uuid ct )
   {
     _M_teamwork = ct;
     return *this;

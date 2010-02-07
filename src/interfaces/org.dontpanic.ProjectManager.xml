@@ -10,7 +10,7 @@
       <arg type="(si)" />
     </method>
     <method name="load">
-    <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="QUuid"/>
+    <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::Uuid"/>
       <arg type="(si)" direction="in" />
       <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="dp::Project"/>
       <arg type="(si)" direction="out" />
