@@ -109,6 +109,7 @@ namespace dp
     {
       Action const& current_selection = _M_model->at(_M_sort_proxy_model->mapToSource(currentIndex()));  
       KEditActionDialog dlg;
+      dlg.setAction(current_selection);
       dlg.exec();
     }
     // ---------------------------------------------------------------------------------

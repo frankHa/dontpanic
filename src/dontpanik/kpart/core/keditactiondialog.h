@@ -21,6 +21,7 @@
 #define DP_CORE_KEDITACTIONDIALOG_H
 
 #include <libdontpanic/defines.hpp>
+#include <libdontpanic/action.hpp>
 #include <QDialog>
 #include <QDate>
 
@@ -31,7 +32,6 @@ namespace Ui
 
 namespace dp
 {
-
     namespace core
     {
 
@@ -45,11 +45,15 @@ namespace dp
                 
           public slots:
             KEditActionDialog & setCurrentDay(QDate const& currentDate);
+            KEditActionDialog & setAction(Action const& a);
           private slots:
             void init_ui();
+            void setup_actions();
+            void accepted();
           private:
             Ui::KEditActionDialog *_M_ui;
             QDate _M_current_date;
+            Action _M_current_action;
         };
 
     }
