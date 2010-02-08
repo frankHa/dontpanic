@@ -6,14 +6,27 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>328</width>
-    <height>251</height>
+    <width>364</width>
+    <height>252</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Action-Don't Panik</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <spacer name="horizontalSpacer_5">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>78</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
    <item row="0" column="1" colspan="2">
     <widget class="QLabel" name="date">
      <property name="sizePolicy">
@@ -27,6 +40,19 @@
      </property>
     </widget>
    </item>
+   <item row="0" column="3">
+    <spacer name="horizontalSpacer_6">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>93</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
    <item row="1" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
@@ -34,10 +60,10 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="1">
+   <item row="1" column="1" colspan="2">
     <widget class="QTimeEdit" name="starting"/>
    </item>
-   <item row="1" column="2">
+   <item row="1" column="3">
     <spacer name="horizontalSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -57,10 +83,10 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="1">
+   <item row="2" column="1" colspan="2">
     <widget class="QTimeEdit" name="ending"/>
    </item>
-   <item row="2" column="2">
+   <item row="2" column="3">
     <widget class="QCheckBox" name="next_day">
      <property name="text">
       <string>next day</string>
@@ -90,7 +116,7 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="1">
+   <item row="4" column="1" colspan="2">
     <widget class="dp::core::detail::KProjectsComboBox" name="projects">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -100,7 +126,7 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="2">
+   <item row="4" column="3">
     <spacer name="horizontalSpacer_2">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -120,7 +146,7 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="1">
+   <item row="5" column="1" colspan="2">
     <widget class="dp::core::detail::KTasksComboBox" name="worktype">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -130,7 +156,7 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="2">
+   <item row="5" column="3">
     <spacer name="horizontalSpacer_3">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -150,14 +176,14 @@
      </property>
     </widget>
    </item>
-   <item row="6" column="1">
+   <item row="6" column="1" colspan="2">
     <widget class="QLineEdit" name="comment">
      <property name="text">
       <string/>
      </property>
     </widget>
    </item>
-   <item row="6" column="2">
+   <item row="6" column="3">
     <spacer name="horizontalSpacer_4">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -170,7 +196,7 @@
      </property>
     </spacer>
    </item>
-   <item row="7" column="1">
+   <item row="7" column="1" colspan="2">
     <spacer name="verticalSpacer_2">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -184,6 +210,19 @@
     </spacer>
    </item>
    <item row="8" column="0" colspan="2">
+    <spacer name="horizontalSpacer_7">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>129</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="8" column="2" colspan="2">
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>

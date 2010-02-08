@@ -54,11 +54,19 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void KActionsTable::contextMenuEvent(QContextMenuEvent *evt)
     {
-      if(!this->selectionModel()->hasSelection()){return;}
       QMenu menu;      
-      menu.addAction(_M_remove_selected_action);
+      menu.addAction(context()->globalActions()->action("add_action"));
       menu.addSeparator();
-      menu.addAction(_M_edit_selected_action);
+      menu.addAction(context()->globalActions()->action("start_new_action"));
+      menu.addAction(context()->globalActions()->action("stop_current_action"));
+      menu.addAction(context()->globalActions()->action("continue_last_action"));
+      if(this->selectionModel()->hasSelection())
+      {
+        menu.addSeparator();
+        menu.addAction(_M_remove_selected_action);
+        menu.addSeparator();
+        menu.addAction(_M_edit_selected_action);
+      }
       menu.exec(evt->globalPos());      
     }
     

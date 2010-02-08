@@ -24,6 +24,7 @@ namespace dp
         , _M_gui_client ( gui_client )
     {
       _M_widget = new KMainWidget ( parent, new KParts::StatusBarExtension(gui_client) );
+      context()->registerGlobalActions(gui_client->actionCollection());
     }
     // ---------------------------------------------------------------------------------
     QWidget *dont_panik_core::widget()

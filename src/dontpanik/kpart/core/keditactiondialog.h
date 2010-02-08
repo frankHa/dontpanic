@@ -45,6 +45,8 @@ namespace dp
                 
           public slots:
             KEditActionDialog & setCurrentDay(QDate const& currentDate);
+          private slots:
+            void init_ui();
           private:
             Ui::KEditActionDialog *_M_ui;
             QDate _M_current_date;

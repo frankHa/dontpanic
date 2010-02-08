@@ -28,6 +28,7 @@ namespace dp
     , _M_ui(new Ui::KEditActionDialog())
     {
       _M_ui->setupUi(this);
+      init_ui();
     }
     
     KEditActionDialog::~KEditActionDialog()
@@ -39,6 +40,12 @@ namespace dp
     {
       _M_current_date = date;
       _M_ui->date->setText(_M_current_date.toString());
+    }
+    
+    void KEditActionDialog::init_ui()
+    {
+      _M_ui->starting->setTime(QTime::currentTime());
+      _M_ui->ending->setTime(QTime::currentTime());
     }
   }
 }

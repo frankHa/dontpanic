@@ -23,13 +23,14 @@ namespace dp
 {
   namespace core
   {
+    // ---------------------------------------------------------------------------------
     Context _instance;
-
+    // ---------------------------------------------------------------------------------
     Context* context()
     {
       return &_instance;
     }
-
+    // ---------------------------------------------------------------------------------
     Context::Context()
     : _M_action_template_manager(new dp::client::ActionTemplateManager())
     , _M_project_manager(new dp::client::ProjectManager())
@@ -38,7 +39,7 @@ namespace dp
     , _M_timetracker((new dp::client::TimeTracker()))
     , _M_current_date(QDate::currentDate()){}
     
-    
+    // ---------------------------------------------------------------------------------
     Context::~Context()
     {
       delete _M_action_template_manager;
@@ -47,41 +48,52 @@ namespace dp
       delete _M_task_manager;
       delete _M_timetracker;
     }
-    
+    // ---------------------------------------------------------------------------------
     void Context::setCurrentDate(QDate const& date)
     {
       _M_current_date = date;
     }
-    
+    // ---------------------------------------------------------------------------------
     QDate Context::currentDate() const
     {
       return _M_current_date;
     }
-
+    // ---------------------------------------------------------------------------------
     dp::client::ActionTemplateManager* Context::actionTemplateManager()
     {
       return _M_action_template_manager;
     }
-
+    // ---------------------------------------------------------------------------------
     dp::client::ProjectManager* Context::projectManager()
     {
       return _M_project_manager;
     }
-    
+    // ---------------------------------------------------------------------------------
     dp::client::ReportManager* Context::reportManager()
     {
       return _M_report_manager;
     }
-    
+    // ---------------------------------------------------------------------------------
     dp::client::TaskManager* Context::taskManager()
     {
       return _M_task_manager;
     }
-    
+    // ---------------------------------------------------------------------------------
     dp::client::TimeTracker* Context::timeTracker()
     {
       return _M_timetracker;
     }
+    // ---------------------------------------------------------------------------------
+    void Context::registerGlobalActions(KActionCollection *actions)
+    {
+      _M_global_actions = actions;
+    }
+    // ---------------------------------------------------------------------------------
+    KActionCollection* Context::globalActions()
+    {
+      return _M_global_actions;
+    }
+    // ---------------------------------------------------------------------------------
   }
 }
 
