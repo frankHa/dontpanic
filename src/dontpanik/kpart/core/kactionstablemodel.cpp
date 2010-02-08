@@ -35,6 +35,26 @@ namespace dp
     {
       
       // ---------------------------------------------------------------------------------
+      class TimeFormatter
+      {
+        public:
+          QString start(Action const& a)
+          {
+            return a.startTime().time().toString(Qt::SystemLocaleShortDate);
+          }
+          QString end(Action const& a)
+          {
+            QString anotherDayMarker("");
+            if(a.startTime().date().day()<a.endTime().date().day())
+            {
+              anotherDayMarker = ">";
+            }
+            QString result = QString("%1%2").arg(anotherDayMarker).arg(a.endTime().time().toString(Qt::SystemLocaleShortDate));
+            return result;
+          }
+      };
+      TimeFormatter time_formatter(){return TimeFormatter();}
+      // ---------------------------------------------------------------------------------
       KActionsTableModel::KActionsTableModel ( QObject *parent )
           : QAbstractTableModel ( parent )
       {
@@ -67,8 +87,8 @@ namespace dp
       {
         switch(index.column())
         {
-          case START: return a.startTime().time();
-          case END:   return a.endTime().time();
+          case START: return time_formatter().start(a);
+          case END:   return time_formatter().end(a);
           case TITLE: return a.name();
           case TYPE:  return task_of(a);
           case PROJECT: return project_of(a);
