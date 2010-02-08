@@ -46,6 +46,7 @@ namespace dp
     void dont_panik_core::addAction()
     {
       KEditActionDialog dlg;
+      dlg.setCurrentDay(context()->currentDate());
       dlg.exec();
     }
     // ---------------------------------------------------------------------------------

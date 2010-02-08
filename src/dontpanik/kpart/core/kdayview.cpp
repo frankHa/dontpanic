@@ -19,6 +19,7 @@
 
 #include "kdayview.h"
 #include <ui_kdayview.h>
+#include "context.h"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -41,6 +42,11 @@ namespace dp
       delete _M_ui;
     }
     // ---------------------------------------------------------------------------------
+    QDate KDayView::currentDay() const
+    {
+      return _M_ui->calendar->selectedDate();
+    }
+    // ---------------------------------------------------------------------------------
     void KDayView::setup_actions()
     {
       connect(_M_ui->today_button, SIGNAL(pressed()), this, SLOT(on_today_pressed()));
@@ -50,6 +56,7 @@ namespace dp
     void KDayView::on_selected_day_changed()
     {
       _M_ui->action_table->load_actions_of(_M_ui->calendar->selectedDate());
+      context()->setCurrentDate(_M_ui->calendar->selectedDate());
     }
     // ---------------------------------------------------------------------------------
     void KDayView::on_today_pressed()

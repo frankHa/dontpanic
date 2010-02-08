@@ -35,6 +35,11 @@ namespace dp
       delete _M_ui;
     }
     
+    KEditActionDialog& KEditActionDialog::setCurrentDay(QDate const& date)
+    {
+      _M_current_date = date;
+      _M_ui->date->setText(_M_current_date.toString());
+    }
   }
 }
 

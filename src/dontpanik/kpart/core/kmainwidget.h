@@ -22,6 +22,7 @@
 
 #include <QtGui/QWidget>
 #include <QtGui/QStackedWidget>
+#include <QDate>
 #include <kparts/statusbarextension.h>
 // ---------------------------------------------------------------------------------
 namespace dp

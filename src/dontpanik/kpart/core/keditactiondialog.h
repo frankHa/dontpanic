@@ -22,6 +22,7 @@
 
 #include <libdontpanic/defines.hpp>
 #include <QDialog>
+#include <QDate>
 
 namespace Ui
 {
@@ -41,8 +42,12 @@ namespace dp
           public:            
                 KEditActionDialog ( QWidget* parent = 0, Qt::WindowFlags f = 0 );
                 ~KEditActionDialog(); 
+                
+          public slots:
+            KEditActionDialog & setCurrentDay(QDate const& currentDate);
           private:
             Ui::KEditActionDialog *_M_ui;
+            QDate _M_current_date;
         };
 
     }

@@ -35,7 +35,8 @@ namespace dp
     , _M_project_manager(new dp::client::ProjectManager())
     , _M_report_manager(new dp::client::ReportManager())
     , _M_task_manager(new dp::client::TaskManager())
-    , _M_timetracker((new dp::client::TimeTracker())){}
+    , _M_timetracker((new dp::client::TimeTracker()))
+    , _M_current_date(QDate::currentDate()){}
     
     
     Context::~Context()
@@ -45,6 +46,16 @@ namespace dp
       delete _M_report_manager;
       delete _M_task_manager;
       delete _M_timetracker;
+    }
+    
+    void Context::setCurrentDate(QDate const& date)
+    {
+      _M_current_date = date;
+    }
+    
+    QDate Context::currentDate() const
+    {
+      return _M_current_date;
     }
 
     dp::client::ActionTemplateManager* Context::actionTemplateManager()
