@@ -51,6 +51,10 @@ at_name TEXT, at_comment TEXT, at_icon TEXT)"
 (a_id TEXT PRIMARY KEY, a_t_task TEXT references t_task(t_id) , a_p_project INTEGER references p_project(p_id),\
 a_ct_collaboration_type TEXT references ct_collaboration_type(ct_id),\
 a_name TEXT, a_comment TEXT, a_start INTEGER, a_end INTEGER, a_reviewed INTEGER, a_billed INTEGER )"
+
+#define CREATE_TABLE_WORK_TIME_PER_DAY\
+ "CREATE TABLE IF NOT EXISTS w_work_time_per_day \
+ (w_day int w_time int)"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -130,6 +134,11 @@ namespace dp
         return error();
       }
       if ( !query.exec ( CREATE_TABLE_ACTION ) )
+      {
+        qDebug() << query.lastError();
+        return error();
+      }
+      if ( !query.exec ( CREATE_TABLE_WORK_TIME_PER_DAY ) )
       {
         qDebug() << query.lastError();
         return error();
