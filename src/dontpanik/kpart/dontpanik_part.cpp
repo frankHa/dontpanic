@@ -84,6 +84,11 @@ void DontPanikPart::editTasks()
   _M_core->editTasks();
 }
 
+void DontPanikPart::addAction()
+{
+  _M_core->addAction();
+}
+
 void DontPanikPart::stopCurrentAction()
 {
   _M_core->stopCurrentAction();
@@ -120,6 +125,12 @@ void DontPanikPart::setup_actions()
   edit_tasks->setText ( i18n ( "Edit Tasks/Worktypes" ) );
   actionCollection()->addAction ( "edit_tasks", edit_tasks );
   connect ( edit_tasks, SIGNAL ( triggered() ), this, SLOT ( editTasks() ) );
+  
+  KAction *add_action = new KAction(this);
+  add_action->setText(i18n("Add Action"));
+  add_action->setShortcut( KShortcut(i18n("Ctrl+A")));
+  actionCollection()->addAction ( "add_action", add_action );
+  connect ( add_action, SIGNAL ( triggered() ), this, SLOT ( addAction() ) );
   
   KAction *start_new_action = new KAction(this);
   start_new_action->setText(i18n("Start Action"));

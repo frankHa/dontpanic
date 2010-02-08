@@ -7,6 +7,7 @@
 #include <QFile>
 #include "context.h"
 #include "kmainwidget.h"
+#include "keditactiondialog.h"
 #include "kprojectsdialog.h"
 #include "ktasksdialog.h"
 #include <KStatusBar>
@@ -39,6 +40,12 @@ namespace dp
     void dont_panik_core::editTasks()
     {
       KTasksDialog dlg ( widget() );
+      dlg.exec();
+    }
+    // ---------------------------------------------------------------------------------
+    void dont_panik_core::addAction()
+    {
+      KEditActionDialog dlg;
       dlg.exec();
     }
     // ---------------------------------------------------------------------------------
