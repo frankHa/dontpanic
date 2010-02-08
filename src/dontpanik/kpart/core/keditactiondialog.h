@@ -50,9 +50,11 @@ namespace dp
             void init_ui();
             void setup_actions();
             void accepted();
+            
+          private:
+            QDate currentDate() const;
           private:
             Ui::KEditActionDialog *_M_ui;
-            QDate _M_current_date;
             Action _M_current_action;
         };
 

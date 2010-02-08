@@ -41,8 +41,7 @@ namespace dp
     
     KEditActionDialog& KEditActionDialog::setCurrentDay(QDate const& date)
     {
-      _M_current_date = date;
-      _M_ui->date->setText(_M_current_date.toString());
+      _M_ui->dateEdit->setDate(date);
     }
     
     KEditActionDialog& KEditActionDialog::setAction(Action const& a)
@@ -52,6 +51,7 @@ namespace dp
       _M_ui->starting->setTime(a.startTime().time());
       _M_ui->ending->setTime(a.endTime().time());
       _M_ui->next_day->setChecked(a.startTime().date().day()<a.endTime().date().day());
+      _M_ui->title->setText(a.name());
       _M_ui->projects->select(a.project());
       _M_ui->worktype->select(a.task());
       _M_ui->comment->setText(a.comment());
@@ -68,6 +68,11 @@ namespace dp
       connect(_M_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accepted()));
     }
     
+    QDate KEditActionDialog::currentDate() const
+    {
+      return _M_ui->dateEdit->date();
+    }
+    
     void KEditActionDialog::accepted()
     {
       Action a;
@@ -75,13 +80,14 @@ namespace dp
       {
         a = _M_current_action;
       }
-      a.setStartTime(QDateTime(_M_current_date, _M_ui->starting->time()));
-      QDate endDate = _M_current_date;
+      a.setStartTime(QDateTime(currentDate(), _M_ui->starting->time()));
+      QDate endDate = currentDate();
       if(_M_ui->next_day->isChecked())
       {
        endDate = endDate.addDays(1); 
       }
       a.setEndTime(QDateTime(endDate, _M_ui->ending->time()));
+      a.setName(_M_ui->title->text());
       a.setProject(_M_ui->projects->selectedUuid());
       a.setTask(_M_ui->worktype->selectedUuid());
       a.setComment(_M_ui->comment->text());

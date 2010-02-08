@@ -6,52 +6,33 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>364</width>
-    <height>252</height>
+    <width>371</width>
+    <height>296</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Action-Don't Panik</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <spacer name="horizontalSpacer_5">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>78</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
    <item row="0" column="1" colspan="2">
-    <widget class="QLabel" name="date">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-       <horstretch>1</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
+    <widget class="QDateEdit" name="dateEdit">
+     <property name="enabled">
+      <bool>false</bool>
      </property>
-     <property name="text">
-      <string>TextLabel</string>
+     <property name="calendarPopup">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
    <item row="0" column="3">
-    <spacer name="horizontalSpacer_6">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+    <widget class="QCheckBox" name="move">
+     <property name="toolTip">
+      <string>Move this action to another day</string>
      </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>93</width>
-       <height>20</height>
-      </size>
+     <property name="text">
+      <string>move</string>
      </property>
-    </spacer>
+    </widget>
    </item>
    <item row="1" column="0">
     <widget class="QLabel" name="label">
@@ -110,13 +91,36 @@
     </spacer>
    </item>
    <item row="4" column="0">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>Title:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1" colspan="2">
+    <widget class="QLineEdit" name="title"/>
+   </item>
+   <item row="4" column="3">
+    <spacer name="horizontalSpacer_8">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>124</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="5" column="0">
     <widget class="QLabel" name="label_2">
      <property name="text">
       <string>Project:</string>
      </property>
     </widget>
    </item>
-   <item row="4" column="1" colspan="2">
+   <item row="5" column="1" colspan="2">
     <widget class="dp::core::detail::KProjectsComboBox" name="projects">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -126,7 +130,7 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="3">
+   <item row="5" column="3">
     <spacer name="horizontalSpacer_2">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -139,14 +143,14 @@
      </property>
     </spacer>
    </item>
-   <item row="5" column="0">
+   <item row="6" column="0">
     <widget class="QLabel" name="label_3">
      <property name="text">
       <string>Worktype:</string>
      </property>
     </widget>
    </item>
-   <item row="5" column="1" colspan="2">
+   <item row="6" column="1" colspan="2">
     <widget class="dp::core::detail::KTasksComboBox" name="worktype">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -156,7 +160,7 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="3">
+   <item row="6" column="3">
     <spacer name="horizontalSpacer_3">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -169,21 +173,21 @@
      </property>
     </spacer>
    </item>
-   <item row="6" column="0">
+   <item row="7" column="0">
     <widget class="QLabel" name="label_5">
      <property name="text">
       <string>Comment:</string>
      </property>
     </widget>
    </item>
-   <item row="6" column="1" colspan="2">
+   <item row="7" column="1" colspan="2">
     <widget class="QLineEdit" name="comment">
      <property name="text">
       <string/>
      </property>
     </widget>
    </item>
-   <item row="6" column="3">
+   <item row="7" column="3">
     <spacer name="horizontalSpacer_4">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -196,7 +200,7 @@
      </property>
     </spacer>
    </item>
-   <item row="7" column="1" colspan="2">
+   <item row="8" column="2">
     <spacer name="verticalSpacer_2">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -209,26 +213,33 @@
      </property>
     </spacer>
    </item>
-   <item row="8" column="0" colspan="2">
+   <item row="9" column="0" colspan="2">
     <spacer name="horizontalSpacer_7">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
-       <width>129</width>
+       <width>136</width>
        <height>20</height>
       </size>
      </property>
     </spacer>
    </item>
-   <item row="8" column="2" colspan="2">
+   <item row="9" column="2" colspan="2">
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="standardButtons">
       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label_7">
+     <property name="text">
+      <string>Date:</string>
      </property>
     </widget>
    </item>
@@ -255,8 +266,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>366</x>
+     <y>291</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -271,12 +282,28 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>366</x>
+     <y>291</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
      <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>move</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>dateEdit</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>303</x>
+     <y>18</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>162</x>
+     <y>18</y>
     </hint>
    </hints>
   </connection>
