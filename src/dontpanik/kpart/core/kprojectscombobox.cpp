@@ -45,6 +45,7 @@ namespace dp
      {
        ProjectList projects = context()->projectManager()->allProjects();
        ProjectList::const_iterator it;
+       addItem("", uuid().toString());
        for(it=projects.begin();it!=projects.end();++it)
        {
          addItem(it->name(), QVariant(it->id().toString()));

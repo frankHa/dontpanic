@@ -50,6 +50,7 @@ namespace dp
      {
        TaskList tasks = context()->taskManager()->allTasks();
        TaskList::const_iterator it;
+       addItem("", uuid().toString());
        for(it=tasks.begin();it!=tasks.end();++it)
        {
          addItem(it->name(), QVariant(it->id().toString()));
