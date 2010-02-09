@@ -20,6 +20,7 @@
 #include "kreportwidget.h"
 #include "ui_kreportwidget.h"
 #include "context.h"
+#include <libdontpanic/durationformatter.h>
 
 namespace dp
 {
@@ -46,6 +47,7 @@ namespace dp
       .arg(r.range().from().date().toString())
       .arg(r.range().to().date().toString())
       );
+      _M_ui->duration->setText(duration_formatter().format(r.duration()));
     }
     
     void KReportWidget::resetReport()
@@ -53,6 +55,7 @@ namespace dp
       _M_ui->report_type->setText("");
       _M_ui->report->setText("");
       _M_ui->report_range->setText("");
+      _M_ui->duration->setText("");
     }
     
     // private stuff:

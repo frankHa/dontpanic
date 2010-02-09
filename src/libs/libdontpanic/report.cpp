@@ -24,7 +24,8 @@ namespace dp
   Report::Report()
   :_M_valid(true)
   , _M_type("")
-  , _M_report_data(""){}
+  , _M_report_data("")
+  , _M_duration(0){}
   
   Report & Report::setValid(bool b)
   {
@@ -64,5 +65,16 @@ namespace dp
   {
     return _M_report_data;
   }
+  
+  Report& Report::setDuration(int d)
+  {
+    _M_duration = d;
+    return *this;
+  }
+  int Report::duration() const
+  {
+    return _M_duration;
+  }
+  
 }
 

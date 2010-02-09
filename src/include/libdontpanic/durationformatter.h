@@ -8,5 +8,9 @@ namespace dp
     public:
       QString format(int duration);
   };
+  inline DurationFormatter duration_formatter()
+  {
+    return DurationFormatter();
+  }
 }
 #endif //DP_DURATION_FORMATTER_H

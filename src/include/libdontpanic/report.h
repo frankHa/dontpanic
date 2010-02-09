@@ -38,12 +38,15 @@ namespace dp
       TimeRange range()const;
       Report& setReportData(QString const& data);
       QString reportData() const;
+      Report& setDuration(int duration);
+      int duration() const;
       
     private:
       bool      _M_valid;
       QString   _M_type;
       TimeRange _M_time_range;
       QString   _M_report_data;
+      int       _M_duration;
   };
   
   inline Report report()
