@@ -257,6 +257,18 @@
    <header>ktaskscombobox.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>starting</tabstop>
+  <tabstop>ending</tabstop>
+  <tabstop>next_day</tabstop>
+  <tabstop>title</tabstop>
+  <tabstop>projects</tabstop>
+  <tabstop>worktype</tabstop>
+  <tabstop>comment</tabstop>
+  <tabstop>buttonBox</tabstop>
+  <tabstop>dateEdit</tabstop>
+  <tabstop>move</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
