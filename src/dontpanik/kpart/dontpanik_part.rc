@@ -1,15 +1,15 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
 <kpartgui name="dontpanik_part" version="2">
 <MenuBar>
-  <Menu name="edit">
+  <Menu name="edit"><text>&amp;Edit</text>
     <Action name="edit_projects" />
     <Action name="edit_tasks" />
   </Menu>
-  <Menu name="view">
+  <Menu name="view"><text>&amp;View</text>
     <Action name="view_day" />
     <Action name="view_reports" />
   </Menu>
-  <Menu name="action">
+  <Menu name="action"><text>&amp;Actions</text>
     <Action name="add_action" />
     <Separator />
     <Action name="start_new_action" />

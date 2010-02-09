@@ -1,0 +1,17 @@
+[Desktop Entry]
+Type=Service
+Icon=dontpanik
+X-KDE-ServiceTypes=Kontact/Plugin,KPluginInfo
+
+X-KDE-Library=kontact_dontpanik_plugin
+X-KDE-KontactPluginVersion=9
+X-KDE-KontactPartLibraryName=dontpanikpart
+X-KDE-KontactPluginHasSummary=false
+
+X-KDE-PluginInfo-Name=kontact_dontpanik_plugin
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+
+Comment=A personal time tracker
+Name=dontpanik

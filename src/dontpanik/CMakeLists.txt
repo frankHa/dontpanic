@@ -1,2 +1,3 @@
 add_subdirectory(kpart)
 add_subdirectory(shell)
+add_subdirectory(kontact_dontpanik_plugin)

@@ -6,7 +6,8 @@ find_package(KDE4 REQUIRED)
 include (KDE4Defaults)
 
 set(DBUS_INTERFACES_PATH ${CMAKE_SOURCE_DIR}/src/interfaces)
-option(DP_USE_LIBUUID ON "use libuuid instead of Qt's default Uuid creator(recommended at least on linux systems!)")
+option(DP_USE_LIBUUID ON "Use libuuid instead of Qt's default Uuid creator(recommended at least on linux systems!)")
+option(DP_BUILD_KONTACT_PLUGIN ON "Building a kontact plugin. This will require the kdepim-dev files.")
 option(DP_INSTALL_SYSTEM_FILES ON "Allows disabling the installation of files which needs root access and are rarely changed")
 
 if(DP_USE_LIBUUID)
