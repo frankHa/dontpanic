@@ -47,6 +47,9 @@ namespace dp
       "SELECT DISTINCT a_id, a_t_task , a_p_project,a_ct_collaboration_type,\
       a_name, a_comment, a_start, a_end, a_reviewed, a_billed FROM a_action\
       order by a_start desc limit 1";
+      
+      const QString HAS_ACTION_FOR = 
+      "SELECT a_id from a_action WHERE a_start>=? AND a_start<=?";
       // ---------------------------------------------------------------------------------
       success Action::persist ( dp::Action const&_a ) const
       {
@@ -138,6 +141,30 @@ namespace dp
         assign_query_values_to_entity(query, _a);
         kDebug()<<"loaded last action "<<id.toString();
         return _a;
+      }
+      // ---------------------------------------------------------------------------------
+      bool Action::hasActionFor(QDate const& date) const
+      {
+        QDateTime _from(date);
+        QDateTime _to(date, QTime(23, 59, 59, 99));
+        return hasActionFor(_from, _to);
+      }
+      // ---------------------------------------------------------------------------------
+      bool Action::hasActionFor(QDateTime const& from, QDateTime const& to) const
+      {
+        QSqlQuery query;
+        query.prepare(HAS_ACTION_FOR);
+        bindTimeValue ( query, from );
+        bindTimeValue ( query, to );
+        if ( execute ( query ).has_failed() )
+        {
+          return false;
+        }
+        if ( !query.first() )
+        {
+          return false;
+        }
+        return true;
       }
       // ---------------------------------------------------------------------------------
       //private stuff:

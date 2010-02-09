@@ -8,11 +8,11 @@ namespace dp
       : _M_id ( uuid().generate() )
   {}
   // ---------------------------------------------------------------------------------
-  CollaborationType::CollaborationType(QUuid const& id)
+  CollaborationType::CollaborationType(Uuid const& id)
       : _M_id ( id )
   {}
   // ---------------------------------------------------------------------------------
-  QUuid const& CollaborationType::id() const
+  Uuid const& CollaborationType::id() const
   {
     return _M_id;
   }

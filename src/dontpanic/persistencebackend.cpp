@@ -32,5 +32,10 @@ namespace dp
     return _persistence::sqlite().lastAction();
   }
   // ---------------------------------------------------------------------------------
+  bool PersistenceBackend::hasActionsFor(QDate const& date)
+  {
+    return _persistence::sqlite().hasActionsFor(date);
+  }
+  // ---------------------------------------------------------------------------------
 }//dp
 // ---------------------------------------------------------------------------------

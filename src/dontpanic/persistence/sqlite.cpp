@@ -221,6 +221,10 @@ namespace dp
       return _sqlite::action().findLastAction();
     }
     // ---------------------------------------------------------------------------------
+    bool Sqlite::hasActionsFor(QDate const& date)const
+    {
+      return _sqlite::action().hasActionFor(date);
+    }
     
   }//_persistance
   // ---------------------------------------------------------------------------------

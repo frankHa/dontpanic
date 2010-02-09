@@ -84,6 +84,11 @@ namespace dp
     return list;
   }
   // ---------------------------------------------------------------------------------
+  bool TimeTracker::hasActionsFor(QDate const& date)
+  {
+    return persistence().hasActionsFor(date);
+  }
+  // ---------------------------------------------------------------------------------
   //private stuff:
   // ---------------------------------------------------------------------------------
   void TimeTracker::load_last_action()

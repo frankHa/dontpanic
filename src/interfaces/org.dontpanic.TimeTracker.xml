@@ -11,6 +11,11 @@
     </method>
     <method name="continueLastAction">
     </method>
+    <method name="hasActionsFor">
+      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="QDate"/>
+      <arg type="(si)" />
+      <arg type="b" direction="out" />
+    </method>
     <method name="remove">
       <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::Action"/>
       <arg type="(si)" />

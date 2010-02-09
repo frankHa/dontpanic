@@ -126,6 +126,18 @@ namespace dp
       return reply.value();
     }
     // ---------------------------------------------------------------------------------
+    bool TimeTracker::hasActionsFor(QDate const& date)
+    {
+      QDBusPendingReply<bool> reply =remote()->hasActionsFor(date);
+      reply.waitForFinished();
+      if(reply.isError())
+      {
+        qWarning()<<reply.error();
+        emit error(QDBusError::errorString(reply.error().type()));
+      }
+      return reply.value();
+    }
+    // ---------------------------------------------------------------------------------
     org::dontpanic::TimeTracker* TimeTracker::remote()
     {
       if(_M_remote == 0)

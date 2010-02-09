@@ -2,11 +2,11 @@
 #define DP_COLLABORATION_TYPE_HPP
 //dp includes
 #include "defines.hpp"
+#include <libdontpanic/uuid.h>
 //Qt includes
 // ---------------------------------------------------------------------------------
 #include <QString>
 #include <QDateTime>
-#include <QUuid>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -21,15 +21,15 @@ namespace dp
     public:
       // ---------------------------------------------------------------------------------
       CollaborationType();
-      CollaborationType(QUuid const& id);
+      CollaborationType(Uuid const& id);
       // ---------------------------------------------------------------------------------
     public :
       // ---------------------------------------------------------------------------------
-      QUuid const& id() const;
+      Uuid const& id() const;
       // ---------------------------------------------------------------------------------
     private:
       // ---------------------------------------------------------------------------------
-      QUuid _M_id;
+      Uuid _M_id;
       // ---------------------------------------------------------------------------------
       QString _M_name;
       // ---------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ namespace dp
   class NullCollaborationType: public CollaborationType
   {
     public:
-      NullCollaborationType() : CollaborationType ( QUuid() ) {}
+      NullCollaborationType() : CollaborationType ( Uuid() ) {}
   };
   // ---------------------------------------------------------------------------------
 }//dp

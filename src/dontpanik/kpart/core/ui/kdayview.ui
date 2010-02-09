@@ -49,7 +49,7 @@
              </spacer>
             </item>
             <item>
-             <widget class="QCalendarWidget" name="calendar"/>
+             <widget class="dp::core::KCalendarWidget" name="calendar"/>
             </item>
             <item>
              <spacer name="horizontalSpacer_2">
@@ -188,6 +188,11 @@
    <class>dp::core::KActionTemplatesList</class>
    <extends>QListView</extends>
    <header>kactiontemplateslist.h</header>
+  </customwidget>
+  <customwidget>
+   <class>dp::core::KCalendarWidget</class>
+   <extends>QCalendarWidget</extends>
+   <header>kcalendarwidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

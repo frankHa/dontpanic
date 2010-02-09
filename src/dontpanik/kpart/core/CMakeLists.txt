@@ -5,6 +5,7 @@ set(dontpanikpart_LIB_SRCS
     context.cpp 
     kactiontemplateslist.cpp
     kactiontemplateslistmodel.cpp
+    kcalendarwidget.cpp 
     kprojectstablemodel.cpp
     kprojectstable.cpp
     kactionstableitemdelegate.cpp 
