@@ -17,11 +17,16 @@
     <Action name="continue_last_action" />
   </Menu>
 </MenuBar>
+<ToolBar name="viewToolbar">
+  <Action name="view_day" />
+  <Action name="view_reports" /> 
+</ToolBar>
 <ToolBar name="actionToolbar">
- <Action name="add_action" />
-    <Separator />
-    <Action name="start_new_action" />
-    <Action name="stop_current_action" />
-    <Action name="continue_last_action" /> 
+  <Separator />
+  <Action name="add_action" />
+  <Separator />
+  <Action name="start_new_action" />
+  <Action name="stop_current_action" />
+  <Action name="continue_last_action" /> 
 </ToolBar>
 </kpartgui>
