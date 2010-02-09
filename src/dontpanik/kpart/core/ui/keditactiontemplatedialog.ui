@@ -90,8 +90,8 @@
          </property>
          <property name="minimumSize">
           <size>
-           <width>96</width>
-           <height>96</height>
+           <width>64</width>
+           <height>64</height>
           </size>
          </property>
          <property name="sizeIncrement">

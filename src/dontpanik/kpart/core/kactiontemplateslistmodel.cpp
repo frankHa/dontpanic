@@ -51,7 +51,7 @@ namespace dp
         switch(role)
         {
           case Qt::DisplayRole: return p.name();
-          case Qt::DecorationRole: return _M_icon_loader->loadIcon(p.icon(), KIconLoader::NoGroup);
+          case Qt::DecorationRole: return _M_icon_loader->loadIcon(p.icon(), KIconLoader::NoGroup, KIconLoader::SizeMedium);
           default: return QVariant();
         }
         
