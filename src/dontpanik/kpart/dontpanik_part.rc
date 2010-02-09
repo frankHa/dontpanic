@@ -17,7 +17,11 @@
     <Action name="continue_last_action" />
   </Menu>
 </MenuBar>
-<ToolBar name="mainToolBar">
- <Separator/>
+<ToolBar name="actionToolbar">
+ <Action name="add_action" />
+    <Separator />
+    <Action name="start_new_action" />
+    <Action name="stop_current_action" />
+    <Action name="continue_last_action" /> 
 </ToolBar>
 </kpartgui>
