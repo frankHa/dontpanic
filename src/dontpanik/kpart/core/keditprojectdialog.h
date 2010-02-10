@@ -19,7 +19,8 @@
 
 #ifndef DP_CORE_KEDITPROJECTDIALOG_H
 #define DP_CORE_KEDITPROJECTDIALOG_H
-
+#include <libdontpanic/defines.hpp>
+#include <libdontpanic/project.hpp>
 #include <QDialog>
 
 
@@ -30,29 +31,30 @@ namespace Ui
 
 namespace dp
 {
-
-    namespace core
+  namespace core
+  {
+    class KEditProjectDialog 
+      : public QDialog
     {
-
-        class KEditProjectDialog : public QDialog
-        {
-	  Q_OBJECT
-	  public:
-	    KEditProjectDialog(QWidget *parent=0);
-	    ~KEditProjectDialog();
-	  private:
-	    void setup_actions();
-	    
-	  private slots:
-	    void accepted();
-	    void rejected();
-	    
-	  private:
-	    Ui::KEditProjectDialog *_M_ui;
-        };
-
-    }
-
+      Q_OBJECT
+      public:
+        KEditProjectDialog(QWidget *parent=0);
+        ~KEditProjectDialog();
+    
+      public:
+        KEditProjectDialog& setProject(Project const& p);
+      private:
+        void setup_actions();
+        
+      private slots:
+        void accepted();
+        void rejected();
+        
+      private:
+        Ui::KEditProjectDialog *_M_ui;
+        Project _M_current_project;
+    };
+  }
 }
 
 #endif // DP_CORE_KEDITPROJECTDIALOG_H

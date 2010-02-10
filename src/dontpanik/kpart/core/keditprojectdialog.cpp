@@ -29,13 +29,24 @@ namespace dp
     KEditProjectDialog::KEditProjectDialog(QWidget *parent)
     :QDialog(parent)
     , _M_ui (new Ui::KEditProjectDialog())
+    , _M_current_project(NullProject())
     {
       _M_ui->setupUi(this);
+      _M_ui->creation_date->setDateTime(QDateTime::currentDateTime());
       setup_actions();
     }
     KEditProjectDialog::~KEditProjectDialog()
     {
       delete _M_ui;
+    }
+    
+    KEditProjectDialog& KEditProjectDialog::setProject(Project const& p)
+    {
+      _M_current_project = p;
+      _M_ui->project_name->setText(p.name());
+      _M_ui->creation_date->setDateTime(p.creationDate());
+      _M_ui->comment->setText(p.comment());
+      return *this;
     }
     
     void KEditProjectDialog::setup_actions()
@@ -46,11 +57,17 @@ namespace dp
     
     void KEditProjectDialog::accepted()
     {
-      kDebug()<<"";
       QString const& name = _M_ui->project_name->text();
+      Project p;
+      if(_M_current_project.isValid())
+      {
+        p = _M_current_project;
+      }
       if(!name.isEmpty())
       {
-        dp::Project p(name);
+        p.setName(name)
+        .setCreationDate(_M_ui->creation_date->dateTime())
+        .setComment(_M_ui->comment->text());
         context()->projectManager()->store(p);
       }
     }

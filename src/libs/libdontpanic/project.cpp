@@ -61,6 +61,11 @@ namespace dp
     return *this;
   }  
   // ---------------------------------------------------------------------------------
+  bool Project::isValid() const
+  {
+    return !id().isNull();
+  }  
+  // ---------------------------------------------------------------------------------
   bool operator == (dp::Project const& lhs, dp::Project const& rhs)
   {
     if(lhs.id().isNull())
