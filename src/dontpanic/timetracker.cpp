@@ -5,6 +5,7 @@
 // ---------------------------------------------------------------------------------
 namespace dp
 {
+  
   // ---------------------------------------------------------------------------------
   TimeTracker::TimeTracker ( QObject *parent )
       : QObject ( parent )
@@ -64,7 +65,7 @@ namespace dp
       kDebug()<<"current action not active->doing nothing...";
       return;
     }
-    _M_current_action.setEndTime ( QDateTime::currentDateTime()/*.toUTC()*/ );
+    _M_current_action.setEndTime ( QDateTime::currentDateTime() );
     store(_M_current_action);
     kDebug()<<"current action stopped";
   }
@@ -107,7 +108,7 @@ namespace dp
       stopCurrentAction();
     }
     _M_current_action = _a;
-    _M_current_action.setStartTime ( QDateTime::currentDateTime()/*.toUTC()*/ );
+    _M_current_action.setStartTime ( QDateTime::currentDateTime() );
     store(_M_current_action);
   }
   // ---------------------------------------------------------------------------------

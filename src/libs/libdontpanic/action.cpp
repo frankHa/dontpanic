@@ -3,6 +3,15 @@
 // ---------------------------------------------------------------------------------
 namespace dp
 {
+  QDateTime inFullMinutes(QDateTime const& time)
+  {
+    if(time.isNull()){return time;}
+    QDateTime dt = time;
+    QTime t = dt.time();
+    dt.setTime(t.addSecs(-t.second()));
+    kDebug()<<"time in full minutes: "<<dt;
+    return dt;
+  }
   // ---------------------------------------------------------------------------------
   Action::Action ()
       : _M_id ( uuid().generate() )
@@ -98,7 +107,7 @@ namespace dp
   // ---------------------------------------------------------------------------------
   Action& Action::setStartTime ( QDateTime const& start )
   {
-    _M_time_range.setFrom(start);
+    _M_time_range.setFrom(inFullMinutes(start));
     return *this;
   }
   // ---------------------------------------------------------------------------------
@@ -109,7 +118,7 @@ namespace dp
   // ---------------------------------------------------------------------------------
   Action& Action::setEndTime ( QDateTime const& end )
   {
-    _M_time_range.setTo(end);
+    _M_time_range.setTo(inFullMinutes(end));
     return *this;
   }
   // ---------------------------------------------------------------------------------
