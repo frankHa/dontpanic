@@ -29,8 +29,10 @@ namespace dp
     KProjectsTable::KProjectsTable ( QWidget *parent )
         : QTableView ( parent )
         , _M_model ( new detail::KProjectsTableModel ( this ) )
+        , _M_sort_proxy_model(new QSortFilterProxyModel(this))
     {
-      setModel ( _M_model );
+      _M_sort_proxy_model->setSourceModel(_M_model);
+      setModel ( _M_sort_proxy_model );
       resizeColumnsToContents();
     }
     // ---------------------------------------------------------------------------------

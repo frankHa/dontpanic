@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>469</width>
-    <height>230</height>
+    <height>464</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,6 +18,9 @@
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="dp::core::KProjectsTable" name="tableView">
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
        <attribute name="horizontalHeaderStretchLastSection">
         <bool>true</bool>
        </attribute>

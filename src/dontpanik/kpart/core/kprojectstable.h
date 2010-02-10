@@ -19,7 +19,8 @@
 
 #ifndef KPROJECTSTABLE_H
 #define KPROJECTSTABLE_H
-
+#include <libdontpanic/defines.hpp>
+#include <QSortFilterProxyModel>
 #include <QTableView>
 // ---------------------------------------------------------------------------------
 namespace dp
@@ -47,6 +48,7 @@ namespace dp
       private:
         // ---------------------------------------------------------------------------------
         detail::KProjectsTableModel *_M_model;
+        QSortFilterProxyModel *_M_sort_proxy_model;
         // ---------------------------------------------------------------------------------
     };
     // ---------------------------------------------------------------------------------
