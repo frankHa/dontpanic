@@ -17,11 +17,11 @@
     <Action name="continue_last_action" />
   </Menu>
 </MenuBar>
-<ToolBar name="viewToolbar">
+<ToolBar name="viewToolbar"><text>View Toolbar</text>
   <Action name="view_day" />
   <Action name="view_reports" /> 
 </ToolBar>
-<ToolBar name="actionToolbar">
+<ToolBar name="actionToolbar"> <text>Action Toolbar</text>
   <Separator />
   <Action name="add_action" />
   <Separator />
