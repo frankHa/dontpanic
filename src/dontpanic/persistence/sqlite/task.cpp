@@ -23,7 +23,7 @@ namespace dp
         "INSERT INTO t_task(t_id, t_name, t_visible, t_solo_effort, t_chargeable, t_creation_date)VALUES(?, ?, 1, ?, ?, ?)";
       // ---------------------------------------------------------------------------------
       const QString SELECT_ALL_TASKS =
-        "SELECT t_id, t_name, t_solo_effort, t_chargeable, t_creation_date FROM t_task WHERE (t_visible <> 0)";
+        "SELECT t_id, t_name, t_solo_effort, t_chargeable, t_creation_date FROM t_task WHERE (t_visible <> 0) order by t_name";
       // ---------------------------------------------------------------------------------
       const QString SELECT_DISTINCT_TASK =
       "SELECT DISTINCT t_id, t_name, t_solo_effort, t_chargeable, t_creation_date FROM t_task WHERE (t_id=?)";

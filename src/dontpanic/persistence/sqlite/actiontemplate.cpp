@@ -22,7 +22,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       const QString SELECT_ALL_ACTION_TEMPLATES =
         "SELECT at_id, at_t_task , at_p_project,at_ct_collaboration_type,\
-        at_name, at_comment, at_icon FROM at_action_template";
+        at_name, at_comment, at_icon FROM at_action_template order by at_name";
       // ---------------------------------------------------------------------------------
       const QString SELECT_DISTINCT_ACTION_TEMPLATE =
         "SELECT DISTINCT at_id, at_t_task , at_p_project,at_ct_collaboration_type,\

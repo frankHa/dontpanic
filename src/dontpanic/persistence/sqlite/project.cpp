@@ -19,7 +19,7 @@ namespace dp
         "INSERT INTO p_project(p_id, p_name, p_visible, p_creation_date, p_comment)VALUES(?, ?, 1, ?, ?)";
       // ---------------------------------------------------------------------------------
       const QString SELECT_ALL_PROJECTS =
-        "SELECT p_id, p_name, p_creation_date, p_comment FROM p_project WHERE (p_visible <> 0)";
+        "SELECT p_id, p_name, p_creation_date, p_comment FROM p_project WHERE (p_visible <> 0) order by p_name";
       // ---------------------------------------------------------------------------------
       const QString SELECT_DISTINCT_PROJECT =
         "SELECT DISTINCT p_id, p_name, p_creation_date, p_comment FROM p_project WHERE (p_id=?)";
