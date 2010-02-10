@@ -25,7 +25,7 @@ namespace dp
         "SELECT DISTINCT p_id, p_name, p_creation_date, p_comment FROM p_project WHERE (p_id=?)";
       // ---------------------------------------------------------------------------------
       const QString UPDATE_PROJECT =
-        "UPDATE p_project set(p_name=?, p_creation_date=?, p_comment=?) WHERE (p_id=?)";
+        "UPDATE p_project set p_name=?, p_creation_date=?, p_comment=? WHERE (p_id=?)";
       // ---------------------------------------------------------------------------------
       const QString REMOVE_PROJECT = 
       "DELETE FROM p_project WHERE (p_id=?)";

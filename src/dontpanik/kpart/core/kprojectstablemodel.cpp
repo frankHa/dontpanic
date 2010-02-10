@@ -142,8 +142,7 @@ namespace dp
       {
         int row = _M_projects.indexOf(p);
         QModelIndex const& i = index(row, NAME);
-        dp::Project _p = _M_projects.at(row);
-        _p.setName(p.name());
+        _M_projects.replace(row, p);
         emit dataChanged(i, i);
       }	  
       // ---------------------------------------------------------------------------------

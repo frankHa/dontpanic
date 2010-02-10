@@ -19,6 +19,7 @@
 
 #include "kprojectstable.h"
 #include "kprojectstablemodel.h"
+#include "keditprojectdialog.h"
 #include "context.h"
 #include <KMessageBox>
 // ---------------------------------------------------------------------------------
@@ -37,6 +38,7 @@ namespace dp
       setModel ( _M_sort_proxy_model );
       resizeColumnsToContents();
       this->sortByColumn(0, Qt::AscendingOrder);
+      connect(this, SIGNAL(doubleClicked(QModelIndex const&)), SLOT(on_edit_selected_project()));
     }
     // ---------------------------------------------------------------------------------
     void KProjectsTable::on_remove_selected_project()
@@ -46,6 +48,14 @@ namespace dp
       {
         context()->projectManager()->remove(current_selection);
       }
+    }
+    // ---------------------------------------------------------------------------------
+    void KProjectsTable::on_edit_selected_project()
+    {
+      Project const& current_selection = _M_model->at(_M_sort_proxy_model->mapToSource(currentIndex()));  
+      KEditProjectDialog dlg;
+      dlg.setProject(current_selection);
+      dlg.exec();
     }
     // ---------------------------------------------------------------------------------
   }//core
