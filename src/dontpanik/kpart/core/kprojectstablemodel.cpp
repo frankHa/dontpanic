@@ -36,22 +36,22 @@ namespace dp
           : QAbstractTableModel ( parent )
       {
         init_header_data();
-	subscribe_to_project_manager_signals();
+        subscribe_to_project_manager_signals();
         init_projects_list();	
       }
       // ---------------------------------------------------------------------------------
       QVariant KProjectsTableModel::data ( const QModelIndex& index, int role ) const
       {
-	if(!index.isValid())return QVariant();
-	if(role != Qt::DisplayRole) return QVariant();
-	Project const& p = _M_projects.at(index.row());
-	switch(index.column())
-	{
-	  case NAME: return p.name();
-	  case DATE: return p.creationDate();
-      case COMMENT: return p.comment();
-	  default: return QVariant();
-	}
+        if(!index.isValid())return QVariant();
+        if(role != Qt::DisplayRole) return QVariant();
+        Project const& p = _M_projects.at(index.row());
+        switch(index.column())
+        {
+          case NAME: return p.name();
+          case DATE: return p.creationDate();
+          case COMMENT: return p.comment();
+          default: return QVariant();
+        }
       }
       // ---------------------------------------------------------------------------------
       QVariant KProjectsTableModel::headerData ( int section, Qt::Orientation orientation, int role ) const
@@ -77,6 +77,12 @@ namespace dp
         return _M_projects.size();
       }
       // ---------------------------------------------------------------------------------
+      Project KProjectsTableModel::at(QModelIndex const& index) const
+      {
+        if(!index.isValid()){return NullProject();}
+        return _M_projects.value(index.row());
+      }
+      // ---------------------------------------------------------------------------------
       // private stuff:
       // ---------------------------------------------------------------------------------
       void KProjectsTableModel::init_header_data()
@@ -93,52 +99,52 @@ namespace dp
       // ---------------------------------------------------------------------------------
       void KProjectsTableModel::subscribe_to_project_manager_signals()
       {
-	client::ProjectManager * pm = context()->projectManager();
+        client::ProjectManager * pm = context()->projectManager();
         connect(pm, SIGNAL(stored(dp::Project)), this, SLOT(stored(dp::Project const&)));
-	connect(pm, SIGNAL(removed(dp::Project)), this, SLOT(removed(dp::Project const&)));
+        connect(pm, SIGNAL(removed(dp::Project)), this, SLOT(removed(dp::Project const&)));
       }
       // ---------------------------------------------------------------------------------
       void KProjectsTableModel::stored(dp::Project const&p)
       {
-	qWarning()<<__FUNCTION__;
-	if(is_already_known(p))
-	{
-	  updated(p);
-	}
-	else
-	{
-	  added(p);
-	}
+        qWarning()<<__FUNCTION__;
+        if(is_already_known(p))
+        {
+          updated(p);
+        }
+        else
+        {
+          added(p);
+        }
       }
       // ---------------------------------------------------------------------------------
       void KProjectsTableModel::removed(dp::Project const&p)
       {
-	int i = _M_projects.indexOf(p);
-	beginRemoveRows(QModelIndex(), i, i);
-	_M_projects.removeAt(i);
-	endRemoveRows();
+        int i = _M_projects.indexOf(p);
+        beginRemoveRows(QModelIndex(), i, i);
+        _M_projects.removeAt(i);
+        endRemoveRows();
       }
       // ---------------------------------------------------------------------------------
       bool KProjectsTableModel::is_already_known(dp::Project const&p) const
       {
-	return (_M_projects.indexOf(p)!=-1);
+        return (_M_projects.indexOf(p)!=-1);
       }	  
       // ---------------------------------------------------------------------------------
       void KProjectsTableModel::added(dp::Project const&p)
       {
-	int index = _M_projects.size();
-	beginInsertRows(QModelIndex(), index, index);
-	_M_projects.append(p);
-	endInsertRows();
+        int index = _M_projects.size();
+        beginInsertRows(QModelIndex(), index, index);
+        _M_projects.append(p);
+        endInsertRows();
       }	  
       // ---------------------------------------------------------------------------------
       void KProjectsTableModel::updated(dp::Project const&p)
       {
-	int row = _M_projects.indexOf(p);
-	QModelIndex const& i = index(row, NAME);
-	dp::Project _p = _M_projects.at(row);
-	_p.setName(p.name());
-	emit dataChanged(i, i);
+        int row = _M_projects.indexOf(p);
+        QModelIndex const& i = index(row, NAME);
+        dp::Project _p = _M_projects.at(row);
+        _p.setName(p.name());
+        emit dataChanged(i, i);
       }	  
       // ---------------------------------------------------------------------------------
     }//detail

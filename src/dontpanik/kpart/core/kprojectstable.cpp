@@ -19,6 +19,8 @@
 
 #include "kprojectstable.h"
 #include "kprojectstablemodel.h"
+#include "context.h"
+#include <KMessageBox>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -35,6 +37,15 @@ namespace dp
       setModel ( _M_sort_proxy_model );
       resizeColumnsToContents();
       this->sortByColumn(0, Qt::AscendingOrder);
+    }
+    // ---------------------------------------------------------------------------------
+    void KProjectsTable::on_remove_selected_project()
+    {
+      Project const& current_selection = _M_model->at(_M_sort_proxy_model->mapToSource(currentIndex()));  
+      if(KMessageBox::questionYesNo(this, i18n("Do you really want to remove the selected project?"), i18n("Remove Project"))==KMessageBox::Yes)
+      {
+        context()->projectManager()->remove(current_selection);
+      }
     }
     // ---------------------------------------------------------------------------------
   }//core
