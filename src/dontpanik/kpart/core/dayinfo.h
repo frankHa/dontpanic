@@ -17,41 +17,31 @@
 
 */
 
-#ifndef KDURATIONSTATUSUPDATER_H
-#define KDURATIONSTATUSUPDATER_H
+#ifndef DP_CORE_DAYINFO_H
+#define DP_CORE_DAYINFO_H
 #include <libdontpanic/defines.hpp>
-#include "kdayview.h"
-#include <kparts/statusbarextension.h>
-#include <QObject>
-#include <QTimer>
-#include <QLabel>
+#include <QDate>
+
 namespace dp
 {
   namespace core
   {
-    class KDurationStatusUpdater: public QObject
+    class DayInfo
     {
-      Q_OBJECT
       public:
-        KDurationStatusUpdater ( QObject* parent = 0 );
+      DayInfo(QDate const& date, int wt=0);
       public:
-        //need to find a more abstract coupling:
-        void setDurationInfoSource(KDayView *dayView);
-        void addTo(KParts::StatusBarExtension*);        
-      private slots:
-        void update();
-        void initLabel();
-      private:        
-        KParts::StatusBarExtension * statusBar();
-        QLabel* label();
-        QTimer* timer();
+      DayInfo setDate(QDate const& date);
+      QDate date() const;
+      
+      DayInfo workTime(int d);
+      int workTime()const; 
+      
       private:
-        KParts::StatusBarExtension *_M_status_bar;
-        QLabel *_M_duration_label;
-        QTimer *_M_timer;
-        KDayView *_M_day_view;
+        QDate _M_date;
+        int _M_worktime;
     };
   }
 }
 
-#endif // KDURATIONSTATUSUPDATER_H
+#endif // DP_CORE_DAY_H

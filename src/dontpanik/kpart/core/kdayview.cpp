@@ -42,9 +42,11 @@ namespace dp
       delete _M_ui;
     }
     // ---------------------------------------------------------------------------------
-    QDate KDayView::currentDay() const
+    DayInfo KDayView::currentDay() const
     {
-      return _M_ui->calendar->selectedDate();
+      QDate const& date =  _M_ui->calendar->selectedDate();
+      int duration = _M_ui->action_table->duration();
+      return DayInfo(date, duration);
     }
     // ---------------------------------------------------------------------------------
     void KDayView::setup_actions()

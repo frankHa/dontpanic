@@ -50,6 +50,11 @@ namespace dp
       _M_model->set_current_day(day);
     }
     // ---------------------------------------------------------------------------------
+    int KActionsTable::duration() const
+    {
+      return _M_model->duration();
+    }
+    // ---------------------------------------------------------------------------------
     // protected stuff:
     // ---------------------------------------------------------------------------------
     void KActionsTable::contextMenuEvent(QContextMenuEvent *evt)

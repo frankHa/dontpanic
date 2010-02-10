@@ -70,6 +70,7 @@ namespace dp
     KDayView* KMainWidget::newDayView()
     {
       KDayView *v = new KDayView(this);
+      _M_duration_updater->setDurationInfoSource(v);
       return v;
     }
     // ---------------------------------------------------------------------------------

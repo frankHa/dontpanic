@@ -42,6 +42,7 @@ namespace dp
     KEditActionDialog& KEditActionDialog::setCurrentDay(QDate const& date)
     {
       _M_ui->dateEdit->setDate(date);
+      return *this;
     }
     
     KEditActionDialog& KEditActionDialog::setAction(Action const& a)
@@ -55,6 +56,7 @@ namespace dp
       _M_ui->projects->select(a.project());
       _M_ui->worktype->select(a.task());
       _M_ui->comment->setText(a.comment());
+      return *this;
     }
     
     void KEditActionDialog::init_ui()

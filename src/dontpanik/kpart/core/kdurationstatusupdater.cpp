@@ -18,6 +18,7 @@
 */
 
 #include "kdurationstatusupdater.h"
+#include <libdontpanic/durationformatter.h>
 
 namespace dp
 {
@@ -28,28 +29,37 @@ namespace dp
     , _M_status_bar(0)
     , _M_duration_label(0)
     , _M_timer(new QTimer(this))
+    , _M_day_view(0)
     {
     }
+    
+    void KDurationStatusUpdater::setDurationInfoSource(KDayView *dayView)
+    {
+      _M_day_view = dayView;
+    }
+    
     void KDurationStatusUpdater::addTo(KParts::StatusBarExtension* sb)
     {
       _M_status_bar = sb;
       connect(timer(), SIGNAL(timeout()), this, SLOT(update()));
-      timer()->start(1000);
+      timer()->start(500);
     }
     
     void KDurationStatusUpdater::update()
     {
       if(statusBar()->statusBar()== 0){return;}
+      if(_M_day_view == 0) {return;}
       if(label() == 0) {initLabel();}
-      label()->setText("hallo");
+      label()->setText(duration_formatter().format(_M_day_view->currentDay().workTime()));      
     }
     
     void KDurationStatusUpdater::initLabel()
     {
       _M_duration_label = new QLabel();
       QFont font;
-      font.setBold(true);
-      _M_duration_label->setFont(font);
+      //font.setBold(true);
+      //_M_duration_label->setFont(font);
+      _M_duration_label->setAlignment(Qt::AlignLeft);
       statusBar()->addStatusBarItem(label(),0 ,true);
     }
     

@@ -3,6 +3,7 @@
 #########################################################################
 set(dontpanikpart_LIB_SRCS 
     context.cpp 
+    dayinfo.cpp 
     kactiontemplateslist.cpp
     kactiontemplateslistmodel.cpp
     kcalendarwidget.cpp 

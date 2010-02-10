@@ -19,6 +19,8 @@
 
 #ifndef DP_KDAYVIEW_H
 #define DP_KDAYVIEW_H
+#include <libdontpanic/defines.hpp>
+#include "dayinfo.h"
 
 #include <QtGui/QWidget>
 #include <QDate>
@@ -47,7 +49,7 @@ namespace dp
         // ---------------------------------------------------------------------------------
       public:
         // ---------------------------------------------------------------------------------
-        QDate currentDay() const;
+        DayInfo currentDay() const;
         // ---------------------------------------------------------------------------------
       private:
         // ---------------------------------------------------------------------------------

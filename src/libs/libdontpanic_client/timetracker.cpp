@@ -123,6 +123,7 @@ namespace dp
         qWarning()<<reply.error();
         emit error(QDBusError::errorString(reply.error().type()));
       }
+      _M_latest_actions = reply.value();
       return reply.value();
     }
     // ---------------------------------------------------------------------------------
