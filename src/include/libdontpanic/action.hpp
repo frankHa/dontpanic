@@ -109,7 +109,11 @@ namespace dp
   // ---------------------------------------------------------------------------------
   DECLARE_SMARTPOINTERS ( Action );
   // ---------------------------------------------------------------------------------
-  typedef QList<Action> ActionList;
+  class  ActionList: public QList<Action>
+  {
+    public:
+      int duration()const;
+  };
   // ---------------------------------------------------------------------------------
   bool DP_EXPORT operator == (dp::Action const& lhs, dp::Action const& rhs);
   // ---------------------------------------------------------------------------------

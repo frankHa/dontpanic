@@ -6,6 +6,7 @@ set(dontpanikpart_LIB_SRCS
     kactiontemplateslist.cpp
     kactiontemplateslistmodel.cpp
     kcalendarwidget.cpp 
+    kdurationstatusupdater.cpp 
     kprojectstablemodel.cpp
     kprojectstable.cpp
     kactionstableitemdelegate.cpp 

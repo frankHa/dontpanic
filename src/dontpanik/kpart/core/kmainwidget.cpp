@@ -20,6 +20,7 @@
 #include "kmainwidget.h"
 #include "kdayview.h"
 #include "kreportview.h"
+#include "kdurationstatusupdater.h"
 #include <QLabel>
 #include <QFont>
 // ---------------------------------------------------------------------------------
@@ -33,8 +34,10 @@ namespace dp
     KMainWidget::KMainWidget ( QWidget *parent, KParts::StatusBarExtension *status_bar)
         : QStackedWidget ( parent )
         , _M_status_bar(status_bar)
+        , _M_duration_updater(new KDurationStatusUpdater(this))
     {
       init_widgets();
+      _M_duration_updater->addTo(statusBar());
     }
     // ---------------------------------------------------------------------------------
     KMainWidget::~KMainWidget()

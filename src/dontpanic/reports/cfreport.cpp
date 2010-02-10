@@ -10,16 +10,6 @@ namespace dp
   namespace reports
   {
     // ---------------------------------------------------------------------------------
-    int duration(ActionList actions)
-    {
-      int result = 0;
-      ActionList::const_iterator iter;
-      for(iter = actions.begin(); iter != actions.end();++iter)
-      {
-        result+=(*iter).duration();
-      }
-      return result;
-    }
     class group
     {
       public:
@@ -92,7 +82,7 @@ namespace dp
     // ---------------------------------------------------------------------------------
     int group::duration() const
     {
-      return dp::reports::duration(_M_actions);
+      return _M_actions.duration();
     }
     // ---------------------------------------------------------------------------------
     bool group::matches(Action const& a) const
@@ -198,7 +188,7 @@ namespace dp
       {
         return report.setValid(false);
       }
-      return report.setReportData(evaluate(actions)).setDuration(dp::reports::duration(actions));
+      return report.setReportData(evaluate(actions)).setDuration(actions.duration());
     }
     // ---------------------------------------------------------------------------------
     QString CFReport::CFReportPrivate::evaluate(ActionList const& actions)
