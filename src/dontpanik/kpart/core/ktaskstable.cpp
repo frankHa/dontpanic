@@ -19,6 +19,8 @@
 
 #include "ktaskstable.h"
 #include "ktaskstablemodel.h"
+#include "context.h"
+#include <KMessageBox>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -35,6 +37,15 @@ namespace dp
       setModel ( _M_sort_proxy_model );
       resizeColumnsToContents();
       this->sortByColumn(0, Qt::AscendingOrder);
+    }
+    // ---------------------------------------------------------------------------------
+    void KTasksTable::on_remove_selected_task()
+    {
+      Task const& current_selection = _M_model->at(_M_sort_proxy_model->mapToSource(currentIndex()));  
+      if(KMessageBox::questionYesNo(this, i18n("Do you really want to remove the selected task description?"), i18n("Remove Task Description"))==KMessageBox::Yes)
+      {
+        context()->taskManager()->remove(current_selection);
+      }
     }
     // ---------------------------------------------------------------------------------
   }//core

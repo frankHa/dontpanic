@@ -42,17 +42,13 @@ namespace dp
     void KTasksDialog::setup_actions()
     {
       connect(_M_ui->b_add, SIGNAL(clicked()), this, SLOT(add()));
-      connect(_M_ui->b_remove, SIGNAL(clicked()), this, SLOT(remove()));
+      connect(_M_ui->b_remove, SIGNAL(clicked()), _M_ui->tableView, SLOT(on_remove_selected_task()));
     }
     // ---------------------------------------------------------------------------------
     void KTasksDialog::add()
     {
       KEditTaskDialog dlg(this);
       dlg.exec();
-    }
-    // ---------------------------------------------------------------------------------
-    void KTasksDialog::remove()
-    {
     }
     // ---------------------------------------------------------------------------------
   }

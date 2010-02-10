@@ -36,23 +36,23 @@ namespace dp
           : QAbstractTableModel ( parent )
       {
         init_header_data();
-	subscribe_to_task_manager_signals();
+        subscribe_to_task_manager_signals();
         init_tasks_list();	
       }
       // ---------------------------------------------------------------------------------
       QVariant KTasksTableModel::data ( const QModelIndex& index, int role ) const
       {
         if(!index.isValid())return QVariant();
-	if(role != Qt::DisplayRole) return QVariant();
-	Task const& p = _M_tasks.at(index.row());
-	switch(index.column())
-	{
-	  case NAME: return p.name();
-	  case DATE: return p.creationDate();
-      case CHARGEABLE: return p.isChargeable();
-      case COMMENT: return p.comment();
-	  default: return QVariant();
-	}
+        if(role != Qt::DisplayRole) return QVariant();
+        Task const& p = _M_tasks.at(index.row());
+        switch(index.column())
+        {
+          case NAME: return p.name();
+          case DATE: return p.creationDate();
+          case CHARGEABLE: return p.isChargeable();
+          case COMMENT: return p.comment();
+          default: return QVariant();
+        }
       }
       // ---------------------------------------------------------------------------------
       QVariant KTasksTableModel::headerData ( int section, Qt::Orientation orientation, int role ) const
@@ -78,6 +78,12 @@ namespace dp
         return _M_tasks.size();
       }
       // ---------------------------------------------------------------------------------
+      Task KTasksTableModel::at(QModelIndex const& index) const
+      {
+        if(!index.isValid()){return NullTask();}
+        return _M_tasks.value(index.row());
+      }
+      // ---------------------------------------------------------------------------------
       // private stuff:
       // ---------------------------------------------------------------------------------
       void KTasksTableModel::init_header_data()
@@ -96,53 +102,53 @@ namespace dp
       // ---------------------------------------------------------------------------------
       void KTasksTableModel::subscribe_to_task_manager_signals()
       {
-	client::TaskManager * pm = context()->taskManager();
+        client::TaskManager * pm = context()->taskManager();
         connect(pm, SIGNAL(stored(dp::Task)), this, SLOT(stored(dp::Task const&)));
-	connect(pm, SIGNAL(removed(dp::Task)), this, SLOT(removed(dp::Task const&)));
+        connect(pm, SIGNAL(removed(dp::Task)), this, SLOT(removed(dp::Task const&)));
       }
       // ---------------------------------------------------------------------------------
       void KTasksTableModel::stored(dp::Task const&p)
       {
-	qWarning()<<__FUNCTION__;
-	if(is_already_known(p))
-	{
-	  updated(p);
-	}
-	else
-	{
-	  added(p);
-	}
+        qWarning()<<__FUNCTION__;
+        if(is_already_known(p))
+        {
+          updated(p);
+        }
+        else
+        {
+          added(p);
+        }
       }
       // ---------------------------------------------------------------------------------
       void KTasksTableModel::removed(dp::Task const&p)
       {
-	int i = _M_tasks.indexOf(p);
-	beginRemoveRows(QModelIndex(), i, i);
-	_M_tasks.removeAt(i);
-	endRemoveRows();
+        int i = _M_tasks.indexOf(p);
+        beginRemoveRows(QModelIndex(), i, i);
+        _M_tasks.removeAt(i);
+        endRemoveRows();
       }
       // ---------------------------------------------------------------------------------
       bool KTasksTableModel::is_already_known(dp::Task const&p) const
       {
-	return (_M_tasks.indexOf(p)!=-1);
+        return (_M_tasks.indexOf(p)!=-1);
       }	  
       // ---------------------------------------------------------------------------------
       void KTasksTableModel::added(dp::Task const&p)
       {
-	int index = _M_tasks.size();
-	beginInsertRows(QModelIndex(), index, index);
-	_M_tasks.append(p);
-	endInsertRows();
-      }	  
+        int index = _M_tasks.size();
+        beginInsertRows(QModelIndex(), index, index);
+        _M_tasks.append(p);
+        endInsertRows();
+      }
       // ---------------------------------------------------------------------------------
       void KTasksTableModel::updated(dp::Task const&p)
       {
-	int row = _M_tasks.indexOf(p);
-	QModelIndex const& i = index(row, NAME);
-	dp::Task _p = _M_tasks.at(row);
-	_p.setName(p.name());
-	emit dataChanged(i, i);
-      }	  
+        int row = _M_tasks.indexOf(p);
+        QModelIndex const& i = index(row, NAME);
+        dp::Task _p = _M_tasks.at(row);
+        _p.setName(p.name());
+        emit dataChanged(i, i);
+      }
       // ---------------------------------------------------------------------------------
     }//detail
     // ---------------------------------------------------------------------------------
