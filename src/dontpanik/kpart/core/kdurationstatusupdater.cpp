@@ -19,6 +19,7 @@
 
 #include "kdurationstatusupdater.h"
 #include <libdontpanic/durationformatter.h>
+#include "context.h"
 #include <KStatusBar>
 
 namespace dp
@@ -51,7 +52,26 @@ namespace dp
       if(statusBar()->statusBar()== 0){return;}
       if(_M_day_view == 0) {return;}
       if(label() == 0) {initLabel();}
-      label()->setText(duration_formatter().format(_M_day_view->currentDay().workTime()));      
+      label()->setText(duration_formatter().format(_M_day_view->currentDay().workTime()));  
+      updateTooltip();
+    }
+    
+    void KDurationStatusUpdater::updateTooltip()
+    {
+      Action const& ca = context()->timeTracker()->currentlyActiveAction();
+      if(!ca.isActive())
+      {
+        label()->setToolTip(i18n("There is currently no active Don't Panik action..."));
+      } 
+      else
+      {
+        QString tooltip = i18n("Current Don't Panik action: \nProject:\t\t%1\nTask:\t\t%2\nRunning since:\t%3\nCurrent duration:\t%4")
+        .arg(context()->projectManager()->load(ca.project()).name())
+        .arg(context()->taskManager()->load(ca.task()).name())
+        .arg(ca.startTime().time().toString(Qt::SystemLocaleShortDate))
+        .arg(duration_formatter().format(ca.duration()));
+        label()->setToolTip(tooltip);
+      }
     }
     
     void KDurationStatusUpdater::initLabel()

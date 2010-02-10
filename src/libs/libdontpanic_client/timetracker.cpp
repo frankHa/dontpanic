@@ -30,7 +30,8 @@ namespace dp
     // ---------------------------------------------------------------------------------
     TimeTracker::TimeTracker ( QObject *parent )
         : QObject ( parent )
-        ,_M_remote(0){}
+        ,_M_remote(0)
+        , _M_current_action(NullAction()){}
     // ---------------------------------------------------------------------------------
     TimeTracker::~TimeTracker ( ){}
     // ---------------------------------------------------------------------------------
@@ -127,6 +128,15 @@ namespace dp
       return reply.value();
     }
     // ---------------------------------------------------------------------------------
+    Action TimeTracker::currentlyActiveAction() const
+    {
+     if(_M_current_action.isActive())
+     {
+       return _M_current_action;
+     }
+     return NullAction();
+    }    
+    // ---------------------------------------------------------------------------------
     bool TimeTracker::hasActionsFor(QDate const& date)
     {
       QDBusPendingReply<bool> reply =remote()->hasActionsFor(date);
@@ -149,11 +159,24 @@ namespace dp
         {
           qWarning()<<_M_remote->lastError();
         }
-        connect(_M_remote, SIGNAL( stored ( dp::Action ) ), this, SIGNAL( stored ( dp::Action ) ));
-        connect(_M_remote, SIGNAL(removed(dp::Action)), this, SIGNAL(removed(dp::Action)));
+        connect(_M_remote, SIGNAL( stored ( dp::Action ) ), this, SLOT( on_stored ( dp::Action ) ));
+        connect(_M_remote, SIGNAL(removed(dp::Action)), this, SLOT(on_removed(dp::Action)));
         connect(_M_remote, SIGNAL(error(QString const&)), this, SIGNAL(error(QString)));
+        _M_current_action = _M_remote->findCurrentlyActiveAction();
       }
       return _M_remote;
+    }
+    // ---------------------------------------------------------------------------------      
+    void TimeTracker::on_stored(dp::Action const& a)
+    {
+      if(a.isActive()) _M_current_action = a;
+      emit stored(a);
+    }
+    // ---------------------------------------------------------------------------------      
+    void TimeTracker::on_removed(dp::Action const& a)
+    {
+      if(a == _M_current_action) _M_current_action = NullAction();
+      emit removed(a);
     }
     // ---------------------------------------------------------------------------------
   }//client

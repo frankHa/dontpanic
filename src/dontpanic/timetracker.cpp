@@ -85,6 +85,12 @@ namespace dp
     return list;
   }
   // ---------------------------------------------------------------------------------
+  Action TimeTracker::findCurrentlyActiveAction() const
+  {
+    if(_M_current_action.isActive())return _M_current_action;
+    return NullAction();
+  }
+  // ---------------------------------------------------------------------------------
   bool TimeTracker::hasActionsFor(QDate const& date)
   {
     return persistence().hasActionsFor(date);
@@ -110,7 +116,7 @@ namespace dp
     _M_current_action = _a;
     _M_current_action.setStartTime ( QDateTime::currentDateTime() );
     store(_M_current_action);
-  }
+  }  
   // ---------------------------------------------------------------------------------
 }//dp
 // ---------------------------------------------------------------------------------

@@ -40,6 +40,7 @@ namespace dp
         void addTo(KParts::StatusBarExtension*);        
       private slots:
         void update();
+        void updateTooltip();
         void initLabel();
       private:        
         KParts::StatusBarExtension * statusBar();
