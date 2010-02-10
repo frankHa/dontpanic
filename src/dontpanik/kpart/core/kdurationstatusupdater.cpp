@@ -19,6 +19,7 @@
 
 #include "kdurationstatusupdater.h"
 #include <libdontpanic/durationformatter.h>
+#include <KStatusBar>
 
 namespace dp
 {
@@ -60,7 +61,7 @@ namespace dp
       //font.setBold(true);
       //_M_duration_label->setFont(font);
       _M_duration_label->setAlignment(Qt::AlignLeft);
-      statusBar()->addStatusBarItem(label(),0 ,true);
+      statusBar()->statusBar()->addPermanentWidget(label(),0);
     }
     
     KParts::StatusBarExtension * KDurationStatusUpdater::statusBar()
