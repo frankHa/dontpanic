@@ -29,7 +29,7 @@
 #define CREATE_TABLE_TASK\
   "CREATE TABLE IF NOT EXISTS t_task \
 (t_id TEXT PRIMARY KEY, t_name TEXT, t_visible INTEGER, \
-t_solo_effort INTEGER, t_chargeable INTEGER, t_creation_date TEXT)"
+t_solo_effort INTEGER, t_chargeable INTEGER, t_creation_date TEXT, t_comment TEXT)"
 
 #define CREATE_TABLE_LEAVE_TYPE\
   "CREATE TABLE IF NOT EXISTS lt_leave_type \

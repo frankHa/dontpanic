@@ -30,7 +30,7 @@ namespace dp
     namespace detail
     {
       // ---------------------------------------------------------------------------------
-      enum{NAME, DATE};
+      enum{NAME, DATE, COMMENT};
       // ---------------------------------------------------------------------------------
       KProjectsTableModel::KProjectsTableModel ( QObject *parent )
           : QAbstractTableModel ( parent )
@@ -49,6 +49,7 @@ namespace dp
 	{
 	  case NAME: return p.name();
 	  case DATE: return p.creationDate();
+      case COMMENT: return p.comment();
 	  default: return QVariant();
 	}
       }
@@ -81,7 +82,8 @@ namespace dp
       void KProjectsTableModel::init_header_data()
       {
         _M_headers << i18n ( "Name" )
-        << i18n ( "Creation Date" );
+        << i18n ( "Creation Date" )
+        << i18n("Comment");
       }
       // ---------------------------------------------------------------------------------
       void KProjectsTableModel::init_projects_list()

@@ -10,21 +10,24 @@ namespace dp
       , _M_name ( "" )
       , _M_solo_effort ( true )
       , _M_chargeable ( true )
-      , _M_creation_date ( QDateTime::currentDateTime() ) {}
+      , _M_creation_date ( QDateTime::currentDateTime() )
+      , _M_comment("") {}
   // ---------------------------------------------------------------------------------
   Task::Task(QString const& name)
       : _M_id ( uuid().generate() )
       , _M_name ( name )
       , _M_solo_effort ( true )
       , _M_chargeable ( true )
-      , _M_creation_date ( QDateTime::currentDateTime() ) {}
+      , _M_creation_date ( QDateTime::currentDateTime() ) 
+      , _M_comment("") {}
   // ---------------------------------------------------------------------------------
   Task::Task ( Uuid const& id )
       : _M_id ( id )
       , _M_name ( "" )
       , _M_solo_effort ( true )
       , _M_chargeable ( true )
-      , _M_creation_date ( QDateTime::currentDateTime() ) {}
+      , _M_creation_date ( QDateTime::currentDateTime() ) 
+      , _M_comment("") {}
   // ---------------------------------------------------------------------------------
   Uuid const& Task::id() const
   {
@@ -72,6 +75,17 @@ namespace dp
   Task& Task::setCreationDate ( QDateTime date )
   {
     _M_creation_date = date;
+    return *this;
+  }
+  // ---------------------------------------------------------------------------------
+  QString Task::comment()const
+  {
+    return _M_comment;
+  }
+  // ---------------------------------------------------------------------------------
+  Task& Task::setComment(QString c)
+  {
+    _M_comment = c;
     return *this;
   }
   // ---------------------------------------------------------------------------------
