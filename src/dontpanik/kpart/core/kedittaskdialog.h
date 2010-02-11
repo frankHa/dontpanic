@@ -19,7 +19,8 @@
 
 #ifndef DP_CORE_KEDITTASKDIALOG_H
 #define DP_CORE_KEDITTASKDIALOG_H
-
+#include <libdontpanic/defines.hpp>
+#include <libdontpanic/task.hpp>
 #include <QDialog>
 
 
@@ -30,29 +31,29 @@ namespace Ui
 
 namespace dp
 {
-
-    namespace core
+  namespace core
+  {
+    class KEditTaskDialog : public QDialog
     {
-
-        class KEditTaskDialog : public QDialog
-        {
-	  Q_OBJECT
-	  public:
-	    KEditTaskDialog(QWidget *parent=0);
-	    ~KEditTaskDialog();
-	  private:
-	    void setup_actions();
-	    
-	  private slots:
-	    void accepted();
-	    void rejected();
-	    
-	  private:
-	    Ui::KEditTaskDialog *_M_ui;
-        };
-
-    }
-
+      Q_OBJECT
+      public:
+        KEditTaskDialog(QWidget *parent=0);
+        ~KEditTaskDialog();
+      private:
+        void setup_actions();
+        
+      public slots:
+        KEditTaskDialog& setTask(Task const& t);
+        
+      private slots:
+        void accepted();
+        void rejected();
+        
+      private:
+        Ui::KEditTaskDialog *_M_ui;
+        Task _M_current_task;
+    };
+  }
 }
 
 #endif // DP_CORE_KEDITTASKDIALOG_H

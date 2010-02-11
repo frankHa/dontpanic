@@ -212,7 +212,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       int KActionsTableModel::duration() const
       {
-        _M_actions.duration();
+        return _M_actions.duration();
       }
       // ---------------------------------------------------------------------------------
       void KActionsTableModel::subscribe_to_timetracker_signals()

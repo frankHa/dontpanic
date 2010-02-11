@@ -30,7 +30,7 @@ namespace dp
     namespace detail
     {
       // ---------------------------------------------------------------------------------
-      enum{NAME, DATE, CHARGEABLE, COMMENT};
+      enum{NAME, DATE, COMMENT};
       // ---------------------------------------------------------------------------------
       KTasksTableModel::KTasksTableModel ( QObject *parent )
           : QAbstractTableModel ( parent )
@@ -49,7 +49,7 @@ namespace dp
         {
           case NAME: return p.name();
           case DATE: return p.creationDate();
-          case CHARGEABLE: return p.isChargeable();
+          //case CHARGEABLE: return p.isChargeable();
           case COMMENT: return p.comment();
           default: return QVariant();
         }
@@ -90,7 +90,7 @@ namespace dp
       {
         _M_headers << i18n ( "Name" )
         << i18n ( "Creation Date" )
-        << i18n ( "Is Chargeable?" )
+        //<< i18n ( "Is Chargeable?" )
         << i18n ( "Comment" );
         
       }
@@ -145,8 +145,7 @@ namespace dp
       {
         int row = _M_tasks.indexOf(p);
         QModelIndex const& i = index(row, NAME);
-        dp::Task _p = _M_tasks.at(row);
-        _p.setName(p.name());
+        _M_tasks.replace(row, p);
         emit dataChanged(i, i);
       }
       // ---------------------------------------------------------------------------------

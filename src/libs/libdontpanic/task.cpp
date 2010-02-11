@@ -89,6 +89,11 @@ namespace dp
     return *this;
   }
   // ---------------------------------------------------------------------------------
+  bool Task::isValid() const
+  {
+    return !id().isNull();
+  }
+  // ---------------------------------------------------------------------------------
   bool operator == (dp::Task const& lhs, dp::Task const& rhs)
   {
     if(lhs.id().isNull())

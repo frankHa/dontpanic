@@ -19,6 +19,7 @@
 
 #include "ktaskstable.h"
 #include "ktaskstablemodel.h"
+#include "kedittaskdialog.h"
 #include "context.h"
 #include <KMessageBox>
 // ---------------------------------------------------------------------------------
@@ -37,6 +38,7 @@ namespace dp
       setModel ( _M_sort_proxy_model );
       resizeColumnsToContents();
       this->sortByColumn(0, Qt::AscendingOrder);
+      connect(this, SIGNAL(doubleClicked(QModelIndex const&)), SLOT(on_edit_selected_task()));
     }
     // ---------------------------------------------------------------------------------
     void KTasksTable::on_remove_selected_task()
@@ -46,6 +48,14 @@ namespace dp
       {
         context()->taskManager()->remove(current_selection);
       }
+    }
+    // ---------------------------------------------------------------------------------
+    void KTasksTable::on_edit_selected_task()
+    {
+      Task const& current_selection = _M_model->at(_M_sort_proxy_model->mapToSource(currentIndex()));  
+      KEditTaskDialog dlg;
+      dlg.setTask(current_selection);
+      dlg.exec();
     }
     // ---------------------------------------------------------------------------------
   }//core

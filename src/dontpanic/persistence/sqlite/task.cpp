@@ -29,7 +29,7 @@ namespace dp
       "SELECT DISTINCT t_id, t_name, t_solo_effort, t_chargeable, t_creation_date, t_comment FROM t_task WHERE (t_id=?)";
       // ---------------------------------------------------------------------------------
       const QString UPDATE_TASK =
-        "UPDATE p_project set t_name=?, t_solo_effort=?, t_chargeable=?, t_creation_date=?, t_comment=? WHERE (t_id=?)";
+        "UPDATE t_task set t_name=?, t_solo_effort=?, t_chargeable=?, t_creation_date=?, t_comment=? WHERE (t_id=?)";
       // ---------------------------------------------------------------------------------
       const QString REMOVE_TASK = 
       "DELETE FROM t_task WHERE (t_id=?)";

@@ -29,13 +29,24 @@ namespace dp
     KEditTaskDialog::KEditTaskDialog(QWidget *parent)
     :QDialog(parent)
     , _M_ui (new Ui::KEditTaskDialog())
+    , _M_current_task(NullTask())
     {
       _M_ui->setupUi(this);
+      _M_ui->creation_date->setDateTime(QDateTime::currentDateTime());
       setup_actions();
     }
     KEditTaskDialog::~KEditTaskDialog()
     {
       delete _M_ui;
+    }
+    
+    KEditTaskDialog& KEditTaskDialog::setTask(Task const& task)
+    {
+      _M_current_task = task;
+      _M_ui->task_name->setText(task.name());
+      _M_ui->creation_date->setDateTime(task.creationDate());
+      _M_ui->comment->setText(task.comment());
+      return *this;
     }
     
     void KEditTaskDialog::setup_actions()
@@ -46,12 +57,18 @@ namespace dp
     
     void KEditTaskDialog::accepted()
     {
-      kDebug()<<"";
       QString const& name = _M_ui->task_name->text();
+      Task t;
+      if(_M_current_task.isValid())
+      {
+        t = _M_current_task;
+      }
       if(!name.isEmpty())
       {
-	dp::Task p(name);
-	context()->taskManager()->store(p);
+        t.setName(name)
+        .setCreationDate(_M_ui->creation_date->dateTime())
+        .setComment(_M_ui->comment->text());
+        context()->taskManager()->store(t);
       }
     }
     void KEditTaskDialog::rejected()
