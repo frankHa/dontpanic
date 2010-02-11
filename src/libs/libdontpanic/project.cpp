@@ -9,18 +9,21 @@ namespace dp
       : _M_id ( Uuid::generate() )
       , _M_name ( "" )
       , _M_creation_date ( QDateTime::currentDateTime() )
+      , _M_visible(true)
       , _M_comment(""){}
   // ---------------------------------------------------------------------------------
    Project::Project(QString const& name)
       : _M_id ( Uuid::generate() )
       , _M_name ( name )
       , _M_creation_date ( QDateTime::currentDateTime() ) 
+      , _M_visible(true)
       , _M_comment(""){}
   // ---------------------------------------------------------------------------------
   Project::Project(Uuid const& id)
       : _M_id ( id )
       , _M_name ( "" )
       , _M_creation_date ( QDateTime::currentDateTime() )
+      , _M_visible(true)
       , _M_comment(""){}
   // ---------------------------------------------------------------------------------
   Uuid const& Project::id() const
@@ -48,6 +51,17 @@ namespace dp
   {
     _M_creation_date = date;
     return *this;
+  }
+  // ---------------------------------------------------------------------------------
+  Project& Project::setVisible(bool v)
+  {
+    _M_visible = v;
+    return *this;
+  }
+  // ---------------------------------------------------------------------------------
+  bool Project::isVisible()const
+  {
+    return _M_visible;
   }
   // ---------------------------------------------------------------------------------
   QString const& Project::comment() const

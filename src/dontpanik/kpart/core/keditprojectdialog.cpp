@@ -44,6 +44,7 @@ namespace dp
     {
       _M_current_project = p;
       _M_ui->project_name->setText(p.name());
+      _M_ui->visible->setChecked(p.isVisible());
       _M_ui->creation_date->setDateTime(p.creationDate());
       _M_ui->comment->setText(p.comment());
       return *this;
@@ -67,7 +68,8 @@ namespace dp
       {
         p.setName(name)
         .setCreationDate(_M_ui->creation_date->dateTime())
-        .setComment(_M_ui->comment->text());
+        .setVisible(_M_ui->visible->isChecked())
+        .setComment(_M_ui->comment->text());        
         context()->projectManager()->store(p);
       }
     }

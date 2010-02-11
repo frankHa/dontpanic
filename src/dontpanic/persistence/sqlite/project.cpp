@@ -16,16 +16,16 @@ namespace dp
     {
       // ---------------------------------------------------------------------------------
       const QString INSERT_PROJECT =
-        "INSERT INTO p_project(p_id, p_name, p_visible, p_creation_date, p_comment)VALUES(?, ?, 1, ?, ?)";
+        "INSERT INTO p_project(p_id, p_name, p_visible, p_creation_date, p_comment)VALUES(?, ?, ?, ?, ?)";
       // ---------------------------------------------------------------------------------
       const QString SELECT_ALL_PROJECTS =
-        "SELECT p_id, p_name, p_creation_date, p_comment FROM p_project WHERE (p_visible <> 0) order by p_name";
+        "SELECT p_id, p_name, p_visible, p_creation_date, p_comment FROM p_project order by p_name";
       // ---------------------------------------------------------------------------------
       const QString SELECT_DISTINCT_PROJECT =
-        "SELECT DISTINCT p_id, p_name, p_creation_date, p_comment FROM p_project WHERE (p_id=?)";
+        "SELECT DISTINCT p_id, p_name, p_visible, p_creation_date, p_comment FROM p_project WHERE (p_id=?)";
       // ---------------------------------------------------------------------------------
       const QString UPDATE_PROJECT =
-        "UPDATE p_project set p_name=?, p_creation_date=?, p_comment=? WHERE (p_id=?)";
+        "UPDATE p_project set p_name=?, p_visible=?, p_creation_date=?, p_comment=? WHERE (p_id=?)";
       // ---------------------------------------------------------------------------------
       const QString REMOVE_PROJECT = 
       "DELETE FROM p_project WHERE (p_id=?)";
@@ -128,6 +128,7 @@ namespace dp
         query.prepare ( INSERT_PROJECT );
         query.addBindValue ( _p.id().toString() );
         query.addBindValue ( _p.name() );
+        query.addBindValue( _p.isVisible());
         query.addBindValue ( _p.creationDate() );
         query.addBindValue( _p.comment() );
         if ( execute ( query ).has_failed() )
@@ -146,6 +147,7 @@ namespace dp
         QSqlQuery query;
         query.prepare ( UPDATE_PROJECT );
         query.addBindValue ( _p.name() );
+        query.addBindValue( _p.isVisible() );
         query.addBindValue ( _p.creationDate() );
         query.addBindValue( _p.comment() );
         query.addBindValue ( _p.id().toString() );
@@ -155,8 +157,9 @@ namespace dp
       success Project::assign_query_values_to_entity ( QSqlQuery& query, dp::Project& p ) const
       {
         p.setName ( query.value ( 1 ).toString() );
-        p.setCreationDate ( query.value ( 2 ).toDateTime() );
-        p.setComment( query.value(3).toString() );
+        p.setVisible(query.value ( 2 ).toBool());
+        p.setCreationDate ( query.value ( 3 ).toDateTime() );
+        p.setComment( query.value(4).toString() );
         return successful();
       }
 
