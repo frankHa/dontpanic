@@ -25,8 +25,6 @@
 #include <QContextMenuEvent>
 #include <KAction>
 #include <KMessageBox>
-#include <KDebug>
-#include <KLocalizedString>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -47,10 +45,10 @@ namespace dp
     {
       _M_new_action_template = new KAction("Create new Favorite", this);
       connect(_M_new_action_template, SIGNAL(triggered()), this, SLOT(on_create_new_action_template()));
-      _M_edit_selected_action_template = new KAction("Edit", this);
-      connect(_M_edit_selected_action_template, SIGNAL(triggered()), this, SLOT(on_edit_selected_action_template()));
-      _M_remove_selected_action_template = new KAction("Remove", this);
+      _M_remove_selected_action_template = new KAction("Remove...", this);
       connect(_M_remove_selected_action_template, SIGNAL(triggered()), this, SLOT(on_remove_selected_action_template()));
+      _M_edit_selected_action_template = new KAction("Properties...", this);
+      connect(_M_edit_selected_action_template, SIGNAL(triggered()), this, SLOT(on_edit_selected_action_template()));
     }
     // ---------------------------------------------------------------------------------
     void KActionTemplatesList::contextMenuEvent(QContextMenuEvent *evt)
@@ -60,8 +58,9 @@ namespace dp
       if(this->selectionModel()->hasSelection())
       {
         menu.addSeparator();
-        menu.addAction(_M_edit_selected_action_template);
         menu.addAction(_M_remove_selected_action_template);
+        menu.addSeparator();
+        menu.addAction(_M_edit_selected_action_template);
       }
       menu.exec(evt->globalPos());      
     }
