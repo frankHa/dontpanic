@@ -103,6 +103,13 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>project_name</tabstop>
+  <tabstop>comment</tabstop>
+  <tabstop>visible</tabstop>
+  <tabstop>creation_date</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

@@ -44,6 +44,7 @@ namespace dp
     {
       _M_current_task = task;
       _M_ui->task_name->setText(task.name());
+      _M_ui->visible->setChecked(task.isVisible());      
       _M_ui->creation_date->setDateTime(task.creationDate());
       _M_ui->comment->setText(task.comment());
       return *this;
@@ -67,7 +68,8 @@ namespace dp
       {
         t.setName(name)
         .setCreationDate(_M_ui->creation_date->dateTime())
-        .setComment(_M_ui->comment->text());
+        .setVisible(_M_ui->visible->isChecked())
+        .setComment(_M_ui->comment->text());        
         context()->taskManager()->store(t);
       }
     }

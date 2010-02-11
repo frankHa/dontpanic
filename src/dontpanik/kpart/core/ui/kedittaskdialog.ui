@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>377</width>
-    <height>141</height>
+    <height>168</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -37,13 +37,33 @@
       <widget class="QLineEdit" name="comment"/>
      </item>
      <item row="2" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Is Visible?:</string>
+       </property>
+       <property name="buddy">
+        <cstring>visible</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QCheckBox" name="visible">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
       <widget class="QLabel" name="label_2">
        <property name="text">
         <string>Creation Date:</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
+     <item row="3" column="1">
       <widget class="QDateTimeEdit" name="creation_date">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -83,6 +103,13 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>task_name</tabstop>
+  <tabstop>comment</tabstop>
+  <tabstop>visible</tabstop>
+  <tabstop>creation_date</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

@@ -53,7 +53,10 @@ namespace dp
        addItem("", uuid().toString());
        for(it=tasks.begin();it!=tasks.end();++it)
        {
-         addItem(it->name(), QVariant(it->id().toString()));
+         if(it->isVisible())
+         {
+          addItem(it->name(), QVariant(it->id().toString()));
+         }
        }
      }
      // ---------------------------------------------------------------------------------

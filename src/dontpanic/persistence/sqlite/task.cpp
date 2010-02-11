@@ -20,16 +20,16 @@ namespace dp
     {
       // ---------------------------------------------------------------------------------
       const QString INSERT_TASK =
-        "INSERT INTO t_task(t_id, t_name, t_visible, t_solo_effort, t_chargeable, t_creation_date, t_comment)VALUES(?, ?, 1, ?, ?, ?, ?)";
+        "INSERT INTO t_task(t_id, t_name, t_visible, t_solo_effort, t_chargeable, t_creation_date, t_comment)VALUES(?, ?, ?, ?, ?, ?, ?)";
       // ---------------------------------------------------------------------------------
       const QString SELECT_ALL_TASKS =
-        "SELECT t_id, t_name, t_solo_effort, t_chargeable, t_creation_date, t_comment FROM t_task WHERE (t_visible <> 0) order by t_name";
+        "SELECT t_id, t_name, t_visible, t_solo_effort, t_chargeable, t_creation_date, t_comment FROM t_task order by t_name";
       // ---------------------------------------------------------------------------------
       const QString SELECT_DISTINCT_TASK =
-      "SELECT DISTINCT t_id, t_name, t_solo_effort, t_chargeable, t_creation_date, t_comment FROM t_task WHERE (t_id=?)";
+      "SELECT DISTINCT t_id, t_name, t_visible, t_solo_effort, t_chargeable, t_creation_date, t_comment FROM t_task WHERE (t_id=?)";
       // ---------------------------------------------------------------------------------
       const QString UPDATE_TASK =
-        "UPDATE t_task set t_name=?, t_solo_effort=?, t_chargeable=?, t_creation_date=?, t_comment=? WHERE (t_id=?)";
+        "UPDATE t_task set t_name=?, t_visible=?, t_solo_effort=?, t_chargeable=?, t_creation_date=?, t_comment=? WHERE (t_id=?)";
       // ---------------------------------------------------------------------------------
       const QString REMOVE_TASK = 
       "DELETE FROM t_task WHERE (t_id=?)";
@@ -67,37 +67,37 @@ namespace dp
       // ---------------------------------------------------------------------------------
       success Task::remove(dp::Task const& _task) const
       {
-	if ( _task.id().isNull())
+        if ( _task.id().isNull())
+            {
+              return error();
+            }
+        if(!exists(_task))
+        {
+            return successful();
+        }
+        QSqlQuery query;
+        query.prepare(REMOVE_TASK);
+        query.addBindValue(_task.id().toString());
+        if(execute(query).has_failed())
         {
           return error();
         }
-	if(!exists(_task))
-	{
-	    return successful();
-	}
-	QSqlQuery query;
-	query.prepare(REMOVE_TASK);
-	query.addBindValue(_task.id().toString());
-	if(execute(query).has_failed())
-	{
-	  return error();
-	}
-	return successful();
+        return successful();
       }
       // ---------------------------------------------------------------------------------
       success Task::findAll(dp::TaskList &l) const
       {
-	QSqlQuery query;
-	query.prepare(SELECT_ALL_TASKS);
-	if ( execute ( query ).has_failed() )
-        {
-          return error();
-        }
-        while ( query.next() )
-        {
-	  dp::Task _t(Uuid(query.value(0).toString()));
-	  assign_query_values_to_entity(query, _t);
-	  l.append(_t);
+        QSqlQuery query;
+        query.prepare(SELECT_ALL_TASKS);
+        if ( execute ( query ).has_failed() )
+            {
+              return error();
+            }
+            while ( query.next() )
+            {
+          dp::Task _t(Uuid(query.value(0).toString()));
+          assign_query_values_to_entity(query, _t);
+          l.append(_t);
         }
         return successful();
       }
@@ -126,6 +126,7 @@ namespace dp
         query.prepare ( INSERT_TASK );
         query.addBindValue ( _t.id().toString() );
         query.addBindValue ( _t.name() );
+        query.addBindValue ( _t.isVisible() );
         query.addBindValue ( _t.isSoloEffort() );
         query.addBindValue ( _t.isChargeable() );
         query.addBindValue ( _t.creationDate() );
@@ -146,6 +147,7 @@ namespace dp
         QSqlQuery query;
         query.prepare ( UPDATE_TASK );
         query.addBindValue ( _t.name() );
+        query.addBindValue ( _t.isVisible() );
         query.addBindValue ( _t.isSoloEffort() );
         query.addBindValue ( _t.isChargeable() );
         query.addBindValue ( _t.creationDate() );
@@ -157,10 +159,11 @@ namespace dp
       success Task::assign_query_values_to_entity ( QSqlQuery& query, dp::Task& t ) const
       {
         t.setName ( query.value ( 1 ).toString() );
-        t.setIsSoloEffort ( query.value ( 2 ).toBool() );
-        t.setIsChargeable ( query.value ( 3 ).toBool() );
-        t.setCreationDate ( query.value ( 4 ).toDateTime() );
-        t.setComment(query.value(5).toString());
+        t.setVisible ( query.value ( 2 ).toBool() );
+        t.setIsSoloEffort ( query.value ( 3 ).toBool() );
+        t.setIsChargeable ( query.value ( 4 ).toBool() );
+        t.setCreationDate ( query.value ( 5 ).toDateTime() );
+        t.setComment(query.value(6).toString());
         return successful();
       }
 

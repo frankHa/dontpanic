@@ -11,6 +11,7 @@ namespace dp
       , _M_solo_effort ( true )
       , _M_chargeable ( true )
       , _M_creation_date ( QDateTime::currentDateTime() )
+      , _M_visible(true)
       , _M_comment("") {}
   // ---------------------------------------------------------------------------------
   Task::Task(QString const& name)
@@ -19,6 +20,7 @@ namespace dp
       , _M_solo_effort ( true )
       , _M_chargeable ( true )
       , _M_creation_date ( QDateTime::currentDateTime() ) 
+      , _M_visible(true)
       , _M_comment("") {}
   // ---------------------------------------------------------------------------------
   Task::Task ( Uuid const& id )
@@ -27,6 +29,7 @@ namespace dp
       , _M_solo_effort ( true )
       , _M_chargeable ( true )
       , _M_creation_date ( QDateTime::currentDateTime() ) 
+      , _M_visible(true)
       , _M_comment("") {}
   // ---------------------------------------------------------------------------------
   Uuid const& Task::id() const
@@ -75,6 +78,17 @@ namespace dp
   Task& Task::setCreationDate ( QDateTime date )
   {
     _M_creation_date = date;
+    return *this;
+  }
+  // ---------------------------------------------------------------------------------
+  bool Task::isVisible()const
+  {
+    return _M_visible;
+  }
+  // ---------------------------------------------------------------------------------
+  Task& Task::setVisible(bool v)
+  {
+    _M_visible = v;
     return *this;
   }
   // ---------------------------------------------------------------------------------
