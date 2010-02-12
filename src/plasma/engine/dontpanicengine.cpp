@@ -23,7 +23,7 @@ DontPanicEngine::DontPanicEngine(QObject* parent, const QVariantList& args)
     // update interval and using too much CPU.
     // In the case of a clock that only has second precision,
     // a third of a second should be more than enough.
-    setMinimumPollingInterval(333);
+    setMinimumPollingInterval(500);
 }
 
 void DontPanicEngine::init()
