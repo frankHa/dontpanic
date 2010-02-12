@@ -4,6 +4,7 @@
 #include <QSizeF>
 #include <QGraphicsLinearLayout>
 
+#include <Plasma/ToolTipManager>
 #include <Plasma/LineEdit>
 #include <Plasma/PushButton>
 #include <plasma/svg.h>
@@ -39,6 +40,7 @@ PlasmaDontPanic::~PlasmaDontPanic()
 void PlasmaDontPanic::init()
 {
  
+  Plasma::ToolTipManager::self()->registerWidget(this);
     // A small demonstration of the setFailedToLaunch function
 } 
  
@@ -50,7 +52,20 @@ QGraphicsWidget* PlasmaDontPanic::graphicsWidget()
   }
   return _M_dialog->dialog();
 }
+
+void PlasmaDontPanic::toolTipAboutToShow()
+{
+  Plasma::ToolTipContent toolTip;
+  toolTip.setImage(KIcon("dontpanik"));
+  toolTip.setMainText("42");
+  toolTip.setSubText(i18n("don't panic :)"));
+  Plasma::ToolTipManager::self()->setContent(this, toolTip);
+}
  
+void PlasmaDontPanic::toolTipHidden()
+{
+  Plasma::ToolTipManager::self()->clearContent(this);
+}
 // void PlasmaDontPanic::paintInterface(QPainter *p,
 //         const QStyleOptionGraphicsItem *option, const QRect &contentsRect)
 // {

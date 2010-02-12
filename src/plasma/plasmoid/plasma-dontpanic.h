@@ -17,7 +17,7 @@ namespace plasma
 {
 namespace applet
 {
-  class Dialog;
+class Dialog;
 // Define our plasma Applet
 class PlasmaDontPanic : public Plasma::PopupApplet
 {
@@ -32,8 +32,14 @@ public:
 //                 const QStyleOptionGraphicsItem *option,
 //                 const QRect& contentsRect);
     void init();
-    
+
     QGraphicsWidget * graphicsWidget();
+
+public slots:
+
+    void toolTipAboutToShow();
+
+    void toolTipHidden();
 
 private:
     Plasma::DataEngine *_M_dont_panic_engine;
