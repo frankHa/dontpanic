@@ -41,6 +41,7 @@ namespace dp
       _M_label = new Plasma::Label(_M_widget);
       _M_label->setText("Don't Panic");
       layout->addItem(_M_label);
+      _M_widget->setMinimumSize(250, 300);
     }
     
     QGraphicsWidget* Dialog::dialog()
