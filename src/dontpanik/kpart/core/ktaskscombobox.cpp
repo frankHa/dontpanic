@@ -22,45 +22,46 @@
 #include <QVariant>
 namespace dp
 {
- namespace core
- {
-   namespace detail
-   {
-     // ---------------------------------------------------------------------------------
-     KTasksComboBox::KTasksComboBox(QWidget *parent)
-     :QComboBox(parent)
-     {
-       init();
-     }
-     // ---------------------------------------------------------------------------------
-     void KTasksComboBox::select(Uuid const& id)
-     {
-       int index = findData(QVariant(id.toString()));
-       setCurrentIndex(index);
-     }
-     // ---------------------------------------------------------------------------------
-     QUuid KTasksComboBox::selectedUuid() const
-     {
-       return QUuid(itemData(currentIndex()).toString());
-     }     
-     // ---------------------------------------------------------------------------------
-     // private stuff:
-     // ---------------------------------------------------------------------------------
-     void KTasksComboBox::init()
-     {
-       TaskList tasks = context()->taskManager()->allTasks();
-       TaskList::const_iterator it;
-       addItem("", uuid().toString());
-       for(it=tasks.begin();it!=tasks.end();++it)
-       {
-         if(it->isVisible())
-         {
-          addItem(it->name(), QVariant(it->id().toString()));
-         }
-       }
-     }
-     // ---------------------------------------------------------------------------------
-   }
- }
+namespace core
+{
+namespace detail
+{
+// ---------------------------------------------------------------------------------
+KTasksComboBox::KTasksComboBox ( QWidget *parent )
+        :QComboBox ( parent )
+{
+    init();
+}
+// ---------------------------------------------------------------------------------
+void KTasksComboBox::select ( Uuid const& id )
+{
+    int index = findData ( QVariant ( id.toString() ) );
+    setCurrentIndex ( index );
+}
+// ---------------------------------------------------------------------------------
+QUuid KTasksComboBox::selectedUuid() const
+{
+    return QUuid ( itemData ( currentIndex() ).toString() );
+}
+// ---------------------------------------------------------------------------------
+// private stuff:
+// ---------------------------------------------------------------------------------
+void KTasksComboBox::init()
+{
+    TaskList tasks = context()->taskManager()->allTasks();
+    TaskList::const_iterator it;
+    addItem ( "", uuid().toString() );
+    for ( it=tasks.begin();it!=tasks.end();++it )
+    {
+        if ( it->isVisible() )
+        {
+            addItem ( it->name(), QVariant ( it->id().toString() ) );
+        }
+    }
+}
+// ---------------------------------------------------------------------------------
+}
+}
 }
 
+// kate: indent-mode cstyle; space-indent on; indent-width 4; 

@@ -37,6 +37,7 @@ namespace dp
     
     KReportWidget::~KReportWidget()
     {
+      delete _M_ui;
     }
     
     void KReportWidget::setReport(Report const& r)
