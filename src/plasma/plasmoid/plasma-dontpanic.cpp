@@ -8,19 +8,22 @@
 #include <Plasma/PushButton>
 #include <plasma/svg.h>
 #include <plasma/theme.h>
- 
+
+#include "dialog.h"
+K_EXPORT_PLASMA_APPLET(dontpanic, dp::plasma::applet::PlasmaDontPanic)
+ namespace dp
+ {
+   namespace plasma
+   {
+     namespace applet
+     {
+     
  
 PlasmaDontPanic::PlasmaDontPanic(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args),
-    m_svg(this)
-    ,m_icon("dontpanik")
-    , _M_lineEdit(0)
-    , _M_pushButton(0)
+    : Plasma::PopupApplet(parent, args)
+    , _M_dialog(0)
 {
-    m_svg.setImagePath("widgets/background");
-    // this will get us the standard applet background, for free!
-    setBackgroundHints(DefaultBackground);
-    resize(200, 200);
+   setPopupIcon("dontpanik");
 }
  
  
@@ -37,22 +40,16 @@ void PlasmaDontPanic::init()
 {
  
     // A small demonstration of the setFailedToLaunch function
-    if (m_icon.isNull()) {
-        setFailedToLaunch(true, "No world to say hello");
-    }
-    QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(this);
-    layout->setOrientation(Qt::Vertical); //so widgets will be stacked up/down
-    
-    _M_lineEdit = new Plasma::LineEdit(this);
-    _M_lineEdit->setText("Hey! This is a Plasma line edit.");
-    
-    _M_pushButton = new Plasma::PushButton(this);
-    _M_pushButton->setText("Whoa! This is a Plasma pushbutton.");
-    _M_pushButton->setIcon(m_icon);
-    layout->addItem(_M_lineEdit);
-    layout->addItem(_M_pushButton);
 } 
  
+QGraphicsWidget* PlasmaDontPanic::graphicsWidget()
+{
+  if(!_M_dialog)
+  {
+    _M_dialog = new Dialog(this, this);
+  }
+  return _M_dialog->dialog();
+}
  
 // void PlasmaDontPanic::paintInterface(QPainter *p,
 //         const QStyleOptionGraphicsItem *option, const QRect &contentsRect)
@@ -73,5 +70,7 @@ void PlasmaDontPanic::init()
 //                 "Hello Don't Panic!");
 //     p->restore();
 // }
- 
+     }
+   }
+ }
 #include "plasma-dontpanic.moc"

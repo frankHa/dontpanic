@@ -2,6 +2,7 @@
 Name=Don't Panic
 Comment=Plasmoid to access common functions of Dont Panic
 Type=Service
+Icon=dontpanik
 ServiceTypes=Plasma/Applet
  
 X-KDE-Library=plasma_applet_dontpanic
