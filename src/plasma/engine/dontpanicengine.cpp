@@ -11,7 +11,7 @@
 #include <libdontpanic_client/taskmanager.h>
 
 #include <Plasma/DataContainer>
-
+#include <QTimerEvent>
 namespace dp
 {
 namespace plasma
@@ -21,6 +21,7 @@ namespace plasma
   
 DontPanicEngine::DontPanicEngine(QObject* parent, const QVariantList& args)
         : Plasma::DataEngine(parent, args)
+        , _M_timer_id(0)
 {
     // We ignore any arguments - data engines do not have much use for them
     Q_UNUSED(args)
@@ -41,8 +42,7 @@ void DontPanicEngine::init()
     _M_timetracker = new dp::client::TimeTracker(this);
     _M_actions_cache = new dp::client::ActionsCache(this);
     _M_actions_cache->setSourceTimeTracker(_M_timetracker);
-    _M_actions_cache->initCache(QDate::currentDate());
-    connect(_M_timetracker, SIGNAL(currentlyActiveActionChanged(dp::Action)), this, SLOT(updateCurrentActivity()));
+    _M_actions_cache->initCache(QDate::currentDate());    
 }
 
 bool DontPanicEngine::sourceRequestEvent(const QString &name)
@@ -50,6 +50,19 @@ bool DontPanicEngine::sourceRequestEvent(const QString &name)
     // We do not have any special code to execute the
     // first time a source is requested, so we just call
     // updateSourceEvent().
+    if(name == src_current_activity)
+    {
+      connect(_M_timetracker, SIGNAL(currentlyActiveActionChanged(dp::Action)), this, SLOT(updateCurrentActivity()));
+      return updateCurrentActivity();
+    }
+    if(name == src_today)
+    {
+      connect(_M_actions_cache, SIGNAL(timerangeChanged()), this, SLOT(updateTodaysDuration()));
+      connect(_M_actions_cache, SIGNAL(stored(dp::Action)), this, SLOT(updateTodaysDuration()));
+      connect(_M_actions_cache, SIGNAL(removed(dp::Action)), this, SLOT(updateTodaysDuration()));
+      connect(_M_timetracker, SIGNAL(currentlyActiveActionChanged(dp::Action)), this, SLOT(updateTodaysDuration()));
+      return updateTodaysDuration();
+    }
     return updateSourceEvent(name);
 }
 
@@ -57,23 +70,23 @@ bool DontPanicEngine::updateSourceEvent(const QString &name)
 {
     if(name==src_today)
     {
-      updateTodaysDuration();
-      return true;
+      return updateTodaysDuration();
     }
     if(name==src_current_activity)
     {
-      updateCurrentActivity();      
-      return true;
+     return updateCurrentActivity();      
     }
-    return true;
+    return false;
 }
 
-void DontPanicEngine::updateTodaysDuration()
+bool DontPanicEngine::updateTodaysDuration()
 {
   setData(src_today, I18N_NOOP("Time"), _M_actions_cache->duration());
+  ensure_correct_timer_state();
+  return true;
 }
 
-void DontPanicEngine::updateCurrentActivity()
+bool DontPanicEngine::updateCurrentActivity()
 {
   Action const& a = _M_timetracker->currentlyActiveAction();
   setData(src_current_activity, "active", a.isActive());
@@ -81,11 +94,40 @@ void DontPanicEngine::updateCurrentActivity()
   setData(src_current_activity, "task", _M_task_manager->load(a.task()).name());
   setData(src_current_activity, "start", a.startTime());
   setData(src_current_activity, "duration", a.duration());
+  ensure_correct_timer_state();
+  return true;
 }
 
 QStringList DontPanicEngine::sources() const
 {
     return QStringList()<<src_today<<src_current_activity;
+}
+
+void DontPanicEngine::timerEvent(QTimerEvent *event)
+{
+  if(event->timerId() == _M_timer_id)
+  {
+    updateCurrentActivity();
+    updateTodaysDuration();
+  }
+  Plasma::DataEngine::timerEvent(event);
+}
+
+void DontPanicEngine::ensure_correct_timer_state()
+{
+  if(_M_timetracker->currentlyActiveAction().isActive())
+  {
+    if(_M_timer_id==0)
+    {
+      _M_timer_id = startTimer(1000);
+    }
+  } else
+  {
+    if(_M_timer_id  != 0)
+    {
+      killTimer(_M_timer_id);
+    }
+  }
 }
 }
 }
