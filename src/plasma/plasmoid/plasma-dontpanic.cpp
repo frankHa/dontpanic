@@ -76,7 +76,7 @@ void PlasmaDontPanic::toolTipAboutToShow()
     } 
     else
     {
-      QString tooltip = i18n("Current Don't Panik action: \nProject:\t\t%1\nTask:\t\t%2\nRunning since:\t%3\nCurrent duration:\t%4")
+      QString tooltip = i18n("Current activity:<br/>%1/%2<br/>Running since: %3 (%4h)")
       .arg(_M_current_action.project)
       .arg(_M_current_action.task)
       .arg(_M_current_action.start.time().toString(Qt::SystemLocaleShortDate))
