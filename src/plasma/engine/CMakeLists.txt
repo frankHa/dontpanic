@@ -10,7 +10,7 @@ kde4_add_plugin(plasma_engine_dontpanic ${dontpanic_engine_SRCS})
 target_link_libraries(plasma_engine_dontpanic
                       ${KDE4_KDECORE_LIBS}
                       ${KDE4_PLASMA_LIBS}
-                      dontpanic_client_lib)
+                      dontpanic_lib dontpanic_client_lib)
  
 install(TARGETS plasma_engine_dontpanic
         DESTINATION ${PLUGIN_INSTALL_DIR})

@@ -3,6 +3,7 @@
 #include <QDate>
 #include <QTime>
 
+#include <libdontpanic/dbus.hpp>
 #include <libdontpanic_client/actiontemplatemanager.h>
 #include <libdontpanic_client/timetracker.h>
 #include <libdontpanic_client/projectmanager.h>
@@ -28,10 +29,12 @@ DontPanicEngine::DontPanicEngine(QObject* parent, const QVariantList& args)
 
 void DontPanicEngine::init()
 {
+    dbus().register_dp_custom_types();
     _M_action_template_manager = new dp::client::ActionTemplateManager();
     _M_project_manager = new dp::client::ProjectManager();
     _M_task_manager = new dp::client::TaskManager();
     _M_timetracker = new dp::client::TimeTracker();
+    _M_timetracker->hasActionsFor(QDate::currentDate());
 }
 
 bool DontPanicEngine::sourceRequestEvent(const QString &name)
@@ -44,14 +47,27 @@ bool DontPanicEngine::sourceRequestEvent(const QString &name)
 
 bool DontPanicEngine::updateSourceEvent(const QString &name)
 {
-    setData(name, I18N_NOOP("Time"), QTime::currentTime());
-    setData(name, I18N_NOOP("Date"), QDate::currentDate());
+    if(name=="today")
+    {
+      setData(name, I18N_NOOP("Time"), QTime::currentTime());
+      return true;
+    }
+    if(name=="current activity")
+    {
+      Action const& a = _M_timetracker->currentlyActiveAction();
+      setData(name, "active", a.isActive());
+      setData(name, "project", _M_project_manager->load(a.project()).name());
+      setData(name, "task", _M_task_manager->load(a.task()).name());
+      setData(name, "start", a.startTime());
+      setData(name, "duration", a.duration());
+      return true;
+    }
     return true;
 }
 
 QStringList DontPanicEngine::sources() const
 {
-    return QStringList();
+    return QStringList()<<"today"<<"current activity";
 }
 }
 }
