@@ -12,7 +12,6 @@ set(libdontpanic_SRCS
     actiontemplate.cpp
     collaborationtype.cpp
     dbus.cpp
-    durationformatter.cpp 
     leavetype.cpp
     project.cpp
     report.cpp 

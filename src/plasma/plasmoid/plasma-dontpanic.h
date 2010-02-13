@@ -2,6 +2,7 @@
 #define PLASMA_DP_H
 #include <Plasma/PopupApplet>
 #include <Plasma/Svg>
+#include <Plasma/DataEngine>
 #include <KIcon>
 
 class QSizeF;
@@ -40,10 +41,26 @@ public slots:
     void toolTipAboutToShow();
 
     void toolTipHidden();
+    void dataUpdated(QString const&,Plasma::DataEngine::Data const&);
 
+  private slots:
+    void on_source_added(QString const& source);
 private:
     Plasma::DataEngine *_M_dont_panic_engine;
     Dialog *_M_dialog;
+    
+    struct Action
+    {
+      Action():active(false), project(""), task(""), start(), duration(0){}
+      bool active;
+      QString project;
+      QString task;
+      QDateTime start;
+      int duration;
+    } _M_current_action;
+    
+    int _M_current_overall_duration;
+    
 };
 }
 }
