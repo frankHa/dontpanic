@@ -57,6 +57,11 @@ int ActionsCache::duration() const
   return _M_actions.duration();
 }
 // ---------------------------------------------------------------------------------
+ActionList ActionsCache::cachedActions() const
+{
+  return _M_actions;
+}
+// ---------------------------------------------------------------------------------
 // private stuff:
 // ---------------------------------------------------------------------------------
 void ActionsCache::on_action_stored(dp::Action a)

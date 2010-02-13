@@ -33,7 +33,6 @@ namespace dp
     // ---------------------------------------------------------------------------------
     namespace detail
     {
-      
       // ---------------------------------------------------------------------------------
       class TimeFormatter
       {
@@ -59,7 +58,8 @@ namespace dp
           : QAbstractTableModel ( parent )
       {
         init_header_data();
-        subscribe_to_timetracker_signals();
+        _M_timetracker.setSourceTimeTracker(context()->timeTracker());
+        subscribe_to_actionscache_signals();
       }
       // ---------------------------------------------------------------------------------
       QVariant KActionsTableModel::data ( const QModelIndex& index, int role ) const
@@ -187,8 +187,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       void KActionsTableModel::set_current_day(QDate const& day)
       {
-        _M_current_day = day;
-        _M_actions=context()->timeTracker()->findAll(day);
+        _M_actions=_M_timetracker.initCache(day).cachedActions();
         reset();
       }
       // ---------------------------------------------------------------------------------
@@ -215,11 +214,10 @@ namespace dp
         return _M_actions.duration();
       }
       // ---------------------------------------------------------------------------------
-      void KActionsTableModel::subscribe_to_timetracker_signals()
+      void KActionsTableModel::subscribe_to_actionscache_signals()
       {
-        client::TimeTracker * pm = context()->timeTracker();
-        connect(pm, SIGNAL(stored(dp::Action)), this, SLOT(stored(dp::Action const&)));
-        connect(pm, SIGNAL(removed(dp::Action)), this, SLOT(removed(dp::Action const&)));
+        connect(&_M_timetracker, SIGNAL(stored(dp::Action)), this, SLOT(stored(dp::Action const&)));
+        connect(&_M_timetracker, SIGNAL(removed(dp::Action)), this, SLOT(removed(dp::Action const&)));
       }
       // ---------------------------------------------------------------------------------
       void KActionsTableModel::stored(dp::Action const&p)
@@ -249,8 +247,6 @@ namespace dp
       // ---------------------------------------------------------------------------------
       void KActionsTableModel::added(dp::Action const&p)
       {
-        kDebug()<<p.id().toString()<< ", start time:"<<p.startTime();
-        if(!is_interesting_for_current_day(p)){return;}
         int index = _M_actions.size();
         beginInsertRows(QModelIndex(), index, index);
         _M_actions.append(p);
@@ -259,25 +255,12 @@ namespace dp
       // ---------------------------------------------------------------------------------
       void KActionsTableModel::updated(dp::Action const&p)
       {
-        kDebug()<<p.id().toString()<< ", start time:"<<p.startTime();
-        if(!is_interesting_for_current_day(p))
-        {
-          removed(p);
-          return;
-        }
         int row = _M_actions.indexOf(p);
         QModelIndex const& begin = index(row, START);
         QModelIndex const& end = index(row, COMMENT);
         _M_actions.replace(row, p);
         emit dataChanged(begin, end);
       }   
-      // ---------------------------------------------------------------------------------
-      bool KActionsTableModel::is_interesting_for_current_day(dp::Action const& a)
-      {
-        if(!_M_current_day.isValid()){return false;}
-        bool result = a.startTime().date() == _M_current_day;
-        return result;
-      }
       // ---------------------------------------------------------------------------------
       QString KActionsTableModel::project_of(Action const& a) const
       {

@@ -13,6 +13,7 @@ set(libdontpanic_client_SRCS
    )
 
 qt4_wrap_cpp(libdontpanic_client_SRCS
+          ../../include/libdontpanic_client/actionscache.h
 	     ../../include/libdontpanic_client/actiontemplatemanager.h
          ../../include/libdontpanic_client/projectmanager.h
          ../../include/libdontpanic_client/reportmanager.h
