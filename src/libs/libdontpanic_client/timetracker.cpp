@@ -111,7 +111,7 @@ namespace dp
     ActionList TimeTracker::findAll(QDate const& from, QDate const& to)
     {
       QDateTime _from(from);
-      QDateTime _to(from, QTime(23, 59, 59, 99));
+      QDateTime _to(to, QTime(23, 59, 59, 99));
       return findAll(_from, _to);
     }
     // ---------------------------------------------------------------------------------

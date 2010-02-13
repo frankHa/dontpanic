@@ -53,6 +53,11 @@ namespace dp
     return _M_to;
   }
   // ---------------------------------------------------------------------------------
+  bool TimeRange::isValid() const
+  {
+    return from().isValid() && to().isValid();
+  }
+  // ---------------------------------------------------------------------------------
   int TimeRange::duration() const
   {
     QDateTime start = from();
