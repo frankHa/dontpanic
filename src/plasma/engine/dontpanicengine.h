@@ -14,6 +14,7 @@ class ActionTemplateManager;
 class ProjectManager;
 class TaskManager;
 class TimeTracker;
+class ActionsCache;
 }
 namespace plasma
 {
@@ -38,6 +39,12 @@ protected:
 
     QStringList sources() const;
 
+  private slots:
+    // ---------------------------------------------------------------------------------
+    void updateTodaysDuration();
+    // ---------------------------------------------------------------------------------
+    void updateCurrentActivity();
+    // ---------------------------------------------------------------------------------
 private:
     // ---------------------------------------------------------------------------------
     dp::client::ActionTemplateManager *_M_action_template_manager;
@@ -47,6 +54,8 @@ private:
     dp::client::TaskManager *_M_task_manager;
     // ---------------------------------------------------------------------------------
     dp::client::TimeTracker *_M_timetracker;
+    // ---------------------------------------------------------------------------------
+    dp::client::ActionsCache *_M_actions_cache;
     // ---------------------------------------------------------------------------------
 };
 }

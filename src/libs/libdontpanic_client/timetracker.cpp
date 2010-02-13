@@ -162,21 +162,27 @@ namespace dp
         connect(_M_remote, SIGNAL( stored ( dp::Action ) ), this, SLOT( on_stored ( dp::Action ) ));
         connect(_M_remote, SIGNAL(removed(dp::Action)), this, SLOT(on_removed(dp::Action)));
         connect(_M_remote, SIGNAL(error(QString const&)), this, SIGNAL(error(QString)));
-        _M_current_action = _M_remote->findCurrentlyActiveAction();
+        setCurrentlyActiveAction(_M_remote->findCurrentlyActiveAction());
       }
       return _M_remote;
     }
     // ---------------------------------------------------------------------------------      
     void TimeTracker::on_stored(dp::Action const& a)
     {
-      if(a.isActive()) _M_current_action = a;
+      if(a.isActive() || a == _M_current_action) setCurrentlyActiveAction(a);
       emit stored(a);
     }
     // ---------------------------------------------------------------------------------      
     void TimeTracker::on_removed(dp::Action const& a)
     {
-      if(a == _M_current_action) _M_current_action = NullAction();
+      if(a == _M_current_action) setCurrentlyActiveAction(NullAction());
       emit removed(a);
+    }
+    // ---------------------------------------------------------------------------------
+    void TimeTracker::setCurrentlyActiveAction(dp::Action const& a)
+    {
+      _M_current_action = a;
+      emit currentlyActiveActionChanged(a);
     }
     // ---------------------------------------------------------------------------------
   }//client
