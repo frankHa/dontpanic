@@ -111,6 +111,7 @@ namespace dp
       _M_current_action_label = new Plasma::Label(_M_widget);
       _M_current_action_label->setAlignment(Qt::AlignHCenter);
       l_layout->addItem(_M_current_action_label);
+      l_layout->addStretch();
       _M_widget->setLayout(l_layout);
       _M_widget->setMinimumSize(250, 200);
     }

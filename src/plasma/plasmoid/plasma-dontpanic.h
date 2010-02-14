@@ -16,6 +16,10 @@ class DataEngine;
 
 namespace dp
 {
+  namespace client
+  {
+    class TimeTracker;
+  }
 namespace plasma
 {
 namespace applet
@@ -64,6 +68,8 @@ private:
     KAction *_M_start_new_action;
     KAction *_M_stop_current_action;
     KAction *_M_resume_last_action;
+    
+    dp::client::TimeTracker *_M_time_tracker;
     
 };
 }

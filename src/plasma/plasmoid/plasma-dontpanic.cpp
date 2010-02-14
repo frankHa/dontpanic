@@ -12,6 +12,7 @@
 #include <Plasma/DataEngine>
 
 #include <libdontpanic/durationformatter.h>
+#include <libdontpanic_client/timetracker.h>
 #include <KAction>
 #include <KIcon>
 
@@ -45,6 +46,7 @@ PlasmaDontPanic::~PlasmaDontPanic()
 
 void PlasmaDontPanic::init()
 {
+    _M_time_tracker = new dp::client::TimeTracker(this);
     setup_actions();
     Plasma::ToolTipManager::self()->registerWidget(this);
     _M_dont_panic_engine = dataEngine("dontpanic");
@@ -144,15 +146,18 @@ void PlasmaDontPanic::setup_actions()
   //start_new_action->setText(i18n("Start Action"));
   _M_start_new_action->setIcon(KIcon("media-playback-start"));
   _M_start_new_action->setShortcut( KShortcut(i18n("Ctrl+S")));
+  connect(_M_start_new_action, SIGNAL(triggered()), _M_time_tracker, SLOT(startNewAction()));
   
   
   _M_stop_current_action = new KAction(this);
   _M_stop_current_action->setIcon(KIcon("media-playback-stop"));
   _M_stop_current_action->setShortcut( KShortcut(i18n("Ctrl+T")));
+  connect(_M_stop_current_action, SIGNAL(triggered()), _M_time_tracker, SLOT(stopCurrentAction()));
   
   _M_resume_last_action = new KAction(this);
   _M_resume_last_action->setIcon(KIcon("media-seek-forward"));
   _M_resume_last_action->setShortcut( KShortcut(i18n("Ctrl+R")));
+  connect(_M_resume_last_action, SIGNAL(triggered()), _M_time_tracker, SLOT(continueLastAction()));
   
   
 }
