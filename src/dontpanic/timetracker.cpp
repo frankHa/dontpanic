@@ -54,7 +54,14 @@ namespace dp
   // ---------------------------------------------------------------------------------
   void TimeTracker::startNewActionFromTemplate ( Uuid const& _template_id )
   {
-    qDebug() << __FUNCTION__;
+    ActionTemplate templ(_template_id);
+    if(persistence().load(templ).has_failed())
+    {
+      kWarning()<<"unable to find template id :" << _template_id.toString();
+      kWarning()<<"not starting a new action here";
+      return;
+    }
+    startNewActionFromTemplate(templ);
   }
   // ---------------------------------------------------------------------------------
   void TimeTracker::stopCurrentAction()

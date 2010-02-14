@@ -13,10 +13,14 @@
 
 #include <libdontpanic/durationformatter.h>
 #include <libdontpanic_client/timetracker.h>
+#include <libdontpanic_client/actiontemplatemanager.h>
 #include <KAction>
 #include <KIcon>
+#include <QMenu>
 
 #include "dialog.h"
+#include "detail/actiontemplateaction.h"
+
 K_EXPORT_PLASMA_APPLET(dontpanic, dp::plasma::applet::PlasmaDontPanic)
 namespace dp
 {
@@ -24,7 +28,6 @@ namespace plasma
 {
 namespace applet
 {
-
 
 PlasmaDontPanic::PlasmaDontPanic(QObject *parent, const QVariantList &args)
         : Plasma::PopupApplet(parent, args)
@@ -47,6 +50,7 @@ PlasmaDontPanic::~PlasmaDontPanic()
 void PlasmaDontPanic::init()
 {
     _M_time_tracker = new dp::client::TimeTracker(this);
+    _M_action_templates = new dp::client::ActionTemplateManager(this);
     setup_actions();
     Plasma::ToolTipManager::self()->registerWidget(this);
     _M_dont_panic_engine = dataEngine("dontpanic");
@@ -158,8 +162,6 @@ void PlasmaDontPanic::setup_actions()
   _M_resume_last_action->setIcon(KIcon("media-seek-forward"));
   _M_resume_last_action->setShortcut( KShortcut(i18n("Ctrl+R")));
   connect(_M_resume_last_action, SIGNAL(triggered()), _M_time_tracker, SLOT(continueLastAction()));
-  
-  
 }
 
 KAction * PlasmaDontPanic::start_new_action()
@@ -174,6 +176,20 @@ KAction * PlasmaDontPanic::resume_last_action()
 {
   return _M_resume_last_action;
 }
+
+KAction* PlasmaDontPanic::action_for(ActionTemplate const& templ)
+{
+  detail::ActionTemplateAction *action = new detail::ActionTemplateAction(this);
+  action->setActionTemplate(templ);
+  connect(action, SIGNAL(triggered(ActionTemplate)), this, SLOT(on_switch_activity_to_triggered(ActionTemplate)));
+  return action;
+}
+
+void PlasmaDontPanic::on_switch_activity_to_triggered(const ActionTemplate& templ)
+{
+  _M_time_tracker->startActionFromTemplate(templ);
+}
+
 
 }
 }

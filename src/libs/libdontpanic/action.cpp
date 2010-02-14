@@ -9,7 +9,6 @@ namespace dp
     QDateTime dt = time;
     QTime t = dt.time();
     dt.setTime(t.addSecs(-t.second()));
-    kDebug()<<"time in full minutes: "<<dt;
     return dt;
   }
   // ---------------------------------------------------------------------------------

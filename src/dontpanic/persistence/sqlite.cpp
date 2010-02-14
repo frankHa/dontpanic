@@ -191,6 +191,11 @@ namespace dp
       return _sqlite::actionTemplate().persist ( _t );
     }
     // ---------------------------------------------------------------------------------
+    success Sqlite::load ( ActionTemplate & _t ) const
+    {
+      return _sqlite::actionTemplate().load ( _t );
+    }
+    // ---------------------------------------------------------------------------------
     success Sqlite::remove ( ActionTemplate const& _t ) const
     {
       return _sqlite::actionTemplate().remove ( _t );

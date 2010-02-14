@@ -16,9 +16,11 @@ class DataEngine;
 
 namespace dp
 {
+  class ActionTemplate;
   namespace client
   {
     class TimeTracker;
+    class ActionTemplateManager;
   }
 namespace plasma
 {
@@ -55,10 +57,12 @@ public slots:
   private slots:
     void on_source_added(QString const& source);
     void setup_actions();
+    void on_switch_activity_to_triggered(ActionTemplate const& templ);
   public:
     KAction * start_new_action();
     KAction * stop_current_action();
     KAction * resume_last_action();
+    KAction * action_for(ActionTemplate const&);
 private:
     Plasma::DataEngine *_M_dont_panic_engine;
     Dialog *_M_dialog;
@@ -70,7 +74,7 @@ private:
     KAction *_M_resume_last_action;
     
     dp::client::TimeTracker *_M_time_tracker;
-    
+    dp::client::ActionTemplateManager *_M_action_templates;
 };
 }
 }

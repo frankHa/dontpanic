@@ -6,6 +6,7 @@ include_directories(
 set(plasma_dp_SRCS 
     dialog.cpp
     plasma-dontpanic.cpp
+    detail/actiontemplateaction.cpp
     )
  
 # Now make sure all files get to the right place

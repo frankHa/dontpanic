@@ -17,21 +17,11 @@
 
 */
 
-#ifndef DP_PLASMA_APPLET_DIALOG_H
-#define DP_PLASMA_APPLET_DIALOG_H
+#ifndef DP_PLASMA_APPLET_ACTIONTEMPLATEACTION_H
+#define DP_PLASMA_APPLET_ACTIONTEMPLATEACTION_H
 
-#include <QObject>
-
-#include "detail/action.h"
-
-class QGraphicsWidget;
-class KAction;
-namespace Plasma
-{
-  class Label;
-  class PushButton;
-}
-
+#include <kaction.h>
+#include <libdontpanic/actiontemplate.hpp>
 
 namespace dp {
 
@@ -39,38 +29,27 @@ namespace plasma {
 
 namespace applet {
 
-  class PlasmaDontPanic;
-class Dialog: public QObject
+  namespace detail{
+class ActionTemplateAction : public KAction
 {
   Q_OBJECT
+  signals:
+    void triggered(ActionTemplate const& t);
   public:
-  Dialog(PlasmaDontPanic *dp, QObject *parent = 0);
+  ActionTemplateAction(QObject* parent);
+  ActionTemplateAction& setActionTemplate(dp::ActionTemplate const& templ);
+  dp::ActionTemplate const& actionTemplate() const;
   
-  public:
-      QGraphicsWidget *dialog();
-      
   private slots:
-    void on_current_duration_changed(int);
-    void on_current_action_changed(detail::Action const&);
-    
-    
-    
+    void on_triggered();
   private:
-    void build_dialog();
-    QGraphicsWidget* button_for(KAction *action);
-    QGraphicsWidget* switch_activity();
-  private: 
-    PlasmaDontPanic *_M_dp_applet;
-    Plasma::Label *_M_main_label;
-    Plasma::Label *_M_duration_label;
-    Plasma::Label *_M_current_action_label;
-    QGraphicsWidget* _M_widget;
+    dp::ActionTemplate _M_template;
 };
-
+  }
 }
 
 }
 
 }
 
-#endif // DP_PLASMA_APPLET_DIALOG_H
+#endif // DP_PLASMA_APPLET_ACTIONTEMPLATEACTION_H
