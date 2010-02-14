@@ -28,8 +28,9 @@
 #include <Plasma/Separator>
 #include <Plasma/PushButton>
 #include <KIconLoader>
-
+#include <KPushButton>
 #include <QLabel>
+#include <KAction>
 
 namespace dp
 {
@@ -98,16 +99,9 @@ namespace dp
       l_blayout->setSpacing(0);
       l_blayout->setOrientation(Qt::Horizontal);
       l_blayout->addStretch();
-      
-      Plasma::PushButton *bstart = new Plasma::PushButton(_M_widget);
-      l_blayout->addItem(bstart);
-      
-      Plasma::PushButton *bstop = new Plasma::PushButton(_M_widget);
-      l_blayout->addItem(bstop);
-      
-      Plasma::PushButton *bcontinue = new Plasma::PushButton(_M_widget);
-      l_blayout->addItem(bcontinue);
-      
+      l_blayout->addItem(button_for(_M_dp_applet->start_new_action()));
+      l_blayout->addItem(button_for(_M_dp_applet->stop_current_action()));
+      l_blayout->addItem(button_for(_M_dp_applet->resume_last_action()));
       l_blayout->addStretch();
       QGraphicsWidget *bWidget = new QGraphicsWidget();
       bWidget->setLayout(l_blayout);
@@ -121,6 +115,13 @@ namespace dp
       _M_widget->setMinimumSize(250, 200);
     }
     // ---------------------------------------------------------------------------------
+    QGraphicsWidget* Dialog::button_for(KAction *action)
+    {
+      Plasma::IconWidget *b = new Plasma::IconWidget(_M_widget);
+      b->setAction(action);
+      return b;
+    }
+    // ---------------------------------------------------------------------------------
     void Dialog::on_current_duration_changed(int duration)
     {
       QString dur = QString("<b>%1<b>").arg(duration_formatter().format(duration));
@@ -131,7 +132,7 @@ namespace dp
     {
       if(action.active)
       {
-        QString tooltip = i18n("Currently working on: \nProject:\t\t%1\nTask:\t\t%2\nRunning since:\t%3\nCurrent duration:\t%4")
+        QString tooltip = i18n("Currently working on: \nProject: %1\nTask: %2\nRunning since: %3\nCurrent duration: %4")
         .arg(action.project)
         .arg(action.task)
         .arg(action.start.time().toString(Qt::SystemLocaleShortDate))

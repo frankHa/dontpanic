@@ -25,10 +25,13 @@
 #include "detail/action.h"
 
 class QGraphicsWidget;
+class KAction;
 namespace Plasma
 {
   class Label;
+  class PushButton;
 }
+
 
 namespace dp {
 
@@ -50,8 +53,11 @@ class Dialog: public QObject
     void on_current_duration_changed(int);
     void on_current_action_changed(detail::Action const&);
     
+    
+    
   private:
     void build_dialog();
+    QGraphicsWidget* button_for(KAction *action);
   private: 
     PlasmaDontPanic *_M_dp_applet;
     Plasma::Label *_M_main_label;

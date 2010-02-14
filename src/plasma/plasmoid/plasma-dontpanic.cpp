@@ -12,6 +12,8 @@
 #include <Plasma/DataEngine>
 
 #include <libdontpanic/durationformatter.h>
+#include <KAction>
+#include <KIcon>
 
 #include "dialog.h"
 K_EXPORT_PLASMA_APPLET(dontpanic, dp::plasma::applet::PlasmaDontPanic)
@@ -34,7 +36,7 @@ PlasmaDontPanic::PlasmaDontPanic(QObject *parent, const QVariantList &args)
 
 PlasmaDontPanic::~PlasmaDontPanic()
 {
-    if (hasFailedToLaunch()) {
+  if (hasFailedToLaunch()) {
         // Do some cleanup here
     } else {
         // Save settings
@@ -43,7 +45,7 @@ PlasmaDontPanic::~PlasmaDontPanic()
 
 void PlasmaDontPanic::init()
 {
-
+    setup_actions();
     Plasma::ToolTipManager::self()->registerWidget(this);
     _M_dont_panic_engine = dataEngine("dontpanic");
     if (_M_dont_panic_engine == 0 || !_M_dont_panic_engine->isValid())
@@ -135,6 +137,39 @@ void PlasmaDontPanic::on_source_added(QString const& src)
 {
   _M_dont_panic_engine->connectSource(src,this);
 }
+
+void PlasmaDontPanic::setup_actions()
+{
+  _M_start_new_action = new KAction(this);
+  //start_new_action->setText(i18n("Start Action"));
+  _M_start_new_action->setIcon(KIcon("media-playback-start"));
+  _M_start_new_action->setShortcut( KShortcut(i18n("Ctrl+S")));
+  
+  
+  _M_stop_current_action = new KAction(this);
+  _M_stop_current_action->setIcon(KIcon("media-playback-stop"));
+  _M_stop_current_action->setShortcut( KShortcut(i18n("Ctrl+T")));
+  
+  _M_resume_last_action = new KAction(this);
+  _M_resume_last_action->setIcon(KIcon("media-seek-forward"));
+  _M_resume_last_action->setShortcut( KShortcut(i18n("Ctrl+R")));
+  
+  
+}
+
+KAction * PlasmaDontPanic::start_new_action()
+{
+  return _M_start_new_action;
+}
+KAction * PlasmaDontPanic::stop_current_action()
+{
+  return _M_stop_current_action;
+}
+KAction * PlasmaDontPanic::resume_last_action()
+{
+  return _M_resume_last_action;
+}
+
 }
 }
 }

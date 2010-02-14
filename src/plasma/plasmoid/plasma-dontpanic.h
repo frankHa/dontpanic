@@ -7,6 +7,7 @@
 
 #include "detail/action.h"
 class QSizeF;
+class KAction;
 
 namespace Plasma
 {
@@ -49,13 +50,20 @@ public slots:
 
   private slots:
     void on_source_added(QString const& source);
+    void setup_actions();
+  public:
+    KAction * start_new_action();
+    KAction * stop_current_action();
+    KAction * resume_last_action();
 private:
     Plasma::DataEngine *_M_dont_panic_engine;
     Dialog *_M_dialog;
     
-    detail::Action _M_current_action;
-    
+    detail::Action _M_current_action;    
     int _M_current_overall_duration;
+    KAction *_M_start_new_action;
+    KAction *_M_stop_current_action;
+    KAction *_M_resume_last_action;
     
 };
 }
