@@ -115,7 +115,7 @@ namespace dp
       l_layout->addItem(switch_activity());
       l_layout->addStretch();
       _M_widget->setLayout(l_layout);
-      _M_widget->setMinimumSize(250, 200);
+      _M_widget->setMinimumSize(250, 300);
     }
     // ---------------------------------------------------------------------------------
     QGraphicsWidget* Dialog::button_for(KAction *action)
@@ -132,7 +132,11 @@ namespace dp
       kDebug()<<"initializing the favorites menu...";
       
       QMenu *menu = new QMenu(b->nativeWidget());
-      menu->addAction("arrgll...");
+      TemplateList favlist = _M_dp_applet->favorites();
+      for(int i=0; i<favlist.length();++i)
+      {
+        menu->addAction(_M_dp_applet->action_for(favlist.value(i)));
+      }
       b->nativeWidget()->setMenu(menu);
       return b;
       

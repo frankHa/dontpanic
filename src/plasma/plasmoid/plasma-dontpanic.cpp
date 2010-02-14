@@ -190,6 +190,11 @@ void PlasmaDontPanic::on_switch_activity_to_triggered(const ActionTemplate& temp
   _M_time_tracker->startActionFromTemplate(templ);
 }
 
+TemplateList PlasmaDontPanic::favorites()
+{
+  return _M_action_templates->allActionTemplates();
+}
+
 
 }
 }

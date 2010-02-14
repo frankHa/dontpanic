@@ -6,6 +6,7 @@
 #include <KIcon>
 
 #include "detail/action.h"
+#include <libdontpanic/actiontemplate.hpp>
 class QSizeF;
 class KAction;
 
@@ -16,7 +17,6 @@ class DataEngine;
 
 namespace dp
 {
-  class ActionTemplate;
   namespace client
   {
     class TimeTracker;
@@ -63,6 +63,7 @@ public slots:
     KAction * stop_current_action();
     KAction * resume_last_action();
     KAction * action_for(ActionTemplate const&);
+    TemplateList favorites();
 private:
     Plasma::DataEngine *_M_dont_panic_engine;
     Dialog *_M_dialog;
