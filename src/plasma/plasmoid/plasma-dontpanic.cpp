@@ -115,6 +115,7 @@ void PlasmaDontPanic::dataUpdated(QString const&source,Plasma::DataEngine::Data 
   if(source == "dp/today")
   {
     _M_current_overall_duration = data.constFind("Time").value().toInt();
+    emit currentDurationChanged(_M_current_overall_duration);
   }
   if(source == "dp/current activity")
   {
@@ -126,6 +127,7 @@ void PlasmaDontPanic::dataUpdated(QString const&source,Plasma::DataEngine::Data 
       _M_current_action.start = data.constFind("start").value().toDateTime();
       _M_current_action.duration = data.constFind("duration").value().toInt();
     }    
+    emit currentActionChanged(_M_current_action);
   }
 }
 

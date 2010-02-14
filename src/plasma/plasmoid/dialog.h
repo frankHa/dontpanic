@@ -22,6 +22,8 @@
 
 #include <QObject>
 
+#include "detail/action.h"
+
 class QGraphicsWidget;
 namespace Plasma
 {
@@ -43,8 +45,18 @@ class Dialog: public QObject
   
   public:
       QGraphicsWidget *dialog();
+      
+  private slots:
+    void on_current_duration_changed(int);
+    void on_current_action_changed(detail::Action const&);
+    
+  private:
+    void build_dialog();
   private: 
-    Plasma::Label *_M_label;
+    PlasmaDontPanic *_M_dp_applet;
+    Plasma::Label *_M_main_label;
+    Plasma::Label *_M_duration_label;
+    Plasma::Label *_M_current_action_label;
     QGraphicsWidget* _M_widget;
 };
 

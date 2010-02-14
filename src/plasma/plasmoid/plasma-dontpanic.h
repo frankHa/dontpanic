@@ -5,6 +5,7 @@
 #include <Plasma/DataEngine>
 #include <KIcon>
 
+#include "detail/action.h"
 class QSizeF;
 
 namespace Plasma
@@ -23,6 +24,9 @@ class Dialog;
 class PlasmaDontPanic : public Plasma::PopupApplet
 {
     Q_OBJECT
+  signals:
+    void currentDurationChanged(int);
+    void currentActionChanged(detail::Action const&);
 public:
     // Basic Create/Destroy
     PlasmaDontPanic(QObject *parent, const QVariantList &args);
@@ -49,15 +53,7 @@ private:
     Plasma::DataEngine *_M_dont_panic_engine;
     Dialog *_M_dialog;
     
-    struct Action
-    {
-      Action():active(false), project(""), task(""), start(), duration(0){}
-      bool active;
-      QString project;
-      QString task;
-      QDateTime start;
-      int duration;
-    } _M_current_action;
+    detail::Action _M_current_action;
     
     int _M_current_overall_duration;
     
