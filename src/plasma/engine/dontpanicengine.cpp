@@ -33,6 +33,7 @@ DontPanicEngine::DontPanicEngine(QObject* parent, const QVariantList& args)
     // In the case of a clock that only has second precision,
     // a third of a second should be more than enough.
     setMinimumPollingInterval(500);
+    _M_sources<<src_today<<src_current_activity;
 }
 
 void DontPanicEngine::init()
@@ -51,9 +52,6 @@ void DontPanicEngine::init()
 
 bool DontPanicEngine::sourceRequestEvent(const QString &name)
 {
-    // We do not have any special code to execute the
-    // first time a source is requested, so we just call
-    // updateSourceEvent().
     if(name == src_current_activity)
     {
       connect(_M_timetracker, SIGNAL(currentlyActiveActionChanged(dp::Action)), this, SLOT(updateCurrentActivity()));
@@ -90,6 +88,12 @@ bool DontPanicEngine::updateSourceEvent(const QString &name)
     }
     return false;
 }
+
+QStringList DontPanicEngine::sources() const
+{
+    return _M_sources;
+}
+
 
 bool DontPanicEngine::updateTodaysDuration()
 {
@@ -137,6 +141,10 @@ bool DontPanicEngine::updateFavorite(QString src_name)
 bool DontPanicEngine::updateFavorite(dp::ActionTemplate const& at)
 {
   QString key = src_favorites + at.id().toString();
+  if(!_M_sources.contains(key))
+  {
+    _M_sources<<key;
+  }
   setData(key, "name", at.name());
   setData(key, "icon", at.icon());
   return true;
@@ -144,7 +152,9 @@ bool DontPanicEngine::updateFavorite(dp::ActionTemplate const& at)
 
 bool DontPanicEngine::removeFavorite(dp::ActionTemplate const& at)
 {
-  removeSource(src_favorites + at.id().toString());
+  QString const& key = src_favorites + at.id().toString();
+  _M_sources.removeAll(key);
+  removeSource(key);
   return true;
 }
 
