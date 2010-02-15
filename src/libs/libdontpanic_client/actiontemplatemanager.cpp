@@ -79,8 +79,8 @@ namespace dp
 	{
 	  qWarning()<<_M_remote->lastError();
 	}
-	connect(_M_remote, SIGNAL( stored ( dp::ActionTemplate ) ), this, SIGNAL( on_stored ( dp::ActionTemplate ) ));
-	connect(_M_remote, SIGNAL(removed(dp::ActionTemplate)), this, SIGNAL(on_removed(dp::ActionTemplate)));
+	connect(_M_remote, SIGNAL( stored ( dp::ActionTemplate ) ), this, SLOT( on_stored ( dp::ActionTemplate ) ));
+	connect(_M_remote, SIGNAL(removed(dp::ActionTemplate)), this, SLOT(on_removed(dp::ActionTemplate)));
 	connect(_M_remote, SIGNAL(error(QString const&)), this, SIGNAL(error(QString)));
       }
       return _M_remote;

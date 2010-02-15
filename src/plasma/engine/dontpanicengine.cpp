@@ -101,9 +101,13 @@ bool DontPanicEngine::updateTodaysDuration()
 
 void DontPanicEngine::init_favorites()
 {
-  connect(_M_action_template_manager, SIGNAL(stored(dp::ActionTemplate)), this, SLOT(updateFavorite(dp::ActionTemplate)));
-  connect(_M_action_template_manager, SIGNAL(removed(dp::ActionTemplate)), this, SLOT(removeFavorite(dp::ActionTemplate)));
-  
+  connect(_M_action_template_manager, SIGNAL(stored(dp::ActionTemplate)), this, SLOT(updateFavorite(dp::ActionTemplate const& )));
+  connect(_M_action_template_manager, SIGNAL(removed(dp::ActionTemplate)), this, SLOT(removeFavorite(dp::ActionTemplate const& )));
+  TemplateList list = _M_action_template_manager->allActionTemplates();
+  for(int i=0;i< list.length();++i)
+  {
+    updateFavorite(list.value(i));
+  }
 }
 
 
@@ -121,16 +125,26 @@ bool DontPanicEngine::updateCurrentActivity()
 
 bool DontPanicEngine::updateFavorite(QString src_name)
 {
+  QString const& key = src_name.right(uuid().toString().length());
+  ActionTemplate const& templ = _M_action_template_manager->load(Uuid(key));
+  if(!templ.isValid())
+  {
+    return false;
+  }
+  return updateFavorite(templ);  
+}
+
+bool DontPanicEngine::updateFavorite(dp::ActionTemplate const& at)
+{
+  QString key = src_favorites + at.id().toString();
+  setData(key, "name", at.name());
+  setData(key, "icon", at.icon());
   return true;
 }
 
-bool DontPanicEngine::updateFavorite(ActionTemplate const& at)
+bool DontPanicEngine::removeFavorite(dp::ActionTemplate const& at)
 {
-  return true;
-}
-
-bool DontPanicEngine::removeFavorite(ActionTemplate const& at)
-{
+  removeSource(src_favorites + at.id().toString());
   return true;
 }
 

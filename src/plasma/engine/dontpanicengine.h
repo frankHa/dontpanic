@@ -42,9 +42,9 @@ protected:
     // ---------------------------------------------------------------------------------
     void init_favorites();
     // ---------------------------------------------------------------------------------
-    bool updateFavorite(ActionTemplate const& t);
+    bool updateFavorite(dp::ActionTemplate const& );
     // ---------------------------------------------------------------------------------
-    bool removeFavorite(ActionTemplate const& t);
+    bool removeFavorite(dp::ActionTemplate const& t);
     // ---------------------------------------------------------------------------------
     bool updateFavorite(QString src_name);
     // ---------------------------------------------------------------------------------
