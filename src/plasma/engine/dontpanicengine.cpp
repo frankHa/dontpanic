@@ -22,6 +22,7 @@ namespace plasma
 DontPanicEngine::DontPanicEngine(QObject* parent, const QVariantList& args)
         : Plasma::DataEngine(parent, args)
         , _M_timer_id(0)
+        , _M_cached_duration(0)
 {
     // We ignore any arguments - data engines do not have much use for them
     Q_UNUSED(args)
@@ -81,7 +82,8 @@ bool DontPanicEngine::updateSourceEvent(const QString &name)
 
 bool DontPanicEngine::updateTodaysDuration()
 {
-  setData(src_today, I18N_NOOP("Time"), _M_actions_cache->duration());
+  _M_cached_duration = _M_actions_cache->duration();
+  setData(src_today, I18N_NOOP("Time"), _M_cached_duration);
   ensure_correct_timer_state();
   return true;
 }
@@ -107,6 +109,10 @@ void DontPanicEngine::timerEvent(QTimerEvent *event)
 {
   if(event->timerId() == _M_timer_id)
   {
+    if(_M_cached_duration == _M_actions_cache->duration())
+    {
+      return;
+    }
     updateCurrentActivity();
     updateTodaysDuration();
   }
@@ -119,13 +125,16 @@ void DontPanicEngine::ensure_correct_timer_state()
   {
     if(_M_timer_id==0)
     {
+      kError()<<"starting timer";
       _M_timer_id = startTimer(1000);
     }
   } else
   {
     if(_M_timer_id  != 0)
     {
+      kError()<<"killing timer";
       killTimer(_M_timer_id);
+      _M_timer_id = 0;
     }
   }
 }
