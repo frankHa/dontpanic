@@ -43,8 +43,8 @@ namespace dp
       reply.waitForFinished();
       if(reply.isError())
       {
-	qWarning()<<reply.error();
-	emit error(QDBusError::errorString(reply.error().type()));
+        qWarning()<<reply.error();
+        emit error(QDBusError::errorString(reply.error().type()));
       }
     }
     // ---------------------------------------------------------------------------------
@@ -54,14 +54,19 @@ namespace dp
       reply.waitForFinished();
       if(reply.isError())
       {
-        qWarning()<<reply.error();
+        kWarning()<<reply.error();
         emit error(QDBusError::errorString(reply.error().type()));
       }
     }
     // ---------------------------------------------------------------------------------
+    ActionTemplate ActionTemplateManager::load(Uuid const& id)
+    {
+      return _M_cache.load(id, remote());      
+    }
+    // ---------------------------------------------------------------------------------
     TemplateList ActionTemplateManager::allActionTemplates()
     {
-      return remote()->allTemplates();
+      return _M_cache.find_all(remote());
     }
     // ---------------------------------------------------------------------------------
     org::dontpanic::ActionTemplateManager* ActionTemplateManager::remote()
@@ -74,11 +79,23 @@ namespace dp
 	{
 	  qWarning()<<_M_remote->lastError();
 	}
-	connect(_M_remote, SIGNAL( stored ( dp::ActionTemplate ) ), this, SIGNAL( stored ( dp::ActionTemplate ) ));
-	connect(_M_remote, SIGNAL(removed(dp::ActionTemplate)), this, SIGNAL(removed(dp::ActionTemplate)));
+	connect(_M_remote, SIGNAL( stored ( dp::ActionTemplate ) ), this, SIGNAL( on_stored ( dp::ActionTemplate ) ));
+	connect(_M_remote, SIGNAL(removed(dp::ActionTemplate)), this, SIGNAL(on_removed(dp::ActionTemplate)));
 	connect(_M_remote, SIGNAL(error(QString const&)), this, SIGNAL(error(QString)));
       }
       return _M_remote;
+    }
+    // ---------------------------------------------------------------------------------
+    void ActionTemplateManager::on_stored(dp::ActionTemplate p)
+    {
+      _M_cache.store(p);
+      emit stored(p);
+    }
+    // ---------------------------------------------------------------------------------
+    void ActionTemplateManager::on_removed(dp::ActionTemplate p)
+    {
+      _M_cache.remove(p);
+      emit removed(p);
     }
     // ---------------------------------------------------------------------------------
   }//client

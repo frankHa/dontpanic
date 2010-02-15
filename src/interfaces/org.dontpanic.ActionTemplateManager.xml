@@ -9,7 +9,7 @@
       <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::ActionTemplate"/>
       <arg type="(si)" />
     </method>
-    <method name="allTemplates">
+    <method name="findAll">
       <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="dp::TemplateList"/>
       <arg type="(si)" direction="out" />
     </method>

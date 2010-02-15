@@ -8,6 +8,7 @@
 
 namespace dp
 {
+  class ActionTemplate;
 namespace client
 {
 class ActionTemplateManager;
@@ -37,9 +38,15 @@ protected:
     // interval is set when requesting a source)
     bool updateSourceEvent(const QString& source);
 
-    QStringList sources() const;
-
   private slots:
+    // ---------------------------------------------------------------------------------
+    void init_favorites();
+    // ---------------------------------------------------------------------------------
+    bool updateFavorite(ActionTemplate const& t);
+    // ---------------------------------------------------------------------------------
+    bool removeFavorite(ActionTemplate const& t);
+    // ---------------------------------------------------------------------------------
+    bool updateFavorite(QString src_name);
     // ---------------------------------------------------------------------------------
     bool updateTodaysDuration();
     // ---------------------------------------------------------------------------------

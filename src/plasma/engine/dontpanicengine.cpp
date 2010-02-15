@@ -18,6 +18,7 @@ namespace plasma
 {
   QString src_today("dp/today");
   QString src_current_activity("dp/current activity");
+  QString src_favorites("dp/favorites/");
   
 DontPanicEngine::DontPanicEngine(QObject* parent, const QVariantList& args)
         : Plasma::DataEngine(parent, args)
@@ -43,7 +44,9 @@ void DontPanicEngine::init()
     _M_timetracker = new dp::client::TimeTracker(this);
     _M_actions_cache = new dp::client::ActionsCache(this);
     _M_actions_cache->setSourceTimeTracker(_M_timetracker);
-    _M_actions_cache->initCache(QDate::currentDate());    
+    _M_actions_cache->initCache(QDate::currentDate());   
+    init_favorites();
+    
 }
 
 bool DontPanicEngine::sourceRequestEvent(const QString &name)
@@ -64,6 +67,10 @@ bool DontPanicEngine::sourceRequestEvent(const QString &name)
       connect(_M_timetracker, SIGNAL(currentlyActiveActionChanged(dp::Action)), this, SLOT(updateTodaysDuration()));
       return updateTodaysDuration();
     }
+    if(name.startsWith(src_favorites))
+    {
+      return updateFavorite(src_favorites);
+    }
     return updateSourceEvent(name);
 }
 
@@ -77,6 +84,10 @@ bool DontPanicEngine::updateSourceEvent(const QString &name)
     {
      return updateCurrentActivity();      
     }
+    if(name.startsWith(src_favorites))
+    {
+      return updateFavorite(src_favorites);
+    }
     return false;
 }
 
@@ -87,6 +98,14 @@ bool DontPanicEngine::updateTodaysDuration()
   ensure_correct_timer_state();
   return true;
 }
+
+void DontPanicEngine::init_favorites()
+{
+  connect(_M_action_template_manager, SIGNAL(stored(dp::ActionTemplate)), this, SLOT(updateFavorite(dp::ActionTemplate)));
+  connect(_M_action_template_manager, SIGNAL(removed(dp::ActionTemplate)), this, SLOT(removeFavorite(dp::ActionTemplate)));
+  
+}
+
 
 bool DontPanicEngine::updateCurrentActivity()
 {
@@ -100,9 +119,19 @@ bool DontPanicEngine::updateCurrentActivity()
   return true;
 }
 
-QStringList DontPanicEngine::sources() const
+bool DontPanicEngine::updateFavorite(QString src_name)
 {
-    return QStringList()<<src_today<<src_current_activity;
+  return true;
+}
+
+bool DontPanicEngine::updateFavorite(ActionTemplate const& at)
+{
+  return true;
+}
+
+bool DontPanicEngine::removeFavorite(ActionTemplate const& at)
+{
+  return true;
 }
 
 void DontPanicEngine::timerEvent(QTimerEvent *event)

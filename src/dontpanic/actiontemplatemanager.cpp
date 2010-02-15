@@ -25,7 +25,7 @@ namespace dp
     }
   }
   // ---------------------------------------------------------------------------------
-  TemplateList ActionTemplateManager::allTemplates()
+  TemplateList ActionTemplateManager::findAll()
   {
     TemplateList list;
     persistence().findAll(list);
