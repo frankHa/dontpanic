@@ -125,14 +125,12 @@ void DontPanicEngine::ensure_correct_timer_state()
   {
     if(_M_timer_id==0)
     {
-      kError()<<"starting timer";
       _M_timer_id = startTimer(1000);
     }
   } else
   {
     if(_M_timer_id  != 0)
     {
-      kError()<<"killing timer";
       killTimer(_M_timer_id);
       _M_timer_id = 0;
     }

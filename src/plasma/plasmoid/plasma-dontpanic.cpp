@@ -123,11 +123,9 @@ void PlasmaDontPanic::toolTipHidden()
 
 void PlasmaDontPanic::dataUpdated ( QString const&source,Plasma::DataEngine::Data const&data )
 {
-  kDebug()<<"source: "<<source;
     if ( source == "dp/today" )
     {
         _M_current_overall_duration = data.constFind ( "Time" ).value().toInt();
-        kDebug()<<_M_current_overall_duration;        
         emit currentDurationChanged ( _M_current_overall_duration );
     }
     if ( source == "dp/current activity" )
