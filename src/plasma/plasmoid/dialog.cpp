@@ -51,6 +51,9 @@ namespace dp
       
       connect(dp, SIGNAL(currentDurationChanged(int)), this, SLOT(on_current_duration_changed(int)));
       connect(dp, SIGNAL(currentActionChanged(detail::Action const&)), this, SLOT(on_current_action_changed(detail::Action const&)));
+      connect(dp, SIGNAL(favorite_added(detail::Favorite const&)), this, SLOT(on_favorite_added(detail::Favorite const&)));
+      connect(dp, SIGNAL(favorite_removed(detail::Favorite const&)), this, SLOT(on_favorite_removed(detail::Favorite const&)));
+      connect(dp, SIGNAL(favorite_updated(detail::Favorite const&)), this, SLOT(on_favorite_updated(detail::Favorite const&)));
     }
     
     QGraphicsWidget* Dialog::dialog()
@@ -131,13 +134,8 @@ namespace dp
       b->setText(i18n("switch activity to..."));
       kDebug()<<"initializing the favorites menu...";
       
-      QMenu *menu = new QMenu(b->nativeWidget());
-      TemplateList favlist = _M_dp_applet->favorites();
-      for(int i=0; i<favlist.length();++i)
-      {
-        menu->addAction(_M_dp_applet->action_for(favlist.value(i)));
-      }
-      b->nativeWidget()->setMenu(menu);
+      _M_favorites_menu = new QMenu(b->nativeWidget());
+      b->nativeWidget()->setMenu(_M_favorites_menu);
       return b;
       
     }
@@ -163,6 +161,17 @@ namespace dp
       {
         _M_current_action_label->setText(i18n("There is currently no active Don't Panic action..."));
       }
+    }
+    // ---------------------------------------------------------------------------------
+    void Dialog::on_favorite_added(detail::Favorite const&)
+    {
+    }
+    void Dialog::on_favorite_removed(detail::Favorite const&)
+    {
+    }
+    void Dialog::on_favorite_updated(detail::Favorite const& fav)
+    {
+      _M_favorites_menu->addAction(_M_dp_applet->action_for(fav));
     }
     // ---------------------------------------------------------------------------------
   }

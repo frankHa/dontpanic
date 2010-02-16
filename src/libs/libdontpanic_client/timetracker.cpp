@@ -46,6 +46,17 @@ namespace dp
       }
     }
     // ---------------------------------------------------------------------------------,
+    void TimeTracker::startActionFromTemplate(Uuid const& t)
+    {
+      QDBusPendingReply<> reply =remote()->startNewActionFromTemplate(t);
+      reply.waitForFinished();
+      if(reply.isError())
+      {
+        qWarning()<<reply.error();
+        emit error(QDBusError::errorString(reply.error().type()));
+      }
+    }
+    // ---------------------------------------------------------------------------------,
     void TimeTracker::remove(Action const& a)
     {
       QDBusPendingReply<> reply =remote()->remove(a);

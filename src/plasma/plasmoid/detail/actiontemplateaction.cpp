@@ -2,38 +2,38 @@
 #include <KIcon>
 namespace dp
 {
-  namespace plasma
-  {
-    namespace applet
-    {
-      namespace detail
-      {
+namespace plasma
+{
+namespace applet
+{
+namespace detail
+{
 ActionTemplateAction::ActionTemplateAction(QObject* parent)
-: KAction(parent)
-,_M_template(NullActionTemplate())
+        : KAction(parent)
+        ,_M_favorite(Favorite())
 {
-  connect(this, SIGNAL(triggered()), this, SLOT(on_triggered()));
+    connect(this, SIGNAL(triggered()), this, SLOT(on_triggered()));
 }
-ActionTemplateAction& ActionTemplateAction::setActionTemplate(const dp::ActionTemplate& templ)
+ActionTemplateAction& ActionTemplateAction::setFavorite(const Favorite& fav)
 {
-  _M_template = templ;
-  setIcon(KIcon(templ.icon()));
-  setText(templ.name());
-  return *this;
+    _M_favorite = fav;
+    setIcon(KIcon(fav.icon));
+    setText(fav.name);
+    return *this;
 }
 
 void ActionTemplateAction::on_triggered()
 {
-  emit triggered(_M_template);
+    emit triggered(_M_favorite);
 }
 
 
-ActionTemplate const& ActionTemplateAction::actionTemplate() const
+Favorite const& ActionTemplateAction::favorite() const
 {
-  return _M_template;
+    return _M_favorite;
 }
 
-      }
-    }
-  }
+}
+}
+}
 }

@@ -17,11 +17,8 @@
 
 */
 
-#ifndef DP_PLASMA_APPLET_ACTIONTEMPLATEACTION_H
-#define DP_PLASMA_APPLET_ACTIONTEMPLATEACTION_H
-
-#include <kaction.h>
-#include "detail/favorite.h"
+#ifndef DP_PLASMA_APPLET_DETAIL_FAVORITE_H
+#define DP_PLASMA_APPLET_DETAIL_FAVORITE_H
 
 namespace dp {
 
@@ -29,27 +26,22 @@ namespace plasma {
 
 namespace applet {
 
-  namespace detail{
-class ActionTemplateAction : public KAction
+namespace detail {
+
+struct Favorite
 {
-  Q_OBJECT
-  signals:
-    void triggered(detail::Favorite const& t);
-  public:
-  ActionTemplateAction(QObject* parent);
-  ActionTemplateAction& setFavorite(Favorite const& fav);
-  Favorite const& favorite() const;
-  
-  private slots:
-    void on_triggered();
-  private:
-    Favorite _M_favorite;
+  Favorite():id(""), name(""), icon(""){}
+  QString id;
+  QString name;
+  QString icon;
 };
-  }
-}
 
 }
 
 }
 
-#endif // DP_PLASMA_APPLET_ACTIONTEMPLATEACTION_H
+}
+
+}
+
+#endif // DP_PLASMA_APPLET_DETAIL_FAVORITE_H

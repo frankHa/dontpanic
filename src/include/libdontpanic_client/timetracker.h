@@ -70,6 +70,7 @@ namespace dp
         void continueLastAction();
         // ---------------------------------------------------------------------------------      
         void startActionFromTemplate(ActionTemplate const& t);
+        void startActionFromTemplate(Uuid const& t);
         // ---------------------------------------------------------------------------------  
         void remove(Action const& a);
         // ---------------------------------------------------------------------------------  

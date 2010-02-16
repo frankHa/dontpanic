@@ -23,9 +23,10 @@
 #include <QObject>
 
 #include "detail/action.h"
-
+#include "detail/favorite.h"
 class QGraphicsWidget;
 class KAction;
+class QMenu;
 namespace Plasma
 {
   class Label;
@@ -52,7 +53,9 @@ class Dialog: public QObject
   private slots:
     void on_current_duration_changed(int);
     void on_current_action_changed(detail::Action const&);
-    
+    void on_favorite_added(detail::Favorite const&);
+    void on_favorite_removed(detail::Favorite const&);
+    void on_favorite_updated(detail::Favorite const&);
     
     
   private:
@@ -65,6 +68,7 @@ class Dialog: public QObject
     Plasma::Label *_M_duration_label;
     Plasma::Label *_M_current_action_label;
     QGraphicsWidget* _M_widget;
+    QMenu *_M_favorites_menu;
 };
 
 }

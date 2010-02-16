@@ -29,6 +29,7 @@ namespace plasma
 namespace applet
 {
 
+  QString const src_favorites = "dp/favorites/";
 PlasmaDontPanic::PlasmaDontPanic ( QObject *parent, const QVariantList &args )
         : Plasma::PopupApplet ( parent, args )
         , _M_dialog ( 0 )
@@ -53,7 +54,6 @@ PlasmaDontPanic::~PlasmaDontPanic()
 void PlasmaDontPanic::init()
 {
     _M_time_tracker = new dp::client::TimeTracker ( this );
-    _M_action_templates = new dp::client::ActionTemplateManager ( this );
     setup_actions();
     Plasma::ToolTipManager::self()->registerWidget ( this );
     _M_dont_panic_engine = dataEngine ( "dontpanic" );
@@ -65,6 +65,18 @@ void PlasmaDontPanic::init()
     _M_dont_panic_engine->connectSource ( "dp/today", this );
     _M_dont_panic_engine->connectSource ( "dp/current activity", this );
     connect ( _M_dont_panic_engine, SIGNAL ( sourceAdded ( QString const& ) ), this, SLOT ( on_source_added ( QString const& ) ) );
+    connect(_M_dont_panic_engine, SIGNAL(sourceRemoved(QString)), this, SLOT(on_source_removed(QString const&)));
+    
+    QStringList sources = _M_dont_panic_engine->sources();
+    for(int i=0; i< sources.length();++i)
+    {
+      QString source = sources.value(i);
+      if(source.startsWith(src_favorites))
+      {
+        _M_dont_panic_engine->connectSource(source, this);
+      _M_dont_panic_engine->query(sources.value(i));
+      }
+    }
 }
 
 QGraphicsWidget* PlasmaDontPanic::graphicsWidget()
@@ -101,28 +113,10 @@ void PlasmaDontPanic::toolTipHidden()
 {
     Plasma::ToolTipManager::self()->clearContent ( this );
 }
-// void PlasmaDontPanic::paintInterface(QPainter *p,
-//         const QStyleOptionGraphicsItem *option, const QRect &contentsRect)
-// {
-//     p->setRenderHint(QPainter::SmoothPixmapTransform);
-//     p->setRenderHint(QPainter::Antialiasing);
-//
-//     // Now we draw the applet, starting with our svg
-//     m_svg.resize((int)contentsRect.width(), (int)contentsRect.height());
-//     m_svg.paint(p, (int)contentsRect.left(), (int)contentsRect.top());
-//
-//     // We place the icon and text
-//     p->drawPixmap(7, 0, m_icon.pixmap((int)contentsRect.width(),(int)contentsRect.width()-14));
-//     p->save();
-//     p->setPen(Qt::white);
-//     p->drawText(contentsRect,
-//                 Qt::AlignBottom | Qt::AlignHCenter,
-//                 "Hello Don't Panic!");
-//     p->restore();
-// }
 
 void PlasmaDontPanic::dataUpdated ( QString const&source,Plasma::DataEngine::Data const&data )
 {
+  kError()<<"updated: "<<source;
     if ( source == "dp/today" )
     {
         _M_current_overall_duration = data.constFind ( "Time" ).value().toInt();
@@ -140,11 +134,33 @@ void PlasmaDontPanic::dataUpdated ( QString const&source,Plasma::DataEngine::Dat
         }
         emit currentActionChanged ( _M_current_action );
     }
+    if(source.startsWith(src_favorites))
+    {
+      
+      QString key = source.right(source.length() - src_favorites.length());
+      detail::Favorite fav;
+      fav.id = key;
+      fav.name = data.constFind ( "name" ).value().toString();
+      fav.icon = data.constFind ( "icon" ).value().toString();
+      emit favorite_updated(fav);
+    }
 }
 
 void PlasmaDontPanic::on_source_added ( QString const& src )
 {
-    //_M_dont_panic_engine->connectSource(src,this);
+    _M_dont_panic_engine->connectSource(src,this);
+}
+
+void PlasmaDontPanic::on_source_removed ( QString const& src )
+{
+  _M_dont_panic_engine->disconnectSource(src,this);
+  if(src.startsWith(src_favorites))
+  {
+    QString key = src.right(src.length() - src_favorites.length());
+    detail::Favorite fav;
+    fav.id = key;
+    emit favorite_added(fav);
+  }
 }
 
 void PlasmaDontPanic::setup_actions()
@@ -180,22 +196,18 @@ KAction * PlasmaDontPanic::resume_last_action()
     return _M_resume_last_action;
 }
 
-KAction* PlasmaDontPanic::action_for ( ActionTemplate const& templ )
+KAction* PlasmaDontPanic::action_for ( detail::Favorite const& fav )
 {
     detail::ActionTemplateAction *action = new detail::ActionTemplateAction ( this );
-    action->setActionTemplate ( templ );
-    connect ( action, SIGNAL ( triggered ( ActionTemplate ) ), this, SLOT ( on_switch_activity_to_triggered ( ActionTemplate ) ) );
+    action->setFavorite ( fav );
+    connect ( action, SIGNAL ( triggered ( detail::Favorite const& ) ), this, SLOT ( on_switch_activity_to_triggered ( detail::Favorite ) ) );
     return action;
 }
 
-void PlasmaDontPanic::on_switch_activity_to_triggered ( const ActionTemplate& templ )
+void PlasmaDontPanic::on_switch_activity_to_triggered ( const detail::Favorite& templ )
 {
-    _M_time_tracker->startActionFromTemplate ( templ );
-}
-
-TemplateList PlasmaDontPanic::favorites()
-{
-    return _M_action_templates->allActionTemplates();
+    kError()<<"switching to action from favorite: "<<templ.id;
+    _M_time_tracker->startActionFromTemplate ( Uuid(templ.id) );
 }
 
 

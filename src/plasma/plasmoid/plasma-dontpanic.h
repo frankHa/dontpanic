@@ -6,6 +6,7 @@
 #include <KIcon>
 
 #include "detail/action.h"
+#include "detail/favorite.h"
 #include <libdontpanic/actiontemplate.hpp>
 class QSizeF;
 class KAction;
@@ -20,7 +21,6 @@ namespace dp
   namespace client
   {
     class TimeTracker;
-    class ActionTemplateManager;
   }
 namespace plasma
 {
@@ -34,6 +34,9 @@ class PlasmaDontPanic : public Plasma::PopupApplet
   signals:
     void currentDurationChanged(int);
     void currentActionChanged(detail::Action const&);
+    void favorite_added(detail::Favorite const& );
+    void favorite_removed(detail::Favorite const& );
+    void favorite_updated(detail::Favorite const& );
 public:
     // Basic Create/Destroy
     PlasmaDontPanic(QObject *parent, const QVariantList &args);
@@ -56,14 +59,14 @@ public slots:
 
   private slots:
     void on_source_added(QString const& source);
+    void on_source_removed(QString const& source);
     void setup_actions();
-    void on_switch_activity_to_triggered(ActionTemplate const& templ);
+    void on_switch_activity_to_triggered(detail::Favorite const& templ);
   public:
     KAction * start_new_action();
     KAction * stop_current_action();
     KAction * resume_last_action();
-    KAction * action_for(ActionTemplate const&);
-    TemplateList favorites();
+    KAction * action_for(detail::Favorite const&);
 private:
     Plasma::DataEngine *_M_dont_panic_engine;
     Dialog *_M_dialog;
@@ -75,7 +78,6 @@ private:
     KAction *_M_resume_last_action;
     
     dp::client::TimeTracker *_M_time_tracker;
-    dp::client::ActionTemplateManager *_M_action_templates;
 };
 }
 }
