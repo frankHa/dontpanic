@@ -4,6 +4,7 @@ include_directories(
  
 # We add our source code here
 set(plasma_dp_SRCS 
+    actionitem.cpp
     dialog.cpp
     plasma-dontpanic.cpp
     detail/actiontemplateaction.cpp

@@ -19,6 +19,7 @@
 
 #include "dialog.h"
 #include "plasma-dontpanic.h"
+#include "actionitem.h"
 #include <libdontpanic/durationformatter.h>
 #include <QGraphicsLinearLayout>
 
@@ -44,13 +45,11 @@ Dialog::Dialog(PlasmaDontPanic *dp, QObject *parent)
         , _M_dp_applet(dp)
         , _M_main_label(0)
         , _M_duration_label(0)
-        , _M_current_action_label(0)
         , _M_widget(0)
 {
     build_dialog();
 
     connect(dp, SIGNAL(currentDurationChanged(int)), this, SLOT(on_current_duration_changed(int)));
-    connect(dp, SIGNAL(currentActionChanged(detail::Action const&)), this, SLOT(on_current_action_changed(detail::Action const&)));
     connect(dp, SIGNAL(favorite_added(detail::Favorite const&)), this, SLOT(on_favorite_added(detail::Favorite const&)));
     connect(dp, SIGNAL(favorite_removed(detail::Favorite const&)), this, SLOT(on_favorite_removed(detail::Favorite const&)));
     connect(dp, SIGNAL(favorite_updated(detail::Favorite const&)), this, SLOT(on_favorite_updated(detail::Favorite const&)));
@@ -98,6 +97,8 @@ void Dialog::build_dialog()
     _M_duration_label->setAlignment(Qt::AlignHCenter);
     _M_duration_label->setScaledContents(true);
     l_layout->addItem(_M_duration_label);
+    
+    l_layout->addItem(createActionItem(_M_widget));
 
     QGraphicsLinearLayout *l_blayout = new QGraphicsLinearLayout;
     l_blayout->setSpacing(0);
@@ -112,13 +113,17 @@ void Dialog::build_dialog()
 
     l_layout->addItem(bWidget);
 
-    _M_current_action_label = new Plasma::Label(_M_widget);
-    _M_current_action_label->setAlignment(Qt::AlignHCenter);
-    l_layout->addItem(_M_current_action_label);
     l_layout->addItem(switch_activity());
     l_layout->addStretch();
     _M_widget->setLayout(l_layout);
     _M_widget->setMinimumSize(250, 300);
+}
+// ---------------------------------------------------------------------------------
+ActionItem *Dialog::createActionItem(QGraphicsWidget *parent)
+{
+  ActionItem *item = new ActionItem(parent);
+  connect(_M_dp_applet, SIGNAL(currentActionChanged(detail::Action const&)), item, SLOT(setAction(detail::Action const&)));
+  return item;
 }
 // ---------------------------------------------------------------------------------
 QGraphicsWidget* Dialog::button_for(KAction *action)
@@ -141,23 +146,6 @@ void Dialog::on_current_duration_changed(int duration)
 {
     QString dur = QString("<b>%1<b>").arg(duration_formatter().format(duration));
     _M_duration_label->setText(dur);
-}
-// ---------------------------------------------------------------------------------
-void Dialog::on_current_action_changed(detail::Action const& action)
-{
-    if (action.active)
-    {
-        QString tooltip = i18n("Currently working on: \nProject: %1\nTask: %2\nRunning since: %3\nCurrent duration: %4")
-                          .arg(action.project)
-                          .arg(action.task)
-                          .arg(action.start.time().toString(Qt::SystemLocaleShortDate))
-                          .arg(duration_formatter().format(action.duration));
-        _M_current_action_label->setText(tooltip);
-    }
-    else
-    {
-        _M_current_action_label->setText(i18n("There is currently no running activity..."));
-    }
 }
 // ---------------------------------------------------------------------------------
 void Dialog::on_favorite_added(detail::Favorite const& fav)

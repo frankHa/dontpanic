@@ -41,6 +41,7 @@ namespace plasma {
 namespace applet {
 
   class PlasmaDontPanic;
+  class ActionItem;
 class Dialog: public QObject
 {
   Q_OBJECT
@@ -52,7 +53,6 @@ class Dialog: public QObject
       
   private slots:
     void on_current_duration_changed(int);
-    void on_current_action_changed(detail::Action const&);
     void on_favorite_added(detail::Favorite const&);
     void on_favorite_removed(detail::Favorite const&);
     void on_favorite_updated(detail::Favorite const&);
@@ -63,11 +63,11 @@ class Dialog: public QObject
     QGraphicsWidget* button_for(KAction *action);
     QGraphicsWidget* switch_activity();
     void rebuild_favorites_menu();
+    ActionItem *createActionItem(QGraphicsWidget *parent);
   private: 
     PlasmaDontPanic *_M_dp_applet;
     Plasma::Label *_M_main_label;
     Plasma::Label *_M_duration_label;
-    Plasma::Label *_M_current_action_label;
     QGraphicsWidget* _M_widget;
     Plasma::PushButton *_M_switch_activity_button;
     //QMenu *_M_favorites_menu;
