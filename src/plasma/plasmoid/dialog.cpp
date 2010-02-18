@@ -98,8 +98,6 @@ void Dialog::build_dialog()
     _M_duration_label->setScaledContents(true);
     l_layout->addItem(_M_duration_label);
     
-    l_layout->addItem(createActionItem(_M_widget));
-
     QGraphicsLinearLayout *l_blayout = new QGraphicsLinearLayout;
     l_blayout->setSpacing(0);
     l_blayout->setOrientation(Qt::Horizontal);
@@ -113,6 +111,8 @@ void Dialog::build_dialog()
 
     l_layout->addItem(bWidget);
 
+    l_layout->addItem(createActionItem(_M_widget));
+    
     l_layout->addItem(switch_activity());
     l_layout->addStretch();
     _M_widget->setLayout(l_layout);
