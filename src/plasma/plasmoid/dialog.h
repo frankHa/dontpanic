@@ -62,13 +62,15 @@ class Dialog: public QObject
     void build_dialog();
     QGraphicsWidget* button_for(KAction *action);
     QGraphicsWidget* switch_activity();
+    void rebuild_favorites_menu();
   private: 
     PlasmaDontPanic *_M_dp_applet;
     Plasma::Label *_M_main_label;
     Plasma::Label *_M_duration_label;
     Plasma::Label *_M_current_action_label;
     QGraphicsWidget* _M_widget;
-    QMenu *_M_favorites_menu;
+    Plasma::PushButton *_M_switch_activity_button;
+    //QMenu *_M_favorites_menu;
 };
 
 }

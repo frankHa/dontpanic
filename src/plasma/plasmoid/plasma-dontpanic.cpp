@@ -168,6 +168,12 @@ void PlasmaDontPanic::on_source_removed ( QString const& src )
   }
 }
 
+detail::FavoriteList PlasmaDontPanic::favorites() const
+{
+  return _M_favorites;
+}
+
+
 void PlasmaDontPanic::setup_actions()
 {
     _M_start_new_action = new KAction ( this );
