@@ -61,7 +61,7 @@ namespace dp
       Action const& ca = context()->timeTracker()->currentlyActiveAction();
       if(!ca.isActive())
       {
-        label()->setToolTip(i18n("There is currently no active Don't Panik action..."));
+        label()->setToolTip(i18n("There is currently no running activity..."));
       } 
       else
       {

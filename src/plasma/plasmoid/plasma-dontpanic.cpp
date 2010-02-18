@@ -95,7 +95,7 @@ void PlasmaDontPanic::toolTipAboutToShow()
     toolTip.setMainText ( duration_formatter().format ( _M_current_overall_duration ) );
     if ( !_M_current_action.active )
     {
-        toolTip.setSubText ( i18n ( "There is currently no active Don't Panic action..." ) );
+        toolTip.setSubText ( i18n ( "There is currently no running activity..." ) );
     }
     else
     {

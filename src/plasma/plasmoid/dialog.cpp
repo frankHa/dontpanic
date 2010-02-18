@@ -156,7 +156,7 @@ void Dialog::on_current_action_changed(detail::Action const& action)
     }
     else
     {
-        _M_current_action_label->setText(i18n("There is currently no active Don't Panic action..."));
+        _M_current_action_label->setText(i18n("There is currently no running activity..."));
     }
 }
 // ---------------------------------------------------------------------------------
