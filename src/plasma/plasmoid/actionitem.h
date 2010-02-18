@@ -6,9 +6,11 @@
 #include "detail/action.h"
 
 class QGraphicsLinearLayout;
+class QGraphicsSceneHoverEvent;
 namespace Plasma
 {
   class Label;
+  class Animation;
 }
 
 namespace dp
@@ -30,6 +32,12 @@ public:
   public slots:
     void setAction(detail::Action const&);
     
+  public:
+    void setHovered(bool hovered);
+    
+  protected:
+    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
+    virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
     
   private:
     void setActionDescription(detail::Action const& );
@@ -37,8 +45,10 @@ public:
   private:
     detail::Action _M_current_action;
     Plasma::Label *_M_action_description;
+    Plasma::Label *_M_possible_actions;
     QGraphicsLinearLayout *_M_tree_layout;
-      
+    Plasma::Animation *_M_label_fade;
+    bool _M_hovered;
 
 };
 }
