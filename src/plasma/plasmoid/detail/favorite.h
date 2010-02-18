@@ -20,7 +20,8 @@
 #ifndef DP_PLASMA_APPLET_DETAIL_FAVORITE_H
 #define DP_PLASMA_APPLET_DETAIL_FAVORITE_H
 #include <QList>
-
+#include <QString>
+#include <libdontpanic/uuid.h>
 namespace dp {
 
 namespace plasma {
@@ -31,14 +32,21 @@ namespace detail {
 
 struct Favorite
 {
-  Favorite():id(""), name(""), icon(""){}
-  QString id;
+  Favorite():id(), name(""), icon(""){}
+  Uuid id;
   QString name;
   QString icon;
 };
 
+inline bool operator==(Favorite const& lhs, Favorite const& rhs)
+{
+  return lhs.id == rhs.id;
+}
+
 typedef QList<Favorite> FavoriteList;
 }
+
+
 
 }
 

@@ -74,7 +74,7 @@ void PlasmaDontPanic::init()
       if(source.startsWith(src_favorites))
       {
         _M_dont_panic_engine->connectSource(source, this);
-      _M_dont_panic_engine->query(sources.value(i));
+      //_M_dont_panic_engine->query(sources.value(i));
       }
     }
 }
@@ -142,7 +142,7 @@ void PlasmaDontPanic::dataUpdated ( QString const&source,Plasma::DataEngine::Dat
       fav.id = key;
       fav.name = data.constFind ( "name" ).value().toString();
       fav.icon = data.constFind ( "icon" ).value().toString();
-      emit favorite_updated(fav);
+      store_in_favorites(fav);
     }
 }
 
@@ -159,7 +159,12 @@ void PlasmaDontPanic::on_source_removed ( QString const& src )
     QString key = src.right(src.length() - src_favorites.length());
     detail::Favorite fav;
     fav.id = key;
-    emit favorite_added(fav);
+    int i = _M_favorites.indexOf(fav);
+    if(i>-1)
+    {
+      _M_favorites.removeAll(fav);
+      emit favorite_removed(fav);
+    }
   }
 }
 
@@ -206,10 +211,24 @@ KAction* PlasmaDontPanic::action_for ( detail::Favorite const& fav )
 
 void PlasmaDontPanic::on_switch_activity_to_triggered ( const detail::Favorite& templ )
 {
-    kError()<<"switching to action from favorite: "<<templ.id;
-    _M_time_tracker->startActionFromTemplate ( Uuid(templ.id) );
+    kError()<<"switching to action from favorite: "<<templ.id.toString();
+    _M_time_tracker->startActionFromTemplate ( templ.id );
 }
 
+void PlasmaDontPanic::store_in_favorites(detail::Favorite const& fav)
+{
+  int index = _M_favorites.indexOf(fav);
+  if(index <0 )
+  {
+    _M_favorites.append(fav);
+    emit favorite_added(fav);
+  }
+  else
+  {
+    _M_favorites.replace(index, fav);
+    emit favorite_updated(fav);
+  }
+}
 
 }
 }

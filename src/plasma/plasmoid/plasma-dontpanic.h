@@ -67,6 +67,9 @@ public slots:
     KAction * stop_current_action();
     KAction * resume_last_action();
     KAction * action_for(detail::Favorite const&);
+    detail::FavoriteList favorites() const;
+  private:
+    void store_in_favorites(detail::Favorite const&);
 private:
     Plasma::DataEngine *_M_dont_panic_engine;
     Dialog *_M_dialog;
@@ -78,6 +81,8 @@ private:
     KAction *_M_resume_last_action;
     
     dp::client::TimeTracker *_M_time_tracker;
+    
+    detail::FavoriteList _M_favorites;
 };
 }
 }
