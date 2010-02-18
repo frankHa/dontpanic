@@ -19,7 +19,7 @@
 
 #include "application.h"
 #include <KCmdLineArgs>
-#include <projectmanager.h>
+#include <libdontpanic_client/projectmanager.h>
 // ---------------------------------------------------------------------------------
 namespace dp
 {

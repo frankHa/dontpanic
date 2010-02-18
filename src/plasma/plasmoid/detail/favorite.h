@@ -19,6 +19,7 @@
 
 #ifndef DP_PLASMA_APPLET_DETAIL_FAVORITE_H
 #define DP_PLASMA_APPLET_DETAIL_FAVORITE_H
+#include <QList>
 
 namespace dp {
 
@@ -36,6 +37,7 @@ struct Favorite
   QString icon;
 };
 
+typedef QList<Favorite> FavoriteList;
 }
 
 }
