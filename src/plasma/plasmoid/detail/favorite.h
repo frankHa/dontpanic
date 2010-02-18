@@ -43,6 +43,11 @@ inline bool operator==(Favorite const& lhs, Favorite const& rhs)
   return lhs.id == rhs.id;
 }
 
+inline int operator<(Favorite const& lhs, Favorite const& rhs)
+{
+  return lhs.name < rhs.name;
+}
+
 typedef QList<Favorite> FavoriteList;
 }
 

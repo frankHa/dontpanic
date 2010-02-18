@@ -179,7 +179,7 @@ void Dialog::rebuild_favorites_menu()
   QMenu *oldmenu = _M_switch_activity_button->nativeWidget()->menu();
   QMenu *newMenu = new QMenu(_M_switch_activity_button->nativeWidget());
       
-  
+  qSort(favList);
   for(int i=0;i<favList.length(); ++i)
   {
     newMenu->addAction(_M_dp_applet->action_for(favList.value(i)));
