@@ -161,7 +161,8 @@ namespace dp
     
     QString group_list::toString()
     {
-      QString result= "Typ;Projekt;Dauer (Tätigkeitsgruppe);Prozent (Tätigkeitsgruppe);Projektkommentar\n";
+      //QString result= "Typ;Projekt;Dauer (Tätigkeitsgruppe);Prozent (Tätigkeitsgruppe);Projektkommentar\n";
+      QString result= i18n("Work Type;Project;Duration (Activity Group);Percent (Activity Group);Project Comment\n");
       int complete_duration = duration();
       GroupList::const_iterator i;
        for(i = _M_groups.begin();i!= _M_groups.end();++i)
