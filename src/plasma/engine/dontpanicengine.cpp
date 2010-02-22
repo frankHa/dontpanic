@@ -98,7 +98,7 @@ QStringList DontPanicEngine::sources() const
 bool DontPanicEngine::updateTodaysDuration()
 {
   _M_cached_duration = _M_actions_cache->duration();
-  setData(src_today, I18N_NOOP("Time"), _M_cached_duration);
+  setData(src_today, "Time", _M_cached_duration);
   ensure_correct_timer_state();
   return true;
 }

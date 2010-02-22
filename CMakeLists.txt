@@ -22,6 +22,7 @@ include_directories(${CMAKE_SOURCE_DIR}/src/include)
 add_subdirectory( doc )
 add_subdirectory( src )
 add_subdirectory( icons )
+add_subdirectory( i18n )
 
 message(STATUS "************************************************************")
 message(STATUS "Configuration Summary:")
