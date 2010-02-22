@@ -49,7 +49,7 @@ msgstr "Titel"
 
 #: kpart/core/kactionstablemodel.cpp:207
 msgid "Type"
-msgstr "Typ"
+msgstr "Tätigkeitstyp"
 
 #: kpart/core/kactionstablemodel.cpp:208
 msgid "Project"
@@ -266,7 +266,7 @@ msgstr "Tätigkeit-Don't Panik"
 #. i18n: ectx: property (toolTip), widget (QCheckBox, move)
 #: rc.cpp:24
 msgid "Move this action to another day"
-msgstr "Verschiebe diese Tätigkeit auf einen anderen Tag"
+msgstr "Diese Tätigkeit auf einen anderen Tag verschieben"
 
 #. i18n: file: kpart/core/ui/keditactiondialog.ui:33
 #. i18n: ectx: property (text), widget (QCheckBox, move)
