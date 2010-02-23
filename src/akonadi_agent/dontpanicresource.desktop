@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Don't Panic
+Type=AkonadiResource
+Exec=akonadi_dontpanic_resource
+Icon=dontpanic
+
+X-Akonadi-MimeTypes=text/calendar,application/x-vnd.akonadi.calendar.event
+X-Akonadi-Capabilities=Resource
+X-Akonadi-Identifier=akonadi_dontpanic_resource
