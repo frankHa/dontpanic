@@ -64,8 +64,8 @@ namespace dp
         Action const& a= model->at(mappedIndex);
         switch(mappedIndex.column())
         {
-          case START: static_cast<QDateTimeEdit*>(editor)->setDateTime(a.startTime()); break;
-          case END: static_cast<QDateTimeEdit*>(editor)->setDateTime(a.endTime()); break;
+          case START: static_cast<QDateTimeEdit*>(editor)->setDateTime(startTimeOf(a)); break;
+          case END: static_cast<QDateTimeEdit*>(editor)->setDateTime(endTimeOf(a)); break;
           case PROJECT: static_cast<KProjectsComboBox*>(editor)->select(a.project()); break;
           case TYPE: static_cast<KTasksComboBox*>(editor)->select(a.task()); break;
           default:QStyledItemDelegate::setEditorData ( editor, index ); break;
@@ -85,6 +85,19 @@ namespace dp
           default: QStyledItemDelegate::setModelData ( editor, model, index );break;
         }
           
+      }
+      // ---------------------------------------------------------------------------------
+      QDateTime KActionsTableItemDelegate::startTimeOf(Action const& a) const
+      {
+        if(a.startTime().isValid()) {return a.startTime();}
+        if(a.endTime().isValid()){return a.endTime();}
+        return QDateTime::currentDateTime();
+      }
+      // ---------------------------------------------------------------------------------
+      QDateTime KActionsTableItemDelegate::endTimeOf(Action const& a) const
+      {
+        if(a.endTime().isValid()){return a.endTime();}
+        return QDateTime::currentDateTime();
       }
       // ---------------------------------------------------------------------------------
     }

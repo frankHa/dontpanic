@@ -1,7 +1,7 @@
 find_package(KdepimLibs REQUIRED)
 find_package(Akonadi REQUIRED)
 
-
+include_directories(../include)
 
 set( dontpanicresource_SRCS
 dontpanicresource.cpp
@@ -18,6 +18,6 @@ install( FILES dontpanicresource.desktop DESTINATION "${AKONADI_SHARE_DIR}/akona
 
 kde4_add_executable(akonadi_dontpanic_resource ${dontpanicresource_SRCS})
 
-target_link_libraries(akonadi_dontpanic_resource ${KDEPIMLIBS_AKONADI_LIBS})
+target_link_libraries(akonadi_dontpanic_resource ${KDEPIMLIBS_AKONADI_LIBS} dontpanic_client_lib)
 
 install(TARGETS akonadi_dontpanic_resource ${INSTALL_TARGETS_DEFAULT_ARGS})

@@ -18,24 +18,40 @@
 */
 
 #include "dontpanicresource.h"
+#include <Akonadi/Collection>
+#include <QStringList>
 
 namespace dp
 {
-  namespace akonadi
-  {
-    DontPanicResource::DontPanicResource(QString const& id)
-    :Akonadi::ResourceBase(id){}
-      void DontPanicResource::retrieveCollections()
-      {
-      }
-      void DontPanicResource::retrieveItems(Akonadi::Collection const&)
-      {
-      }
-      bool DontPanicResource::retrieveItem(Akonadi::Item const&item, QSet<QByteArray> const&)
-      {
-        return true;
-      }
-  }
+namespace akonadi
+{
+// ---------------------------------------------------------------------------------
+DontPanicResource::DontPanicResource(QString const& id)
+        :Akonadi::ResourceBase(id) {}
+
+void DontPanicResource::retrieveCollections()
+{
+    Akonadi::Collection c;
+    c.setParent( Akonadi::Collection::root() );
+    c.setRemoteId( "akonadi_dontpanic_resource" );
+    c.setName( name() );
+    c.setContentMimeTypes( QStringList() << "application/x-vnd.akonadi.calendar.event" );
+    c.setRights( Akonadi::Collection::ReadOnly );
+    Akonadi::Collection::List list;
+    list << c;
+    collectionsRetrieved( list );
+}
+// ---------------------------------------------------------------------------------
+void DontPanicResource::retrieveItems(Akonadi::Collection const&)
+{
+}
+// ---------------------------------------------------------------------------------
+bool DontPanicResource::retrieveItem(Akonadi::Item const&item, QSet<QByteArray> const&)
+{
+    return true;
+}
+// ---------------------------------------------------------------------------------
+}
 }
 AKONADI_RESOURCE_MAIN( dp::akonadi::DontPanicResource )
 #include "dontpanicresource.moc"
