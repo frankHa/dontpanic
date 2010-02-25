@@ -143,14 +143,14 @@ bool ActionItem::isCollapsed() const
 
 void ActionItem::initPossibleActionsFor ( detail::Action const&a )
 {
-    bool wasExpanded = !isCollapsed();
-    collapse();
+    //bool wasExpanded = !isCollapsed();
+    //collapse();
     removePossibleActions();
     addPossibleActionsFor ( a );
-    if ( wasExpanded )
-    {
-        expand();
-    }
+    //if ( wasExpanded )
+    //{
+    //    expand();
+    //}
 }
 
 void ActionItem::removePossibleActions()
