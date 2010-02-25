@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-26 00:31+0100\n"
+"POT-Creation-Date: 2010-02-26 00:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,11 +34,11 @@ msgid "There is currently no running activity..."
 msgstr ""
 
 #: plasmoid/detail/actiondescription.cpp:54
-msgid "<unknown project>"
+msgid "(unknown project)"
 msgstr ""
 
 #: plasmoid/detail/actiondescription.cpp:63
-msgid "<unknown task>"
+msgid "(unknown task)"
 msgstr ""
 
 #: plasmoid/dialog.cpp:79

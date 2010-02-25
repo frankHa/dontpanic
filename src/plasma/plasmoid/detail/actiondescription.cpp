@@ -51,7 +51,7 @@ QString ActionDescription::projectOf(Action const&a)const
 {
   if(a.project.isEmpty())
   {
-    return i18n("<unknown project>");
+    return i18n("(unknown project)");
   }
   return a.project;
 }
@@ -60,7 +60,7 @@ QString ActionDescription::taskOf(Action const&a)const
 {
   if(a.task.isEmpty())
   {
-    return i18n("<unknown task>");
+    return i18n("(unknown task)");
   }
   return a.task;
 }
