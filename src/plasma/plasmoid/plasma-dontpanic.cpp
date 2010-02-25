@@ -192,7 +192,7 @@ void PlasmaDontPanic::setup_actions()
     connect ( _M_stop_current_action, SIGNAL ( triggered() ), _M_time_tracker, SLOT ( stopCurrentAction() ) );
 
     _M_resume_last_action = new KAction ( this );
-    _M_resume_last_action->setText("Resume last Action");
+    _M_resume_last_action->setText(i18n("Resume last Action"));
     _M_resume_last_action->setIcon ( KIcon ( "media-seek-forward" ) );
     _M_resume_last_action->setShortcut ( KShortcut ( i18n ( "Ctrl+R" ) ) );
     connect ( _M_resume_last_action, SIGNAL ( triggered() ), _M_time_tracker, SLOT ( continueLastAction() ) );

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-25 20:04+0100\n"
+"POT-Creation-Date: 2010-02-25 23:16+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plasmoid/actionitem.cpp:56
+#: plasmoid/actionitem.cpp:87
 msgid ""
 "Currently working on: \n"
 "Project: %1\n"
@@ -25,15 +25,23 @@ msgid ""
 "Current duration: %4"
 msgstr ""
 
-#: plasmoid/actionitem.cpp:65 plasmoid/plasma-dontpanic.cpp:100
+#: plasmoid/actionitem.cpp:96 plasmoid/plasma-dontpanic.cpp:100
 msgid "There is currently no running activity..."
 msgstr ""
 
-#: plasmoid/dialog.cpp:81
+#: plasmoid/actionitem.cpp:188
+msgid "switch activity to:"
+msgstr ""
+
+#: plasmoid/actionitem.cpp:213
+msgid "%1 possible actions..."
+msgstr ""
+
+#: plasmoid/dialog.cpp:79
 msgid "Don't Panic"
 msgstr ""
 
-#: plasmoid/dialog.cpp:139
+#: plasmoid/dialog.cpp:116
 msgid "switch activity to..."
 msgstr ""
 
@@ -41,15 +49,27 @@ msgstr ""
 msgid "Current activity:<br/>%1/%2<br/>Running since: %3 (%4h)"
 msgstr ""
 
+#: plasmoid/plasma-dontpanic.cpp:182
+msgid "Start Action"
+msgstr ""
+
 #: plasmoid/plasma-dontpanic.cpp:184
 msgid "Ctrl+S"
 msgstr ""
 
-#: plasmoid/plasma-dontpanic.cpp:190
+#: plasmoid/plasma-dontpanic.cpp:189
+msgid "Stop current Action"
+msgstr ""
+
+#: plasmoid/plasma-dontpanic.cpp:191
 msgid "Ctrl+T"
 msgstr ""
 
 #: plasmoid/plasma-dontpanic.cpp:195
+msgid "Resume last Action"
+msgstr ""
+
+#: plasmoid/plasma-dontpanic.cpp:197
 msgid "Ctrl+R"
 msgstr ""
 

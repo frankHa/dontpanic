@@ -187,7 +187,8 @@ void ActionItem::addPossibleActionsFor ( const dp::plasma::applet::detail::Actio
     Plasma::Label *l = new Plasma::Label(this);
     l->setText(i18n("switch activity to:"));
     _M_actions_layout->addItem(l);
-
+    _M_actions_layout->addItem ( new Plasma::Separator ( this ) );
+    
     foreach(detail::Favorite const& fav, applet()->favorites())
     {
       addPossibleAction(applet()->action_for(fav));
@@ -208,7 +209,8 @@ void ActionItem::addPossibleAction ( KAction *action )
 
 void ActionItem::updatePossibleActionsText()
 {
-  _M_possible_actions->setText(i18n("%1 possible actions...").arg(_M_actions_layout->count()));
+  static int const PASSIVE_LAYOUT_ITEMS = 3;
+  _M_possible_actions->setText(i18n("%1 possible actions...").arg(_M_actions_layout->count() -  PASSIVE_LAYOUT_ITEMS));
 }
 
 
