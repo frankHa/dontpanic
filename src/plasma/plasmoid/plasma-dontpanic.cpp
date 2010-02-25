@@ -179,20 +179,20 @@ detail::FavoriteList PlasmaDontPanic::favorites() const
 void PlasmaDontPanic::setup_actions()
 {
     _M_start_new_action = new KAction ( this );
-    _M_start_new_action->setText(i18n("Start Action"));
+    _M_start_new_action->setText(i18n("Start a new Action"));
     _M_start_new_action->setIcon ( KIcon ( "media-playback-start" ) );
     _M_start_new_action->setShortcut ( KShortcut ( i18n ( "Ctrl+S" ) ) );
     connect ( _M_start_new_action, SIGNAL ( triggered() ), _M_time_tracker, SLOT ( startNewAction() ) );
 
 
     _M_stop_current_action = new KAction ( this );
-    _M_stop_current_action->setText(i18n("Stop current Action"));
+    _M_stop_current_action->setText(i18n("Stop the current Action"));
     _M_stop_current_action->setIcon ( KIcon ( "media-playback-stop" ) );
     _M_stop_current_action->setShortcut ( KShortcut ( i18n ( "Ctrl+T" ) ) );
     connect ( _M_stop_current_action, SIGNAL ( triggered() ), _M_time_tracker, SLOT ( stopCurrentAction() ) );
 
     _M_resume_last_action = new KAction ( this );
-    _M_resume_last_action->setText(i18n("Resume last Action"));
+    _M_resume_last_action->setText(i18n("Resume the last Action"));
     _M_resume_last_action->setIcon ( KIcon ( "media-seek-forward" ) );
     _M_resume_last_action->setShortcut ( KShortcut ( i18n ( "Ctrl+R" ) ) );
     connect ( _M_resume_last_action, SIGNAL ( triggered() ), _M_time_tracker, SLOT ( continueLastAction() ) );

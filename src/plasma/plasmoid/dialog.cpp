@@ -96,9 +96,7 @@ void Dialog::build_dialog()
     _M_duration_label->setScaledContents(true);
     l_layout->addItem(_M_duration_label);
     
-    Plasma::ScrollWidget *scroll = new Plasma::ScrollWidget(_M_widget);
-    scroll->setWidget(createActionItem(scroll));
-    l_layout->addItem(scroll);
+    l_layout->addItem(createActionItem(_M_widget));
     
     _M_widget->setLayout(l_layout);
     _M_widget->setMinimumSize(300, 300);

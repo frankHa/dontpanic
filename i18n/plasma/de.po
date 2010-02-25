@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-25 23:16+0100\n"
-"PO-Revision-Date: 2010-02-25 23:16+0100\n"
+"POT-Creation-Date: 2010-02-25 23:30+0100\n"
+"PO-Revision-Date: 2010-02-25 23:31+0100\n"
 "Last-Translator: Frank Habel <frank@bugplasma.de>\n"
 "Language-Team: Deutsch <>\n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgstr "%1 mögliche Aktionen..."
 msgid "Don't Panic"
 msgstr "Don't Panic"
 
-#: plasmoid/dialog.cpp:116
+#: plasmoid/dialog.cpp:114
 msgid "switch activity to..."
 msgstr "Wechsle zu Tätigkeit..."
 
@@ -56,24 +56,24 @@ msgid "Current activity:<br/>%1/%2<br/>Running since: %3 (%4h)"
 msgstr "Aktuelle Tätigkeit:<br/>%1/%2<br/>Wird ausgeführt seit: %3 (%4h)"
 
 #: plasmoid/plasma-dontpanic.cpp:182
-msgid "Start Action"
-msgstr "Tätigkeit starten"
+msgid "Start a new Action"
+msgstr "Eine neue Tätigkeit starten"
 
 #: plasmoid/plasma-dontpanic.cpp:184
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
 #: plasmoid/plasma-dontpanic.cpp:189
-msgid "Stop current Action"
-msgstr "Aktuelle Tätigkeit beenden"
+msgid "Stop the current Action"
+msgstr "Die Aktuelle Tätigkeit beenden"
 
 #: plasmoid/plasma-dontpanic.cpp:191
 msgid "Ctrl+T"
 msgstr "Ctrl+T"
 
 #: plasmoid/plasma-dontpanic.cpp:195
-msgid "Resume last Action"
-msgstr "Letzte Tätigkeit fortsetzen"
+msgid "Resume the last Action"
+msgstr "Die letzte Tätigkeit fortsetzen"
 
 #: plasmoid/plasma-dontpanic.cpp:197
 msgid "Ctrl+R"

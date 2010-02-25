@@ -12,6 +12,7 @@ namespace Plasma
 {
   class Label;
   class Animation;
+  class ScrollWidget;
 }
 
 namespace dp
@@ -60,6 +61,7 @@ public:
     Plasma::Label *_M_action_description;
     Plasma::Label *_M_possible_actions;
     QGraphicsLinearLayout *_M_tree_layout;
+    Plasma::ScrollWidget *_M_scroll;
     QGraphicsWidget *_M_actions_widget;
     QGraphicsLinearLayout * _M_actions_layout;
     Plasma::Animation *_M_label_fade;

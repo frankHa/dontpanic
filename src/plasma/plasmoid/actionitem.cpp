@@ -26,6 +26,7 @@ ActionItem::ActionItem ( QGraphicsWidget *parent, PlasmaDontPanic *applet )
         , _M_action_description ( 0 )
         , _M_possible_actions ( 0 )
         , _M_tree_layout ( 0 )
+        , _M_scroll(0)
         , _M_actions_widget ( 0 )
         , _M_actions_layout ( 0 )
         ,_M_label_fade ( 0 )
@@ -35,14 +36,12 @@ ActionItem::ActionItem ( QGraphicsWidget *parent, PlasmaDontPanic *applet )
     this->setAcceptHoverEvents ( true );
     setCacheMode ( DeviceCoordinateCache );
     setZValue ( 0 );
-    setSizePolicy ( QSizePolicy::MinimumExpanding, QSizePolicy::Fixed );
     _M_tree_layout = new QGraphicsLinearLayout ( Qt::Vertical, this );
     _M_tree_layout->setContentsMargins ( 0, 0, 0, 0 );
 
     _M_action_description = new Plasma::Label ( this );
     _M_possible_actions = new Plasma::Label ( this );
 
-    //_M_possible_actions->setText ( i18n ( "" ) );
     QFont font = _M_possible_actions->font();
     font.setPointSize ( KGlobalSettings::smallestReadableFont().pointSize() );
     font.setItalic ( true );
@@ -57,14 +56,15 @@ ActionItem::ActionItem ( QGraphicsWidget *parent, PlasmaDontPanic *applet )
 
     _M_tree_layout->addItem ( info );
 
-    //Plasma::ScrollWidget * scroll = new Plasma::ScrollWidget(this);
-    _M_actions_widget = new QGraphicsWidget ( this );
-    //scroll->setWidget(_M_actions_widget);
+    _M_scroll = new Plasma::ScrollWidget(this);
+    _M_actions_widget = new QGraphicsWidget ( _M_scroll );
+    _M_scroll->setWidget(_M_actions_widget);
     //scroll->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
     //_M_actions_widget->hide();
     _M_actions_layout = new QGraphicsLinearLayout ( Qt::Vertical, _M_actions_widget );
     _M_actions_layout->setContentsMargins ( 30, 0, 0, 0 );
-    _M_tree_layout->addItem ( _M_actions_widget );
+    //_M_tree_layout->addItem ( _M_actions_widget );
+    _M_tree_layout->addItem(_M_scroll);
     setAction ( _M_current_action );
 
 
@@ -133,8 +133,8 @@ void ActionItem::expand()
     {
         return;
     }
-    _M_tree_layout->addItem ( _M_actions_widget );
-    _M_actions_widget->show();
+    _M_tree_layout->addItem ( _M_scroll );
+    _M_scroll->show();
     update();
 }
 void ActionItem::collapse()
@@ -143,8 +143,8 @@ void ActionItem::collapse()
     {
         return;
     }
-    _M_tree_layout->removeItem ( _M_actions_widget );
-    _M_actions_widget->hide();
+    _M_tree_layout->removeItem ( _M_scroll );
+    _M_scroll->hide();
     update();
 }
 
