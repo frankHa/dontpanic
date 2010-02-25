@@ -214,6 +214,7 @@ KAction* PlasmaDontPanic::action_for ( detail::Favorite const& fav )
     detail::ActionTemplateAction *action = new detail::ActionTemplateAction ( this );
     action->setFavorite ( fav );
     connect ( action, SIGNAL ( triggered ( detail::Favorite const& ) ), this, SLOT ( on_switch_activity_to_triggered ( detail::Favorite ) ) );
+    connect ( action, SIGNAL ( triggered ( detail::Favorite const& ) ), this, SLOT ( hidePopup()));
     return action;
 }
 

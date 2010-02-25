@@ -41,12 +41,17 @@ public:
     
   private:
     void setActionDescription(detail::Action const& );
+    void expand();
+    void collapse();
+    bool isCollapsed() const;
     
   private:
     detail::Action _M_current_action;
     Plasma::Label *_M_action_description;
     Plasma::Label *_M_possible_actions;
     QGraphicsLinearLayout *_M_tree_layout;
+    QGraphicsWidget *_M_actions_widget;
+    QGraphicsLinearLayout * _M_actions_layout;
     Plasma::Animation *_M_label_fade;
     bool _M_hovered;
 
