@@ -98,19 +98,7 @@ void Dialog::build_dialog()
     _M_duration_label->setScaledContents(true);
     l_layout->addItem(_M_duration_label);
     
-    QGraphicsLinearLayout *l_blayout = new QGraphicsLinearLayout;
-    l_blayout->setSpacing(0);
-    l_blayout->setOrientation(Qt::Horizontal);
-    l_blayout->addStretch();
-    l_blayout->addItem(button_for(_M_dp_applet->start_new_action()));
-    l_blayout->addItem(button_for(_M_dp_applet->stop_current_action()));
-    l_blayout->addItem(button_for(_M_dp_applet->resume_last_action()));
-    l_blayout->addStretch();
-    QGraphicsWidget *bWidget = new QGraphicsWidget();
-    bWidget->setLayout(l_blayout);
-
-    l_layout->addItem(bWidget);
-
+    
     l_layout->addItem(createActionItem(_M_widget));
     
     l_layout->addItem(switch_activity());
@@ -121,8 +109,7 @@ void Dialog::build_dialog()
 // ---------------------------------------------------------------------------------
 ActionItem *Dialog::createActionItem(QGraphicsWidget *parent)
 {
-  ActionItem *item = new ActionItem(parent);
-  connect(_M_dp_applet, SIGNAL(currentActionChanged(detail::Action const&)), item, SLOT(setAction(detail::Action const&)));
+  ActionItem *item = new ActionItem(parent, _M_dp_applet);
   return item;
 }
 // ---------------------------------------------------------------------------------

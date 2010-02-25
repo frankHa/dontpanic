@@ -7,6 +7,7 @@
 
 class QGraphicsLinearLayout;
 class QGraphicsSceneHoverEvent;
+class KAction;
 namespace Plasma
 {
   class Label;
@@ -19,13 +20,14 @@ namespace plasma
 {
 namespace applet
 {
+  class PlasmaDontPanic;
 
 class ActionItem: public QGraphicsWidget
 {
     Q_OBJECT
 
 public:
-    ActionItem(QGraphicsWidget *parent = 0);
+    ActionItem(QGraphicsWidget *parent, PlasmaDontPanic *applet);
 
     ~ActionItem();
     
@@ -44,8 +46,14 @@ public:
     void expand();
     void collapse();
     bool isCollapsed() const;
+    void initPossibleActionsFor(detail::Action const&);
+    void removePossibleActions();
+    void addPossibleActionsFor(detail::Action const&);
+    void addPossibleAction(KAction *action);
     
+    PlasmaDontPanic *applet();
   private:
+    PlasmaDontPanic *_M_applet;
     detail::Action _M_current_action;
     Plasma::Label *_M_action_description;
     Plasma::Label *_M_possible_actions;
