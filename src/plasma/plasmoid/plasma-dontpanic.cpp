@@ -35,6 +35,8 @@ PlasmaDontPanic::PlasmaDontPanic ( QObject *parent, const QVariantList &args )
         , _M_dialog ( 0 )
         , _M_current_overall_duration ( 0 )
 {
+    setAspectRatioMode(Plasma::IgnoreAspectRatio);
+    KGlobal::locale()->insertCatalog("dontpanik_plasma");
     setPopupIcon ( "dontpanik" );
 }
 

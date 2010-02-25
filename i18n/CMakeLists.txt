@@ -1,2 +1,4 @@
 add_subdirectory(dontpanic)
 add_subdirectory(dontpanik)
+
+add_subdirectory(plasma)
