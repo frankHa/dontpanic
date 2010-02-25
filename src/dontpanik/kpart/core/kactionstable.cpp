@@ -37,7 +37,7 @@ namespace dp
     KActionsTable::KActionsTable ( QWidget *parent )
         : QTableView ( parent )
         , _M_model ( new detail::KActionsTableModel ( this ))
-        , _M_sort_proxy_model(new QSortFilterProxyModel(this))
+        , _M_sort_proxy_model(new detail::KActionsTableSortModel(this))
     {
       installEventFilter(this);
       init_model();

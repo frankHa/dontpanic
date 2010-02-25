@@ -12,6 +12,7 @@ set(dontpanikpart_LIB_SRCS
     kprojectstable.cpp
     kactionstableitemdelegate.cpp 
     kactionstablemodel.cpp
+    kactionstablesortmodel.cpp 
     kactionstable.cpp
     keditactiondialog.cpp 
     keditactiontemplatedialog.cpp 
