@@ -53,16 +53,10 @@ class Dialog: public QObject
       
   private slots:
     void on_current_duration_changed(int);
-    void on_favorite_added(detail::Favorite const&);
-    void on_favorite_removed(detail::Favorite const&);
-    void on_favorite_updated(detail::Favorite const&);
-    
     
   private:
     void build_dialog();
-    QGraphicsWidget* button_for(KAction *action);
     QGraphicsWidget* switch_activity();
-    void rebuild_favorites_menu();
     ActionItem *createActionItem(QGraphicsWidget *parent );
   private: 
     PlasmaDontPanic *_M_dp_applet;

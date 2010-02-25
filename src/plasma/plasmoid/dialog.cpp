@@ -28,6 +28,7 @@
 #include <Plasma/IconWidget>
 #include <Plasma/Separator>
 #include <Plasma/PushButton>
+#include <Plasma/ScrollWidget>
 #include <KIconLoader>
 #include <KPushButton>
 #include <QLabel>
@@ -49,10 +50,7 @@ Dialog::Dialog(PlasmaDontPanic *dp, QObject *parent)
 {
     build_dialog();
 
-    connect(dp, SIGNAL(currentDurationChanged(int)), this, SLOT(on_current_duration_changed(int)));
-    connect(dp, SIGNAL(favorite_added(detail::Favorite const&)), this, SLOT(on_favorite_added(detail::Favorite const&)));
-    connect(dp, SIGNAL(favorite_removed(detail::Favorite const&)), this, SLOT(on_favorite_removed(detail::Favorite const&)));
-    connect(dp, SIGNAL(favorite_updated(detail::Favorite const&)), this, SLOT(on_favorite_updated(detail::Favorite const&)));
+    connect(dp, SIGNAL(currentDurationChanged(int)), this, SLOT(on_current_duration_changed(int)));    
 }
 
 QGraphicsWidget* Dialog::dialog()
@@ -91,20 +89,19 @@ void Dialog::build_dialog()
     l_layout->addItem(titleWidget);
     l_layout->addItem(new Plasma::Separator());
 
-
+      
 
     _M_duration_label = new Plasma::Label(_M_widget);
     _M_duration_label->setAlignment(Qt::AlignHCenter);
     _M_duration_label->setScaledContents(true);
     l_layout->addItem(_M_duration_label);
     
+    Plasma::ScrollWidget *scroll = new Plasma::ScrollWidget(_M_widget);
+    scroll->setWidget(createActionItem(scroll));
+    l_layout->addItem(scroll);
     
-    l_layout->addItem(createActionItem(_M_widget));
-    
-    l_layout->addItem(switch_activity());
-    l_layout->addStretch();
     _M_widget->setLayout(l_layout);
-    _M_widget->setMinimumSize(250, 300);
+    _M_widget->setMinimumSize(300, 300);
 }
 // ---------------------------------------------------------------------------------
 ActionItem *Dialog::createActionItem(QGraphicsWidget *parent)
@@ -113,18 +110,10 @@ ActionItem *Dialog::createActionItem(QGraphicsWidget *parent)
   return item;
 }
 // ---------------------------------------------------------------------------------
-QGraphicsWidget* Dialog::button_for(KAction *action)
-{
-    Plasma::IconWidget *b = new Plasma::IconWidget(_M_widget);
-    b->setAction(action);
-    return b;
-}
-// ---------------------------------------------------------------------------------
 QGraphicsWidget* Dialog::switch_activity()
 {
     _M_switch_activity_button = new Plasma::PushButton(_M_widget);
     _M_switch_activity_button->setText(i18n("switch activity to..."));
-    rebuild_favorites_menu();
     return _M_switch_activity_button;
 
 }
@@ -133,37 +122,6 @@ void Dialog::on_current_duration_changed(int duration)
 {
     QString dur = QString("<b>%1<b>").arg(duration_formatter().format(duration));
     _M_duration_label->setText(dur);
-}
-// ---------------------------------------------------------------------------------
-void Dialog::on_favorite_added(detail::Favorite const& fav)
-{
-    rebuild_favorites_menu();
-}
-void Dialog::on_favorite_removed(detail::Favorite const&)
-{
-    rebuild_favorites_menu();
-}
-void Dialog::on_favorite_updated(detail::Favorite const& fav)
-{
-    rebuild_favorites_menu();
-}
-// ---------------------------------------------------------------------------------
-void Dialog::rebuild_favorites_menu()
-{
-  detail::FavoriteList favList = _M_dp_applet->favorites();
-  QMenu *oldmenu = _M_switch_activity_button->nativeWidget()->menu();
-  QMenu *newMenu = new QMenu(_M_switch_activity_button->nativeWidget());
-      
-  qSort(favList);
-  for(int i=0;i<favList.length(); ++i)
-  {
-    newMenu->addAction(_M_dp_applet->action_for(favList.value(i)));
-  }
-  _M_switch_activity_button->nativeWidget()->setMenu(newMenu);
-  if(oldmenu != 0)
-  {
-   delete oldmenu; 
-  }
 }
 // ---------------------------------------------------------------------------------
 }

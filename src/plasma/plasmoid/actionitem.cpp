@@ -5,6 +5,7 @@
 #include <Plasma/Label>
 #include <Plasma/Separator>
 #include <Plasma/IconWidget>
+#include <Plasma/ScrollWidget>
 #include <Plasma/Animator>
 #include <Plasma/Animation>
 #include <QGraphicsLinearLayout>
@@ -41,7 +42,7 @@ ActionItem::ActionItem ( QGraphicsWidget *parent, PlasmaDontPanic *applet )
     _M_action_description = new Plasma::Label ( this );
     _M_possible_actions = new Plasma::Label ( this );
 
-    _M_possible_actions->setText ( i18n ( "switch activity to..." ) );
+    //_M_possible_actions->setText ( i18n ( "" ) );
     QFont font = _M_possible_actions->font();
     font.setPointSize ( KGlobalSettings::smallestReadableFont().pointSize() );
     font.setItalic ( true );
@@ -56,8 +57,10 @@ ActionItem::ActionItem ( QGraphicsWidget *parent, PlasmaDontPanic *applet )
 
     _M_tree_layout->addItem ( info );
 
-
+    //Plasma::ScrollWidget * scroll = new Plasma::ScrollWidget(this);
     _M_actions_widget = new QGraphicsWidget ( this );
+    //scroll->setWidget(_M_actions_widget);
+    //scroll->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
     //_M_actions_widget->hide();
     _M_actions_layout = new QGraphicsLinearLayout ( Qt::Vertical, _M_actions_widget );
     _M_actions_layout->setContentsMargins ( 30, 0, 0, 0 );
@@ -181,10 +184,15 @@ void ActionItem::addPossibleActionsFor ( const dp::plasma::applet::detail::Actio
         addPossibleAction ( applet()->stop_current_action() );
     }
     _M_actions_layout->addItem ( new Plasma::Separator ( this ) );
-    //add label: "switch activity to..."
+    Plasma::Label *l = new Plasma::Label(this);
+    l->setText(i18n("switch activity to:"));
+    _M_actions_layout->addItem(l);
 
-    //foreach(favorite)
-    // addPossibleAction(favorite);
+    foreach(detail::Favorite const& fav, applet()->favorites())
+    {
+      addPossibleAction(applet()->action_for(fav));
+    }
+    updatePossibleActionsText();
 }
 
 void ActionItem::addPossibleAction ( KAction *action )
@@ -192,11 +200,17 @@ void ActionItem::addPossibleAction ( KAction *action )
     Plasma::IconWidget *action_widget = new Plasma::IconWidget ( _M_actions_widget );
     action_widget->setAction ( action );
     action_widget->setOrientation(Qt::Horizontal);
-    action_widget->setPreferredHeight(KIconLoader::SizeMedium + 3 +3);
+    action_widget->setPreferredHeight(KIconLoader::SizeSmall + 3 +3);
     action_widget->setPreferredWidth(0);
     action_widget->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
     _M_actions_layout->addItem ( action_widget );
 }
+
+void ActionItem::updatePossibleActionsText()
+{
+  _M_possible_actions->setText(i18n("%1 possible actions...").arg(_M_actions_layout->count()));
+}
+
 
 PlasmaDontPanic *ActionItem::applet()
 {

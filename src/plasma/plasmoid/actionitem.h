@@ -50,6 +50,8 @@ public:
     void removePossibleActions();
     void addPossibleActionsFor(detail::Action const&);
     void addPossibleAction(KAction *action);
+  private slots:
+    void updatePossibleActionsText();
     
     PlasmaDontPanic *applet();
   private:
