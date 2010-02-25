@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-26 00:39+0100\n"
-"PO-Revision-Date: 2010-02-26 00:38+0100\n"
+"POT-Creation-Date: 2010-02-26 00:46+0100\n"
+"PO-Revision-Date: 2010-02-26 00:47+0100\n"
 "Last-Translator: Frank Habel <frank@bugplasma.de>\n"
 "Language-Team: Deutsch <>\n"
 "MIME-Version: 1.0\n"
@@ -17,11 +17,11 @@ msgstr ""
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: plasmoid/actionitem.cpp:177
+#: plasmoid/actionitem.cpp:180
 msgid "switch activity to:"
 msgstr "Wechsle zu Tätigkeit:"
 
-#: plasmoid/actionitem.cpp:203
+#: plasmoid/actionitem.cpp:206
 msgid "%1 possible actions..."
 msgstr "%1 mögliche Aktionen..."
 
@@ -39,7 +39,6 @@ msgid "(unknown project)"
 msgstr "(Unbekanntes Projekt)"
 
 #: plasmoid/detail/actiondescription.cpp:63
-#, fuzzy
 msgid "(unknown task)"
 msgstr "(Unbekannte Aufgabe)"
 

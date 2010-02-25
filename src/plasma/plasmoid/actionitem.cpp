@@ -167,10 +167,13 @@ void ActionItem::removePossibleActions()
 void ActionItem::addPossibleActionsFor ( const dp::plasma::applet::detail::Action& a )
 {
     addPossibleAction ( applet()->start_new_action() );
-    addPossibleAction ( applet()->resume_last_action() );
     if ( a.active )
     {
         addPossibleAction ( applet()->stop_current_action() );
+    } 
+    else
+    {
+      addPossibleAction ( applet()->resume_last_action() );
     }
     _M_actions_layout->addItem ( new Plasma::Separator ( _M_actions_widget ) );
     Plasma::Label *l = new Plasma::Label(_M_actions_widget);

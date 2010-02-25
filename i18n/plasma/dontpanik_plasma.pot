@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-26 00:39+0100\n"
+"POT-Creation-Date: 2010-02-26 00:46+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plasmoid/actionitem.cpp:177
+#: plasmoid/actionitem.cpp:180
 msgid "switch activity to:"
 msgstr ""
 
-#: plasmoid/actionitem.cpp:203
+#: plasmoid/actionitem.cpp:206
 msgid "%1 possible actions..."
 msgstr ""
 
