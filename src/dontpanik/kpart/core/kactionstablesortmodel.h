@@ -20,7 +20,7 @@
 #ifndef KACTIONSTABLESORTMODEL_H
 #define KACTIONSTABLESORTMODEL_H
 
-#include <qt4/QtGui/QSortFilterProxyModel>
+#include <QtGui/QSortFilterProxyModel>
 
 namespace dp
 {
