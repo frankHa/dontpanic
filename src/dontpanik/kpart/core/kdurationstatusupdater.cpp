@@ -78,9 +78,10 @@ namespace dp
     {
       _M_duration_label = new QLabel();
       QFont font;
-      //font.setBold(true);
-      //_M_duration_label->setFont(font);
-      _M_duration_label->setAlignment(Qt::AlignLeft);
+      font.setBold(true);
+      _M_duration_label->setFont(font);
+      _M_duration_label->setAlignment(Qt::AlignRight);
+      _M_duration_label->setIndent(10);
       statusBar()->statusBar()->addPermanentWidget(label(),0);
     }
     
