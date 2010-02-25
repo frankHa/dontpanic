@@ -22,30 +22,51 @@
 
 namespace dp
 {
-  namespace plasma
-  {
-    namespace applet
+namespace plasma
+{
+namespace applet
+{
+namespace detail
+{
+QString ActionDescription::forAction(Action const& action) const
+{
+    if ( action.active )
     {
-      namespace detail
-      {
-      QString ActionDescription::forAction(Action const& action)
-      {
-        if ( action.active )
-        {
-          QString tooltip = i18n ( "Currently working on: \nProject: %1\nTask: %2\nRunning since: %3\nCurrent duration: %4" )
-          .arg ( action.project )
-          .arg ( action.task )
-          .arg ( action.start.time().toString ( Qt::SystemLocaleShortDate ) )
-          .arg ( duration_formatter().format ( action.duration ) );
-          return ( tooltip );
-        }
-        else
-        {
-          return ( i18n ( "There is currently no running activity..." ) );
-        }
-      }
-      }
+        QString tooltip = i18n ( "Currently working on:<br/><br/><b>%1 / %2</b><br/>since: <b>%3 (%4h)</b>" )
+                          .arg ( projectOf(action) )
+                          .arg ( taskOf(action) )
+                          .arg ( action.start.time().toString ( Qt::SystemLocaleShortDate ) )
+                          .arg ( duration_formatter().format ( action.duration ) );
+        return ( tooltip );
     }
+    else
+    {
+        return ( i18n ( "There is currently no running activity..." ) );
+    }
+}
+// ---------------------------------------------------------------------------------
+// private stuff:
+// ---------------------------------------------------------------------------------
+QString ActionDescription::projectOf(Action const&a)const
+{
+  if(a.project.isEmpty())
+  {
+    return i18n("<unknown project>");
   }
+  return a.project;
+}
+// ---------------------------------------------------------------------------------
+QString ActionDescription::taskOf(Action const&a)const
+{
+  if(a.task.isEmpty())
+  {
+    return i18n("<unknown task>");
+  }
+  return a.task;
+}
+// ---------------------------------------------------------------------------------
+}
+}
+}
 }
 

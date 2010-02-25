@@ -13,6 +13,7 @@
 #include <QGraphicsSceneHoverEvent>
 #include <KGlobalSettings>
 #include <KAction>
+#include <QLabel>
 namespace dp
 {
 namespace plasma
@@ -41,6 +42,7 @@ ActionItem::ActionItem ( QGraphicsWidget *parent, PlasmaDontPanic *applet )
     _M_tree_layout->setContentsMargins ( 0, 0, 0, 0 );
 
     _M_action_description = new Plasma::Label ( this );
+    _M_action_description->nativeWidget()->setTextFormat(Qt::RichText);
     _M_possible_actions = new Plasma::Label ( this );
 
     QFont font = _M_possible_actions->font();
@@ -60,11 +62,8 @@ ActionItem::ActionItem ( QGraphicsWidget *parent, PlasmaDontPanic *applet )
     _M_scroll = new Plasma::ScrollWidget(this);
     _M_actions_widget = new QGraphicsWidget ( _M_scroll );
     _M_scroll->setWidget(_M_actions_widget);
-    //scroll->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
-    //_M_actions_widget->hide();
     _M_actions_layout = new QGraphicsLinearLayout ( Qt::Vertical, _M_actions_widget );
     _M_actions_layout->setContentsMargins ( 30, 0, 0, 0 );
-    //_M_tree_layout->addItem ( _M_actions_widget );
     _M_tree_layout->addItem(_M_scroll);
     setAction ( _M_current_action );
 
@@ -131,9 +130,9 @@ void ActionItem::collapse()
     if ( isCollapsed() )
     {
         return;
-    }
-    _M_tree_layout->removeItem ( _M_scroll );
+    }    
     _M_scroll->hide();
+    _M_tree_layout->removeItem ( _M_scroll );
     update();
 }
 
@@ -160,6 +159,7 @@ void ActionItem::removePossibleActions()
     {
         QGraphicsLayoutItem *item = _M_actions_layout->itemAt ( 0 );
         _M_actions_layout->removeAt ( 0 );
+        item->graphicsItem()->hide();
         delete item;
     }
 }
@@ -172,11 +172,12 @@ void ActionItem::addPossibleActionsFor ( const dp::plasma::applet::detail::Actio
     {
         addPossibleAction ( applet()->stop_current_action() );
     }
-    _M_actions_layout->addItem ( new Plasma::Separator ( this ) );
-    Plasma::Label *l = new Plasma::Label(this);
+    _M_actions_layout->addItem ( new Plasma::Separator ( _M_actions_widget ) );
+    Plasma::Label *l = new Plasma::Label(_M_actions_widget);
     l->setText(i18n("switch activity to:"));
+    l->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
     _M_actions_layout->addItem(l);
-    _M_actions_layout->addItem ( new Plasma::Separator ( this ) );
+    _M_actions_layout->addItem ( new Plasma::Separator ( _M_actions_widget ) );
     
     foreach(detail::Favorite const& fav, applet()->favorites())
     {

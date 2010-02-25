@@ -33,7 +33,10 @@ namespace detail {
 class ActionDescription
 {
 public:
-    QString forAction(Action const&a);
+    QString forAction(Action const&a)const;
+  private:
+    QString projectOf(Action const&a)const;
+    QString taskOf(Action const&a)const;
 
 };
 
