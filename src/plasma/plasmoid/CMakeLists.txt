@@ -8,6 +8,7 @@ set(plasma_dp_SRCS
     dialog.cpp
     plasma-dontpanic.cpp
     detail/actiontemplateaction.cpp
+    detail/actiondescription.cpp
     )
  
 # Now make sure all files get to the right place

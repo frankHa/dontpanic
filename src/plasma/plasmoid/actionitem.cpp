@@ -1,5 +1,6 @@
 #include "actionitem.h"
 #include "detail/action.h"
+#include "detail/actiondescription.h"
 #include "plasma-dontpanic.h"
 #include <libdontpanic/durationformatter.h>
 #include <Plasma/Label>
@@ -82,19 +83,7 @@ void ActionItem::setAction ( const detail::Action& action )
 
 void ActionItem::setActionDescription ( detail::Action const& action )
 {
-    if ( action.active )
-    {
-        QString tooltip = i18n ( "Currently working on: \nProject: %1\nTask: %2\nRunning since: %3\nCurrent duration: %4" )
-                          .arg ( action.project )
-                          .arg ( action.task )
-                          .arg ( action.start.time().toString ( Qt::SystemLocaleShortDate ) )
-                          .arg ( duration_formatter().format ( action.duration ) );
-        _M_action_description->setText ( tooltip );
-    }
-    else
-    {
-        _M_action_description->setText ( i18n ( "There is currently no running activity..." ) );
-    }
+    _M_action_description->setText(detail::actionDescription().forAction(action));
 }
 
 void ActionItem::setHovered ( bool hovered )

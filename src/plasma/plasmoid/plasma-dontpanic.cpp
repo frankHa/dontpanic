@@ -20,6 +20,7 @@
 
 #include "dialog.h"
 #include "detail/actiontemplateaction.h"
+#include "detail/actiondescription.h"
 
 K_EXPORT_PLASMA_APPLET ( dontpanic, dp::plasma::applet::PlasmaDontPanic )
 namespace dp
@@ -95,19 +96,7 @@ void PlasmaDontPanic::toolTipAboutToShow()
     Plasma::ToolTipContent toolTip;
     toolTip.setImage ( KIcon ( "dontpanik" ) );
     toolTip.setMainText ( duration_formatter().format ( _M_current_overall_duration ) );
-    if ( !_M_current_action.active )
-    {
-        toolTip.setSubText ( i18n ( "There is currently no running activity..." ) );
-    }
-    else
-    {
-        QString tooltip = i18n ( "Current activity:<br/>%1/%2<br/>Running since: %3 (%4h)" )
-                          .arg ( _M_current_action.project )
-                          .arg ( _M_current_action.task )
-                          .arg ( _M_current_action.start.time().toString ( Qt::SystemLocaleShortDate ) )
-                          .arg ( duration_formatter().format ( _M_current_action.duration ) );
-        toolTip.setSubText ( tooltip );
-    }
+    toolTip.setSubText(detail::actionDescription().forAction(_M_current_action));
     Plasma::ToolTipManager::self()->setContent ( this, toolTip );
 }
 
