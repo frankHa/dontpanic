@@ -37,6 +37,7 @@ class PlasmaDontPanic : public Plasma::PopupApplet
     void favorite_added(detail::Favorite const& );
     void favorite_removed(detail::Favorite const& );
     void favorite_updated(detail::Favorite const& );
+    void icon_updated(QString const&);
 public:
     // Basic Create/Destroy
     PlasmaDontPanic(QObject *parent, const QVariantList &args);
@@ -68,8 +69,11 @@ public slots:
     KAction * resume_last_action();
     KAction * action_for(detail::Favorite const&);
     detail::FavoriteList favorites() const;
+    QString icon() const;
   private:
     void store_in_favorites(detail::Favorite const&);
+  private slots:
+    void updateIcon();
 private:
     Plasma::DataEngine *_M_dont_panic_engine;
     Dialog *_M_dialog;
@@ -80,6 +84,7 @@ private:
     KAction *_M_stop_current_action;
     KAction *_M_resume_last_action;
     
+    QString _M_icon;
     dp::client::TimeTracker *_M_time_tracker;
     
     detail::FavoriteList _M_favorites;

@@ -38,6 +38,7 @@ ActionItem::ActionItem ( QGraphicsWidget *parent, PlasmaDontPanic *applet )
     this->setAcceptHoverEvents ( true );
     setCacheMode ( DeviceCoordinateCache );
     setZValue ( 0 );
+    //setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
     _M_tree_layout = new QGraphicsLinearLayout ( Qt::Vertical, this );
     _M_tree_layout->setContentsMargins ( 0, 0, 0, 0 );
 

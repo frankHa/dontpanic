@@ -31,6 +31,7 @@ namespace Plasma
 {
   class Label;
   class PushButton;
+  class IconWidget;
 }
 
 
@@ -64,6 +65,9 @@ class Dialog: public QObject
     Plasma::Label *_M_duration_label;
     QGraphicsWidget* _M_widget;
     Plasma::PushButton *_M_switch_activity_button;
+    Plasma::IconWidget *_M_icon;
+private slots:
+    void updateIcon(QString const&);
 };
 
 }

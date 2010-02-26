@@ -51,6 +51,7 @@ Dialog::Dialog(PlasmaDontPanic *dp, QObject *parent)
     build_dialog();
 
     connect(dp, SIGNAL(currentDurationChanged(int)), this, SLOT(on_current_duration_changed(int)));    
+    connect(dp, SIGNAL(icon_updated(QString const&)), this, SLOT(updateIcon(QString const&)));
 }
 
 QGraphicsWidget* Dialog::dialog()
@@ -65,13 +66,14 @@ void Dialog::build_dialog()
     _M_widget = new QGraphicsWidget(_M_dp_applet);
     _M_widget->setFocusPolicy(Qt::ClickFocus);
 
+    //_M_widget->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
     QGraphicsLinearLayout *l_layout = new QGraphicsLinearLayout(Qt::Vertical, _M_widget);
     l_layout->setSpacing(0);
-    Plasma::IconWidget *icon = new Plasma::IconWidget(_M_widget);
-    icon->setIcon(KIcon("dontpanik"));
-    icon->setMaximumHeight(KIconLoader::SizeMedium);
-    icon->setMinimumHeight(KIconLoader::SizeMedium);
-    icon->setAcceptHoverEvents(false);
+    _M_icon = new Plasma::IconWidget(_M_widget);
+    _M_icon->setIcon(KIcon(_M_dp_applet->icon()));
+    _M_icon->setMaximumHeight(KIconLoader::SizeMedium);
+    _M_icon->setMinimumHeight(KIconLoader::SizeMedium);
+    _M_icon->setAcceptHoverEvents(false);
     _M_main_label = new Plasma::Label(_M_widget);
     _M_main_label->setMaximumHeight(KIconLoader::SizeMedium);
     _M_main_label->nativeWidget()->setWordWrap(false);
@@ -81,7 +83,7 @@ void Dialog::build_dialog()
     QGraphicsLinearLayout *l_layout2 = new QGraphicsLinearLayout;
     l_layout2->setSpacing(0);
     l_layout2->setOrientation(Qt::Horizontal);
-    l_layout2->addItem(icon);
+    l_layout2->addItem(_M_icon);
     l_layout2->addItem(_M_main_label);
     l_layout2->addStretch();
     QGraphicsWidget *titleWidget = new QGraphicsWidget();
@@ -99,7 +101,7 @@ void Dialog::build_dialog()
     l_layout->addItem(createActionItem(_M_widget));
     
     _M_widget->setLayout(l_layout);
-    _M_widget->setMinimumSize(300, 300);
+    _M_widget->setMinimumSize(350, 300);
 }
 // ---------------------------------------------------------------------------------
 ActionItem *Dialog::createActionItem(QGraphicsWidget *parent)
@@ -122,6 +124,10 @@ void Dialog::on_current_duration_changed(int duration)
     _M_duration_label->setText(dur);
 }
 // ---------------------------------------------------------------------------------
+void Dialog::updateIcon(QString const& icon)
+{
+  _M_icon->setIcon(icon);
+}
 }
 }
 }

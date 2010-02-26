@@ -35,10 +35,11 @@ PlasmaDontPanic::PlasmaDontPanic ( QObject *parent, const QVariantList &args )
         : Plasma::PopupApplet ( parent, args )
         , _M_dialog ( 0 )
         , _M_current_overall_duration ( 0 )
+        , _M_icon("dontpanik")
 {
     setAspectRatioMode(Plasma::IgnoreAspectRatio);
     KGlobal::locale()->insertCatalog("dontpanik_plasma");
-    setPopupIcon ( "dontpanik" );
+    updateIcon();
 }
 
 
@@ -94,7 +95,7 @@ QGraphicsWidget* PlasmaDontPanic::graphicsWidget()
 void PlasmaDontPanic::toolTipAboutToShow()
 {
     Plasma::ToolTipContent toolTip;
-    toolTip.setImage ( KIcon ( "dontpanik" ) );
+    toolTip.setImage ( KIcon ( icon() ) );
     toolTip.setMainText ( duration_formatter().format ( _M_current_overall_duration ) );
     toolTip.setSubText(detail::actionDescription().forAction(_M_current_action));
     Plasma::ToolTipManager::self()->setContent ( this, toolTip );
@@ -112,6 +113,7 @@ void PlasmaDontPanic::dataUpdated ( QString const&source,Plasma::DataEngine::Dat
     {
         _M_current_overall_duration = data.constFind ( "Time" ).value().toInt();
         emit currentDurationChanged ( _M_current_overall_duration );
+        updateIcon();
     }
     if ( source == "dp/current activity" )
     {
@@ -124,6 +126,7 @@ void PlasmaDontPanic::dataUpdated ( QString const&source,Plasma::DataEngine::Dat
             _M_current_action.duration = data.constFind ( "duration" ).value().toInt();
         }
         emit currentActionChanged ( _M_current_action );
+        updateIcon();
     }
     if(source.startsWith(src_favorites))
     {
@@ -228,6 +231,31 @@ void PlasmaDontPanic::store_in_favorites(detail::Favorite const& fav)
     _M_favorites.replace(index, fav);
     emit favorite_updated(fav);
   }
+}
+
+QString PlasmaDontPanic::icon() const
+{
+  return _M_icon;
+}
+
+
+void PlasmaDontPanic::updateIcon()
+{
+  static int EIGHT_HOURS = 480;
+  _M_icon = "dontpanik";
+   if(_M_current_action.active)
+   {
+     if(_M_current_overall_duration < EIGHT_HOURS)
+     {
+       _M_icon = "dontpanik-green";
+     }
+     else
+     {
+       _M_icon = "dontpanik-red";
+     }
+   }
+   setPopupIcon(_M_icon);
+   emit icon_updated(_M_icon);
 }
 
 }
