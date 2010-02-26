@@ -10,3 +10,4 @@ GenericName=A personal time tracker
 GenericName[de]=Eine persönliche Zeiterfassung
 Terminal=0
 X-Ubuntu-Gettext-Domain=desktop_kdesdk
+Categories=Office;

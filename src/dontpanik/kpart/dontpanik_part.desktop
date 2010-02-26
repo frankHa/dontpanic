@@ -11,4 +11,4 @@ MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;tex
 ServiceTypes=KParts/ReadOnlyPart
 X-KDE-Library=dontpanikpart
 Type=Service
-X-Ubuntu-Gettext-Domain=desktop_kdesdk
+X-Ubuntu-Gettext-Domain=desktop_dontpanic
