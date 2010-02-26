@@ -68,6 +68,8 @@ namespace dp
         void stopCurrentAction();
         // ---------------------------------------------------------------------------------      
         void continueLastAction();
+        // ---------------------------------------------------------------------------------
+        void continueAction(Action const& a);
         // ---------------------------------------------------------------------------------      
         void startActionFromTemplate(ActionTemplate const& t);
         void startActionFromTemplate(Uuid const& t);

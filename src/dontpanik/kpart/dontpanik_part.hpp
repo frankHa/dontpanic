@@ -55,7 +55,7 @@ class DontPanikPart : public KParts::ReadOnlyPart
     void editTasks();
     void addAction();
     void stopCurrentAction();
-    void continueLastAction();
+    void continueAction();
     void startNewAction();
     void viewDayAction();
     void viewReportsAction();

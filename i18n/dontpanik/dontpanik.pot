@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-22 23:43+0100\n"
+"POT-Creation-Date: 2010-02-26 20:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,42 +16,41 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: kpart/core/kactionstable.cpp:107
+#: kpart/core/kactionstable.cpp:108
 msgid "Do you really want to remove the selected action?"
 msgstr ""
 
-#: kpart/core/kactionstable.cpp:107
+#: kpart/core/kactionstable.cpp:108
 msgid "Remove Action"
 msgstr ""
 
-#: kpart/core/kactionstablemodel.cpp:82
+#: kpart/core/kactionstablemodel.cpp:83
 msgid ""
 "This Task:\t%1\n"
-"Today:\t%2\n"
-"uuid:\t:%3"
-msgstr ""
-
-#: kpart/core/kactionstablemodel.cpp:204
-msgid "Start"
-msgstr ""
-
-#: kpart/core/kactionstablemodel.cpp:205
-msgid "End"
-msgstr ""
-
-#: kpart/core/kactionstablemodel.cpp:206
-msgid "Title"
-msgstr ""
-
-#: kpart/core/kactionstablemodel.cpp:207
-msgid "Type"
+"Today:\t%2"
 msgstr ""
 
 #: kpart/core/kactionstablemodel.cpp:208
+msgid "Start"
+msgstr ""
+
+#: kpart/core/kactionstablemodel.cpp:209
+msgid "End"
+msgstr ""
+
+#: kpart/core/kactionstablemodel.cpp:210
+msgid "Title"
+msgstr ""
+
+#: kpart/core/kactionstablemodel.cpp:211
+msgid "Type"
+msgstr ""
+
+#: kpart/core/kactionstablemodel.cpp:212
 msgid "Project"
 msgstr ""
 
-#: kpart/core/kactionstablemodel.cpp:209 kpart/core/kprojectstablemodel.cpp:92
+#: kpart/core/kactionstablemodel.cpp:213 kpart/core/kprojectstablemodel.cpp:92
 #: kpart/core/ktaskstablemodel.cpp:94
 msgid "Comment"
 msgstr ""
@@ -129,64 +128,40 @@ msgstr ""
 msgid "Remove Task Description"
 msgstr ""
 
-#: kpart/dontpanik_part.cpp:67
+#: kpart/dontpanik_part.cpp:68
 msgid "DontPanikPart"
 msgstr ""
 
-#: kpart/dontpanik_part.cpp:120
+#: kpart/dontpanik_part.cpp:121
 msgid "Edit Projects"
 msgstr ""
 
-#: kpart/dontpanik_part.cpp:126
+#: kpart/dontpanik_part.cpp:127
 msgid "Edit Tasks/Worktypes"
 msgstr ""
 
-#: kpart/dontpanik_part.cpp:132
+#: kpart/dontpanik_part.cpp:133
 msgid "Add Action"
 msgstr ""
 
-#: kpart/dontpanik_part.cpp:134
-msgid "Ctrl+A"
-msgstr ""
-
-#: kpart/dontpanik_part.cpp:139
+#: kpart/dontpanik_part.cpp:140
 msgid "Start Action"
 msgstr ""
 
-#: kpart/dontpanik_part.cpp:141
-msgid "Ctrl+S"
-msgstr ""
-
-#: kpart/dontpanik_part.cpp:146
+#: kpart/dontpanik_part.cpp:147
 msgid "Stop current Action"
 msgstr ""
 
-#: kpart/dontpanik_part.cpp:148
-msgid "Ctrl+T"
+#: kpart/dontpanik_part.cpp:154
+msgid "Resume Action"
 msgstr ""
 
-#: kpart/dontpanik_part.cpp:153
-msgid "Resume the last Action"
-msgstr ""
-
-#: kpart/dontpanik_part.cpp:155
-msgid "Ctrl+R"
-msgstr ""
-
-#: kpart/dontpanik_part.cpp:160
+#: kpart/dontpanik_part.cpp:161
 msgid "Day View"
 msgstr ""
 
-#: kpart/dontpanik_part.cpp:162
-msgid "Ctrl+V, Ctrl+D"
-msgstr ""
-
-#: kpart/dontpanik_part.cpp:167
+#: kpart/dontpanik_part.cpp:168
 msgid "Reports View"
-msgstr ""
-
-#: kpart/dontpanik_part.cpp:169
-msgid "Ctrl+V, Ctrl+R"
 msgstr ""
 
 #: shell/dontpanik.cpp:58

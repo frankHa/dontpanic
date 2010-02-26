@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-22 23:43+0100\n"
-"PO-Revision-Date: 2010-02-22 21:41+0100\n"
+"POT-Creation-Date: 2010-02-26 20:35+0100\n"
+"PO-Revision-Date: 2010-02-26 20:34+0100\n"
 "Last-Translator: Frank Habel <frank@bugplasma.de>\n"
 "Language-Team: Deutsch <>\n"
 "MIME-Version: 1.0\n"
@@ -17,45 +17,43 @@ msgstr ""
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: kpart/core/kactionstable.cpp:107
+#: kpart/core/kactionstable.cpp:108
 msgid "Do you really want to remove the selected action?"
 msgstr "Möchten Sie die ausgewählte Aktion wirklich löschen?"
 
-#: kpart/core/kactionstable.cpp:107
+#: kpart/core/kactionstable.cpp:108
 msgid "Remove Action"
 msgstr "Aktion Löschen"
 
-#: kpart/core/kactionstablemodel.cpp:82
+#: kpart/core/kactionstablemodel.cpp:83
 msgid ""
 "This Task:\t%1\n"
-"Today:\t%2\n"
-"uuid:\t:%3"
+"Today:\t%2"
 msgstr ""
 "Diese Aufgabe:\t%1\n"
-"Heute:\t%2\n"
-"uuid:\t:%3"
+"Heute:\t%2"
 
-#: kpart/core/kactionstablemodel.cpp:204
+#: kpart/core/kactionstablemodel.cpp:208
 msgid "Start"
 msgstr "Start"
 
-#: kpart/core/kactionstablemodel.cpp:205
+#: kpart/core/kactionstablemodel.cpp:209
 msgid "End"
 msgstr "Ende"
 
-#: kpart/core/kactionstablemodel.cpp:206
+#: kpart/core/kactionstablemodel.cpp:210
 msgid "Title"
 msgstr "Titel"
 
-#: kpart/core/kactionstablemodel.cpp:207
+#: kpart/core/kactionstablemodel.cpp:211
 msgid "Type"
 msgstr "Tätigkeitstyp"
 
-#: kpart/core/kactionstablemodel.cpp:208
+#: kpart/core/kactionstablemodel.cpp:212
 msgid "Project"
 msgstr "Projekt"
 
-#: kpart/core/kactionstablemodel.cpp:209 kpart/core/kprojectstablemodel.cpp:92
+#: kpart/core/kactionstablemodel.cpp:213 kpart/core/kprojectstablemodel.cpp:92
 #: kpart/core/ktaskstablemodel.cpp:94
 msgid "Comment"
 msgstr "Bemerkung"
@@ -138,65 +136,41 @@ msgstr "Möchten Sie den ausgewählten Tätigkeitstyp wirklich löschen?"
 msgid "Remove Task Description"
 msgstr "Tätigkeitstyp Löschen"
 
-#: kpart/dontpanik_part.cpp:67
+#: kpart/dontpanik_part.cpp:68
 msgid "DontPanikPart"
 msgstr "DontPanikPart"
 
-#: kpart/dontpanik_part.cpp:120
+#: kpart/dontpanik_part.cpp:121
 msgid "Edit Projects"
 msgstr "Projekte verwalten"
 
-#: kpart/dontpanik_part.cpp:126
+#: kpart/dontpanik_part.cpp:127
 msgid "Edit Tasks/Worktypes"
 msgstr "Tätigkeitstypen verwalten"
 
-#: kpart/dontpanik_part.cpp:132
+#: kpart/dontpanik_part.cpp:133
 msgid "Add Action"
 msgstr "Tätigkeit hinzufügen"
 
-#: kpart/dontpanik_part.cpp:134
-msgid "Ctrl+A"
-msgstr "Ctrl+A"
-
-#: kpart/dontpanik_part.cpp:139
+#: kpart/dontpanik_part.cpp:140
 msgid "Start Action"
 msgstr "Tätigkeit starten"
 
-#: kpart/dontpanik_part.cpp:141
-msgid "Ctrl+S"
-msgstr "Ctrl+S"
-
-#: kpart/dontpanik_part.cpp:146
+#: kpart/dontpanik_part.cpp:147
 msgid "Stop current Action"
 msgstr "Aktuelle Tätigkeit beenden"
 
-#: kpart/dontpanik_part.cpp:148
-msgid "Ctrl+T"
-msgstr "Ctrl+T"
+#: kpart/dontpanik_part.cpp:154
+msgid "Resume Action"
+msgstr "Tätigkeit fortsetzen"
 
-#: kpart/dontpanik_part.cpp:153
-msgid "Resume the last Action"
-msgstr "Letzte Tätigkeit fortsetzen"
-
-#: kpart/dontpanik_part.cpp:155
-msgid "Ctrl+R"
-msgstr "Ctrl+R"
-
-#: kpart/dontpanik_part.cpp:160
+#: kpart/dontpanik_part.cpp:161
 msgid "Day View"
 msgstr "Tagesansicht"
 
-#: kpart/dontpanik_part.cpp:162
-msgid "Ctrl+V, Ctrl+D"
-msgstr "Ctrl+V, Ctrl+D"
-
-#: kpart/dontpanik_part.cpp:167
+#: kpart/dontpanik_part.cpp:168
 msgid "Reports View"
 msgstr "Berichtsansicht"
-
-#: kpart/dontpanik_part.cpp:169
-msgid "Ctrl+V, Ctrl+R"
-msgstr "Ctrl+V, Ctrl+R"
 
 #: shell/dontpanik.cpp:58
 msgid "Unable to find the 'Don't Panic' KPart!"
@@ -206,7 +180,8 @@ msgstr "Das Don't Panik KPart konnte leider nicht geladen werden!"
 msgid ""
 "The KDE interface to the personal project based time tracking tool dontpanic"
 msgstr ""
-"Die KDE GUI zum persönlichen projektbasierten Zeiterfassungstool 'Don't Panic'"
+"Die KDE GUI zum persönlichen projektbasierten Zeiterfassungstool 'Don't "
+"Panic'"
 
 #: shell/main.cpp:16
 msgid "Don't Panik"
@@ -539,6 +514,27 @@ msgstr "Frank Habel"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "frank@bugplasma.de"
+
+#~ msgid "Ctrl+S"
+#~ msgstr "Ctrl+S"
+
+#~ msgid "Ctrl+T"
+#~ msgstr "Ctrl+T"
+
+#~ msgid "Ctrl+A"
+#~ msgstr "Ctrl+A"
+
+#~ msgid "Ctrl+R"
+#~ msgstr "Ctrl+R"
+
+#~ msgid "Ctrl+V, Ctrl+D"
+#~ msgstr "Ctrl+V, Ctrl+D"
+
+#~ msgid "Ctrl+V, Ctrl+R"
+#~ msgstr "Ctrl+V, Ctrl+R"
+
+#~ msgid "Resume the last Action"
+#~ msgstr "Letzte Tätigkeit fortsetzen"
 
 #~ msgid ""
 #~ "Work Type;Project;Duration (Activity Group);Percent (Activity Group);"

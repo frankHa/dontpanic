@@ -78,6 +78,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       QVariant KActionsTableModel::tooltip_role(Action const& a, QModelIndex const& index) const
       {
+        Q_UNUSED(index);
         DurationFormatter d;
         QString tt = QString(i18n("This Task:\t%1\nToday:\t%2")).arg(d.format(a.duration())).arg(d.format(duration()));
         return tt;
@@ -113,6 +114,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       QVariant KActionsTableModel::font_role(Action const& a, QModelIndex const& index) const
       {
+        Q_UNUSED(index);
         QFont _font;
         if(a.isActive())
         {
@@ -123,11 +125,13 @@ namespace dp
       // ---------------------------------------------------------------------------------
       int KActionsTableModel::columnCount ( const QModelIndex& parent ) const
       {
+        Q_UNUSED(parent);
         return _M_headers.count();
       }
       // ---------------------------------------------------------------------------------
       int KActionsTableModel::rowCount ( const QModelIndex& parent ) const
       {
+        Q_UNUSED(parent);
         return _M_actions.count();
       }
       // ---------------------------------------------------------------------------------

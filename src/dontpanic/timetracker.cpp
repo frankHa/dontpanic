@@ -85,6 +85,18 @@ namespace dp
     store(_M_current_action);
   }
   // ---------------------------------------------------------------------------------
+  void TimeTracker::continueAction(Action const& a)
+  {
+    if(a == _M_current_action) {continueLastAction(); return;}
+    Action newAction;
+    newAction.setCollaborationType(a.collaborationType());
+    newAction.setComment(a.comment());
+    newAction.setName(a.name());
+    newAction.setProject(a.project());
+    newAction.setTask(a.task());
+    start_action(newAction);
+  }
+  // ---------------------------------------------------------------------------------
   ActionList TimeTracker::findAll(QDateTime const& from, QDateTime const& to)
   {
     ActionList list;

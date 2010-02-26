@@ -36,6 +36,8 @@ DontPanikPart::DontPanikPart ( QWidget *parentWidget, QObject *parent, const QSt
   dp::dbus().register_dp_custom_types();
   QWidget *canvas = new QWidget ( parentWidget );
 
+  setup_actions();
+  
   _M_core = new dp::core::dont_panik_core ( this, canvas );
 
   // notify the part that this is our internal widget
@@ -43,8 +45,6 @@ DontPanikPart::DontPanikPart ( QWidget *parentWidget, QObject *parent, const QSt
   QVBoxLayout *topLayout = new QVBoxLayout ( canvas );
 
   topLayout->addWidget ( _M_core->widget() );
-  
-  setup_actions();
   
   // set our XML-UI resource file
   setXMLFile ( "dontpanik_part.rc" );
@@ -95,9 +95,9 @@ void DontPanikPart::stopCurrentAction()
   _M_core->stopCurrentAction();
 }
 
-void DontPanikPart::continueLastAction()
+void DontPanikPart::continueAction()
 {
-  _M_core->continueLastAction();
+  _M_core->continueAction();
 }
 
 void DontPanikPart::startNewAction()
@@ -132,42 +132,42 @@ void DontPanikPart::setup_actions()
   KAction *add_action = new KAction(this);
   add_action->setText(i18n("Add Action"));
   add_action->setIcon(KIcon("document-new"));
-  add_action->setShortcut( KShortcut(i18n("Ctrl+A")));
+  add_action->setShortcut( KShortcut("Ctrl+A"));
   actionCollection()->addAction ( "add_action", add_action );
   connect ( add_action, SIGNAL ( triggered() ), this, SLOT ( addAction() ) );
   
   KAction *start_new_action = new KAction(this);
   start_new_action->setText(i18n("Start Action"));
   start_new_action->setIcon(KIcon("media-playback-start"));
-  start_new_action->setShortcut( KShortcut(i18n("Ctrl+S")));
+  start_new_action->setShortcut( KShortcut("Ctrl+S"));
   actionCollection()->addAction ( "start_new_action", start_new_action );
   connect ( start_new_action, SIGNAL ( triggered() ), this, SLOT ( startNewAction() ) );
   
   KAction *stop_current_action = new KAction(this);
   stop_current_action->setText(i18n("Stop current Action"));
   stop_current_action->setIcon(KIcon("media-playback-stop"));
-  stop_current_action->setShortcut( KShortcut(i18n("Ctrl+T")));
+  stop_current_action->setShortcut( KShortcut("Ctrl+T"));
   actionCollection()->addAction ( "stop_current_action", stop_current_action );
   connect ( stop_current_action, SIGNAL ( triggered() ), this, SLOT ( stopCurrentAction() ) );
   
-  KAction *continue_last_action = new KAction(this);
-  continue_last_action->setText(i18n("Resume the last Action"));
-  continue_last_action->setIcon(KIcon("media-seek-forward"));
-  continue_last_action->setShortcut( KShortcut(i18n("Ctrl+R")));
-  actionCollection()->addAction ( "continue_last_action", continue_last_action );
-  connect ( continue_last_action, SIGNAL ( triggered() ), this, SLOT ( continueLastAction() ) );
+  KAction *continue_action = new KAction(this);
+  continue_action->setText(i18n("Resume Action"));
+  continue_action->setIcon(KIcon("media-seek-forward"));
+  continue_action->setShortcut( KShortcut("Ctrl+R"));
+  actionCollection()->addAction ( "continue_action", continue_action );
+  connect ( continue_action, SIGNAL ( triggered() ), this, SLOT ( continueAction() ) );
   
   KAction *view_day_action = new KAction(this);
   view_day_action->setText(i18n("Day View"));
   view_day_action->setIcon(KIcon("view-pim-calendar"));
-  view_day_action->setShortcut( KShortcut(i18n("Ctrl+V, Ctrl+D")));
+  view_day_action->setShortcut( KShortcut("Ctrl+V, Ctrl+D"));
   actionCollection()->addAction ( "view_day", view_day_action );
   connect ( view_day_action, SIGNAL ( triggered() ), this, SLOT ( viewDayAction() ) );
   
   KAction *view_reports_action = new KAction(this);
   view_reports_action->setText(i18n("Reports View"));
   view_reports_action->setIcon(KIcon("view-calendar-list"));
-  view_reports_action->setShortcut( KShortcut(i18n("Ctrl+V, Ctrl+R")));
+  view_reports_action->setShortcut( KShortcut("Ctrl+V, Ctrl+R"));
   actionCollection()->addAction ( "view_reports", view_reports_action );
   connect ( view_reports_action, SIGNAL ( triggered() ), this, SLOT ( viewReportsAction() ) );
   

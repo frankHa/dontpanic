@@ -23,8 +23,8 @@ namespace dp
         , _M_read_write ( false )
         , _M_gui_client ( gui_client )
     {
-      _M_widget = new KMainWidget ( parent, new KParts::StatusBarExtension(gui_client) );
       context()->registerGlobalActions(gui_client->actionCollection());
+      _M_widget = new KMainWidget ( parent, new KParts::StatusBarExtension(gui_client) );      
     }
     // ---------------------------------------------------------------------------------
     QWidget *dont_panik_core::widget()
@@ -56,9 +56,10 @@ namespace dp
       context()->timeTracker()->stopCurrentAction();
     }
     // ---------------------------------------------------------------------------------
-    void dont_panik_core::continueLastAction()
+    void dont_panik_core::continueAction()
     {
-      context()->timeTracker()->continueLastAction();
+      //context()->timeTracker()->continueLastAction();
+      emit continueActionTriggered();
     }
     // ---------------------------------------------------------------------------------
     void dont_panik_core::startNewAction()

@@ -112,6 +112,17 @@ namespace dp
       }
     }
     // ---------------------------------------------------------------------------------
+    void TimeTracker::continueAction(Action const& action)
+    {
+      QDBusPendingReply<> reply =remote()->continueAction(action);
+      reply.waitForFinished();
+      if(reply.isError())
+      {
+        qWarning()<<reply.error();
+        emit error(QDBusError::errorString(reply.error().type()));
+      }
+    }
+    // ---------------------------------------------------------------------------------
     ActionList TimeTracker::findAll(QDate const& day)
     {
       QDateTime _from(day);

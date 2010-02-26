@@ -43,6 +43,7 @@ namespace dp
       init_model();
       init_menu_actions();
       init_item_delegate();
+      connect(context()->globalActions()->action("continue_action"), SIGNAL(triggered()), this, SLOT(on_continue_action()));
     }
     // ---------------------------------------------------------------------------------
     void KActionsTable::load_actions_of(QDate const& day)
@@ -64,7 +65,7 @@ namespace dp
       menu.addSeparator();
       menu.addAction(context()->globalActions()->action("start_new_action"));
       menu.addAction(context()->globalActions()->action("stop_current_action"));
-      menu.addAction(context()->globalActions()->action("continue_last_action"));
+      menu.addAction(context()->globalActions()->action("continue_action"));
       if(this->selectionModel()->hasSelection())
       {
         menu.addSeparator();
@@ -133,6 +134,18 @@ namespace dp
         }
       }
       return QTableView::eventFilter(obj, event);
+    }
+    // ---------------------------------------------------------------------------------
+    void KActionsTable::on_continue_action()
+    {
+      Action const& current_selection = _M_model->at(_M_sort_proxy_model->mapToSource(currentIndex()));  
+      if(current_selection.isValid())
+      {
+        context()->timeTracker()->continueAction(current_selection);
+      } else
+      {
+        context()->timeTracker()->continueLastAction();
+      }
     }
     // ---------------------------------------------------------------------------------
   }//core

@@ -14,7 +14,7 @@
     <Separator />
     <Action name="start_new_action" />
     <Action name="stop_current_action" />
-    <Action name="continue_last_action" />
+    <Action name="continue_action" />
   </Menu>
 </MenuBar>
 <ToolBar name="viewToolbar"><text>View Toolbar</text>
@@ -27,6 +27,6 @@
   <Separator />
   <Action name="start_new_action" />
   <Action name="stop_current_action" />
-  <Action name="continue_last_action" /> 
+  <Action name="continue_action" /> 
 </ToolBar>
 </kpartgui>
