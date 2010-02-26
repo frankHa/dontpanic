@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-26 00:46+0100\n"
+"POT-Creation-Date: 2010-02-26 10:06+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,8 +25,7 @@ msgid "%1 possible actions..."
 msgstr ""
 
 #: plasmoid/detail/actiondescription.cpp:35
-msgid ""
-"Currently working on:<br/><br/><b>%1 / %2</b><br/>since: <b>%3 (%4h)</b>"
+msgid "Currently working on:<br/><b>%1 / %2</b><br/>since: <b>%3 (%4h)</b>"
 msgstr ""
 
 #: plasmoid/detail/actiondescription.cpp:44
