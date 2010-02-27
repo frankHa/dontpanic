@@ -10,84 +10,93 @@
 #include "keditactiondialog.h"
 #include "kprojectsdialog.h"
 #include "ktasksdialog.h"
+#include "statusnotifieritem.h"
 #include <KStatusBar>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
-  // ---------------------------------------------------------------------------------
-  namespace core
-  {
-    // ---------------------------------------------------------------------------------
-    dont_panik_core::dont_panik_core ( KParts::ReadOnlyPart *gui_client, QWidget *parent )
+// ---------------------------------------------------------------------------------
+namespace core
+{
+// ---------------------------------------------------------------------------------
+dont_panik_core::dont_panik_core ( KParts::ReadOnlyPart *gui_client, QWidget *parent )
         : QObject ( parent )
         , _M_read_write ( false )
         , _M_gui_client ( gui_client )
-    {
-      context()->registerGlobalActions(gui_client->actionCollection());
-      _M_widget = new KMainWidget ( parent, new KParts::StatusBarExtension(gui_client) );      
-    }
-    // ---------------------------------------------------------------------------------
-    QWidget *dont_panik_core::widget()
-    {
-      return _M_widget;
-    }
-    // ---------------------------------------------------------------------------------
-    void dont_panik_core::editProjects()
-    {
-      KProjectsDialog dlg ( widget() );
-      dlg.exec();
-    }
-    // ---------------------------------------------------------------------------------
-    void dont_panik_core::editTasks()
-    {
-      KTasksDialog dlg ( widget() );
-      dlg.exec();
-    }
-    // ---------------------------------------------------------------------------------
-    void dont_panik_core::addAction()
-    {
-      KEditActionDialog dlg;
-      dlg.setCurrentDay(context()->currentDate());
-      dlg.exec();
-    }
-    // ---------------------------------------------------------------------------------
-    void dont_panik_core::stopCurrentAction()
-    {
-      context()->timeTracker()->stopCurrentAction();
-    }
-    // ---------------------------------------------------------------------------------
-    void dont_panik_core::continueAction()
-    {
-      //context()->timeTracker()->continueLastAction();
-      emit continueActionTriggered();
-    }
-    // ---------------------------------------------------------------------------------
-    void dont_panik_core::startNewAction()
-    {
-      context()->timeTracker()->startNewAction();
-    }
-    // ---------------------------------------------------------------------------------
-    void dont_panik_core::viewDayAction()
-    {
-      _M_widget->show_dayview();
-    }
-    // ---------------------------------------------------------------------------------
-    void dont_panik_core::viewReportsAction()
-    {
-      _M_widget->show_reportview();
-    }
-    // ---------------------------------------------------------------------------------
-    bool dont_panik_core::openFile()
-    {
-      return true;
-    }
-    // ---------------------------------------------------------------------------------
-    bool dont_panik_core::is_read_write() const
-    {
-      return _M_read_write;
-    }
-    // ---------------------------------------------------------------------------------
-  }//core
-  // ---------------------------------------------------------------------------------
+{
+    context()->registerGlobalActions(gui_client->actionCollection());
+    _M_widget = new KMainWidget ( parent, new KParts::StatusBarExtension(gui_client) );
+    init_status_notifier_item();
+}
+// ---------------------------------------------------------------------------------
+QWidget *dont_panik_core::widget()
+{
+    return _M_widget;
+}
+// ---------------------------------------------------------------------------------
+void dont_panik_core::editProjects()
+{
+    KProjectsDialog dlg ( widget() );
+    dlg.exec();
+}
+// ---------------------------------------------------------------------------------
+void dont_panik_core::editTasks()
+{
+    KTasksDialog dlg ( widget() );
+    dlg.exec();
+}
+// ---------------------------------------------------------------------------------
+void dont_panik_core::addAction()
+{
+    KEditActionDialog dlg;
+    dlg.setCurrentDay(context()->currentDate());
+    dlg.exec();
+}
+// ---------------------------------------------------------------------------------
+void dont_panik_core::stopCurrentAction()
+{
+    context()->timeTracker()->stopCurrentAction();
+}
+// ---------------------------------------------------------------------------------
+void dont_panik_core::continueAction()
+{
+    //context()->timeTracker()->continueLastAction();
+    emit continueActionTriggered();
+}
+// ---------------------------------------------------------------------------------
+void dont_panik_core::startNewAction()
+{
+    context()->timeTracker()->startNewAction();
+}
+// ---------------------------------------------------------------------------------
+void dont_panik_core::viewDayAction()
+{
+    _M_widget->show_dayview();
+}
+// ---------------------------------------------------------------------------------
+void dont_panik_core::viewReportsAction()
+{
+    _M_widget->show_reportview();
+}
+// ---------------------------------------------------------------------------------
+bool dont_panik_core::openFile()
+{
+    return true;
+}
+// ---------------------------------------------------------------------------------
+bool dont_panik_core::is_read_write() const
+{
+    return _M_read_write;
+}
+// ---------------------------------------------------------------------------------
+// private stuff:
+// ---------------------------------------------------------------------------------
+void dont_panik_core::init_status_notifier_item()
+{
+  _M_status_notifier_item = new StatusNotifierItem(this);
+}
+// ---------------------------------------------------------------------------------
+}//core
+// ---------------------------------------------------------------------------------
 }//dp
 // ---------------------------------------------------------------------------------

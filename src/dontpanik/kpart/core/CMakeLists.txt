@@ -32,6 +32,7 @@ set(dontpanikpart_LIB_SRCS
     ktaskstable.cpp
     ktaskstablemodel.cpp    
     dont_panik_part_core.cpp
+    statusnotifieritem.cpp
    )
 
 set(dontpanikpart_LIB_UIS

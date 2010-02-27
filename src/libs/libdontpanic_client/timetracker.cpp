@@ -20,6 +20,7 @@
 #include "libdontpanic_client/timetracker.h"
 #include <libdontpanic/actiontemplate.hpp>
 #include <QDBusConnection>
+#include <QDBusServiceWatcher>
 #include <KDebug>
 #include <remote_timetracker.h>
 namespace dp
@@ -31,7 +32,11 @@ namespace dp
     TimeTracker::TimeTracker ( QObject *parent )
         : QObject ( parent )
         ,_M_remote(0)
-        , _M_current_action(NullAction()){}
+        , _M_current_action(NullAction())
+        {
+          //QDBusServiceWatcher *watcher = new QDBusServiceWatcher("org.dontpanic", QDBusConnection::sessionBus(), QDBusServiceWatcher::WatchForOwnerChange, this);
+          //connect(watcher, SIGNAL(serviceOwnerChanged(QString,QString,QString)), this, SLOT(reset_remote_object()));
+        }
     // ---------------------------------------------------------------------------------
     TimeTracker::~TimeTracker ( ){}
     // ---------------------------------------------------------------------------------
@@ -175,16 +180,7 @@ namespace dp
     {
       if(_M_remote == 0)
       {
-        _M_remote = new org::dontpanic::TimeTracker
-        ( "org.dontpanic", "/TimeTracker", QDBusConnection::sessionBus(), this );
-        if(!_M_remote->isValid())
-        {
-          qWarning()<<_M_remote->lastError();
-        }
-        connect(_M_remote, SIGNAL( stored ( dp::Action ) ), this, SLOT( on_stored ( dp::Action ) ));
-        connect(_M_remote, SIGNAL(removed(dp::Action)), this, SLOT(on_removed(dp::Action)));
-        connect(_M_remote, SIGNAL(error(QString const&)), this, SIGNAL(error(QString)));
-        setCurrentlyActiveAction(_M_remote->findCurrentlyActiveAction());
+       reset_remote_object(); 
       }
       return _M_remote;
     }
@@ -199,6 +195,22 @@ namespace dp
     {
       if(a == _M_current_action) setCurrentlyActiveAction(NullAction());
       emit removed(a);
+    }
+    // ---------------------------------------------------------------------------------
+    void TimeTracker::reset_remote_object()
+    {
+      kDebug()<<"resetting remote object";
+      if(_M_remote != 0){delete _M_remote;}
+      _M_remote = new org::dontpanic::TimeTracker
+      ( "org.dontpanic", "/TimeTracker", QDBusConnection::sessionBus(), this );
+      if(!_M_remote->isValid())
+      {
+        qWarning()<<_M_remote->lastError();
+      }
+      connect(_M_remote, SIGNAL( stored ( dp::Action ) ), this, SLOT( on_stored ( dp::Action ) ));
+      connect(_M_remote, SIGNAL(removed(dp::Action)), this, SLOT(on_removed(dp::Action)));
+      connect(_M_remote, SIGNAL(error(QString const&)), this, SIGNAL(error(QString)));
+      setCurrentlyActiveAction(_M_remote->findCurrentlyActiveAction());
     }
     // ---------------------------------------------------------------------------------
     void TimeTracker::setCurrentlyActiveAction(dp::Action const& a)

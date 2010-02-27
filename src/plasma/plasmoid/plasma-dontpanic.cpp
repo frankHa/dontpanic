@@ -142,11 +142,13 @@ void PlasmaDontPanic::dataUpdated ( QString const&source,Plasma::DataEngine::Dat
 
 void PlasmaDontPanic::on_source_added ( QString const& src )
 {
+  kWarning()<<src;
     _M_dont_panic_engine->connectSource(src,this);
 }
 
 void PlasmaDontPanic::on_source_removed ( QString const& src )
 {
+  kWarning()<<src;
   _M_dont_panic_engine->disconnectSource(src,this);
   if(src.startsWith(src_favorites))
   {

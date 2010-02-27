@@ -51,6 +51,7 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void KReportTypesList::contextMenuEvent(QContextMenuEvent *evt)
     {
+      Q_UNUSED(evt);
 //       QMenu menu;
 //       menu.addAction(_M_new_action_template);
 //       if(this->selectionModel()->hasSelection())
