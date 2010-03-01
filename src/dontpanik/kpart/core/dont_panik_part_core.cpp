@@ -26,7 +26,7 @@ dont_panik_core::dont_panik_core ( KParts::ReadOnlyPart *gui_client, QWidget *pa
 {
     context()->registerGlobalActions(gui_client->actionCollection());
     _M_widget = new KMainWidget ( parent, new KParts::StatusBarExtension(gui_client) );
-    init_status_notifier_item();
+    init_status_notifier_item(gui_client->widget());
 }
 // ---------------------------------------------------------------------------------
 QWidget *dont_panik_core::widget()
@@ -89,11 +89,18 @@ bool dont_panik_core::is_read_write() const
     return _M_read_write;
 }
 // ---------------------------------------------------------------------------------
+StatusNotifierItem* dont_panik_core::statusNotifierItem()
+{
+  return _M_status_notifier_item;
+}
+// ---------------------------------------------------------------------------------
 // private stuff:
 // ---------------------------------------------------------------------------------
-void dont_panik_core::init_status_notifier_item()
+void dont_panik_core::init_status_notifier_item(QWidget *parent_widget)
 {
   _M_status_notifier_item = new StatusNotifierItem(this);
+  //_M_status_notifier_item->setAssociatedWidget(parent_widget);
+  //QWidget *w = static_cast<QWidget *>(parent_widget->parent());  
 }
 // ---------------------------------------------------------------------------------
 }//core

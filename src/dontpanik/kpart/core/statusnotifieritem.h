@@ -20,18 +20,22 @@
 #ifndef DP_CORE_STATUSNOTIFIERITEM_H
 #define DP_CORE_STATUSNOTIFIERITEM_H
 #include <libdontpanic/defines.hpp>
+#include <libdontpanic/dp_export.hpp>
 #include <KStatusNotifierItem>
 namespace dp {
 
 namespace core {
 
-class StatusNotifierItem: public KStatusNotifierItem
+class DP_EXPORT StatusNotifierItem
+            : public KStatusNotifierItem
 {
     Q_OBJECT
 
 public:
     StatusNotifierItem(QObject* parent = 0);
-  private:
+public:
+    void setAssociatedWidget(QWidget *w);
+private:
     void init();
 };
 

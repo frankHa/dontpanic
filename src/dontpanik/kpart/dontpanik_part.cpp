@@ -3,6 +3,7 @@
 #include "dontpanik_part.moc"
 
 #include "dont_panik_part_core.hpp"
+#include "statusnotifieritem.h"
 #include <libdontpanic/dbus.hpp>
 
 #include <kaction.h>
@@ -13,6 +14,7 @@
 #include <kstandardaction.h>
 #include <kshortcut.h>
 #include <kdebug.h>
+#include <KStatusNotifierItem>
 
 #include <QtCore/QFile>
 #include <QtCore/QTextStream>
@@ -37,11 +39,12 @@ DontPanikPart::DontPanikPart ( QWidget *parentWidget, QObject *parent, const QSt
   QWidget *canvas = new QWidget ( parentWidget );
 
   setup_actions();
-  
+  setWidget ( canvas );
   _M_core = new dp::core::dont_panik_core ( this, canvas );
+  _M_core->statusNotifierItem()->setAssociatedWidget(parentWidget);
 
   // notify the part that this is our internal widget
-  setWidget ( canvas );
+  
   QVBoxLayout *topLayout = new QVBoxLayout ( canvas );
 
   topLayout->addWidget ( _M_core->widget() );

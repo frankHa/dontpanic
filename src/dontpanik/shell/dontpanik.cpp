@@ -39,8 +39,7 @@ DontPanik::DontPanik()
   {
     // now that the Part is loaded, we cast it to a Part to get
     // our hands on it
-    _M_part = static_cast<KParts::ReadOnlyPart *> ( factory->create ( this,
-              "DontPanikPart" ) );
+    _M_part = factory->create<KParts::ReadOnlyPart> ( this, this);
 
     if ( _M_part )
     {

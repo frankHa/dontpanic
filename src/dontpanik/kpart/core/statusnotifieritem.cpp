@@ -33,17 +33,28 @@ StatusNotifierItem::StatusNotifierItem(QObject* parent)
 {
   init();
 }
+
+// ---------------------------------------------------------------------------------
+void StatusNotifierItem::setAssociatedWidget(QWidget* w)
+{
+  KStatusNotifierItem::setAssociatedWidget(w);
+  connect(this, SIGNAL(activateRequested(bool,QPoint)), w, SLOT(setVisible(bool)));
+}
+
 // ---------------------------------------------------------------------------------
 // private stuff:
 // ---------------------------------------------------------------------------------
 void StatusNotifierItem::init()
 {
   setIconByName("dontpanik");
-  KMenu *menu = contextMenu();
+  KMenu *menu = contextMenu();  
   menu->addAction(context()->globalActions()->action("start_new_action"));
   menu->addAction(context()->globalActions()->action("stop_current_action"));
-  menu->addAction(context()->globalActions()->action("continue_action"));
+  menu->addAction(context()->globalActions()->action("continue_action")); 
+  
+  
 }
+
 
 }
 }
