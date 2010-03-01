@@ -20,7 +20,6 @@
 #include "libdontpanic_client/timetracker.h"
 #include <libdontpanic/actiontemplate.hpp>
 #include <QDBusConnection>
-#include <QDBusServiceWatcher>
 #include <KDebug>
 #include <remote_timetracker.h>
 namespace dp
