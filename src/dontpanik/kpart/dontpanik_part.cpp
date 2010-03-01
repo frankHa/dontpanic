@@ -1,6 +1,7 @@
 #include "dontpanik_part.hpp"
 
 #include "dontpanik_part.moc"
+#include <config.h>
 
 #include "dont_panik_part_core.hpp"
 #include "statusnotifieritem.h"
@@ -14,7 +15,6 @@
 #include <kstandardaction.h>
 #include <kshortcut.h>
 #include <kdebug.h>
-#include <KStatusNotifierItem>
 
 #include <QtCore/QFile>
 #include <QtCore/QTextStream>
@@ -41,8 +41,9 @@ DontPanikPart::DontPanikPart ( QWidget *parentWidget, QObject *parent, const QSt
   setup_actions();
   setWidget ( canvas );
   _M_core = new dp::core::dont_panik_core ( this, canvas );
+  #ifdef DP_BUILD_TRAY_ICON_SUPPORT
   _M_core->statusNotifierItem()->setAssociatedWidget(parentWidget);
-
+  #endif //DP_BUILD_TRAY_ICON_SUPPORT
   // notify the part that this is our internal widget
   
   QVBoxLayout *topLayout = new QVBoxLayout ( canvas );

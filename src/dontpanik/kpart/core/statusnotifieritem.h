@@ -20,6 +20,8 @@
 #ifndef DP_CORE_STATUSNOTIFIERITEM_H
 #define DP_CORE_STATUSNOTIFIERITEM_H
 #include <libdontpanic/defines.hpp>
+#include <config.h>
+#ifdef DP_BUILD_TRAY_ICON_SUPPORT
 #include <libdontpanic/dp_export.hpp>
 #include <KStatusNotifierItem>
 class KAction;
@@ -47,5 +49,5 @@ private:
 }
 
 }
-
+#endif //DP_BUILD_TRAY_ICON_SUPPORT
 #endif // DP_CORE_STATUSNOTIFIERITEM_H

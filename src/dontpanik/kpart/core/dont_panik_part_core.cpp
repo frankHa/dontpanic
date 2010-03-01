@@ -1,6 +1,8 @@
 #include "dont_panik_part_core.hpp"
 #include "dont_panik_part_core.moc"
 // ---------------------------------------------------------------------------------
+#include <config.h>
+// ---------------------------------------------------------------------------------
 //Qt includes
 #include <QTextEdit>
 #include <QTextStream>
@@ -98,9 +100,11 @@ StatusNotifierItem* dont_panik_core::statusNotifierItem()
 // ---------------------------------------------------------------------------------
 void dont_panik_core::init_status_notifier_item(QWidget *parent_widget)
 {
+  #ifdef DP_BUILD_TRAY_ICON_SUPPORT
   _M_status_notifier_item = new StatusNotifierItem(this);
   //_M_status_notifier_item->setAssociatedWidget(parent_widget);
   //QWidget *w = static_cast<QWidget *>(parent_widget->parent());  
+  #endif //DP_BUILD_TRAY_ICON_SUPPORT
 }
 // ---------------------------------------------------------------------------------
 }//core

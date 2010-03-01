@@ -16,8 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
-
 #include "statusnotifieritem.h"
+#ifdef DP_BUILD_TRAY_ICON_SUPPORT
 #include "context.h"
 #include "actiontemplateaction.h"
 #include <KMenu>
@@ -76,4 +76,4 @@ KAction* StatusNotifierItem::actionFor(ActionTemplate const& a)
 // ---------------------------------------------------------------------------------
 }
 }
-
+#endif //DP_BUILD_TRAY_ICON_SUPPORT

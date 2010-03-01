@@ -1,5 +1,5 @@
 add_subdirectory(core)
-include_directories(core)
+include_directories(core ${CMAKE_BINARY_DIR})
 
 #########################################################################
 # KPART SECTION
@@ -8,6 +8,8 @@ include_directories(core)
 set(dontpanik_PART_SRCS
    dontpanik_part.cpp
  )
+
+configure_file(config.h.cmake ${CMAKE_BINARY_DIR}/config.h)
 
 kde4_add_plugin(dontpanikpart ${dontpanik_PART_SRCS})
 
