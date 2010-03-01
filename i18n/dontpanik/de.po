@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-26 20:35+0100\n"
+"POT-Creation-Date: 2010-03-01 14:07+0100\n"
 "PO-Revision-Date: 2010-02-26 20:34+0100\n"
 "Last-Translator: Frank Habel <frank@bugplasma.de>\n"
 "Language-Team: Deutsch <>\n"
@@ -136,43 +136,47 @@ msgstr "Möchten Sie den ausgewählten Tätigkeitstyp wirklich löschen?"
 msgid "Remove Task Description"
 msgstr "Tätigkeitstyp Löschen"
 
-#: kpart/dontpanik_part.cpp:68
+#: kpart/core/statusnotifieritem.cpp:61
+msgid "switch activity to..."
+msgstr "Wechsle zu Tätigkeit..."
+
+#: kpart/dontpanik_part.cpp:72
 msgid "DontPanikPart"
 msgstr "DontPanikPart"
 
-#: kpart/dontpanik_part.cpp:121
+#: kpart/dontpanik_part.cpp:125
 msgid "Edit Projects"
 msgstr "Projekte verwalten"
 
-#: kpart/dontpanik_part.cpp:127
+#: kpart/dontpanik_part.cpp:131
 msgid "Edit Tasks/Worktypes"
 msgstr "Tätigkeitstypen verwalten"
 
-#: kpart/dontpanik_part.cpp:133
+#: kpart/dontpanik_part.cpp:137
 msgid "Add Action"
 msgstr "Tätigkeit hinzufügen"
 
-#: kpart/dontpanik_part.cpp:140
+#: kpart/dontpanik_part.cpp:144
 msgid "Start Action"
 msgstr "Tätigkeit starten"
 
-#: kpart/dontpanik_part.cpp:147
+#: kpart/dontpanik_part.cpp:151
 msgid "Stop current Action"
 msgstr "Aktuelle Tätigkeit beenden"
 
-#: kpart/dontpanik_part.cpp:154
+#: kpart/dontpanik_part.cpp:158
 msgid "Resume Action"
 msgstr "Tätigkeit fortsetzen"
 
-#: kpart/dontpanik_part.cpp:161
+#: kpart/dontpanik_part.cpp:165
 msgid "Day View"
 msgstr "Tagesansicht"
 
-#: kpart/dontpanik_part.cpp:168
+#: kpart/dontpanik_part.cpp:172
 msgid "Reports View"
 msgstr "Berichtsansicht"
 
-#: shell/dontpanik.cpp:58
+#: shell/dontpanik.cpp:57
 msgid "Unable to find the 'Don't Panic' KPart!"
 msgstr "Das Don't Panik KPart konnte leider nicht geladen werden!"
 
@@ -545,9 +549,6 @@ msgstr "frank@bugplasma.de"
 
 #~ msgid "Don't Panic"
 #~ msgstr "Don't Panic"
-
-#~ msgid "switch activity to..."
-#~ msgstr "Wechsle zu Tätigkeit..."
 
 #~ msgid "Current activity:<br/>%1/%2<br/>Running since: %3 (%4h)"
 #~ msgstr "Aktuelle Tätigkeit:<br/>%1/%2<br/>Wird ausgeführt seit: %3 (%4h)"
