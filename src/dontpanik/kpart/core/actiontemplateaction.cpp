@@ -17,35 +17,39 @@
 
 */
 
-#ifndef DP_CORE_STATUSNOTIFIERITEM_H
-#define DP_CORE_STATUSNOTIFIERITEM_H
-#include <libdontpanic/defines.hpp>
-#include <libdontpanic/dp_export.hpp>
-#include <KStatusNotifierItem>
-class KAction;
-namespace dp {
+#include "actiontemplateaction.h"
 
-  class ActionTemplate;
-namespace core {
+#include <KIcon>
 
-class DP_EXPORT StatusNotifierItem
-            : public KStatusNotifierItem
+namespace dp
 {
-    Q_OBJECT
+namespace core
+{
+ActionTemplateAction::ActionTemplateAction(QObject* parent)
+        : KAction(parent)
+        ,_M_favorite(NullActionTemplate())
+{
+    connect(this, SIGNAL(triggered()), this, SLOT(on_triggered()));
+}
+ActionTemplateAction& ActionTemplateAction::setFavorite(const ActionTemplate& fav)
+{
+    _M_favorite = fav;
+    setIcon(KIcon(fav.icon()));
+    setText(fav.name());
+    return *this;
+}
 
-public:
-    StatusNotifierItem(QObject* parent = 0);
-public:
-    void setAssociatedWidget(QWidget *w);
-  private:    
-    KAction *actionFor(ActionTemplate const& at);
-    void initFavoritesMenu();
-private:
-    void init();
-};
+void ActionTemplateAction::on_triggered()
+{
+    emit triggered(_M_favorite);
+}
 
+
+ActionTemplate const& ActionTemplateAction::favorite() const
+{
+    return _M_favorite;
 }
 
 }
+}
 
-#endif // DP_CORE_STATUSNOTIFIERITEM_H

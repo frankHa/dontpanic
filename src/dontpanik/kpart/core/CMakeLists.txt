@@ -2,6 +2,7 @@
 # PRIVATE SECTION
 #########################################################################
 set(dontpanikpart_LIB_SRCS 
+    actiontemplateaction.cpp
     context.cpp 
     dayinfo.cpp 
     kactiontemplateslist.cpp

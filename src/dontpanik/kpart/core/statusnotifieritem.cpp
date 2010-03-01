@@ -19,7 +19,7 @@
 
 #include "statusnotifieritem.h"
 #include "context.h"
-
+#include "actiontemplateaction.h"
 #include <KMenu>
 
 namespace dp
@@ -50,12 +50,30 @@ void StatusNotifierItem::init()
   KMenu *menu = contextMenu();  
   menu->addAction(context()->globalActions()->action("start_new_action"));
   menu->addAction(context()->globalActions()->action("stop_current_action"));
-  menu->addAction(context()->globalActions()->action("continue_action")); 
-  
-  
+  menu->addAction(context()->globalActions()->action("continue_action"));   
+  initFavoritesMenu();
 }
-
-
+// ---------------------------------------------------------------------------------
+void StatusNotifierItem::initFavoritesMenu()
+{
+  KMenu *menu = contextMenu();  
+  menu->addSeparator();
+  KMenu *favMenu = new KMenu(i18n("switch activity to..."), menu);
+  foreach(ActionTemplate const& at, context()->actionTemplateManager()->allActionTemplates())
+  {
+    favMenu->addAction(actionFor(at));
+  }
+  menu->addMenu(favMenu);
+}
+// ---------------------------------------------------------------------------------
+KAction* StatusNotifierItem::actionFor(ActionTemplate const& a)
+{
+  ActionTemplateAction * ata = new ActionTemplateAction(this);
+  ata->setFavorite(a);
+  connect(ata, SIGNAL(triggered(ActionTemplate)), context()->timeTracker(), SLOT(startActionFromTemplate(ActionTemplate const&)));
+  return ata;
+}
+// ---------------------------------------------------------------------------------
 }
 }
 
