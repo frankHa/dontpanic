@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-01 14:07+0100\n"
-"PO-Revision-Date: 2010-02-26 20:34+0100\n"
+"POT-Creation-Date: 2010-03-02 13:14+0100\n"
+"PO-Revision-Date: 2010-03-02 13:14+0100\n"
 "Last-Translator: Frank Habel <frank@bugplasma.de>\n"
 "Language-Team: Deutsch <>\n"
 "MIME-Version: 1.0\n"
@@ -136,7 +136,7 @@ msgstr "Möchten Sie den ausgewählten Tätigkeitstyp wirklich löschen?"
 msgid "Remove Task Description"
 msgstr "Tätigkeitstyp Löschen"
 
-#: kpart/core/statusnotifieritem.cpp:61
+#: kpart/core/statusnotifieritem.cpp:68
 msgid "switch activity to..."
 msgstr "Wechsle zu Tätigkeit..."
 
@@ -153,8 +153,8 @@ msgid "Edit Tasks/Worktypes"
 msgstr "Tätigkeitstypen verwalten"
 
 #: kpart/dontpanik_part.cpp:137
-msgid "Add Action"
-msgstr "Tätigkeit hinzufügen"
+msgid "Add &new Action"
+msgstr "&Neue Tätigkeit hinzufügen"
 
 #: kpart/dontpanik_part.cpp:144
 msgid "Start Action"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-01 14:07+0100\n"
+"POT-Creation-Date: 2010-03-02 13:14+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -128,7 +128,7 @@ msgstr ""
 msgid "Remove Task Description"
 msgstr ""
 
-#: kpart/core/statusnotifieritem.cpp:61
+#: kpart/core/statusnotifieritem.cpp:68
 msgid "switch activity to..."
 msgstr ""
 
@@ -145,7 +145,7 @@ msgid "Edit Tasks/Worktypes"
 msgstr ""
 
 #: kpart/dontpanik_part.cpp:137
-msgid "Add Action"
+msgid "Add &new Action"
 msgstr ""
 
 #: kpart/dontpanik_part.cpp:144

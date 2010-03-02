@@ -37,9 +37,11 @@ class DP_EXPORT StatusNotifierItem
 
 public:
     StatusNotifierItem(QObject* parent = 0);
+  public slots:
+    void updateTooltip();
 public:
     void setAssociatedWidget(QWidget *w);
-  private:    
+  private:        
     KAction *actionFor(ActionTemplate const& at);
     void initFavoritesMenu();
 private:

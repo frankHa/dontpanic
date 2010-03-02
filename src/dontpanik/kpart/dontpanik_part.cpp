@@ -133,12 +133,12 @@ void DontPanikPart::setup_actions()
   actionCollection()->addAction ( "edit_tasks", edit_tasks );
   connect ( edit_tasks, SIGNAL ( triggered() ), this, SLOT ( editTasks() ) );
   
-  KAction *add_action = new KAction(this);
-  add_action->setText(i18n("Add Action"));
-  add_action->setIcon(KIcon("document-new"));
-  add_action->setShortcut( KShortcut("Ctrl+A"));
-  actionCollection()->addAction ( "add_action", add_action );
-  connect ( add_action, SIGNAL ( triggered() ), this, SLOT ( addAction() ) );
+  KAction *add_new_action = new KAction(this);
+  add_new_action->setText(i18n("Add &new Action"));
+  add_new_action->setIcon(KIcon("document-new"));
+  add_new_action->setShortcut( KShortcut("Ctrl+N"));
+  actionCollection()->addAction ( "add_new_action", add_new_action );
+  connect ( add_new_action, SIGNAL ( triggered() ), this, SLOT ( addAction() ) );
   
   KAction *start_new_action = new KAction(this);
   start_new_action->setText(i18n("Start Action"));

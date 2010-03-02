@@ -10,7 +10,7 @@
     <Action name="view_reports" />
   </Menu>
   <Menu name="action"><text>&amp;Actions</text>
-    <Action name="add_action" />
+    <Action name="add_new_action" />
     <Separator />
     <Action name="start_new_action" />
     <Action name="stop_current_action" />
@@ -23,7 +23,7 @@
 </ToolBar>
 <ToolBar name="actionToolbar"> <text>Action Toolbar</text>
   <Separator />
-  <Action name="add_action" />
+  <Action name="add_new_action" />
   <Separator />
   <Action name="start_new_action" />
   <Action name="stop_current_action" />

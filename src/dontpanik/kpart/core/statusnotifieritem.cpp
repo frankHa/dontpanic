@@ -42,6 +42,12 @@ void StatusNotifierItem::setAssociatedWidget(QWidget* w)
 }
 
 // ---------------------------------------------------------------------------------
+void StatusNotifierItem::updateTooltip()
+{
+  setToolTipIconByName("dontpanik");
+  setToolTipTitle("Don't Panik");
+}
+// ---------------------------------------------------------------------------------
 // private stuff:
 // ---------------------------------------------------------------------------------
 void StatusNotifierItem::init()
@@ -52,6 +58,7 @@ void StatusNotifierItem::init()
   menu->addAction(context()->globalActions()->action("stop_current_action"));
   menu->addAction(context()->globalActions()->action("continue_action"));   
   initFavoritesMenu();
+  updateTooltip();
 }
 // ---------------------------------------------------------------------------------
 void StatusNotifierItem::initFavoritesMenu()
