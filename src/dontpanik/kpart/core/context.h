@@ -26,6 +26,7 @@
 #include <libdontpanic_client/reportmanager.h>
 #include <libdontpanic_client/taskmanager.h>
 #include <libdontpanic_client/timetracker.h>
+#include <libdontpanic_client/plannedworkingtimemanager.h>
 
 #include <QObject>
 #include <KActionCollection>
@@ -62,6 +63,8 @@ namespace dp
         // ---------------------------------------------------------------------------------
         dp::client::TimeTracker* timeTracker();
         // ---------------------------------------------------------------------------------
+        dp::client::PlannedWorkingTimeManager* plannedWorkingtimeManager();
+        // ---------------------------------------------------------------------------------
         QDate currentDate() const;
         // ---------------------------------------------------------------------------------
         void registerGlobalActions(KActionCollection *actions);
@@ -79,6 +82,8 @@ namespace dp
         dp::client::TaskManager *_M_task_manager;
         // ---------------------------------------------------------------------------------
         dp::client::TimeTracker *_M_timetracker;
+        // ---------------------------------------------------------------------------------
+        dp::client::PlannedWorkingTimeManager *_M_planned_working_time_manager;
         // ---------------------------------------------------------------------------------
         QDate _M_current_date;
         // ---------------------------------------------------------------------------------

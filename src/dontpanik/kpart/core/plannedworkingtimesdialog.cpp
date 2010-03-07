@@ -19,6 +19,8 @@
 
 #include "plannedworkingtimesdialog.h"
 #include "ui_plannedworkingtimesdialog.h"
+#include <libdontpanic/worktimeperday.h>
+#include "context.h"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -31,11 +33,50 @@ namespace dp
         , _M_ui ( new Ui::PlannedWorkingTimesDialog )
     {
       _M_ui->setupUi ( this );
+      _M_time_edit_list
+      << _M_ui->monday
+      << _M_ui->tuesday
+      << _M_ui->wednesday
+      << _M_ui->thursday
+      << _M_ui->friday
+      << _M_ui->saturday
+      << _M_ui->sunday;
+      init_time_values();
+      connect ( _M_ui->buttonBox, SIGNAL ( accepted() ), this, SLOT ( store_time_values() ) );
     }
     // ---------------------------------------------------------------------------------
     PlannedWorkingTimesDialog::~PlannedWorkingTimesDialog()
     {
       delete _M_ui;
+    }
+    // ---------------------------------------------------------------------------------
+    void PlannedWorkingTimesDialog::init_time_values()
+    {
+      dp::client::PlannedWorkingTimeManager *time_manager = context()->plannedWorkingtimeManager();
+      for ( int i = 0; i < _M_time_edit_list.size(); ++i )
+      {
+        int day = i + 1;
+        WorktimePerDay const& wtpd = time_manager->load ( day );
+        QTime  const& t = wtpd.plannedWorkingHours();
+        if ( wtpd.isValid() )
+        {
+          _M_time_edit_list[i]->setTime ( t );
+        }
+      }
+    }
+    // ---------------------------------------------------------------------------------
+    void PlannedWorkingTimesDialog::store_time_values()
+    {
+      dp::client::PlannedWorkingTimeManager *time_manager = context()->plannedWorkingtimeManager();
+      WorktimePerDayList wtpds;
+      for ( int i = 0; i < _M_time_edit_list.size(); ++i )
+      {
+        int day = i + 1;
+        WorktimePerDay wtpd ( day );
+        wtpd.setPlannedWorkingHours ( _M_time_edit_list[i]->time () );
+        wtpds<<wtpd;
+      }
+      time_manager->store(wtpds);
     }
     // ---------------------------------------------------------------------------------
   }//core

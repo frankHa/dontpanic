@@ -37,6 +37,7 @@ namespace dp
     , _M_report_manager(new dp::client::ReportManager())
     , _M_task_manager(new dp::client::TaskManager())
     , _M_timetracker((new dp::client::TimeTracker()))
+    , _M_planned_working_time_manager(new dp::client::PlannedWorkingTimeManager())
     , _M_current_date(QDate::currentDate()){}
     
     // ---------------------------------------------------------------------------------
@@ -47,6 +48,7 @@ namespace dp
       delete _M_report_manager;
       delete _M_task_manager;
       delete _M_timetracker;
+      delete _M_planned_working_time_manager;
     }
     // ---------------------------------------------------------------------------------
     void Context::setCurrentDate(QDate const& date)
@@ -82,6 +84,11 @@ namespace dp
     dp::client::TimeTracker* Context::timeTracker()
     {
       return _M_timetracker;
+    }
+    // ---------------------------------------------------------------------------------
+    dp::client::PlannedWorkingTimeManager* Context::plannedWorkingtimeManager()
+    {
+      return _M_planned_working_time_manager;
     }
     // ---------------------------------------------------------------------------------
     void Context::registerGlobalActions(KActionCollection *actions)

@@ -29,7 +29,7 @@ namespace dp
       "SELECT DISTINCT w_day, w_time FROM w_work_time_per_day WHERE (w_day=?)";
       // ---------------------------------------------------------------------------------
       const QString UPDATE_WORKTIME =
-      "UPDATE w_work_time_per_day set w_day=?, w_time=? WHERE (w_day=?)";
+      "UPDATE w_work_time_per_day set w_time=? WHERE (w_day=?)";
       // ---------------------------------------------------------------------------------
       const QString REMOVE_WORKTIME = 
       "DELETE FROM w_work_time_per_day WHERE (w_day=?)";
@@ -47,7 +47,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       success WorktimePerDay::load ( dp::WorktimePerDay &_wt ) const
       {
-        if ( _wt.day() == 0 )
+        if ( !_wt.isValid() )
         {
           return error();
         }
@@ -106,7 +106,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       bool WorktimePerDay::exists ( const dp::WorktimePerDay& _wt ) const
       {
-        if ( _wt.day() == 0 )
+        if ( !_wt.isValid() )
         {
           return false;
         }
@@ -135,7 +135,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       success WorktimePerDay::update ( const dp::WorktimePerDay& _wt ) const
       {
-        if(_wt.day() == 0)
+        if( !_wt.isValid() )
         {
           return error();
         }

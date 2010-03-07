@@ -38,6 +38,11 @@ namespace dp
     return *this;
   }
   // ---------------------------------------------------------------------------------
+  bool WorktimePerDay::isValid() const
+  {
+    return (_M_day_of_week>= Qt::Monday) && (_M_day_of_week<=Qt::Sunday);
+  }
+  // ---------------------------------------------------------------------------------
   int WorktimePerDay::day() const
   {
     return _M_day_of_week;

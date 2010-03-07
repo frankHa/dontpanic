@@ -15,6 +15,14 @@ namespace dp
     }
   }
   // ---------------------------------------------------------------------------------
+  void PlannedWorkingTimeManager::store ( WorktimePerDayList const& wl )
+  {
+    foreach(WorktimePerDay const wt, wl)
+    {
+      store(wt);
+    }
+  }
+  // ---------------------------------------------------------------------------------
   void PlannedWorkingTimeManager::remove ( WorktimePerDay const& t )
   {
     if ( persistence().remove ( t ).was_successful() )

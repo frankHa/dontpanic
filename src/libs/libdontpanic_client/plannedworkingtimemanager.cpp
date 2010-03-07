@@ -46,6 +46,17 @@ namespace dp
       }
     }
     // ---------------------------------------------------------------------------------
+    void PlannedWorkingTimeManager::store(WorktimePerDayList const& wl)
+    {
+      QDBusPendingReply<> reply =remote()->store(wl);
+      reply.waitForFinished();
+      if(reply.isError())
+      {
+        kWarning()<<reply.error();
+        emit error(QDBusError::errorString(reply.error().type()));
+      }
+    }
+    // ---------------------------------------------------------------------------------
     WorktimePerDay PlannedWorkingTimeManager::load(int id)
     {
       return _M_cache.load(id, remote());      
@@ -62,7 +73,7 @@ namespace dp
       }
     }
     // ---------------------------------------------------------------------------------
-    WorktimePerDayList PlannedWorkingTimeManager::allTasks()
+    WorktimePerDayList PlannedWorkingTimeManager::worktimesForWholeWeek()
     {
       return _M_cache.find_all(remote());
     }
