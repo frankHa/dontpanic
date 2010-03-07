@@ -50,7 +50,7 @@
     <widget class="KTextBrowser" name="report"/>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupBox">
+    <widget class="QGroupBox" name="summary">
      <property name="title">
       <string>Report Summary</string>
      </property>
