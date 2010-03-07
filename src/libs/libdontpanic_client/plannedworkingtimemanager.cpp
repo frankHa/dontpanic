@@ -62,6 +62,12 @@ namespace dp
       return _M_cache.load(id, remote());      
     }
     // ---------------------------------------------------------------------------------
+    WorktimePerDay PlannedWorkingTimeManager::plannedWorktimeToday()
+    {
+      int day = QDate::currentDate().dayOfWeek();
+      return load(day);
+    }
+    // ---------------------------------------------------------------------------------
     void PlannedWorkingTimeManager::remove(WorktimePerDay const& p)
     {
       QDBusPendingReply<> reply =remote()->remove(p);
