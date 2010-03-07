@@ -7,6 +7,7 @@ set(libdontpanic_client_SRCS
     actionscache.cpp
     actiontemplatemanager.cpp
     projectmanager.cpp
+    plannedworkingtimemanager.cpp
     reportmanager.cpp
     taskmanager.cpp
     timetracker.cpp
@@ -16,6 +17,7 @@ qt4_wrap_cpp(libdontpanic_client_SRCS
           ../../include/libdontpanic_client/actionscache.h
 	     ../../include/libdontpanic_client/actiontemplatemanager.h
          ../../include/libdontpanic_client/projectmanager.h
+         ../../include/libdontpanic_client/plannedworkingtimemanager.h
          ../../include/libdontpanic_client/reportmanager.h
 	     ../../include/libdontpanic_client/taskmanager.h
 	     ../../include/libdontpanic_client/timetracker.h
@@ -54,6 +56,12 @@ qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS
                                     libdontpanic/dbus_support/actiontemplate.hpp
                                     libdontpanic/dbus_support/uuid.h
                                     )
+                                   
+qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS
+                                   ${DBUS_INTERFACES_PATH}/org.dontpanic.PlannedWorkingTimeManager.xml
+                                   remote_planned_working_time_manager
+                                   libdontpanic/dbus_support/worktimeperday.h
+                                   )
 
 add_definitions(-fPIC)
 kde4_add_library(dontpanic_client_lib STATIC ${libdontpanic_client_SRCS})

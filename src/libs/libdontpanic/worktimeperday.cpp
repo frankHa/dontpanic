@@ -22,23 +22,23 @@
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  WorktimePerDay::WorktimePerDay ( Qt::DayOfWeek day )
+  WorktimePerDay::WorktimePerDay ( int day )
   :_M_day_of_week(day)
   , _M_time(0,0)
   {}
   // ---------------------------------------------------------------------------------
   WorktimePerDay::WorktimePerDay()
-  :_M_day_of_week(Qt::Monday)
+  :_M_day_of_week(0)
   , _M_time(0,0)
   {}
   // ---------------------------------------------------------------------------------
-  WorktimePerDay &WorktimePerDay::setDay ( Qt::DayOfWeek day)
+  WorktimePerDay &WorktimePerDay::setDay ( int day)
   {
     _M_day_of_week = day;
     return *this;
   }
   // ---------------------------------------------------------------------------------
-  Qt::DayOfWeek WorktimePerDay::day() const
+  int WorktimePerDay::day() const
   {
     return _M_day_of_week;
   }
@@ -52,6 +52,11 @@ namespace dp
   QTime WorktimePerDay::plannedWorkingHours() const
   {
     return _M_time;
+  }
+  // ---------------------------------------------------------------------------------
+  bool DP_EXPORT operator == ( dp::WorktimePerDay const& lhs, dp::WorktimePerDay const& rhs )
+  {
+    return lhs.day() == rhs.day();
   }
   // ---------------------------------------------------------------------------------
 }

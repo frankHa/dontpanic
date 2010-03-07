@@ -7,28 +7,28 @@ namespace dp
 {
   // ---------------------------------------------------------------------------------
   TaskManager::TaskManager ( QObject *parent )
-      : QObject ( parent ){}
+      : QObject ( parent ) {}
   // ---------------------------------------------------------------------------------
   void TaskManager::store ( Task const& t )
   {
-    if(persistence().persist(t).was_successful())
-       {
-        emit stored(t);
-       }
-  }
-  // ---------------------------------------------------------------------------------
-  void TaskManager::remove(Task const& t)
-  {
-    if(persistence().remove(t).was_successful())
+    if ( persistence().persist ( t ).was_successful() )
     {
-      emit removed(t);
+      emit stored ( t );
     }
   }
   // ---------------------------------------------------------------------------------
-  Task TaskManager::load(Uuid const& id)
+  void TaskManager::remove ( Task const& t )
   {
-    Task p(id);
-    if(persistence().load(p).was_successful())
+    if ( persistence().remove ( t ).was_successful() )
+    {
+      emit removed ( t );
+    }
+  }
+  // ---------------------------------------------------------------------------------
+  Task TaskManager::load ( Uuid const& id )
+  {
+    Task p ( id );
+    if ( persistence().load ( p ).was_successful() )
     {
       return p;
     }
@@ -38,7 +38,7 @@ namespace dp
   TaskList TaskManager::findAll()
   {
     TaskList list;
-    persistence().findAll(list);
+    persistence().findAll ( list );
     return list;
   }
   // ---------------------------------------------------------------------------------

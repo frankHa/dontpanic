@@ -27,6 +27,7 @@ set(libdontpanic_SRCS
     dbus_support/timerange.cpp
     dbus_support/qdatetime.cpp
     dbus_support/uuid.cpp    
+    dbus_support/worktimeperday.cpp
    )
 
 add_definitions(-fPIC)
