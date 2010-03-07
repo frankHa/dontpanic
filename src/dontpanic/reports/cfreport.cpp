@@ -1,5 +1,6 @@
 #include "cfreport.h"
 #include "persistencebackend.hpp"
+#include "reports/plannedworkingtime.h"
 #include <libdontpanic/action.hpp>
 #include <libdontpanic/project.hpp>
 #include <libdontpanic/task.hpp>
@@ -179,7 +180,6 @@ namespace dp
       _M_range = r;
     }
     // ---------------------------------------------------------------------------------
-    // ---------------------------------------------------------------------------------
     Report CFReport::CFReportPrivate::asDontPanicReport()
     {
       Report report;
@@ -189,7 +189,7 @@ namespace dp
       {
         return report.setValid(false);
       }
-      return report.setReportData(evaluate(actions)).setDuration(actions.duration());
+      return report.setReportData(evaluate(actions)).setDuration(actions.duration()).setPlannedWorkingTime(planned_working_time_for(_M_range));
     }
     // ---------------------------------------------------------------------------------
     QString CFReport::CFReportPrivate::evaluate(ActionList const& actions)

@@ -40,6 +40,8 @@ namespace dp
       QString reportData() const;
       Report& setDuration(int duration);
       int duration() const;
+      Report& setPlannedWorkingTime(int planned_working_time);
+      int plannedWorkingTime() const;
       
     private:
       bool      _M_valid;
@@ -47,6 +49,7 @@ namespace dp
       TimeRange _M_time_range;
       QString   _M_report_data;
       int       _M_duration;
+      int       _M_planned_working_time;
   };
   
   inline Report report()

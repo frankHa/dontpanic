@@ -22,41 +22,42 @@
 namespace dp
 {
   Report::Report()
-  :_M_valid(true)
-  , _M_type("")
-  , _M_report_data("")
-  , _M_duration(0){}
-  
-  Report & Report::setValid(bool b)
+      : _M_valid ( true )
+      , _M_type ( "" )
+      , _M_report_data ( "" )
+      , _M_duration ( 0 )
+      , _M_planned_working_time ( 0 ) {}
+
+  Report & Report::setValid ( bool b )
   {
     _M_valid = b;
     return *this;
   }
-  
+
   bool Report::isValid() const
   {
     return _M_valid;
   }
-  
-  Report & Report::setReportType(QString const& t)
+
+  Report & Report::setReportType ( QString const& t )
   {
     _M_type = t;
     return *this;
   }
-  QString Report::reportType()const
+  QString Report::reportType() const
   {
     return _M_type;
   }
-  Report & Report::setRange(TimeRange const& range)
+  Report & Report::setRange ( TimeRange const& range )
   {
     _M_time_range = range;
     return *this;
   }
-  TimeRange Report::range()const
+  TimeRange Report::range() const
   {
     return _M_time_range;
   }
-  Report& Report::setReportData(QString const& data)
+  Report& Report::setReportData ( QString const& data )
   {
     _M_report_data = data;
     return *this;
@@ -65,8 +66,8 @@ namespace dp
   {
     return _M_report_data;
   }
-  
-  Report& Report::setDuration(int d)
+
+  Report& Report::setDuration ( int d )
   {
     _M_duration = d;
     return *this;
@@ -75,6 +76,17 @@ namespace dp
   {
     return _M_duration;
   }
+
+  Report& Report::setPlannedWorkingTime ( int planned_working_time )
+  {
+    _M_planned_working_time = planned_working_time;
+    return *this;
+  }
   
+  int Report::plannedWorkingTime() const
+  {
+    return _M_planned_working_time;
+  }
+
 }
 

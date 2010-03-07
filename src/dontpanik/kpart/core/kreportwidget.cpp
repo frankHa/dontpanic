@@ -49,6 +49,8 @@ namespace dp
       .arg(r.range().to().date().toString())
       );
       _M_ui->duration->setText(duration_formatter().format(r.duration()));
+      _M_ui->planned_time->setText(duration_formatter().format(r.plannedWorkingTime()));
+      _M_ui->overtime->setText(duration_formatter().format(r.duration()-r.plannedWorkingTime()));
     }
     
     void KReportWidget::resetReport()
@@ -57,6 +59,8 @@ namespace dp
       _M_ui->report->setText("");
       _M_ui->report_range->setText("");
       _M_ui->duration->setText("");
+      _M_ui->planned_time->setText("");
+      _M_ui->overtime->setText("");
     }
     
     // private stuff:
