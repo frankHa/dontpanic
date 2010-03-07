@@ -19,7 +19,7 @@ set(dontpanic_SRCS
     plannedworkingtimemanager.cpp
     projectmanager.cpp
     reportmanager.cpp
-    taskmanager.cpp 
+    taskmanager.cpp
     timetracker.cpp
     persistence/sqlite.cpp
     persistence/sqlite/action.cpp

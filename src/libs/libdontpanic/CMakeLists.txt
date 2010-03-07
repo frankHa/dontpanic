@@ -16,6 +16,7 @@ set(libdontpanic_SRCS
     project.cpp
     report.cpp 
     task.cpp
+    time.cpp
     timerange.cpp 
     uuid.cpp
     worktimeperday.cpp
