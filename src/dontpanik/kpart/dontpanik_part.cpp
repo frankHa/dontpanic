@@ -89,6 +89,11 @@ void DontPanikPart::editTasks()
   _M_core->editTasks();
 }
 
+void DontPanikPart::editPlannedWorkingTimes()
+{
+  _M_core->editPlannedWorkingTimes();
+}
+
 void DontPanikPart::addAction()
 {
   _M_core->addAction();
@@ -132,6 +137,12 @@ void DontPanikPart::setup_actions()
   edit_tasks->setIcon(KIcon("view-pim-tasks"));
   actionCollection()->addAction ( "edit_tasks", edit_tasks );
   connect ( edit_tasks, SIGNAL ( triggered() ), this, SLOT ( editTasks() ) );
+  
+  KAction *edit_planned_working_times = new KAction ( this );
+  edit_planned_working_times->setText ( i18n ( "Edit Planned Working Times" ) );
+  edit_planned_working_times->setIcon(KIcon("preferences-system-time"));
+  actionCollection()->addAction ( "edit_planned_working_times", edit_planned_working_times );
+  connect ( edit_planned_working_times, SIGNAL ( triggered() ), this, SLOT ( editPlannedWorkingTimes() ) );
   
   KAction *add_new_action = new KAction(this);
   add_new_action->setText(i18n("Add &new Action"));

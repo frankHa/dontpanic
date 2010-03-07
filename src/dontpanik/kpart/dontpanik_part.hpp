@@ -53,6 +53,7 @@ class DontPanikPart : public KParts::ReadOnlyPart
     //void fileSaveAs();
     void editProjects();
     void editTasks();
+    void editPlannedWorkingTimes();
     void addAction();
     void stopCurrentAction();
     void continueAction();

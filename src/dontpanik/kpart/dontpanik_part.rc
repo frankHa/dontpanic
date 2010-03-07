@@ -4,6 +4,7 @@
   <Menu name="edit"><text>&amp;Edit</text>
     <Action name="edit_projects" />
     <Action name="edit_tasks" />
+    <Action name="edit_planned_working_times" />
   </Menu>
   <Menu name="view"><text>&amp;View</text>
     <Action name="view_day" />
