@@ -16,6 +16,7 @@ set(dontpanic_SRCS
     dbus.cpp
     main.cpp
     persistencebackend.cpp
+    plannedworkingtimemanager.cpp
     projectmanager.cpp
     reportmanager.cpp
     taskmanager.cpp 
@@ -45,6 +46,10 @@ qt4_add_dbus_adaptor(dontpanic_SRCS
 qt4_add_dbus_adaptor(dontpanic_SRCS
                     ${DBUS_INTERFACES_PATH}/org.dontpanic.ActionTemplateManager.xml
                     actiontemplatemanager.h dp::ActionTemplateManager)
+
+qt4_add_dbus_adaptor(dontpanic_SRCS
+                    ${DBUS_INTERFACES_PATH}/org.dontpanic.PlannedWorkingTimeManager.xml
+                    plannedworkingtimemanager.h dp::PlannedWorkingTimeManager)
 
 kde4_add_executable(dontpanic ${dontpanic_SRCS})
 target_link_libraries(dontpanic ${libuuid_LIB} dontpanic_lib ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTSQL_LIBRARY})

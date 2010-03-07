@@ -4,6 +4,7 @@
 #include "persistence/sqlite/action.hpp"
 #include "persistence/sqlite/task.hpp"
 #include "persistence/sqlite/actiontemplate.hpp"
+#include "persistence/sqlite/worktimeperday.hpp"
 #include "libdontpanic/project.hpp"
 #include "libdontpanic/task.hpp"
 //Qt includes
@@ -145,6 +146,27 @@ namespace dp
       }
       return successful();
     }
+    // ---------------------------------------------------------------------------------
+    success Sqlite::persist ( WorktimePerDay const& _wt ) const
+    {
+      return _sqlite::worktime_per_day().persist ( _wt );
+    }
+    // ---------------------------------------------------------------------------------
+    success Sqlite::remove ( WorktimePerDay const& _wt ) const
+    {
+      return _sqlite::worktime_per_day().remove ( _wt );
+    }
+    // ---------------------------------------------------------------------------------
+    success Sqlite::load ( WorktimePerDay & _wt ) const
+    {
+      return _sqlite::worktime_per_day().load ( _wt );
+    }
+    // ---------------------------------------------------------------------------------
+    success Sqlite::findAll(WorktimePerDayList & _wl) const
+    {
+      return _sqlite::worktime_per_day().findAll(_wl);
+    }
+    
     // ---------------------------------------------------------------------------------
     success Sqlite::persist ( Project const& _project ) const
     {

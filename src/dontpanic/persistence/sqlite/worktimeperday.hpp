@@ -43,7 +43,7 @@ namespace dp
           // ---------------------------------------------------------------------------------
       };//Project
       // ---------------------------------------------------------------------------------
-      inline WorktimePerDay worktime_per_Day()
+      inline WorktimePerDay worktime_per_day()
       {
         return WorktimePerDay();
       }

@@ -14,6 +14,8 @@ namespace dp
   typedef QList<Task> TaskList;
   class ActionTemplate;
   typedef QList<ActionTemplate> TemplateList;
+  class WorktimePerDay;
+  typedef QList<WorktimePerDay> WorktimePerDayList;
   // ---------------------------------------------------------------------------------
   namespace _persistence
   {
@@ -32,6 +34,14 @@ namespace dp
         success update_database_schema_if_necessary() const;
         // ---------------------------------------------------------------------------------
       public:
+        // ---------------------------------------------------------------------------------
+        success persist ( WorktimePerDay const&_wt ) const;
+        // ---------------------------------------------------------------------------------
+        success load (WorktimePerDay & _wt)const;
+        // ---------------------------------------------------------------------------------
+        success remove (WorktimePerDay const& _wt)const;
+        // ---------------------------------------------------------------------------------
+        success findAll(WorktimePerDayList &_pl)const;
         // ---------------------------------------------------------------------------------
         success persist ( Project const&_project ) const;
         // ---------------------------------------------------------------------------------

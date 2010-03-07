@@ -4,6 +4,7 @@
 #include "reportmanageradaptor.h"
 #include "taskmanageradaptor.h"
 #include "actiontemplatemanageradaptor.h"
+#include "plannedworkingtimemanageradaptor.h"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -38,6 +39,12 @@ namespace dp
   QDBusAbstractAdaptor* create_dbus_adaptor_for<dp::ActionTemplateManager> ( dp::ActionTemplateManager *obj )
   {
     return new ActionTemplateManagerAdaptor ( obj );
+  }
+  // ---------------------------------------------------------------------------------
+  template<>
+  QDBusAbstractAdaptor* create_dbus_adaptor_for<dp::PlannedWorkingTimeManager> ( dp::PlannedWorkingTimeManager *obj )
+  {
+    return new PlannedWorkingTimeManagerAdaptor ( obj );
   }
   // ---------------------------------------------------------------------------------
 }//dp

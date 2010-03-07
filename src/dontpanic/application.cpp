@@ -8,6 +8,8 @@
 #include "reportmanager.h"
 #include "taskmanager.h"
 #include "timetracker.h"
+#include "plannedworkingtimemanager.h"
+
 
 //Qt includes
 #include <QDebug>
@@ -42,6 +44,8 @@ class Application::ApplicationPrivate
     // ---------------------------------------------------------------------------------
     void init_timetracker();
     // ---------------------------------------------------------------------------------
+    void init_planned_workingtime_manager();
+    // ---------------------------------------------------------------------------------
     void register_with_session_bus();
     // ---------------------------------------------------------------------------------
   private:
@@ -54,6 +58,7 @@ class Application::ApplicationPrivate
     dp::ReportManager *_M_reportmanager;
     dp::TaskManager *_M_taskmanager;
     dp::ActionTemplateManager *_M_action_template_manager;
+    dp::PlannedWorkingTimeManager *_M_planned_workingtime_manager;
     // ---------------------------------------------------------------------------------
 };
 // ---------------------------------------------------------------------------------
@@ -98,6 +103,7 @@ void Application::ApplicationPrivate::init()
   init_reportmanager();
   init_taskmanager();
   init_timetracker();  
+  init_planned_workingtime_manager();
 }
 // ---------------------------------------------------------------------------------
 bool Application::ApplicationPrivate::init_storage_backend()
@@ -133,6 +139,12 @@ void Application::ApplicationPrivate::init_timetracker()
 {
   _M_timetracker = new dp::TimeTracker ( _M_self );
   dp::dbus().register_object ( _M_timetracker ).at_session_bus().as ( "/TimeTracker" );
+}
+// ---------------------------------------------------------------------------------
+void Application::ApplicationPrivate::init_planned_workingtime_manager()
+{
+  _M_planned_workingtime_manager = new dp::PlannedWorkingTimeManager ( _M_self );
+  dp::dbus().register_object ( _M_planned_workingtime_manager ).at_session_bus().as ( "/PlannedWorkingTimeManager" );
 }
 // ---------------------------------------------------------------------------------
 void Application::ApplicationPrivate::register_with_session_bus()
