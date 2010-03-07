@@ -24,12 +24,14 @@ namespace dp
         public:
           // ---------------------------------------------------------------------------------
           success persist ( dp::WorktimePerDay const&p ) const;
-	  // ---------------------------------------------------------------------------------
-	  success remove ( dp::WorktimePerDay const&t ) const;	  
+          // ---------------------------------------------------------------------------------
+          success remove ( dp::WorktimePerDay const&t ) const;
           // ---------------------------------------------------------------------------------
           success load ( dp::WorktimePerDay &p ) const;
           // ---------------------------------------------------------------------------------
-          success findAll(dp::WorktimePerDayList &list) const;
+          success findAll ( dp::WorktimePerDayList &list ) const;
+          // ---------------------------------------------------------------------------------
+          void insert_default_entries() const;
           // ---------------------------------------------------------------------------------
         private:
           // ---------------------------------------------------------------------------------
@@ -39,7 +41,7 @@ namespace dp
           // ---------------------------------------------------------------------------------
           success update ( dp::WorktimePerDay const& _p ) const;
           // ---------------------------------------------------------------------------------
-          success assign_query_values_to_entity(QSqlQuery &query, dp::WorktimePerDay &p) const;
+          success assign_query_values_to_entity ( QSqlQuery &query, dp::WorktimePerDay &p ) const;
           // ---------------------------------------------------------------------------------
       };//Project
       // ---------------------------------------------------------------------------------

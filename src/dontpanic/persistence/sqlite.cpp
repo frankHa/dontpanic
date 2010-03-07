@@ -144,6 +144,7 @@ namespace dp
         qDebug() << query.lastError();
         return error();
       }
+      _sqlite::worktime_per_day().insert_default_entries();
       return successful();
     }
     // ---------------------------------------------------------------------------------
