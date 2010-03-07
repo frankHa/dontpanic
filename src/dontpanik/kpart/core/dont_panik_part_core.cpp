@@ -12,6 +12,7 @@
 #include "keditactiondialog.h"
 #include "kprojectsdialog.h"
 #include "ktasksdialog.h"
+#include "plannedworkingtimesdialog.h"
 #include "statusnotifieritem.h"
 #include <KStatusBar>
 // ---------------------------------------------------------------------------------
@@ -50,7 +51,8 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void dont_panik_core::editPlannedWorkingTimes()
     {
-
+      PlannedWorkingTimesDialog dlg(widget());
+      dlg.exec();
     }
     // ---------------------------------------------------------------------------------
     void dont_panik_core::addAction()
