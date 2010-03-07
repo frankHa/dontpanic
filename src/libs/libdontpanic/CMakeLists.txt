@@ -18,6 +18,7 @@ set(libdontpanic_SRCS
     task.cpp
     timerange.cpp 
     uuid.cpp
+    worktimeperday.cpp
     dbus_support/action.cpp
     dbus_support/actiontemplate.cpp
     dbus_support/project.cpp
