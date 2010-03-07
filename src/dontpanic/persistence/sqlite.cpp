@@ -54,7 +54,7 @@ a_name TEXT, a_comment TEXT, a_start INTEGER, a_end INTEGER, a_reviewed INTEGER,
 
 #define CREATE_TABLE_WORK_TIME_PER_DAY\
  "CREATE TABLE IF NOT EXISTS w_work_time_per_day \
- (w_day int w_time int)"
+ (w_day int PRIMARY KEY, w_time int)"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
