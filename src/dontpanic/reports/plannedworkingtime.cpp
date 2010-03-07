@@ -18,7 +18,10 @@
 */
 // ---------------------------------------------------------------------------------
 #include "plannedworkingtime.h"
+#include <libdontpanic/time.hpp>
 #include <libdontpanic/timerange.h>
+#include <libdontpanic/worktimeperday.h>
+#include "persistencebackend.hpp"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -26,9 +29,47 @@ namespace dp
   namespace reports
   {
     // ---------------------------------------------------------------------------------
-    long planned_working_time_for(TimeRange const& range)
+    namespace detail
     {
-      return 0;
+      typedef QMap<Qt::DayOfWeek, QTime> work_time_per_day_map;
+
+      work_time_per_day_map planned_times()
+      {
+        work_time_per_day_map work_time_per_day;
+        WorktimePerDayList wtpdl;
+        persistence().findAll ( wtpdl );
+        foreach ( WorktimePerDay const& wtpd, wtpdl )
+        {
+          if ( wtpd.isValid() )
+          {
+            work_time_per_day[ ( Qt::DayOfWeek ) wtpd.day() ] = wtpd.plannedWorkingHours();
+          }
+        }
+        return work_time_per_day;
+      }
+      // ---------------------------------------------------------------------------------
+      Qt::DayOfWeek current_day(int first, long offset)
+      {
+        Qt::DayOfWeek result = (Qt::DayOfWeek)((((first-1) + offset)%7)+1);
+        return result;
+      }
+    }
+    // ---------------------------------------------------------------------------------
+    long planned_working_time_for ( TimeRange const& range )
+    {
+      if ( !range.isValid() )
+      {
+        return 0;
+      }
+      int firstDayOfWeek = range.from().date().dayOfWeek();
+      detail::work_time_per_day_map wtpdm = detail::planned_times();
+      long days = dp::time::days ( range );
+      long result = 0;
+      for ( long i = 0; i < days; ++i )
+      {
+        result+=dp::time::minutes(wtpdm[detail::current_day(firstDayOfWeek, i)]);
+      }
+      return result;
     }
     // ---------------------------------------------------------------------------------
   }
