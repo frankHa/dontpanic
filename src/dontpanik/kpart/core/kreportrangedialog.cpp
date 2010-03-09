@@ -120,7 +120,7 @@ namespace dp
     {
       QDateTime current = QDateTime::currentDateTime();
       QDate end(current.date());
-      QDate begin(end.addDays(-end.dayOfWeek()));
+      QDate begin(end.addDays(-(end.dayOfWeek()-1)));
       return TimeRange(QDateTime(begin), current);
     }
     
