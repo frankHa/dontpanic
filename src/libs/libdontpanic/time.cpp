@@ -14,13 +14,21 @@ namespace dp
       return result;
     }
     // ---------------------------------------------------------------------------------    
-    long days(TimeRange const& range)
+    long full_days(TimeRange const& range)
     {
       if(!range.isValid()){return 0;}
       long minutes = range.duration();
       long hours = minutes/60;
       long days = hours/24;
       return days;
+    }
+    // ---------------------------------------------------------------------------------
+    long days(TimeRange const& range)
+    {
+      if(!range.isValid()){return 0;}
+      QDate const& from = range.from().date();
+      QDate const& to = range.to().date();
+      return (from.daysTo(to)+1);
     }
     // ---------------------------------------------------------------------------------
   }
