@@ -19,6 +19,7 @@ namespace dp
     signals:
       void removed ( dp::WorktimePerDay );
       void stored ( dp::WorktimePerDay );
+      void currentHolidayRegionStored(QString);
       // ---------------------------------------------------------------------------------
     public:
       // ---------------------------------------------------------------------------------
@@ -33,6 +34,10 @@ namespace dp
       void store ( WorktimePerDayList const& p );
       // ---------------------------------------------------------------------------------
       void remove ( WorktimePerDay const& p );
+      // ---------------------------------------------------------------------------------
+      void storeCurrentHolidayRegion(QString const& r);
+      // ---------------------------------------------------------------------------------
+      QString loadCurrentHolidayRegion();
       // ---------------------------------------------------------------------------------
       WorktimePerDayList findAll();
       // ---------------------------------------------------------------------------------

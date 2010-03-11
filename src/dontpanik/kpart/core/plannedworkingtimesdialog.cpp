@@ -33,6 +33,18 @@ namespace dp
         , _M_ui ( new Ui::PlannedWorkingTimesDialog )
     {
       _M_ui->setupUi ( this );
+
+      init_planned_working_hours_per_day();
+      init_holiday_region();
+    }
+    // ---------------------------------------------------------------------------------
+    PlannedWorkingTimesDialog::~PlannedWorkingTimesDialog()
+    {
+      delete _M_ui;
+    }
+    // ---------------------------------------------------------------------------------
+    void PlannedWorkingTimesDialog::init_planned_working_hours_per_day()
+    {
       _M_time_edit_list
       << _M_ui->monday
       << _M_ui->tuesday
@@ -45,9 +57,9 @@ namespace dp
       connect ( _M_ui->buttonBox, SIGNAL ( accepted() ), this, SLOT ( store_time_values() ) );
     }
     // ---------------------------------------------------------------------------------
-    PlannedWorkingTimesDialog::~PlannedWorkingTimesDialog()
+    void PlannedWorkingTimesDialog::init_holiday_region()
     {
-      delete _M_ui;
+      _M_ui->holiday_region->selectRegion(context()->plannedWorkingtimeManager()->currentHolidayRegion());
     }
     // ---------------------------------------------------------------------------------
     void PlannedWorkingTimesDialog::init_time_values()
@@ -74,9 +86,9 @@ namespace dp
         int day = i + 1;
         WorktimePerDay wtpd ( day );
         wtpd.setPlannedWorkingHours ( _M_time_edit_list[i]->time () );
-        wtpds<<wtpd;
+        wtpds << wtpd;
       }
-      time_manager->store(wtpds);
+      time_manager->store ( wtpds );
     }
     // ---------------------------------------------------------------------------------
   }//core

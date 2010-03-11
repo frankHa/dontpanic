@@ -83,6 +83,18 @@ namespace dp
     {
       return _M_cache.find_all(remote());
     }
+    // ---------------------------------------------------------------------------------   
+    QString PlannedWorkingTimeManager::currentHolidayRegion()
+    {
+      QDBusPendingReply<QString> reply =remote()->loadCurrentHolidayRegion();
+      reply.waitForFinished();
+      if(reply.isError())
+      {
+        kWarning()<<reply.error();
+        emit error(QDBusError::errorString(reply.error().type()));
+      }
+      return reply.value();
+    }
     // ---------------------------------------------------------------------------------
     org::dontpanic::PlannedWorkingTimeManager* PlannedWorkingTimeManager::remote()
     {

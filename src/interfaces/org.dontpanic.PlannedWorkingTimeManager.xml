@@ -1,6 +1,12 @@
 <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
 <node>
   <interface name="org.dontpanic.PlannedWorkingTimeManager">    
+    <method name="storeCurrentHolidayRegion">
+      <arg type="s" direction="in" />
+    </method>
+    <method name="loadCurrentHolidayRegion">
+      <arg type="s" direction="out" />
+    </method>
     <method name="store">
       <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::WorktimePerDay"/>
       <arg type="(si)" />
@@ -30,6 +36,9 @@
     <signal name="removed">
       <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::WorktimePerDay"/>
       <arg type="(si)" />
+    </signal>
+    <signal name="currentHolidayRegionStored">
+      <arg type="s" />
     </signal>
     <signal name="error">
       <arg type="s" />

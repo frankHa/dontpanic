@@ -48,5 +48,16 @@ namespace dp
     return list;
   }
   // ---------------------------------------------------------------------------------
+  void PlannedWorkingTimeManager::storeCurrentHolidayRegion(QString const& r)
+  {
+    //TODO: needs to be implemented!
+  }
+  // ---------------------------------------------------------------------------------
+  QString PlannedWorkingTimeManager::loadCurrentHolidayRegion()
+  {
+    //TODO: needs to be implemented!
+    return "de";
+  }
+  // ---------------------------------------------------------------------------------
 }//dp
 // ---------------------------------------------------------------------------------

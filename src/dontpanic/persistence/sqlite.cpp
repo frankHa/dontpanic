@@ -56,6 +56,10 @@ a_name TEXT, a_comment TEXT, a_start INTEGER, a_end INTEGER, a_reviewed INTEGER,
 #define CREATE_TABLE_WORK_TIME_PER_DAY\
  "CREATE TABLE IF NOT EXISTS w_work_time_per_day \
  (w_day int PRIMARY KEY, w_time int)"
+ 
+#define CREATE_TABLE_CURRENT_HOLIDAY_REGION\
+ "CREATE TABLE IF NOT EXISTS chr_current_holiday_region \
+  (chr_region TEXT PRIMARY KEY )"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -145,6 +149,11 @@ namespace dp
         return error();
       }
       _sqlite::worktime_per_day().insert_default_entries();
+      if ( !query.exec ( CREATE_TABLE_CURRENT_HOLIDAY_REGION ) )
+      {
+        qDebug() << query.lastError();
+        return error();
+      }
       return successful();
     }
     // ---------------------------------------------------------------------------------
