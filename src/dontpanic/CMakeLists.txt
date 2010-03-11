@@ -13,6 +13,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 set(dontpanic_SRCS 
     actiontemplatemanager.cpp
     application.cpp
+    context.cpp
     dbus.cpp
     main.cpp
     persistencebackend.cpp
