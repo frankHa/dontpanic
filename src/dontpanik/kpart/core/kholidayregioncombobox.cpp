@@ -18,10 +18,8 @@
 */
 
 #include "kholidayregioncombobox.h"
+#include "country.h"
 #include <KHolidays/Holidays>
-#include <KStandardDirs>
-#include <KConfig>
-#include <KConfigGroup>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -44,19 +42,7 @@ namespace dp
 
       foreach ( const QString &country, countryList )
       {
-        QString countryFile = KStandardDirs::locate ( "locale",
-                              "l10n/" + country + "/entry.desktop" );
-        QString regionName;
-        if ( !countryFile.isEmpty() )
-        {
-          KConfig _cfg ( countryFile, KConfig::SimpleConfig );
-          KConfigGroup cfg ( &_cfg, "KCM Locale" );
-          regionName = cfg.readEntry ( "Name" );
-        }
-        if ( regionName.isEmpty() )
-        {
-          regionName = country;
-        }
+        QString regionName = dp::core::country(country).displayName();
 
         holidayRegions[regionName] = country;
       }

@@ -5,6 +5,7 @@ find_package(KdepimLibs REQUIRED)
 set(dontpanikpart_LIB_SRCS 
     actiontemplateaction.cpp
     context.cpp 
+    country.cpp
     dayinfo.cpp 
     kactiontemplateslist.cpp
     kactiontemplateslistmodel.cpp
