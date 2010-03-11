@@ -38,8 +38,9 @@ namespace dp
     void KHolidayRegionComboBox::init()
     {
       QString currentHolidayName;
-      QStringList holidayList;
+      //QStringList holidayList;
       QStringList countryList = KHolidays::HolidayRegion::locations();
+      QMap<QString, QString> holidayRegions;
 
       foreach ( const QString &country, countryList )
       {
@@ -57,20 +58,29 @@ namespace dp
           regionName = country;
         }
 
-        holidayList << regionName;
-        //mRegionMap[regionName] = country; //store region for saving to config file
-
-//         if ( KOGlobals::self()->holidays() &&
-//              ( country == KOGlobals::self()->holidays()->location() ) )
-//         {
-//           currentHolidayName = regionName;
-//         }
+        holidayRegions[regionName] = country;
       }
-      holidayList.sort();
-      holidayList.push_front (
-        i18nc ( "@item:inlistbox do not use holidays", "(None)" ) );
+      QStringList displayStrings = holidayRegions.keys();
+      displayStrings.sort();
+      //displayStrings.push_front (
+      //  i18nc ( "@item:inlistbox do not use holidays", "(None)" ) );
 
-      addItems ( holidayList );
+      addItem ( i18nc ( "@item:inlistbox do not use holidays", "(None)" ), "" );
+      foreach ( QString const& displayString, displayStrings )
+      {
+        addItem ( displayString, holidayRegions.value ( displayString ) );
+      }
+    }
+    // ---------------------------------------------------------------------------------
+    void KHolidayRegionComboBox::selectRegion ( QString const& region )
+    {
+      int index = findData ( QVariant ( region ) );
+      setCurrentIndex ( index );
+    }
+    // ---------------------------------------------------------------------------------
+    QString KHolidayRegionComboBox::selectedRegion() const
+    {
+      return itemData ( currentIndex() ).toString();
     }
     // ---------------------------------------------------------------------------------
   }
