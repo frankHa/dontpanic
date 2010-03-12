@@ -58,7 +58,8 @@ namespace dp
     
     bool KCalendarWidget::isHoliday(QDate const& date) const
     {
-      return (date.dayOfWeek()==Qt::Saturday || date.dayOfWeek() == Qt::Sunday);
+      return (date.dayOfWeek()==Qt::Saturday || date.dayOfWeek() == Qt::Sunday
+              || !context()->plannedWorkingtimeManager()->isWorkDay(date));
     }
     
     bool KCalendarWidget::haveActionsFor(QDate const& date) const
