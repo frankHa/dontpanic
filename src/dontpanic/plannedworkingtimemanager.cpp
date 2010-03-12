@@ -57,14 +57,18 @@ namespace dp
   // ---------------------------------------------------------------------------------
   void PlannedWorkingTimeManager::storeCurrentHolidayRegion ( QString const& r )
   {
-    //TODO: needs to be implemented!
-    init_holidays();
+    if(persistence().persistCurrentHolidayRegion(r).was_successful())
+    {
+      init_holidays();
+      emit currentHolidayRegionChanged(r);
+    }
   }
   // ---------------------------------------------------------------------------------
   QString PlannedWorkingTimeManager::loadCurrentHolidayRegion()
   {
-    //TODO: needs to be implemented!
-    return "de";
+    QString region("");
+    persistence().loadCurrentHolidayRegion(region);
+    return region;
   }
   // ---------------------------------------------------------------------------------
   bool PlannedWorkingTimeManager::isWorkDay ( const QDate& day )

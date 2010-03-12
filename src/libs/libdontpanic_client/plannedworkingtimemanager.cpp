@@ -86,7 +86,7 @@ namespace dp
       return _M_cache.find_all ( remote() );
     }
     // ---------------------------------------------------------------------------------
-    QString PlannedWorkingTimeManager::currentHolidayRegion()
+    QString PlannedWorkingTimeManager::loadCurrentHolidayRegion()
     {
       QDBusPendingReply<QString> reply = remote()->loadCurrentHolidayRegion();
       reply.waitForFinished();
@@ -96,6 +96,17 @@ namespace dp
         emit error ( QDBusError::errorString ( reply.error().type() ) );
       }
       return reply.value();
+    }
+    // ---------------------------------------------------------------------------------
+    void PlannedWorkingTimeManager::storeCurrentHolidayRegion(QString const& region)
+    {
+      QDBusPendingReply<> reply = remote()->storeCurrentHolidayRegion(region);
+      reply.waitForFinished();
+      if ( reply.isError() )
+      {
+        kWarning() << reply.error();
+        emit error ( QDBusError::errorString ( reply.error().type() ) );
+      }
     }
     // ---------------------------------------------------------------------------------
     bool PlannedWorkingTimeManager::isWorkDay ( QDate const& day )

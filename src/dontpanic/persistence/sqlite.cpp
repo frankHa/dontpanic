@@ -1,6 +1,7 @@
 #include "persistence/sqlite.hpp"
 #include "persistence/execute_query.hpp"
 #include "persistence/sqlite/project.hpp"
+#include "persistence/sqlite/currentholidayregion.hpp"
 #include "persistence/sqlite/action.hpp"
 #include "persistence/sqlite/task.hpp"
 #include "persistence/sqlite/actiontemplate.hpp"
@@ -262,7 +263,22 @@ namespace dp
     {
       return _sqlite::action().hasActionFor(date);
     }
-    
+    // ---------------------------------------------------------------------------------
+    success Sqlite::persistCurrentHolidayRegion(QString const& region) const
+    {
+      return _sqlite::current_holiday_region().persist(region);
+    }
+    // ---------------------------------------------------------------------------------
+    success Sqlite::removeCurrentHolidayRegion() const
+    {
+      return _sqlite::current_holiday_region().remove();
+    }
+    // ---------------------------------------------------------------------------------
+    success Sqlite::loadCurrentHolidayRegion(QString & region) const
+    {
+      return _sqlite::current_holiday_region().load(region);
+    }
+    // ---------------------------------------------------------------------------------
   }//_persistance
   // ---------------------------------------------------------------------------------
 }//dp

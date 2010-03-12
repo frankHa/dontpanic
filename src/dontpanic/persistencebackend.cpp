@@ -37,5 +37,20 @@ namespace dp
     return _persistence::sqlite().hasActionsFor(date);
   }
   // ---------------------------------------------------------------------------------
+  success PersistenceBackend::persistCurrentHolidayRegion(QString const& region) const
+  {
+    return _persistence::sqlite().persistCurrentHolidayRegion(region);
+  }
+  // ---------------------------------------------------------------------------------
+  success PersistenceBackend::removeCurrentHolidayRegion() const
+  {
+    return _persistence::sqlite().removeCurrentHolidayRegion();
+  }
+  // ---------------------------------------------------------------------------------
+  success PersistenceBackend::loadCurrentHolidayRegion(QString & region) const
+  {
+    return _persistence::sqlite().loadCurrentHolidayRegion(region);
+  }
+  // ---------------------------------------------------------------------------------
 }//dp
 // ---------------------------------------------------------------------------------

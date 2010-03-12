@@ -25,6 +25,7 @@ set(dontpanic_SRCS
     persistence/sqlite.cpp
     persistence/sqlite/action.cpp
     persistence/sqlite/actiontemplate.cpp
+    persistence/sqlite/currentholidayregion.cpp
     persistence/sqlite/project.cpp
     persistence/sqlite/task.cpp    
     persistence/sqlite/worktimeperday.cpp

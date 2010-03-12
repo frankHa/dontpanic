@@ -54,12 +54,12 @@ namespace dp
       << _M_ui->saturday
       << _M_ui->sunday;
       init_time_values();
-      connect ( _M_ui->buttonBox, SIGNAL ( accepted() ), this, SLOT ( store_time_values() ) );
+      connect ( _M_ui->buttonBox, SIGNAL ( accepted() ), this, SLOT ( store() ) );
     }
     // ---------------------------------------------------------------------------------
     void PlannedWorkingTimesDialog::init_holiday_region()
     {
-      _M_ui->holiday_region->selectRegion(context()->plannedWorkingtimeManager()->currentHolidayRegion());
+      _M_ui->holiday_region->selectRegion ( context()->plannedWorkingtimeManager()->loadCurrentHolidayRegion() );
     }
     // ---------------------------------------------------------------------------------
     void PlannedWorkingTimesDialog::init_time_values()
@@ -77,6 +77,13 @@ namespace dp
       }
     }
     // ---------------------------------------------------------------------------------
+    void PlannedWorkingTimesDialog::store()
+    {
+      store_time_values();
+      store_holiday_region();
+    }
+
+    // ---------------------------------------------------------------------------------
     void PlannedWorkingTimesDialog::store_time_values()
     {
       dp::client::PlannedWorkingTimeManager *time_manager = context()->plannedWorkingtimeManager();
@@ -91,8 +98,14 @@ namespace dp
       time_manager->store ( wtpds );
     }
     // ---------------------------------------------------------------------------------
+    void PlannedWorkingTimesDialog::store_holiday_region()
+    {
+      context()->plannedWorkingtimeManager()->storeCurrentHolidayRegion(_M_ui->holiday_region->selectedRegion());
+    }
+
+    // ---------------------------------------------------------------------------------
   }//core
-  // ---------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------
 }//dp
 // ---------------------------------------------------------------------------------
 

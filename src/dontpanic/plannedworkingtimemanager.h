@@ -20,7 +20,7 @@ namespace dp
     signals:
       void removed ( dp::WorktimePerDay );
       void stored ( dp::WorktimePerDay );
-      void currentHolidayRegionStored(QString);
+      void currentHolidayRegionChanged(QString);
       // ---------------------------------------------------------------------------------
     public:
       // ---------------------------------------------------------------------------------
