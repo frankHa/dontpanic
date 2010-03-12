@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-22 23:27+0100\n"
+"POT-Creation-Date: 2010-03-12 13:14+0100\n"
 "PO-Revision-Date: 2010-02-22 21:41+0100\n"
 "Last-Translator: Frank Habel <frank@bugplasma.de>\n"
 "Language-Team: Deutsch <>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: reports/cfreport.cpp:165
+#: reports/cfreport.cpp:166
 msgid ""
 "Work Type;Project;Duration (Activity Group);Percent (Activity Group);Project "
 "Comment\n"

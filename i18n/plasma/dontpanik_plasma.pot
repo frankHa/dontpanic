@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-26 10:06+0100\n"
+"POT-Creation-Date: 2010-03-12 13:14+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plasmoid/actionitem.cpp:180
+#: plasmoid/actionitem.cpp:181
 msgid "switch activity to:"
 msgstr ""
 
-#: plasmoid/actionitem.cpp:206
+#: plasmoid/actionitem.cpp:207
 msgid "%1 possible actions..."
 msgstr ""
 
@@ -40,35 +40,35 @@ msgstr ""
 msgid "(unknown task)"
 msgstr ""
 
-#: plasmoid/dialog.cpp:79
+#: plasmoid/dialog.cpp:81
 msgid "Don't Panic"
 msgstr ""
 
-#: plasmoid/dialog.cpp:114
+#: plasmoid/dialog.cpp:116
 msgid "switch activity to..."
 msgstr ""
 
-#: plasmoid/plasma-dontpanic.cpp:171
+#: plasmoid/plasma-dontpanic.cpp:180
 msgid "Start a new Action"
 msgstr ""
 
-#: plasmoid/plasma-dontpanic.cpp:173
+#: plasmoid/plasma-dontpanic.cpp:182
 msgid "Ctrl+S"
 msgstr ""
 
-#: plasmoid/plasma-dontpanic.cpp:178
+#: plasmoid/plasma-dontpanic.cpp:187
 msgid "Stop the current Action"
 msgstr ""
 
-#: plasmoid/plasma-dontpanic.cpp:180
+#: plasmoid/plasma-dontpanic.cpp:189
 msgid "Ctrl+T"
 msgstr ""
 
-#: plasmoid/plasma-dontpanic.cpp:184
+#: plasmoid/plasma-dontpanic.cpp:193
 msgid "Resume the last Action"
 msgstr ""
 
-#: plasmoid/plasma-dontpanic.cpp:186
+#: plasmoid/plasma-dontpanic.cpp:195
 msgid "Ctrl+R"
 msgstr ""
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-07 23:14+0100\n"
-"PO-Revision-Date: 2010-03-07 23:22+0100\n"
+"POT-Creation-Date: 2010-03-12 13:13+0100\n"
+"PO-Revision-Date: 2010-03-12 13:14+0100\n"
 "Last-Translator: Frank Habel <frank@bugplasma.de>\n"
 "Language-Team: Deutsch <>\n"
 "MIME-Version: 1.0\n"
@@ -95,6 +95,12 @@ msgstr ""
 "Tätigkeitstyp:\t\t%2\n"
 "Wird bearbeitet seit:\t%3\n"
 "Momentane Dauer:\t%4"
+
+#. i18nc ( "@item:inlistbox do not use holidays", "(None)" ) );
+#: kpart/core/kholidayregioncombobox.cpp:54
+msgctxt "@item:inlistbox do not use holidays"
+msgid "(None)"
+msgstr "(Keine)"
 
 #: kpart/core/kprojectstable.cpp:47
 msgid "Do you really want to remove the selected project?"
@@ -438,7 +444,7 @@ msgid "Report"
 msgstr "Bericht"
 
 #. i18n: file: kpart/core/ui/kreportwidget.ui:55
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#. i18n: ectx: property (title), widget (QGroupBox, summary)
 #: rc.cpp:138
 msgid "Report Summary"
 msgstr "Zusammenfassung"
@@ -531,11 +537,23 @@ msgstr "Samstag"
 msgid "Sunday"
 msgstr "Sonntag"
 
+#. i18n: file: kpart/core/ui/plannedworkingtimesdialog.ui:171
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: rc.cpp:195
+msgid "Holidays"
+msgstr "Feiertage"
+
+#. i18n: file: kpart/core/ui/plannedworkingtimesdialog.ui:189
+#. i18n: ectx: property (text), widget (QLabel, label_8)
+#: rc.cpp:198
+msgid "Use holiday region:"
+msgstr "Region für Feiertage:"
+
 #. i18n: file: kpart/dontpanik_part.rc:4
 #. i18n: ectx: Menu (edit)
 #. i18n: file: shell/dontpanik_shell.rc:10
 #. i18n: ectx: Menu (edit)
-#: rc.cpp:195 rc.cpp:213
+#: rc.cpp:201 rc.cpp:219
 msgid "&Edit"
 msgstr "B&earbeiten"
 
@@ -543,58 +561,58 @@ msgstr "B&earbeiten"
 #. i18n: ectx: Menu (view)
 #. i18n: file: shell/dontpanik_shell.rc:13
 #. i18n: ectx: Menu (view)
-#: rc.cpp:198 rc.cpp:216
+#: rc.cpp:204 rc.cpp:222
 msgid "&View"
 msgstr "&Ansicht"
 
 #. i18n: file: kpart/dontpanik_part.rc:13
 #. i18n: ectx: Menu (action)
-#: rc.cpp:201
+#: rc.cpp:207
 msgid "&Actions"
 msgstr "&Tätigkeiten"
 
 #. i18n: file: kpart/dontpanik_part.rc:21
 #. i18n: ectx: ToolBar (viewToolbar)
-#: rc.cpp:204
+#: rc.cpp:210
 msgid "View Toolbar"
 msgstr "Ansichts-Werkzeugleiste"
 
 #. i18n: file: kpart/dontpanik_part.rc:25
 #. i18n: ectx: ToolBar (actionToolbar)
-#: rc.cpp:207
+#: rc.cpp:213
 msgid "Action Toolbar"
 msgstr "Tätigkeiten-Werkzugleiste"
 
 #. i18n: file: shell/dontpanik_shell.rc:4
 #. i18n: ectx: Menu (file)
-#: rc.cpp:210
+#: rc.cpp:216
 msgid "&File"
 msgstr "&Datei"
 
 #. i18n: file: shell/dontpanik_shell.rc:16
 #. i18n: ectx: Menu (action)
-#: rc.cpp:219
+#: rc.cpp:225
 msgid "&Action"
 msgstr "&Tätigkeit"
 
 #. i18n: file: shell/dontpanik_shell.rc:19
 #. i18n: ectx: Menu (settings)
-#: rc.cpp:222
+#: rc.cpp:228
 msgid "&Settings"
 msgstr "&Einstellungen"
 
 #. i18n: file: shell/dontpanik_shell.rc:32
 #. i18n: ectx: ToolBar (mainToolBar)
-#: rc.cpp:225
+#: rc.cpp:231
 msgid "Main Toolbar"
 msgstr "Haupt-Werkzeugleiste"
 
-#: rc.cpp:226
+#: rc.cpp:232
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "Frank Habel"
 
-#: rc.cpp:227
+#: rc.cpp:233
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "frank@bugplasma.de"
