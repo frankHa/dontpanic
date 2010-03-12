@@ -21,6 +21,7 @@
 #include <libdontpanic/time.hpp>
 #include <libdontpanic/timerange.h>
 #include <libdontpanic/worktimeperday.h>
+#include <context.h>
 #include "persistencebackend.hpp"
 // ---------------------------------------------------------------------------------
 namespace dp
@@ -48,9 +49,9 @@ namespace dp
         return work_time_per_day;
       }
       // ---------------------------------------------------------------------------------
-      Qt::DayOfWeek current_day(int first, long offset)
+      Qt::DayOfWeek current_day ( int first, long offset )
       {
-        Qt::DayOfWeek result = (Qt::DayOfWeek)((((first-1) + offset)%7)+1);
+        Qt::DayOfWeek result = ( Qt::DayOfWeek ) ( ( ( ( first - 1 ) + offset ) % 7 ) + 1 );
         return result;
       }
     }
@@ -61,16 +62,26 @@ namespace dp
       {
         return 0;
       }
-      int firstDayOfWeek = range.from().date().dayOfWeek();
+      QDate const& from = range.from().date();
+      QDate const& to = range.to().date();
       detail::work_time_per_day_map wtpdm = detail::planned_times();
-      long days = dp::time::days ( range );
       long result = 0;
-      for ( long i = 0; i < days; ++i )
+      for ( QDate date = from; date <= to; date=date.addDays ( 1 ) )
       {
-        result+=dp::time::minutes(wtpdm[detail::current_day(firstDayOfWeek, i)]);
+        if(is_work_day(date))
+        {
+          result += dp::time::minutes ( wtpdm[ ( Qt::DayOfWeek ) date.dayOfWeek() ] );
+        }
       }
       return result;
+
     }
+    // ---------------------------------------------------------------------------------
+    bool is_work_day ( const QDate& day )
+    {
+      context()->plannedWorkingtimeManager()->isWorkDay(day);
+    }
+
     // ---------------------------------------------------------------------------------
   }
   // ---------------------------------------------------------------------------------

@@ -19,7 +19,7 @@
 
 #ifndef DP_REPORTS_PLANNEDWORKINGTIME_H
 #define DP_REPORTS_PLANNEDWORKINGTIME_H
-
+class QDate;
 namespace dp
 {
   // ---------------------------------------------------------------------------------
@@ -29,6 +29,7 @@ namespace dp
   {
     // ---------------------------------------------------------------------------------
     long planned_working_time_for ( TimeRange const& range );
+    bool is_work_day(QDate const& day);
     // ---------------------------------------------------------------------------------
   }
   // ---------------------------------------------------------------------------------

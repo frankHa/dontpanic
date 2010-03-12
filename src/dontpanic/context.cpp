@@ -36,17 +36,35 @@ namespace dp
     init();
   }
   // ---------------------------------------------------------------------------------
-  dp::ActionTemplateManager* actionTemplateManager();
+  dp::ActionTemplateManager* Context::actionTemplateManager()
+  {
+    return _M_action_template_manager;
+  }
   // ---------------------------------------------------------------------------------
-  dp::ProjectManager* projectManager();
+  dp::ProjectManager* Context::projectManager()
+  {
+    return _M_project_manager;
+  }
   // ---------------------------------------------------------------------------------
-  dp::ReportManager* reportManager();
+  dp::ReportManager* Context::reportManager()
+  {
+    return _M_report_manager;
+  }
   // ---------------------------------------------------------------------------------
-  dp::TaskManager* taskManager();
+  dp::TaskManager* Context::taskManager()
+  {
+    return _M_task_manager;
+  }
   // ---------------------------------------------------------------------------------
-  dp::TimeTracker* timeTracker();
+  dp::TimeTracker* Context::timeTracker()
+  {
+    return _M_timetracker;
+  }
   // ---------------------------------------------------------------------------------
-  dp::PlannedWorkingTimeManager* plannedWorkingtimeManager();
+  dp::PlannedWorkingTimeManager* Context::plannedWorkingtimeManager()
+  {
+    return _M_planned_working_time_manager;
+  }
   // ---------------------------------------------------------------------------------
   // private stuff:
   // ---------------------------------------------------------------------------------

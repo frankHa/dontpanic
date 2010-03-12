@@ -1,6 +1,5 @@
 include_directories(${CMAKE_BINARY_DIR})
 
-find_package(KdepimLibs REQUIRED)
 
 set(dontpanikpart_LIB_SRCS 
     actiontemplateaction.cpp
