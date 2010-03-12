@@ -7,6 +7,12 @@
     <method name="loadCurrentHolidayRegion">
       <arg type="s" direction="out" />
     </method>
+    <method name="isWorkDay">
+    <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="QDate"/>
+      <arg type="(si)" direction="in" />
+      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="bool"/>
+      <arg type="(si)" direction="out" />
+    </method>
     <method name="store">
       <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::WorktimePerDay"/>
       <arg type="(si)" />

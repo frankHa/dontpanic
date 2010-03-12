@@ -101,7 +101,7 @@ namespace dp
     {
       _M_cached_duration = _M_actions_cache->duration();
       setData ( src_today, "Time", _M_cached_duration );
-      setData ( src_today, "Planned working time", _M_planned_working_time_manager->plannedWorktimeToday().plannedWorkingHours() );
+      setData ( src_today, "Planned working time", _M_planned_working_time_manager->plannedWorkHoursToday() );
       ensure_correct_timer_state();
       return true;
     }
