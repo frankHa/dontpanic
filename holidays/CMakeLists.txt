@@ -1,0 +1,7 @@
+set(LIBKHOLIDAYS_DATA_DIR ${KDEPIMLIBS_DATA_DIR}/libkholidays)
+
+set(HOLIDAYS
+    holiday_Hessen
+   )
+   
+install( FILES ${HOLIDAYS} DESTINATION ${LIBKHOLIDAYS_DATA_DIR})
