@@ -59,7 +59,7 @@ namespace dp
     void KDayView::on_selected_day_changed()
     {
       _M_ui->action_table->load_actions_of(_M_ui->calendar->selectedDate());
-      context()->setCurrentDate(_M_ui->calendar->selectedDate());
+      context()->setCurrentlySelectedDate(_M_ui->calendar->selectedDate());
     }
     // ---------------------------------------------------------------------------------
     void KDayView::on_today_pressed()

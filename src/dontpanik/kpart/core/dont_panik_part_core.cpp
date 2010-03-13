@@ -9,6 +9,8 @@
 #include <QFile>
 #include "context.h"
 #include "kmainwidget.h"
+#include "kstatus.h"
+#include "kdurationstatusupdater.h"
 #include "keditactiondialog.h"
 #include "kprojectsdialog.h"
 #include "ktasksdialog.h"
@@ -26,10 +28,15 @@ namespace dp
         : QObject ( parent )
         , _M_read_write ( false )
         , _M_gui_client ( gui_client )
+        , _M_status(new KStatus(this))
+        , _M_status_bar_label(new KDurationStatusUpdater(this))
     {
       context()->registerGlobalActions ( gui_client->actionCollection() );
-      _M_widget = new KMainWidget ( parent, new KParts::StatusBarExtension ( gui_client ) );
+      _M_widget = new KMainWidget ( parent );
+      _M_status_bar_label->addTo(new KParts::StatusBarExtension ( gui_client ));
+      init_statusbar_label();
       init_status_notifier_item ( gui_client->widget() );
+      _M_status->updateAll();
     }
     // ---------------------------------------------------------------------------------
     QWidget *dont_panik_core::widget()
@@ -51,14 +58,14 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void dont_panik_core::editPlannedWorkingTimes()
     {
-      PlannedWorkingTimesDialog dlg(widget());
+      PlannedWorkingTimesDialog dlg ( widget() );
       dlg.exec();
     }
     // ---------------------------------------------------------------------------------
     void dont_panik_core::addAction()
     {
       KEditActionDialog dlg;
-      dlg.setCurrentDay ( context()->currentDate() );
+      dlg.setCurrentDay ( context()->currentlySelectedDate() );
       dlg.exec();
     }
     // ---------------------------------------------------------------------------------
@@ -109,9 +116,15 @@ namespace dp
     {
 #ifdef DP_BUILD_TRAY_ICON_SUPPORT
       _M_status_notifier_item = new StatusNotifierItem ( this );
-      //_M_status_notifier_item->setAssociatedWidget(parent_widget);
-      //QWidget *w = static_cast<QWidget *>(parent_widget->parent());
+      connect(_M_status, SIGNAL(currentProjectChanged(QString)), _M_status_notifier_item, SLOT(onCurrentProjectChanged(QString)));
+      connect(_M_status, SIGNAL(todaysDurationChanged(int)), _M_status_notifier_item, SLOT(onTodaysDurationChanged(int)));
 #endif //DP_BUILD_TRAY_ICON_SUPPORT
+    }
+    // ---------------------------------------------------------------------------------
+    void dont_panik_core::init_statusbar_label()
+    {
+      connect(_M_status, SIGNAL(currentProjectChanged(QString)), _M_status_bar_label, SLOT(onCurrentProjectChanged(QString)));
+      connect(_M_status, SIGNAL(currentlySelectedDaysDurationChanged(int)), _M_status_bar_label, SLOT(onCurrentlySelectedDaysDurationChanged(int)));
     }
     // ---------------------------------------------------------------------------------
   }//core

@@ -20,67 +20,82 @@
 #ifdef DP_BUILD_TRAY_ICON_SUPPORT
 #include "context.h"
 #include "actiontemplateaction.h"
+#include <libdontpanic/durationformatter.h>
 #include <KMenu>
 
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-namespace core
-{
-  // ---------------------------------------------------------------------------------
-StatusNotifierItem::StatusNotifierItem(QObject* parent)
-        : KStatusNotifierItem("dontpanik_part", parent)
-{
-  init();
-}
-
-// ---------------------------------------------------------------------------------
-void StatusNotifierItem::setAssociatedWidget(QWidget* w)
-{
-  KStatusNotifierItem::setAssociatedWidget(w);
-  connect(this, SIGNAL(activateRequested(bool,QPoint)), w, SLOT(setVisible(bool)));
-}
-
-// ---------------------------------------------------------------------------------
-void StatusNotifierItem::updateTooltip()
-{
-  setToolTipIconByName("dontpanik");
-  setToolTipTitle("Don't Panik");
-}
-// ---------------------------------------------------------------------------------
-// private stuff:
-// ---------------------------------------------------------------------------------
-void StatusNotifierItem::init()
-{
-  setIconByName("dontpanik");
-  KMenu *menu = contextMenu();  
-  menu->addAction(context()->globalActions()->action("start_new_action"));
-  menu->addAction(context()->globalActions()->action("stop_current_action"));
-  menu->addAction(context()->globalActions()->action("continue_action"));   
-  initFavoritesMenu();
-  updateTooltip();
-}
-// ---------------------------------------------------------------------------------
-void StatusNotifierItem::initFavoritesMenu()
-{
-  KMenu *menu = contextMenu();  
-  menu->addSeparator();
-  KMenu *favMenu = new KMenu(i18n("switch activity to..."), menu);
-  foreach(ActionTemplate const& at, context()->actionTemplateManager()->allActionTemplates())
+  namespace core
   {
-    favMenu->addAction(actionFor(at));
+    // ---------------------------------------------------------------------------------
+    StatusNotifierItem::StatusNotifierItem ( QObject* parent )
+        : KStatusNotifierItem ( "dontpanik_part", parent )
+    {
+      init();
+    }
+
+    // ---------------------------------------------------------------------------------
+    void StatusNotifierItem::setAssociatedWidget ( QWidget* w )
+    {
+      KStatusNotifierItem::setAssociatedWidget ( w );
+      connect ( this, SIGNAL ( activateRequested ( bool, QPoint ) ), w, SLOT ( setVisible ( bool ) ) );
+    }
+
+    // ---------------------------------------------------------------------------------
+//     void StatusNotifierItem::updateTooltip()
+//     {
+//       setToolTipIconByName ( "dontpanik" );
+//       setToolTipTitle ( "Don't Panik" );
+//     }
+    // ---------------------------------------------------------------------------------
+    void StatusNotifierItem::onCurrentProjectChanged ( QString const& project_description)
+    {
+      setToolTipSubTitle(project_description);
+    }
+    // ---------------------------------------------------------------------------------
+    void StatusNotifierItem::onTodaysDurationChanged ( int duration)
+    {
+      setToolTipTitle(duration_formatter().format(duration));
+    }
+    // ---------------------------------------------------------------------------------
+    void StatusNotifierItem::onIconChanged(QString const& icon)
+    {
+      setToolTipIconByName(icon);
+    }
+    // ---------------------------------------------------------------------------------
+    // private stuff:
+    // ---------------------------------------------------------------------------------
+    void StatusNotifierItem::init()
+    {
+      setIconByName ( "dontpanik" );
+      KMenu *menu = contextMenu();
+      menu->addAction ( context()->globalActions()->action ( "start_new_action" ) );
+      menu->addAction ( context()->globalActions()->action ( "stop_current_action" ) );
+      menu->addAction ( context()->globalActions()->action ( "continue_action" ) );
+      initFavoritesMenu();
+    }
+    // ---------------------------------------------------------------------------------
+    void StatusNotifierItem::initFavoritesMenu()
+    {
+      KMenu *menu = contextMenu();
+      menu->addSeparator();
+      KMenu *favMenu = new KMenu ( i18n ( "switch activity to..." ), menu );
+      foreach ( ActionTemplate const& at, context()->actionTemplateManager()->allActionTemplates() )
+      {
+        favMenu->addAction ( actionFor ( at ) );
+      }
+      menu->addMenu ( favMenu );
+    }
+    // ---------------------------------------------------------------------------------
+    KAction* StatusNotifierItem::actionFor ( ActionTemplate const& a )
+    {
+      ActionTemplateAction * ata = new ActionTemplateAction ( this );
+      ata->setFavorite ( a );
+      connect ( ata, SIGNAL ( triggered ( ActionTemplate ) ), context()->timeTracker(), SLOT ( startActionFromTemplate ( ActionTemplate const& ) ) );
+      return ata;
+    }
+    // ---------------------------------------------------------------------------------
   }
-  menu->addMenu(favMenu);
-}
-// ---------------------------------------------------------------------------------
-KAction* StatusNotifierItem::actionFor(ActionTemplate const& a)
-{
-  ActionTemplateAction * ata = new ActionTemplateAction(this);
-  ata->setFavorite(a);
-  connect(ata, SIGNAL(triggered(ActionTemplate)), context()->timeTracker(), SLOT(startActionFromTemplate(ActionTemplate const&)));
-  return ata;
-}
-// ---------------------------------------------------------------------------------
-}
 }
 #endif //DP_BUILD_TRAY_ICON_SUPPORT

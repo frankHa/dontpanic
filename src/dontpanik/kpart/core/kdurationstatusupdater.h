@@ -35,22 +35,24 @@ namespace dp
       public:
         KDurationStatusUpdater ( QObject* parent = 0 );
       public:
-        //need to find a more abstract coupling:
-        void setDurationInfoSource(KDayView *dayView);
+        // ---------------------------------------------------------------------------------
         void addTo(KParts::StatusBarExtension*);        
-      private slots:
-        void update();
-        void updateTooltip();
+        // ---------------------------------------------------------------------------------
+      public slots:
+        // ---------------------------------------------------------------------------------
+        void onCurrentlySelectedDaysDurationChanged ( int duration );
+        // ---------------------------------------------------------------------------------
+        void onCurrentProjectChanged ( QString const& project_description );
+        // ---------------------------------------------------------------------------------        
         void initLabel();
+        // ---------------------------------------------------------------------------------
       private:        
+        // ---------------------------------------------------------------------------------
         KParts::StatusBarExtension * statusBar();
         QLabel* label();
-        QTimer* timer();
       private:
         KParts::StatusBarExtension *_M_status_bar;
         QLabel *_M_duration_label;
-        QTimer *_M_timer;
-        KDayView *_M_day_view;
     };
   }
 }

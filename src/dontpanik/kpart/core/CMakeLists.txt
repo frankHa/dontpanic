@@ -30,6 +30,7 @@ set(dontpanikpart_LIB_SRCS
     kreportrangedialog.cpp 
     kreportview.cpp 
     kreportwidget.cpp 
+    kstatus.cpp
     ktaskscombobox.cpp 
     ktasksdialog.cpp
     ktaskstable.cpp

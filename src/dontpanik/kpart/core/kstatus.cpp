@@ -17,55 +17,76 @@
 
 */
 
-#include "kmainwidget.h"
-#include "kdayview.h"
-#include "kreportview.h"
-#include "kdurationstatusupdater.h"
-#include <QLabel>
-#include <QFont>
+#include "kstatus.h"
+#include "context.h"
+#include <libdontpanic_client/actionscache.h>
+#include <libdontpanic/durationformatter.h>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
-  enum view{DAY, REPORT};
   // ---------------------------------------------------------------------------------
   namespace core
   {
     // ---------------------------------------------------------------------------------
-    KMainWidget::KMainWidget ( QWidget *parent)
-        : QStackedWidget ( parent )
+    KStatus::KStatus ( QObject* parent )
+        : QObject ( parent )
+        , _M_timer_id ( 0 )
+        , _M_todays_actions ( new client::ActionsCache ( this ) )
+        , _M_actions_of_selected_day ( new client::ActionsCache ( this ) )
     {
-      init_widgets();
+      init();
     }
     // ---------------------------------------------------------------------------------
-    KMainWidget::~KMainWidget()
+    void KStatus::updateAll()
+    {
+      update();
+    }
+    // ---------------------------------------------------------------------------------
+    // protected stuff:
+    // ---------------------------------------------------------------------------------
+    void KStatus::timerEvent ( QTimerEvent* event )
+    {
+      QObject::timerEvent ( event );
+    }
+
+    // ---------------------------------------------------------------------------------
+    //private stuff:
+    // ---------------------------------------------------------------------------------
+    void KStatus::init()
+    {
+
+    }
+    // ---------------------------------------------------------------------------------
+    void KStatus::ensure_correct_timer_state()
     {
     }
     // ---------------------------------------------------------------------------------
-    void KMainWidget::show_dayview()
+    void KStatus::on_active_action_changed ( dp::Action const& ca)
     {
-      setCurrentIndex(DAY);
+      if(!ca.isActive())
+      {
+        emit currentProjectChanged(i18n("There is currently no running activity..."));
+      } 
+      else
+      {
+        QString tooltip = i18n("Current Don't Panik action: \nProject:\t\t%1\nTask:\t\t%2\nRunning since:\t%3\nCurrent duration:\t%4")
+        .arg(context()->projectManager()->load(ca.project()).name())
+        .arg(context()->taskManager()->load(ca.task()).name())
+        .arg(ca.startTime().time().toString(Qt::SystemLocaleShortDate))
+        .arg(duration_formatter().format(ca.duration()));
+        emit currentProjectChanged(tooltip);
+      }
     }
     // ---------------------------------------------------------------------------------
-    void KMainWidget::show_reportview()
+    void KStatus::on_selected_day_changed ( QDate const& day )
     {
-      setCurrentIndex(REPORT);
     }
     // ---------------------------------------------------------------------------------
-    // private stuff:
-    // ---------------------------------------------------------------------------------
-    void KMainWidget::init_widgets()
+    void KStatus::update()
     {
-      addWidget(newDayView());
-      addWidget(new KReportView(this));
-    }    
-    // ---------------------------------------------------------------------------------
-    KDayView* KMainWidget::newDayView()
-    {
-      KDayView *v = new KDayView(this);
-      return v;
     }
     // ---------------------------------------------------------------------------------
-  }//core
+  }
   // ---------------------------------------------------------------------------------
-}//dp
+}
 // ---------------------------------------------------------------------------------

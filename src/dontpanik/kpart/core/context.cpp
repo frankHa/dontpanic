@@ -51,12 +51,14 @@ namespace dp
       delete _M_planned_working_time_manager;
     }
     // ---------------------------------------------------------------------------------
-    void Context::setCurrentDate(QDate const& date)
+    void Context::setCurrentlySelectedDate(QDate const& date)
     {
+      if(date == _M_current_date){return;}
       _M_current_date = date;
+      emit currentlySelectedDateChanged(date);
     }
     // ---------------------------------------------------------------------------------
-    QDate Context::currentDate() const
+    QDate Context::currentlySelectedDate() const
     {
       return _M_current_date;
     }
