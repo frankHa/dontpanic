@@ -50,6 +50,7 @@ namespace dp
     {
       if(statusBar()->statusBar()== 0){return;}
       if(label() == 0) {initLabel();}
+      label()->setTextFormat(Qt::RichText);
       label()->setToolTip(project_description);      
     }
     // ---------------------------------------------------------------------------------

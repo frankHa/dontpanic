@@ -118,6 +118,7 @@ namespace dp
       _M_status_notifier_item = new StatusNotifierItem ( this );
       connect(_M_status, SIGNAL(currentProjectChanged(QString)), _M_status_notifier_item, SLOT(onCurrentProjectChanged(QString)));
       connect(_M_status, SIGNAL(todaysDurationChanged(int)), _M_status_notifier_item, SLOT(onTodaysDurationChanged(int)));
+      connect(_M_status, SIGNAL(iconChanged(QString const&)), _M_status_notifier_item, SLOT(onIconChanged(QString const&)));
 #endif //DP_BUILD_TRAY_ICON_SUPPORT
     }
     // ---------------------------------------------------------------------------------

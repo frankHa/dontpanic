@@ -43,24 +43,28 @@ namespace dp
     }
 
     // ---------------------------------------------------------------------------------
-//     void StatusNotifierItem::updateTooltip()
-//     {
-//       setToolTipIconByName ( "dontpanik" );
-//       setToolTipTitle ( "Don't Panik" );
-//     }
+     void StatusNotifierItem::initTooltip()
+     {
+       setToolTipIconByName ( "dontpanik" );
+       setToolTipTitle ( "Don't Panik" );
+     }
     // ---------------------------------------------------------------------------------
     void StatusNotifierItem::onCurrentProjectChanged ( QString const& project_description)
     {
+      kDebug()<<project_description;
       setToolTipSubTitle(project_description);
     }
     // ---------------------------------------------------------------------------------
     void StatusNotifierItem::onTodaysDurationChanged ( int duration)
     {
+      kDebug()<<duration;
       setToolTipTitle(duration_formatter().format(duration));
     }
     // ---------------------------------------------------------------------------------
     void StatusNotifierItem::onIconChanged(QString const& icon)
     {
+      kDebug()<<icon;
+      setIconByName(icon);
       setToolTipIconByName(icon);
     }
     // ---------------------------------------------------------------------------------
@@ -74,6 +78,7 @@ namespace dp
       menu->addAction ( context()->globalActions()->action ( "stop_current_action" ) );
       menu->addAction ( context()->globalActions()->action ( "continue_action" ) );
       initFavoritesMenu();
+      initTooltip();
     }
     // ---------------------------------------------------------------------------------
     void StatusNotifierItem::initFavoritesMenu()

@@ -55,6 +55,7 @@ namespace dp
     {
       if(date == _M_current_date){return;}
       _M_current_date = date;
+      kDebug()<<"emitting: "<<date;
       emit currentlySelectedDateChanged(date);
     }
     // ---------------------------------------------------------------------------------
