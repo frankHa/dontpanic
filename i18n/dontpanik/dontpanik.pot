@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-12 13:13+0100\n"
+"POT-Creation-Date: 2010-03-13 23:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,19 +75,6 @@ msgstr ""
 msgid "Creation Date"
 msgstr ""
 
-#: kpart/core/kdurationstatusupdater.cpp:64
-msgid "There is currently no running activity..."
-msgstr ""
-
-#: kpart/core/kdurationstatusupdater.cpp:68
-msgid ""
-"Current Don't Panik action: \n"
-"Project:\t\t%1\n"
-"Task:\t\t%2\n"
-"Running since:\t%3\n"
-"Current duration:\t%4"
-msgstr ""
-
 #. i18nc ( "@item:inlistbox do not use holidays", "(None)" ) );
 #: kpart/core/kholidayregioncombobox.cpp:54
 msgctxt "@item:inlistbox do not use holidays"
@@ -126,6 +113,16 @@ msgstr ""
 msgid "%1 - %2"
 msgstr ""
 
+#: kpart/core/kstatus.cpp:113
+msgid "There is currently no running activity..."
+msgstr ""
+
+#: kpart/core/kstatus.cpp:117
+msgid ""
+"<html>Currently working on:<br/><b>%1 / %2</b><br/>since: <b>%3 (%4h)</b></"
+"html>"
+msgstr ""
+
 #: kpart/core/ktaskstable.cpp:47
 msgid "Do you really want to remove the selected task description?"
 msgstr ""
@@ -134,7 +131,7 @@ msgstr ""
 msgid "Remove Task Description"
 msgstr ""
 
-#: kpart/core/statusnotifieritem.cpp:68
+#: kpart/core/statusnotifieritem.cpp:88
 msgid "switch activity to..."
 msgstr ""
 
