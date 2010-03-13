@@ -48,6 +48,11 @@ namespace dp
     void KStatus::updateAll()
     {
       update();
+      emit todaysDurationChanged ( _M_cached_todays_duration );
+      emit currentlySelectedDaysDurationChanged ( _M_cached_selected_days_duration );
+      emit currentProjectChanged ( _M_cached_project );
+      emit iconChanged ( _M_cached_icon );
+      
     }
     // ---------------------------------------------------------------------------------
     // protected stuff:
@@ -67,42 +72,40 @@ namespace dp
     void KStatus::init()
     {
       connect ( context()->timeTracker(), SIGNAL ( currentlyActiveActionChanged ( dp::Action ) ), this, SLOT ( on_active_action_changed ( dp::Action ) ) );
-      connect ( context()->timeTracker(), SIGNAL ( stored ( dp::Action ) ), this, SLOT ( on_action_stored ( dp::Action ) ) );
-      connect ( context()->timeTracker(), SIGNAL ( removed ( dp::Action ) ), this, SLOT ( on_action_removed ( dp::Action ) ) );
       connect ( context(), SIGNAL ( currentlySelectedDateChanged ( QDate const& ) ), this, SLOT ( on_selected_day_changed ( QDate const& ) ) );
+      connect ( _M_todays_actions, SIGNAL ( stored ( dp::Action ) ), this, SLOT ( on_action_stored ( dp::Action ) ) );
+      connect ( _M_todays_actions, SIGNAL ( removed ( dp::Action ) ), this, SLOT ( on_action_removed ( dp::Action ) ) );
+      connect ( _M_actions_of_selected_day, SIGNAL ( stored ( dp::Action ) ), this, SLOT ( on_action_stored ( dp::Action ) ) );
+      connect ( _M_actions_of_selected_day, SIGNAL ( removed ( dp::Action ) ), this, SLOT ( on_action_removed ( dp::Action ) ) );
       _M_todays_actions->setSourceTimeTracker ( context()->timeTracker() );
       _M_todays_actions->initCache ( QDate::currentDate() );
       _M_actions_of_selected_day->setSourceTimeTracker ( context()->timeTracker() );
       _M_actions_of_selected_day->initCache ( _M_cached_selected_day );
+      
       update();
     }
     // ---------------------------------------------------------------------------------
     void KStatus::ensure_correct_timer_state()
     {
-      if ( _M_timer_id == 0 )
+      if ( context()->timeTracker()->currentlyActiveAction().isActive() )
       {
-        _M_timer_id = startTimer ( 500 );
+        if ( _M_timer_id == 0 )
+        {
+          _M_timer_id = startTimer ( 500 );
+        }
       }
-//       if ( context()->timeTracker()->currentlyActiveAction().isActive() )
-//       {
-//         if ( _M_timer_id == 0 )
-//         {
-//           _M_timer_id = startTimer ( 500 );
-//         }
-//       }
-//       else
-//       {
-//         if ( _M_timer_id  != 0 )
-//         {
-//           killTimer ( _M_timer_id );
-//           _M_timer_id = 0;
-//         }
-//       }
+      else
+      {
+        if ( _M_timer_id  != 0 )
+        {
+          killTimer ( _M_timer_id );
+          _M_timer_id = 0;
+        }
+      }
     }
     // ---------------------------------------------------------------------------------
     void KStatus::on_active_action_changed ( dp::Action const& ca )
     {
-      kDebug() << "";
       ensure_correct_timer_state();
       QString description;
       if ( !ca.isActive() )
@@ -111,8 +114,7 @@ namespace dp
       }
       else
       {
-        description = ///i18n ( "Current Don't Panik action: \nProject:\t\t%1\nTask:\t\t%2\nRunning since:\t%3\nCurrent duration:\t%4" )
-        i18n ( "Currently working on:<br/><b>%1 / %2</b><br/>since: <b>%3 (%4h)</b>" )
+        description = i18n ( "<html>Currently working on:<br/><b>%1 / %2</b><br/>since: <b>%3 (%4h)</b></html>" )
                       .arg ( context()->projectManager()->load ( ca.project() ).name() )
                       .arg ( context()->taskManager()->load ( ca.task() ).name() )
                       .arg ( ca.startTime().time().toString ( Qt::SystemLocaleShortDate ) )
@@ -121,20 +123,17 @@ namespace dp
       if ( _M_cached_project != description )
       {
         _M_cached_project = description;
-        kDebug() << "emitting: " << description;
         emit currentProjectChanged ( description );
       }
     }
     // ---------------------------------------------------------------------------------
     void KStatus::on_selected_day_changed ( QDate const& day )
     {
-      kDebug() << day;
       if ( day == _M_cached_selected_day )
       {
         return;
       }
       _M_actions_of_selected_day->initCache ( day );
-      kDebug() << "cached " << _M_actions_of_selected_day->cachedActions().size() << " actions for :" << day;
       _M_cached_selected_day = day;
       updateSelectedDaysDuration();
     }
@@ -151,7 +150,6 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void KStatus::update()
     {
-      //kDebug()<<"";
       updateCurrentActivity();
       updateTodaysDuration();
       updateSelectedDaysDuration();
@@ -160,33 +158,28 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void KStatus::updateCurrentActivity()
     {
-      kDebug() << "";
       on_active_action_changed ( context()->timeTracker()->currentlyActiveAction() );
     }
     // ---------------------------------------------------------------------------------
     void KStatus::updateTodaysDuration()
     {
-      kDebug() << "";
       int current_duration = _M_todays_actions->duration();
       if ( _M_cached_todays_duration == current_duration )
       {
         return;
       }
       _M_cached_todays_duration = current_duration;
-      kDebug() << "emitting: " << current_duration;
       emit todaysDurationChanged ( current_duration );
     }
     // ---------------------------------------------------------------------------------
     void KStatus::updateSelectedDaysDuration()
     {
-      kDebug() << "";
       int current_duration = _M_actions_of_selected_day->duration();
       if ( _M_cached_selected_days_duration == current_duration )
       {
         return;
       }
       _M_cached_selected_days_duration = current_duration;
-      kDebug() << "emitting: " << current_duration;
       emit currentlySelectedDaysDurationChanged ( current_duration );
     }
     // ---------------------------------------------------------------------------------
@@ -214,7 +207,6 @@ namespace dp
         return;
       }
       _M_cached_icon = icon;
-      kDebug() << "emitting: " << _M_cached_icon;
       emit iconChanged ( _M_cached_icon );
     }
     // ---------------------------------------------------------------------------------

@@ -21,6 +21,7 @@
 #include <libdontpanic/durationformatter.h>
 #include "context.h"
 #include <KStatusBar>
+#include <QToolTip>
 
 namespace dp
 {
@@ -50,7 +51,6 @@ namespace dp
     {
       if(statusBar()->statusBar()== 0){return;}
       if(label() == 0) {initLabel();}
-      label()->setTextFormat(Qt::RichText);
       label()->setToolTip(project_description);      
     }
     // ---------------------------------------------------------------------------------
