@@ -43,29 +43,29 @@ namespace dp
     }
 
     // ---------------------------------------------------------------------------------
-     void StatusNotifierItem::initTooltip()
-     {
-       setToolTipIconByName ( "dontpanik" );
-       setToolTipTitle ( "Don't Panik" );
-     }
-    // ---------------------------------------------------------------------------------
-    void StatusNotifierItem::onCurrentProjectChanged ( QString const& project_description)
+    void StatusNotifierItem::initTooltip()
     {
-      kDebug()<<project_description;
-      setToolTipSubTitle(project_description);
+      setToolTipIconByName ( "dontpanik" );
+      setToolTipTitle ( "Don't Panik" );
     }
     // ---------------------------------------------------------------------------------
-    void StatusNotifierItem::onTodaysDurationChanged ( int duration)
+    void StatusNotifierItem::onCurrentProjectChanged ( QString const& project_description )
     {
-      kDebug()<<duration;
-      setToolTipTitle(duration_formatter().format(duration));
+      kDebug() << project_description;
+      setToolTipSubTitle ( project_description );
     }
     // ---------------------------------------------------------------------------------
-    void StatusNotifierItem::onIconChanged(QString const& icon)
+    void StatusNotifierItem::onTodaysDurationChanged ( int duration )
     {
-      kDebug()<<icon;
-      setIconByName(icon);
-      setToolTipIconByName(icon);
+      kDebug() << duration;
+      setToolTipTitle ( duration_formatter().format ( duration ) );
+    }
+    // ---------------------------------------------------------------------------------
+    void StatusNotifierItem::onIconChanged ( QString const& icon )
+    {
+      kDebug() << icon;
+      setIconByName ( icon );
+      setToolTipIconByName ( icon );
     }
     // ---------------------------------------------------------------------------------
     // private stuff:
@@ -79,18 +79,26 @@ namespace dp
       menu->addAction ( context()->globalActions()->action ( "continue_action" ) );
       initFavoritesMenu();
       initTooltip();
+      connect ( context()->actionTemplateManager(), SIGNAL ( stored ( dp::ActionTemplate ) ), this, SLOT ( on_favorite_stored ( dp::ActionTemplate const&) ) );
+      connect ( context()->actionTemplateManager(), SIGNAL ( removed ( dp::ActionTemplate ) ), this, SLOT ( on_favorite_removed ( dp::ActionTemplate const&) ) );
     }
     // ---------------------------------------------------------------------------------
     void StatusNotifierItem::initFavoritesMenu()
     {
       KMenu *menu = contextMenu();
       menu->addSeparator();
-      KMenu *favMenu = new KMenu ( i18n ( "switch activity to..." ), menu );
+      _M_fav_menu = new KMenu ( i18n ( "switch activity to..." ), menu );
+      populateFavoritesMenu();
+      menu->addMenu ( _M_fav_menu );
+    }
+    // ---------------------------------------------------------------------------------
+    void StatusNotifierItem::populateFavoritesMenu()
+    {
+      _M_fav_menu->clear();
       foreach ( ActionTemplate const& at, context()->actionTemplateManager()->allActionTemplates() )
       {
-        favMenu->addAction ( actionFor ( at ) );
+        _M_fav_menu->addAction ( actionFor ( at ) );
       }
-      menu->addMenu ( favMenu );
     }
     // ---------------------------------------------------------------------------------
     KAction* StatusNotifierItem::actionFor ( ActionTemplate const& a )
@@ -99,6 +107,16 @@ namespace dp
       ata->setFavorite ( a );
       connect ( ata, SIGNAL ( triggered ( ActionTemplate ) ), context()->timeTracker(), SLOT ( startActionFromTemplate ( ActionTemplate const& ) ) );
       return ata;
+    }
+    // ---------------------------------------------------------------------------------
+    void StatusNotifierItem::on_favorite_stored ( ActionTemplate const& at )
+    {
+      populateFavoritesMenu();
+    }
+    // ---------------------------------------------------------------------------------
+    void StatusNotifierItem::on_favorite_removed ( ActionTemplate const& at )
+    {
+      populateFavoritesMenu();
     }
     // ---------------------------------------------------------------------------------
   }
