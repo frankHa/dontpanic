@@ -1,25 +1,28 @@
 #ifndef DP_CLIENT_DETAIL_CACHE_HPP
 #define DP_CLIENT_DETAIL_CACHE_HPP
-
+// ---------------------------------------------------------------------------------
 namespace dp
 {
+  // ---------------------------------------------------------------------------------
   namespace client
   {
+    // ---------------------------------------------------------------------------------
     namespace detail
     {
+      // ---------------------------------------------------------------------------------
       template<typename ObjT, typename NullT>
       class cache
       {
+        // ---------------------------------------------------------------------------------
         public:
           typedef ObjT object;
           typedef NullT null_t;
           typedef QList<object> objectlist;
-          
+          // ---------------------------------------------------------------------------------
         public:
           cache()
-          :_M_initialized(false){}
-          
-          
+          :_M_initialized(false){}          
+          // ---------------------------------------------------------------------------------
         public:   
           template<typename remote_ptr>
           object at(int index, remote_ptr remote)
@@ -27,7 +30,7 @@ namespace dp
             assure_we_are_initialized(remote);
             return _M_objects.at(index);
           }
-          
+          // ---------------------------------------------------------------------------------
           template<typename id_t, typename remote_ptr>
           object load(id_t const& id, remote_ptr remote)
           {
@@ -40,7 +43,7 @@ namespace dp
             }
             return _M_objects.value(index);
           }
-          
+          // ---------------------------------------------------------------------------------
           void store(object const& o)
           {
             int index = _M_objects.indexOf(o);
@@ -53,20 +56,21 @@ namespace dp
               _M_objects.replace(index, o);
             }
           }
-          
+          // ---------------------------------------------------------------------------------
           void remove(object const& o)
           {
             _M_objects.removeAll(o);
           }
-          
+          // ---------------------------------------------------------------------------------
           template<typename remote_ptr>
           objectlist find_all(remote_ptr remote)
           {
             assure_we_are_initialized(remote);
             return _M_objects;
           }
-          
+          // ---------------------------------------------------------------------------------
         private:
+          // ---------------------------------------------------------------------------------
           template<typename remote_ptr>
           void assure_we_are_initialized(remote_ptr remote)
           {
@@ -74,13 +78,18 @@ namespace dp
             _M_objects = remote->findAll();
             _M_initialized = true;
           }
-          
+          // ---------------------------------------------------------------------------------
         private:
+          // ---------------------------------------------------------------------------------
           bool _M_initialized;
           objectlist _M_objects;          
+          // ---------------------------------------------------------------------------------
       };
+      // ---------------------------------------------------------------------------------
     }//detail
+    // ---------------------------------------------------------------------------------
   }//client
+  // ---------------------------------------------------------------------------------
 }//dp
-
+// ---------------------------------------------------------------------------------
 #endif //DP_CLIENT_DETAIL_CACHE_HPP
