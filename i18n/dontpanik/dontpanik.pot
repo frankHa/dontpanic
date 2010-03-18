@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-13 23:34+0100\n"
+"POT-Creation-Date: 2010-03-18 12:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -113,14 +113,22 @@ msgstr ""
 msgid "%1 - %2"
 msgstr ""
 
-#: kpart/core/kstatus.cpp:113
+#: kpart/core/kstatus.cpp:135
 msgid "There is currently no running activity..."
 msgstr ""
 
-#: kpart/core/kstatus.cpp:117
+#: kpart/core/kstatus.cpp:139
 msgid ""
 "<html>Currently working on:<br/><b>%1 / %2</b><br/>since: <b>%3 (%4h)</b></"
 "html>"
+msgstr ""
+
+#: kpart/core/kstatus.cpp:238
+msgid "Reminder"
+msgstr ""
+
+#: kpart/core/kstatus.cpp:238
+msgid "15 minutes passed without job tracking!"
 msgstr ""
 
 #: kpart/core/ktaskstable.cpp:47
@@ -131,7 +139,7 @@ msgstr ""
 msgid "Remove Task Description"
 msgstr ""
 
-#: kpart/core/statusnotifieritem.cpp:88
+#: kpart/core/statusnotifieritem.cpp:90
 msgid "switch activity to..."
 msgstr ""
 

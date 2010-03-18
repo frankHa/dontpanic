@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-13 23:34+0100\n"
-"PO-Revision-Date: 2010-03-13 23:35+0100\n"
+"POT-Creation-Date: 2010-03-18 12:12+0100\n"
+"PO-Revision-Date: 2010-03-18 12:13+0100\n"
 "Last-Translator: Frank Habel <frank@bugplasma.de>\n"
 "Language-Team: Deutsch <>\n"
 "MIME-Version: 1.0\n"
@@ -116,17 +116,24 @@ msgstr "CF Monatsbericht"
 msgid "%1 - %2"
 msgstr "%1 - %2"
 
-#: kpart/core/kstatus.cpp:113
+#: kpart/core/kstatus.cpp:135
 msgid "There is currently no running activity..."
 msgstr "Momentan gibt es keine aktive Tätigkeit..."
 
-#: kpart/core/kstatus.cpp:117
+#: kpart/core/kstatus.cpp:139
 msgid ""
 "<html>Currently working on:<br/><b>%1 / %2</b><br/>since: <b>%3 (%4h)</b></"
 "html>"
 msgstr ""
-"<html>Aktuelle Tätigkeit:<br/><b>%1 / %2</b><br/>seit: <b>%3 (%4h)</b></"
-"html>"
+"<html>Aktuelle Tätigkeit:<br/><b>%1 / %2</b><br/>seit: <b>%3 (%4h)</b></html>"
+
+#: kpart/core/kstatus.cpp:238
+msgid "Reminder"
+msgstr "Erinnerung"
+
+#: kpart/core/kstatus.cpp:238
+msgid "15 minutes passed without job tracking!"
+msgstr "Es sind 15 Minuten ohne aktive Tätigkeit vergangen!"
 
 #: kpart/core/ktaskstable.cpp:47
 msgid "Do you really want to remove the selected task description?"
@@ -136,7 +143,7 @@ msgstr "Möchten Sie den ausgewählten Tätigkeitstyp wirklich löschen?"
 msgid "Remove Task Description"
 msgstr "Tätigkeitstyp Löschen"
 
-#: kpart/core/statusnotifieritem.cpp:88
+#: kpart/core/statusnotifieritem.cpp:90
 msgid "switch activity to..."
 msgstr "Wechsle zu Tätigkeit..."
 
