@@ -6,6 +6,7 @@ set(dontpanikpart_LIB_SRCS
     context.cpp 
     country.cpp
     dayinfo.cpp 
+    desktopnotificationmanager.cpp
     kactiontemplateslist.cpp
     kactiontemplateslistmodel.cpp
     kcalendarwidget.cpp 
@@ -55,6 +56,7 @@ set(dontpanikpart_LIB_UIS
    )
 
 qt4_wrap_ui(dontpanikpart_LIB_SRCS ${dontpanikpart_LIB_UIS})
+
 
 kde4_add_library(dontpanikpartprivate SHARED ${dontpanikpart_LIB_SRCS})
 target_link_libraries(dontpanikpartprivate ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KPARTS_LIBS} ${KDEPIMLIBS_KHOLIDAYS_LIBS} dontpanic_lib dontpanic_client_lib)

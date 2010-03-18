@@ -31,9 +31,12 @@ namespace dp
   namespace core
   {
     // ---------------------------------------------------------------------------------
+    enum Timer{HALF_A_SECOND = 500, FIFTEEN_MINUTES = 15*60*1000};    
+    // ---------------------------------------------------------------------------------
     KStatus::KStatus ( QObject* parent )
         : QObject ( parent )
-        , _M_timer_id ( 0 )
+        , _M_tick_timer_id ( 0 )
+        , _M_no_job_warning_timer_id(0)
         , _M_todays_actions ( new client::ActionsCache ( this ) )
         , _M_actions_of_selected_day ( new client::ActionsCache ( this ) )
         , _M_cached_selected_day ( QDate::currentDate() )
@@ -59,9 +62,16 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void KStatus::timerEvent ( QTimerEvent* event )
     {
-      if ( event->timerId() == _M_timer_id )
+      if ( event->timerId() == _M_tick_timer_id )
       {
         update();
+      }
+      else
+      {
+        if(event->timerId() == _M_no_job_warning_timer_id)
+        {
+          updateNoJobTrackingsWarning();
+        }
       }
       QObject::timerEvent ( event );
     }
@@ -89,18 +99,30 @@ namespace dp
     {
       if ( context()->timeTracker()->currentlyActiveAction().isActive() )
       {
-        if ( _M_timer_id == 0 )
-        {
-          _M_timer_id = startTimer ( 500 );
-        }
+        stopTimer(_M_no_job_warning_timer_id);
+        ensureTimerIsRunning(_M_tick_timer_id, HALF_A_SECOND);
       }
       else
       {
-        if ( _M_timer_id  != 0 )
-        {
-          killTimer ( _M_timer_id );
-          _M_timer_id = 0;
-        }
+        stopTimer(_M_tick_timer_id);
+        ensureTimerIsRunning(_M_no_job_warning_timer_id, FIFTEEN_MINUTES);
+      }
+    }
+    // ---------------------------------------------------------------------------------
+    void KStatus::stopTimer(int &id)
+    {
+      if ( id  != 0 )
+      {
+        killTimer ( id );
+        id = 0;
+      }
+    }
+    // ---------------------------------------------------------------------------------
+    void KStatus::ensureTimerIsRunning(int &id, long timeout)
+    {
+      if ( id == 0 )
+      {
+        id = startTimer ( timeout );
       }
     }
     // ---------------------------------------------------------------------------------
@@ -208,6 +230,13 @@ namespace dp
       }
       _M_cached_icon = icon;
       emit iconChanged ( _M_cached_icon );
+    }
+    // ---------------------------------------------------------------------------------
+    void KStatus::updateNoJobTrackingsWarning()
+    {
+      kDebug()<<"emitting: 15 minutes passed without job tracking!";
+      emit noJobTrackingsWarning(i18n("Reminder"), i18n("15 minutes passed without job tracking!"));
+      stopTimer(_M_no_job_warning_timer_id);
     }
     // ---------------------------------------------------------------------------------
   }
