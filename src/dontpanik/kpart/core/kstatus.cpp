@@ -32,6 +32,7 @@ namespace dp
   {
     // ---------------------------------------------------------------------------------
     enum Timer{HALF_A_SECOND = 500, FIFTEEN_MINUTES = 15*60*1000};    
+    //enum Timer{HALF_A_SECOND = 500, FIFTEEN_MINUTES = 1*10*1000};    
     // ---------------------------------------------------------------------------------
     KStatus::KStatus ( QObject* parent )
         : QObject ( parent )
@@ -235,7 +236,7 @@ namespace dp
     void KStatus::updateNoJobTrackingsWarning()
     {
       kDebug()<<"emitting: 15 minutes passed without job tracking!";
-      emit noJobTrackingsWarning(i18n("Reminder"), i18n("15 minutes passed without job tracking!"));
+      emit noJobTrackingsWarning(i18n("15 minutes passed without job tracking!"));
       stopTimer(_M_no_job_warning_timer_id);
     }
     // ---------------------------------------------------------------------------------

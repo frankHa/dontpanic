@@ -28,14 +28,16 @@ namespace dp
   {
     // ---------------------------------------------------------------------------------
     DesktopNotificationManager::DesktopNotificationManager ( QObject* parent )
-        : QObject ( parent )
+        : QObject ( parent ){}
+    // ---------------------------------------------------------------------------------
+    void DesktopNotificationManager::setComponentData(KComponentData const& data)
     {
-
+      _M_component = data;
     }
     // ---------------------------------------------------------------------------------
-    void DesktopNotificationManager::showWarning ( QString const&title, QString const& msg )
+    void DesktopNotificationManager::showNoJobTrackingWarning ( QString const& msg )
     {
-      KNotification::event(KNotification::Warning, title, msg, KIcon("dontpanik").pixmap(48), 0, KNotification::Persistant);
+      KNotification::event("NoJobTracking", i18n("Don't Panik Reminder"), msg, KIcon("dontpanik").pixmap(48), 0, KNotification::Persistent, _M_component);
     }
     // ---------------------------------------------------------------------------------
   }

@@ -1,0 +1,7 @@
+[Global]
+IconName=dontpanik
+Comment=Don't Panik
+
+[Event/NoJobTracking]
+Name=No Job Tracking
+Action=Popup

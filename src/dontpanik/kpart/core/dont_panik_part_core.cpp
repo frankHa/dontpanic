@@ -133,7 +133,8 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void dont_panik_core::init_desktop_notification_manager()
     {
-      connect ( _M_status, SIGNAL ( noJobTrackingsWarning(QString, QString)), _M_desktop_notification_manager, SLOT ( showWarning (QString, QString ) ) );
+      _M_desktop_notification_manager->setComponentData(_M_gui_client->componentData());
+      connect ( _M_status, SIGNAL ( noJobTrackingsWarning(QString)), _M_desktop_notification_manager, SLOT ( showNoJobTrackingWarning ( QString ) ) );
     }
     // ---------------------------------------------------------------------------------
   }//core

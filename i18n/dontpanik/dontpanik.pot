@@ -8,13 +8,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-18 12:12+0100\n"
+"POT-Creation-Date: 2010-03-19 21:01+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: kpart/core/desktopnotificationmanager.cpp:40
+msgid "Don't Panik Reminder"
+msgstr ""
 
 #: kpart/core/kactionstable.cpp:108
 msgid "Do you really want to remove the selected action?"
@@ -113,21 +117,17 @@ msgstr ""
 msgid "%1 - %2"
 msgstr ""
 
-#: kpart/core/kstatus.cpp:135
+#: kpart/core/kstatus.cpp:136
 msgid "There is currently no running activity..."
 msgstr ""
 
-#: kpart/core/kstatus.cpp:139
+#: kpart/core/kstatus.cpp:140
 msgid ""
 "<html>Currently working on:<br/><b>%1 / %2</b><br/>since: <b>%3 (%4h)</b></"
 "html>"
 msgstr ""
 
-#: kpart/core/kstatus.cpp:238
-msgid "Reminder"
-msgstr ""
-
-#: kpart/core/kstatus.cpp:238
+#: kpart/core/kstatus.cpp:239
 msgid "15 minutes passed without job tracking!"
 msgstr ""
 

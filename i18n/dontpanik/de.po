@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-18 12:12+0100\n"
-"PO-Revision-Date: 2010-03-18 12:13+0100\n"
+"POT-Creation-Date: 2010-03-19 21:01+0100\n"
+"PO-Revision-Date: 2010-03-19 21:02+0100\n"
 "Last-Translator: Frank Habel <frank@bugplasma.de>\n"
 "Language-Team: Deutsch <>\n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: kpart/core/desktopnotificationmanager.cpp:40
+msgid "Don't Panik Reminder"
+msgstr "Don't Panik Erinnerung"
 
 #: kpart/core/kactionstable.cpp:108
 msgid "Do you really want to remove the selected action?"
@@ -116,22 +120,18 @@ msgstr "CF Monatsbericht"
 msgid "%1 - %2"
 msgstr "%1 - %2"
 
-#: kpart/core/kstatus.cpp:135
+#: kpart/core/kstatus.cpp:136
 msgid "There is currently no running activity..."
 msgstr "Momentan gibt es keine aktive Tätigkeit..."
 
-#: kpart/core/kstatus.cpp:139
+#: kpart/core/kstatus.cpp:140
 msgid ""
 "<html>Currently working on:<br/><b>%1 / %2</b><br/>since: <b>%3 (%4h)</b></"
 "html>"
 msgstr ""
 "<html>Aktuelle Tätigkeit:<br/><b>%1 / %2</b><br/>seit: <b>%3 (%4h)</b></html>"
 
-#: kpart/core/kstatus.cpp:238
-msgid "Reminder"
-msgstr "Erinnerung"
-
-#: kpart/core/kstatus.cpp:238
+#: kpart/core/kstatus.cpp:239
 msgid "15 minutes passed without job tracking!"
 msgstr "Es sind 15 Minuten ohne aktive Tätigkeit vergangen!"
 
@@ -617,6 +617,9 @@ msgstr "Frank Habel"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "frank@bugplasma.de"
+
+#~ msgid "Reminder"
+#~ msgstr "Erinnerung"
 
 #~ msgid ""
 #~ "Current Don't Panik action: \n"

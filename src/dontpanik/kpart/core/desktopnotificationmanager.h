@@ -19,8 +19,9 @@
 
 #ifndef DP_CORE_DESKTOPNOTIFICATIONMANAGER_H
 #define DP_CORE_DESKTOPNOTIFICATIONMANAGER_H
-
+#include <libdontpanic/defines.hpp>
 #include <QtCore/QObject>
+#include <KComponentData>
 
 // ---------------------------------------------------------------------------------
 namespace dp
@@ -39,9 +40,15 @@ namespace dp
         // ---------------------------------------------------------------------------------
         DesktopNotificationManager ( QObject* parent = 0 );
         // ---------------------------------------------------------------------------------
+        void setComponentData(KComponentData const& data);
+        // ---------------------------------------------------------------------------------
       public slots:
         // ---------------------------------------------------------------------------------
-        void showWarning(QString const& title, QString const& msg);
+        void showNoJobTrackingWarning(QString const& msg);
+        // ---------------------------------------------------------------------------------
+      private:
+        // ---------------------------------------------------------------------------------
+        KComponentData _M_component;
         // ---------------------------------------------------------------------------------
     };
     // ---------------------------------------------------------------------------------

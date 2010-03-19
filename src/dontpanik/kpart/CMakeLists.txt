@@ -17,6 +17,7 @@ target_link_libraries(dontpanikpart ${KDE4_KDEUI_LIBS} dontpanikpartprivate dont
 
 install( FILES dontpanik_part.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR} )
 install( FILES dontpanik_part.rc  DESTINATION  ${DATA_INSTALL_DIR}/dontpanikpart )
+install( FILES dontpanikpart.notifyrc  DESTINATION  ${DATA_INSTALL_DIR}/dontpanikpart )
 
 install(TARGETS dontpanikpart  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
