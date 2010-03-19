@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-19 21:01+0100\n"
+"POT-Creation-Date: 2010-03-19 22:11+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,33 +28,39 @@ msgstr ""
 msgid "Remove Action"
 msgstr ""
 
-#: kpart/core/kactionstablemodel.cpp:83
-msgid ""
-"This Task:\t%1\n"
-"Today:\t%2"
+#: kpart/core/kactionstablemodel.cpp:90
+msgid "Current Duration"
 msgstr ""
 
-#: kpart/core/kactionstablemodel.cpp:208
+#: kpart/core/kactionstablemodel.cpp:91
+msgid "This Task:"
+msgstr ""
+
+#: kpart/core/kactionstablemodel.cpp:92
+msgid "Today:"
+msgstr ""
+
+#: kpart/core/kactionstablemodel.cpp:217
 msgid "Start"
 msgstr ""
 
-#: kpart/core/kactionstablemodel.cpp:209
+#: kpart/core/kactionstablemodel.cpp:218
 msgid "End"
 msgstr ""
 
-#: kpart/core/kactionstablemodel.cpp:210
+#: kpart/core/kactionstablemodel.cpp:219
 msgid "Title"
 msgstr ""
 
-#: kpart/core/kactionstablemodel.cpp:211
+#: kpart/core/kactionstablemodel.cpp:220
 msgid "Type"
 msgstr ""
 
-#: kpart/core/kactionstablemodel.cpp:212
+#: kpart/core/kactionstablemodel.cpp:221
 msgid "Project"
 msgstr ""
 
-#: kpart/core/kactionstablemodel.cpp:213 kpart/core/kprojectstablemodel.cpp:92
+#: kpart/core/kactionstablemodel.cpp:222 kpart/core/kprojectstablemodel.cpp:92
 #: kpart/core/ktaskstablemodel.cpp:94
 msgid "Comment"
 msgstr ""

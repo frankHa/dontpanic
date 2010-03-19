@@ -24,6 +24,8 @@
 #include <QFont>
 #include <KLocalizedString>
 #include <KDebug>
+#include <QPalette>
+#include <QApplication>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -80,7 +82,14 @@ namespace dp
       {
         Q_UNUSED(index);
         DurationFormatter d;
-        QString tt = QString(i18n("This Task:\t%1\nToday:\t%2")).arg(d.format(a.duration())).arg(d.format(duration()));
+        QString bckColor = QApplication::palette().color( QPalette::ToolTipText ).name();
+        QString txtColor = QApplication::palette().color( QPalette::ToolTipBase ).name();
+        QString tt = QString("<html><table><tr><th bgcolor=%1  colspan=2 align=left><div style=\"color: %2; font-weight: bold;\">%3</div></th></tr><tr><td><b>%4</b></td><td>%5</td></tr><tr><td><b>%6</b></td><td>%7</td></tr></table></html>")
+        .arg(bckColor)
+        .arg(txtColor)
+        .arg(i18n("Current Duration"))
+        .arg(i18n("This Task:")).arg(d.format(a.duration()))
+        .arg(i18n("Today:")).arg(d.format(duration()));
         return tt;
       }
       // ---------------------------------------------------------------------------------

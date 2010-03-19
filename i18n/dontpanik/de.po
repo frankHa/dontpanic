@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-19 21:01+0100\n"
-"PO-Revision-Date: 2010-03-19 21:02+0100\n"
+"POT-Creation-Date: 2010-03-19 22:11+0100\n"
+"PO-Revision-Date: 2010-03-19 22:11+0100\n"
 "Last-Translator: Frank Habel <frank@bugplasma.de>\n"
 "Language-Team: Deutsch <>\n"
 "MIME-Version: 1.0\n"
@@ -29,35 +29,39 @@ msgstr "Möchten Sie die ausgewählte Aktion wirklich löschen?"
 msgid "Remove Action"
 msgstr "Aktion Löschen"
 
-#: kpart/core/kactionstablemodel.cpp:83
-msgid ""
-"This Task:\t%1\n"
-"Today:\t%2"
-msgstr ""
-"Diese Aufgabe:\t%1\n"
-"Heute:\t\t%2"
+#: kpart/core/kactionstablemodel.cpp:90
+msgid "Current Duration"
+msgstr "Aktuelle Dauer"
 
-#: kpart/core/kactionstablemodel.cpp:208
+#: kpart/core/kactionstablemodel.cpp:91
+msgid "This Task:"
+msgstr "Diese Tätigkeit:"
+
+#: kpart/core/kactionstablemodel.cpp:92
+msgid "Today:"
+msgstr "Heute:"
+
+#: kpart/core/kactionstablemodel.cpp:217
 msgid "Start"
 msgstr "Start"
 
-#: kpart/core/kactionstablemodel.cpp:209
+#: kpart/core/kactionstablemodel.cpp:218
 msgid "End"
 msgstr "Ende"
 
-#: kpart/core/kactionstablemodel.cpp:210
+#: kpart/core/kactionstablemodel.cpp:219
 msgid "Title"
 msgstr "Titel"
 
-#: kpart/core/kactionstablemodel.cpp:211
+#: kpart/core/kactionstablemodel.cpp:220
 msgid "Type"
 msgstr "Tätigkeitstyp"
 
-#: kpart/core/kactionstablemodel.cpp:212
+#: kpart/core/kactionstablemodel.cpp:221
 msgid "Project"
 msgstr "Projekt"
 
-#: kpart/core/kactionstablemodel.cpp:213 kpart/core/kprojectstablemodel.cpp:92
+#: kpart/core/kactionstablemodel.cpp:222 kpart/core/kprojectstablemodel.cpp:92
 #: kpart/core/ktaskstablemodel.cpp:94
 msgid "Comment"
 msgstr "Bemerkung"
@@ -617,6 +621,13 @@ msgstr "Frank Habel"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "frank@bugplasma.de"
+
+#~ msgid ""
+#~ "This Task:\t%1\n"
+#~ "Today:\t%2"
+#~ msgstr ""
+#~ "Diese Aufgabe:\t%1\n"
+#~ "Heute:\t\t%2"
 
 #~ msgid "Reminder"
 #~ msgstr "Erinnerung"
