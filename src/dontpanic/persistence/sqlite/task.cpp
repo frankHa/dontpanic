@@ -19,6 +19,11 @@ namespace dp
     namespace _sqlite
     {
       // ---------------------------------------------------------------------------------
+      const QString CREATE_TABLE_TASK =
+        "CREATE TABLE IF NOT EXISTS t_task \
+      (t_id TEXT PRIMARY KEY, t_name TEXT, t_visible INTEGER, \
+      t_solo_effort INTEGER, t_chargeable INTEGER, t_creation_date TEXT, t_comment TEXT)";
+      // ---------------------------------------------------------------------------------
       const QString INSERT_TASK =
         "INSERT INTO t_task(t_id, t_name, t_visible, t_solo_effort, t_chargeable, t_creation_date, t_comment)VALUES(?, ?, ?, ?, ?, ?, ?)";
       // ---------------------------------------------------------------------------------
@@ -26,15 +31,22 @@ namespace dp
         "SELECT t_id, t_name, t_visible, t_solo_effort, t_chargeable, t_creation_date, t_comment FROM t_task order by t_name";
       // ---------------------------------------------------------------------------------
       const QString SELECT_DISTINCT_TASK =
-      "SELECT DISTINCT t_id, t_name, t_visible, t_solo_effort, t_chargeable, t_creation_date, t_comment FROM t_task WHERE (t_id=?)";
+        "SELECT DISTINCT t_id, t_name, t_visible, t_solo_effort, t_chargeable, t_creation_date, t_comment FROM t_task WHERE (t_id=?)";
       // ---------------------------------------------------------------------------------
       const QString UPDATE_TASK =
         "UPDATE t_task set t_name=?, t_visible=?, t_solo_effort=?, t_chargeable=?, t_creation_date=?, t_comment=? WHERE (t_id=?)";
       // ---------------------------------------------------------------------------------
-      const QString REMOVE_TASK = 
-      "DELETE FROM t_task WHERE (t_id=?)";
-	// ---------------------------------------------------------------------------------
+      const QString REMOVE_TASK =
+        "DELETE FROM t_task WHERE (t_id=?)";
+      // ---------------------------------------------------------------------------------
       // public stuff:
+      // ---------------------------------------------------------------------------------
+      success _sqlite::Task::create_table() const
+      {
+        QSqlQuery query;
+        query.prepare ( CREATE_TABLE_TASK );
+        return execute(query);
+      }
       // ---------------------------------------------------------------------------------
       success Task::persist ( dp::Task const&_task ) const
       {
@@ -65,39 +77,39 @@ namespace dp
         return assign_query_values_to_entity ( query, t );
       }
       // ---------------------------------------------------------------------------------
-      success Task::remove(dp::Task const& _task) const
+      success Task::remove ( dp::Task const& _task ) const
       {
-        if ( _task.id().isNull())
-            {
-              return error();
-            }
-        if(!exists(_task))
+        if ( _task.id().isNull() )
         {
-            return successful();
+          return error();
+        }
+        if ( !exists ( _task ) )
+        {
+          return successful();
         }
         QSqlQuery query;
-        query.prepare(REMOVE_TASK);
-        query.addBindValue(_task.id().toString());
-        if(execute(query).has_failed())
+        query.prepare ( REMOVE_TASK );
+        query.addBindValue ( _task.id().toString() );
+        if ( execute ( query ).has_failed() )
         {
           return error();
         }
         return successful();
       }
       // ---------------------------------------------------------------------------------
-      success Task::findAll(dp::TaskList &l) const
+      success Task::findAll ( dp::TaskList &l ) const
       {
         QSqlQuery query;
-        query.prepare(SELECT_ALL_TASKS);
+        query.prepare ( SELECT_ALL_TASKS );
         if ( execute ( query ).has_failed() )
-            {
-              return error();
-            }
-            while ( query.next() )
-            {
-          dp::Task _t(Uuid(query.value(0).toString()));
-          assign_query_values_to_entity(query, _t);
-          l.append(_t);
+        {
+          return error();
+        }
+        while ( query.next() )
+        {
+          dp::Task _t ( Uuid ( query.value ( 0 ).toString() ) );
+          assign_query_values_to_entity ( query, _t );
+          l.append ( _t );
         }
         return successful();
       }
@@ -140,7 +152,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       success Task::update ( const dp::Task& _t ) const
       {
-        if(_t.id().isNull())
+        if ( _t.id().isNull() )
         {
           return error();
         }
@@ -163,7 +175,7 @@ namespace dp
         t.setIsSoloEffort ( query.value ( 3 ).toBool() );
         t.setIsChargeable ( query.value ( 4 ).toBool() );
         t.setCreationDate ( query.value ( 5 ).toDateTime() );
-        t.setComment(query.value(6).toString());
+        t.setComment ( query.value ( 6 ).toString() );
         return successful();
       }
 

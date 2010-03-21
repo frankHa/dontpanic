@@ -24,15 +24,6 @@
 // ---------------------------------------------------------------------------------
 // creating tables:
 // ---------------------------------------------------------------------------------
-#define CREATE_TABLE_PROJECT\
-  "CREATE TABLE IF NOT EXISTS p_project \
-(p_id TEXT PRIMARY KEY, p_name TEXT, p_visible INTEGER, p_creation_date TEXT, p_comment TEXT)"
-
-#define CREATE_TABLE_TASK\
-  "CREATE TABLE IF NOT EXISTS t_task \
-(t_id TEXT PRIMARY KEY, t_name TEXT, t_visible INTEGER, \
-t_solo_effort INTEGER, t_chargeable INTEGER, t_creation_date TEXT, t_comment TEXT)"
-
 #define CREATE_TABLE_LEAVE_TYPE\
   "CREATE TABLE IF NOT EXISTS lt_leave_type \
 (lt_id INTEGER PRIMARY KEY, lt_name TEXT, lt_paid INTEGER, lt_description TEXT)"
@@ -41,26 +32,6 @@ t_solo_effort INTEGER, t_chargeable INTEGER, t_creation_date TEXT, t_comment TEX
   "CREATE TABLE IF NOT EXISTS ct_collaboration_type \
 (ct_id TEXT PRIMARY KEY, ct_name TEXT, ct_visible INTEGER,\
 ct_creation_date TEXT, ct_solo_effort INTEGER, ct_interrupting INTEGER)"
-
-#define CREATE_TABLE_ACTION_TEMPLATE\
-  "CREATE TABLE IF NOT EXISTS at_action_template \
-(at_id TEXT PRIMARY KEY, at_t_task TEXT references t_task(t_id) , at_p_project INTEGER references p_project(p_id),\
-at_ct_collaboration_type TEXT references ct_collaboration_type(ct_id),\
-at_name TEXT, at_comment TEXT, at_icon TEXT)"
-
-#define CREATE_TABLE_ACTION\
-  "CREATE TABLE IF NOT EXISTS a_action \
-(a_id TEXT PRIMARY KEY, a_t_task TEXT references t_task(t_id) , a_p_project INTEGER references p_project(p_id),\
-a_ct_collaboration_type TEXT references ct_collaboration_type(ct_id),\
-a_name TEXT, a_comment TEXT, a_start INTEGER, a_end INTEGER, a_reviewed INTEGER, a_billed INTEGER )"
-
-#define CREATE_TABLE_WORK_TIME_PER_DAY\
- "CREATE TABLE IF NOT EXISTS w_work_time_per_day \
- (w_day int PRIMARY KEY, w_time int)"
- 
-#define CREATE_TABLE_CURRENT_HOLIDAY_REGION\
- "CREATE TABLE IF NOT EXISTS chr_current_holiday_region \
-  (chr_region TEXT PRIMARY KEY )"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -114,14 +85,12 @@ namespace dp
     dp::success Sqlite::update_database_schema_if_necessary() const
     {
       QSqlQuery query;
-      if ( !query.exec ( CREATE_TABLE_PROJECT ) )
+      if(_sqlite::project().create_table().has_failed())
       {
-        qDebug() << query.lastError();
         return error();
       }
-      if ( !query.exec ( CREATE_TABLE_TASK ) )
+      if(_sqlite::task().create_table().has_failed())
       {
-        qDebug() << query.lastError();
         return error();
       }
       if ( !query.exec ( CREATE_TABLE_LEAVE_TYPE ) )
@@ -134,25 +103,20 @@ namespace dp
         qDebug() << query.lastError();
         return error();
       }
-      if ( !query.exec ( CREATE_TABLE_ACTION_TEMPLATE ) )
+      if(_sqlite::actionTemplate().create_table().has_failed())
       {
-        qDebug() << query.lastError();
         return error();
       }
-      if ( !query.exec ( CREATE_TABLE_ACTION ) )
+      if(_sqlite::action().create_table().has_failed())
       {
-        qDebug() << query.lastError();
         return error();
       }
-      if ( !query.exec ( CREATE_TABLE_WORK_TIME_PER_DAY ) )
+      if(_sqlite::worktime_per_day().create_table().has_failed())
       {
-        qDebug() << query.lastError();
         return error();
       }
-      _sqlite::worktime_per_day().insert_default_entries();
-      if ( !query.exec ( CREATE_TABLE_CURRENT_HOLIDAY_REGION ) )
+      if(_sqlite::current_holiday_region().create_table().has_failed())
       {
-        qDebug() << query.lastError();
         return error();
       }
       return successful();

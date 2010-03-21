@@ -13,12 +13,19 @@ namespace dp
     // ---------------------------------------------------------------------------------
     namespace _sqlite
     {
+      // ---------------------------------------------------------------------------------
+      const QString CREATE_TABLE_ACTION_TEMPLATE =
+        "CREATE TABLE IF NOT EXISTS at_action_template \
+      (at_id TEXT PRIMARY KEY, at_t_task TEXT references t_task(t_id) , at_p_project INTEGER references p_project(p_id),\
+      at_ct_collaboration_type TEXT references ct_collaboration_type(ct_id),\
+      at_name TEXT, at_comment TEXT, at_icon TEXT)";
+      // ---------------------------------------------------------------------------------
       const QString INSERT_ACTION_TEMPLATE =
         "INSERT INTO at_action_template(at_id, at_t_task , at_p_project,at_ct_collaboration_type,\
         at_name, at_comment, at_icon)VALUES(?, ?, ?, ?, ?, ?, ?)";
       // ---------------------------------------------------------------------------------
-      const QString REMOVE_ACTION_TEMPLATE = 
-      "DELETE FROM at_action_template WHERE (at_id=?)";
+      const QString REMOVE_ACTION_TEMPLATE =
+        "DELETE FROM at_action_template WHERE (at_id=?)";
       // ---------------------------------------------------------------------------------
       const QString SELECT_ALL_ACTION_TEMPLATES =
         "SELECT at_id, at_t_task , at_p_project,at_ct_collaboration_type,\
@@ -31,6 +38,13 @@ namespace dp
       const QString UPDATE_ACTION_TEMPLATE =
         "UPDATE at_action_template set at_t_task=?, at_p_project=?,at_ct_collaboration_type=?,\
         at_name=?, at_comment=?, at_icon=? WHERE (at_id=?)";
+      // ---------------------------------------------------------------------------------
+      success _sqlite::ActionTemplate::create_table()
+      {
+        QSqlQuery query;
+        query.prepare ( CREATE_TABLE_ACTION_TEMPLATE );
+        return execute ( query );
+      }
       // ---------------------------------------------------------------------------------
       success ActionTemplate::persist ( dp::ActionTemplate const&_a ) const
       {
@@ -61,40 +75,40 @@ namespace dp
         return assign_query_values_to_entity ( query, a );
       }
       // ---------------------------------------------------------------------------------
-      success ActionTemplate::remove(dp::ActionTemplate const& _a) const
+      success ActionTemplate::remove ( dp::ActionTemplate const& _a ) const
       {
-        kDebug()<<_a.id().toString();
-        if ( !_a.isValid())
+        kDebug() << _a.id().toString();
+        if ( !_a.isValid() )
         {
           return error();
         }
-        if(!exists(_a))
+        if ( !exists ( _a ) )
         {
           return successful();
         }
         QSqlQuery query;
-        query.prepare(REMOVE_ACTION_TEMPLATE);
-        query.addBindValue(_a.id().toString());
-        if(execute(query).has_failed())
+        query.prepare ( REMOVE_ACTION_TEMPLATE );
+        query.addBindValue ( _a.id().toString() );
+        if ( execute ( query ).has_failed() )
         {
           return error();
         }
         return successful();
       }
       // ---------------------------------------------------------------------------------
-      success ActionTemplate::findAll(dp::TemplateList &l) const
+      success ActionTemplate::findAll ( dp::TemplateList &l ) const
       {
         QSqlQuery query;
-        query.prepare(SELECT_ALL_ACTION_TEMPLATES);
+        query.prepare ( SELECT_ALL_ACTION_TEMPLATES );
         if ( execute ( query ).has_failed() )
         {
           return error();
         }
         while ( query.next() )
         {
-          dp::ActionTemplate _p(Uuid(query.value(0).toString()));
-          assign_query_values_to_entity(query, _p);
-          l.append(_p);
+          dp::ActionTemplate _p ( Uuid ( query.value ( 0 ).toString() ) );
+          assign_query_values_to_entity ( query, _p );
+          l.append ( _p );
         }
         return successful();
       }
@@ -167,7 +181,7 @@ namespace dp
         Uuid const& project_id = query.value ( 2 ).toString();
         a.setProject ( project_id );
         Uuid const& collaboration_id = query.value ( 3 ).toString();
-        a.setCollaborationType(collaboration_id);
+        a.setCollaborationType ( collaboration_id );
         a.setName ( query.value ( 4 ).toString() );
         a.setComment ( query.value ( 5 ).toString() );
         a.setIcon ( query.value ( 6 ).toString() );

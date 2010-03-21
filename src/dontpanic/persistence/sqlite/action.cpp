@@ -15,6 +15,13 @@ namespace dp
     // ---------------------------------------------------------------------------------
     namespace _sqlite
     {
+      // ---------------------------------------------------------------------------------
+      const QString CREATE_TABLE_ACTION =
+        "CREATE TABLE IF NOT EXISTS a_action \
+      (a_id TEXT PRIMARY KEY, a_t_task TEXT references t_task(t_id) , a_p_project INTEGER references p_project(p_id),\
+      a_ct_collaboration_type TEXT references ct_collaboration_type(ct_id),\
+      a_name TEXT, a_comment TEXT, a_start INTEGER, a_end INTEGER, a_reviewed INTEGER, a_billed INTEGER )";
+      // ---------------------------------------------------------------------------------
       const QString INSERT_ACTION =
         "INSERT INTO a_action(a_id, a_t_task , a_p_project,a_ct_collaboration_type,\
         a_name, a_comment, a_start, a_end, a_reviewed, a_billed)VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -29,31 +36,38 @@ namespace dp
         WHERE a_start>=? AND a_start<=?";
       // ---------------------------------------------------------------------------------
       const QString SELECT_DISTINCT =
-      "SELECT DISTINCT a_id, a_t_task , a_p_project,a_ct_collaboration_type,\
+        "SELECT DISTINCT a_id, a_t_task , a_p_project,a_ct_collaboration_type,\
       a_name, a_comment, a_start, a_end, a_reviewed, a_billed FROM a_action";
       // ---------------------------------------------------------------------------------
       const QString SELECT_DISTINCT_ACTION =
-      "SELECT DISTINCT a_id, a_t_task , a_p_project,a_ct_collaboration_type,\
+        "SELECT DISTINCT a_id, a_t_task , a_p_project,a_ct_collaboration_type,\
       a_name, a_comment, a_start, a_end, a_reviewed, a_billed FROM a_action WHERE (a_id=?)";
       // ---------------------------------------------------------------------------------
       const QString UPDATE_ACTION =
-      "UPDATE a_action set a_t_task=?, a_p_project=?,a_ct_collaboration_type=?,\
+        "UPDATE a_action set a_t_task=?, a_p_project=?,a_ct_collaboration_type=?,\
       a_name=?, a_comment=?, a_start=?, a_end=?, a_reviewed=?, a_billed=? WHERE (a_id=?)";
       // ---------------------------------------------------------------------------------
-      const QString REMOVE_ACTION = 
-      "DELETE FROM a_action WHERE (a_id=?)";
+      const QString REMOVE_ACTION =
+        "DELETE FROM a_action WHERE (a_id=?)";
       // ---------------------------------------------------------------------------------
-      const QString SELECT_LAST_ACTION = 
-      "SELECT DISTINCT a_id, a_t_task , a_p_project,a_ct_collaboration_type,\
+      const QString SELECT_LAST_ACTION =
+        "SELECT DISTINCT a_id, a_t_task , a_p_project,a_ct_collaboration_type,\
       a_name, a_comment, a_start, a_end, a_reviewed, a_billed FROM a_action\
       order by a_start desc limit 1";
-      
-      const QString HAS_ACTION_FOR = 
-      "SELECT a_id from a_action WHERE a_start>=? AND a_start<=?";
+
+      const QString HAS_ACTION_FOR =
+        "SELECT a_id from a_action WHERE a_start>=? AND a_start<=?";
+      // ---------------------------------------------------------------------------------
+      success _sqlite::Action::create_table() const
+      {
+        QSqlQuery query;
+        query.prepare ( CREATE_TABLE_ACTION );
+        return execute ( query );
+      }
       // ---------------------------------------------------------------------------------
       success Action::persist ( dp::Action const&_a ) const
       {
-        if(!_a.isValid()) return error();
+        if ( !_a.isValid() ) return error();
         if ( exists ( _a ) )
         {
           return update ( _a );
@@ -81,43 +95,43 @@ namespace dp
         return assign_query_values_to_entity ( query, a );
       }
       // ---------------------------------------------------------------------------------
-      success Action::remove(dp::Action const& _action) const
+      success Action::remove ( dp::Action const& _action ) const
       {
-        if ( _action.id().isNull())
+        if ( _action.id().isNull() )
         {
           return error();
         }
-        if(!exists(_action))
+        if ( !exists ( _action ) )
         {
           return successful();
         }
         QSqlQuery query;
-        query.prepare(REMOVE_ACTION);
-        query.addBindValue(_action.id().toString());
-        if(execute(query).has_failed())
+        query.prepare ( REMOVE_ACTION );
+        query.addBindValue ( _action.id().toString() );
+        if ( execute ( query ).has_failed() )
         {
           return error();
         }
         return successful();
-      }      
+      }
       // ---------------------------------------------------------------------------------
       success Action::findAll ( dp::ActionList &l, QDateTime const& from, QDateTime const& to ) const
       {
-        kDebug()<<"from: "<<from<<" to: "<<to;
+        kDebug() << "from: " << from << " to: " << to;
         QSqlQuery query;
-        query.prepare(SELECT_RANGE_OF_ACTIONS);
+        query.prepare ( SELECT_RANGE_OF_ACTIONS );
         bindTimeValue ( query, from );
         bindTimeValue ( query, to );
         if ( execute ( query ).has_failed() )
         {
-          kWarning()<<"last error: "<<query.lastError();
+          kWarning() << "last error: " << query.lastError();
           return error();
         }
         while ( query.next() )
         {
-          dp::Action _a(QUuid(query.value(0).toString()));
-          assign_query_values_to_entity(query, _a);
-          l.append(_a);
+          dp::Action _a ( QUuid ( query.value ( 0 ).toString() ) );
+          assign_query_values_to_entity ( query, _a );
+          l.append ( _a );
         }
         return successful();
       }
@@ -138,22 +152,22 @@ namespace dp
         }
         QUuid const&id = query.value ( 0 ).toString();
         dp::Action _a ( id );
-        assign_query_values_to_entity(query, _a);
-        kDebug()<<"loaded last action "<<id.toString();
+        assign_query_values_to_entity ( query, _a );
+        kDebug() << "loaded last action " << id.toString();
         return _a;
       }
       // ---------------------------------------------------------------------------------
-      bool Action::hasActionFor(QDate const& date) const
+      bool Action::hasActionFor ( QDate const& date ) const
       {
-        QDateTime _from(date);
-        QDateTime _to(date, QTime(23, 59, 59, 99));
-        return hasActionFor(_from, _to);
+        QDateTime _from ( date );
+        QDateTime _to ( date, QTime ( 23, 59, 59, 99 ) );
+        return hasActionFor ( _from, _to );
       }
       // ---------------------------------------------------------------------------------
-      bool Action::hasActionFor(QDateTime const& from, QDateTime const& to) const
+      bool Action::hasActionFor ( QDateTime const& from, QDateTime const& to ) const
       {
         QSqlQuery query;
-        query.prepare(HAS_ACTION_FOR);
+        query.prepare ( HAS_ACTION_FOR );
         bindTimeValue ( query, from );
         bindTimeValue ( query, to );
         if ( execute ( query ).has_failed() )
@@ -192,7 +206,7 @@ namespace dp
           {
             return error();
           }
-          kDebug()<<_a.id().toString();
+          kDebug() << _a.id().toString();
           QSqlQuery query;
           query.prepare ( INSERT_ACTION );
           query.addBindValue ( _a.id().toString() );
@@ -219,7 +233,7 @@ namespace dp
         {
           return error();
         }
-        kDebug()<<_a.id().toString();
+        kDebug() << _a.id().toString();
         QSqlQuery query;
         query.prepare ( UPDATE_ACTION );
         query.addBindValue ( _a.task().toString() );
@@ -243,17 +257,17 @@ namespace dp
         a.setProject ( project_id );
         QDateTime _start, _end;
         QUuid const& collaboration_id = query.value ( 3 ).toString();
-        a.setCollaborationType(collaboration_id);
+        a.setCollaborationType ( collaboration_id );
         a.setName ( query.value ( 4 ).toString() );
         a.setComment ( query.value ( 5 ).toString() );
         uint starttime = query.value ( 6 ).toUInt();
-        if(starttime > 0)
+        if ( starttime > 0 )
         {
           _start.setTime_t ( starttime );
         }
         a.setStartTime ( _start );
         uint endtime = query.value ( 7 ).toUInt();
-        if(endtime>0)
+        if ( endtime > 0 )
         {
           _end.setTime_t ( endtime );
         }

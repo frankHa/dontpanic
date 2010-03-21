@@ -18,19 +18,30 @@ namespace dp
     namespace _sqlite
     {
       // ---------------------------------------------------------------------------------
+      const QString CREATE_TABLE_CURRENT_HOLIDAY_REGION =
+        "CREATE TABLE IF NOT EXISTS chr_current_holiday_region \
+      (chr_region TEXT PRIMARY KEY )";
+      // ---------------------------------------------------------------------------------
       const QString INSERT_CURRENT_HOLIDAY_REGION =
-      "INSERT INTO chr_current_holiday_region(chr_region)VALUES(?)";
+        "INSERT INTO chr_current_holiday_region(chr_region)VALUES(?)";
       // ---------------------------------------------------------------------------------
       const QString SELECT_DISTINCT_CURRENT_HOLIDAY_REGION =
-      "SELECT DISTINCT chr_region FROM chr_current_holiday_region";
+        "SELECT DISTINCT chr_region FROM chr_current_holiday_region";
       // ---------------------------------------------------------------------------------
       const QString UPDATE_CURRENT_HOLIDAY_REGION =
-      "UPDATE chr_current_holiday_region set chr_region=?";
+        "UPDATE chr_current_holiday_region set chr_region=?";
       // ---------------------------------------------------------------------------------
       const QString REMOVE_CURRENT_HOLIDAY_REGION =
-      "DELETE FROM chr_current_holiday_region";
+        "DELETE FROM chr_current_holiday_region";
       // ---------------------------------------------------------------------------------
       // public stuff:
+      // ---------------------------------------------------------------------------------
+      success CurrentHolidayRegion::create_table() const
+      {
+        QSqlQuery query;
+        query.prepare(CREATE_TABLE_CURRENT_HOLIDAY_REGION);
+        return execute(query);
+      }
       // ---------------------------------------------------------------------------------
       success CurrentHolidayRegion::persist ( QString const&_region ) const
       {

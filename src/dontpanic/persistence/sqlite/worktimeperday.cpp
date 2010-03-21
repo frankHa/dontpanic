@@ -19,6 +19,10 @@ namespace dp
     namespace _sqlite
     {
       // ---------------------------------------------------------------------------------
+      const QString CREATE_TABLE_WORK_TIME_PER_DAY =
+      "CREATE TABLE IF NOT EXISTS w_work_time_per_day \
+      (w_day int PRIMARY KEY, w_time int)";
+      // ---------------------------------------------------------------------------------
       const QString INSERT_WORKTIME =
         "INSERT INTO w_work_time_per_day(w_day, w_time)VALUES(?, ?)";
       // ---------------------------------------------------------------------------------
@@ -35,6 +39,19 @@ namespace dp
         "DELETE FROM w_work_time_per_day WHERE (w_day=?)";
       // ---------------------------------------------------------------------------------
       // public stuff:
+      // ---------------------------------------------------------------------------------
+      success WorktimePerDay::create_table() const
+      {
+        QSqlQuery query;
+        query.prepare(CREATE_TABLE_WORK_TIME_PER_DAY);
+        if(execute(query).was_successful())
+        {
+          insert_default_entries();
+          return successful();          
+        }
+        return error();
+        
+      }
       // ---------------------------------------------------------------------------------
       void WorktimePerDay::insert_default_entries() const
       {
