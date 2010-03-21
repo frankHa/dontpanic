@@ -24,14 +24,14 @@
 // ---------------------------------------------------------------------------------
 // creating tables:
 // ---------------------------------------------------------------------------------
-#define CREATE_TABLE_LEAVE_TYPE\
-  "CREATE TABLE IF NOT EXISTS lt_leave_type \
-(lt_id INTEGER PRIMARY KEY, lt_name TEXT, lt_paid INTEGER, lt_description TEXT)"
-
-#define CREATE_TABLE_COLLABORATION_TYPE\
-  "CREATE TABLE IF NOT EXISTS ct_collaboration_type \
-(ct_id TEXT PRIMARY KEY, ct_name TEXT, ct_visible INTEGER,\
-ct_creation_date TEXT, ct_solo_effort INTEGER, ct_interrupting INTEGER)"
+// #define CREATE_TABLE_LEAVE_TYPE\
+//   "CREATE TABLE IF NOT EXISTS lt_leave_type \
+// (lt_id INTEGER PRIMARY KEY, lt_name TEXT, lt_paid INTEGER, lt_description TEXT)"
+// 
+// #define CREATE_TABLE_COLLABORATION_TYPE\
+//   "CREATE TABLE IF NOT EXISTS ct_collaboration_type \
+// (ct_id TEXT PRIMARY KEY, ct_name TEXT, ct_visible INTEGER,\
+// ct_creation_date TEXT, ct_solo_effort INTEGER, ct_interrupting INTEGER)"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -93,16 +93,16 @@ namespace dp
       {
         return error();
       }
-      if ( !query.exec ( CREATE_TABLE_LEAVE_TYPE ) )
-      {
-        qDebug() << query.lastError();
-        return error();
-      }
-      if ( !query.exec ( CREATE_TABLE_COLLABORATION_TYPE ) )
-      {
-        qDebug() << query.lastError();
-        return error();
-      }
+//       if ( !query.exec ( CREATE_TABLE_LEAVE_TYPE ) )
+//       {
+//         qDebug() << query.lastError();
+//         return error();
+//       }
+//       if ( !query.exec ( CREATE_TABLE_COLLABORATION_TYPE ) )
+//       {
+//         qDebug() << query.lastError();
+//         return error();
+//       }
       if(_sqlite::actionTemplate().create_table().has_failed())
       {
         return error();
