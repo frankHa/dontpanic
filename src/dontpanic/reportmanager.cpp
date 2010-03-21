@@ -7,7 +7,7 @@ namespace dp
   ReportManager::ReportManager ( QObject *parent )
       : QObject ( parent ){}
   // ---------------------------------------------------------------------------------
-  Report ReportManager::generateCfReport(TimeRange const& range)
+  Report ReportManager::generateReport(ReportType const& _type, TimeRange const& range)
   {
     reports::CFReport cfrep;
     return cfrep.setRange(range).asDontPanicReport();    

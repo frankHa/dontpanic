@@ -63,6 +63,12 @@ namespace dp
         return _M_report_types.size();
       }
       // ---------------------------------------------------------------------------------
+      ReportType KReportTypesListModel::at(QModelIndex const& index) const
+      {
+        if(!index.isValid()) return NullReportType();
+        return _M_report_types.value(index.row());
+      }
+      // ---------------------------------------------------------------------------------
       // private stuff:
       // ---------------------------------------------------------------------------------
       void KReportTypesListModel::init_header_data()

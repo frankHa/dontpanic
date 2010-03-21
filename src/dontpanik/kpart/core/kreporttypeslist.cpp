@@ -69,7 +69,7 @@ namespace dp
       KReportRangeDialog dlg;
       if(dlg.exec()==QDialog::Accepted)
       {
-        Report r =context()->reportManager()->generateCfReport(dlg.selectedRange());
+        Report r =context()->reportManager()->generateReport(_M_model->at(index), dlg.selectedRange());
         kDebug()<<r.reportData();
       }
     }

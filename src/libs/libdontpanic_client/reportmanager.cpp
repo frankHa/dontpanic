@@ -63,9 +63,9 @@ namespace dp
       return _M_cache.find_all(remote());
     }
     // ---------------------------------------------------------------------------------
-    Report ReportManager::generateCfReport(TimeRange const& range)
+    Report ReportManager::generateReport(ReportType const& _type, TimeRange const& range)
     {
-      QDBusPendingReply<Report> reply =remote()->generateCfReport(range);
+      QDBusPendingReply<Report> reply =remote()->generateReport(_type, range);
       reply.waitForFinished();
       if(reply.isError())
       {
