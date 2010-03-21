@@ -5,7 +5,6 @@
 #include <libdontpanic/uuid.h>
 #include <QString>
 #include <QDateTime>
-#include <QMetaType>
 class QDBusArgument;
 // ---------------------------------------------------------------------------------
 namespace dp
