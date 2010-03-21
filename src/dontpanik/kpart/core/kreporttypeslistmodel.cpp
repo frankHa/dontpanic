@@ -42,7 +42,7 @@ namespace dp
       {
         if(!index.isValid()) return QVariant();
         if(role != Qt::DisplayRole) return QVariant();
-        return _M_report_types.value(index.row());        
+        return _M_report_types.value(index.row()).title();        
       }
       // ---------------------------------------------------------------------------------
       QVariant KReportTypesListModel::headerData ( int section, Qt::Orientation orientation, int role ) const
@@ -73,7 +73,8 @@ namespace dp
       // ---------------------------------------------------------------------------------
       void KReportTypesListModel::init_report_types_list()
       {
-        _M_report_types<< i18n("cf monthly report");
+        //_M_report_types<< i18n("cf monthly report");
+        _M_report_types = context()->reportManager()->allReportTypes();
       }
       // ---------------------------------------------------------------------------------
     }//detail

@@ -46,6 +46,7 @@ namespace dp
     qDBusRegisterMetaType<dp::ProjectList>();
     qDBusRegisterMetaType<dp::Report>();
     qDBusRegisterMetaType<dp::ReportType>();
+    qDBusRegisterMetaType<dp::ReportTypeList>();
     qDBusRegisterMetaType<dp::TimeRange>();
     qDBusRegisterMetaType<dp::Task>();
     qDBusRegisterMetaType<dp::TaskList>();

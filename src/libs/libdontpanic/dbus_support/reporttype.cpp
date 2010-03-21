@@ -18,7 +18,7 @@ namespace dp
   QDBusArgument & operator << ( QDBusArgument &arg, ReportType const& report_type )
   {
     arg.beginStructure();
-    arg << report_type.id() << report_type.title();
+    arg << report_type.id().toString() << report_type.title();
     arg.endStructure();
     return arg;
   }

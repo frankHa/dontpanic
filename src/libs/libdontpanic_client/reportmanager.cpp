@@ -31,6 +31,38 @@ namespace dp
         ,_M_remote(0)
     {}
     // ---------------------------------------------------------------------------------
+    void ReportManager::store(ReportType const& p)
+    {
+      QDBusPendingReply<> reply =remote()->store(p);
+      reply.waitForFinished();
+      if(reply.isError())
+      {
+        qWarning()<<reply.error();
+        emit error(QDBusError::errorString(reply.error().type()));
+      }
+    }
+    // ---------------------------------------------------------------------------------
+    ReportType ReportManager::load(Uuid const& id)
+    {
+      return _M_cache.load(id, remote());      
+    }
+    // ---------------------------------------------------------------------------------
+    void ReportManager::remove(ReportType const& p)
+    {
+      QDBusPendingReply<> reply =remote()->remove(p);
+      reply.waitForFinished();
+      if(reply.isError())
+      {
+        kWarning()<<reply.error();
+        emit error(QDBusError::errorString(reply.error().type()));
+      }
+    }
+    // ---------------------------------------------------------------------------------
+    ReportTypeList ReportManager::allReportTypes()
+    {
+      return _M_cache.find_all(remote());
+    }
+    // ---------------------------------------------------------------------------------
     Report ReportManager::generateCfReport(TimeRange const& range)
     {
       QDBusPendingReply<Report> reply =remote()->generateCfReport(range);
@@ -57,11 +89,23 @@ namespace dp
         {
           kWarning()<<_M_remote->lastError();
         }
-//         connect(_M_remote, SIGNAL( stored ( dp::Task ) ), this, SLOT( on_stored ( dp::Task ) ));
-//         connect(_M_remote, SIGNAL(removed(dp::Task)), this, SLOT(on_removed(dp::Task)));
-//         connect(_M_remote, SIGNAL(error(QString const&)), this, SIGNAL(error(QString)));
+         connect(_M_remote, SIGNAL( stored ( dp::ReportType ) ), this, SLOT( on_stored ( dp::ReportType ) ));
+         connect(_M_remote, SIGNAL(removed(dp::ReportType)), this, SLOT(on_removed(dp::ReportType)));
+         connect(_M_remote, SIGNAL(error(QString const&)), this, SIGNAL(error(QString)));
       }
       return _M_remote;
+    }
+    // ---------------------------------------------------------------------------------    
+    void ReportManager::on_stored(dp::ReportType p)
+    {
+      _M_cache.store(p);
+      emit stored(p);
+    }
+    // ---------------------------------------------------------------------------------
+    void ReportManager::on_removed(dp::ReportType p)
+    {
+      _M_cache.remove(p);
+      emit removed(p);
     }
     // ---------------------------------------------------------------------------------
   }//client
