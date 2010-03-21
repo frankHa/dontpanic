@@ -1,0 +1,18 @@
+#ifndef DP_DBUS_REPORTTYPE_H
+#define DP_DBUS_REPORTTYPE_H
+#include <libdontpanic/defines.hpp>
+#include <libdontpanic/reporttype.h>
+#include <QDBusArgument>
+
+Q_DECLARE_METATYPE ( dp::ReportType )
+// ---------------------------------------------------------------------------------
+namespace dp
+{
+  // ---------------------------------------------------------------------------------
+  QDBusArgument const& operator >> ( QDBusArgument const&arg, ReportType & report_type );
+  // ---------------------------------------------------------------------------------
+  QDBusArgument & operator << ( QDBusArgument &arg, ReportType const& report_type );
+  // ---------------------------------------------------------------------------------
+}
+// ---------------------------------------------------------------------------------
+#endif //RP_DBUS_QUUID_H
