@@ -79,7 +79,7 @@ namespace dp
     // ---------------------------------------------------------------------------------
     bool is_work_day ( const QDate& day )
     {
-      context()->plannedWorkingtimeManager()->isWorkDay(day);
+     return context()->plannedWorkingtimeManager()->isWorkDay(day);
     }
 
     // ---------------------------------------------------------------------------------

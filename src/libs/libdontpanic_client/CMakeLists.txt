@@ -61,12 +61,12 @@ qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS
                                    
 qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS
                                    ${DBUS_INTERFACES_PATH}/org.dontpanic.PlannedWorkingTimeManager.xml
-                                   remote_planned_working_time_manager
+                                  remote_planned_working_time_manager
                                    libdontpanic/dbus_support/worktimeperday.h
                                    )
 
-add_definitions(-fPIC)
-kde4_add_library(dontpanic_client_lib STATIC ${libdontpanic_client_SRCS})
+#add_definitions(-fPIC)
+kde4_add_library(dontpanic_client_lib SHARED ${libdontpanic_client_SRCS})
 target_link_libraries(dontpanic_client_lib ${KDE4_KDECORE_LIBS} dontpanic_lib)
 set_target_properties(dontpanic_client_lib PROPERTIES OUTPUT_NAME dontpanic_client)
 install(TARGETS dontpanic_client_lib DESTINATION ${LIB_INSTALL_DIR})
