@@ -6,8 +6,13 @@
 
 Q_DECLARE_METATYPE ( QDateTime )
 // ---------------------------------------------------------------------------------
-DP_EXPORT QDBusArgument const& operator >> ( QDBusArgument const&arg, QDateTime & time );
-// ---------------------------------------------------------------------------------
-DP_EXPORT QDBusArgument & operator << ( QDBusArgument &arg, QDateTime const& uuid );
+namespace dp
+{
+  // ---------------------------------------------------------------------------------
+  DP_EXPORT QDBusArgument const& operator >> ( QDBusArgument const&arg, QDateTime & time );
+  // ---------------------------------------------------------------------------------
+  DP_EXPORT QDBusArgument & operator << ( QDBusArgument &arg, QDateTime const& time );
+  // ---------------------------------------------------------------------------------
+}//dp
 // ---------------------------------------------------------------------------------
 #endif //RP_DBUS_QUUID_H

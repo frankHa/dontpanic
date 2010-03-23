@@ -6,8 +6,13 @@
 
 Q_DECLARE_METATYPE ( dp::Uuid )
 // ---------------------------------------------------------------------------------
-DP_EXPORT QDBusArgument const& operator >> ( QDBusArgument const&arg, dp::Uuid & uuid );
-// ---------------------------------------------------------------------------------
-DP_EXPORT QDBusArgument & operator << ( QDBusArgument &arg, dp::Uuid const& uuid );
+namespace dp
+{
+  // ---------------------------------------------------------------------------------
+  DP_EXPORT QDBusArgument const& operator >> ( QDBusArgument const&arg, dp::Uuid & uuid );
+  // ---------------------------------------------------------------------------------
+  DP_EXPORT QDBusArgument & operator << ( QDBusArgument &arg, dp::Uuid const& uuid );
+  // ---------------------------------------------------------------------------------
+}//dp
 // ---------------------------------------------------------------------------------
 #endif //RP_DBUS_UUID_H
