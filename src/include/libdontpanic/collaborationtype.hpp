@@ -47,7 +47,7 @@ namespace dp
   // ---------------------------------------------------------------------------------
   DECLARE_SMARTPOINTERS ( CollaborationType );
   // ---------------------------------------------------------------------------------
-  class NullCollaborationType: public CollaborationType
+  class DP_EXPORT NullCollaborationType: public CollaborationType
   {
     public:
       NullCollaborationType() : CollaborationType ( Uuid() ) {}

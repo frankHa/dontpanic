@@ -12,9 +12,9 @@ Q_DECLARE_METATYPE ( dp::ProjectList )
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  QDBusArgument DP_EXPORT const& operator >> ( QDBusArgument const&arg, dp::Project & project );
+  DP_EXPORT QDBusArgument DP_EXPORT const& operator >> ( QDBusArgument const&arg, dp::Project & project );
   // ---------------------------------------------------------------------------------
-  QDBusArgument DP_EXPORT  & operator << ( QDBusArgument &arg, dp::Project const& project );
+  DP_EXPORT QDBusArgument DP_EXPORT  & operator << ( QDBusArgument &arg, dp::Project const& project );
   // ---------------------------------------------------------------------------------
 }
 #endif //DP_DBUS_PROJECT_HPP

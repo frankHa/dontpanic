@@ -1,6 +1,7 @@
 #ifndef DONTPANICPART_H
 #define DONTPANICPART_H
 
+#include <libdontpanic/defines.hpp>
 #include <kparts/part.h>
 
 class QWidget;
@@ -27,7 +28,7 @@ namespace dp
  * @author %{AUTHOR} <%{EMAIL}>
  * @version ${APP_VERSION}
  */
-class DontPanikPart : public KParts::ReadOnlyPart
+class DP_EXPORT DontPanikPart : public KParts::ReadOnlyPart
 {
     Q_OBJECT
   public:

@@ -38,4 +38,4 @@ kde4_add_library(dontpanic_lib STATIC ${libdontpanic_SRCS})
 target_link_libraries(dontpanic_lib ${KDE4_KDECORE_LIBS} ${SQLITE_LIBRARIES} ${libuuid_LIB})
 set_target_properties(dontpanic_lib PROPERTIES OUTPUT_NAME dontpanic)
 
-install(TARGETS dontpanic_lib DESTINATION ${PLUGIN_INSTALL_DIR})
+install(TARGETS dontpanic_lib DESTINATION ${LIB_INSTALL_DIR})

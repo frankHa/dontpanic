@@ -6,8 +6,8 @@
 
 Q_DECLARE_METATYPE ( dp::TimeRange )
 // ---------------------------------------------------------------------------------
-QDBusArgument const& operator >> ( QDBusArgument const&arg, dp::TimeRange & range );
+DP_EXPORT QDBusArgument const& operator >> ( QDBusArgument const&arg, dp::TimeRange & range );
 // ---------------------------------------------------------------------------------
-QDBusArgument & operator << ( QDBusArgument &arg, dp::TimeRange const& range );
+DP_EXPORT QDBusArgument & operator << ( QDBusArgument &arg, dp::TimeRange const& range );
 // ---------------------------------------------------------------------------------
 #endif //RP_DBUS_QUUID_H

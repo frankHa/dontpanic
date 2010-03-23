@@ -11,9 +11,9 @@ Q_DECLARE_METATYPE ( dp::ActionList )
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  QDBusArgument const& operator >> ( QDBusArgument const&arg, dp::Action & at );
+  DP_EXPORT QDBusArgument const& operator >> ( QDBusArgument const&arg, dp::Action & at );
   // ---------------------------------------------------------------------------------
-  QDBusArgument & operator << ( QDBusArgument &arg, dp::Action const& at );
+  DP_EXPORT QDBusArgument & operator << ( QDBusArgument &arg, dp::Action const& at );
   // ---------------------------------------------------------------------------------
 }
 #endif //DP_DBUS_ACTION_TEMPLATE_HPP

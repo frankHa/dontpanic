@@ -9,7 +9,7 @@
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  class ActionTemplate
+  class DP_EXPORT ActionTemplate
   {
       // ---------------------------------------------------------------------------------
       friend QDBusArgument const& operator >> ( QDBusArgument const&arg, ActionTemplate & at );

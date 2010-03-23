@@ -11,9 +11,9 @@ Q_DECLARE_METATYPE ( dp::TemplateList )
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  QDBusArgument const& operator >> ( QDBusArgument const&arg, dp::ActionTemplate & at );
+  DP_EXPORT QDBusArgument const& operator >> ( QDBusArgument const&arg, dp::ActionTemplate & at );
   // ---------------------------------------------------------------------------------
-  QDBusArgument & operator << ( QDBusArgument &arg, dp::ActionTemplate const& at );
+  DP_EXPORT QDBusArgument & operator << ( QDBusArgument &arg, dp::ActionTemplate const& at );
   // ---------------------------------------------------------------------------------
 }
 #endif //DP_DBUS_ACTION_TEMPLATE_HPP

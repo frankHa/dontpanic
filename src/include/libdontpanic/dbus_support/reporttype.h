@@ -10,9 +10,9 @@ Q_DECLARE_METATYPE ( dp::ReportTypeList )
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  QDBusArgument const& operator >> ( QDBusArgument const&arg, ReportType & report_type );
+  DP_EXPORT QDBusArgument const& operator >> ( QDBusArgument const&arg, ReportType & report_type );
   // ---------------------------------------------------------------------------------
-  QDBusArgument & operator << ( QDBusArgument &arg, ReportType const& report_type );
+  DP_EXPORT QDBusArgument & operator << ( QDBusArgument &arg, ReportType const& report_type );
   // ---------------------------------------------------------------------------------
 }
 // ---------------------------------------------------------------------------------

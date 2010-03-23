@@ -29,7 +29,7 @@ class QDBusArgument;
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  class WorktimePerDay
+  class DP_EXPORT WorktimePerDay
   {
       // ---------------------------------------------------------------------------------
       friend QDBusArgument const& operator >> ( QDBusArgument const&arg, dp::WorktimePerDay & wtpd );

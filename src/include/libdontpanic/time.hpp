@@ -13,11 +13,11 @@ namespace dp
   namespace time
   {
     // ---------------------------------------------------------------------------------
-    long minutes(QTime const& time);
+    DP_EXPORT long minutes(QTime const& time);
     // ---------------------------------------------------------------------------------
-    long full_days(TimeRange const& range);
+    DP_EXPORT long full_days(TimeRange const& range);
     // ---------------------------------------------------------------------------------
-    long days(TimeRange const& range);
+    DP_EXPORT long days(TimeRange const& range);
     // ---------------------------------------------------------------------------------
   }
   // ---------------------------------------------------------------------------------

@@ -6,8 +6,8 @@
 
 Q_DECLARE_METATYPE ( dp::Report )
 // ---------------------------------------------------------------------------------
-QDBusArgument const& operator >> ( QDBusArgument const&arg, dp::Report & report );
+DP_EXPORT QDBusArgument const& operator >> ( QDBusArgument const&arg, dp::Report & report );
 // ---------------------------------------------------------------------------------
-QDBusArgument & operator << ( QDBusArgument &arg, dp::Report const& report );
+DP_EXPORT QDBusArgument & operator << ( QDBusArgument &arg, dp::Report const& report );
 // ---------------------------------------------------------------------------------
 #endif //RP_DBUS_QUUID_H

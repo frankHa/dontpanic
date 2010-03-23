@@ -69,5 +69,4 @@ add_definitions(-fPIC)
 kde4_add_library(dontpanic_client_lib STATIC ${libdontpanic_client_SRCS})
 target_link_libraries(dontpanic_client_lib ${KDE4_KDECORE_LIBS} dontpanic_lib)
 set_target_properties(dontpanic_client_lib PROPERTIES OUTPUT_NAME dontpanic_client)
-
-install(TARGETS dontpanic_client_lib DESTINATION ${PLUGIN_INSTALL_DIR})
+install(TARGETS dontpanic_client_lib DESTINATION ${LIB_INSTALL_DIR})

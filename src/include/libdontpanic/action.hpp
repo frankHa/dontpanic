@@ -98,7 +98,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
   };//Action
   // ---------------------------------------------------------------------------------
-  class NullAction:public Action
+  class DP_EXPORT NullAction:public Action
   {
     // ---------------------------------------------------------------------------------
     public:
@@ -109,7 +109,7 @@ namespace dp
   // ---------------------------------------------------------------------------------
   DECLARE_SMARTPOINTERS ( Action );
   // ---------------------------------------------------------------------------------
-  class  ActionList: public QList<Action>
+  class DP_EXPORT ActionList: public QList<Action>
   {
     public:
       int duration()const;

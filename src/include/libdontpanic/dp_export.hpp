@@ -4,13 +4,13 @@
 #include <kdemacros.h>
 // ---------------------------------------------------------------------------------
 #ifndef DP_EXPORT
-# if defined(MAKE_DPPRIVATE_LIB)
+//# if defined(MAKE_DPPRIVATE_LIB)
    /* We are building this library */
 #  define DP_EXPORT KDE_EXPORT
-# else
+//# else
    /* We are using this library */
-#  define DP_EXPORT KDE_IMPORT
-# endif
+//#  define DP_EXPORT KDE_IMPORT
+//# endif
 #endif
 // ---------------------------------------------------------------------------------
 #endif //DP_EXPORT_HPP
