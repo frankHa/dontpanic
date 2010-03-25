@@ -21,6 +21,7 @@
 #include "kreporttypeslistmodel.h"
 #include "kreportrangedialog.h"
 #include "context.h"
+#include <KAction>
 #include <QMenu>
 #include <QContextMenuEvent>
 // ---------------------------------------------------------------------------------
@@ -41,36 +42,47 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void KReportTypesList::init_menu_actions()
     {
-//       _M_new_action_template = new KAction("Create new Favorite", this);
-//       connect(_M_new_action_template, SIGNAL(triggered()), this, SLOT(on_create_new_action_template()));
-//       _M_edit_selected_action_template = new KAction("Edit", this);
-//       connect(_M_edit_selected_action_template, SIGNAL(triggered()), this, SLOT(on_edit_selected_action_template()));
-//       _M_remove_selected_action_template = new KAction("Remove", this);
-//       connect(_M_remove_selected_action_template, SIGNAL(triggered()), this, SLOT(on_remove_selected_action_template()));
+      _M_add_report_type = new KAction(i18n("Define a new Report Type"), this);
+      connect(_M_add_report_type, SIGNAL(triggered()), this, SLOT(on_new_report_type()));
+      _M_edit_selected_report_type = new KAction(i18n("Edit"), this);
+      connect(_M_edit_selected_report_type, SIGNAL(triggered()), this, SLOT(on_edit_selected_report_type()));
+      _M_remove_selected_report_type = new KAction(i18n("Remove"), this);
+      connect(_M_remove_selected_report_type, SIGNAL(triggered()), this, SLOT(on_remove_selected_report_type()));
     }
     // ---------------------------------------------------------------------------------
     void KReportTypesList::contextMenuEvent(QContextMenuEvent *evt)
     {
       Q_UNUSED(evt);
-//       QMenu menu;
-//       menu.addAction(_M_new_action_template);
-//       if(this->selectionModel()->hasSelection())
-//       {
-//         menu.addSeparator();
-//         menu.addAction(_M_edit_selected_action_template);
-//         menu.addAction(_M_remove_selected_action_template);
-//       }
-//       menu.exec(evt->globalPos());      
+      QMenu menu;
+      menu.addAction(_M_add_report_type);
+      if(this->selectionModel()->hasSelection())
+      {
+        menu.addSeparator();
+        menu.addAction(_M_edit_selected_report_type);
+        menu.addAction(_M_remove_selected_report_type);
+      }
+      menu.exec(evt->globalPos());      
+    }
+    // ---------------------------------------------------------------------------------
+    void KReportTypesList::on_new_report_type()
+    {
+    }
+    // ---------------------------------------------------------------------------------
+    void KReportTypesList::on_delete_selected_report_type()
+    {
+    }
+    // ---------------------------------------------------------------------------------
+    void KReportTypesList::on_edit_selected_report_type()
+    {
     }
     // ---------------------------------------------------------------------------------
     void KReportTypesList::on_double_clicked(QModelIndex const& index)
     {
-      //dummy impl as there is only one fix report type!
       KReportRangeDialog dlg;
       if(dlg.exec()==QDialog::Accepted)
       {
         Report r =context()->reportManager()->generateReport(_M_model->at(index), dlg.selectedRange());
-        kDebug()<<r.reportData();
+        //kDebug()<<r.reportData();
       }
     }
     // ---------------------------------------------------------------------------------
