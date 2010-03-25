@@ -20,6 +20,7 @@
 #include "kreporttypeslist.h"
 #include "kreporttypeslistmodel.h"
 #include "kreportrangedialog.h"
+#include "editreporttypedialog.h"
 #include "context.h"
 #include <KAction>
 #include <QMenu>
@@ -66,6 +67,8 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void KReportTypesList::on_new_report_type()
     {
+      EditReportTypeDialog dlg;
+      dlg.exec();
     }
     // ---------------------------------------------------------------------------------
     void KReportTypesList::on_delete_selected_report_type()

@@ -7,6 +7,7 @@ set(dontpanikpart_LIB_SRCS
     country.cpp
     dayinfo.cpp 
     desktopnotificationmanager.cpp
+    editreporttypedialog.cpp
     kactiontemplateslist.cpp
     kactiontemplateslistmodel.cpp
     kcalendarwidget.cpp 
@@ -42,6 +43,7 @@ set(dontpanikpart_LIB_SRCS
    )
 
 set(dontpanikpart_LIB_UIS
+    ui/editreporttypedialog.ui
     ui/kdayview.ui
     ui/keditactiondialog.ui
     ui/keditactiontemplatedialog.ui
