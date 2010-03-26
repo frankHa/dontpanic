@@ -24,7 +24,9 @@ namespace dp
   ///ctor
   ReportType::ReportType()
       : _M_id ( Uuid::generate() )
-      , _M_title ( "" ) {}
+      , _M_title ( "" )
+      , _M_group_by_activity(false)
+      , _M_group_by_project(false){}
   // ---------------------------------------------------------------------------------
   ReportType::ReportType ( QString const& title )
       : _M_id ( Uuid::generate() )
@@ -48,6 +50,48 @@ namespace dp
   {
     _M_title = title;
     return *this;
+  }
+  // ---------------------------------------------------------------------------------
+  ReportType& ReportType::setGroupByActivity(bool b)
+  {
+    _M_group_by_activity = b;
+    return *this;
+  }
+  // ---------------------------------------------------------------------------------
+  bool ReportType::groupByActivity() const
+  {
+    return _M_group_by_activity;
+  }
+  // ---------------------------------------------------------------------------------
+  ReportType& ReportType::setGroupByProject(bool b)
+  {
+    _M_group_by_project = b;
+    return *this;
+  }
+  // ---------------------------------------------------------------------------------
+  bool ReportType::groupByProject() const
+  {
+    return _M_group_by_project;
+  }
+  // ---------------------------------------------------------------------------------
+  ReportDataFilter & ReportType::activityFilter()
+  {
+    return _M_activity_filter;
+  }
+  // ---------------------------------------------------------------------------------
+  ReportDataFilter const& ReportType::activityFilter() const
+  {
+    return _M_activity_filter;
+  }
+  // ---------------------------------------------------------------------------------
+  ReportDataFilter & ReportType::projectFilter()
+  {
+    return _M_project_filter;
+  }
+  // ---------------------------------------------------------------------------------
+  ReportDataFilter const& ReportType::projectFilter() const
+  {
+    return _M_project_filter;
   }
   // ---------------------------------------------------------------------------------
   bool DP_EXPORT operator == (dp::ReportType const& lhs, dp::ReportType const& rhs)

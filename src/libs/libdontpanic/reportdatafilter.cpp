@@ -17,7 +17,15 @@
 
 */
 
-#include "../../include/libdontpanic/reportdatafilter.h"
-
-using namespace dp;
+#include <libdontpanic/reportdatafilter.h>
+#include <libdontpanic/reporttype.h>
+// ---------------------------------------------------------------------------------
+namespace dp
+{
+  // ---------------------------------------------------------------------------------
+  ReportDataFilter::ReportDataFilter()
+  : _M_type(ReportType::NO_FILTER){}
+  // ---------------------------------------------------------------------------------
+}//dp
+// ---------------------------------------------------------------------------------
 

@@ -26,6 +26,7 @@ set(libdontpanic_SRCS
     dbus_support/actiontemplate.cpp
     dbus_support/project.cpp
     dbus_support/report.cpp
+    dbus_support/reportdatafilter.cpp
     dbus_support/reporttype.cpp
     dbus_support/task.cpp
     dbus_support/timerange.cpp
