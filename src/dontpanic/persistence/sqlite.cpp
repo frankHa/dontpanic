@@ -4,6 +4,7 @@
 #include "persistence/sqlite/currentholidayregion.hpp"
 #include "persistence/sqlite/action.hpp"
 #include "persistence/sqlite/task.hpp"
+#include "persistence/sqlite/reporttype.hpp"
 #include "persistence/sqlite/actiontemplate.hpp"
 #include "persistence/sqlite/worktimeperday.hpp"
 #include "libdontpanic/project.hpp"
@@ -241,6 +242,26 @@ namespace dp
     success Sqlite::loadCurrentHolidayRegion(QString & region) const
     {
       return _sqlite::current_holiday_region().load(region);
+    }
+    // ---------------------------------------------------------------------------------
+    success Sqlite::persist ( ReportType const& _t ) const
+    {
+      return _sqlite::report_type().persist ( _t );
+    }
+    // ---------------------------------------------------------------------------------
+    success Sqlite::load ( ReportType & _t ) const
+    {
+      return _sqlite::report_type().load ( _t );
+    }
+    // ---------------------------------------------------------------------------------
+    success Sqlite::remove ( ReportType const& _t ) const
+    {
+      return _sqlite::report_type().remove ( _t );
+    }
+    // ---------------------------------------------------------------------------------
+    success Sqlite::findAll(ReportTypeList & _tl) const
+    {
+      return _sqlite::report_type().findAll(_tl);
     }
     // ---------------------------------------------------------------------------------
   }//_persistance

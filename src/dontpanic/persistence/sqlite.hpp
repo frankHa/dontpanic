@@ -16,6 +16,8 @@ namespace dp
   typedef QList<ActionTemplate> TemplateList;
   class WorktimePerDay;
   typedef QList<WorktimePerDay> WorktimePerDayList;
+  class ReportType;
+  typedef QList<ReportType> ReportTypeList;
   // ---------------------------------------------------------------------------------
   namespace _persistence
   {
@@ -83,8 +85,14 @@ namespace dp
         // ---------------------------------------------------------------------------------
         success loadCurrentHolidayRegion(QString & region) const;
         // ---------------------------------------------------------------------------------
-        
-        
+        success persist ( ReportType const&_t )const; 
+        // ---------------------------------------------------------------------------------
+        success load (ReportType & _t)const;
+        // ---------------------------------------------------------------------------------
+        success remove (ReportType const& _t)const;
+        // ---------------------------------------------------------------------------------
+        success findAll(ReportTypeList &_tl)const;
+        // ---------------------------------------------------------------------------------
     };
     // ---------------------------------------------------------------------------------
     inline Sqlite sqlite()
