@@ -26,6 +26,29 @@ namespace dp
   ReportDataFilter::ReportDataFilter()
   : _M_type(ReportType::NO_FILTER){}
   // ---------------------------------------------------------------------------------
+  int ReportDataFilter::filterType() const
+  {
+    return _M_type;
+  }
+  // ---------------------------------------------------------------------------------
+  ReportDataFilter& ReportDataFilter::setFilterType (int type)
+  {
+    _M_type = type;
+    return *this;
+  }
+  // ---------------------------------------------------------------------------------
+  ReportDataFilter::Entries &
+  ReportDataFilter::entries()
+  {
+    return _M_entries;
+  }
+  // ---------------------------------------------------------------------------------
+  ReportDataFilter::Entries const& 
+  ReportDataFilter::entries() const
+  {
+    return _M_entries;
+  }
+  // ---------------------------------------------------------------------------------
 }//dp
 // ---------------------------------------------------------------------------------
 
