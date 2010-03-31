@@ -26,15 +26,22 @@ namespace dp
       : _M_id ( Uuid::generate() )
       , _M_title ( "" )
       , _M_group_by_activity(false)
-      , _M_group_by_project(false){}
+      , _M_group_by_project(false)
+      , _M_group_by_time_interval(NONE){}
   // ---------------------------------------------------------------------------------
   ReportType::ReportType ( QString const& title )
       : _M_id ( Uuid::generate() )
-      , _M_title ( title ) {}
+      , _M_title ( title ) 
+      , _M_group_by_activity(false)
+      , _M_group_by_project(false)
+      , _M_group_by_time_interval(NONE){}
   // ---------------------------------------------------------------------------------
   ReportType::ReportType ( Uuid const& id )
       : _M_id ( id )
-      , _M_title ( "" ) {}
+      , _M_title ( "" ) 
+      , _M_group_by_activity(false)
+      , _M_group_by_project(false)
+      , _M_group_by_time_interval(NONE){}
   // ---------------------------------------------------------------------------------
   Uuid const& ReportType::id() const
   {
@@ -72,6 +79,17 @@ namespace dp
   bool ReportType::groupByProject() const
   {
     return _M_group_by_project;
+  }
+  // ---------------------------------------------------------------------------------
+  int ReportType::groupByTimeInterval() const
+  {
+    return _M_group_by_time_interval;
+  }
+  // ---------------------------------------------------------------------------------
+  ReportType & ReportType::setGroupByTimeInterval(int interval_type)
+  {
+    _M_group_by_time_interval = interval_type;
+    return *this;
   }
   // ---------------------------------------------------------------------------------
   ReportDataFilter & ReportType::activityFilter()

@@ -11,22 +11,24 @@ namespace dp
     QString _name;
     bool _a;
     bool _p;
+    int _t;
     ReportDataFilter &_af = report_type.activityFilter();
     ReportDataFilter &_pf = report_type.projectFilter();
     arg.beginStructure();
-    arg >> _id >> _name >> _a >> _p >> _af >> _pf;
+    arg >> _id >> _name >> _a >> _p >> _t >> _af >> _pf;
     arg.endStructure();
     report_type._M_id = _id;
     report_type.setTitle ( _name );
     report_type.setGroupByActivity(_a);
     report_type.setGroupByProject(_p);
+    report_type.setGroupByTimeInterval(_t);
     return arg;
   }
   // ---------------------------------------------------------------------------------
   QDBusArgument & operator << ( QDBusArgument &arg, ReportType const& rt )
   {
     arg.beginStructure();
-    arg << rt.id() << rt.title()<<rt.groupByActivity()<<rt.groupByProject()<<rt.activityFilter()<<rt.projectFilter();
+    arg << rt.id() << rt.title()<<rt.groupByActivity()<<rt.groupByProject()<<rt.groupByTimeInterval()<<rt.activityFilter()<<rt.projectFilter();
     arg.endStructure();
     return arg;
   }
