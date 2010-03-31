@@ -29,6 +29,7 @@ set(dontpanic_SRCS
     persistence/sqlite/project.cpp
     persistence/sqlite/reporttype.cpp
     persistence/sqlite/task.cpp    
+    persistence/sqlite/transaction.cpp
     persistence/sqlite/worktimeperday.cpp
     reports/cfreport.cpp
     reports/plannedworkingtime.cpp
