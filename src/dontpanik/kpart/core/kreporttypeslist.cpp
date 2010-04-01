@@ -25,6 +25,7 @@
 #include <KAction>
 #include <QMenu>
 #include <QContextMenuEvent>
+#include <KMessageBox>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -48,7 +49,7 @@ namespace dp
       _M_edit_selected_report_type = new KAction(i18n("Edit"), this);
       connect(_M_edit_selected_report_type, SIGNAL(triggered()), this, SLOT(on_edit_selected_report_type()));
       _M_remove_selected_report_type = new KAction(i18n("Remove"), this);
-      connect(_M_remove_selected_report_type, SIGNAL(triggered()), this, SLOT(on_remove_selected_report_type()));
+      connect(_M_remove_selected_report_type, SIGNAL(triggered()), this, SLOT(on_delete_selected_report_type()));
     }
     // ---------------------------------------------------------------------------------
     void KReportTypesList::contextMenuEvent(QContextMenuEvent *evt)
@@ -73,10 +74,20 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void KReportTypesList::on_delete_selected_report_type()
     {
+      ReportType current_selection = _M_model->at(currentIndex());  
+      if(KMessageBox::questionYesNo(this, i18n("Do you really want to remove the selected report type?"), i18n("Remove Report Type"))==KMessageBox::Yes)
+      {
+        kDebug()<<"attempting to delete report type"<<current_selection.id().toString();
+        context()->reportManager()->remove(current_selection);
+      }
     }
     // ---------------------------------------------------------------------------------
     void KReportTypesList::on_edit_selected_report_type()
     {
+      ReportType current_selection = _M_model->at(currentIndex());
+      EditReportTypeDialog dlg;
+      dlg.setReportType(current_selection);
+      dlg.exec();
     }
     // ---------------------------------------------------------------------------------
     void KReportTypesList::on_double_clicked(QModelIndex const& index)

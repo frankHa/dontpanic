@@ -33,34 +33,34 @@ namespace dp
     namespace detail
     {
       // ---------------------------------------------------------------------------------
-      enum{NAME, DATE};
+      enum {NAME, DATE};
       // ---------------------------------------------------------------------------------
       KActionTemplatesListModel::KActionTemplatesListModel ( QObject *parent )
           : QAbstractListModel ( parent )
-          , _M_icon_loader(new KIconLoader("", 0, this))
+          , _M_icon_loader ( new KIconLoader ( "", 0, this ) )
       {
         init_header_data();
         subscribe_to_action_template_manager_signals();
-        init_action_templates_list();	
+        init_action_templates_list();
       }
       // ---------------------------------------------------------------------------------
       QVariant KActionTemplatesListModel::data ( const QModelIndex& index, int role ) const
       {
-        if(!index.isValid())return QVariant();
-        ActionTemplate const& p = _M_action_templates.at(index.row());
-        switch(role)
+        if ( !index.isValid() ) return QVariant();
+        ActionTemplate const& p = _M_action_templates.at ( index.row() );
+        switch ( role )
         {
           case Qt::DisplayRole: return p.name();
-          case Qt::DecorationRole: return _M_icon_loader->loadIcon(p.icon(), KIconLoader::NoGroup, KIconLoader::SizeMedium);
+          case Qt::DecorationRole: return _M_icon_loader->loadIcon ( p.icon(), KIconLoader::NoGroup, KIconLoader::SizeMedium );
           default: return QVariant();
         }
-        
+
       }
       // ---------------------------------------------------------------------------------
       QVariant KActionTemplatesListModel::headerData ( int section, Qt::Orientation orientation, int role ) const
       {
         if ( role != Qt::DisplayRole )
-        {          
+        {
           return QVariant();
         }
         if ( orientation != Qt::Horizontal )
@@ -75,13 +75,13 @@ namespace dp
         return _M_action_templates.size();
       }
       // ---------------------------------------------------------------------------------
-      ActionTemplate KActionTemplatesListModel::at(QModelIndex const& index)
+      ActionTemplate KActionTemplatesListModel::at ( QModelIndex const& index )
       {
-        if(!index.isValid())
+        if ( !index.isValid() )
         {
-          return NullActionTemplate();          
+          return NullActionTemplate();
         }
-        return _M_action_templates.at(index.row());
+        return _M_action_templates.at ( index.row() );
       }
       // ---------------------------------------------------------------------------------
       // private stuff:
@@ -99,53 +99,53 @@ namespace dp
       // ---------------------------------------------------------------------------------
       void KActionTemplatesListModel::subscribe_to_action_template_manager_signals()
       {
-	client::ActionTemplateManager * pm = context()->actionTemplateManager();
-        connect(pm, SIGNAL(stored(dp::ActionTemplate)), this, SLOT(stored(dp::ActionTemplate const&)));
-        connect(pm, SIGNAL(removed(dp::ActionTemplate)), this, SLOT(removed(dp::ActionTemplate const&)));
+        client::ActionTemplateManager * pm = context()->actionTemplateManager();
+        connect ( pm, SIGNAL ( stored ( dp::ActionTemplate ) ), this, SLOT ( stored ( dp::ActionTemplate const& ) ) );
+        connect ( pm, SIGNAL ( removed ( dp::ActionTemplate ) ), this, SLOT ( removed ( dp::ActionTemplate const& ) ) );
       }
       // ---------------------------------------------------------------------------------
-      void KActionTemplatesListModel::stored(dp::ActionTemplate const&p)
+      void KActionTemplatesListModel::stored ( dp::ActionTemplate const&p )
       {
-        qWarning()<<__FUNCTION__;
-        if(is_already_known(p))
+        qWarning() << __FUNCTION__;
+        if ( is_already_known ( p ) )
         {
-          updated(p);
+          updated ( p );
         }
         else
         {
-          added(p);
+          added ( p );
         }
       }
       // ---------------------------------------------------------------------------------
-      void KActionTemplatesListModel::removed(dp::ActionTemplate const&p)
+      void KActionTemplatesListModel::removed ( dp::ActionTemplate const&p )
       {
-        int i = _M_action_templates.indexOf(p);
-        beginRemoveRows(QModelIndex(), i, i);
-        _M_action_templates.removeAt(i);
+        int i = _M_action_templates.indexOf ( p );
+        beginRemoveRows ( QModelIndex(), i, i );
+        _M_action_templates.removeAt ( i );
         endRemoveRows();
       }
       // ---------------------------------------------------------------------------------
-      bool KActionTemplatesListModel::is_already_known(dp::ActionTemplate const&p) const
+      bool KActionTemplatesListModel::is_already_known ( dp::ActionTemplate const&p ) const
       {
-        return (_M_action_templates.indexOf(p)!=-1);
-      }	  
+        return ( _M_action_templates.indexOf ( p ) != -1 );
+      }
       // ---------------------------------------------------------------------------------
-      void KActionTemplatesListModel::added(dp::ActionTemplate const&p)
+      void KActionTemplatesListModel::added ( dp::ActionTemplate const&p )
       {
         int index = _M_action_templates.size();
-        beginInsertRows(QModelIndex(), index, index);
-        _M_action_templates.append(p);
+        beginInsertRows ( QModelIndex(), index, index );
+        _M_action_templates.append ( p );
         endInsertRows();
-      }	  
+      }
       // ---------------------------------------------------------------------------------
-      void KActionTemplatesListModel::updated(dp::ActionTemplate const&p)
+      void KActionTemplatesListModel::updated ( dp::ActionTemplate const&p )
       {
-        int row = _M_action_templates.indexOf(p);
-        kDebug()<<"updating action template ["<<row<<"]";
-        QModelIndex const& i = index(row);
-        _M_action_templates.replace(row, p);
-        emit dataChanged(i, i);
-      }	  
+        int row = _M_action_templates.indexOf ( p );
+        kDebug() << "updating action template [" << row << "]";
+        QModelIndex const& i = index ( row );
+        _M_action_templates.replace ( row, p );
+        emit dataChanged ( i, i );
+      }
       // ---------------------------------------------------------------------------------
     }//detail
     // ---------------------------------------------------------------------------------

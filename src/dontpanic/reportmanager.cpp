@@ -1,4 +1,5 @@
 #include "reportmanager.h"
+#include "persistencebackend.hpp"
 #include "reports/cfreport.h"
 // ---------------------------------------------------------------------------------
 namespace dp
@@ -15,22 +16,34 @@ namespace dp
   // ---------------------------------------------------------------------------------
   void ReportManager::store ( ReportType const& p )
   {
+    if ( persistence().persist ( p ).was_successful() )
+    {
+      emit stored ( p );
+    }
   }
   // ---------------------------------------------------------------------------------
   void ReportManager::remove ( ReportType const& p )
   {
+    if ( persistence().remove ( p ).was_successful() )
+    {
+      emit removed ( p );
+    }
   }
   // ---------------------------------------------------------------------------------
-  ReportType ReportManager::load ( Uuid const& p )
+  ReportType ReportManager::load ( Uuid const& id )
   {
-    ReportType t("cf monthly");
-    return t;
+    ReportType p ( id );
+    if ( persistence().load ( p ).was_successful() )
+    {
+      return p;
+    }
+    return NullReportType();
   }
   // ---------------------------------------------------------------------------------
   ReportTypeList ReportManager::findAll()
   {
     ReportTypeList list;
-    list<<load(Uuid());
+    persistence().findAll ( list );
     return list;
   }
   // ---------------------------------------------------------------------------------

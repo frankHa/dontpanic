@@ -20,6 +20,7 @@ namespace dp
     arg.endStructure();
     report_type._M_id = _id;
     report_type.setName ( _name );
+    report_type.setIcon(_icon);
     report_type.setGroupByTask(_a);
     report_type.setGroupByProject(_p);
     report_type.setGroupByTimeInterval(_t);

@@ -51,6 +51,11 @@ namespace dp
     return _M_id;
   }
   // ---------------------------------------------------------------------------------
+  bool ReportType::isValid() const
+  {
+    return !_M_id.isNull();
+  }
+  // ---------------------------------------------------------------------------------
   QString ReportType::name() const
   {
     return _M_name;

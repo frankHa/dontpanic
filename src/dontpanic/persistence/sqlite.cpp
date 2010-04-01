@@ -120,6 +120,10 @@ namespace dp
       {
         return error();
       }
+      if(_sqlite::report_type().create_table().has_failed())
+      {
+        return error();
+      }
       return successful();
     }
     // ---------------------------------------------------------------------------------
