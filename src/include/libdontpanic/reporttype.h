@@ -55,13 +55,17 @@ namespace dp
       // ---------------------------------------------------------------------------------
       Uuid const& id() const;
       // ---------------------------------------------------------------------------------
-      QString title() const;
+      QString name() const;
       // ---------------------------------------------------------------------------------
-      ReportType& setTitle ( QString title );
+      ReportType& setName ( QString name );
       // ---------------------------------------------------------------------------------
-      ReportType& setGroupByActivity(bool b);
+      QString icon() const;
       // ---------------------------------------------------------------------------------
-      bool groupByActivity() const;
+      ReportType& setIcon(QString icon);
+      // ---------------------------------------------------------------------------------
+      ReportType& setGroupByTask(bool b);
+      // ---------------------------------------------------------------------------------
+      bool groupByTask() const;
       // ---------------------------------------------------------------------------------
       ReportType& setGroupByProject(bool b);
       // ---------------------------------------------------------------------------------      
@@ -71,8 +75,8 @@ namespace dp
       // ---------------------------------------------------------------------------------
       bool groupByProject() const;
       // ---------------------------------------------------------------------------------
-      ReportDataFilter & activityFilter();
-      ReportDataFilter const& activityFilter()const;
+      ReportDataFilter & taskFilter();
+      ReportDataFilter const& taskFilter()const;
       // ---------------------------------------------------------------------------------
       ReportDataFilter & projectFilter();
       ReportDataFilter const& projectFilter() const;
@@ -81,15 +85,17 @@ namespace dp
       // ---------------------------------------------------------------------------------
       Uuid _M_id;
       // ---------------------------------------------------------------------------------
-      QString _M_title;
+      QString _M_name;
       // ---------------------------------------------------------------------------------
-      bool _M_group_by_activity;
+      QString _M_icon;
+      // ---------------------------------------------------------------------------------
+      bool _M_group_by_task;
       // ---------------------------------------------------------------------------------
       bool _M_group_by_project;
       // ---------------------------------------------------------------------------------
       int _M_group_by_time_interval;
       // ---------------------------------------------------------------------------------
-      ReportDataFilter _M_activity_filter;
+      ReportDataFilter _M_task_filter;
       // ---------------------------------------------------------------------------------
       ReportDataFilter _M_project_filter;
       // ---------------------------------------------------------------------------------
@@ -112,7 +118,7 @@ namespace dp
   template<typename ostream>
   ostream & operator<<(ostream &out, dp::ReportType const& p)
   {
-    out<<"ReportType: "<<p.id().toString()<<", title: "<<p.title();
+    out<<"ReportType: "<<p.id().toString()<<", title: "<<p.name();
     return out;
   }
   // ---------------------------------------------------------------------------------

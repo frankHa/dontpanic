@@ -24,22 +24,25 @@ namespace dp
   ///ctor
   ReportType::ReportType()
       : _M_id ( Uuid::generate() )
-      , _M_title ( "" )
-      , _M_group_by_activity(false)
+      , _M_name ( "" )
+      , _M_icon("")
+      , _M_group_by_task(false)
       , _M_group_by_project(false)
       , _M_group_by_time_interval(NONE){}
   // ---------------------------------------------------------------------------------
   ReportType::ReportType ( QString const& title )
       : _M_id ( Uuid::generate() )
-      , _M_title ( title ) 
-      , _M_group_by_activity(false)
+      , _M_name ( title ) 
+      , _M_icon("")
+      , _M_group_by_task(false)
       , _M_group_by_project(false)
       , _M_group_by_time_interval(NONE){}
   // ---------------------------------------------------------------------------------
   ReportType::ReportType ( Uuid const& id )
       : _M_id ( id )
-      , _M_title ( "" ) 
-      , _M_group_by_activity(false)
+      , _M_name ( "" ) 
+      , _M_icon("")
+      , _M_group_by_task(false)
       , _M_group_by_project(false)
       , _M_group_by_time_interval(NONE){}
   // ---------------------------------------------------------------------------------
@@ -48,26 +51,37 @@ namespace dp
     return _M_id;
   }
   // ---------------------------------------------------------------------------------
-  QString ReportType::title() const
+  QString ReportType::name() const
   {
-    return _M_title;
+    return _M_name;
   }
   // ---------------------------------------------------------------------------------
-  ReportType& ReportType::setTitle ( QString title )
+  ReportType& ReportType::setName ( QString title )
   {
-    _M_title = title;
+    _M_name = title;
     return *this;
   }
   // ---------------------------------------------------------------------------------
-  ReportType& ReportType::setGroupByActivity(bool b)
+  QString ReportType::icon() const
   {
-    _M_group_by_activity = b;
+    return _M_icon;
+  }
+  // ---------------------------------------------------------------------------------
+  ReportType& ReportType::setIcon ( QString icon )
+  {
+    _M_icon = icon;
     return *this;
   }
   // ---------------------------------------------------------------------------------
-  bool ReportType::groupByActivity() const
+  ReportType& ReportType::setGroupByTask(bool b)
   {
-    return _M_group_by_activity;
+    _M_group_by_task = b;
+    return *this;
+  }
+  // ---------------------------------------------------------------------------------
+  bool ReportType::groupByTask() const
+  {
+    return _M_group_by_task;
   }
   // ---------------------------------------------------------------------------------
   ReportType& ReportType::setGroupByProject(bool b)
@@ -92,14 +106,14 @@ namespace dp
     return *this;
   }
   // ---------------------------------------------------------------------------------
-  ReportDataFilter & ReportType::activityFilter()
+  ReportDataFilter & ReportType::taskFilter()
   {
-    return _M_activity_filter;
+    return _M_task_filter;
   }
   // ---------------------------------------------------------------------------------
-  ReportDataFilter const& ReportType::activityFilter() const
+  ReportDataFilter const& ReportType::taskFilter() const
   {
-    return _M_activity_filter;
+    return _M_task_filter;
   }
   // ---------------------------------------------------------------------------------
   ReportDataFilter & ReportType::projectFilter()

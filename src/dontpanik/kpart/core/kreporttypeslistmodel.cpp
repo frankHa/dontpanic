@@ -42,7 +42,7 @@ namespace dp
       {
         if(!index.isValid()) return QVariant();
         if(role != Qt::DisplayRole) return QVariant();
-        return _M_report_types.value(index.row()).title();        
+        return _M_report_types.value(index.row()).name();        
       }
       // ---------------------------------------------------------------------------------
       QVariant KReportTypesListModel::headerData ( int section, Qt::Orientation orientation, int role ) const
