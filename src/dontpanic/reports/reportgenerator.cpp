@@ -5,6 +5,7 @@
 #include <libdontpanic/project.hpp>
 #include <libdontpanic/task.hpp>
 #include <libdontpanic/durationformatter.h>
+#include <memory>
 namespace dp
 {
   // ---------------------------------------------------------------------------------
@@ -27,19 +28,19 @@ namespace dp
         Uuid _M_task;
         ActionList _M_actions;
     };
-    typedef QList<group> GroupList;
+    typedef QList<group*> GroupList;
     // ---------------------------------------------------------------------------------
     class group_list
     {
       public:
-        ~group_list(){}
+        ~group_list(){qDeleteAll(_M_groups);}
       void sort(ActionList const& actions);
       QString toString();
       private:
         bool added_to_existing_group(Action const& a);
         void add_to_newly_created_group(Action const& a);
         int duration() const;        
-        QString dump(group const& g, int dur);
+        QString dump(group const* g, int dur);
       private:
         GroupList _M_groups;
     };
@@ -48,11 +49,13 @@ namespace dp
     {
       public:
       void setRange(TimeRange const& r);
-      Report asDontPanicReportOfType(ReportType const& rt);
+      void setType(ReportType const& type);
+      Report asDontPanicReport();
       private:
         QString evaluate(ActionList const& actions);
       private:
       TimeRange _M_range;
+      ReportType _M_type;
     };
     // ---------------------------------------------------------------------------------
     // group impl:
@@ -101,12 +104,11 @@ namespace dp
     // ---------------------------------------------------------------------------------
     bool group_list::added_to_existing_group(Action const& a)
     {
-      GroupList::iterator iter;
-      for(iter=_M_groups.begin();iter!=_M_groups.end();++iter)
+      foreach( group *g,_M_groups)
       {
-        if((iter)->matches(a))
+        if(g->matches(a))
         {
-          (iter)->add(a);
+          g->add(a);
           return true;
         }
       }
@@ -115,44 +117,42 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void group_list::add_to_newly_created_group(Action const& a)
     {
-      group g(a.project(),a.task());
-      g.add(a);
+      group *g = new group(a.project(),a.task());
+      g->add(a);
       _M_groups<<g;
     }
     // ---------------------------------------------------------------------------------
     void group_list::sort(ActionList const& actions)
     {
-      ActionList::const_iterator action_iter;
-      for(action_iter=actions.begin();action_iter != actions.end();++action_iter)
+      foreach(Action const& action, actions)
       {
-        if(!added_to_existing_group(*action_iter))
+        if(!added_to_existing_group(action))
         {
-          add_to_newly_created_group(*action_iter);
+          add_to_newly_created_group(action);
         }
       }
     }
     
     int group_list::duration() const
     {
-      GroupList::const_iterator iter;
       int result(0);
-      for(iter = _M_groups.begin();iter != _M_groups.end();++iter)
+      foreach(group *g, _M_groups)
       {
-        result +=(iter)->duration();
+        result +=g->duration();
       }
       return result;
     }
     
-    QString group_list::dump(group const& g, int dur)
+    QString group_list::dump(group const* g, int dur)
     {
       double percentage = 0.0;
       DurationFormatter formatter;
-      if(dur!=0){percentage = 100.0*(double)g.duration()/(double)dur;}
-      Project const& p = g.project();
+      if(dur!=0){percentage = 100.0*(double)g->duration()/(double)dur;}
+      Project const& p = g->project();
       QString s = QString("%1;%2;%3;%4\%;%5")
-      .arg(g.task().name())
+      .arg(g->task().name())
       .arg(p.name())
-      .arg(formatter.format(g.duration()))
+      .arg(formatter.format(g->duration()))
       .arg(percentage, 0, 'f', 2)
       .arg(p.comment());
       return s;
@@ -165,10 +165,9 @@ namespace dp
       //QString result= "Typ;Projekt;Dauer (Tätigkeitsgruppe);Prozent (Tätigkeitsgruppe);Projektkommentar\n";
       QString result= i18n("Work Type;Project;Duration (Activity Group);Percent (Activity Group);Project Comment\n");
       int complete_duration = duration();
-      GroupList::const_iterator i;
-       for(i = _M_groups.begin();i!= _M_groups.end();++i)
+      foreach(group *g, _M_groups)
        {
-         result += dump(*i, complete_duration) + "\n";
+         result += dump(g, complete_duration) + "\n";
        }
       return result;
     }
@@ -180,10 +179,10 @@ namespace dp
       _M_range = r;
     }
     // ---------------------------------------------------------------------------------
-    Report ReportGeneratorPrivate::asDontPanicReportOfType(ReportType const& _type)
+    Report ReportGeneratorPrivate::asDontPanicReport()
     {
       Report report;
-      report.setReportType(_type).setRange(_M_range);
+      report.setReportType(_M_type).setRange(_M_range);
       ActionList actions;
       if(persistence().findAll(actions, _M_range.from(), _M_range.to()).has_failed())
       {
@@ -192,19 +191,23 @@ namespace dp
       return report.setReportData(evaluate(actions)).setDuration(actions.duration()).setPlannedWorkingTime(planned_working_time_for(_M_range));
     }
     // ---------------------------------------------------------------------------------
-    QString ReportGeneratorPrivate::evaluate(ActionList const& actions)
+    void ReportGeneratorPrivate::setType(const dp::ReportType& type)
     {
-      group_list gl;
-      gl.sort(actions);
-      return gl.toString();
+      _M_type = type;
+    }
+    // ---------------------------------------------------------------------------------
+    QString ReportGeneratorPrivate::evaluate(ActionList const& actions)
+    {      
+      std::auto_ptr<group_list> gl(new group_list()); //should be: group_list_for(_M_type);
+      gl->sort(actions);
+      QString const& result= gl->toString();
+      return result;
     }    
     // ---------------------------------------------------------------------------------
-    // CFReport:
+    // ReportGenerator:
     // ---------------------------------------------------------------------------------
     ReportGenerator::ReportGenerator()
-    :d_ptr(new ReportGeneratorPrivate())
-    {
-    }
+    :d_ptr(new ReportGeneratorPrivate()){}
     // ---------------------------------------------------------------------------------
     ReportGenerator::~ReportGenerator(){
      delete d_ptr;
@@ -220,7 +223,8 @@ namespace dp
     Report ReportGenerator::asDontPanicReportOfType(ReportType const&rt)
     {
       Q_D(ReportGenerator);
-      return d->asDontPanicReportOfType(rt);
+      d->setType(rt);
+      return d->asDontPanicReport();
     }
   } // ---------------------------------------------------------------------------------
 }
