@@ -23,7 +23,7 @@ namespace dp
 {
   Report::Report()
       : _M_valid ( true )
-      , _M_type ( "" )
+      , _M_type ( NullReportType() )
       , _M_report_data ( "" )
       , _M_duration ( 0 )
       , _M_planned_working_time ( 0 ) {}
@@ -39,12 +39,12 @@ namespace dp
     return _M_valid;
   }
 
-  Report & Report::setReportType ( QString const& t )
+  Report & Report::setReportType ( ReportType const& t )
   {
     _M_type = t;
     return *this;
   }
-  QString Report::reportType() const
+  ReportType Report::reportType() const
   {
     return _M_type;
   }

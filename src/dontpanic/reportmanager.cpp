@@ -1,6 +1,6 @@
 #include "reportmanager.h"
 #include "persistencebackend.hpp"
-#include "reports/cfreport.h"
+#include "reports/reportgenerator.h"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -10,8 +10,8 @@ namespace dp
   // ---------------------------------------------------------------------------------
   Report ReportManager::generateReport(ReportType const& _type, TimeRange const& range)
   {
-    reports::CFReport cfrep;
-    return cfrep.setRange(range).asDontPanicReport();    
+    reports::ReportGenerator report_generator;
+    return report_generator.setRange(range).asDontPanicReportOfType(_type);    
   }
   // ---------------------------------------------------------------------------------
   void ReportManager::store ( ReportType const& p )

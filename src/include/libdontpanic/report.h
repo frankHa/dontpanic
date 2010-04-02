@@ -22,6 +22,7 @@
 
 #include <libdontpanic/defines.hpp>
 #include <libdontpanic/timerange.h>
+#include <libdontpanic/reporttype.h>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -39,9 +40,9 @@ namespace dp
       // ---------------------------------------------------------------------------------
       bool isValid() const;
       // ---------------------------------------------------------------------------------
-      Report & setReportType ( QString const& );
+      Report & setReportType ( ReportType const& );
       // ---------------------------------------------------------------------------------
-      QString reportType() const;
+      ReportType reportType() const;
       // ---------------------------------------------------------------------------------
       Report & setRange ( TimeRange const& );
       // ---------------------------------------------------------------------------------
@@ -62,7 +63,7 @@ namespace dp
     private:
       // ---------------------------------------------------------------------------------
       bool      _M_valid;
-      QString   _M_type;
+      ReportType   _M_type;
       TimeRange _M_time_range;
       QString   _M_report_data;
       int       _M_duration;

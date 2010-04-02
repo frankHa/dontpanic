@@ -1,5 +1,6 @@
 #include <libdontpanic/dbus_support/report.h>
 #include <libdontpanic/dbus_support/timerange.h>
+#include <libdontpanic/dbus_support/reporttype.h>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -7,7 +8,7 @@ namespace dp
   QDBusArgument const& operator >> ( QDBusArgument const&arg, dp::Report & report )
   {
     bool _v;
-    QString _t;
+    ReportType _t;
     dp::TimeRange _r;
     QString _d;
     int _dur;

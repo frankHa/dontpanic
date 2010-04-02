@@ -31,8 +31,9 @@ set(dontpanic_SRCS
     persistence/sqlite/task.cpp    
     persistence/sqlite/transaction.cpp
     persistence/sqlite/worktimeperday.cpp
-    reports/cfreport.cpp
+    #reports/cfreport.cpp
     reports/plannedworkingtime.cpp
+    reports/reportgenerator.cpp
    )
 
 qt4_add_dbus_adaptor(dontpanic_SRCS  
