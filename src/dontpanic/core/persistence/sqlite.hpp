@@ -2,32 +2,23 @@
 #define DP_SQLITE_HPP
 //dp includes
 #include "libdontpanic/defines.hpp"
-#include <libdontpanic/action.hpp>
+#include "persistenceengine.h"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
-  // ---------------------------------------------------------------------------------
-  //forward decl:
-  class Project;
-  typedef QList<Project> ProjectList;
-  class Task;
-  typedef QList<Task> TaskList;
-  class ActionTemplate;
-  typedef QList<ActionTemplate> TemplateList;
-  class WorktimePerDay;
-  typedef QList<WorktimePerDay> WorktimePerDayList;
-  class ReportType;
-  typedef QList<ReportType> ReportTypeList;
   // ---------------------------------------------------------------------------------
   namespace _persistence
   {
     // ---------------------------------------------------------------------------------
     class Sqlite
+          : public PersistenceEngine
     {
+        // ---------------------------------------------------------------------------------
+        Q_OBJECT
         // ---------------------------------------------------------------------------------
       public:
         // ---------------------------------------------------------------------------------
-        Sqlite();
+        Sqlite ( QObject *parent = 0 );
         // ---------------------------------------------------------------------------------
       public:
         // ---------------------------------------------------------------------------------
@@ -37,68 +28,65 @@ namespace dp
         // ---------------------------------------------------------------------------------
       public:
         // ---------------------------------------------------------------------------------
+        bool init();
+        // ---------------------------------------------------------------------------------
         success persist ( WorktimePerDay const&_wt ) const;
         // ---------------------------------------------------------------------------------
-        success load (WorktimePerDay & _wt)const;
+        success load ( WorktimePerDay & _wt ) const;
         // ---------------------------------------------------------------------------------
-        success remove (WorktimePerDay const& _wt)const;
+        success remove ( WorktimePerDay const& _wt ) const;
         // ---------------------------------------------------------------------------------
-        success findAll(WorktimePerDayList &_pl)const;
+        success findAll ( WorktimePerDayList &_pl ) const;
         // ---------------------------------------------------------------------------------
         success persist ( Project const&_project ) const;
         // ---------------------------------------------------------------------------------
-        success load (Project & _project)const;
+        success load ( Project & _project ) const;
         // ---------------------------------------------------------------------------------
-        success remove (Project const& _project)const;
+        success remove ( Project const& _project ) const;
         // ---------------------------------------------------------------------------------
-        success findAll(ProjectList &_pl)const;
+        success findAll ( ProjectList &_pl ) const;
         // ---------------------------------------------------------------------------------
-        success persist ( Task const&_t )const;	
+        success persist ( Task const&_t ) const;
         // ---------------------------------------------------------------------------------
-        success load (Task & _t)const;
+        success load ( Task & _t ) const;
         // ---------------------------------------------------------------------------------
-        success remove (Task const& _t)const;
+        success remove ( Task const& _t ) const;
         // ---------------------------------------------------------------------------------
-        success findAll(TaskList &_tl)const;
+        success findAll ( TaskList &_tl ) const;
         // ---------------------------------------------------------------------------------
-        success persist ( ActionTemplate const&_t )const;	
+        success persist ( ActionTemplate const&_t ) const;
         // ---------------------------------------------------------------------------------
-        success load ( ActionTemplate &_t )const;   
+        success load ( ActionTemplate &_t ) const;
         // ---------------------------------------------------------------------------------
-        success remove (ActionTemplate const& _t)const;
+        success remove ( ActionTemplate const& _t ) const;
         // ---------------------------------------------------------------------------------
-        success findAll(TemplateList &_tl)const;
+        success findAll ( TemplateList &_tl ) const;
         // ---------------------------------------------------------------------------------
-        success persist ( Action const&_a )const;
+        success persist ( Action const&_a ) const;
         // ---------------------------------------------------------------------------------
-        success remove ( Action const&_a )const;
+        success remove ( Action const&_a ) const;
         // ---------------------------------------------------------------------------------
-        success findAll(ActionList &_tl, QDateTime const& from,  QDateTime const& to)const;
+        success findAll ( ActionList &_tl, QDateTime const& from,  QDateTime const& to ) const;
         // ---------------------------------------------------------------------------------
-        Action lastAction()const;
+        Action lastAction() const;
         // ---------------------------------------------------------------------------------
-        bool hasActionsFor(QDate const& date)const;
+        bool hasActionsFor ( QDate const& date ) const;
         // ---------------------------------------------------------------------------------
-        success persistCurrentHolidayRegion(QString const& region) const;
+        success persistCurrentHolidayRegion ( QString const& region ) const;
         // ---------------------------------------------------------------------------------
         success removeCurrentHolidayRegion() const;
         // ---------------------------------------------------------------------------------
-        success loadCurrentHolidayRegion(QString & region) const;
+        success loadCurrentHolidayRegion ( QString & region ) const;
         // ---------------------------------------------------------------------------------
-        success persist ( ReportType const&_t )const; 
+        success persist ( ReportType const&_t ) const;
         // ---------------------------------------------------------------------------------
-        success load (ReportType & _t)const;
+        success load ( ReportType & _t ) const;
         // ---------------------------------------------------------------------------------
-        success remove (ReportType const& _t)const;
+        success remove ( ReportType const& _t ) const;
         // ---------------------------------------------------------------------------------
-        success findAll(ReportTypeList &_tl)const;
+        success findAll ( ReportTypeList &_tl ) const;
         // ---------------------------------------------------------------------------------
     };
-    // ---------------------------------------------------------------------------------
-    inline Sqlite sqlite()
-    {
-      return Sqlite();
-    }
     // ---------------------------------------------------------------------------------
   }//_persistance
   // ---------------------------------------------------------------------------------

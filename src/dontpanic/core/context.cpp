@@ -81,7 +81,7 @@ namespace dp
   // ---------------------------------------------------------------------------------
   bool Context::init_storage_backend()
   {
-    return dp::persistence().init();
+    return dp::persistence().init("sqlite");
   }
   // ---------------------------------------------------------------------------------
   void Context::init_projectmanager()

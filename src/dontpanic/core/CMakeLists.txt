@@ -22,6 +22,7 @@ set(dontpanic_core_lib_SRCS
     reportmanager.cpp
     taskmanager.cpp
     timetracker.cpp
+    persistence/persistenceengine.cpp
     persistence/sqlite.cpp
     persistence/sqlite/action.cpp
     persistence/sqlite/actiontemplate.cpp

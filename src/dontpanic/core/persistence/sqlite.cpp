@@ -28,7 +28,7 @@
 // #define CREATE_TABLE_LEAVE_TYPE\
 //   "CREATE TABLE IF NOT EXISTS lt_leave_type \
 // (lt_id INTEGER PRIMARY KEY, lt_name TEXT, lt_paid INTEGER, lt_description TEXT)"
-// 
+//
 // #define CREATE_TABLE_COLLABORATION_TYPE\
 //   "CREATE TABLE IF NOT EXISTS ct_collaboration_type \
 // (ct_id TEXT PRIMARY KEY, ct_name TEXT, ct_visible INTEGER,\
@@ -66,7 +66,23 @@ namespace dp
     // ---------------------------------------------------------------------------------
     //Sqlite impl:
     // ---------------------------------------------------------------------------------
-    Sqlite::Sqlite(){}
+    Sqlite::Sqlite ( QObject *parent )
+        : PersistenceEngine ( parent ) {}
+    // ---------------------------------------------------------------------------------
+    bool Sqlite::init()
+    {
+      if ( open_database_connection().has_failed() )
+      {
+        qWarning() << "unable to initialize persistance backend. exiting now";
+        ::exit ( 1 );
+      }
+      if ( update_database_schema_if_necessary().has_failed() )
+      {
+        qWarning() << "unable to initialize the required database schema. exiting now";
+        ::exit ( 1 );
+      }
+      return true;
+    }
     // ---------------------------------------------------------------------------------
     success Sqlite::open_database_connection() const
     {
@@ -86,11 +102,11 @@ namespace dp
     dp::success Sqlite::update_database_schema_if_necessary() const
     {
       QSqlQuery query;
-      if(_sqlite::project().create_table().has_failed())
+      if ( _sqlite::project().create_table().has_failed() )
       {
         return error();
       }
-      if(_sqlite::task().create_table().has_failed())
+      if ( _sqlite::task().create_table().has_failed() )
       {
         return error();
       }
@@ -104,23 +120,23 @@ namespace dp
 //         qDebug() << query.lastError();
 //         return error();
 //       }
-      if(_sqlite::actionTemplate().create_table().has_failed())
+      if ( _sqlite::actionTemplate().create_table().has_failed() )
       {
         return error();
       }
-      if(_sqlite::action().create_table().has_failed())
+      if ( _sqlite::action().create_table().has_failed() )
       {
         return error();
       }
-      if(_sqlite::worktime_per_day().create_table().has_failed())
+      if ( _sqlite::worktime_per_day().create_table().has_failed() )
       {
         return error();
       }
-      if(_sqlite::current_holiday_region().create_table().has_failed())
+      if ( _sqlite::current_holiday_region().create_table().has_failed() )
       {
         return error();
       }
-      if(_sqlite::report_type().create_table().has_failed())
+      if ( _sqlite::report_type().create_table().has_failed() )
       {
         return error();
       }
@@ -142,11 +158,11 @@ namespace dp
       return _sqlite::worktime_per_day().load ( _wt );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::findAll(WorktimePerDayList & _wl) const
+    success Sqlite::findAll ( WorktimePerDayList & _wl ) const
     {
-      return _sqlite::worktime_per_day().findAll(_wl);
+      return _sqlite::worktime_per_day().findAll ( _wl );
     }
-    
+
     // ---------------------------------------------------------------------------------
     success Sqlite::persist ( Project const& _project ) const
     {
@@ -163,9 +179,9 @@ namespace dp
       return _sqlite::project().load ( _project );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::findAll(ProjectList & _pl) const
+    success Sqlite::findAll ( ProjectList & _pl ) const
     {
-      return _sqlite::project().findAll(_pl);
+      return _sqlite::project().findAll ( _pl );
     }
     // ---------------------------------------------------------------------------------
     success Sqlite::persist ( Task const& _t ) const
@@ -183,9 +199,9 @@ namespace dp
       return _sqlite::task().remove ( _t );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::findAll(TaskList & _tl) const
+    success Sqlite::findAll ( TaskList & _tl ) const
     {
-      return _sqlite::task().findAll(_tl);
+      return _sqlite::task().findAll ( _tl );
     }
     // ---------------------------------------------------------------------------------
     success Sqlite::persist ( ActionTemplate const& _t ) const
@@ -203,9 +219,9 @@ namespace dp
       return _sqlite::actionTemplate().remove ( _t );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::findAll(TemplateList & _tl) const
+    success Sqlite::findAll ( TemplateList & _tl ) const
     {
-      return _sqlite::actionTemplate().findAll(_tl);
+      return _sqlite::actionTemplate().findAll ( _tl );
     }
     // ---------------------------------------------------------------------------------
     success Sqlite::persist ( Action const& _a ) const
@@ -218,9 +234,9 @@ namespace dp
       return _sqlite::action().remove ( _t );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::findAll(ActionList & _tl, QDateTime const& from, QDateTime const& to) const
+    success Sqlite::findAll ( ActionList & _tl, QDateTime const& from, QDateTime const& to ) const
     {
-      return _sqlite::action().findAll(_tl, from, to);
+      return _sqlite::action().findAll ( _tl, from, to );
     }
     // ---------------------------------------------------------------------------------
     Action Sqlite::lastAction() const
@@ -228,14 +244,14 @@ namespace dp
       return _sqlite::action().findLastAction();
     }
     // ---------------------------------------------------------------------------------
-    bool Sqlite::hasActionsFor(QDate const& date)const
+    bool Sqlite::hasActionsFor ( QDate const& date ) const
     {
-      return _sqlite::action().hasActionFor(date);
+      return _sqlite::action().hasActionFor ( date );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::persistCurrentHolidayRegion(QString const& region) const
+    success Sqlite::persistCurrentHolidayRegion ( QString const& region ) const
     {
-      return _sqlite::current_holiday_region().persist(region);
+      return _sqlite::current_holiday_region().persist ( region );
     }
     // ---------------------------------------------------------------------------------
     success Sqlite::removeCurrentHolidayRegion() const
@@ -243,9 +259,9 @@ namespace dp
       return _sqlite::current_holiday_region().remove();
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::loadCurrentHolidayRegion(QString & region) const
+    success Sqlite::loadCurrentHolidayRegion ( QString & region ) const
     {
-      return _sqlite::current_holiday_region().load(region);
+      return _sqlite::current_holiday_region().load ( region );
     }
     // ---------------------------------------------------------------------------------
     success Sqlite::persist ( ReportType const& _t ) const
@@ -263,12 +279,13 @@ namespace dp
       return _sqlite::report_type().remove ( _t );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::findAll(ReportTypeList & _tl) const
+    success Sqlite::findAll ( ReportTypeList & _tl ) const
     {
-      return _sqlite::report_type().findAll(_tl);
+      return _sqlite::report_type().findAll ( _tl );
     }
     // ---------------------------------------------------------------------------------
   }//_persistance
   // ---------------------------------------------------------------------------------
 }//dp
 // ---------------------------------------------------------------------------------
+#include "sqlite.moc"
