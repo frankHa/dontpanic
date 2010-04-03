@@ -3,9 +3,17 @@
 //Qt includes
 #include <QDebug>
 #include <libdontpanic/action.hpp>
+#include <kglobal.h>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
+  // ---------------------------------------------------------------------------------
+  K_GLOBAL_STATIC(PersistenceBackend, _instance);
+  // ---------------------------------------------------------------------------------  
+  PersistenceBackend & persistence()
+  {
+    return *_instance;
+  }
   // ---------------------------------------------------------------------------------
   bool PersistenceBackend::init()
   {
