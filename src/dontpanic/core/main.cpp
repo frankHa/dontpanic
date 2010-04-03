@@ -1,5 +1,5 @@
 //dp includes
-#include "core/application.hpp"
+#include "application.hpp"
 #include "libdontpanic/dbus.hpp"
 //Qt includes
 #include <QDebug>

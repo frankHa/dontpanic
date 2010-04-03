@@ -2,6 +2,7 @@
 #include "application.moc"
 
 #include "libdontpanic/dbus.hpp"
+#include "context.h"
 #include "persistencebackend.hpp"
 #include "actiontemplatemanager.h"
 #include "projectmanager.h"
@@ -31,6 +32,8 @@ class Application::ApplicationPrivate
   private:
     // ---------------------------------------------------------------------------------
     void init();
+    // ---------------------------------------------------------------------------------
+    void init_context();
     // ---------------------------------------------------------------------------------
     bool init_storage_backend();
     // ---------------------------------------------------------------------------------
@@ -89,7 +92,14 @@ void Application::ApplicationPrivate::exit()
 void Application::ApplicationPrivate::init()
 {
   register_with_session_bus();
+  init_context();
 }
+// ---------------------------------------------------------------------------------
+void Application::ApplicationPrivate::init_context()
+{
+  dp::context();
+}
+
 // ---------------------------------------------------------------------------------
 void Application::ApplicationPrivate::register_with_session_bus()
 {
