@@ -30,41 +30,41 @@ namespace dp
         // ---------------------------------------------------------------------------------
         bool init();
         // ---------------------------------------------------------------------------------
-        success persist ( WorktimePerDay const&_wt ) const;
+        success persist ( WorktimePerDay const&_wt );
         // ---------------------------------------------------------------------------------
         success load ( WorktimePerDay & _wt ) const;
         // ---------------------------------------------------------------------------------
-        success remove ( WorktimePerDay const& _wt ) const;
+        success remove ( WorktimePerDay const& _wt );
         // ---------------------------------------------------------------------------------
         success findAll ( WorktimePerDayList &_pl ) const;
         // ---------------------------------------------------------------------------------
-        success persist ( Project const&_project ) const;
+        success persist ( Project const&_project );
         // ---------------------------------------------------------------------------------
         success load ( Project & _project ) const;
         // ---------------------------------------------------------------------------------
-        success remove ( Project const& _project ) const;
+        success remove ( Project const& _project );
         // ---------------------------------------------------------------------------------
         success findAll ( ProjectList &_pl ) const;
         // ---------------------------------------------------------------------------------
-        success persist ( Task const&_t ) const;
+        success persist ( Task const&_t );
         // ---------------------------------------------------------------------------------
         success load ( Task & _t ) const;
         // ---------------------------------------------------------------------------------
-        success remove ( Task const& _t ) const;
+        success remove ( Task const& _t );
         // ---------------------------------------------------------------------------------
         success findAll ( TaskList &_tl ) const;
         // ---------------------------------------------------------------------------------
-        success persist ( ActionTemplate const&_t ) const;
+        success persist ( ActionTemplate const&_t );
         // ---------------------------------------------------------------------------------
         success load ( ActionTemplate &_t ) const;
         // ---------------------------------------------------------------------------------
-        success remove ( ActionTemplate const& _t ) const;
+        success remove ( ActionTemplate const& _t );
         // ---------------------------------------------------------------------------------
         success findAll ( TemplateList &_tl ) const;
         // ---------------------------------------------------------------------------------
-        success persist ( Action const&_a ) const;
+        success persist ( Action const&_a );
         // ---------------------------------------------------------------------------------
-        success remove ( Action const&_a ) const;
+        success remove ( Action const&_a );
         // ---------------------------------------------------------------------------------
         success findAll ( ActionList &_tl, QDateTime const& from,  QDateTime const& to ) const;
         // ---------------------------------------------------------------------------------
@@ -72,17 +72,17 @@ namespace dp
         // ---------------------------------------------------------------------------------
         bool hasActionsFor ( QDate const& date ) const;
         // ---------------------------------------------------------------------------------
-        success persistCurrentHolidayRegion ( QString const& region ) const;
+        success persistCurrentHolidayRegion ( QString const& region );
         // ---------------------------------------------------------------------------------
-        success removeCurrentHolidayRegion() const;
+        success removeCurrentHolidayRegion();
         // ---------------------------------------------------------------------------------
         success loadCurrentHolidayRegion ( QString & region ) const;
         // ---------------------------------------------------------------------------------
-        success persist ( ReportType const&_t ) const;
+        success persist ( ReportType const&_t );
         // ---------------------------------------------------------------------------------
         success load ( ReportType & _t ) const;
         // ---------------------------------------------------------------------------------
-        success remove ( ReportType const& _t ) const;
+        success remove ( ReportType const& _t );
         // ---------------------------------------------------------------------------------
         success findAll ( ReportTypeList &_tl ) const;
         // ---------------------------------------------------------------------------------

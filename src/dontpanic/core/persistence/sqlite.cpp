@@ -143,12 +143,12 @@ namespace dp
       return successful();
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::persist ( WorktimePerDay const& _wt ) const
+    success Sqlite::persist ( WorktimePerDay const& _wt )
     {
       return _sqlite::worktime_per_day().persist ( _wt );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::remove ( WorktimePerDay const& _wt ) const
+    success Sqlite::remove ( WorktimePerDay const& _wt )
     {
       return _sqlite::worktime_per_day().remove ( _wt );
     }
@@ -164,12 +164,12 @@ namespace dp
     }
 
     // ---------------------------------------------------------------------------------
-    success Sqlite::persist ( Project const& _project ) const
+    success Sqlite::persist ( Project const& _project )
     {
       return _sqlite::project().persist ( _project );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::remove ( Project const& _project ) const
+    success Sqlite::remove ( Project const& _project )
     {
       return _sqlite::project().remove ( _project );
     }
@@ -184,7 +184,7 @@ namespace dp
       return _sqlite::project().findAll ( _pl );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::persist ( Task const& _t ) const
+    success Sqlite::persist ( Task const& _t )
     {
       return _sqlite::task().persist ( _t );
     }
@@ -194,7 +194,7 @@ namespace dp
       return _sqlite::task().load ( _t );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::remove ( Task const& _t ) const
+    success Sqlite::remove ( Task const& _t )
     {
       return _sqlite::task().remove ( _t );
     }
@@ -204,7 +204,7 @@ namespace dp
       return _sqlite::task().findAll ( _tl );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::persist ( ActionTemplate const& _t ) const
+    success Sqlite::persist ( ActionTemplate const& _t )
     {
       return _sqlite::actionTemplate().persist ( _t );
     }
@@ -214,7 +214,7 @@ namespace dp
       return _sqlite::actionTemplate().load ( _t );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::remove ( ActionTemplate const& _t ) const
+    success Sqlite::remove ( ActionTemplate const& _t )
     {
       return _sqlite::actionTemplate().remove ( _t );
     }
@@ -224,12 +224,12 @@ namespace dp
       return _sqlite::actionTemplate().findAll ( _tl );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::persist ( Action const& _a ) const
+    success Sqlite::persist ( Action const& _a )
     {
       return _sqlite::action().persist ( _a );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::remove ( Action const& _t ) const
+    success Sqlite::remove ( Action const& _t )
     {
       return _sqlite::action().remove ( _t );
     }
@@ -249,12 +249,12 @@ namespace dp
       return _sqlite::action().hasActionFor ( date );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::persistCurrentHolidayRegion ( QString const& region ) const
+    success Sqlite::persistCurrentHolidayRegion ( QString const& region )
     {
       return _sqlite::current_holiday_region().persist ( region );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::removeCurrentHolidayRegion() const
+    success Sqlite::removeCurrentHolidayRegion()
     {
       return _sqlite::current_holiday_region().remove();
     }
@@ -264,7 +264,7 @@ namespace dp
       return _sqlite::current_holiday_region().load ( region );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::persist ( ReportType const& _t ) const
+    success Sqlite::persist ( ReportType const& _t )
     {
       return _sqlite::report_type().persist ( _t );
     }
@@ -274,7 +274,7 @@ namespace dp
       return _sqlite::report_type().load ( _t );
     }
     // ---------------------------------------------------------------------------------
-    success Sqlite::remove ( ReportType const& _t ) const
+    success Sqlite::remove ( ReportType const& _t )
     {
       return _sqlite::report_type().remove ( _t );
     }

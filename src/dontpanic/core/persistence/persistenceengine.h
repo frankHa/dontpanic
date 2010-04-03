@@ -56,41 +56,41 @@ namespace dp
       // ---------------------------------------------------------------------------------
       virtual bool init() = 0;
       // ---------------------------------------------------------------------------------
-      virtual success persist ( WorktimePerDay const&_wt ) const = 0;
+      virtual success persist ( WorktimePerDay const&_wt ) = 0;
       // ---------------------------------------------------------------------------------
       virtual success load ( WorktimePerDay & _wt ) const = 0;
       // ---------------------------------------------------------------------------------
-      virtual success remove ( WorktimePerDay const& _wt ) const = 0;
+      virtual success remove ( WorktimePerDay const& _wt ) = 0;
       // ---------------------------------------------------------------------------------
       virtual success findAll ( WorktimePerDayList &_pl ) const = 0;
       // ---------------------------------------------------------------------------------
-      virtual success persist ( Project const&_project ) const = 0;
+      virtual success persist ( Project const&_project ) = 0;
       // ---------------------------------------------------------------------------------
       virtual success load ( Project & _project ) const = 0;
       // ---------------------------------------------------------------------------------
-      virtual success remove ( Project const& _project ) const = 0;
+      virtual success remove ( Project const& _project ) = 0;
       // ---------------------------------------------------------------------------------
       virtual success findAll ( ProjectList &_pl ) const = 0;
       // ---------------------------------------------------------------------------------
-      virtual success persist ( Task const&_t ) const = 0;
+      virtual success persist ( Task const&_t ) = 0;
       // ---------------------------------------------------------------------------------
       virtual success load ( Task & _t ) const = 0;
       // ---------------------------------------------------------------------------------
-      virtual success remove ( Task const& _t ) const = 0;
+      virtual success remove ( Task const& _t ) = 0;
       // ---------------------------------------------------------------------------------
       virtual success findAll ( TaskList &_tl ) const = 0;
       // ---------------------------------------------------------------------------------
-      virtual success persist ( ActionTemplate const&_t ) const = 0;
+      virtual success persist ( ActionTemplate const&_t ) = 0;
       // ---------------------------------------------------------------------------------
       virtual success load ( ActionTemplate &_t ) const = 0;
       // ---------------------------------------------------------------------------------
-      virtual success remove ( ActionTemplate const& _t ) const = 0;
+      virtual success remove ( ActionTemplate const& _t ) = 0;
       // ---------------------------------------------------------------------------------
       virtual success findAll ( TemplateList &_tl ) const = 0;
       // ---------------------------------------------------------------------------------
-      virtual success persist ( Action const&_a ) const = 0;
+      virtual success persist ( Action const&_a ) = 0;
       // ---------------------------------------------------------------------------------
-      virtual success remove ( Action const&_a ) const = 0;
+      virtual success remove ( Action const&_a ) = 0;
       // ---------------------------------------------------------------------------------
       virtual success findAll ( ActionList &_tl, QDateTime const& from,  QDateTime const& to ) const = 0;
       // ---------------------------------------------------------------------------------
@@ -98,17 +98,17 @@ namespace dp
       // ---------------------------------------------------------------------------------
       virtual bool hasActionsFor ( QDate const& date ) const = 0;
       // ---------------------------------------------------------------------------------
-      virtual success persistCurrentHolidayRegion ( QString const& region ) const = 0;
+      virtual success persistCurrentHolidayRegion ( QString const& region ) = 0;
       // ---------------------------------------------------------------------------------
-      virtual success removeCurrentHolidayRegion() const = 0;
+      virtual success removeCurrentHolidayRegion() = 0;
       // ---------------------------------------------------------------------------------
       virtual success loadCurrentHolidayRegion ( QString & region ) const = 0;
       // ---------------------------------------------------------------------------------
-      virtual success persist ( ReportType const&_t ) const = 0;
+      virtual success persist ( ReportType const&_t ) = 0;
       // ---------------------------------------------------------------------------------
       virtual success load ( ReportType & _t ) const = 0;
       // ---------------------------------------------------------------------------------
-      virtual success remove ( ReportType const& _t ) const = 0;
+      virtual success remove ( ReportType const& _t ) = 0;
       // ---------------------------------------------------------------------------------
       virtual success findAll ( ReportTypeList &_tl ) const = 0;
       // ---------------------------------------------------------------------------------
