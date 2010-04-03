@@ -21,12 +21,10 @@ MACRO(QT4_ADD_DBUS_INTERFACE_WITH_INCLUDES _sources _interface _basename)
   
 ENDMACRO(QT4_ADD_DBUS_INTERFACE_WITH_INCLUDES)
 
-macro(link test)
-  target_link_libraries(${test} remoteproxy_lib ${QT_QTTEST_LIBRARY} ${QT_QTCORE_LIBRARY})
-endmacro(link)
-
 macro(create_test test_name)
-  add_executable(${test_name} ${ARGN})
+  SET(_srcs ${ARGN})
+  qt4_automoc(${_srcs})
+  add_executable(${test_name} ${_srcs})
   link(${test_name})
   install(TARGETS ${test_name} RUNTIME DESTINATION bin)
   add_test(${test_name} ${test_name})
