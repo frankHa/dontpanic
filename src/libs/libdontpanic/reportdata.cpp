@@ -32,9 +32,15 @@ namespace dp
   {
     QString const& format = dataFormatString();
     QString result = dump_headers(format);
+    QStringList entries;
     foreach(Row const row, _M_data)
     {
-      result += "\n" + dump_data(row, format);
+      entries<<dump_data(row, format);
+    }
+    qSort(entries);
+    foreach(QString const& entry, entries)
+    {
+      result += "\n" + entry;
     }
     return result;
   }
