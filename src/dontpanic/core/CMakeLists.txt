@@ -33,6 +33,8 @@ set(dontpanic_core_lib_SRCS
     persistence/sqlite/transaction.cpp
     persistence/sqlite/worktimeperday.cpp
     #reports/cfreport.cpp
+    reports/category.cpp
+    reports/group.cpp
     reports/plannedworkingtime.cpp
     reports/reportgenerator.cpp
    )
