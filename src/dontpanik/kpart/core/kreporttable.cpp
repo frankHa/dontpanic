@@ -25,6 +25,7 @@
 #include <QContextMenuEvent>
 #include <QMenu>
 #include <QFile>
+#include <QDir>
 #include <KMessageBox>
 // ---------------------------------------------------------------------------------
 namespace dp
@@ -70,7 +71,7 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void KReportTable::setup_actions()
     {
-      _M_export_data_action = new KAction(i18n("Export Report data to file"), this);
+      _M_export_data_action = new KAction(i18n("Export Report Data to File"), this);
       connect(_M_export_data_action, SIGNAL(triggered()), this, SLOT(export_data_to_file()));
     }
     // ---------------------------------------------------------------------------------
@@ -78,10 +79,27 @@ namespace dp
     {
       QString const& filename = _M_data_model->report().reportType().exportDataFileName(_M_data_model->report()).absoluteFilePath();
       QFile out(filename);
-      if(!out.open(QIODevice::WriteOnly)){kError()<<"bah.."; return;}
+      QFileInfo out_info(out);
+      if(out_info.exists())
+      {
+        if(KMessageBox::questionYesNo(0, i18n("The target file %1 already exists. Do you really want to overwrite it?").arg(filename), i18n("File already exists - Don't Panik")) == KMessageBox::No)
+        {
+          return;
+        }
+      }
+      QDir parentDir = out_info.absoluteDir();
+      if(!parentDir.exists())
+      {
+        parentDir.mkpath(parentDir.absolutePath());
+      }
+      if(!out.open(QIODevice::WriteOnly))
+      {
+        KMessageBox::error(0, i18n("Unable to export Report Data to file %1.<br>Please correct the target file name in the Report definition and regenerate this report with the new settings.").arg(filename), i18n("Report Export Error - Don't Panik"));
+        return;
+      }
       out.write(_M_data_model->report().reportData().exportDataString().toAscii());
       out.close();
-      KMessageBox::information(0, i18n("Report exported successfully to %1.").arg(filename), i18n("Export"));
+      KMessageBox::information(0, i18n("Report exported successfully to %1.").arg(filename), i18n("Report Export - Don't Panik"));
     }
     // ---------------------------------------------------------------------------------
   }

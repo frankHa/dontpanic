@@ -21,6 +21,7 @@ set(libdontpanic_SRCS
     task.cpp
     time.cpp
     timerange.cpp 
+    timerangeformatter.cpp 
     uuid.cpp
     worktimeperday.cpp
     dbus_support/action.cpp

@@ -18,6 +18,8 @@
 */
 
 #include <libdontpanic/reporttype.h>
+#include <libdontpanic/report.h>
+#include <libdontpanic/timerangeformatter.h>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -153,6 +155,8 @@ namespace dp
   QFileInfo ReportType::exportDataFileName(Report const& rep) const
   {
     QString absFilePath = _M_data_export_file_template;
+    TimeRange const& range = rep.range();
+    absFilePath.replace("<pretty_timerange>", time_range_formatter().pretty_format(range), Qt::CaseInsensitive);
     return absFilePath;
   }
   // ---------------------------------------------------------------------------------
