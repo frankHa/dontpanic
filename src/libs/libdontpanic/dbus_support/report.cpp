@@ -1,6 +1,7 @@
 #include <libdontpanic/dbus_support/report.h>
 #include <libdontpanic/dbus_support/timerange.h>
 #include <libdontpanic/dbus_support/reporttype.h>
+#include <libdontpanic/dbus_support/reportdata.h>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -10,7 +11,7 @@ namespace dp
     bool _v;
     ReportType _t;
     dp::TimeRange _r;
-    QString _d;
+    ReportData _d;
     int _dur;
     int _pwt;
     arg.beginStructure();

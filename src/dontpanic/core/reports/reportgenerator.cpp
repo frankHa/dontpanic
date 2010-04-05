@@ -17,7 +17,7 @@ namespace dp
         void setType ( ReportType const& type );
         Report asDontPanicReport();
       private:
-        QString evaluate ( ActionList const& actions );
+        ReportData evaluate ( ActionList const& actions );
       private:
         TimeRange _M_range;
         ReportType _M_type;
@@ -48,11 +48,11 @@ namespace dp
       _M_type = type;
     }
     // ---------------------------------------------------------------------------------
-    QString ReportGeneratorPrivate::evaluate ( ActionList const& actions )
+    ReportData ReportGeneratorPrivate::evaluate ( ActionList const& actions )
     {
       group_list gl ( _M_type );
       gl.sort ( actions );
-      QString result = _M_columns.dump(gl);
+      ReportData result = _M_columns.dump(gl);
       return result;
     }
     // ---------------------------------------------------------------------------------

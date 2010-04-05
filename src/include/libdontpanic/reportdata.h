@@ -1,83 +1,62 @@
-/*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-*/
-
-#ifndef DP_REPORT_H
-#define DP_REPORT_H
-
+#ifndef DP_REPORTDATA_H
+#define DP_REPORTDATA_H
+// ---------------------------------------------------------------------------------
 #include <libdontpanic/defines.hpp>
-#include <libdontpanic/timerange.h>
-#include <libdontpanic/reporttype.h>
-#include <libdontpanic/reportdata.h>
+#include <QVariant>
+// ---------------------------------------------------------------------------------
+class QModelIndex;
 // ---------------------------------------------------------------------------------
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  class DP_EXPORT Report
+  class DP_EXPORT ReportData
   {
       // ---------------------------------------------------------------------------------
     public:
       // ---------------------------------------------------------------------------------
-      Report();
+      typedef QList<QVariant> Row;
+      typedef QList<Row> Data;
       // ---------------------------------------------------------------------------------
     public:
       // ---------------------------------------------------------------------------------
-      Report& setValid ( bool );
+      int columnCount() const;
       // ---------------------------------------------------------------------------------
-      bool isValid() const;
+      int rowCount() const;
       // ---------------------------------------------------------------------------------
-      Report & setReportType ( ReportType const& );
+      QVariant header ( int col ) const;
       // ---------------------------------------------------------------------------------
-      ReportType reportType() const;
+      QVariant data(QModelIndex const& index) const;
       // ---------------------------------------------------------------------------------
-      Report & setRange ( TimeRange const& );
+      QString exportDataString() const;
       // ---------------------------------------------------------------------------------
-      TimeRange range() const;
+      void addHeader(QString header);
       // ---------------------------------------------------------------------------------
-      Report& setReportData ( ReportData const& data );
+      void addRow ( Row const& row );
       // ---------------------------------------------------------------------------------
-      ReportData reportData() const;
+      QStringList const& headers() const;
       // ---------------------------------------------------------------------------------
-      Report& setDuration ( int duration );
+      QStringList & headers();
       // ---------------------------------------------------------------------------------
-      int duration() const;
+      Data const& data()const;
       // ---------------------------------------------------------------------------------
-      Report& setPlannedWorkingTime ( int planned_working_time );
-      // ---------------------------------------------------------------------------------
-      int plannedWorkingTime() const;
+      Data & data();
       // ---------------------------------------------------------------------------------
     private:
       // ---------------------------------------------------------------------------------
-      bool      _M_valid;
-      ReportType   _M_type;
-      TimeRange _M_time_range;
-      QString   _M_report_data_deprecated;
-      ReportData _M_report_data;
-      int       _M_duration;
-      int       _M_planned_working_time;
+      QString dataFormatString() const;
+      // ---------------------------------------------------------------------------------
+      QString dump_headers(QString const format) const;
+      // ---------------------------------------------------------------------------------
+      QString dump_data(Row const& row, QString const& format) const;
+      // ---------------------------------------------------------------------------------      
+    private:
+      // ---------------------------------------------------------------------------------
+      QStringList _M_headers;
+      // ---------------------------------------------------------------------------------
+      Data _M_data;
       // ---------------------------------------------------------------------------------
   };
   // ---------------------------------------------------------------------------------
-  inline Report report()
-  {
-    return Report();
-  }
-  // ---------------------------------------------------------------------------------
-}
+}//dp
 // ---------------------------------------------------------------------------------
-#endif // DP_REPORT_H
+#endif //DP_REPORTDATA_H

@@ -3,6 +3,7 @@
 #include "libdontpanic/dbus_support/actiontemplate.hpp"
 #include "libdontpanic/dbus_support/project.hpp"
 #include "libdontpanic/dbus_support/report.h"
+#include "libdontpanic/dbus_support/reportdata.h"
 #include "libdontpanic/dbus_support/reportdatafilter.h"
 #include "libdontpanic/dbus_support/reporttype.h"
 #include "libdontpanic/dbus_support/task.hpp"
@@ -46,6 +47,7 @@ namespace dp
     qDBusRegisterMetaType<dp::Project>();
     qDBusRegisterMetaType<dp::ProjectList>();
     qDBusRegisterMetaType<dp::Report>();
+    qDBusRegisterMetaType<dp::ReportData>();
     qDBusRegisterMetaType<dp::ReportDataFilter>();
     qDBusRegisterMetaType<dp::ReportType>();
     qDBusRegisterMetaType<dp::ReportTypeList>();

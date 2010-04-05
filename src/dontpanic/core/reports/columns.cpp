@@ -327,35 +327,35 @@ namespace dp
       qDeleteAll(_M_columns);
     }
     // ---------------------------------------------------------------------------------
-    QString Columns::dump(group_list const& gl)
+    ReportData Columns::dump(group_list const& gl)
     {
       init(gl);     
-      QString result = dump_headers();
+      
+      ReportData result;
+      set_headers(result);
       foreach(group const* g, gl.groups())
       {
-        result+="\n" +dump_group(g);
+        add_group(result, g);
       }
       return result;
     }
     // ---------------------------------------------------------------------------------
-    QString Columns::dump_headers() const
+    void Columns::set_headers(ReportData &data) const
     {
-      QString result = _M_format;
       foreach(columns::column const* col, _M_columns)
       {
-        result = result.arg(col->name());
+        data.addHeader(col->name());
       }
-      return result;
     }
     // ---------------------------------------------------------------------------------
-    QString Columns::dump_group(group const*g) const
+    void Columns::add_group(ReportData &data, group const*g) const
     {
-      QString result = _M_format;
+      ReportData::Row row;
       foreach(columns::column const* col, _M_columns)
       {
-        result = result.arg(col->value_of(g).toString());
+        row.append(col->value_of(g));
       }
-      return result;
+      data.addRow(row);
     }
     // ---------------------------------------------------------------------------------
     //private stuff:
@@ -419,18 +419,6 @@ namespace dp
       {
         _M_columns.append(new columns::project_comment());
       }
-      _M_format = format_string();
-    }
-    // ---------------------------------------------------------------------------------
-    QString Columns::format_string() const
-    {
-      int col_count = _M_columns.count();
-      QString format = "%1";
-      for(int i=1; i<col_count;++i)
-      {
-        format +=";%" + QString::number(i+1);
-      }
-      return format;
     }
     // ---------------------------------------------------------------------------------
   }
