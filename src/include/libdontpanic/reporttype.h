@@ -23,11 +23,13 @@
 #include <libdontpanic/defines.hpp>
 #include <libdontpanic/uuid.h>
 #include <libdontpanic/reportdatafilter.h>
+#include <QFileInfo>
 class QDBusArgument;
 // ---------------------------------------------------------------------------------
 namespace dp
 {
-  class ReportTypePrivate;
+  // ---------------------------------------------------------------------------------
+  class Report;
   // ---------------------------------------------------------------------------------
   class DP_EXPORT ReportType
   {
@@ -85,6 +87,12 @@ namespace dp
       ReportDataFilter & projectFilter();
       ReportDataFilter const& projectFilter() const;
       // ---------------------------------------------------------------------------------
+      QString exportDataFileTemplate() const;
+      // ---------------------------------------------------------------------------------
+      ReportType& setExportDataFileTemplate(QString const& file);
+      // ---------------------------------------------------------------------------------
+      QFileInfo exportDataFileName(Report const& rep) const;
+      // ---------------------------------------------------------------------------------
     private:
       // ---------------------------------------------------------------------------------
       Uuid _M_id;
@@ -102,6 +110,8 @@ namespace dp
       ReportDataFilter _M_task_filter;
       // ---------------------------------------------------------------------------------
       ReportDataFilter _M_project_filter;
+      // ---------------------------------------------------------------------------------
+      QString _M_data_export_file_template;
       // ---------------------------------------------------------------------------------
   };
   // ---------------------------------------------------------------------------------

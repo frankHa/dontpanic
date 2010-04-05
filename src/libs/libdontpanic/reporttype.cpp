@@ -139,6 +139,23 @@ namespace dp
     return _M_project_filter;
   }
   // ---------------------------------------------------------------------------------
+  QString ReportType::exportDataFileTemplate() const
+  {
+    return _M_data_export_file_template;
+  }
+  // ---------------------------------------------------------------------------------
+  ReportType& ReportType::setExportDataFileTemplate(QString const& file)
+  {
+    _M_data_export_file_template = file;
+    return *this;
+  }
+  // ---------------------------------------------------------------------------------
+  QFileInfo ReportType::exportDataFileName(Report const& rep) const
+  {
+    QString absFilePath = _M_data_export_file_template;
+    return absFilePath;
+  }
+  // ---------------------------------------------------------------------------------
   bool DP_EXPORT operator == (dp::ReportType const& lhs, dp::ReportType const& rhs)
   {
     return lhs.id() == rhs.id();

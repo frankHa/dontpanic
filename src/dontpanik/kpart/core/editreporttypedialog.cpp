@@ -49,6 +49,7 @@ namespace dp
       _M_ui->icon->setIcon(at.icon());
       _M_ui->group_tasks->setChecked(at.groupByTask());
       _M_ui->group_projects->setChecked(at.groupByProject());
+      _M_ui->export_data_file->setText(at.exportDataFileTemplate());
     }
     // ---------------------------------------------------------------------------------
     void EditReportTypeDialog::setup_actions()
@@ -72,6 +73,7 @@ namespace dp
         t.setIcon(_M_ui->icon->icon());
         t.setGroupByProject(_M_ui->group_projects->isChecked());
         t.setGroupByTask(_M_ui->group_tasks->isChecked());
+        t.setExportDataFileTemplate(_M_ui->export_data_file->text());
         context()->reportManager()->store(t);
       }
     }

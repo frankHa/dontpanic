@@ -43,7 +43,7 @@ namespace dp
     void KReportWidget::setReport(Report const& r)
     {
       _M_ui->report_type->setText(r.reportType().name());
-      _M_ui->report->setText(r.reportData().exportDataString());
+      _M_ui->report_table->setReport(r.reportData());
       _M_ui->report_range->setText(i18n("%1 - %2")
       .arg(r.range().from().date().toString())
       .arg(r.range().to().date().toString())
@@ -58,7 +58,7 @@ namespace dp
     {
       _M_ui->summary->setVisible(false);
       _M_ui->report_type->setText("");
-      _M_ui->report->setText("");
+      _M_ui->report_table->resetReport();
       _M_ui->report_range->setText("");
       _M_ui->duration->setText("");
       _M_ui->planned_time->setText("");

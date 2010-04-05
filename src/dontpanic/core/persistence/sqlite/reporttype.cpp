@@ -18,7 +18,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       const QString CREATE_TABLE_REPORT_TYPE =
         "CREATE TABLE IF NOT EXISTS r_report_type \
-      (r_id TEXT PRIMARY KEY, r_name TEXT, r_icon TEXT, r_group_by_activity INTEGER, r_group_by_project INTEGER, r_group_by_time_interval INTEGER, r_task_filter INTEGER, r_project_filter INTEGER)";
+      (r_id TEXT PRIMARY KEY, r_name TEXT, r_icon TEXT, r_group_by_activity INTEGER, r_group_by_project INTEGER, r_group_by_time_interval INTEGER, r_task_filter INTEGER, r_project_filter INTEGER, r_data_export_file_template TEXT)";
       // ---------------------------------------------------------------------------------
       const QString CREATE_TABLE_REPORT_TYPE_PROJECTS = 
       "CREATE TABLE IF NOT EXISTS r_report_type_projects \
@@ -29,16 +29,16 @@ namespace dp
       (rp_r_id, TEXT, rp_t_id TEXT)";
       // ---------------------------------------------------------------------------------
       const QString INSERT_REPORT_TYPE =
-      "INSERT INTO r_report_type(r_id, r_name, r_icon, r_group_by_activity, r_group_by_project, r_group_by_time_interval, r_task_filter, r_project_filter)VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+      "INSERT INTO r_report_type(r_id, r_name, r_icon, r_group_by_activity, r_group_by_project, r_group_by_time_interval, r_task_filter, r_project_filter, r_data_export_file_template)VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
       // ---------------------------------------------------------------------------------
       const QString SELECT_ALL_REPORT_TYPES =
-      "SELECT r_id, r_name, r_icon, r_group_by_activity, r_group_by_project, r_group_by_time_interval, r_task_filter, r_project_filter FROM r_report_type order by r_name";
+      "SELECT r_id, r_name, r_icon, r_group_by_activity, r_group_by_project, r_group_by_time_interval, r_task_filter, r_project_filter, r_data_export_file_template FROM r_report_type order by r_name";
       // ---------------------------------------------------------------------------------
       const QString SELECT_DISTINCT_REPORT_TYPE =
-      "SELECT DISTINCT r_id, r_name, r_icon, r_group_by_activity, r_group_by_project, r_group_by_time_interval, r_task_filter, r_project_filter FROM r_report_type WHERE (r_id=?)";
+      "SELECT DISTINCT r_id, r_name, r_icon, r_group_by_activity, r_group_by_project, r_group_by_time_interval, r_task_filter, r_project_filter, r_data_export_file_template FROM r_report_type WHERE (r_id=?)";
       // ---------------------------------------------------------------------------------
       const QString UPDATE_REPORT_TYPE =
-      "UPDATE r_report_type set r_name=?, r_icon=?, r_group_by_activity=?, r_group_by_project=?, r_group_by_time_interval=?, r_task_filter=?, r_project_filter=? WHERE (r_id=?)";
+      "UPDATE r_report_type set r_name=?, r_icon=?, r_group_by_activity=?, r_group_by_project=?, r_group_by_time_interval=?, r_task_filter=?, r_project_filter=?, r_data_export_file_template=? WHERE (r_id=?)";
       // ---------------------------------------------------------------------------------
       const QString REMOVE_REPORT_TYPE =
         "DELETE FROM r_report_type WHERE (r_id=?)";
@@ -219,6 +219,7 @@ namespace dp
         query.addBindValue ( _p.groupByTimeInterval() );
         query.addBindValue ( _p.taskFilter().filterType() );
         query.addBindValue ( _p.projectFilter().filterType() );
+        query.addBindValue ( _p.exportDataFileTemplate() );
         success result = execute ( query );
         if(result.was_successful())
         {
@@ -251,6 +252,7 @@ namespace dp
         query.addBindValue ( _p.groupByTimeInterval() );
         query.addBindValue ( _p.taskFilter().filterType() );
         query.addBindValue ( _p.projectFilter().filterType() );
+        query.addBindValue ( _p.exportDataFileTemplate() );
         query.addBindValue ( _p.id().toString() );
         success result = execute ( query );
         if(result.was_successful())
@@ -363,6 +365,7 @@ namespace dp
         p.setGroupByTimeInterval ( query.value ( 5 ).toInt()) ;
         p.taskFilter().setFilterType ( query.value ( 6 ).toInt()) ;
         p.projectFilter().setFilterType ( query.value ( 7 ).toInt()) ;
+        p.setExportDataFileTemplate(query.value ( 8 ).toString());
         return successful();
       }
 

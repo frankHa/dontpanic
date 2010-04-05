@@ -47,7 +47,23 @@
     </widget>
    </item>
    <item>
-    <widget class="KTextBrowser" name="report"/>
+    <widget class="dp::core::KReportTable" name="report_table">
+     <property name="sortingEnabled">
+      <bool>true</bool>
+     </property>
+     <attribute name="horizontalHeaderStretchLastSection">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="horizontalHeaderStretchLastSection">
+      <bool>true</bool>
+     </attribute>
+    </widget>
    </item>
    <item>
     <widget class="QGroupBox" name="summary">
@@ -179,9 +195,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KTextBrowser</class>
-   <extends>QTextBrowser</extends>
-   <header>ktextbrowser.h</header>
+   <class>dp::core::KReportTable</class>
+   <extends>QTableView</extends>
+   <header>kreporttable.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

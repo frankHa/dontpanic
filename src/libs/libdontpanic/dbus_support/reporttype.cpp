@@ -13,10 +13,11 @@ namespace dp
     bool _a;
     bool _p;
     int _t;
+    QString _f;
     ReportDataFilter &_af = report_type.taskFilter();
     ReportDataFilter &_pf = report_type.projectFilter();
     arg.beginStructure();
-    arg >> _id >> _name >> _icon >> _a >> _p >> _t >> _af >> _pf;
+    arg >> _id >> _name >> _icon >> _a >> _p >> _t >> _af >> _pf >> _f;
     arg.endStructure();
     report_type._M_id = _id;
     report_type.setName ( _name );
@@ -24,13 +25,14 @@ namespace dp
     report_type.setGroupByTask(_a);
     report_type.setGroupByProject(_p);
     report_type.setGroupByTimeInterval(_t);
+    report_type.setExportDataFileTemplate(_f);
     return arg;
   }
   // ---------------------------------------------------------------------------------
   QDBusArgument & operator << ( QDBusArgument &arg, ReportType const& rt )
   {
     arg.beginStructure();
-    arg << rt.id() << rt.name()<<rt.icon()<<rt.groupByTask()<<rt.groupByProject()<<rt.groupByTimeInterval()<<rt.taskFilter()<<rt.projectFilter();
+    arg << rt.id() << rt.name()<<rt.icon()<<rt.groupByTask()<<rt.groupByProject()<<rt.groupByTimeInterval()<<rt.taskFilter()<<rt.projectFilter()<<rt.exportDataFileTemplate();
     arg.endStructure();
     return arg;
   }

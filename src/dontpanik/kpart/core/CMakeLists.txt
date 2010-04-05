@@ -27,6 +27,8 @@ set(dontpanikpart_LIB_SRCS
     kprojectsdialog.cpp
     kdayview.cpp
     kmainwidget.cpp
+    kreporttable.cpp
+    kreporttablemodel.cpp
     kreporttypeslist.cpp
     kreporttypeslistmodel.cpp
     kreportrangedialog.cpp 
