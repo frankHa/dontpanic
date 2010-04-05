@@ -33,32 +33,32 @@ namespace dp
     {
       if(!index.isValid()) return QVariant();
       if(!role == Qt::DisplayRole) return QVariant();
-      return _M_report.data(index);
+      return _M_report.reportData().data(index);
     }
     // ---------------------------------------------------------------------------------
     int KReportTableModel::columnCount ( const QModelIndex& parent ) const
     {
-      return _M_report.columnCount();
+      return _M_report.reportData().columnCount();
     }
     // ---------------------------------------------------------------------------------
     int KReportTableModel::rowCount ( const QModelIndex& parent ) const
     {
-      return _M_report.rowCount();
+      return _M_report.reportData().rowCount();
     }
     // ---------------------------------------------------------------------------------
     QVariant KReportTableModel::headerData ( int section, Qt::Orientation orientation, int role ) const
     {
       if(orientation != Qt::Horizontal) return QVariant();
       if(role != Qt::DisplayRole) return QVariant();
-      return _M_report.header(section);
+      return _M_report.reportData().header(section);
     }
     // ---------------------------------------------------------------------------------
-    ReportData const& KReportTableModel::report() const
+    Report const& KReportTableModel::report() const
     {
       return _M_report;
     }
     // ---------------------------------------------------------------------------------
-    void KReportTableModel::setReport ( const dp::ReportData& data )
+    void KReportTableModel::setReport ( const dp::Report& data )
     {
       _M_report = data;
       reset();
@@ -66,7 +66,7 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void KReportTableModel::resetReport()
     {
-      _M_report = ReportData();
+      _M_report = Report();
       reset();
     }
     // ---------------------------------------------------------------------------------

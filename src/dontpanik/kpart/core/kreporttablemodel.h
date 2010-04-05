@@ -21,7 +21,7 @@
 #define DP_CORE_KREPORTTABLEMODEL_H
 
 #include <QModelIndex>
-#include <libdontpanic/reportdata.h>
+#include <libdontpanic/report.h>
 
 namespace dp
 {
@@ -40,12 +40,12 @@ namespace dp
         virtual int rowCount ( const QModelIndex& parent = QModelIndex() ) const;
         virtual QVariant headerData ( int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const;
       public:
-        void setReport(ReportData const& data);
+        void setReport(Report const& data);
         void resetReport();
-        ReportData const& report() const;
+        Report const& report() const;
         
       private:
-        ReportData _M_report;
+        Report _M_report;
     };
 
   }
