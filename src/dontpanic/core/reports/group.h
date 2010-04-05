@@ -40,12 +40,14 @@ namespace dp
         group_list ( ReportType const& type );
         ~group_list();
         void sort ( ActionList const& actions );
-        QString toString();
+        //QString toString();
+        ReportType report_type() const;
+        int duration() const;     
+        GroupList const& groups()const;
+        // ---------------------------------------------------------------------------------
       private:
         bool added_to_existing_group ( Action const& a );
         void add_to_newly_created_group ( Action const& a );
-        int duration() const;
-        QString dump ( group const* g, int dur );
         grouping::category * category_for ( Action const& a );
       private:
         ReportType const& _M_type;

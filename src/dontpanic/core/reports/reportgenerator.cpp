@@ -1,7 +1,7 @@
 #include "reportgenerator.h"
 #include "category.h"
 #include "group.h"
-#include "column.h"
+#include "columns.h"
 #include "persistencebackend.hpp"
 #include "reports/plannedworkingtime.h"
 namespace dp
@@ -21,6 +21,7 @@ namespace dp
       private:
         TimeRange _M_range;
         ReportType _M_type;
+        Columns _M_columns;
     };
     // ---------------------------------------------------------------------------------
     // ReportGeneratorPrivate imp:
@@ -51,7 +52,7 @@ namespace dp
     {
       group_list gl ( _M_type );
       gl.sort ( actions );
-      QString const& result = gl.toString();
+      QString result = _M_columns.dump(gl);
       return result;
     }
     // ---------------------------------------------------------------------------------

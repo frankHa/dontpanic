@@ -78,6 +78,14 @@ namespace dp
     return *this;
   }
   // ---------------------------------------------------------------------------------
+  bool ReportType::noGrouping() const
+  {
+    if(groupByProject()) return false;
+    if(groupByTask()) return false;
+    if(groupByTimeInterval() != NONE) return false;
+    return true;
+  }
+  // ---------------------------------------------------------------------------------
   ReportType& ReportType::setGroupByTask(bool b)
   {
     _M_group_by_task = b;

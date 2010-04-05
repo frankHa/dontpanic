@@ -34,6 +34,7 @@ set(dontpanic_core_lib_SRCS
     persistence/sqlite/worktimeperday.cpp
     #reports/cfreport.cpp
     reports/category.cpp
+    reports/columns.cpp
     reports/group.cpp
     reports/plannedworkingtime.cpp
     reports/reportgenerator.cpp
