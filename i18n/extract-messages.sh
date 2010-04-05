@@ -1,6 +1,6 @@
 #!/bin/sh
-BASEDIR="../../src/plasma"   # root of translatable sources
-PROJECT="dontpanik_plasma"  # project name
+BASEDIR="../../src/"   # root of translatable sources
+PROJECT="dontpanic"  # project name
 BUGADDR=""      # MSGID-Bugs
 WDIR=`pwd`          # working dir
  

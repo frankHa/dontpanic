@@ -43,7 +43,7 @@ namespace dp
           , _M_planned_working_time_for_today ( QTime ( 0, 0 ) )
       {
         setAspectRatioMode ( Plasma::IgnoreAspectRatio );
-        KGlobal::locale()->insertCatalog ( "dontpanik_plasma" );
+        KGlobal::locale()->insertCatalog ( "dontpanic" );
         updateIcon();
       }
       // ---------------------------------------------------------------------------------

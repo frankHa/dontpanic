@@ -110,7 +110,7 @@ namespace dp
       }
       if(!out.open(QIODevice::WriteOnly))
       {
-        KMessageBox::error(0, i18n("Unable to export Report Data to file <b>'%1'</b>.<br>Please correct the target file name in the Report definition and regenerate this report with the new settings.").arg(filename), i18n("Report Export Error - Don't Panik"));
+        KMessageBox::error(0, i18n("Unable to export Report Data to file <b>'%1'</b>.<br>Please correct the target file name in the Report definition.").arg(filename), i18n("Report Export Error - Don't Panik"));
         return;
       }
       out.write(_M_data_model->report().reportData().exportDataString().toAscii());

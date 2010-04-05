@@ -31,7 +31,7 @@ K_EXPORT_COMPONENT_FACTORY ( dontpanikpart, DontPanikPartFactory )
 DontPanikPart::DontPanikPart ( QWidget *parentWidget, QObject *parent, const QStringList & /*args*/ )
     : KParts::ReadOnlyPart ( parent )
 {
-  KGlobal::locale()->insertCatalog("dontpanik");
+  KGlobal::locale()->insertCatalog("dontpanic");
   // we need an instance
   setComponentData ( DontPanikPartFactory::componentData() );
 
