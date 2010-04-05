@@ -44,11 +44,13 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void KReportTypesList::init_menu_actions()
     {
+      _M_generate_report = new KAction(i18n("Generate Report"), this );
+      connect(_M_generate_report, SIGNAL(triggered()), this, SLOT(generate_report_of_selected_type()));
       _M_add_report_type = new KAction(i18n("Define a new Report Type"), this);
       connect(_M_add_report_type, SIGNAL(triggered()), this, SLOT(on_new_report_type()));
-      _M_edit_selected_report_type = new KAction(i18n("Edit"), this);
+      _M_edit_selected_report_type = new KAction(i18n("Edit Report Type"), this);
       connect(_M_edit_selected_report_type, SIGNAL(triggered()), this, SLOT(on_edit_selected_report_type()));
-      _M_remove_selected_report_type = new KAction(i18n("Remove"), this);
+      _M_remove_selected_report_type = new KAction(i18n("Remove Report Type"), this);
       connect(_M_remove_selected_report_type, SIGNAL(triggered()), this, SLOT(on_delete_selected_report_type()));
     }
     // ---------------------------------------------------------------------------------
@@ -56,6 +58,11 @@ namespace dp
     {
       Q_UNUSED(evt);
       QMenu menu;
+      if(this->selectionModel()->hasSelection())
+      {
+        menu.addAction(_M_generate_report);
+        menu.addSeparator();
+      }
       menu.addAction(_M_add_report_type);
       if(this->selectionModel()->hasSelection())
       {
@@ -90,13 +97,17 @@ namespace dp
       dlg.exec();
     }
     // ---------------------------------------------------------------------------------
+    void KReportTypesList::generate_report_of_selected_type()
+    {
+      on_double_clicked(currentIndex());
+    }
+    // ---------------------------------------------------------------------------------
     void KReportTypesList::on_double_clicked(QModelIndex const& index)
     {
       KReportRangeDialog dlg;
       if(dlg.exec()==QDialog::Accepted)
       {
         Report r =context()->reportManager()->generateReport(_M_model->at(index), dlg.selectedRange());
-        //kDebug()<<r.reportData();
       }
     }
     // ---------------------------------------------------------------------------------
