@@ -11,7 +11,7 @@ namespace dp
   // ---------------------------------------------------------------------------------
   int ReportData::rowCount() const
   {
-    _M_data.count();
+    return _M_data.count();
   }
   // ---------------------------------------------------------------------------------
   QVariant ReportData::header ( int col ) const

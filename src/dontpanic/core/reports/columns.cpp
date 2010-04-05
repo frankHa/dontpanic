@@ -198,7 +198,7 @@ namespace dp
           {
             Action const& a = g->first();
             if ( !a.isValid() ) return "";
-            return a.startTime();
+            return a.startTime().toString();
           }
       };
       // ---------------------------------------------------------------------------------
@@ -217,7 +217,7 @@ namespace dp
           {
             Action const& a = g->first();
             if ( !a.isValid() ) return "";
-            return a.endTime();
+            return a.endTime().toString();
           }
       };
       // ---------------------------------------------------------------------------------
