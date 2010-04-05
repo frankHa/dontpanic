@@ -18,7 +18,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       void category::embed ( category *cat )
       {
-        if ( embedded == 0 )
+        if ( embedded ==  0)
         {
           embedded = cat;
         }

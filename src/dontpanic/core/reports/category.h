@@ -36,8 +36,9 @@ namespace dp
         public:
           bool matches ( Action const& a ) const
           {
-            return true;
-          }
+            if(embedded == 0)return true;
+            return embedded->matches(a);
+          }          
       };
       // ---------------------------------------------------------------------------------
       class no: public category
