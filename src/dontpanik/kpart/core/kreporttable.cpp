@@ -19,6 +19,7 @@
 
 #include "kreporttable.h"
 #include "kreporttablemodel.h"
+#include "context.h"
 #include <libdontpanic/report.h>
 #include <QSortFilterProxyModel>
 #include <KAction>
@@ -77,14 +78,29 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void KReportTable::export_data_to_file()
     {
-      QString const& filename = _M_data_model->report().reportType().exportDataFileName(_M_data_model->report()).absoluteFilePath();
+      Uuid const&id = _M_data_model->report().reportType().id();
+      //fetching the target file name from the most recent representation of the report type (instead of using the cached report type definition):
+      QString const& filename = context()->reportManager()->load(id).exportDataFileName(_M_data_model->report());
+      if(filename.isEmpty())
+      {
+        KMessageBox::error(0, i18n("No target file specified. Please correct the target file name in the Report definition."), i18n("Report Export Error - Don't Panik"));
+        return;
+      }
       QFile out(filename);
       QFileInfo out_info(out);
-      if(out_info.exists())
+      if(out_info.exists())       
       {
-        if(KMessageBox::questionYesNo(0, i18n("The target file %1 already exists. Do you really want to overwrite it?").arg(filename), i18n("File already exists - Don't Panik")) == KMessageBox::No)
+        if(out_info.isDir())
         {
+          KMessageBox::error(0, i18n("The target file <b>'%1'</b> is pointing to a directory instead of a file.<br>Please correct the target file name in the Report definition.").arg(filename), i18n("Report Export Error - Don't Panik"));
           return;
+        }
+        else
+        {
+          if(KMessageBox::questionYesNo(0, i18n("The target file <b>'%1'</b> already exists. Do you really want to overwrite it?").arg(filename), i18n("File already exists - Don't Panik")) == KMessageBox::No)
+          {
+            return;
+          }
         }
       }
       QDir parentDir = out_info.absoluteDir();
@@ -94,12 +110,12 @@ namespace dp
       }
       if(!out.open(QIODevice::WriteOnly))
       {
-        KMessageBox::error(0, i18n("Unable to export Report Data to file %1.<br>Please correct the target file name in the Report definition and regenerate this report with the new settings.").arg(filename), i18n("Report Export Error - Don't Panik"));
+        KMessageBox::error(0, i18n("Unable to export Report Data to file <b>'%1'</b>.<br>Please correct the target file name in the Report definition and regenerate this report with the new settings.").arg(filename), i18n("Report Export Error - Don't Panik"));
         return;
       }
       out.write(_M_data_model->report().reportData().exportDataString().toAscii());
       out.close();
-      KMessageBox::information(0, i18n("Report exported successfully to %1.").arg(filename), i18n("Report Export - Don't Panik"));
+      KMessageBox::information(0, i18n("Report exported successfully to <b>'%1'</b>.").arg(filename), i18n("Report Export - Don't Panik"));
     }
     // ---------------------------------------------------------------------------------
   }

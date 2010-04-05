@@ -91,7 +91,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       ReportType& setExportDataFileTemplate(QString const& file);
       // ---------------------------------------------------------------------------------
-      QFileInfo exportDataFileName(Report const& rep) const;
+      QString exportDataFileName(Report const& rep) const;
       // ---------------------------------------------------------------------------------
     private:
       // ---------------------------------------------------------------------------------

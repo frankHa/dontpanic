@@ -152,11 +152,11 @@ namespace dp
     return *this;
   }
   // ---------------------------------------------------------------------------------
-  QFileInfo ReportType::exportDataFileName(Report const& rep) const
+  QString ReportType::exportDataFileName(Report const& rep) const
   {
     QString absFilePath = _M_data_export_file_template;
     TimeRange const& range = rep.range();
-    absFilePath.replace("<pretty_timerange>", time_range_formatter().pretty_format(range), Qt::CaseInsensitive);
+    absFilePath.replace("<smart_timerange>", time_range_formatter().pretty_format(range), Qt::CaseInsensitive);
     return absFilePath;
   }
   // ---------------------------------------------------------------------------------
