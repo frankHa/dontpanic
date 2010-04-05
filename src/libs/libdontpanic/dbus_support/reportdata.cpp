@@ -1,4 +1,5 @@
 #include <libdontpanic/dbus_support/reportdata.h>
+#include <libdontpanic/dbus_support/qdatetime.h>
 // ---------------------------------------------------------------------------------
 namespace dp
 {

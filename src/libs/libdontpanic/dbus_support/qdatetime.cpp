@@ -5,18 +5,18 @@ namespace dp
   // ---------------------------------------------------------------------------------
   QDBusArgument const& operator >> ( QDBusArgument const&arg, QDateTime & time )
   {
-    QString _id;
+    uint _secs;
     arg.beginStructure();
-    arg >> _id;
+    arg >> _secs;
     arg.endStructure();
-    time = QDateTime::fromString ( _id );
+    time.setTime_t( _secs );
     return arg;
   }
   // ---------------------------------------------------------------------------------
   QDBusArgument & operator << ( QDBusArgument &arg, QDateTime const& time )
   {
     arg.beginStructure();
-    arg << time.toString();
+    arg << time.toTime_t();
     arg.endStructure();
     return arg;
   }
