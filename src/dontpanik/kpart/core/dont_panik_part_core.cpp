@@ -18,6 +18,7 @@
 #include "plannedworkingtimesdialog.h"
 #include "statusnotifieritem.h"
 #include <KStatusBar>
+#include <KAction>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -26,10 +27,10 @@ namespace dp
   {
     // ---------------------------------------------------------------------------------
     dont_panik_core::dont_panik_core ( KParts::ReadOnlyPart *gui_client, QWidget *parent )
-        : QObject ( parent )
+        : QObject ( parent )        
         , _M_read_write ( false )
-        , _M_gui_client ( gui_client )
-        , _M_status ( new KStatus ( this ) )
+        , _M_gui_client ( gui_client )        
+        , _M_status (new KStatus ( this ) )
         , _M_status_bar_label ( new KDurationStatusUpdater ( this ) )
         , _M_desktop_notification_manager ( new DesktopNotificationManager ( this ) )
     {
@@ -39,7 +40,11 @@ namespace dp
       init_statusbar_label();
       init_status_notifier_item ( gui_client->widget() );
       init_desktop_notification_manager();
+      connect(context()->timeTracker() , SIGNAL(currentlyActiveActionChanged(dp::Action)), gui_client, SLOT(onCurrentlyActiveActionChanged(dp::Action)));
+      connect(_M_widget, SIGNAL(dayViewMode()), gui_client, SLOT(onCurrentlyDisplayingDayView()));
+      connect(_M_widget, SIGNAL(reportViewMode()), gui_client, SLOT(onCurrentlyDisplayingReportsView()));
       _M_status->updateAll();
+      init_correct_action_states();
     }
     // ---------------------------------------------------------------------------------
     QWidget *dont_panik_core::widget()
@@ -135,6 +140,13 @@ namespace dp
     {
       _M_desktop_notification_manager->setComponentData(_M_gui_client->componentData());
       connect ( _M_status, SIGNAL ( noJobTrackingsWarning(QString)), _M_desktop_notification_manager, SLOT ( showNoJobTrackingWarning ( QString ) ) );
+    }
+    // ---------------------------------------------------------------------------------
+    void dont_panik_core::init_correct_action_states()
+    {
+      context()->globalActions()->action("view_day")->setEnabled(false);
+      context()->globalActions()->action("view_reports")->setEnabled(true);
+      context()->globalActions()->action("stop_current_action")->setEnabled(context()->timeTracker()->currentlyActiveAction().isActive());
     }
     // ---------------------------------------------------------------------------------
   }//core

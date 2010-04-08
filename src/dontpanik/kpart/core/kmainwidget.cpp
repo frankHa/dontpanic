@@ -44,11 +44,13 @@ namespace dp
     void KMainWidget::show_dayview()
     {
       setCurrentIndex(DAY);
+      emit dayViewMode();
     }
     // ---------------------------------------------------------------------------------
     void KMainWidget::show_reportview()
     {
       setCurrentIndex(REPORT);
+      emit reportViewMode();
     }
     // ---------------------------------------------------------------------------------
     // private stuff:

@@ -6,6 +6,7 @@
 #include "dont_panik_part_core.hpp"
 #include "statusnotifieritem.h"
 #include <libdontpanic/dbus.hpp>
+#include <libdontpanic/action.hpp>
 
 #include <kaction.h>
 #include <kactioncollection.h>
@@ -52,12 +53,6 @@ DontPanikPart::DontPanikPart ( QWidget *parentWidget, QObject *parent, const QSt
   
   // set our XML-UI resource file
   setXMLFile ( "dontpanik_part.rc" );
-
-  // we are read-write by default
-  //setReadWrite(true);
-
-  // we are not modified since we haven't done anything yet
-  //setModified(false);
 }
 
 DontPanikPart::~DontPanikPart()
@@ -122,6 +117,30 @@ void DontPanikPart::viewDayAction()
 void DontPanikPart::viewReportsAction()
 {
   _M_core->viewReportsAction();
+}
+
+void DontPanikPart::onCurrentlyActiveActionChanged(const dp::Action& a)
+{
+  if(a.isActive())
+  {
+    emit stateChanged("has_active_action");
+  }
+  else
+  {
+    emit stateChanged("has_active_action", StateReverse);
+  }  
+}
+
+void DontPanikPart::onCurrentlyDisplayingDayView()
+{
+  emit stateChanged("displaying_view_day");
+  emit stateChanged("displaying_view_reports", StateReverse);
+}
+
+void DontPanikPart::onCurrentlyDisplayingReportsView()
+{
+  emit stateChanged("displaying_view_day", StateReverse);
+  emit stateChanged("displaying_view_reports");
 }
 
 void DontPanikPart::setup_actions()

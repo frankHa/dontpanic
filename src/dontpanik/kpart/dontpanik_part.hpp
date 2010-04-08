@@ -13,6 +13,7 @@ class KAction;
 
 namespace dp
 {
+  class Action;
   namespace core
   {
     class dont_panik_core;
@@ -61,6 +62,11 @@ class DP_EXPORT DontPanikPart : public KParts::ReadOnlyPart
     void startNewAction();
     void viewDayAction();
     void viewReportsAction();
+    
+  private slots:
+    void onCurrentlyActiveActionChanged(dp::Action const& );
+    void onCurrentlyDisplayingDayView();
+    void onCurrentlyDisplayingReportsView();
     
   private:    
     void setup_actions();
