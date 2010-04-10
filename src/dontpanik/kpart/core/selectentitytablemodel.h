@@ -17,19 +17,10 @@
 
 */
 
-#ifndef DP_CORE_SELECTPROJECTSDIALOG_H
-#define DP_CORE_SELECTPROJECTSDIALOG_H
-// ---------------------------------------------------------------------------------
+#ifndef DP_CORE_SELECTENTITYTABLEMODEL_H
+#define DP_CORE_SELECTENTITYTABLEMODEL_H
 #include <libdontpanic/defines.hpp>
-// ---------------------------------------------------------------------------------
-#include <QDialog>
-// ---------------------------------------------------------------------------------
-namespace Ui
-{
-  // ---------------------------------------------------------------------------------
-  class SelectProjectsDialog;
-  // ---------------------------------------------------------------------------------
-}
+#include <QModelIndex>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -37,33 +28,32 @@ namespace dp
   namespace core
   {
     // ---------------------------------------------------------------------------------
-    class SelectEntityTableModel;
-    // ---------------------------------------------------------------------------------
-    class SelectProjectsDialog 
-    : public QDialog
+    class SelectEntityTableModelAdaptor;
+    class SelectEntityTableModel : public QAbstractTableModel
     {
       // ---------------------------------------------------------------------------------
       Q_OBJECT
       // ---------------------------------------------------------------------------------
       public:
         // ---------------------------------------------------------------------------------
-        SelectProjectsDialog ( QWidget* parent = 0, Qt::WindowFlags f = 0 );
-        ~SelectProjectsDialog();
-      // ---------------------------------------------------------------------------------
+        SelectEntityTableModel ( SelectEntityTableModelAdaptor *data, QObject* parent = 0 );
+        // ---------------------------------------------------------------------------------
+      public:
+        // ---------------------------------------------------------------------------------
+        virtual QVariant data ( const QModelIndex& index, int role = Qt::DisplayRole ) const;
+        virtual int columnCount ( const QModelIndex& parent = QModelIndex() ) const;
+        virtual int rowCount ( const QModelIndex& parent = QModelIndex() ) const;
+        virtual QVariant headerData ( int section, Qt::Orientation orientation, int role = Qt::EditRole )const;
+        // ---------------------------------------------------------------------------------
       private:
         // ---------------------------------------------------------------------------------
-        void init_model();
-      // ---------------------------------------------------------------------------------
-      private:
-        // ---------------------------------------------------------------------------------
-        Ui::SelectProjectsDialog *_M_ui;
-        // ---------------------------------------------------------------------------------
-        SelectEntityTableModel *_M_model;
+        SelectEntityTableModelAdaptor *_M_data;
         // ---------------------------------------------------------------------------------
     };
-    // ---------------------------------------------------------------------------------
+  
+    
   }
-  // ---------------------------------------------------------------------------------
+
 }
-// ---------------------------------------------------------------------------------
-#endif // DP_CORE_SELECTPROJECTSDIALOG_H
+
+#endif // DP_CORE_SELECTENTITYTABLEMODEL_H

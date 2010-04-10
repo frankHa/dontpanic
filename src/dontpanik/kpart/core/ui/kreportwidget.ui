@@ -48,6 +48,9 @@
    </item>
    <item>
     <widget class="dp::core::KReportTable" name="report_table">
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
      <property name="sortingEnabled">
       <bool>true</bool>
      </property>

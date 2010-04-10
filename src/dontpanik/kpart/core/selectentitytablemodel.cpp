@@ -17,11 +17,9 @@
 
 */
 
-#include "selectprojectsdialog.h"
-#include "selectprojectsdialog.moc"
-#include "ui_selectprojectsdialog.h"
 #include "selectentitytablemodel.h"
-#include "selectprojectstablemodeladaptor.h"
+#include "selectentitytablemodel.moc"
+#include "selectentitytablemodeladaptor.h"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -29,29 +27,37 @@ namespace dp
   namespace core
   {
     // ---------------------------------------------------------------------------------
-    SelectProjectsDialog::SelectProjectsDialog ( QWidget* parent, Qt::WindowFlags f ) 
-    : QDialog ( parent, f )
-    , _M_ui(new Ui::SelectProjectsDialog())
+    SelectEntityTableModel::SelectEntityTableModel ( SelectEntityTableModelAdaptor * data, QObject* parent ) 
+      : QAbstractTableModel ( parent )
+      , _M_data(data)
     {
-      _M_ui->setupUi(this);
-      init_model();
+      _M_data->setParent(this);
     }
     // ---------------------------------------------------------------------------------
-    SelectProjectsDialog::~SelectProjectsDialog()
+    QVariant SelectEntityTableModel::data ( const QModelIndex& index, int role ) const
     {
-      delete _M_ui;
+      if(role != Qt::DisplayRole) return QVariant();
+      return _M_data->data(index);
     }
     // ---------------------------------------------------------------------------------
-    //private stuff:
-    // ---------------------------------------------------------------------------------
-    void SelectProjectsDialog::init_model()
+    int SelectEntityTableModel::columnCount ( const QModelIndex& parent ) const
     {
-      _M_model = new SelectEntityTableModel(new SelectProjectsTableModelAdaptor(), this);
-      _M_ui->projects_table->setModel(_M_model);
+      return _M_data->columnCount();
+    }
+    // ---------------------------------------------------------------------------------
+    int SelectEntityTableModel::rowCount ( const QModelIndex& parent ) const
+    {
+      return _M_data->rowCount();
+    }
+    // ---------------------------------------------------------------------------------
+    QVariant SelectEntityTableModel::headerData ( int section, Qt::Orientation orientation, int role ) const
+    {
+      if(orientation != Qt::Horizontal) return QVariant();
+      if(role != Qt::DisplayRole) return QVariant();
+      return _M_data->headerData(section);
     }
     // ---------------------------------------------------------------------------------
   }
   // ---------------------------------------------------------------------------------
 }
 // ---------------------------------------------------------------------------------
-

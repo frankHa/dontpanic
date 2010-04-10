@@ -42,6 +42,9 @@ set(dontpanikpart_LIB_SRCS
     dont_panik_part_core.cpp
     plannedworkingtimesdialog.cpp
     selectprojectsdialog.cpp
+    selectentitytablemodel.cpp
+    selectentitytablemodeladaptor.cpp
+    selectprojectstablemodeladaptor.cpp
     statusnotifieritem.cpp
    )
 

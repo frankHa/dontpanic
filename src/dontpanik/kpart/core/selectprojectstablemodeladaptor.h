@@ -17,19 +17,12 @@
 
 */
 
-#ifndef DP_CORE_SELECTPROJECTSDIALOG_H
-#define DP_CORE_SELECTPROJECTSDIALOG_H
+#ifndef DP_CORE_SELECTPROJECTSTABLEMODELADAPTOR_H
+#define DP_CORE_SELECTPROJECTSTABLEMODELADAPTOR_H
 // ---------------------------------------------------------------------------------
 #include <libdontpanic/defines.hpp>
-// ---------------------------------------------------------------------------------
-#include <QDialog>
-// ---------------------------------------------------------------------------------
-namespace Ui
-{
-  // ---------------------------------------------------------------------------------
-  class SelectProjectsDialog;
-  // ---------------------------------------------------------------------------------
-}
+#include "selectentitytablemodeladaptor.h"
+#include <libdontpanic/project.hpp>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -37,33 +30,43 @@ namespace dp
   namespace core
   {
     // ---------------------------------------------------------------------------------
-    class SelectEntityTableModel;
-    // ---------------------------------------------------------------------------------
-    class SelectProjectsDialog 
-    : public QDialog
+    class SelectProjectsTableModelAdaptorPrivate;
+    class SelectProjectsTableModelAdaptor
+    : public SelectEntityTableModelAdaptor
     {
-      // ---------------------------------------------------------------------------------
-      Q_OBJECT
-      // ---------------------------------------------------------------------------------
+      class entry;
+      typedef QList<entry> entry_list;
+        // ---------------------------------------------------------------------------------
+        Q_OBJECT
+        // ---------------------------------------------------------------------------------
       public:
         // ---------------------------------------------------------------------------------
-        SelectProjectsDialog ( QWidget* parent = 0, Qt::WindowFlags f = 0 );
-        ~SelectProjectsDialog();
-      // ---------------------------------------------------------------------------------
+        SelectProjectsTableModelAdaptor ( QObject* parent = 0 );
+        // ---------------------------------------------------------------------------------
+        ~SelectProjectsTableModelAdaptor ( );
+        // ---------------------------------------------------------------------------------
+      public:
+        // ---------------------------------------------------------------------------------
+        virtual QVariant data ( const QModelIndex& index ) const;
+        virtual int columnCount ( ) const;
+        virtual int rowCount ( ) const;
+        virtual QVariant headerData ( int column )const;
+        // ---------------------------------------------------------------------------------
+        virtual UuidList selected() const;
+        // ---------------------------------------------------------------------------------
+        virtual void setSelected(UuidList const&);
+        // ---------------------------------------------------------------------------------      
       private:
+        // ---------------------------------------------------------------------------------        
+        SelectProjectsTableModelAdaptorPrivate *d_ptr;
         // ---------------------------------------------------------------------------------
-        void init_model();
-      // ---------------------------------------------------------------------------------
-      private:
-        // ---------------------------------------------------------------------------------
-        Ui::SelectProjectsDialog *_M_ui;
-        // ---------------------------------------------------------------------------------
-        SelectEntityTableModel *_M_model;
+        Q_DISABLE_COPY(SelectProjectsTableModelAdaptor);
+        Q_DECLARE_PRIVATE(SelectProjectsTableModelAdaptor);
         // ---------------------------------------------------------------------------------
     };
     // ---------------------------------------------------------------------------------
   }
-  // ---------------------------------------------------------------------------------
+
 }
-// ---------------------------------------------------------------------------------
-#endif // DP_CORE_SELECTPROJECTSDIALOG_H
+
+#endif // DP_CORE_SELECTPROJECTSTABLEMODELADAPTOR_H
