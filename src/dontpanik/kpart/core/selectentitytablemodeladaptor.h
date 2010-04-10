@@ -45,10 +45,13 @@ namespace dp
         // ---------------------------------------------------------------------------------
       public:
         // ---------------------------------------------------------------------------------
-        virtual QVariant data ( const QModelIndex& index ) const=0;
+        virtual QVariant data ( const QModelIndex& index, int role = Qt::DisplayRole ) const=0;
         virtual int columnCount ( ) const=0;
         virtual int rowCount ( ) const=0;
         virtual QVariant headerData ( int column )const=0;
+        virtual bool isCheckable(QModelIndex const& index) const = 0;
+        // ---------------------------------------------------------------------------------
+        virtual void setCheckState(QModelIndex const& index, int state) = 0;
         // ---------------------------------------------------------------------------------
         virtual UuidList selected() const = 0;
         // ---------------------------------------------------------------------------------

@@ -36,8 +36,17 @@ namespace dp
     // ---------------------------------------------------------------------------------
     QVariant SelectEntityTableModel::data ( const QModelIndex& index, int role ) const
     {
-      if(role != Qt::DisplayRole) return QVariant();
-      return _M_data->data(index);
+      if(role != Qt::DisplayRole 
+        && role != Qt::CheckStateRole
+        && role != Qt::EditRole) return QVariant();
+      return _M_data->data(index, role);
+    }
+    // ---------------------------------------------------------------------------------
+    bool SelectEntityTableModel::setData ( const QModelIndex& index, QVariant const& data, int role)
+    {
+      if(role != Qt::CheckStateRole) return false;
+      _M_data->setCheckState(index, data.toInt());
+      return true;
     }
     // ---------------------------------------------------------------------------------
     int SelectEntityTableModel::columnCount ( const QModelIndex& parent ) const
@@ -55,6 +64,16 @@ namespace dp
       if(orientation != Qt::Horizontal) return QVariant();
       if(role != Qt::DisplayRole) return QVariant();
       return _M_data->headerData(section);
+    }
+    // ---------------------------------------------------------------------------------
+    Qt::ItemFlags SelectEntityTableModel::flags(QModelIndex const& index) const
+    {
+      Qt::ItemFlags f = QAbstractTableModel::flags(index);
+      if(_M_data->isCheckable(index))
+      {
+        f |= Qt::ItemIsUserCheckable;
+      }
+      return f;
     }
     // ---------------------------------------------------------------------------------
   }

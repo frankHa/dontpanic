@@ -31,25 +31,29 @@ namespace dp
     class Entry
     {
       public:
-        Entry ( Project const& p ) : selected ( false ), project ( p ) {}
+        Entry ( Project const& p ) : check_state ( Qt::Unchecked ), project ( p ) {}
 
-        bool selected;
+        int check_state;
         Project project;
     };
     // ---------------------------------------------------------------------------------
     class SelectProjectsTableModelAdaptorPrivate
     {
-        typedef QList<Entry> EntryList;
+        typedef QList<Entry*> EntryList;
       public:
         // ---------------------------------------------------------------------------------
         SelectProjectsTableModelAdaptorPrivate();
+        ~SelectProjectsTableModelAdaptorPrivate(){qDeleteAll(_M_entries);}
         // ---------------------------------------------------------------------------------
       public:
         // ---------------------------------------------------------------------------------
-        QVariant data ( const QModelIndex& index ) const;
+        QVariant data ( const QModelIndex& index, int role ) const;
         int columnCount ( ) const;
         int rowCount ( ) const;
         QVariant headerData ( int column ) const;
+        bool isCheckable(QModelIndex const& index) const;
+        // ---------------------------------------------------------------------------------
+        void setCheckState(QModelIndex const& index, int state);
         // ---------------------------------------------------------------------------------
         UuidList selected() const;
         // ---------------------------------------------------------------------------------
@@ -77,16 +81,25 @@ namespace dp
       init_projects_list();
     }
     // ---------------------------------------------------------------------------------
-    QVariant SelectProjectsTableModelAdaptorPrivate::data ( const QModelIndex& index ) const
+    QVariant SelectProjectsTableModelAdaptorPrivate::data ( const QModelIndex& index, int role ) const
     {
       if ( index.row() >= rowCount() ) return QVariant();
-      Entry const& e ( _M_entries.at ( index.row() ) );
-      switch ( index.column() )
+      Entry const* e ( _M_entries.at ( index.row() ) );
+      if(index.column() == 0&& role == Qt::CheckStateRole)
       {
-        case 0: return e.selected;
-        case 1: return e.project.name();
-        default: return QVariant();
+        return e->check_state;
       }
+      if(index.column() == 0&& role == Qt::EditRole)
+      {
+        return e->check_state;
+        //if(e.check_state == Qt::Checked) return true;
+        //return false;        
+      }
+      if(index.column()==1 && role==Qt::DisplayRole)
+      {
+        return e->project.name();
+      }
+      return QVariant();
 
     }
     // ---------------------------------------------------------------------------------
@@ -104,6 +117,17 @@ namespace dp
     {
       if ( column < 0 || column >= _M_headers.size() ) return QVariant();
       return _M_headers.at ( column );
+    }
+    // ---------------------------------------------------------------------------------    
+    bool SelectProjectsTableModelAdaptorPrivate::isCheckable(QModelIndex const& index) const
+    {
+      return index.column() == 0;
+    }
+    // ---------------------------------------------------------------------------------
+    void SelectProjectsTableModelAdaptorPrivate::setCheckState(QModelIndex const& index, int check_state) 
+    {
+      Entry *e = _M_entries.at(index.row());
+      e->check_state = check_state;
     }
     // ---------------------------------------------------------------------------------
     UuidList SelectProjectsTableModelAdaptorPrivate::selected() const
@@ -127,7 +151,7 @@ namespace dp
       {
         if ( project.isVisible() )
         {
-          _M_entries << Entry ( project );
+          _M_entries <<  new Entry ( project );
         }
       }
     }
@@ -144,10 +168,10 @@ namespace dp
       delete d_ptr;
     }
     // ---------------------------------------------------------------------------------
-    QVariant SelectProjectsTableModelAdaptor::data ( const QModelIndex& index ) const
+    QVariant SelectProjectsTableModelAdaptor::data ( const QModelIndex& index, int role ) const
     {
       const Q_D ( SelectProjectsTableModelAdaptor );
-      return d->data ( index );
+      return d->data ( index, role );
     }
     // ---------------------------------------------------------------------------------
     int SelectProjectsTableModelAdaptor::columnCount ( ) const
@@ -166,6 +190,18 @@ namespace dp
     {
       const Q_D ( SelectProjectsTableModelAdaptor );
       return d->headerData ( column );
+    }
+    // ---------------------------------------------------------------------------------
+    bool SelectProjectsTableModelAdaptor::isCheckable(QModelIndex const& index) const
+    {
+      const Q_D ( SelectProjectsTableModelAdaptor );
+      return d->isCheckable ( index );
+    }
+    // ---------------------------------------------------------------------------------
+    void SelectProjectsTableModelAdaptor::setCheckState(QModelIndex const& index, int state)
+    {
+      Q_D ( SelectProjectsTableModelAdaptor );
+      return d->setCheckState ( index, state);
     }
     // ---------------------------------------------------------------------------------
     UuidList SelectProjectsTableModelAdaptor::selected() const
