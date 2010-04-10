@@ -166,7 +166,7 @@
        </widget>
       </item>
       <item row="0" column="2">
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="select_tasks">
         <property name="text">
          <string>Select</string>
         </property>
@@ -190,7 +190,7 @@
        </widget>
       </item>
       <item row="1" column="2">
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="select_projects">
         <property name="text">
          <string>Select</string>
         </property>

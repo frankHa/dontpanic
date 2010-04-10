@@ -41,6 +41,7 @@ set(dontpanikpart_LIB_SRCS
     ktaskstablemodel.cpp    
     dont_panik_part_core.cpp
     plannedworkingtimesdialog.cpp
+    selectprojectsdialog.cpp
     statusnotifieritem.cpp
    )
 
@@ -57,6 +58,7 @@ set(dontpanikpart_LIB_UIS
     ui/kreportwidget.ui
     ui/ktasksdialog.ui    
     ui/plannedworkingtimesdialog.ui
+    ui/selectprojectsdialog.ui
    )
 
 qt4_wrap_ui(dontpanikpart_LIB_SRCS ${dontpanikpart_LIB_UIS})

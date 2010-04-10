@@ -21,6 +21,7 @@
 #include "ui_editreporttypedialog.h"
 #include "context.h"
 #include <libdontpanic/reportdatafiltertype.h>
+#include "selectprojectsdialog.h"
 namespace dp
 {
   // ---------------------------------------------------------------------------------
@@ -34,8 +35,8 @@ namespace dp
     {
         _M_ui->setupUi(this);
         _M_ui->icon->setIconType(KIconLoader::NoGroup, KIconLoader::Emote);
-        init_combo_boxes();
         setup_actions();
+        init_combo_boxes();        
     }
     // ---------------------------------------------------------------------------------
     EditReportTypeDialog::~EditReportTypeDialog()
@@ -51,6 +52,8 @@ namespace dp
       _M_ui->icon->setIcon(at.icon());
       _M_ui->group_tasks->setChecked(at.groupByTask());
       _M_ui->group_projects->setChecked(at.groupByProject());
+      _M_ui->task_filter_type->setCurrentIndex(at.taskFilter().filterType());
+      _M_ui->project_filter_type->setCurrentIndex(at.projectFilter().filterType());
       _M_ui->export_data_file->setText(at.exportDataFileTemplate());
     }
     // ---------------------------------------------------------------------------------
@@ -58,12 +61,18 @@ namespace dp
     {
       connect(_M_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accepted()));
       connect(_M_ui->buttonBox, SIGNAL(rejected()), this, SLOT(rejected()));
+      connect(_M_ui->select_tasks, SIGNAL(clicked()), this, SLOT(select_tasks()));
+      connect(_M_ui->select_projects, SIGNAL(clicked()), this, SLOT(select_projects()));
+      connect(_M_ui->task_filter_type, SIGNAL(currentIndexChanged(int)), this, SLOT(update_select_tasks_enabled_state(int)));
+      connect(_M_ui->project_filter_type, SIGNAL(currentIndexChanged(int)), this, SLOT(update_select_projects_enabled_state(int)));
     }
     // ---------------------------------------------------------------------------------
     void EditReportTypeDialog::init_combo_boxes()
     {
       _M_ui->task_filter_type->addItems(ReportDataFilterType::pretty_names());
+      _M_ui->task_filter_type->setCurrentIndex(ReportDataFilterType::NO_FILTER);
       _M_ui->project_filter_type->addItems(ReportDataFilterType::pretty_names());
+      _M_ui->project_filter_type->setCurrentIndex(ReportDataFilterType::NO_FILTER);
     }
     // ---------------------------------------------------------------------------------
     void EditReportTypeDialog::accepted()
@@ -81,6 +90,8 @@ namespace dp
         t.setIcon(_M_ui->icon->icon());
         t.setGroupByProject(_M_ui->group_projects->isChecked());
         t.setGroupByTask(_M_ui->group_tasks->isChecked());
+        t.taskFilter().setFilterType(_M_ui->task_filter_type->currentIndex());
+        t.projectFilter().setFilterType(_M_ui->project_filter_type->currentIndex());
         t.setExportDataFileTemplate(_M_ui->export_data_file->text());
         context()->reportManager()->store(t);
       }
@@ -90,6 +101,28 @@ namespace dp
     {
       close();
     }
+    // ---------------------------------------------------------------------------------
+    void EditReportTypeDialog::select_projects()
+    {
+      SelectProjectsDialog dlg;
+      dlg.exec();
+    }
+    // ---------------------------------------------------------------------------------
+    void EditReportTypeDialog::select_tasks()
+    {
+
+    }
+    // ---------------------------------------------------------------------------------
+    void EditReportTypeDialog::update_select_tasks_enabled_state(int selected_filter_type)
+    {
+      _M_ui->select_tasks->setEnabled(selected_filter_type != ReportDataFilterType::NO_FILTER);
+    }
+    // ---------------------------------------------------------------------------------
+    void EditReportTypeDialog::update_select_projects_enabled_state(int selected_filter_type)
+    {
+      _M_ui->select_projects->setEnabled(selected_filter_type != ReportDataFilterType::NO_FILTER);
+    }
+    // ---------------------------------------------------------------------------------
   }
   // ---------------------------------------------------------------------------------
 }
