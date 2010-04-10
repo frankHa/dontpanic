@@ -15,7 +15,8 @@ set(libdontpanic_SRCS
     leavetype.cpp
     project.cpp
     reportdata.cpp
-    reportdatafilter.cpp
+    reportdatafilter.cpp    
+    reportdatafiltertype.cpp
     reporttype.cpp
     report.cpp 
     task.cpp

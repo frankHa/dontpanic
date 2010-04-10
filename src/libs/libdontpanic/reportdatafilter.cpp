@@ -18,13 +18,14 @@
 */
 
 #include <libdontpanic/reportdatafilter.h>
+#include <libdontpanic/reportdatafiltertype.h>
 #include <libdontpanic/reporttype.h>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
   // ---------------------------------------------------------------------------------
   ReportDataFilter::ReportDataFilter()
-  : _M_type(ReportType::NO_FILTER){}
+  : _M_type(ReportDataFilterType::NO_FILTER){}
   // ---------------------------------------------------------------------------------
   int ReportDataFilter::filterType() const
   {

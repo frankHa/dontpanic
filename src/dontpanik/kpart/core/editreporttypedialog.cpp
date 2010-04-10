@@ -20,6 +20,7 @@
 #include "editreporttypedialog.h"
 #include "ui_editreporttypedialog.h"
 #include "context.h"
+#include <libdontpanic/reportdatafiltertype.h>
 namespace dp
 {
   // ---------------------------------------------------------------------------------
@@ -33,6 +34,7 @@ namespace dp
     {
         _M_ui->setupUi(this);
         _M_ui->icon->setIconType(KIconLoader::NoGroup, KIconLoader::Emote);
+        init_combo_boxes();
         setup_actions();
     }
     // ---------------------------------------------------------------------------------
@@ -56,6 +58,12 @@ namespace dp
     {
       connect(_M_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accepted()));
       connect(_M_ui->buttonBox, SIGNAL(rejected()), this, SLOT(rejected()));
+    }
+    // ---------------------------------------------------------------------------------
+    void EditReportTypeDialog::init_combo_boxes()
+    {
+      _M_ui->task_filter_type->addItems(ReportDataFilterType::pretty_names());
+      _M_ui->project_filter_type->addItems(ReportDataFilterType::pretty_names());
     }
     // ---------------------------------------------------------------------------------
     void EditReportTypeDialog::accepted()

@@ -1,10 +1,10 @@
-#ifndef CF_ENUM_H
-#define CF_ENUM_H
+#ifndef DP_ENUM_H
+#define DP_ENUM_H
 
 #include <QString>
 #include <QStringList>
 // ---------------------------------------------------------------------------------
-namespace cf
+namespace dp
 {
   // ---------------------------------------------------------------------------------
   /**
@@ -137,4 +137,4 @@ bool operator == ( typename EnumType::value l, EnumType const& r )
   return r.ordinal_number() == l;
 }
 // ---------------------------------------------------------------------------------
-#endif //CF_ENUM_H
+#endif //DP_ENUM_H
