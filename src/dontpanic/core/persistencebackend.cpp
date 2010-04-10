@@ -24,6 +24,7 @@ namespace dp
     {
       return init(new _persistence::Sqlite(this));
     }
+    return false;
   }
   // ---------------------------------------------------------------------------------
   bool PersistenceBackend::init(PersistenceEngine *engine)

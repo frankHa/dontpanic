@@ -18,10 +18,12 @@ namespace dp
         Report asDontPanicReport();
       private:
         ReportData evaluate ( ActionList const& actions );
+        int duration() const;
       private:
         TimeRange _M_range;
         ReportType _M_type;
         Columns _M_columns;
+        int _M_duration;
     };
     // ---------------------------------------------------------------------------------
     // ReportGeneratorPrivate imp:
@@ -29,6 +31,11 @@ namespace dp
     void ReportGeneratorPrivate::setRange ( TimeRange const& r )
     {
       _M_range = r;
+    }
+    // ---------------------------------------------------------------------------------
+    int ReportGeneratorPrivate::duration() const
+    {
+      return _M_duration;
     }
     // ---------------------------------------------------------------------------------
     Report ReportGeneratorPrivate::asDontPanicReport()
@@ -40,7 +47,8 @@ namespace dp
       {
         return report.setValid ( false );
       }
-      return report.setReportData ( evaluate ( actions ) ).setDuration ( actions.duration() ).setPlannedWorkingTime ( planned_working_time_for ( _M_range ) );
+      report.setReportData ( evaluate ( actions ) );
+      return report.setDuration ( duration() ).setPlannedWorkingTime ( planned_working_time_for ( _M_range ) );
     }
     // ---------------------------------------------------------------------------------
     void ReportGeneratorPrivate::setType ( const dp::ReportType& type )
@@ -53,6 +61,7 @@ namespace dp
       group_list gl ( _M_type );
       gl.sort ( actions );
       ReportData result = _M_columns.dump(gl);
+      _M_duration = gl.duration();
       return result;
     }
     // ---------------------------------------------------------------------------------

@@ -17,6 +17,8 @@ namespace dp
       class category;
     }
     // ---------------------------------------------------------------------------------
+    class filter;
+    // ---------------------------------------------------------------------------------
     class group
     {
       public:
@@ -49,9 +51,11 @@ namespace dp
         bool added_to_existing_group ( Action const& a );
         void add_to_newly_created_group ( Action const& a );
         grouping::category * category_for ( Action const& a );
+        void init_filter();
       private:
         ReportType const& _M_type;
         GroupList _M_groups;
+        filter *_M_filter;
     };
 
     // ---------------------------------------------------------------------------------

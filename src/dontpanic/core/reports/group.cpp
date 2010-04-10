@@ -1,5 +1,6 @@
 #include "group.h"
 #include "category.h"
+#include "filter.h"
 #include <libdontpanic/durationformatter.h>
 // ---------------------------------------------------------------------------------
 namespace dp
@@ -11,7 +12,7 @@ namespace dp
     // group impl:
     // ---------------------------------------------------------------------------------
     group::group ( grouping::category const* cat )
-    : _M_category ( cat ) {}
+        : _M_category ( cat ) {}
     // ---------------------------------------------------------------------------------
     group::~group() {delete _M_category;}
     // ---------------------------------------------------------------------------------
@@ -40,11 +41,13 @@ namespace dp
     // group_list
     // ---------------------------------------------------------------------------------
     group_list::group_list ( const dp::ReportType& type )
-    : _M_type ( type ) {}
+        : _M_type ( type )
+        , _M_filter ( 0 ) {}
     // ---------------------------------------------------------------------------------
     group_list::~group_list()
     {
       qDeleteAll ( _M_groups );
+      delete _M_filter;
     }
     // ---------------------------------------------------------------------------------
     bool group_list::added_to_existing_group ( Action const& a )
@@ -95,11 +98,15 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void group_list::sort ( ActionList const& actions )
     {
+      init_filter();
       foreach ( Action const& action, actions )
       {
-        if ( !added_to_existing_group ( action ) )
+        if ( _M_filter->matches ( action ) )
         {
-          add_to_newly_created_group ( action );
+          if ( !added_to_existing_group ( action ) )
+          {
+            add_to_newly_created_group ( action );
+          }
         }
       }
     }
@@ -123,35 +130,11 @@ namespace dp
       return _M_groups;
     }
     // ---------------------------------------------------------------------------------
-//     QString group_list::dump ( group const* g, int dur )
-//     {
-//       double percentage = 0.0;
-//       DurationFormatter formatter;
-//       if ( dur != 0 ) {percentage = 100.0 * ( double ) g->duration() / ( double ) dur;}
-//       //Project const& p = g->project();
-//       QString s = QString ( "%1;%2" )
-//       //.arg ( g->task().name() )
-//       //.arg ( p.name() )
-//       .arg ( formatter.format ( g->duration() ) )
-//       .arg ( percentage, 0, 'f', 2 )
-//       //.arg ( p.comment() )
-//       ;
-//       return s;
-//       
-//     }
-    // ---------------------------------------------------------------------------------
-//     QString group_list::toString()
-//     {
-//       //QString result= "Typ;Projekt;Dauer (Tätigkeitsgruppe);Prozent (Tätigkeitsgruppe);Projektkommentar\n";
-//       QString result = i18n ( "Work Type;Project;Duration (Activity Group);Percent (Activity Group);Project Comment\n" );
-//       int complete_duration = duration();
-//       foreach ( group *g, _M_groups )
-//       {
-//         result += dump ( g, complete_duration ) + "\n";
-//       }
-//       return result;
-//     }
-    
+    void group_list::init_filter()
+    {
+      delete _M_filter;
+      _M_filter = filter_for(report_type());
+    }
     // ---------------------------------------------------------------------------------
   }//reports
   // ---------------------------------------------------------------------------------
