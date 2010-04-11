@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-04-11 14:48+0200\n"
-"PO-Revision-Date: 2010-04-11 14:52+0200\n"
+"PO-Revision-Date: 2010-04-11 14:55+0200\n"
 "Last-Translator: Frank Habel <frank@bugplasma.de>\n"
 "Language-Team: Deutsch <>\n"
 "MIME-Version: 1.0\n"
@@ -872,7 +872,7 @@ msgstr "Alle auswählen"
 #. i18n: ectx: property (text), widget (QPushButton, deselect_all)
 #: rc.cpp:255
 msgid "Deselect All"
-msgstr "Keine auswählen"
+msgstr "Auswahl aufheben"
 
 #. i18n: file: dontpanik/kpart/dontpanik_part.rc:4
 #. i18n: ectx: Menu (edit)
