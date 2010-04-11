@@ -89,17 +89,26 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void SelectEntityTableModel::select(UuidList const& ids)
     {
-      _M_data->setChecked(ids);;
+      QModelIndex const&begin= index(0, 0);
+      QModelIndex const&end= index(rowCount()-1, 0);
+      _M_data->setChecked(ids);
+      emit dataChanged(begin, end);
     }
     // ---------------------------------------------------------------------------------
     void SelectEntityTableModel::selectAll()
     {
+      QModelIndex const&begin= index(0, 0);
+      QModelIndex const&end= index(rowCount()-1, 0);
       _M_data->checkAll();
+      emit dataChanged(begin, end);
     }
     // ---------------------------------------------------------------------------------
     void SelectEntityTableModel::unselectAll()
     {
+      QModelIndex const&begin= index(0, 0);
+      QModelIndex const&end= index(rowCount()-1, 0);
       _M_data->unCheckAll();
+      emit dataChanged(begin, end);
     }
     // ---------------------------------------------------------------------------------
   }

@@ -34,7 +34,7 @@ namespace dp
     , _M_model(model)
     {
       _M_ui->setupUi(this);
-      _M_model->init(this);
+      _M_model->init(this);      
       init();
     }
     // ---------------------------------------------------------------------------------
@@ -60,6 +60,26 @@ namespace dp
       _M_ui->entities_table->setModel(_M_model->tableModel());
       _M_ui->entities_table->resizeColumnsToContents();
       this->setWindowTitle(_M_model->windowTitle());
+      connect(_M_ui->select_all, SIGNAL(stateChanged(int)), this, SLOT(on_select_all_changed(int)));
+      connect(_M_ui->unselect_all, SIGNAL(stateChanged(int)), this, SLOT(on_unselect_all_changed(int)));
+    }
+    // ---------------------------------------------------------------------------------
+    void SelectEntityDialog::on_select_all_changed(int new_state)
+    {
+      if(new_state == Qt::Checked)
+      {
+        _M_ui->unselect_all->setCheckState(Qt::Unchecked);
+        _M_model->selectAll();
+      }
+    }
+    // ---------------------------------------------------------------------------------
+    void SelectEntityDialog::on_unselect_all_changed(int new_state)
+    {
+      if(new_state == Qt::Checked)
+      {
+        _M_ui->select_all->setCheckState(Qt::Unchecked);
+        _M_model->unselectAll();
+      }
     }
     // ---------------------------------------------------------------------------------
   }
