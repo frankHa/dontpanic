@@ -64,6 +64,21 @@ namespace dp
       return i18n ( "Select Projects - Don't Panik" );
     }
     // ---------------------------------------------------------------------------------
+    // SelectProjectsDialogModel:
+    // ---------------------------------------------------------------------------------
+    SelectTasksDialogModel::SelectTasksDialogModel ()
+    : SelectEntityDialogModel ( ) {}
+    // ---------------------------------------------------------------------------------
+    QAbstractTableModel *SelectTasksDialogModel::init_source_model()
+    {
+      return new SelectEntityTableModel ( new SelectTasksTableModelAdaptor(), this );
+    }
+    // ---------------------------------------------------------------------------------
+    QString SelectTasksDialogModel::windowTitle() const
+    {
+      return i18n ( "Select Tasks - Don't Panik" );
+    }
+    // ---------------------------------------------------------------------------------
   }
   // ---------------------------------------------------------------------------------
 }

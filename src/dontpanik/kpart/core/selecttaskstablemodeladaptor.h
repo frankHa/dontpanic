@@ -17,21 +17,9 @@
 
 */
 
-#include "selectprojectsdialog.h"
-#include "selectprojectsdialog.moc"
-#include "selectentitydialogmodel.h"
+#ifndef DP_CORE_SELECTTASKSTABLEMODELADAPTOR_H
+#define DP_CORE_SELECTTASKSTABLEMODELADAPTOR_H
 // ---------------------------------------------------------------------------------
-namespace dp
-{
-  // ---------------------------------------------------------------------------------
-  namespace core
-  {
-    // ---------------------------------------------------------------------------------
-    SelectProjectsDialog::SelectProjectsDialog ( QWidget* parent, Qt::WindowFlags f ) 
-    : SelectEntityDialog ( new SelectProjectsDialogModel(), parent, f ){}
-    // ---------------------------------------------------------------------------------
-  }
-  // ---------------------------------------------------------------------------------
-}
+#include "selectentitytablemodeladaptor.h"
 // ---------------------------------------------------------------------------------
-
+#endif // DP_CORE_SELECTTASKSTABLEMODELADAPTOR_H

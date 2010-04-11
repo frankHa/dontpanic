@@ -17,8 +17,8 @@
 
 */
 
-#include "selectprojectsdialog.h"
-#include "selectprojectsdialog.moc"
+#include "selecttasksdialog.h"
+#include "selecttasksdialog.moc"
 #include "selectentitydialogmodel.h"
 // ---------------------------------------------------------------------------------
 namespace dp
@@ -27,8 +27,8 @@ namespace dp
   namespace core
   {
     // ---------------------------------------------------------------------------------
-    SelectProjectsDialog::SelectProjectsDialog ( QWidget* parent, Qt::WindowFlags f ) 
-    : SelectEntityDialog ( new SelectProjectsDialogModel(), parent, f ){}
+    SelectTasksDialog::SelectTasksDialog ( QWidget* parent, Qt::WindowFlags f ) 
+    : SelectEntityDialog ( new SelectTasksDialogModel(), parent, f ){}
     // ---------------------------------------------------------------------------------
   }
   // ---------------------------------------------------------------------------------

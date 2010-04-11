@@ -17,9 +17,13 @@
 
 */
 
-#include "selectprojectsdialog.h"
-#include "selectprojectsdialog.moc"
-#include "selectentitydialogmodel.h"
+#ifndef DP_CORE_SELECTTASKSDIALOG_H
+#define DP_CORE_SELECTTASKSDIALOG_H
+// ---------------------------------------------------------------------------------
+#include <libdontpanic/defines.hpp>
+#include "selectentitydialog.h"
+// ---------------------------------------------------------------------------------
+#include <QDialog>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -27,11 +31,20 @@ namespace dp
   namespace core
   {
     // ---------------------------------------------------------------------------------
-    SelectProjectsDialog::SelectProjectsDialog ( QWidget* parent, Qt::WindowFlags f ) 
-    : SelectEntityDialog ( new SelectProjectsDialogModel(), parent, f ){}
+    class SelectTasksDialog 
+    : public SelectEntityDialog
+    {
+      // ---------------------------------------------------------------------------------
+      Q_OBJECT
+      // ---------------------------------------------------------------------------------
+      public:
+        // ---------------------------------------------------------------------------------
+        SelectTasksDialog ( QWidget* parent = 0, Qt::WindowFlags f = 0 );
+        // ---------------------------------------------------------------------------------
+    };
     // ---------------------------------------------------------------------------------
   }
   // ---------------------------------------------------------------------------------
 }
 // ---------------------------------------------------------------------------------
-
+#endif // DP_CORE_SELECTTASKSDIALOG_H

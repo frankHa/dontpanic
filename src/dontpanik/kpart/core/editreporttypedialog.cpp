@@ -22,6 +22,7 @@
 #include "context.h"
 #include <libdontpanic/reportdatafiltertype.h>
 #include "selectprojectsdialog.h"
+#include "selecttasksdialog.h"
 namespace dp
 {
   // ---------------------------------------------------------------------------------
@@ -110,7 +111,8 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void EditReportTypeDialog::select_tasks()
     {
-
+      SelectTasksDialog dlg;
+      dlg.exec();
     }
     // ---------------------------------------------------------------------------------
     void EditReportTypeDialog::update_select_tasks_enabled_state(int selected_filter_type)

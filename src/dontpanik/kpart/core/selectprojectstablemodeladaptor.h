@@ -20,56 +20,6 @@
 #ifndef DP_CORE_SELECTPROJECTSTABLEMODELADAPTOR_H
 #define DP_CORE_SELECTPROJECTSTABLEMODELADAPTOR_H
 // ---------------------------------------------------------------------------------
-#include <libdontpanic/defines.hpp>
 #include "selectentitytablemodeladaptor.h"
-#include <libdontpanic/project.hpp>
 // ---------------------------------------------------------------------------------
-namespace dp
-{
-  // ---------------------------------------------------------------------------------
-  namespace core
-  {
-    // ---------------------------------------------------------------------------------
-    class SelectProjectsTableModelAdaptorPrivate;
-    class SelectProjectsTableModelAdaptor
-    : public SelectEntityTableModelAdaptor
-    {
-      class entry;
-      typedef QList<entry> entry_list;
-        // ---------------------------------------------------------------------------------
-        Q_OBJECT
-        // ---------------------------------------------------------------------------------
-      public:
-        // ---------------------------------------------------------------------------------
-        SelectProjectsTableModelAdaptor ( QObject* parent = 0 );
-        // ---------------------------------------------------------------------------------
-        ~SelectProjectsTableModelAdaptor ( );
-        // ---------------------------------------------------------------------------------
-      public:
-        // ---------------------------------------------------------------------------------
-        virtual QVariant data ( const QModelIndex& index, int role=Qt::DisplayRole ) const;
-        virtual int columnCount ( ) const;
-        virtual int rowCount ( ) const;
-        virtual QVariant headerData ( int column )const;
-        bool isCheckable(QModelIndex const& index) const;
-        // ---------------------------------------------------------------------------------
-        void setCheckState(QModelIndex const& index, int state);
-        // ---------------------------------------------------------------------------------
-        virtual UuidList selected() const;
-        // ---------------------------------------------------------------------------------
-        virtual void setSelected(UuidList const&);
-        // ---------------------------------------------------------------------------------      
-      private:
-        // ---------------------------------------------------------------------------------        
-        SelectProjectsTableModelAdaptorPrivate *d_ptr;
-        // ---------------------------------------------------------------------------------
-        Q_DISABLE_COPY(SelectProjectsTableModelAdaptor);
-        Q_DECLARE_PRIVATE(SelectProjectsTableModelAdaptor);
-        // ---------------------------------------------------------------------------------
-    };
-    // ---------------------------------------------------------------------------------
-  }
-
-}
-
 #endif // DP_CORE_SELECTPROJECTSTABLEMODELADAPTOR_H
