@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-05 22:53+0200\n"
+"POT-Creation-Date: 2010-04-11 14:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -131,6 +131,8 @@ msgstr ""
 #: dontpanik/kpart/core/kprojectstablemodel.cpp:90
 #: dontpanik/kpart/core/kreporttypeslistmodel.cpp:84
 #: dontpanik/kpart/core/ktaskstablemodel.cpp:91
+#: dontpanik/kpart/core/selectentitytablemodeladaptor.cpp:131
+#: dontpanik/kpart/core/selectentitytablemodeladaptor.cpp:169
 msgid "Name"
 msgstr ""
 
@@ -265,48 +267,58 @@ msgstr ""
 msgid "Remove Task Description"
 msgstr ""
 
+#. i18n: file: dontpanik/kpart/core/ui/selectentitiesdialog.ui:14
+#. i18n: ectx: property (windowTitle), widget (QDialog, SelectEntitiesDialog)
+#: dontpanik/kpart/core/selectentitydialogmodel.cpp:85 rc.cpp:249
+msgid "Select Projects - Don't Panik"
+msgstr ""
+
+#: dontpanik/kpart/core/selectentitydialogmodel.cpp:100
+msgid "Select Tasks - Don't Panik"
+msgstr ""
+
 #: dontpanik/kpart/core/statusnotifieritem.cpp:90
 #: plasma/plasmoid/dialog.cpp:116
 msgid "switch activity to..."
 msgstr ""
 
-#: dontpanik/kpart/dontpanik_part.cpp:72
+#: dontpanik/kpart/dontpanik_part.cpp:67
 msgid "DontPanikPart"
 msgstr ""
 
-#: dontpanik/kpart/dontpanik_part.cpp:130
+#: dontpanik/kpart/dontpanik_part.cpp:149
 msgid "Edit Projects"
 msgstr ""
 
-#: dontpanik/kpart/dontpanik_part.cpp:136
+#: dontpanik/kpart/dontpanik_part.cpp:155
 msgid "Edit Tasks/Worktypes"
 msgstr ""
 
-#: dontpanik/kpart/dontpanik_part.cpp:142
+#: dontpanik/kpart/dontpanik_part.cpp:161
 msgid "Edit Planned Working Times"
 msgstr ""
 
-#: dontpanik/kpart/dontpanik_part.cpp:148
+#: dontpanik/kpart/dontpanik_part.cpp:167
 msgid "Add &new Action"
 msgstr ""
 
-#: dontpanik/kpart/dontpanik_part.cpp:155
+#: dontpanik/kpart/dontpanik_part.cpp:174
 msgid "Start Action"
 msgstr ""
 
-#: dontpanik/kpart/dontpanik_part.cpp:162
+#: dontpanik/kpart/dontpanik_part.cpp:181
 msgid "Stop current Action"
 msgstr ""
 
-#: dontpanik/kpart/dontpanik_part.cpp:169
+#: dontpanik/kpart/dontpanik_part.cpp:188
 msgid "Resume Action"
 msgstr ""
 
-#: dontpanik/kpart/dontpanik_part.cpp:176
+#: dontpanik/kpart/dontpanik_part.cpp:195
 msgid "Day View"
 msgstr ""
 
-#: dontpanik/kpart/dontpanik_part.cpp:183
+#: dontpanik/kpart/dontpanik_part.cpp:202
 msgid "Reports View"
 msgstr ""
 
@@ -325,6 +337,18 @@ msgstr ""
 
 #: dontpanik/shell/main.cpp:16
 msgid "(C) 2009-2010 The Don't Panik Authors"
+msgstr ""
+
+#: libs/libdontpanic/reportdatafiltertype.cpp:32
+msgid "No Filter"
+msgstr ""
+
+#: libs/libdontpanic/reportdatafiltertype.cpp:32
+msgid "Selected Only"
+msgstr ""
+
+#: libs/libdontpanic/reportdatafiltertype.cpp:32
+msgid "Unselected Only"
 msgstr ""
 
 #: plasma/plasmoid/actionitem.cpp:181
@@ -456,9 +480,9 @@ msgid "Filter Tasks:"
 msgstr ""
 
 #. i18n: file: dontpanik/kpart/core/ui/editreporttypedialog.ui:171
-#. i18n: ectx: property (text), widget (QPushButton, pushButton)
+#. i18n: ectx: property (text), widget (QPushButton, select_tasks)
 #. i18n: file: dontpanik/kpart/core/ui/editreporttypedialog.ui:195
-#. i18n: ectx: property (text), widget (QPushButton, pushButton_2)
+#. i18n: ectx: property (text), widget (QPushButton, select_projects)
 #. i18n: file: dontpanik/kpart/core/ui/editreporttypedialog.ui:221
 #. i18n: ectx: property (text), widget (QPushButton, pushButton_3)
 #: rc.cpp:33 rc.cpp:39 rc.cpp:48
@@ -715,35 +739,35 @@ msgstr ""
 msgid "Report"
 msgstr ""
 
-#. i18n: file: dontpanik/kpart/core/ui/kreportwidget.ui:71
+#. i18n: file: dontpanik/kpart/core/ui/kreportwidget.ui:74
 #. i18n: ectx: property (title), widget (QGroupBox, summary)
 #: rc.cpp:186
 msgid "Report Summary"
 msgstr ""
 
-#. i18n: file: dontpanik/kpart/core/ui/kreportwidget.ui:81
+#. i18n: file: dontpanik/kpart/core/ui/kreportwidget.ui:84
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: rc.cpp:189
 msgid "Overall hours:"
 msgstr ""
 
-#. i18n: file: dontpanik/kpart/core/ui/kreportwidget.ui:100
+#. i18n: file: dontpanik/kpart/core/ui/kreportwidget.ui:103
 #. i18n: ectx: property (text), widget (QLabel, duration)
-#. i18n: file: dontpanik/kpart/core/ui/kreportwidget.ui:132
+#. i18n: file: dontpanik/kpart/core/ui/kreportwidget.ui:135
 #. i18n: ectx: property (text), widget (QLabel, planned_time)
-#. i18n: file: dontpanik/kpart/core/ui/kreportwidget.ui:164
+#. i18n: file: dontpanik/kpart/core/ui/kreportwidget.ui:167
 #. i18n: ectx: property (text), widget (QLabel, overtime)
 #: rc.cpp:192 rc.cpp:198 rc.cpp:204
 msgid "TextLabel"
 msgstr ""
 
-#. i18n: file: dontpanik/kpart/core/ui/kreportwidget.ui:113
+#. i18n: file: dontpanik/kpart/core/ui/kreportwidget.ui:116
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: rc.cpp:195
 msgid "Overall Planned Work Time:"
 msgstr ""
 
-#. i18n: file: dontpanik/kpart/core/ui/kreportwidget.ui:145
+#. i18n: file: dontpanik/kpart/core/ui/kreportwidget.ui:148
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: rc.cpp:201
 msgid "Overtime:"
@@ -821,11 +845,23 @@ msgstr ""
 msgid "Use holiday region:"
 msgstr ""
 
+#. i18n: file: dontpanik/kpart/core/ui/selectentitiesdialog.ui:50
+#. i18n: ectx: property (text), widget (QPushButton, select_all)
+#: rc.cpp:252
+msgid "Select All"
+msgstr ""
+
+#. i18n: file: dontpanik/kpart/core/ui/selectentitiesdialog.ui:57
+#. i18n: ectx: property (text), widget (QPushButton, deselect_all)
+#: rc.cpp:255
+msgid "Deselect All"
+msgstr ""
+
 #. i18n: file: dontpanik/kpart/dontpanik_part.rc:4
 #. i18n: ectx: Menu (edit)
 #. i18n: file: dontpanik/shell/dontpanik_shell.rc:10
 #. i18n: ectx: Menu (edit)
-#: rc.cpp:249 rc.cpp:267
+#: rc.cpp:258 rc.cpp:276
 msgid "&Edit"
 msgstr ""
 
@@ -833,58 +869,58 @@ msgstr ""
 #. i18n: ectx: Menu (view)
 #. i18n: file: dontpanik/shell/dontpanik_shell.rc:13
 #. i18n: ectx: Menu (view)
-#: rc.cpp:252 rc.cpp:270
+#: rc.cpp:261 rc.cpp:279
 msgid "&View"
 msgstr ""
 
 #. i18n: file: dontpanik/kpart/dontpanik_part.rc:13
 #. i18n: ectx: Menu (action)
-#: rc.cpp:255
+#: rc.cpp:264
 msgid "&Actions"
 msgstr ""
 
 #. i18n: file: dontpanik/kpart/dontpanik_part.rc:21
 #. i18n: ectx: ToolBar (viewToolbar)
-#: rc.cpp:258
+#: rc.cpp:267
 msgid "View Toolbar"
 msgstr ""
 
 #. i18n: file: dontpanik/kpart/dontpanik_part.rc:25
 #. i18n: ectx: ToolBar (actionToolbar)
-#: rc.cpp:261
+#: rc.cpp:270
 msgid "Action Toolbar"
 msgstr ""
 
 #. i18n: file: dontpanik/shell/dontpanik_shell.rc:4
 #. i18n: ectx: Menu (file)
-#: rc.cpp:264
+#: rc.cpp:273
 msgid "&File"
 msgstr ""
 
 #. i18n: file: dontpanik/shell/dontpanik_shell.rc:16
 #. i18n: ectx: Menu (action)
-#: rc.cpp:273
+#: rc.cpp:282
 msgid "&Action"
 msgstr ""
 
 #. i18n: file: dontpanik/shell/dontpanik_shell.rc:19
 #. i18n: ectx: Menu (settings)
-#: rc.cpp:276
+#: rc.cpp:285
 msgid "&Settings"
 msgstr ""
 
 #. i18n: file: dontpanik/shell/dontpanik_shell.rc:32
 #. i18n: ectx: ToolBar (mainToolBar)
-#: rc.cpp:279
+#: rc.cpp:288
 msgid "Main Toolbar"
 msgstr ""
 
-#: rc.cpp:280
+#: rc.cpp:289
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
 
-#: rc.cpp:281
+#: rc.cpp:290
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""

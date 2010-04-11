@@ -1,5 +1,5 @@
 #!/bin/sh
-BASEDIR="../../src/"   # root of translatable sources
+BASEDIR="../src/"   # root of translatable sources
 PROJECT="dontpanic"  # project name
 BUGADDR=""      # MSGID-Bugs
 WDIR=`pwd`          # working dir
