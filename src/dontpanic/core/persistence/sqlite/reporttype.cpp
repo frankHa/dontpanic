@@ -281,7 +281,7 @@ namespace dp
           while ( query.next() )
           {
             Uuid id(query.value ( 0 ).toString());
-            _p.projectFilter().entries().append(id);
+            _p.projectFilter().selection().append(id);
           }
         }
         return result;
@@ -298,7 +298,7 @@ namespace dp
           while ( query.next() )
           {
             Uuid id(query.value ( 0 ).toString());
-            _p.taskFilter().entries().append(id);
+            _p.taskFilter().selection().append(id);
           }
         }
         return result;
@@ -309,7 +309,7 @@ namespace dp
         success result = remove_selected_projects(_p);
         if(result.was_successful())
         {
-          ReportDataFilter::Entries const& entries = _p.projectFilter().entries();
+          UuidList const& entries = _p.projectFilter().selection();
           foreach(Uuid const& id, entries)
           {
             QSqlQuery query;
@@ -327,7 +327,7 @@ namespace dp
         success result = remove_selected_tasks(_p);
         if(result.was_successful())
         {
-          ReportDataFilter::Entries const& entries = _p.taskFilter().entries();
+          UuidList const& entries = _p.taskFilter().selection();
           foreach(Uuid const& id, entries)
           {
             QSqlQuery query;

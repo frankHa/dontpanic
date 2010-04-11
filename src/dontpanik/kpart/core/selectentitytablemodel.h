@@ -20,6 +20,7 @@
 #ifndef DP_CORE_SELECTENTITYTABLEMODEL_H
 #define DP_CORE_SELECTENTITYTABLEMODEL_H
 #include <libdontpanic/defines.hpp>
+#include <libdontpanic/uuid.h>
 #include <QModelIndex>
 // ---------------------------------------------------------------------------------
 namespace dp
@@ -47,6 +48,14 @@ namespace dp
         virtual int rowCount ( const QModelIndex& parent = QModelIndex() ) const;
         virtual QVariant headerData ( int section, Qt::Orientation orientation, int role = Qt::EditRole ) const;
         virtual Qt::ItemFlags flags ( QModelIndex const& ) const;
+        // ---------------------------------------------------------------------------------
+        UuidList selected() const;
+        // ---------------------------------------------------------------------------------
+        void select(UuidList const& ids);
+        // ---------------------------------------------------------------------------------
+        void selectAll();
+        // ---------------------------------------------------------------------------------
+        void unselectAll();
         // ---------------------------------------------------------------------------------
       private:
         // ---------------------------------------------------------------------------------

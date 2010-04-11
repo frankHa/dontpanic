@@ -42,12 +42,23 @@ namespace dp
     {
       delete _M_ui;
     }
+    // ---------------------------------------------------------------------------------    
+    void SelectEntityDialog::select ( const dp::UuidList& ids )
+    {
+      _M_model->select(ids);
+    }
+    // ---------------------------------------------------------------------------------
+    UuidList SelectEntityDialog::selection() const
+    {
+      return _M_model->selection();
+    }
     // ---------------------------------------------------------------------------------
     //private stuff:
     // ---------------------------------------------------------------------------------
     void SelectEntityDialog::init()
     {
       _M_ui->entities_table->setModel(_M_model->tableModel());
+      _M_ui->entities_table->resizeColumnsToContents();
       this->setWindowTitle(_M_model->windowTitle());
     }
     // ---------------------------------------------------------------------------------

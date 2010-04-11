@@ -43,14 +43,14 @@
     </widget>
    </item>
    <item>
-    <widget class="QCheckBox" name="checkBox">
+    <widget class="QCheckBox" name="select_all">
      <property name="text">
       <string>Select All</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QCheckBox" name="checkBox_2">
+    <widget class="QCheckBox" name="unselect_all">
      <property name="text">
       <string>Unselect All</string>
      </property>

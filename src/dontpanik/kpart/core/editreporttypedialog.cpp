@@ -55,7 +55,9 @@ namespace dp
       _M_ui->group_projects->setChecked(at.groupByProject());
       _M_ui->task_filter_type->setCurrentIndex(at.taskFilter().filterType());
       _M_ui->project_filter_type->setCurrentIndex(at.projectFilter().filterType());
+      _M_selected_projects = at.projectFilter().selection();
       _M_ui->export_data_file->setText(at.exportDataFileTemplate());
+      _M_selected_tasks = at.taskFilter().selection();
     }
     // ---------------------------------------------------------------------------------
     void EditReportTypeDialog::setup_actions()
@@ -92,8 +94,10 @@ namespace dp
         t.setGroupByProject(_M_ui->group_projects->isChecked());
         t.setGroupByTask(_M_ui->group_tasks->isChecked());
         t.taskFilter().setFilterType(_M_ui->task_filter_type->currentIndex());
+        t.taskFilter().setSelection(_M_selected_tasks);
         t.projectFilter().setFilterType(_M_ui->project_filter_type->currentIndex());
-        t.setExportDataFileTemplate(_M_ui->export_data_file->text());
+        t.projectFilter().setSelection(_M_selected_projects);
+        t.setExportDataFileTemplate(_M_ui->export_data_file->text());        
         context()->reportManager()->store(t);
       }
     }
@@ -106,13 +110,21 @@ namespace dp
     void EditReportTypeDialog::select_projects()
     {
       SelectProjectsDialog dlg;
-      dlg.exec();
+      dlg.select(_M_selected_projects);
+      if(dlg.exec()==QDialog::Accepted)
+      {
+        _M_selected_projects = dlg.selection();
+      }
     }
     // ---------------------------------------------------------------------------------
     void EditReportTypeDialog::select_tasks()
     {
       SelectTasksDialog dlg;
-      dlg.exec();
+      dlg.select(_M_selected_tasks);
+      if(dlg.exec()==QDialog::Accepted)
+      {
+        _M_selected_tasks = dlg.selection();
+      }
     }
     // ---------------------------------------------------------------------------------
     void EditReportTypeDialog::update_select_tasks_enabled_state(int selected_filter_type)

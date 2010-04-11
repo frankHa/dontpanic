@@ -41,7 +41,8 @@ namespace dp
     {
       setParent(parent);
       _M_sort_model = new QSortFilterProxyModel ( this );
-      _M_sort_model->setSourceModel ( init_source_model() );
+      _M_data_model = init_source_model();
+      _M_sort_model->setSourceModel ( _M_data_model );
     }
     // ---------------------------------------------------------------------------------
     QAbstractItemModel* SelectEntityDialogModel::tableModel() const
@@ -49,12 +50,32 @@ namespace dp
       return _M_sort_model;
     }
     // ---------------------------------------------------------------------------------
+    void SelectEntityDialogModel::selectAll()
+    {
+      _M_data_model->selectAll();
+    }
+    // ---------------------------------------------------------------------------------
+    void SelectEntityDialogModel::unselectAll()
+    {
+      _M_data_model->unselectAll();
+    }
+    // ---------------------------------------------------------------------------------
+    void SelectEntityDialogModel::select(UuidList const& ids)
+    {
+      _M_data_model->select(ids);
+    }
+    // ---------------------------------------------------------------------------------
+    UuidList SelectEntityDialogModel::selection() const     
+    {
+      return _M_data_model->selected();
+    }
+    // ---------------------------------------------------------------------------------
     // SelectProjectsDialogModel:
     // ---------------------------------------------------------------------------------
     SelectProjectsDialogModel::SelectProjectsDialogModel ()
         : SelectEntityDialogModel ( ) {}
     // ---------------------------------------------------------------------------------
-    QAbstractTableModel *SelectProjectsDialogModel::init_source_model()
+    SelectEntityTableModel *SelectProjectsDialogModel::init_source_model()
     {
       return new SelectEntityTableModel ( new SelectProjectsTableModelAdaptor(), this );
     }
@@ -69,7 +90,7 @@ namespace dp
     SelectTasksDialogModel::SelectTasksDialogModel ()
     : SelectEntityDialogModel ( ) {}
     // ---------------------------------------------------------------------------------
-    QAbstractTableModel *SelectTasksDialogModel::init_source_model()
+    SelectEntityTableModel *SelectTasksDialogModel::init_source_model()
     {
       return new SelectEntityTableModel ( new SelectTasksTableModelAdaptor(), this );
     }

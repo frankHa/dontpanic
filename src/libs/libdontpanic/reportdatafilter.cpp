@@ -38,16 +38,21 @@ namespace dp
     return *this;
   }
   // ---------------------------------------------------------------------------------
-  ReportDataFilter::Entries &
-  ReportDataFilter::entries()
+  ReportDataFilter& ReportDataFilter::setSelection (UuidList const& ids)
   {
-    return _M_entries;
+    _M_selection.clear();
+    _M_selection<<ids;
+    return *this;
   }
   // ---------------------------------------------------------------------------------
-  ReportDataFilter::Entries const& 
-  ReportDataFilter::entries() const
+  UuidList & ReportDataFilter::selection()
   {
-    return _M_entries;
+    return _M_selection;
+  }
+  // ---------------------------------------------------------------------------------
+  UuidList const& ReportDataFilter::selection() const
+  {
+    return _M_selection;
   }
   // ---------------------------------------------------------------------------------
 }//dp

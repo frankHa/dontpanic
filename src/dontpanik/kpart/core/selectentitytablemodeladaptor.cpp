@@ -60,14 +60,51 @@ namespace dp
       _M_data.value(row)->set_check_state(state);
     }
     // ---------------------------------------------------------------------------------
-    UuidList SelectEntityTableModelAdaptor::selected() const
+    UuidList SelectEntityTableModelAdaptor::checked() const
     {
-      return UuidList();
+      UuidList result;
+      foreach(Entry const*e, _M_data)
+      {
+        if(e->check_state() == Qt::Checked)
+        {
+          result<<e->id();
+        }
+      }
+      return result;
     }
     // ---------------------------------------------------------------------------------
-    void SelectEntityTableModelAdaptor::setSelected ( UuidList const& )
+    void SelectEntityTableModelAdaptor::setChecked ( UuidList const& ids)
     {
+        foreach(Entry *e, _M_data)
+        {
+          if(ids.contains(e->id()))
+          {
+            e->set_check_state(Qt::Checked);
+          }
+          else
+          {
+            e->set_check_state(Qt::Unchecked);
+          }
+        }
     }
+    // ---------------------------------------------------------------------------------
+    void SelectEntityTableModelAdaptor::checkAll()
+    {
+      foreach(Entry *e, _M_data)
+      {
+        e->set_check_state(Qt::Checked);
+      }
+    }
+    // ---------------------------------------------------------------------------------
+    void SelectEntityTableModelAdaptor::unCheckAll()
+    {
+      foreach(Entry *e, _M_data)
+      {
+        e->set_check_state(Qt::Unchecked);
+      }
+    }
+    // ---------------------------------------------------------------------------------
+    // protected stuff:
     // ---------------------------------------------------------------------------------
     void SelectEntityTableModelAdaptor::add ( SelectEntityTableModelAdaptor::Entry* entry )
     {
@@ -116,7 +153,6 @@ namespace dp
         }
       }      
     }
-    // ---------------------------------------------------------------------------------
     // ---------------------------------------------------------------------------------
     //SelectTasksTableModelAdaptor:
     // ---------------------------------------------------------------------------------

@@ -7,7 +7,7 @@ namespace dp
   QDBusArgument const& operator >> ( QDBusArgument const&arg, ReportDataFilter & filter )
   {
     int _t;
-    ReportDataFilter::Entries &_e=filter.entries();
+    UuidList &_e=filter.selection();
     arg.beginStructure();
     arg>>_t>>_e;
     arg.endStructure();
@@ -18,7 +18,7 @@ namespace dp
   QDBusArgument & operator << ( QDBusArgument &arg, ReportDataFilter const& filter )
   {
     arg.beginStructure();
-    arg<<filter.filterType()<<filter.entries();
+    arg<<filter.filterType()<<filter.selection();
     arg.endStructure();
     return arg;
   }

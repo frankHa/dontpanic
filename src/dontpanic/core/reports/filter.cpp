@@ -176,14 +176,14 @@ namespace dp
               case ReportDataFilterType::SELECTED_ONLY:
               {
                 selected_filter_rule *tmp = new selected_filter_rule();
-                tmp->setSelection ( filter_def.entries() );
+                tmp->setSelection ( filter_def.selection() );
                 result = tmp;
                 break;
               }
               case ReportDataFilterType::UNSELECTED_ONLY:
               {
                 unselected_filter_rule *tmp = new unselected_filter_rule();
-                tmp->setSelection ( filter_def.entries() );
+                tmp->setSelection ( filter_def.selection() );
                 result = tmp;
                 break;
               }
