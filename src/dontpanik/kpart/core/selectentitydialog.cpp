@@ -28,13 +28,13 @@ namespace dp
   namespace core
   {
     // ---------------------------------------------------------------------------------
-    SelectEntityDialog::SelectEntityDialog ( SelectEntityDialogModel *model, QWidget* parent, Qt::WindowFlags f ) 
-    : QDialog ( parent, f )
-    , _M_ui(new Ui::SelectEntitiesDialog())
-    , _M_model(model)
+    SelectEntityDialog::SelectEntityDialog ( SelectEntityDialogModel *model, QWidget* parent, Qt::WindowFlags f )
+        : QDialog ( parent, f )
+        , _M_ui ( new Ui::SelectEntitiesDialog() )
+        , _M_model ( model )
     {
-      _M_ui->setupUi(this);
-      _M_model->init(this);      
+      _M_ui->setupUi ( this );
+      _M_model->init ( this );
       init();
     }
     // ---------------------------------------------------------------------------------
@@ -42,10 +42,10 @@ namespace dp
     {
       delete _M_ui;
     }
-    // ---------------------------------------------------------------------------------    
+    // ---------------------------------------------------------------------------------
     void SelectEntityDialog::select ( const dp::UuidList& ids )
     {
-      _M_model->select(ids);
+      _M_model->select ( ids );
     }
     // ---------------------------------------------------------------------------------
     UuidList SelectEntityDialog::selection() const
@@ -57,29 +57,21 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void SelectEntityDialog::init()
     {
-      _M_ui->entities_table->setModel(_M_model->tableModel());
+      _M_ui->entities_table->setModel ( _M_model->tableModel() );
       _M_ui->entities_table->resizeColumnsToContents();
-      this->setWindowTitle(_M_model->windowTitle());
-      connect(_M_ui->select_all, SIGNAL(stateChanged(int)), this, SLOT(on_select_all_changed(int)));
-      connect(_M_ui->unselect_all, SIGNAL(stateChanged(int)), this, SLOT(on_unselect_all_changed(int)));
+      this->setWindowTitle ( _M_model->windowTitle() );
+      connect ( _M_ui->select_all, SIGNAL ( clicked() ), this, SLOT ( on_select_all() ) );
+      connect ( _M_ui->deselect_all, SIGNAL ( clicked() ), this, SLOT ( on_unselect_all() ) );
     }
     // ---------------------------------------------------------------------------------
-    void SelectEntityDialog::on_select_all_changed(int new_state)
+    void SelectEntityDialog::on_select_all()
     {
-      if(new_state == Qt::Checked)
-      {
-        _M_ui->unselect_all->setCheckState(Qt::Unchecked);
-        _M_model->selectAll();
-      }
+      _M_model->selectAll();
     }
     // ---------------------------------------------------------------------------------
-    void SelectEntityDialog::on_unselect_all_changed(int new_state)
+    void SelectEntityDialog::on_unselect_all()
     {
-      if(new_state == Qt::Checked)
-      {
-        _M_ui->select_all->setCheckState(Qt::Unchecked);
-        _M_model->unselectAll();
-      }
+      _M_model->unselectAll();
     }
     // ---------------------------------------------------------------------------------
   }
