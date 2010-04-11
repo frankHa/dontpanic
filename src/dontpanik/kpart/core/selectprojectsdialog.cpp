@@ -20,8 +20,7 @@
 #include "selectprojectsdialog.h"
 #include "selectprojectsdialog.moc"
 #include "ui_selectprojectsdialog.h"
-#include "selectentitytablemodel.h"
-#include "selectprojectstablemodeladaptor.h"
+#include "selectentitydialogmodel.h"
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -30,25 +29,7 @@ namespace dp
   {
     // ---------------------------------------------------------------------------------
     SelectProjectsDialog::SelectProjectsDialog ( QWidget* parent, Qt::WindowFlags f ) 
-    : QDialog ( parent, f )
-    , _M_ui(new Ui::SelectProjectsDialog())
-    {
-      _M_ui->setupUi(this);
-      init_model();
-    }
-    // ---------------------------------------------------------------------------------
-    SelectProjectsDialog::~SelectProjectsDialog()
-    {
-      delete _M_ui;
-    }
-    // ---------------------------------------------------------------------------------
-    //private stuff:
-    // ---------------------------------------------------------------------------------
-    void SelectProjectsDialog::init_model()
-    {
-      _M_model = new SelectEntityTableModel(new SelectProjectsTableModelAdaptor(), this);
-      _M_ui->projects_table->setModel(_M_model);
-    }
+    : SelectEntityDialog ( new SelectProjectsDialogModel(), parent, f ){}
     // ---------------------------------------------------------------------------------
   }
   // ---------------------------------------------------------------------------------

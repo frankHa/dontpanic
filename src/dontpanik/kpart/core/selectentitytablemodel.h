@@ -29,6 +29,7 @@ namespace dp
   {
     // ---------------------------------------------------------------------------------
     class SelectEntityTableModelAdaptor;
+    // ---------------------------------------------------------------------------------
     class SelectEntityTableModel : public QAbstractTableModel
     {
       // ---------------------------------------------------------------------------------
@@ -44,16 +45,14 @@ namespace dp
         virtual bool setData ( const QModelIndex& index, QVariant const& data, int role = Qt::DisplayRole );
         virtual int columnCount ( const QModelIndex& parent = QModelIndex() ) const;
         virtual int rowCount ( const QModelIndex& parent = QModelIndex() ) const;
-        virtual QVariant headerData ( int section, Qt::Orientation orientation, int role = Qt::EditRole )const;
-        virtual Qt::ItemFlags flags(QModelIndex const& ) const;
+        virtual QVariant headerData ( int section, Qt::Orientation orientation, int role = Qt::EditRole ) const;
+        virtual Qt::ItemFlags flags ( QModelIndex const& ) const;
         // ---------------------------------------------------------------------------------
       private:
         // ---------------------------------------------------------------------------------
         SelectEntityTableModelAdaptor *_M_data;
         // ---------------------------------------------------------------------------------
     };
-  
-    
   }
 
 }

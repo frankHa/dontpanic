@@ -17,9 +17,11 @@
 
 */
 
+#include "selectentitydialogmodel.h"
+#include "selectentitydialogmodel.moc"
 #include "selectentitytablemodel.h"
-#include "selectentitytablemodel.moc"
 #include "selectprojectstablemodeladaptor.h"
+#include <QSortFilterProxyModel>
 #include <QSortFilterProxyModel>
 // ---------------------------------------------------------------------------------
 namespace dp
@@ -28,55 +30,41 @@ namespace dp
   namespace core
   {
     // ---------------------------------------------------------------------------------
-    SelectEntityTableModel::SelectEntityTableModel ( SelectEntityTableModelAdaptor * data, QObject* parent )
-        : QAbstractTableModel ( parent )
-        , _M_data ( data )
+    // SelectEntityDialogModel:
+    // ---------------------------------------------------------------------------------
+    SelectEntityDialogModel::SelectEntityDialogModel ( )
+        : QObject ( 0 ) {}
+    // ---------------------------------------------------------------------------------
+    SelectEntityDialogModel::~SelectEntityDialogModel() {}
+    // ---------------------------------------------------------------------------------
+    void SelectEntityDialogModel::init(QObject *parent)
     {
-      _M_data->setParent ( this );
+      setParent(parent);
+      _M_sort_model = new QSortFilterProxyModel ( this );
+      _M_sort_model->setSourceModel ( init_source_model() );
     }
     // ---------------------------------------------------------------------------------
-    QVariant SelectEntityTableModel::data ( const QModelIndex& index, int role ) const
+    QAbstractItemModel* SelectEntityDialogModel::tableModel() const
     {
-      if ( role != Qt::DisplayRole
-           && role != Qt::CheckStateRole
-           && role != Qt::EditRole ) return QVariant();
-      return _M_data->data ( index, role );
+      return _M_sort_model;
     }
     // ---------------------------------------------------------------------------------
-    bool SelectEntityTableModel::setData ( const QModelIndex& index, QVariant const& data, int role )
+    // SelectProjectsDialogModel:
+    // ---------------------------------------------------------------------------------
+    SelectProjectsDialogModel::SelectProjectsDialogModel ()
+        : SelectEntityDialogModel ( ) {}
+    // ---------------------------------------------------------------------------------
+    QAbstractTableModel *SelectProjectsDialogModel::init_source_model()
     {
-      if ( role != Qt::CheckStateRole ) return false;
-      _M_data->setCheckState ( index, data.toInt() );
-      return true;
+      return new SelectEntityTableModel ( new SelectProjectsTableModelAdaptor(), this );
     }
     // ---------------------------------------------------------------------------------
-    int SelectEntityTableModel::columnCount ( const QModelIndex& parent ) const
+    QString SelectProjectsDialogModel::windowTitle() const
     {
-      return _M_data->columnCount();
+      return i18n ( "Select Projects - Don't Panik" );
     }
     // ---------------------------------------------------------------------------------
-    int SelectEntityTableModel::rowCount ( const QModelIndex& parent ) const
-    {
-      return _M_data->rowCount();
-    }
-    // ---------------------------------------------------------------------------------
-    QVariant SelectEntityTableModel::headerData ( int section, Qt::Orientation orientation, int role ) const
-    {
-      if ( orientation != Qt::Horizontal ) return QVariant();
-      if ( role != Qt::DisplayRole ) return QVariant();
-      return _M_data->headerData ( section );
-    }
-    // ---------------------------------------------------------------------------------
-    Qt::ItemFlags SelectEntityTableModel::flags ( QModelIndex const& index ) const
-    {
-      Qt::ItemFlags f = QAbstractTableModel::flags ( index );
-      if ( _M_data->isCheckable ( index ) )
-      {
-        f |= Qt::ItemIsUserCheckable;
-      }
-      return f;
-    }
-  // ---------------------------------------------------------------------------------
   }
+  // ---------------------------------------------------------------------------------
 }
 // ---------------------------------------------------------------------------------
