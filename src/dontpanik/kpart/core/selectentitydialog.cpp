@@ -37,6 +37,7 @@ namespace dp
       _M_ui->setupUi ( widget );
       setMainWidget(widget);
       setButtons(KDialog::None);
+      this->setInitialSize(QSize(460, 560));
       connect(_M_ui->kdialogbuttonbox, SIGNAL(accepted()), this, SLOT(accept()));
       connect(_M_ui->kdialogbuttonbox, SIGNAL(rejected()), this, SLOT(reject()));
       _M_model->init ( this );
