@@ -82,7 +82,7 @@ namespace dp
     // ---------------------------------------------------------------------------------
     QString SelectProjectsDialogModel::windowTitle() const
     {
-      return i18n ( "Select Projects - Don't Panik" );
+      return i18n ( "Select Projects" );
     }
     // ---------------------------------------------------------------------------------
     // SelectProjectsDialogModel:
@@ -97,7 +97,7 @@ namespace dp
     // ---------------------------------------------------------------------------------
     QString SelectTasksDialogModel::windowTitle() const
     {
-      return i18n ( "Select Tasks - Don't Panik" );
+      return i18n ( "Select Tasks" );
     }
     // ---------------------------------------------------------------------------------
   }

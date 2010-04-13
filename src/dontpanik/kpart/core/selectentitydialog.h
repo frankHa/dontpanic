@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <libdontpanic/defines.hpp>
 #include <libdontpanic/uuid.h>
 // ---------------------------------------------------------------------------------
-#include <QDialog>
+#include <KDialog>
 // ---------------------------------------------------------------------------------
 namespace Ui
 {
@@ -42,7 +42,7 @@ namespace dp
     class SelectEntityDialogModel;
     // ---------------------------------------------------------------------------------
     class SelectEntityDialog 
-    : public QDialog
+    : public KDialog
     {
       // ---------------------------------------------------------------------------------
       Q_OBJECT
