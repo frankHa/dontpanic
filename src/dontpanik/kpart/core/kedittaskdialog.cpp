@@ -27,11 +27,15 @@ namespace dp
   namespace core
   {
     KEditTaskDialog::KEditTaskDialog(QWidget *parent)
-    :QDialog(parent)
+    :KDialog(parent)
     , _M_ui (new Ui::KEditTaskDialog())
     , _M_current_task(NullTask())
     {
-      _M_ui->setupUi(this);
+      QWidget *w = new QWidget(this);
+      _M_ui->setupUi(w);
+      setMainWidget(w);
+      setButtons(Ok|Cancel);
+      setCaption(i18n("Worktype"));
       _M_ui->creation_date->setDateTime(QDateTime::currentDateTime());
       setup_actions();
     }
@@ -52,8 +56,8 @@ namespace dp
     
     void KEditTaskDialog::setup_actions()
     {
-      connect(_M_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accepted()));
-      connect(_M_ui->buttonBox, SIGNAL(rejected()), this, SLOT(rejected()));
+      connect(this, SIGNAL(accepted()), this, SLOT(accepted()));
+      connect(this, SIGNAL(rejected()), this, SLOT(rejected()));
     }
     
     void KEditTaskDialog::accepted()

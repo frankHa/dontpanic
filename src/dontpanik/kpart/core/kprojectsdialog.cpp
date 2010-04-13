@@ -28,10 +28,15 @@ namespace dp
   {
     // ---------------------------------------------------------------------------------
     KProjectsDialog::KProjectsDialog ( QWidget *parent )
-        : QDialog ( parent )
+        : KDialog ( parent )
         , _M_ui ( new Ui::KProjectsDialog () )
     {
-      _M_ui->setupUi ( this );
+      QWidget *w= new QWidget(this);
+      _M_ui->setupUi ( w );
+      setMainWidget(w);
+      setButtons(Ok|Cancel);
+      setCaption(i18n("Projects"));
+      setInitialSize(QSize(470, 460));
       setup_actions();
     }
     // ---------------------------------------------------------------------------------

@@ -25,10 +25,15 @@ namespace dp
   namespace core
   {
     KTasksDialog::KTasksDialog ( QWidget* parent, Qt::WindowFlags f )
-        : QDialog ( parent, f )
+        : KDialog ( parent, f )
         , _M_ui ( new Ui::KTasksDialog() )
     {
-      _M_ui->setupUi(this);
+      QWidget *w = new QWidget(this);
+      _M_ui->setupUi(w);
+      setMainWidget(w);
+      setButtons(Ok|Cancel);
+      setCaption(i18n("Tasks/Worktypes"));
+      setInitialSize(QSize(470, 460));
       setup_actions();
     }
 

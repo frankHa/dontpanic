@@ -21,7 +21,7 @@
 #define DP_CORE_KEDITTASKDIALOG_H
 #include <libdontpanic/defines.hpp>
 #include <libdontpanic/task.hpp>
-#include <QDialog>
+#include <KDialog>
 
 
 namespace Ui
@@ -33,7 +33,7 @@ namespace dp
 {
   namespace core
   {
-    class KEditTaskDialog : public QDialog
+    class KEditTaskDialog : public KDialog
     {
       Q_OBJECT
       public:

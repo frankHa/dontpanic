@@ -29,11 +29,15 @@ namespace dp
   namespace core
   {
     KReportRangeDialog::KReportRangeDialog ( QWidget* parent, Qt::WindowFlags f)
-    :QDialog(parent, f)
+    :KDialog(parent, f)
     , _M_ui(new Ui::KReportRangeDialog())
     , _M_range(LAST_MONTH)
     {
-      _M_ui->setupUi(this);
+      QWidget *w= new QWidget(this);
+      _M_ui->setupUi(w);
+      setMainWidget(w);
+      setButtons(Ok|Cancel);
+      setCaption(i18n("Choose Report Range"));
       init_actions();
       init_presets();
       init_ui();

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>KEditTaskDialog</class>
- <widget class="QDialog" name="KEditTaskDialog">
+ <widget class="QWidget" name="KEditTaskDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -90,16 +90,6 @@
       </size>
      </property>
     </spacer>
-   </item>
-   <item>
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
    </item>
   </layout>
  </widget>

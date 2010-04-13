@@ -20,7 +20,7 @@
 #ifndef KPROJECTSDIALOG_H
 #define KPROJECTSDIALOG_H
 
-#include <QDialog>
+#include <KDialog>
 // ---------------------------------------------------------------------------------
 namespace Ui
 {
@@ -34,7 +34,7 @@ namespace dp
   {
     // ---------------------------------------------------------------------------------
     class KProjectsDialog
-          : public QDialog
+          : public KDialog
     {
         // ---------------------------------------------------------------------------------
         Q_OBJECT

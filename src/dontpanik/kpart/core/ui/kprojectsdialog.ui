@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>KProjectsDialog</class>
- <widget class="QDialog" name="KProjectsDialog">
+ <widget class="QWidget" name="KProjectsDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -64,16 +64,6 @@
       </layout>
      </item>
     </layout>
-   </item>
-   <item>
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Close</set>
-     </property>
-    </widget>
    </item>
   </layout>
  </widget>

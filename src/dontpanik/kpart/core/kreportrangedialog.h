@@ -21,7 +21,7 @@
 #define DP_CORE_KTIMERANGEDIALOG_H
 
 #include <libdontpanic/defines.hpp>
-#include <QDialog>
+#include <KDialog>
 
 namespace Ui
 {
@@ -34,7 +34,7 @@ namespace dp
   namespace core
   {
     class KReportRangeDialog 
-    : public QDialog
+    : public KDialog
     {
       Q_OBJECT
       

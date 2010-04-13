@@ -21,7 +21,7 @@
 #define DP_CORE_KEDITPROJECTDIALOG_H
 #include <libdontpanic/defines.hpp>
 #include <libdontpanic/project.hpp>
-#include <QDialog>
+#include <KDialog>
 
 
 namespace Ui
@@ -34,7 +34,7 @@ namespace dp
   namespace core
   {
     class KEditProjectDialog 
-      : public QDialog
+      : public KDialog
     {
       Q_OBJECT
       public:

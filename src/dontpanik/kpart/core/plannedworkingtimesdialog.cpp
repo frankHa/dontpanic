@@ -29,11 +29,14 @@ namespace dp
   {
     // ---------------------------------------------------------------------------------
     PlannedWorkingTimesDialog::PlannedWorkingTimesDialog ( QWidget* parent, Qt::WindowFlags f )
-        : QDialog ( parent, f )
+        : KDialog ( parent, f )
         , _M_ui ( new Ui::PlannedWorkingTimesDialog )
     {
-      _M_ui->setupUi ( this );
-
+     QWidget *w=new QWidget(this); 
+      _M_ui->setupUi ( w );
+      setMainWidget(w);
+      setButtons(Ok|Cancel);
+      setCaption(i18n("Planned Working Times"));
       init_planned_working_hours_per_day();
       init_holiday_region();
     }
@@ -54,7 +57,7 @@ namespace dp
       << _M_ui->saturday
       << _M_ui->sunday;
       init_time_values();
-      connect ( _M_ui->buttonBox, SIGNAL ( accepted() ), this, SLOT ( store() ) );
+      connect ( this, SIGNAL ( accepted() ), this, SLOT ( store() ) );
     }
     // ---------------------------------------------------------------------------------
     void PlannedWorkingTimesDialog::init_holiday_region()

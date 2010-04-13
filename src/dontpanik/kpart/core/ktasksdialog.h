@@ -20,7 +20,7 @@
 #ifndef DP_CORE_KTASKSDIALOG_H
 #define DP_CORE_KTASKSDIALOG_H
 
-#include <QDialog>
+#include <KDialog>
 
 namespace Ui
 {
@@ -33,7 +33,7 @@ namespace dp
   namespace core
   {
 
-    class KTasksDialog : public QDialog
+    class KTasksDialog : public KDialog
     {
         Q_OBJECT
       public:

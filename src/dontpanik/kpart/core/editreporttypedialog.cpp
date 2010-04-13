@@ -66,6 +66,7 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void EditReportTypeDialog::setup_actions()
     {
+      connect(this, SIGNAL(accepted()), this, SLOT(accepted()));
       connect(_M_ui->select_tasks, SIGNAL(clicked()), this, SLOT(select_tasks()));
       connect(_M_ui->select_projects, SIGNAL(clicked()), this, SLOT(select_projects()));
       connect(_M_ui->task_filter_type, SIGNAL(currentIndexChanged(int)), this, SLOT(update_select_tasks_enabled_state(int)));
