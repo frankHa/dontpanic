@@ -30,11 +30,15 @@ namespace dp
   {
     // ---------------------------------------------------------------------------------
     EditReportTypeDialog::EditReportTypeDialog ( QWidget* parent, Qt::WindowFlags f)
-    :QDialog(parent, f)
+    :KDialog(parent, f)
     ,_M_ui(new Ui::EditReportTypeDialog)
     , _M_current_report_type(NullReportType())
     {
-        _M_ui->setupUi(this);
+      QWidget *w = new QWidget(this);
+        _M_ui->setupUi(w);
+        setMainWidget(w);
+        setCaption(i18n("Report Type"));
+        setButtons(Ok | Cancel);
         _M_ui->icon->setIconType(KIconLoader::NoGroup, KIconLoader::Emote);
         setup_actions();
         init_combo_boxes();        
@@ -62,8 +66,6 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void EditReportTypeDialog::setup_actions()
     {
-      connect(_M_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accepted()));
-      connect(_M_ui->buttonBox, SIGNAL(rejected()), this, SLOT(rejected()));
       connect(_M_ui->select_tasks, SIGNAL(clicked()), this, SLOT(select_tasks()));
       connect(_M_ui->select_projects, SIGNAL(clicked()), this, SLOT(select_projects()));
       connect(_M_ui->task_filter_type, SIGNAL(currentIndexChanged(int)), this, SLOT(update_select_tasks_enabled_state(int)));

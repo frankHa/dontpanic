@@ -20,7 +20,7 @@
 #ifndef DP_CORE_EDITREPORTTYPEDIALOG_H
 #define DP_CORE_EDITREPORTTYPEDIALOG_H
 #include <libdontpanic/defines.hpp>
-#include <QDialog>
+#include <KDialog>
 #include <libdontpanic/reporttype.h>
 #include <libdontpanic/uuid.h>
 // ---------------------------------------------------------------------------------
@@ -36,7 +36,7 @@ namespace dp
   {
     // ---------------------------------------------------------------------------------
     class EditReportTypeDialog
-          : public QDialog
+          : public KDialog
     {
         // ---------------------------------------------------------------------------------
         Q_OBJECT
