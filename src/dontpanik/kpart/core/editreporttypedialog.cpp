@@ -21,6 +21,7 @@
 #include "ui_editreporttypedialog.h"
 #include "context.h"
 #include <libdontpanic/reportdatafiltertype.h>
+#include <libdontpanic/reportgroupingtimeinterval.h>
 #include "selectprojectsdialog.h"
 #include "selecttasksdialog.h"
 namespace dp
@@ -57,6 +58,7 @@ namespace dp
       _M_ui->icon->setIcon(at.icon());
       _M_ui->group_tasks->setChecked(at.groupByTask());
       _M_ui->group_projects->setChecked(at.groupByProject());
+      _M_ui->group_timeinterval->setCurrentIndex(at.groupByTimeInterval());
       _M_ui->task_filter_type->setCurrentIndex(at.taskFilter().filterType());
       _M_ui->project_filter_type->setCurrentIndex(at.projectFilter().filterType());
       _M_selected_projects = at.projectFilter().selection();
@@ -79,6 +81,8 @@ namespace dp
       _M_ui->task_filter_type->setCurrentIndex(ReportDataFilterType::NO_FILTER);
       _M_ui->project_filter_type->addItems(ReportDataFilterType::pretty_names());
       _M_ui->project_filter_type->setCurrentIndex(ReportDataFilterType::NO_FILTER);
+      _M_ui->group_timeinterval->addItems(ReportGroupingTimeInterval::pretty_names());
+      _M_ui->group_timeinterval->setCurrentIndex(ReportGroupingTimeInterval::NONE);
     }
     // ---------------------------------------------------------------------------------
     void EditReportTypeDialog::accepted()
@@ -96,6 +100,7 @@ namespace dp
         t.setIcon(_M_ui->icon->icon());
         t.setGroupByProject(_M_ui->group_projects->isChecked());
         t.setGroupByTask(_M_ui->group_tasks->isChecked());
+        t.setGroupByTimeInterval(_M_ui->group_timeinterval->currentIndex());
         t.taskFilter().setFilterType(_M_ui->task_filter_type->currentIndex());
         t.taskFilter().setSelection(_M_selected_tasks);
         t.projectFilter().setFilterType(_M_ui->project_filter_type->currentIndex());

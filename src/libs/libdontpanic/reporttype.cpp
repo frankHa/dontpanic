@@ -20,6 +20,7 @@
 #include <libdontpanic/reporttype.h>
 #include <libdontpanic/report.h>
 #include <libdontpanic/timerangeformatter.h>
+#include <libdontpanic/reportgroupingtimeinterval.h>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -30,7 +31,7 @@ namespace dp
       , _M_icon("")
       , _M_group_by_task(false)
       , _M_group_by_project(false)
-      , _M_group_by_time_interval(NONE){}
+      , _M_group_by_time_interval(ReportGroupingTimeInterval::NONE){}
   // ---------------------------------------------------------------------------------
   ReportType::ReportType ( QString const& title )
       : _M_id ( Uuid::generate() )
@@ -38,7 +39,7 @@ namespace dp
       , _M_icon("")
       , _M_group_by_task(false)
       , _M_group_by_project(false)
-      , _M_group_by_time_interval(NONE){}
+      , _M_group_by_time_interval(ReportGroupingTimeInterval::NONE){}
   // ---------------------------------------------------------------------------------
   ReportType::ReportType ( Uuid const& id )
       : _M_id ( id )
@@ -46,7 +47,7 @@ namespace dp
       , _M_icon("")
       , _M_group_by_task(false)
       , _M_group_by_project(false)
-      , _M_group_by_time_interval(NONE){}
+      , _M_group_by_time_interval(ReportGroupingTimeInterval::NONE){}
   // ---------------------------------------------------------------------------------
   Uuid const& ReportType::id() const
   {
@@ -84,7 +85,7 @@ namespace dp
   {
     if(groupByProject()) return false;
     if(groupByTask()) return false;
-    if(groupByTimeInterval() != NONE) return false;
+    if(groupByTimeInterval() != ReportGroupingTimeInterval::NONE) return false;
     return true;
   }
   // ---------------------------------------------------------------------------------

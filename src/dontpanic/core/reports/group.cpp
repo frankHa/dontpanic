@@ -2,12 +2,31 @@
 #include "category.h"
 #include "filter.h"
 #include <libdontpanic/durationformatter.h>
+#include <libdontpanic/reportgroupingtimeinterval.h>
+#include <libdontpanic/time.hpp>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
   // ---------------------------------------------------------------------------------
   namespace reports
   {
+    // ---------------------------------------------------------------------------------
+    namespace detail
+    {
+      grouping::category *embed(grouping::category *parent, grouping::category *child)
+      {
+        grouping::category *result = parent;
+        if(result == 0)
+        {
+          result = child;
+        }
+        else
+        {
+          result->embed(child);
+        }
+        return result;
+      }
+    }
     // ---------------------------------------------------------------------------------
     // group impl:
     // ---------------------------------------------------------------------------------
@@ -80,14 +99,38 @@ namespace dp
       if ( _M_type.groupByProject() )
       {
         grouping::category *p = new grouping::project ( a.project() );
-        if ( result == 0 )
-        {
-          result = p;
-        }
-        else
-        {
-          result->embed ( p );
-        }
+        result = detail::embed(result, p);
+      }
+      if(_M_type.groupByTimeInterval() == ReportGroupingTimeInterval::DAILY)
+      {
+        grouping::category *p = new grouping::daily(a.startTime().date());
+        result = detail::embed(result, p);
+      }
+      if(_M_type.groupByTimeInterval() == ReportGroupingTimeInterval::WEEKLY)
+      {
+        QDate const& d = a.startTime().date();
+        int year;
+        int week = d.weekNumber(&year);
+        grouping::category *p = new grouping::weekly(week, year);
+        result = detail::embed(result, p);
+      }
+      if(_M_type.groupByTimeInterval() == ReportGroupingTimeInterval::MONTHLY)
+      {
+        QDate const& d = a.startTime().date();
+        grouping::category *p = new grouping::monthly(d.month(), d.year());
+        result = detail::embed(result, p);
+      }
+      if(_M_type.groupByTimeInterval() == ReportGroupingTimeInterval::QUARTERLY)
+      {
+        QDate const& d = a.startTime().date();
+        grouping::category *p = new grouping::quarterly(time::quarter(d), d.year());
+        result = detail::embed(result, p);
+      }
+      if(_M_type.groupByTimeInterval() == ReportGroupingTimeInterval::YEARLY)
+      {
+        QDate const& d = a.startTime().date();
+        grouping::category *p = new grouping::yearly(d.year());
+        result = detail::embed(result, p);
       }
       if ( result == 0 )
       {

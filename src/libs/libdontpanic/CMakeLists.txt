@@ -17,6 +17,7 @@ set(libdontpanic_SRCS
     reportdata.cpp
     reportdatafilter.cpp    
     reportdatafiltertype.cpp
+    reportgroupingtimeinterval.cpp 
     reporttype.cpp
     report.cpp 
     task.cpp

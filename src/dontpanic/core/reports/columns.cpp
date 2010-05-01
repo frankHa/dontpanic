@@ -3,8 +3,10 @@
 #include "context.h"
 #include <libdontpanic/uuid.h>
 #include <libdontpanic/durationformatter.h>
+#include <libdontpanic/time.hpp>
 #include <libdontpanic/action.hpp>
 #include <libdontpanic/reporttype.h>
+#include <libdontpanic/reportgroupingtimeinterval.h>
 #include <QVariant>
 
 // ---------------------------------------------------------------------------------
@@ -41,7 +43,7 @@ namespace dp
         public:
           static bool applies_to ( ReportType const& t )
           {
-            return t.groupByTimeInterval() == ReportType::DAILY;
+            return t.groupByTimeInterval() == ReportGroupingTimeInterval::DAILY;
           }
           virtual QString name() const
           {
@@ -51,7 +53,7 @@ namespace dp
           {
             Action const& a = g->first();
             if ( !a.isValid() ) return "";
-            return a.startTime().date();
+            return a.startTime().date().toString();
           }
       };
       // ---------------------------------------------------------------------------------
@@ -60,7 +62,7 @@ namespace dp
         public:
           static bool applies_to ( ReportType const& t )
           {
-            return t.groupByTimeInterval() == ReportType::WEEKLY;
+            return t.groupByTimeInterval() == ReportGroupingTimeInterval::WEEKLY;
           }
           virtual QString name() const
           {
@@ -79,7 +81,7 @@ namespace dp
         public:
           static bool applies_to ( ReportType const& t )
           {
-            return t.groupByTimeInterval() == ReportType::MONTHLY;
+            return t.groupByTimeInterval() == ReportGroupingTimeInterval::MONTHLY;
           }
           virtual QString name() const
           {
@@ -98,7 +100,7 @@ namespace dp
         public:
           static bool applies_to ( ReportType const& t )
           {
-            return t.groupByTimeInterval() == ReportType::QUARTERLY;
+            return t.groupByTimeInterval() == ReportGroupingTimeInterval::QUARTERLY;
           }
           virtual QString name() const
           {
@@ -108,11 +110,7 @@ namespace dp
           {
             Action const& a = g->first();
             if ( !a.isValid() ) return "";
-            int month = a.startTime().date().month();
-            if ( month < 4 ) return 1;
-            if ( month < 7 ) return 2;
-            if ( month < 10 ) return 3;
-            return 4;
+            return time::quarter(a.startTime().date());
           }
       };
       // ---------------------------------------------------------------------------------
@@ -124,7 +122,7 @@ namespace dp
           static bool applies_to ( ReportType const& t )
           {
             int tg = t.groupByTimeInterval();
-            return ( tg == ReportType::WEEKLY || tg == ReportType::MONTHLY || tg == ReportType::QUARTERLY );
+            return ( tg == ReportGroupingTimeInterval::WEEKLY || tg == ReportGroupingTimeInterval::MONTHLY || tg == ReportGroupingTimeInterval::QUARTERLY );
           }
           virtual QString name() const
           {
@@ -134,9 +132,9 @@ namespace dp
           {
             Action const& a = g->first();
             if ( !a.isValid() ) return "";
-            if ( _M_report_type.groupByTimeInterval() != ReportType::WEEKLY )
+            if ( _M_report_type.groupByTimeInterval() != ReportGroupingTimeInterval::WEEKLY )
             {
-              return a.startTime().date().month();
+              return a.startTime().date().year();
             }
             int year;
             a.startTime().date().weekNumber ( &year );
