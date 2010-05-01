@@ -69,7 +69,9 @@ namespace dp
         // ---------------------------------------------------------------------------------
         void update_select_tasks_enabled_state(int selected_filter_type);
         // ---------------------------------------------------------------------------------
-        void update_select_projects_enabled_state(int selected_filter_type);        
+        void update_select_projects_enabled_state(int selected_filter_type);    
+        // ---------------------------------------------------------------------------------
+        void select_target_file();
         // ---------------------------------------------------------------------------------
       private:
         // ---------------------------------------------------------------------------------

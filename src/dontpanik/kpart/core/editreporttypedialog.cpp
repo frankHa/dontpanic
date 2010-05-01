@@ -24,6 +24,8 @@
 #include <libdontpanic/reportgroupingtimeinterval.h>
 #include "selectprojectsdialog.h"
 #include "selecttasksdialog.h"
+#include <kfiledialog.h>
+
 namespace dp
 {
   // ---------------------------------------------------------------------------------
@@ -73,6 +75,7 @@ namespace dp
       connect(_M_ui->select_projects, SIGNAL(clicked()), this, SLOT(select_projects()));
       connect(_M_ui->task_filter_type, SIGNAL(currentIndexChanged(int)), this, SLOT(update_select_tasks_enabled_state(int)));
       connect(_M_ui->project_filter_type, SIGNAL(currentIndexChanged(int)), this, SLOT(update_select_projects_enabled_state(int)));
+      connect(_M_ui->select_target_file, SIGNAL(clicked()), this, SLOT(select_target_file()));
     }
     // ---------------------------------------------------------------------------------
     void EditReportTypeDialog::init_combo_boxes()
@@ -143,6 +146,16 @@ namespace dp
     void EditReportTypeDialog::update_select_projects_enabled_state(int selected_filter_type)
     {
       _M_ui->select_projects->setEnabled(selected_filter_type != ReportDataFilterType::NO_FILTER);
+    }
+    // ---------------------------------------------------------------------------------
+    void EditReportTypeDialog::select_target_file()
+    {
+      KUrl url(_M_ui->export_data_file->text());
+      QString const& selection = KFileDialog::getSaveFileName(url);
+      if(!selection.isEmpty())
+      {
+        _M_ui->export_data_file->setText(selection);
+      }
     }
     // ---------------------------------------------------------------------------------
   }
