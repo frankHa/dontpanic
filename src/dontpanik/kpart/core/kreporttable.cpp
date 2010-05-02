@@ -20,6 +20,7 @@
 #include "kreporttable.h"
 #include "kreporttablemodel.h"
 #include "context.h"
+#include "mailinterface.h"
 #include <libdontpanic/report.h>
 #include <QSortFilterProxyModel>
 #include <KAction>
@@ -116,6 +117,16 @@ namespace dp
       out.write ( _M_data_model->report().reportData().exportDataString().toAscii() );
       out.close();
       KMessageBox::information ( 0, i18n ( "Report exported successfully to <b>'%1'</b>." ).arg ( filename ), i18n ( "Report Export - Don't Panik" ) );
+      send_per_mail(out_info);
+    }
+    // ---------------------------------------------------------------------------------
+    void KReportTable::send_per_mail(QFileInfo const& report_file)
+    {
+      Mail mail;
+      mail.setSubject(report_file.fileName());
+      mail.addAttachement(report_file.absoluteFilePath());
+      MailInterface interface;
+      interface.send(mail);
     }
     // ---------------------------------------------------------------------------------
   }
