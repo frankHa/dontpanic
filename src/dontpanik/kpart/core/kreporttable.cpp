@@ -36,6 +36,20 @@ namespace dp
   namespace core
   {
     // ---------------------------------------------------------------------------------
+    namespace detail
+    {
+      KUrl url(QString const& filename)
+      {
+        QFileInfo fi(filename);
+        QDir const& parent = fi.absoluteDir();
+        if(parent.exists())
+        {
+          return KUrl(filename);
+        }
+        return KUrl(fi.fileName());
+      }
+    }
+    // ---------------------------------------------------------------------------------
     KReportTable::KReportTable ( QWidget* parent )
         : QTableView ( parent )
     {
@@ -82,7 +96,8 @@ namespace dp
       Uuid const&id = _M_data_model->report().reportType().id();
       //fetching the target file name from the most recent representation of the report type (instead of using the cached report type definition):
       QString filename = context()->reportManager()->load ( id ).exportDataFileName ( _M_data_model->report() );
-      filename = KFileDialog::getSaveFileName ( KUrl ( filename ), QString(), 0, i18n ( "Export Report Data to" ) );
+      
+      filename = KFileDialog::getSaveFileName ( detail::url(filename), QString(), 0, i18n ( "Export Report Data to" ) );
       if ( filename.isEmpty() ) {return;}
       QFile out ( filename );
       QFileInfo out_info ( out );
