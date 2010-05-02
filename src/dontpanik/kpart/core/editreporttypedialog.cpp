@@ -42,6 +42,7 @@ namespace dp
         setMainWidget(w);
         setCaption(i18n("Report Type"));
         setButtons(Ok | Cancel);
+        enableButtonOk(false);
         _M_ui->icon->setIconType(KIconLoader::NoGroup, KIconLoader::Emote);
         setup_actions();
         init_combo_boxes();        
@@ -76,6 +77,7 @@ namespace dp
       connect(_M_ui->task_filter_type, SIGNAL(currentIndexChanged(int)), this, SLOT(update_select_tasks_enabled_state(int)));
       connect(_M_ui->project_filter_type, SIGNAL(currentIndexChanged(int)), this, SLOT(update_select_projects_enabled_state(int)));
       connect(_M_ui->select_target_file, SIGNAL(clicked()), this, SLOT(select_target_file()));
+      connect(_M_ui->name, SIGNAL(textChanged(QString)), this, SLOT(on_report_name_changed(QString)));
     }
     // ---------------------------------------------------------------------------------
     void EditReportTypeDialog::init_combo_boxes()
@@ -146,6 +148,11 @@ namespace dp
     void EditReportTypeDialog::update_select_projects_enabled_state(int selected_filter_type)
     {
       _M_ui->select_projects->setEnabled(selected_filter_type != ReportDataFilterType::NO_FILTER);
+    }
+    // ---------------------------------------------------------------------------------
+    void EditReportTypeDialog::on_report_name_changed(QString const& name)
+    {
+      this->enableButtonOk(!name.isEmpty());
     }
     // ---------------------------------------------------------------------------------
     void EditReportTypeDialog::select_target_file()
