@@ -20,7 +20,7 @@
 #include "kreporttable.h"
 #include "kreporttablemodel.h"
 #include "context.h"
-#include "mailinterface.h"
+#include "reportexportedsuccessfullydialog.h"
 #include <libdontpanic/report.h>
 #include <QSortFilterProxyModel>
 #include <KAction>
@@ -39,15 +39,15 @@ namespace dp
     // ---------------------------------------------------------------------------------
     namespace detail
     {
-      KUrl url(QString const& filename)
+      KUrl url ( QString const& filename )
       {
-        QFileInfo fi(filename);
+        QFileInfo fi ( filename );
         QDir const& parent = fi.absoluteDir();
-        if(parent.exists())
+        if ( parent.exists() )
         {
-          return KUrl(filename);
+          return KUrl ( filename );
         }
-        return KUrl(fi.fileName());
+        return KUrl ( fi.fileName() );
       }
     }
     // ---------------------------------------------------------------------------------
@@ -97,8 +97,8 @@ namespace dp
       Uuid const&id = _M_data_model->report().reportType().id();
       //fetching the target file name from the most recent representation of the report type (instead of using the cached report type definition):
       QString filename = context()->reportManager()->load ( id ).exportDataFileName ( _M_data_model->report() );
-      
-      filename = KFileDialog::getSaveFileName ( detail::url(filename), QString(), 0, i18n ( "Export Report Data to" ) );
+
+      filename = KFileDialog::getSaveFileName ( detail::url ( filename ), QString(), 0, i18n ( "Export Report Data to" ) );
       if ( filename.isEmpty() ) {return;}
       QFile out ( filename );
       QFileInfo out_info ( out );
@@ -111,22 +111,19 @@ namespace dp
       }
       if ( !out.open ( QIODevice::WriteOnly ) )
       {
-        KMessageBox::error ( 0, i18n ( "Unable to export Report Data to file <b>'%1'</b>." ).arg ( filename ), i18n ( "Report Export Error - Don't Panik" ) );
+        KMessageBox::error ( 0, i18n ( "Unable to export Report Data to file <b>'%1'</b>." ).arg ( filename ), i18n ( "Report Export Error" ) );
         return;
       }
       out.write ( _M_data_model->report().reportData().exportDataString().toAscii() );
       out.close();
-      KMessageBox::information ( 0, i18n ( "Report exported successfully to <b>'%1'</b>." ).arg ( filename ), i18n ( "Report Export - Don't Panik" ) );
-      send_per_mail(out_info);
-    }
-    // ---------------------------------------------------------------------------------
-    void KReportTable::send_per_mail(QFileInfo const& report_file)
-    {
-      Mail mail;
-      mail.setSubject(report_file.fileName());
-      mail.addAttachement(report_file.absoluteFilePath());
-      MailInterface interface;
-      interface.send(mail);
+      KDialog *dlg = new ReportExportedSuccessfullyDialog ( out_info );
+      KMessageBox::createKMessageBox ( dlg
+                                       , QMessageBox::Information
+                                       , i18n ( "Report exported successfully to <b>'%1'</b>." ).arg ( filename )
+                                       , QStringList()
+                                       , QString ( "" )
+                                       , 0
+                                       , KMessageBox::Notify );
     }
     // ---------------------------------------------------------------------------------
   }

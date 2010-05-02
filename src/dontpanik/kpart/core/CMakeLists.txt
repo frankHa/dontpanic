@@ -1,7 +1,7 @@
 include_directories(${CMAKE_BINARY_DIR})
 
 
-set(dontpanikpart_LIB_SRCS
+set(dontpanikpart_LIB_SRCS 
     actiontemplateaction.cpp
     context.cpp 
     country.cpp
@@ -42,6 +42,7 @@ set(dontpanikpart_LIB_SRCS
     ktaskstablemodel.cpp    
     mailinterface.cpp 
     plannedworkingtimesdialog.cpp
+    reportexportedsuccessfullydialog.cpp
     selectprojectsdialog.cpp
     selecttasksdialog.cpp
     selectentitydialog.cpp
