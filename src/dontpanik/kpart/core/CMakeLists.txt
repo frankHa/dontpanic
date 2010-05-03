@@ -70,6 +70,11 @@ set(dontpanikpart_LIB_UIS
 
 qt4_wrap_ui(dontpanikpart_LIB_SRCS ${dontpanikpart_LIB_UIS})
 
+qt4_add_dbus_interface(dontpanikpart_LIB_SRCS
+                       ${KDEPIMLIBS_DBUS_INTERFACES_DIR}/org.kde.kmail.kmail.xml
+                       remote_kmail
+)
+
 
 kde4_add_library(dontpanikpartprivate SHARED ${dontpanikpart_LIB_SRCS})
 target_link_libraries(dontpanikpartprivate ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KPARTS_LIBS} ${KDEPIMLIBS_KHOLIDAYS_LIBS} dontpanic_client_lib dontpanic_lib)

@@ -49,20 +49,51 @@ namespace dp
     // ---------------------------------------------------------------------------------
     // Mail interface:
     // ---------------------------------------------------------------------------------
-    MailInterface::MailInterface ( QObject* parent ) 
-    : QObject ( parent ){}
+    MailInterface::MailInterface ( QObject* parent )
+        : QObject ( parent )
+        , _M_remote ( 0 ) {}
 
     // ---------------------------------------------------------------------------------
     void MailInterface::send ( Mail const& mail )
     {
-      QStringList arguments;
-      arguments<<"-s"<<mail.subject();
-      foreach(QString const& url, mail.attachements())
+      if ( remote()->isValid() )
       {
-        arguments<<"--attach"<<url;
+        QString to("");
+        QString cc("");
+        QString bcc("");
+        QString const& subject = mail.subject();
+        QString body("");
+        bool hidden(false);
+        QString messageFile("");
+        QStringList const& attachements = mail.attachements();
+        QStringList customHeaders;
+        remote()->openComposer(to, cc, bcc, subject, body, hidden, messageFile, attachements, customHeaders);
       }
-      arguments<<"--composer";
-      QProcess::execute("kmail", arguments);
+      else
+      {
+        QStringList arguments;
+        arguments << "-s" << mail.subject();
+        foreach ( QString const& url, mail.attachements() )
+        {
+          arguments << "--attach" << url;
+        }
+        arguments << "--composer";
+        QProcess::execute ( "kmail", arguments );
+      }
+    }
+    // ---------------------------------------------------------------------------------
+    org::kde::kmail::kmail *MailInterface::remote()
+    {
+      if ( _M_remote == 0 )
+      {
+        _M_remote = new org::kde::kmail::kmail
+        ( "org.kde.kmail", "/KMail", QDBusConnection::sessionBus(), this );
+        if ( !_M_remote->isValid() )
+        {
+          kWarning() << _M_remote->lastError();
+        }
+      }
+      return _M_remote;
     }
     // ---------------------------------------------------------------------------------
   }

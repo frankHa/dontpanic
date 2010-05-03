@@ -42,13 +42,14 @@ namespace dp
     }
     // ---------------------------------------------------------------------------------
     void ReportExportedSuccessfullyDialog::on_send_via_mail()
-    {
-      Mail mail;
-      mail.setSubject(_M_report_file.fileName());
-      mail.addAttachement(_M_report_file.absoluteFilePath());
-      MailInterface interface;
-      interface.send(mail);
-      this->accept();      
+    {      
+//       QFileInfo report = _M_report_file;      
+      this->done(User1);           
+//       Mail mail;
+//       mail.setSubject(report.fileName());
+//       mail.addAttachement(report.absoluteFilePath());
+//       MailInterface interface;
+//       interface.send(mail); 
     }
     // ---------------------------------------------------------------------------------
   }

@@ -20,6 +20,7 @@
 #include "kreporttable.h"
 #include "kreporttablemodel.h"
 #include "context.h"
+#include "mailinterface.h"
 #include "reportexportedsuccessfullydialog.h"
 #include <libdontpanic/report.h>
 #include <QSortFilterProxyModel>
@@ -116,14 +117,22 @@ namespace dp
       }
       out.write ( _M_data_model->report().reportData().exportDataString().toAscii() );
       out.close();
-      KDialog *dlg = new ReportExportedSuccessfullyDialog ( out_info );
-      KMessageBox::createKMessageBox ( dlg
-                                       , QMessageBox::Information
-                                       , i18n ( "Report exported successfully to <b>'%1'</b>." ).arg ( filename )
-                                       , QStringList()
-                                       , QString ( "" )
-                                       , 0
-                                       , KMessageBox::Notify );
+      KDialog *dlg = new ReportExportedSuccessfullyDialog ( out_info, this );
+      int result = KMessageBox::createKMessageBox ( dlg
+                   , QMessageBox::Information
+                   , i18n ( "Report exported successfully to <b>'%1'</b>." ).arg ( filename )
+                   , QStringList()
+                   , QString ( "" )
+                   , 0
+                   , KMessageBox::Notify );
+      if ( result == KDialog::User1 )
+      {
+        Mail mail;
+        mail.setSubject ( out_info.fileName() );
+        mail.addAttachement ( out_info.absoluteFilePath() );
+        MailInterface interface;
+        interface.send ( mail );
+      }
     }
     // ---------------------------------------------------------------------------------
   }
