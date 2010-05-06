@@ -12,9 +12,14 @@ namespace dp
       // ---------------------------------------------------------------------------------
       inline QString format(int duration)
       {
+        QString pattern("%L1:%L2");
+        if(duration < 0)
+        {
+          pattern = "-" + pattern;
+        }        
         int mins = duration%60;
         int h = (duration-mins)/60;
-        QString result = QString("%L1:%L2").arg(h,2, 10, QChar('0')).arg(abs(mins),2, 10, QChar('0'));
+        QString result = pattern.arg(abs(h),2, 10, QChar('0')).arg(abs(mins),2, 10, QChar('0'));
         return result;
       }
       // ---------------------------------------------------------------------------------

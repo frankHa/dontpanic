@@ -66,7 +66,6 @@ namespace dp
       bool      _M_valid;
       ReportType   _M_type;
       TimeRange _M_time_range;
-      QString   _M_report_data_deprecated;
       ReportData _M_report_data;
       int       _M_duration;
       int       _M_planned_working_time;

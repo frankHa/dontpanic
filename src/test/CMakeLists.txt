@@ -9,3 +9,4 @@ endmacro(link)
 # defining our test cases:
 ########################################
 #create_test(reportgeneratortest reportgeneratortest.cpp dummypersistence.cpp)
+create_test(durationformattertest durationformattertest.cpp)

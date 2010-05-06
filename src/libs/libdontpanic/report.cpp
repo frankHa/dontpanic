@@ -25,7 +25,6 @@ namespace dp
   Report::Report()
       : _M_valid ( true )
       , _M_type ( NullReportType() )
-      , _M_report_data_deprecated ( "" )
       , _M_duration ( 0 )
       , _M_planned_working_time ( 0 ) {}
       // ---------------------------------------------------------------------------------
