@@ -39,6 +39,8 @@ namespace dp
           // ---------------------------------------------------------------------------------
           success create_task_filter_table() const; 
           // ---------------------------------------------------------------------------------
+          success create_email_recipients_table() const;
+          // ---------------------------------------------------------------------------------
           bool exists ( dp::ReportType const& _project ) const;
           // ---------------------------------------------------------------------------------
           success insert ( dp::ReportType const&_p ) const;
@@ -49,13 +51,19 @@ namespace dp
           // ---------------------------------------------------------------------------------
           success load_selected_tasks( dp::ReportType & _p) const;
           // ---------------------------------------------------------------------------------
+          success load_selected_email_recipients( dp::ReportType & _p) const;
+          // ---------------------------------------------------------------------------------
           success update_selected_projects ( dp::ReportType const& _p ) const;
           // ---------------------------------------------------------------------------------
           success update_selected_tasks ( dp::ReportType const& _p ) const;
           // ---------------------------------------------------------------------------------
+          success update_selected_email_recipients( dp::ReportType const& _p) const;
+          // ---------------------------------------------------------------------------------
           success remove_selected_projects(dp::ReportType const& _p) const;
           // ---------------------------------------------------------------------------------
           success remove_selected_tasks(dp::ReportType const& _p) const;
+          // ---------------------------------------------------------------------------------
+          success remove_selected_email_recipients( dp::ReportType const& _p) const;
           // ---------------------------------------------------------------------------------
           success assign_query_values_to_entity ( QSqlQuery &query, dp::ReportType &p ) const;
           // ---------------------------------------------------------------------------------
