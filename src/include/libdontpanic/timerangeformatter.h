@@ -10,7 +10,9 @@ namespace dp
   class DP_EXPORT TimeRangeFormatter
   {
     public:
-      QString pretty_format ( TimeRange const& range );
+      QString pretty_filename_format ( TimeRange const& range );
+      
+      QString pretty_ui_format(TimeRange const& range);
   };
   // ---------------------------------------------------------------------------------
   inline TimeRangeFormatter time_range_formatter()

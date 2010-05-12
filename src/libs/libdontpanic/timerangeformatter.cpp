@@ -16,7 +16,7 @@ namespace dp
     }
   }
   // ---------------------------------------------------------------------------------
-  QString TimeRangeFormatter::pretty_format ( TimeRange const& range )
+  QString TimeRangeFormatter::pretty_filename_format ( TimeRange const& range )
   {
     if(detail::is_complete_month(range))
     {
@@ -25,6 +25,16 @@ namespace dp
     QString result("%1_%2");
     return result.arg(range.from().date().toString(Qt::DefaultLocaleShortDate)).arg(range.to().date().toString(Qt::DefaultLocaleShortDate));        
     
+  }
+  // ---------------------------------------------------------------------------------
+  QString TimeRangeFormatter::pretty_ui_format(TimeRange const& range)
+  {
+    if(detail::is_complete_month(range))
+    {
+      return range.from().toString("MMMM yyyy");
+    }
+    QString result("%1 - %2");
+    return result.arg(range.from().date().toString()).arg(range.to().date().toString());        
   }
   // ---------------------------------------------------------------------------------
 }

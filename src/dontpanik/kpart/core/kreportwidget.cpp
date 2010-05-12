@@ -21,6 +21,7 @@
 #include "ui_kreportwidget.h"
 #include "context.h"
 #include <libdontpanic/durationformatter.h>
+#include <libdontpanic/timerangeformatter.h>
 
 namespace dp
 {
@@ -44,10 +45,7 @@ namespace dp
     {
       _M_ui->report_type->setText(r.reportType().name());
       _M_ui->report_table->setReport(r);
-      _M_ui->report_range->setText(i18n("%1 - %2")
-      .arg(r.range().from().date().toString())
-      .arg(r.range().to().date().toString())
-      );
+      _M_ui->report_range->setText(time_range_formatter().pretty_ui_format ( r.range() ));
       _M_ui->duration->setText(duration_formatter().format(r.duration()));
       _M_ui->planned_time->setText(duration_formatter().format(r.plannedWorkingTime()));
       _M_ui->overtime->setText(duration_formatter().format(r.duration()-r.plannedWorkingTime()));
