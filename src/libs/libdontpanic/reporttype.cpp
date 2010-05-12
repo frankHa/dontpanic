@@ -199,7 +199,7 @@ namespace dp
     return *this;
   }
   // ---------------------------------------------------------------------------------
-  bool ReportType::enableEmailExport() const
+  bool ReportType::isEmailExportEnabled() const
   {
     return _M_enable_email_export;
   }

@@ -257,7 +257,7 @@ namespace dp
         query.addBindValue ( _p.taskFilter().filterType() );
         query.addBindValue ( _p.projectFilter().filterType() );
         query.addBindValue ( _p.exportDataFileTemplate() );
-        query.addBindValue ( _p.enableEmailExport() );
+        query.addBindValue ( _p.isEmailExportEnabled() );
         query.addBindValue ( _p.defaultMailBody() );
         query.addBindValue ( _p.defaultMailSenderId() );
         success result = execute ( query );
@@ -300,7 +300,7 @@ namespace dp
         query.addBindValue ( _p.taskFilter().filterType() );
         query.addBindValue ( _p.projectFilter().filterType() );
         query.addBindValue ( _p.exportDataFileTemplate() );
-        query.addBindValue ( _p.enableEmailExport() );
+        query.addBindValue ( _p.isEmailExportEnabled() );
         query.addBindValue ( _p.defaultMailBody() );
         query.addBindValue ( _p.defaultMailSenderId() );
         query.addBindValue ( _p.id().toString() );
