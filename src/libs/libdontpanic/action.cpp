@@ -7,8 +7,8 @@ namespace dp
   {
     if(time.isNull()){return time;}
     QDateTime dt = time;
-    QTime t = dt.time();
-    dt.setTime(t.addSecs(-t.second()));
+    QTime t(dt.time().hour(), dt.time().minute(), dt.time().second());
+    dt.setTime(t);
     return dt;
   }
   // ---------------------------------------------------------------------------------
