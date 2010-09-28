@@ -22,6 +22,7 @@
 #include "keditprojectdialog.h"
 #include "context.h"
 #include <KMessageBox>
+#include <QHeaderView>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -34,6 +35,7 @@ namespace dp
         , _M_model ( new detail::KProjectsTableModel ( this ) )
         , _M_sort_proxy_model(new QSortFilterProxyModel(this))
     {
+      verticalHeader()->setDefaultSectionSize(verticalHeader()->minimumSectionSize()+2);
       _M_sort_proxy_model->setSourceModel(_M_model);
       setModel ( _M_sort_proxy_model );
       resizeColumnsToContents();
