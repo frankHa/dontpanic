@@ -89,7 +89,7 @@ namespace dp
       connect ( _M_actions_of_selected_day, SIGNAL ( stored ( dp::Action ) ), this, SLOT ( on_action_stored ( dp::Action ) ) );
       connect ( _M_actions_of_selected_day, SIGNAL ( removed ( dp::Action ) ), this, SLOT ( on_action_removed ( dp::Action ) ) );
       _M_todays_actions->setSourceTimeTracker ( context()->timeTracker() );
-      _M_todays_actions->initCache ( QDate::currentDate() );
+      _M_todays_actions->initCache ();
       _M_actions_of_selected_day->setSourceTimeTracker ( context()->timeTracker() );
       _M_actions_of_selected_day->initCache ( _M_cached_selected_day );
       
