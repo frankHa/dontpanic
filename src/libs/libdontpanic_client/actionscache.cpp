@@ -49,7 +49,7 @@ namespace dp
     // ---------------------------------------------------------------------------------
     ActionsCache& ActionsCache::initCache()
     {
-      initCache ( QDate() );
+      initCache ( QDate::currentDate() );
       _M_is_live_cache = true;
       return *this;
     }
@@ -134,7 +134,7 @@ namespace dp
     void ActionsCache::update_timerange_if_necessary()
     {
       if(not _M_is_live_cache){return;}
-      QDate now;
+      QDate now = QDate::currentDate();
       if(now>_M_current_time_range.to().date())
       {
         initCache();
