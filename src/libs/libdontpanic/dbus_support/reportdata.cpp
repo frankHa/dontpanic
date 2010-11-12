@@ -8,8 +8,9 @@ namespace dp
   {
     QStringList &_h= data.headers();
     ReportData::Data &_d = data.data();
+    ReportData::TypeList &_t = data.columnTypes();
     arg.beginStructure();
-    arg>>_h>>_d;
+    arg>>_h>>_d >> _t;
     arg.endStructure();
     return arg;
   }
@@ -17,7 +18,7 @@ namespace dp
   QDBusArgument & operator << ( QDBusArgument &arg, ReportData const& data )
   {
     arg.beginStructure();
-    arg<< data.headers()<< data.data();
+    arg<< data.headers()<< data.data()<<data.columnTypes();
     arg.endStructure();
     return arg;
   }

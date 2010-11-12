@@ -32,7 +32,8 @@ namespace dp
     QVariant KReportTableModel::data ( const QModelIndex& index, int role ) const
     {
       if(!index.isValid()) return QVariant();
-      if(!role == Qt::DisplayRole) return QVariant();
+      if(role == SortRole) return _M_report.reportData().rawData(index);
+      if(role != Qt::DisplayRole) return QVariant();
       return _M_report.reportData().data(index);
     }
     // ---------------------------------------------------------------------------------

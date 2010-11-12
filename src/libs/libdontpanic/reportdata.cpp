@@ -16,43 +16,58 @@ namespace dp
   // ---------------------------------------------------------------------------------
   QVariant ReportData::header ( int col ) const
   {
-    if(col < 0 || col>=_M_headers.count()) return QVariant();
-    return _M_headers.value(col);
+    if ( col < 0 || col >= _M_headers.count() ) return QVariant();
+    return _M_headers.value ( col );
   }
   // ---------------------------------------------------------------------------------
-  QVariant ReportData::data(QModelIndex const& index) const
+  QVariant ReportData::data ( QModelIndex const& index ) const
   {
-    if(index.row()>=_M_data.count()){return QVariant();}
-    Row const& row = _M_data.value(index.row());
-    if(index.column()>=row.count()){return QVariant();}
+    return display_value(rawData ( index ), _M_column_types.value(index.column()));
+  }
+  // ---------------------------------------------------------------------------------
+  QVariant ReportData::rawData(QModelIndex const& index) const
+  {
+    if ( index.row() >= _M_data.count() ) {return QVariant();}
+    Row const& row = _M_data.value ( index.row() );
+    if ( index.column() >= row.count() ) {return QVariant();}
     return row.value(index.column());
+  }
+  // ---------------------------------------------------------------------------------
+  QVariant ReportData::display_value(QVariant const& value, int t) const
+  {
+    switch(t)
+    {
+      case Percentage: return QString("%1%").arg ( value.toDouble(), 0, 'f', 2 );
+      default: return value;
+    }
   }
   // ---------------------------------------------------------------------------------
   QString ReportData::exportDataString() const
   {
     QString const& format = dataFormatString();
-    QString result = dump_headers(format);
+    QString result = dump_headers ( format );
     QStringList entries;
-    foreach(Row const row, _M_data)
+    foreach ( Row const row, _M_data )
     {
-      entries<<dump_data(row, format);
+      entries << dump_data ( row, format );
     }
-    qSort(entries);
-    foreach(QString const& entry, entries)
+    qSort ( entries );
+    foreach ( QString const& entry, entries )
     {
       result += "\n" + entry;
     }
     return result;
   }
   // ---------------------------------------------------------------------------------
-  void ReportData::addHeader(QString header)
+  void ReportData::addHeader ( QString header, int column_type )
   {
-    _M_headers<<header;
+    _M_headers << header;
+    _M_column_types<< column_type;
   }
   // ---------------------------------------------------------------------------------
   void ReportData::addRow ( ReportData::Row const& row )
   {
-    _M_data.append(row);
+    _M_data.append ( row );
   }
   // ---------------------------------------------------------------------------------
   QStringList const& ReportData::headers() const
@@ -65,7 +80,7 @@ namespace dp
     return _M_headers;
   }
   // ---------------------------------------------------------------------------------
-  ReportData::Data const& ReportData::data()const
+  ReportData::Data const& ReportData::data() const
   {
     return _M_data;
   }
@@ -81,31 +96,41 @@ namespace dp
   {
     int col_count = _M_headers.count();
     QString format = "%1";
-    for(int i=1; i<col_count;++i)
+    for ( int i = 1; i < col_count;++i )
     {
-      format +=";%" + QString::number(i+1);
+      format += ";%" + QString::number ( i + 1 );
     }
     return format;
   }
   // ---------------------------------------------------------------------------------
-  QString ReportData::dump_headers(QString const format) const
+  QString ReportData::dump_headers ( QString const format ) const
   {
     QString result = format;
-    foreach(QString const& header , _M_headers)
+    foreach ( QString const& header , _M_headers )
     {
-      result = result.arg(header);
+      result = result.arg ( header );
     }
     return result;
   }
   // ---------------------------------------------------------------------------------
-  QString ReportData::dump_data(Row const& row, QString const& format) const
+  QString ReportData::dump_data ( Row const& row, QString const& format ) const
   {
     QString result = format;
-    foreach(QVariant const& value, row)
+    foreach ( QVariant const& value, row )
     {
-      result = result.arg(value.toString());
+      result = result.arg ( value.toString() );
     }
     return result;
+  }
+  // ---------------------------------------------------------------------------------
+  ReportData::TypeList &ReportData::columnTypes()
+  {
+    return _M_column_types;
+  }
+  // ---------------------------------------------------------------------------------
+  ReportData::TypeList const& ReportData::columnTypes() const
+  {
+    return _M_column_types;
   }
   // ---------------------------------------------------------------------------------
 }

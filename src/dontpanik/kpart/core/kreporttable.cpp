@@ -82,6 +82,7 @@ namespace dp
     {
       _M_data_model = new KReportTableModel ( this );
       _M_sort_model = new QSortFilterProxyModel ( this );
+      _M_sort_model->setSortRole(KReportTableModel::SortRole);
       _M_sort_model->setSourceModel ( _M_data_model );
       this->setModel ( _M_sort_model );
       setup_actions();

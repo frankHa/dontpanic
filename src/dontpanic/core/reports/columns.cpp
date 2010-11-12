@@ -21,11 +21,12 @@ namespace dp
       // ---------------------------------------------------------------------------------
       namespace detail
       {
-        QString percentage(int overall, int duration)
+        double percentage(int overall, int duration)
         {
           double percentage = 0.0;
           if ( overall != 0 ) {percentage = 100.0 * ( double ) duration / ( double ) overall;}
-          return QString("%1%").arg ( percentage, 0, 'f', 2 );
+          //return QString("%1%").arg ( percentage, 0, 'f', 2 );
+          return percentage;
         }
       }
       // ---------------------------------------------------------------------------------
@@ -35,6 +36,7 @@ namespace dp
           virtual ~column() {}
         public:
           virtual QString name() const = 0;
+          virtual int column_type() const = 0;
           virtual QVariant value_of ( group const*g ) const = 0;
       };
       // ---------------------------------------------------------------------------------
@@ -48,6 +50,10 @@ namespace dp
           virtual QString name() const
           {
             return i18n ( "Date" );
+          }
+          virtual int column_type() const
+          {
+            return ReportData::Date;
           }
           virtual QVariant value_of ( group const*g ) const
           {
@@ -68,6 +74,10 @@ namespace dp
           {
             return i18n ( "Week" );
           }
+          virtual int column_type() const
+          {
+            return ReportData::Integer;
+          }
           virtual QVariant value_of ( group const*g ) const
           {
             Action const& a = g->first();
@@ -87,6 +97,10 @@ namespace dp
           {
             return i18n ( "Month" );
           }
+          virtual int column_type() const
+          {
+            return ReportData::String;
+          }
           virtual QVariant value_of ( group const*g ) const
           {
             Action const& a = g->first();
@@ -105,6 +119,10 @@ namespace dp
           virtual QString name() const
           {
             return i18n ( "Quarter" );
+          }
+          virtual int column_type() const
+          {
+            return ReportData::Integer;
           }
           virtual QVariant value_of ( group const*g ) const
           {
@@ -127,6 +145,10 @@ namespace dp
           virtual QString name() const
           {
             return i18n ( "Year" );
+          }
+          virtual int column_type() const
+          {
+            return ReportData::Integer;
           }
           virtual QVariant value_of ( group const*g ) const
           {
@@ -154,6 +176,10 @@ namespace dp
           {
             return i18n ( "Work Type" );
           }
+          virtual int column_type() const
+          {
+            return ReportData::String;
+          }
           virtual QVariant value_of ( group const*g ) const
           {
             Action const& a = g->first();
@@ -172,6 +198,10 @@ namespace dp
           virtual QString name() const
           {
             return i18n ( "Project" );
+          }
+          virtual int column_type() const
+          {
+            return ReportData::String;
           }
           virtual QVariant value_of ( group const*g ) const
           {
@@ -192,6 +222,10 @@ namespace dp
           {
             return i18n ( "From" );
           }
+          virtual int column_type() const
+          {
+            return ReportData::String;
+          }
           virtual QVariant value_of ( group const*g ) const
           {
             Action const& a = g->first();
@@ -210,6 +244,10 @@ namespace dp
           virtual QString name() const
           {
             return i18n ( "To" );
+          }
+          virtual int column_type() const
+          {
+            return ReportData::String;
           }
           virtual QVariant value_of ( group const*g ) const
           {
@@ -230,6 +268,10 @@ namespace dp
           {
             return i18n ( "Duration (Activity Group)" );
           }
+          virtual int column_type() const
+          {
+            return ReportData::Float;
+          }
           virtual QVariant value_of ( group const*g ) const
           {
             return duration_formatter().format ( g->duration() );
@@ -246,6 +288,10 @@ namespace dp
           virtual QString name() const
           {
             return i18n ( "Duration" );
+          }
+          virtual int column_type() const
+          {
+            return ReportData::Float;
           }
           virtual QVariant value_of ( group const*g ) const
           {
@@ -268,6 +314,10 @@ namespace dp
           {
             return i18n ( "Percentage (Activity Group)" );
           }
+          virtual int column_type() const
+          {
+            return ReportData::Percentage;
+          }
           virtual QVariant value_of ( group const*g ) const
           {
             return detail::percentage(_M_overall, g->duration());
@@ -289,6 +339,10 @@ namespace dp
           {
             return i18n ( "Percentage" );
           }
+          virtual int column_type() const
+          {
+            return ReportData::Percentage;
+          }
           virtual QVariant value_of ( group const*g ) const
           {
             return detail::percentage(_M_overall, g->duration());
@@ -307,6 +361,10 @@ namespace dp
           virtual QString name() const
           {
             return i18n ( "Project Comment" );
+          }
+          virtual int column_type() const
+          {
+            return ReportData::String;
           }
           virtual QVariant value_of ( group const*g ) const
           {
@@ -342,7 +400,7 @@ namespace dp
     {
       foreach(columns::column const* col, _M_columns)
       {
-        data.addHeader(col->name());
+        data.addHeader(col->name(), col->column_type());
       }
     }
     // ---------------------------------------------------------------------------------

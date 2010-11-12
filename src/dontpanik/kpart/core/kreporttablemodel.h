@@ -1,3 +1,4 @@
+
 /*
     <one line to give the program's name and a brief idea of what it does.>
     Copyright (C) <year>  <name of author>
@@ -31,8 +32,9 @@ namespace dp
 
     class KReportTableModel : public QAbstractTableModel
     {
-      Q_OBJECT
+        Q_OBJECT
       public:
+        enum Role {SortRole = Qt::UserRole + 1};
         KReportTableModel ( QObject* parent = 0 );
       public:
         virtual QVariant data ( const QModelIndex& index, int role = Qt::DisplayRole ) const;
@@ -40,10 +42,10 @@ namespace dp
         virtual int rowCount ( const QModelIndex& parent = QModelIndex() ) const;
         virtual QVariant headerData ( int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const;
       public:
-        void setReport(Report const& data);
+        void setReport ( Report const& data );
         void resetReport();
         Report const& report() const;
-        
+
       private:
         Report _M_report;
     };
