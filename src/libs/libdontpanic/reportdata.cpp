@@ -116,9 +116,9 @@ namespace dp
   QString ReportData::dump_data ( Row const& row, QString const& format ) const
   {
     QString result = format;
-    foreach ( QVariant const& value, row )
+    for ( int column=0; column < _M_headers.count(); ++column )
     {
-      result = result.arg ( value.toString() );
+      result = result.arg ( display_value(row.value(column), _M_column_types.value(column)).toString() );
     }
     return result;
   }
