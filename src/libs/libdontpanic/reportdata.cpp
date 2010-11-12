@@ -1,4 +1,5 @@
 #include <libdontpanic/reportdata.h>
+#include <libdontpanic/durationformatter.h>
 #include <QModelIndex>
 // ---------------------------------------------------------------------------------
 namespace dp
@@ -38,6 +39,7 @@ namespace dp
     switch(t)
     {
       case Percentage: return QString("%1%").arg ( value.toDouble(), 0, 'f', 2 );
+      case Duration: return duration_formatter().format(value.toInt());
       default: return value;
     }
   }

@@ -2,7 +2,6 @@
 #include "group.h"
 #include "context.h"
 #include <libdontpanic/uuid.h>
-#include <libdontpanic/durationformatter.h>
 #include <libdontpanic/time.hpp>
 #include <libdontpanic/action.hpp>
 #include <libdontpanic/reporttype.h>
@@ -270,11 +269,11 @@ namespace dp
           }
           virtual int column_type() const
           {
-            return ReportData::Float;
+            return ReportData::Duration;
           }
           virtual QVariant value_of ( group const*g ) const
           {
-            return duration_formatter().format ( g->duration() );
+            return ( g->duration() );
           }
       };
       // ---------------------------------------------------------------------------------
@@ -291,13 +290,13 @@ namespace dp
           }
           virtual int column_type() const
           {
-            return ReportData::Float;
+            return ReportData::Duration;
           }
           virtual QVariant value_of ( group const*g ) const
           {
             Action const& a = g->first();
             if ( !a.isValid() ) return "";
-            return duration_formatter().format ( a.duration() );
+            return ( a.duration() );
           }
       };
       // ---------------------------------------------------------------------------------

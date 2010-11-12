@@ -13,7 +13,7 @@ namespace dp
   {
       // ---------------------------------------------------------------------------------
     public:
-      enum ColumnType{String, Integer, Float, Date, Percentage, DateTime};
+      enum ColumnType{String, Integer, Float, Date, Percentage, Duration, DateTime};
       // ---------------------------------------------------------------------------------
       typedef QList<QVariant> Row;
       typedef QList<Row> Data;
