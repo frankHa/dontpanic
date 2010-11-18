@@ -41,7 +41,7 @@ namespace dp
     {
       case Percentage: return QString ( "%1%" ).arg ( value.toDouble(), 0, 'f', 2 );
       case Duration: return duration_formatter().format ( value.toInt() );
-      case DateTime: return QDateTime::fromTime_t ( value.toUInt() ).toString();
+      case DateTime: return QDateTime::fromTime_t ( value.toUInt() ).toString(Qt::SystemLocaleShortDate);
       default: return value;
     }
   }
