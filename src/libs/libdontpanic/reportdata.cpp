@@ -1,6 +1,7 @@
 #include <libdontpanic/reportdata.h>
 #include <libdontpanic/durationformatter.h>
 #include <QModelIndex>
+#include <QDateTime>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -23,23 +24,24 @@ namespace dp
   // ---------------------------------------------------------------------------------
   QVariant ReportData::data ( QModelIndex const& index ) const
   {
-    return display_value(rawData ( index ), _M_column_types.value(index.column()));
+    return display_value ( rawData ( index ), _M_column_types.value ( index.column() ) );
   }
   // ---------------------------------------------------------------------------------
-  QVariant ReportData::rawData(QModelIndex const& index) const
+  QVariant ReportData::rawData ( QModelIndex const& index ) const
   {
     if ( index.row() >= _M_data.count() ) {return QVariant();}
     Row const& row = _M_data.value ( index.row() );
     if ( index.column() >= row.count() ) {return QVariant();}
-    return row.value(index.column());
+    return row.value ( index.column() );
   }
   // ---------------------------------------------------------------------------------
-  QVariant ReportData::display_value(QVariant const& value, int t) const
+  QVariant ReportData::display_value ( QVariant const& value, int t ) const
   {
-    switch(t)
+    switch ( t )
     {
-      case Percentage: return QString("%1%").arg ( value.toDouble(), 0, 'f', 2 );
-      case Duration: return duration_formatter().format(value.toInt());
+      case Percentage: return QString ( "%1%" ).arg ( value.toDouble(), 0, 'f', 2 );
+      case Duration: return duration_formatter().format ( value.toInt() );
+      case DateTime: return QDateTime::fromTime_t ( value.toUInt() ).toString();
       default: return value;
     }
   }
@@ -64,7 +66,7 @@ namespace dp
   void ReportData::addHeader ( QString header, int column_type )
   {
     _M_headers << header;
-    _M_column_types<< column_type;
+    _M_column_types << column_type;
   }
   // ---------------------------------------------------------------------------------
   void ReportData::addRow ( ReportData::Row const& row )
@@ -118,9 +120,9 @@ namespace dp
   QString ReportData::dump_data ( Row const& row, QString const& format ) const
   {
     QString result = format;
-    for ( int column=0; column < _M_headers.count(); ++column )
+    for ( int column = 0; column < _M_headers.count(); ++column )
     {
-      result = result.arg ( display_value(row.value(column), _M_column_types.value(column)).toString() );
+      result = result.arg ( display_value ( row.value ( column ), _M_column_types.value ( column ) ).toString() );
     }
     return result;
   }

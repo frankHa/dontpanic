@@ -223,13 +223,13 @@ namespace dp
           }
           virtual int column_type() const
           {
-            return ReportData::String;
+            return ReportData::DateTime;
           }
           virtual QVariant value_of ( group const*g ) const
           {
             Action const& a = g->first();
             if ( !a.isValid() ) return "";
-            return a.startTime().toString();
+            return a.startTime().toTime_t();
           }
       };
       // ---------------------------------------------------------------------------------
@@ -246,13 +246,13 @@ namespace dp
           }
           virtual int column_type() const
           {
-            return ReportData::String;
+            return ReportData::DateTime;
           }
           virtual QVariant value_of ( group const*g ) const
           {
             Action const& a = g->first();
             if ( !a.isValid() ) return "";
-            return a.endTime().toString();
+            return a.endTime().toTime_t();
           }
       };
       // ---------------------------------------------------------------------------------
