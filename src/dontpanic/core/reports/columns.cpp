@@ -355,7 +355,7 @@ namespace dp
         public:
           static bool applies_to ( ReportType const& t )
           {
-            return ( t.noGrouping() || t.groupByProject() );
+            return ( t.groupByProject() );
           }
           virtual QString name() const
           {
@@ -370,6 +370,29 @@ namespace dp
             Action const& a = g->first();
             if ( !a.isValid() ) return "";
             return context()->projectManager()->load ( a.project() ).comment();
+          }
+      };
+      // ---------------------------------------------------------------------------------
+      class comment: public column
+      {
+        public:
+          static bool applies_to ( ReportType const& t )
+          {
+            return ( t.noGrouping() );
+          }
+          virtual QString name() const
+          {
+            return i18n ( "Comment" );
+          }
+          virtual int column_type() const
+          {
+            return ReportData::String;
+          }
+          virtual QVariant value_of ( group const*g ) const
+          {
+            Action const& a = g->first();
+            if ( !a.isValid() ) return "";
+            return a.comment();
           }
       };
       // ---------------------------------------------------------------------------------
@@ -473,6 +496,10 @@ namespace dp
       if(columns::project_comment::applies_to(t))
       {
         _M_columns.append(new columns::project_comment());
+      }
+      if(columns::comment::applies_to(t))
+      {
+        _M_columns.append(new columns::comment());
       }
     }
     // ---------------------------------------------------------------------------------
