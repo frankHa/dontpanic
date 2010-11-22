@@ -168,7 +168,7 @@ namespace dp
           // ---------------------------------------------------------------------------------
           rule *rule_for ( ReportDataFilter const& filter_def )
           {
-            rule *result;
+            rule *result=0;
             switch ( filter_def.filterType() )
             {
               case ReportDataFilterType::NO_FILTER:
