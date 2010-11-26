@@ -52,6 +52,8 @@ namespace dp
         case THIS_MONTH: return this_month();
         case LAST_WEEK:  return last_week();
         case THIS_WEEK:  return this_week();
+        case LAST_YEAR:  return last_year();
+        case THIS_YEAR:  return this_year();
         case CUSTOM:
         default: return custom_range();
       }
@@ -68,7 +70,9 @@ namespace dp
       presets<<i18n("Last Month")
       <<i18n("This Month")
       <<i18n("Last Week")
-      <<i18n("This Week");
+      <<i18n("This Week")
+      <<i18n("Last Year")
+      <<i18n("This Year");
       _M_ui->preset_choice->addItems(presets);
     }
     
@@ -126,6 +130,23 @@ namespace dp
       QDate end(current.date());
       QDate begin(end.addDays(-(end.dayOfWeek()-1)));
       return TimeRange(QDateTime(begin), current);
+    }
+    
+    TimeRange KReportRangeDialog::this_year() const
+    {
+      QDateTime current_time = QDateTime::currentDateTime();
+      QDate current_date = current_time.date();
+      QDate begin(current_date.year(), 1, 1);
+      return TimeRange(QDateTime(begin), current_time);
+    }
+    
+    TimeRange KReportRangeDialog::last_year() const
+    {
+      QDate current = QDate::currentDate();
+      QDate end(current.year(), 1, 1);
+      QDate begin(end.addMonths(-12));
+      QDateTime endtime(end);
+      return TimeRange(QDateTime(begin), endtime.addMSecs(-1));
     }
     
     void KReportRangeDialog::on_use_preset_toggled(bool checked)

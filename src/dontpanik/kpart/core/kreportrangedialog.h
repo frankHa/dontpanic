@@ -38,7 +38,7 @@ namespace dp
     {
       Q_OBJECT
       
-      enum Range{LAST_MONTH, THIS_MONTH, LAST_WEEK, THIS_WEEK, CUSTOM};
+      enum Range{LAST_MONTH, THIS_MONTH, LAST_WEEK, THIS_WEEK, LAST_YEAR, THIS_YEAR, CUSTOM};
       public:
         KReportRangeDialog ( QWidget* parent = 0, Qt::WindowFlags f = 0 );
         ~KReportRangeDialog();
@@ -58,6 +58,8 @@ namespace dp
         TimeRange this_month() const;
         TimeRange last_week() const;
         TimeRange this_week() const;
+        TimeRange last_year() const;
+        TimeRange this_year() const;
         
       private:
         Ui::KReportRangeDialog *_M_ui;

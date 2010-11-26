@@ -7,87 +7,95 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-13 21:32+0200\n"
-"PO-Revision-Date: 2010-04-13 21:37+0200\n"
-"Last-Translator: Frank Habel <frank@bugplasma.de>\n"
-"Language-Team: Deutsch <>\n"
+"POT-Creation-Date: 2010-11-26 15:03+0100\n"
+"PO-Revision-Date: 2010-11-26 15:04+0100\n"
+"Last-Translator: Frank Habel <f.habel@comforte.com>\n"
+"Language-Team: German <kde-i18n-de@kde.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 1.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: dontpanic/core/reports/columns.cpp:48
+#: dontpanic/core/reports/columns.cpp:51
 msgid "Date"
 msgstr "Datum "
 
-#: dontpanic/core/reports/columns.cpp:67
+#: dontpanic/core/reports/columns.cpp:74
 msgid "Week"
 msgstr "Woche"
 
-#: dontpanic/core/reports/columns.cpp:86
+#: dontpanic/core/reports/columns.cpp:97
 msgid "Month"
 msgstr "Monat"
 
-#: dontpanic/core/reports/columns.cpp:105
+#: dontpanic/core/reports/columns.cpp:120
 msgid "Quarter"
 msgstr "Quartal "
 
-#: dontpanic/core/reports/columns.cpp:131
+#: dontpanic/core/reports/columns.cpp:146
 msgid "Year"
 msgstr "Jahr"
 
-#: dontpanic/core/reports/columns.cpp:157
+#: dontpanic/core/reports/columns.cpp:176
 msgid "Work Type"
 msgstr "Tätigkeitstyp"
 
-#: dontpanic/core/reports/columns.cpp:176
+#: dontpanic/core/reports/columns.cpp:199
 #: dontpanik/kpart/core/kactionstablemodel.cpp:221
 #: dontpanik/kpart/core/keditprojectdialog.cpp:38
 msgid "Project"
 msgstr "Projekt"
 
-#: dontpanic/core/reports/columns.cpp:195
+#: dontpanic/core/reports/columns.cpp:222
 msgid "From"
 msgstr "Von"
 
-#: dontpanic/core/reports/columns.cpp:214
+#: dontpanic/core/reports/columns.cpp:245
 msgid "To"
 msgstr "Bis"
 
-#: dontpanic/core/reports/columns.cpp:233
+#: dontpanic/core/reports/columns.cpp:268
 msgid "Duration (Activity Group)"
 msgstr "Dauer(Aktivitätengruppe)"
 
-#: dontpanic/core/reports/columns.cpp:250
+#: dontpanic/core/reports/columns.cpp:289
 msgid "Duration"
 msgstr "Dauer"
 
-#: dontpanic/core/reports/columns.cpp:271
+#: dontpanic/core/reports/columns.cpp:314
 msgid "Percentage (Activity Group)"
 msgstr "Prozent(Aktivitätengruppe)"
 
-#: dontpanic/core/reports/columns.cpp:292
+#: dontpanic/core/reports/columns.cpp:339
 msgid "Percentage"
 msgstr "Prozent"
 
-#: dontpanic/core/reports/columns.cpp:311
+#: dontpanic/core/reports/columns.cpp:362
 msgid "Project Comment"
 msgstr "Projektkommentar"
+
+#: dontpanic/core/reports/columns.cpp:385
+#: dontpanik/kpart/core/kactionstablemodel.cpp:222
+#: dontpanik/kpart/core/kprojectstablemodel.cpp:92
+#: dontpanik/kpart/core/ktaskstablemodel.cpp:94
+msgid "Comment"
+msgstr "Bemerkung"
 
 #: dontpanik/kpart/core/desktopnotificationmanager.cpp:40
 msgid "Don't Panik Reminder"
 msgstr "Don't Panik Erinnerung"
 
-#: dontpanik/kpart/core/editreporttypedialog.cpp:40
+#: dontpanik/kpart/core/editreporttypedialog.cpp:43
 msgid "Report Type"
 msgstr "Berichtstyp"
 
-#: dontpanik/kpart/core/kactionstable.cpp:108
+#: dontpanik/kpart/core/kactionstable.cpp:109
 msgid "Do you really want to remove the selected action?"
 msgstr "Möchten Sie die ausgewählte Aktion wirklich löschen?"
 
-#: dontpanik/kpart/core/kactionstable.cpp:108
+#: dontpanik/kpart/core/kactionstable.cpp:109
 msgid "Remove Action"
 msgstr "Aktion Löschen"
 
@@ -118,12 +126,6 @@ msgstr "Titel"
 #: dontpanik/kpart/core/kactionstablemodel.cpp:220
 msgid "Type"
 msgstr "Typ"
-
-#: dontpanik/kpart/core/kactionstablemodel.cpp:222
-#: dontpanik/kpart/core/kprojectstablemodel.cpp:92
-#: dontpanik/kpart/core/ktaskstablemodel.cpp:94
-msgid "Comment"
-msgstr "Bemerkung"
 
 #: dontpanik/kpart/core/kactiontemplateslist.cpp:92
 msgid "Do you really want to remove the selected favorite definition?"
@@ -171,11 +173,11 @@ msgstr "(keine)"
 msgid "Projects"
 msgstr "Projekte"
 
-#: dontpanik/kpart/core/kprojectstable.cpp:47
+#: dontpanik/kpart/core/kprojectstable.cpp:49
 msgid "Do you really want to remove the selected project?"
 msgstr "Möchten Sie die ausgewählte Projektdefinition wirklich löschen?"
 
-#: dontpanik/kpart/core/kprojectstable.cpp:47
+#: dontpanik/kpart/core/kprojectstable.cpp:49
 msgid "Remove Project"
 msgstr "Projekt Löschen"
 
@@ -183,50 +185,40 @@ msgstr "Projekt Löschen"
 msgid "Choose Report Range"
 msgstr "Berichtszeitraum"
 
-#: dontpanik/kpart/core/kreportrangedialog.cpp:68
+#: dontpanik/kpart/core/kreportrangedialog.cpp:70
 msgid "Last Month"
 msgstr "Letzten Monat"
 
-#: dontpanik/kpart/core/kreportrangedialog.cpp:69
+#: dontpanik/kpart/core/kreportrangedialog.cpp:71
 msgid "This Month"
 msgstr "Diesen Monat"
 
-#: dontpanik/kpart/core/kreportrangedialog.cpp:70
+#: dontpanik/kpart/core/kreportrangedialog.cpp:72
 msgid "Last Week"
 msgstr "Letzte Woche"
 
-#: dontpanik/kpart/core/kreportrangedialog.cpp:71
+#: dontpanik/kpart/core/kreportrangedialog.cpp:73
 msgid "This Week"
 msgstr "Diese Woche"
 
-#: dontpanik/kpart/core/kreporttable.cpp:75
+#: dontpanik/kpart/core/kreportrangedialog.cpp:74
+msgid "Last Year"
+msgstr "Letztes Jahr"
+
+#: dontpanik/kpart/core/kreportrangedialog.cpp:75
+msgid "This Year"
+msgstr "Dieses Jahr"
+
+#: dontpanik/kpart/core/kreporttable.cpp:93
 msgid "Export Report Data to File"
 msgstr "Exportiere den Bericht in eine Datei"
 
-#: dontpanik/kpart/core/kreporttable.cpp:86
-msgid ""
-"No target file specified. Please correct the target file name in the Report "
-"definition."
-msgstr ""
-"Keine Zieldatei angegeben. Bitte korrigieren Sie den Namen der Zieldatei in "
-"der Berichtskonfiguration."
+#: dontpanik/kpart/core/kreporttable.cpp:103
+#, fuzzy
+msgid "Export Report Data to"
+msgstr "Exportiere den Bericht in eine Datei"
 
-#: dontpanik/kpart/core/kreporttable.cpp:86
-#: dontpanik/kpart/core/kreporttable.cpp:95
-#: dontpanik/kpart/core/kreporttable.cpp:113
-msgid "Report Export Error - Don't Panik"
-msgstr "Export-Fehler - Don't Panik"
-
-#: dontpanik/kpart/core/kreporttable.cpp:95
-msgid ""
-"The target file <b>'%1'</b> is pointing to a directory instead of a file."
-"<br>Please correct the target file name in the Report definition."
-msgstr ""
-"Der Name der Zieldatei <b>\"%1\"</b> zeigt auf ein Verzeichnis statt einer "
-"Datei. <br>Bitte korrigieren Sie den Namen der Zieldatei in der "
-"Berichtskonfiguration."
-
-#: dontpanik/kpart/core/kreporttable.cpp:100
+#: dontpanik/kpart/core/kreporttable.cpp:109
 msgid ""
 "The target file <b>'%1'</b> already exists. Do you really want to overwrite "
 "it?"
@@ -234,26 +226,23 @@ msgstr ""
 "Die Ziedatei <b>\"%1\"</b> existiert bereits. Möchten Sie sie wirklich "
 "überschreiben?"
 
-#: dontpanik/kpart/core/kreporttable.cpp:100
+#: dontpanik/kpart/core/kreporttable.cpp:109
 msgid "File already exists - Don't Panik"
 msgstr "Datei existiert bereits - Don't Panik"
 
-#: dontpanik/kpart/core/kreporttable.cpp:113
-msgid ""
-"Unable to export Report Data to file <b>'%1'</b>.<br>Please correct the "
-"target file name in the Report definition."
-msgstr ""
-"Leider konnte der Bericht nicht nach <b>\"%1\"</b> exportiert werden. "
-"<br>Bitte korrigieren Sie den Namen der Zieldatei in der "
-"Berichtskonfiguration."
+#: dontpanik/kpart/core/kreporttable.cpp:116
+#, fuzzy
+msgid "Unable to export Report Data to file <b>'%1'</b>."
+msgstr "Exportiere den Bericht in eine Datei"
 
-#: dontpanik/kpart/core/kreporttable.cpp:118
+#: dontpanik/kpart/core/kreporttable.cpp:116
+#, fuzzy
+msgid "Report Export Error"
+msgstr "Export-Fehler - Don't Panik"
+
+#: dontpanik/kpart/core/kreporttable.cpp:124
 msgid "Report exported successfully to <b>'%1'</b>."
 msgstr "Der Bericht wurde erfolgreich nach <b>\"%1\"</b> exportiert."
-
-#: dontpanik/kpart/core/kreporttable.cpp:118
-msgid "Report Export - Don't Panik"
-msgstr "Berichtsexport - Don't Panik"
 
 #: dontpanik/kpart/core/kreporttypeslist.cpp:47
 msgid "Generate Report"
@@ -276,10 +265,6 @@ msgstr "Berichtstyp löschen"
 msgid "Do you really want to remove the selected report type?"
 msgstr "Möchten Sie den ausgewählten Berichtstyp wirklich löschen?"
 
-#: dontpanik/kpart/core/kreportwidget.cpp:47
-msgid "%1 - %2"
-msgstr "%1 - %2"
-
 #: dontpanik/kpart/core/kstatus.cpp:136
 #: plasma/plasmoid/detail/actiondescription.cpp:44
 msgid "There is currently no running activity..."
@@ -300,17 +285,26 @@ msgstr "Es sind 15 Minuten ohne aktive Tätigkeit vergangen!"
 msgid "Tasks/Worktypes"
 msgstr "Tätigkeitstypen verwalten"
 
-#: dontpanik/kpart/core/ktaskstable.cpp:47
+#: dontpanik/kpart/core/ktaskstable.cpp:49
 msgid "Do you really want to remove the selected task description?"
 msgstr "Möchten Sie den ausgewählten Tätigkeitstyp wirklich löschen?"
 
-#: dontpanik/kpart/core/ktaskstable.cpp:47
+#: dontpanik/kpart/core/ktaskstable.cpp:49
 msgid "Remove Task Description"
 msgstr "Tätigkeitstyp Löschen"
 
 #: dontpanik/kpart/core/plannedworkingtimesdialog.cpp:39
 msgid "Planned Working Times"
 msgstr "Sollarbeitszeiten verwalten"
+
+#: dontpanik/kpart/core/reportexportedsuccessfullydialog.cpp:38
+#, fuzzy
+msgid "Report Export"
+msgstr "Berichtstyp"
+
+#: dontpanik/kpart/core/reportexportedsuccessfullydialog.cpp:40
+msgid "Send via Email"
+msgstr ""
 
 #: dontpanik/kpart/core/selectentitydialogmodel.cpp:85
 msgid "Select Projects"
@@ -394,6 +388,35 @@ msgstr "Auswahl"
 #: libs/libdontpanic/reportdatafiltertype.cpp:32
 msgid "Unselected Only"
 msgstr "Auswahl ausschließen"
+
+#: libs/libdontpanic/reportgroupingtimeinterval.cpp:34
+#, fuzzy
+msgid "None"
+msgstr "(keine)"
+
+#: libs/libdontpanic/reportgroupingtimeinterval.cpp:34
+msgid "Daily"
+msgstr ""
+
+#: libs/libdontpanic/reportgroupingtimeinterval.cpp:34
+#, fuzzy
+msgid "Weekly"
+msgstr "Woche"
+
+#: libs/libdontpanic/reportgroupingtimeinterval.cpp:34
+#, fuzzy
+msgid "Monthly"
+msgstr "Monat"
+
+#: libs/libdontpanic/reportgroupingtimeinterval.cpp:34
+#, fuzzy
+msgid "Quarterly"
+msgstr "Quartal "
+
+#: libs/libdontpanic/reportgroupingtimeinterval.cpp:34
+#, fuzzy
+msgid "Yearly"
+msgstr "Jahr"
 
 #: plasma/plasmoid/actionitem.cpp:181
 msgid "switch activity to:"
@@ -532,7 +555,7 @@ msgstr "Filtere Tätigkeitstypen:"
 #. i18n: file: dontpanik/kpart/core/ui/editreporttypedialog.ui:195
 #. i18n: ectx: property (text), widget (QPushButton, select_projects)
 #. i18n: file: dontpanik/kpart/core/ui/editreporttypedialog.ui:221
-#. i18n: ectx: property (text), widget (QPushButton, pushButton_3)
+#. i18n: ectx: property (text), widget (QPushButton, select_target_file)
 #: rc.cpp:33 rc.cpp:39 rc.cpp:48
 msgid "Select"
 msgstr "Auswählen"
@@ -972,6 +995,35 @@ msgstr "Frank Habel"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "frank@bugplasma.de"
+
+#~ msgid ""
+#~ "No target file specified. Please correct the target file name in the "
+#~ "Report definition."
+#~ msgstr ""
+#~ "Keine Zieldatei angegeben. Bitte korrigieren Sie den Namen der Zieldatei "
+#~ "in der Berichtskonfiguration."
+
+#~ msgid ""
+#~ "The target file <b>'%1'</b> is pointing to a directory instead of a file."
+#~ "<br>Please correct the target file name in the Report definition."
+#~ msgstr ""
+#~ "Der Name der Zieldatei <b>\"%1\"</b> zeigt auf ein Verzeichnis statt "
+#~ "einer Datei. <br>Bitte korrigieren Sie den Namen der Zieldatei in der "
+#~ "Berichtskonfiguration."
+
+#~ msgid ""
+#~ "Unable to export Report Data to file <b>'%1'</b>.<br>Please correct the "
+#~ "target file name in the Report definition."
+#~ msgstr ""
+#~ "Leider konnte der Bericht nicht nach <b>\"%1\"</b> exportiert werden. "
+#~ "<br>Bitte korrigieren Sie den Namen der Zieldatei in der "
+#~ "Berichtskonfiguration."
+
+#~ msgid "Report Export - Don't Panik"
+#~ msgstr "Berichtsexport - Don't Panik"
+
+#~ msgid "%1 - %2"
+#~ msgstr "%1 - %2"
 
 #~ msgid "Select Tasks - Don't Panik"
 #~ msgstr "Aufgabenauswahl - Don't Panik"
