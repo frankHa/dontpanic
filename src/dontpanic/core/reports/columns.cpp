@@ -58,7 +58,7 @@ namespace dp
           {
             Action const& a = g->first();
             if ( !a.isValid() ) return "";
-            return a.startTime().date().toString();
+            return a.startTime().toTime_t();
           }
       };
       // ---------------------------------------------------------------------------------
