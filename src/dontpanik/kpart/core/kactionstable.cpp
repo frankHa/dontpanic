@@ -40,6 +40,7 @@ namespace dp
         , _M_sort_proxy_model(new detail::KActionsTableSortModel(this))
     {
       installEventFilter(this);
+      this->verticalHeader()->setDefaultSectionSize(verticalHeader()->minimumSectionSize()+2);
       init_model();
       init_menu_actions();
       init_item_delegate();

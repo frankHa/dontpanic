@@ -63,5 +63,6 @@ qt4_add_dbus_adaptor(dontpanic_core_lib_SRCS
 
 kde4_add_library(libdontpanic_core STATIC ${dontpanic_core_lib_SRCS})
 #target_link_libraries(libdontpanic_core ${libuuid_LIB} dontpanic_lib ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTSQL_LIBRARY} ${KDEPIMLIBS_KHOLIDAYS_LIBS})
+target_link_libraries(libdontpanic_core ${KDE4_KDECORE_LIBS})
 #install(TARGETS dontpanic ${INSTALL_TARGETS_DEFAULT_ARGS} )
 target_link_libraries(libdontpanic_core ${KDE4_KDECORE_LIBS})

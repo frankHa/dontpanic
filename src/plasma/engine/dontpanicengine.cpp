@@ -47,7 +47,7 @@ namespace dp
       _M_planned_working_time_manager = new dp::client::PlannedWorkingTimeManager ( this );
       _M_actions_cache = new dp::client::ActionsCache ( this );
       _M_actions_cache->setSourceTimeTracker ( _M_timetracker );
-      _M_actions_cache->initCache ( QDate::currentDate() );
+      _M_actions_cache->initCache ();
       init_favorites();
 
     }

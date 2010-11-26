@@ -1,8 +1,10 @@
 project(dontpanic)
+cmake_minimum_required(VERSION 2.8)
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/src/cmake/modules)
 include(Qt4Support)
 include(AssertOutOfSourceBuild)
 find_package(KDE4  REQUIRED)
+include(KDE4Defaults)
 find_package(KdepimLibs REQUIRED)
 include (KDE4Defaults)
 

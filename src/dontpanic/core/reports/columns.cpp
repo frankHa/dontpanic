@@ -2,7 +2,6 @@
 #include "group.h"
 #include "context.h"
 #include <libdontpanic/uuid.h>
-#include <libdontpanic/durationformatter.h>
 #include <libdontpanic/time.hpp>
 #include <libdontpanic/action.hpp>
 #include <libdontpanic/reporttype.h>
@@ -21,11 +20,12 @@ namespace dp
       // ---------------------------------------------------------------------------------
       namespace detail
       {
-        QString percentage(int overall, int duration)
+        double percentage(int overall, int duration)
         {
           double percentage = 0.0;
           if ( overall != 0 ) {percentage = 100.0 * ( double ) duration / ( double ) overall;}
-          return QString("%1%").arg ( percentage, 0, 'f', 2 );
+          //return QString("%1%").arg ( percentage, 0, 'f', 2 );
+          return percentage;
         }
       }
       // ---------------------------------------------------------------------------------
@@ -35,6 +35,7 @@ namespace dp
           virtual ~column() {}
         public:
           virtual QString name() const = 0;
+          virtual int column_type() const = 0;
           virtual QVariant value_of ( group const*g ) const = 0;
       };
       // ---------------------------------------------------------------------------------
@@ -48,6 +49,10 @@ namespace dp
           virtual QString name() const
           {
             return i18n ( "Date" );
+          }
+          virtual int column_type() const
+          {
+            return ReportData::Date;
           }
           virtual QVariant value_of ( group const*g ) const
           {
@@ -68,6 +73,10 @@ namespace dp
           {
             return i18n ( "Week" );
           }
+          virtual int column_type() const
+          {
+            return ReportData::Integer;
+          }
           virtual QVariant value_of ( group const*g ) const
           {
             Action const& a = g->first();
@@ -87,6 +96,10 @@ namespace dp
           {
             return i18n ( "Month" );
           }
+          virtual int column_type() const
+          {
+            return ReportData::String;
+          }
           virtual QVariant value_of ( group const*g ) const
           {
             Action const& a = g->first();
@@ -105,6 +118,10 @@ namespace dp
           virtual QString name() const
           {
             return i18n ( "Quarter" );
+          }
+          virtual int column_type() const
+          {
+            return ReportData::Integer;
           }
           virtual QVariant value_of ( group const*g ) const
           {
@@ -127,6 +144,10 @@ namespace dp
           virtual QString name() const
           {
             return i18n ( "Year" );
+          }
+          virtual int column_type() const
+          {
+            return ReportData::Integer;
           }
           virtual QVariant value_of ( group const*g ) const
           {
@@ -154,6 +175,10 @@ namespace dp
           {
             return i18n ( "Work Type" );
           }
+          virtual int column_type() const
+          {
+            return ReportData::String;
+          }
           virtual QVariant value_of ( group const*g ) const
           {
             Action const& a = g->first();
@@ -172,6 +197,10 @@ namespace dp
           virtual QString name() const
           {
             return i18n ( "Project" );
+          }
+          virtual int column_type() const
+          {
+            return ReportData::String;
           }
           virtual QVariant value_of ( group const*g ) const
           {
@@ -192,11 +221,15 @@ namespace dp
           {
             return i18n ( "From" );
           }
+          virtual int column_type() const
+          {
+            return ReportData::DateTime;
+          }
           virtual QVariant value_of ( group const*g ) const
           {
             Action const& a = g->first();
             if ( !a.isValid() ) return "";
-            return a.startTime().toString();
+            return a.startTime().toTime_t();
           }
       };
       // ---------------------------------------------------------------------------------
@@ -211,11 +244,15 @@ namespace dp
           {
             return i18n ( "To" );
           }
+          virtual int column_type() const
+          {
+            return ReportData::DateTime;
+          }
           virtual QVariant value_of ( group const*g ) const
           {
             Action const& a = g->first();
             if ( !a.isValid() ) return "";
-            return a.endTime().toString();
+            return a.endTime().toTime_t();
           }
       };
       // ---------------------------------------------------------------------------------
@@ -230,9 +267,13 @@ namespace dp
           {
             return i18n ( "Duration (Activity Group)" );
           }
+          virtual int column_type() const
+          {
+            return ReportData::Duration;
+          }
           virtual QVariant value_of ( group const*g ) const
           {
-            return duration_formatter().format ( g->duration() );
+            return ( g->duration() );
           }
       };
       // ---------------------------------------------------------------------------------
@@ -247,11 +288,15 @@ namespace dp
           {
             return i18n ( "Duration" );
           }
+          virtual int column_type() const
+          {
+            return ReportData::Duration;
+          }
           virtual QVariant value_of ( group const*g ) const
           {
             Action const& a = g->first();
             if ( !a.isValid() ) return "";
-            return duration_formatter().format ( a.duration() );
+            return ( a.duration() );
           }
       };
       // ---------------------------------------------------------------------------------
@@ -267,6 +312,10 @@ namespace dp
           virtual QString name() const
           {
             return i18n ( "Percentage (Activity Group)" );
+          }
+          virtual int column_type() const
+          {
+            return ReportData::Percentage;
           }
           virtual QVariant value_of ( group const*g ) const
           {
@@ -289,6 +338,10 @@ namespace dp
           {
             return i18n ( "Percentage" );
           }
+          virtual int column_type() const
+          {
+            return ReportData::Percentage;
+          }
           virtual QVariant value_of ( group const*g ) const
           {
             return detail::percentage(_M_overall, g->duration());
@@ -302,17 +355,44 @@ namespace dp
         public:
           static bool applies_to ( ReportType const& t )
           {
-            return ( t.noGrouping() || t.groupByProject() );
+            return ( t.groupByProject() );
           }
           virtual QString name() const
           {
             return i18n ( "Project Comment" );
+          }
+          virtual int column_type() const
+          {
+            return ReportData::String;
           }
           virtual QVariant value_of ( group const*g ) const
           {
             Action const& a = g->first();
             if ( !a.isValid() ) return "";
             return context()->projectManager()->load ( a.project() ).comment();
+          }
+      };
+      // ---------------------------------------------------------------------------------
+      class comment: public column
+      {
+        public:
+          static bool applies_to ( ReportType const& t )
+          {
+            return ( t.noGrouping() );
+          }
+          virtual QString name() const
+          {
+            return i18n ( "Comment" );
+          }
+          virtual int column_type() const
+          {
+            return ReportData::String;
+          }
+          virtual QVariant value_of ( group const*g ) const
+          {
+            Action const& a = g->first();
+            if ( !a.isValid() ) return "";
+            return a.comment();
           }
       };
       // ---------------------------------------------------------------------------------
@@ -342,7 +422,7 @@ namespace dp
     {
       foreach(columns::column const* col, _M_columns)
       {
-        data.addHeader(col->name());
+        data.addHeader(col->name(), col->column_type());
       }
     }
     // ---------------------------------------------------------------------------------
@@ -416,6 +496,10 @@ namespace dp
       if(columns::project_comment::applies_to(t))
       {
         _M_columns.append(new columns::project_comment());
+      }
+      if(columns::comment::applies_to(t))
+      {
+        _M_columns.append(new columns::comment());
       }
     }
     // ---------------------------------------------------------------------------------

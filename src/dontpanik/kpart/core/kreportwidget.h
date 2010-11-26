@@ -29,26 +29,32 @@ namespace Ui
   class KReportWidget;
 }
 
+class QPropertyAnimation;
+
 namespace dp
 {
   namespace core
   {
     class KReportWidget : public QWidget
     {
-      Q_OBJECT
+        Q_OBJECT
       public:
         KReportWidget ( QWidget* parent = 0, Qt::WindowFlags f = 0 );
         ~KReportWidget();
-        
+
       public slots:
-        void setReport(Report const& r);
+        void setReport ( Report const& r );
         void resetReport();
-     
+
+      private slots:
+        void setSummaryVisible(bool v);
+
       private:
         void subscribe_to_report_manager_signals();
-        
+
       private:
         Ui::KReportWidget *_M_ui;
+        QPropertyAnimation *_M_summary_animation;
     };
   }
 }

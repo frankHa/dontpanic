@@ -22,6 +22,7 @@
 #include "context.h"
 #include <libdontpanic/durationformatter.h>
 #include <libdontpanic/timerangeformatter.h>
+#include <QPropertyAnimation>
 
 namespace dp
 {
@@ -32,6 +33,7 @@ namespace dp
     , _M_ui(new Ui::KReportWidget())
     {
       _M_ui->setupUi(this);
+      _M_summary_animation = new QPropertyAnimation(_M_ui->summary, "maximumHeight", this);
       resetReport();
       subscribe_to_report_manager_signals();
     }
@@ -49,12 +51,12 @@ namespace dp
       _M_ui->duration->setText(duration_formatter().format(r.duration()));
       _M_ui->planned_time->setText(duration_formatter().format(r.plannedWorkingTime()));
       _M_ui->overtime->setText(duration_formatter().format(r.duration()-r.plannedWorkingTime()));
-      _M_ui->summary->setVisible(true);
+      setSummaryVisible(true);
     }
     
     void KReportWidget::resetReport()
     {
-      _M_ui->summary->setVisible(false);
+      setSummaryVisible(false);
       _M_ui->report_type->setText("");
       _M_ui->report_table->resetReport();
       _M_ui->report_range->setText("");
@@ -69,6 +71,28 @@ namespace dp
     {
       connect(context()->reportManager(), SIGNAL(generated(Report)), this, SLOT(setReport(Report)));
     }
+    
+    void KReportWidget::setSummaryVisible(bool v)
+    {
+      int start =_M_ui->summary->maximumHeight();
+      int target;
+      if(v)
+      {
+        start = 0;
+        target = _M_ui->summary->sizeHint().height();
+      }
+      else
+      {
+        target = 0;
+      }
+      _M_summary_animation->setDuration(500);
+      _M_summary_animation->setStartValue(start);
+      _M_summary_animation->setEndValue(target);
+      if(!this->isVisible()){_M_ui->summary->setMaximumHeight(target); return;}
+      _M_summary_animation->start();
+    }
+    
+    
   }
 }
 
