@@ -43,6 +43,7 @@ namespace dp
       Q_ASSERT ( _M_source );
       _M_current_time_range = timerange;
       _M_actions = _M_source->findAll ( timerange.from(), timerange.to() );
+      kDebug() << "action cache initialized with " << _M_actions.size() << " entries";
       _M_is_live_cache = false;
       return *this;
     }
@@ -64,6 +65,7 @@ namespace dp
     // ---------------------------------------------------------------------------------
     int ActionsCache::duration() const
     {
+      kDebug() << _M_actions.size() << "in current action cache";
       return _M_actions.duration();
     }
     // ---------------------------------------------------------------------------------
@@ -105,7 +107,10 @@ namespace dp
       {
         return;
       }
-      _M_actions.append ( a );
+      if ( not is_already_known ( a ) )
+      {
+        _M_actions.append ( a );
+      }
       emit stored ( a );
     }
     // ---------------------------------------------------------------------------------
@@ -123,19 +128,17 @@ namespace dp
     // ---------------------------------------------------------------------------------
     bool ActionsCache::is_interesting_for_current_timerange ( dp::Action const&a )
     {
-      if ( !_M_current_time_range.isValid() )
-      {
-        return false;
-      }
-      bool result = ( a.startTime() >= _M_current_time_range.from() && a.startTime() <= _M_current_time_range.to() );
+      if ( !_M_current_time_range.isValid() ) {return false;}
+      if ( !a.isValid() ) {return false;}
+      bool result = ( ( a.startTime() >= _M_current_time_range.from() ) and ( a.startTime() <= _M_current_time_range.to() ) );
       return result;
     }
     // ---------------------------------------------------------------------------------
     void ActionsCache::update_timerange_if_necessary()
     {
-      if(not _M_is_live_cache){return;}
+      if ( not _M_is_live_cache ) {return;}
       QDate now = QDate::currentDate();
-      if(now>_M_current_time_range.to().date())
+      if ( now > _M_current_time_range.to().date() )
       {
         initCache();
       }
