@@ -20,6 +20,7 @@
 #include "kdayview.h"
 #include <ui_kdayview.h>
 #include "context.h"
+#include <QSettings>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -32,14 +33,16 @@ namespace dp
         , _M_ui ( new Ui::KDayView ( ) )
     {
       _M_ui->setupUi ( this );
-        _M_ui->recent_box->setVisible(false);
+      _M_ui->recent_box->setVisible ( false );
       _M_ui->main_splitter->setSizes ( QList<int>() << 100 << 500 );
       setup_actions();
+      restore_actions_table_geometry();
       on_selected_day_changed();
     }
     // ---------------------------------------------------------------------------------
     KDayView::~KDayView()
     {
+      save_actions_table_geometry();
       delete _M_ui;
     }
     // ---------------------------------------------------------------------------------
@@ -47,24 +50,36 @@ namespace dp
     {
       QDate const& date =  _M_ui->calendar->selectedDate();
       int duration = _M_ui->action_table->duration();
-      return DayInfo(date, duration);
+      return DayInfo ( date, duration );
     }
     // ---------------------------------------------------------------------------------
     void KDayView::setup_actions()
     {
-      connect(_M_ui->today_button, SIGNAL(pressed()), this, SLOT(on_today_pressed()));
-      connect(_M_ui->calendar, SIGNAL(selectionChanged()), this, SLOT(on_selected_day_changed()));
+      connect ( _M_ui->today_button, SIGNAL ( pressed() ), this, SLOT ( on_today_pressed() ) );
+      connect ( _M_ui->calendar, SIGNAL ( selectionChanged() ), this, SLOT ( on_selected_day_changed() ) );
     }
     // ---------------------------------------------------------------------------------
     void KDayView::on_selected_day_changed()
     {
-      _M_ui->action_table->load_actions_of(_M_ui->calendar->selectedDate());
-      context()->setCurrentlySelectedDate(_M_ui->calendar->selectedDate());
+      _M_ui->action_table->load_actions_of ( _M_ui->calendar->selectedDate() );
+      context()->setCurrentlySelectedDate ( _M_ui->calendar->selectedDate() );
     }
     // ---------------------------------------------------------------------------------
     void KDayView::on_today_pressed()
     {
-      _M_ui->calendar->setSelectedDate(QDate::currentDate());
+      _M_ui->calendar->setSelectedDate ( QDate::currentDate() );
+    }
+    // ---------------------------------------------------------------------------------
+    void KDayView::restore_actions_table_geometry()
+    {
+      QSettings settings ( "dontpanic", "DontPanik" );
+      _M_ui->action_table->horizontalHeader()->restoreState(settings.value ( "actions_table_horizontal_state").toByteArray());
+    }
+    // ---------------------------------------------------------------------------------
+    void KDayView::save_actions_table_geometry()
+    {
+      QSettings settings ( "dontpanic", "DontPanik" );
+      settings.setValue ( "actions_table_horizontal_state", _M_ui->action_table->horizontalHeader()->saveState() );
     }
     // ---------------------------------------------------------------------------------
   }//core
