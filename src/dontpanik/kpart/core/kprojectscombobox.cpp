@@ -39,6 +39,12 @@ namespace dp
        setCurrentIndex(index);
      }
      // ---------------------------------------------------------------------------------
+      void KProjectsComboBox::hidePopup()
+      {
+        QComboBox::hidePopup();
+        emit popupClosed();
+      }
+     // ---------------------------------------------------------------------------------
      // private stuff:
      // ---------------------------------------------------------------------------------
      void KProjectsComboBox::init()

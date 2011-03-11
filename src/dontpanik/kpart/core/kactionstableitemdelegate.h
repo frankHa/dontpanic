@@ -25,29 +25,32 @@
 
 namespace dp
 {
- class Action;
-namespace core
-{
+  class Action;
+  namespace core
+  {
 
-namespace detail
-{
+    namespace detail
+    {
 
-class KActionsTableItemDelegate : public QStyledItemDelegate
-{
-    Q_OBJECT
-public:
-    KActionsTableItemDelegate ( QObject* parent = 0 );
-    virtual QWidget* createEditor ( QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index ) const;
-    virtual void setEditorData ( QWidget* editor, const QModelIndex& index ) const;
-    virtual void setModelData ( QWidget* editor, QAbstractItemModel* model, const QModelIndex& index ) const;
-private:
-  QDateTime startTimeOf(Action const& ) const;
-  QDateTime endTimeOf(Action const& ) const;
-};
+      class KActionsTableItemDelegate : public QStyledItemDelegate
+      {
+          Q_OBJECT
+        public:
+          KActionsTableItemDelegate ( QObject* parent = 0 );
+          virtual QWidget* createEditor ( QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index ) const;
+          virtual void setEditorData ( QWidget* editor, const QModelIndex& index ) const;
+          virtual void setModelData ( QWidget* editor, QAbstractItemModel* model, const QModelIndex& index ) const;
 
-}
+        protected slots:
+          void commit_and_close_editor();
+        private:
+          QDateTime startTimeOf ( Action const& ) const;
+          QDateTime endTimeOf ( Action const& ) const;
+      };
 
-}
+    }
+
+  }
 
 }
 

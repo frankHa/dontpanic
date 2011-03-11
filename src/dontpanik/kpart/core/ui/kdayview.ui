@@ -159,7 +159,7 @@
        </sizepolicy>
       </property>
       <property name="editTriggers">
-       <set>QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>
+       <set>QAbstractItemView::CurrentChanged|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed|QAbstractItemView::SelectedClicked</set>
       </property>
       <property name="alternatingRowColors">
        <bool>true</bool>
