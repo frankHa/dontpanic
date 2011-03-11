@@ -20,6 +20,7 @@
 #include "ktaskscombobox.h"
 #include "context.h"
 #include <QVariant>
+#include <QAbstractItemView>
 namespace dp
 {
   namespace core
@@ -47,6 +48,7 @@ namespace dp
       void KTasksComboBox::hidePopup()
       {
         QComboBox::hidePopup();
+        setCurrentIndex(view()->currentIndex().row());
         emit popupClosed();
       }
       // ---------------------------------------------------------------------------------

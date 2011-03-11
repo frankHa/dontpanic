@@ -20,6 +20,8 @@
 #include "kprojectscombobox.h"
 #include "context.h"
 #include <QVariant>
+#include <qabstractitemview.h>
+#include <QEvent>
 namespace dp
 {
  namespace core
@@ -42,6 +44,7 @@ namespace dp
       void KProjectsComboBox::hidePopup()
       {
         QComboBox::hidePopup();
+        setCurrentIndex(view()->currentIndex().row());
         emit popupClosed();
       }
      // ---------------------------------------------------------------------------------
@@ -59,6 +62,7 @@ namespace dp
           addItem(it->name(), QVariant(it->id().toString()));
          }
        }
+       view()->installEventFilter(this);
      }
      // ---------------------------------------------------------------------------------
      QUuid KProjectsComboBox::selectedUuid() const
