@@ -33,18 +33,18 @@ KParts::ReadOnlyPart *DontPanikPlugin::createPart()
 
 void DontPanikPlugin::readProperties( const KConfigGroup &config )
 {
-  if ( part() )
-  {
-    DontPanikPart *myPart = static_cast<DontPanikPart*>( part() );
-  }
+//   if ( part() )
+//   {
+//     DontPanikPart *myPart = static_cast<DontPanikPart*>( part() );
+//   }
 }
 
 void DontPanikPlugin::saveProperties( KConfigGroup &config )
 {
-  if ( part() )
-  {
-    DontPanikPart *myPart = static_cast<DontPanikPart*>( part() );
-  }
+//   if ( part() )
+//   {
+//     DontPanikPart *myPart = static_cast<DontPanikPart*>( part() );
+//   }
 }
 
 void DontPanikPlugin::showPart()

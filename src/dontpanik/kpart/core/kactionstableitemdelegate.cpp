@@ -25,7 +25,9 @@
 
 #include <QSortFilterProxyModel>
 #include <QTimeEdit>
-
+#include <QCoreApplication>
+#include <QShowEvent>
+#include <QAbstractItemView>
 namespace dp
 {
   // ---------------------------------------------------------------------------------
@@ -81,7 +83,8 @@ namespace dp
           case PROJECT:
           {
             KProjectsComboBox *pb = static_cast<KProjectsComboBox*> ( editor );
-            pb->select ( a.project() );break;
+            pb->select ( a.project() );
+            break;
           }
           case TYPE: static_cast<KTasksComboBox*> ( editor )->select ( a.task() ); break;
           default:QStyledItemDelegate::setEditorData ( editor, index ); break;

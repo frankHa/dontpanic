@@ -22,55 +22,56 @@
 #include <QVariant>
 #include <qabstractitemview.h>
 #include <QEvent>
+#include <qevent.h>
 namespace dp
 {
- namespace core
- {
-   namespace detail
-   {
-     // ---------------------------------------------------------------------------------
-     KProjectsComboBox::KProjectsComboBox(QWidget *parent)
-     :QComboBox(parent)
-     {
-       init();
-     }
-     // ---------------------------------------------------------------------------------
-     void KProjectsComboBox::select(Uuid const& id)
-     {
-       int index = findData(QVariant(id.toString()));
-       setCurrentIndex(index);
-     }
-     // ---------------------------------------------------------------------------------
+  namespace core
+  {
+    namespace detail
+    {
+      // ---------------------------------------------------------------------------------
+      KProjectsComboBox::KProjectsComboBox ( QWidget *parent )
+          : QComboBox ( parent )
+      {
+        init();
+      }
+      // ---------------------------------------------------------------------------------
+      void KProjectsComboBox::select ( Uuid const& id )
+      {
+        int index = findData ( QVariant ( id.toString() ) );
+        setCurrentIndex ( index );
+      }
+      // ---------------------------------------------------------------------------------
       void KProjectsComboBox::hidePopup()
       {
         QComboBox::hidePopup();
-        setCurrentIndex(view()->currentIndex().row());
+        setCurrentIndex ( view()->currentIndex().row() );
         emit popupClosed();
       }
-     // ---------------------------------------------------------------------------------
-     // private stuff:
-     // ---------------------------------------------------------------------------------
-     void KProjectsComboBox::init()
-     {
-       ProjectList projects = context()->projectManager()->allProjects();
-       ProjectList::const_iterator it;
-       addItem("", uuid().toString());
-       for(it=projects.begin();it!=projects.end();++it)
-       {
-         if(it->isVisible())
-         {
-          addItem(it->name(), QVariant(it->id().toString()));
-         }
-       }
-       view()->installEventFilter(this);
-     }
-     // ---------------------------------------------------------------------------------
-     QUuid KProjectsComboBox::selectedUuid() const
-     {
-       return QUuid(itemData(currentIndex()).toString());
-     }
-     // ---------------------------------------------------------------------------------
-   }
- }
+      // ---------------------------------------------------------------------------------
+      // private stuff:
+      // ---------------------------------------------------------------------------------
+      void KProjectsComboBox::init()
+      {
+        ProjectList projects = context()->projectManager()->allProjects();
+        ProjectList::const_iterator it;
+        addItem ( "", uuid().toString() );
+        for ( it = projects.begin();it != projects.end();++it )
+        {
+          if ( it->isVisible() )
+          {
+            addItem ( it->name(), QVariant ( it->id().toString() ) );
+          }
+        }
+        view()->installEventFilter ( this );
+      }
+      // ---------------------------------------------------------------------------------
+      QUuid KProjectsComboBox::selectedUuid() const
+      {
+        return QUuid ( itemData ( currentIndex() ).toString() );
+      }
+      // ---------------------------------------------------------------------------------
+    }
+  }
 }
 

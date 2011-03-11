@@ -21,6 +21,7 @@
 #include <ui_kdayview.h>
 #include "context.h"
 #include <QSettings>
+#include <KConfigGroup>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -72,14 +73,14 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void KDayView::restore_actions_table_geometry()
     {
-      QSettings settings ( "dontpanic", "DontPanik" );
-      _M_ui->action_table->horizontalHeader()->restoreState(settings.value ( "actions_table_horizontal_state").toByteArray());
+      KConfigGroup const& group = KSharedConfig::openConfig()->group("dontpanikpart");
+      _M_ui->action_table->horizontalHeader()->restoreState(group.readEntry<QByteArray>( "ActionsTableHorizontalHeaderState", ""));
     }
     // ---------------------------------------------------------------------------------
     void KDayView::save_actions_table_geometry()
     {
-      QSettings settings ( "dontpanic", "DontPanik" );
-      settings.setValue ( "actions_table_horizontal_state", _M_ui->action_table->horizontalHeader()->saveState() );
+      KConfigGroup group = KSharedConfig::openConfig()->group("dontpanikpart");
+      group.writeEntry ( "ActionsTableHorizontalHeaderState", _M_ui->action_table->horizontalHeader()->saveState() );
     }
     // ---------------------------------------------------------------------------------
   }//core
