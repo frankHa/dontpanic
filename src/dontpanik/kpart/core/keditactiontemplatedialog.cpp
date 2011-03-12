@@ -74,8 +74,8 @@ namespace dp
             t = _M_current_template;
          }
          t.setName(_M_ui->name->text());         
-         QUuid project(_M_ui->projects->selectedUuid());
-         QUuid task(_M_ui->worktype->selectedUuid());
+         Uuid project(_M_ui->projects->selectedUuid());
+         Uuid task(_M_ui->worktype->selectedUuid());
          t.setProject(project);
          t.setTask(task);
          t.setComment(_M_ui->comment->text());

@@ -47,6 +47,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       void KTasksComboBox::hidePopup()
       {
+        if(not view()->isVisible()){return;}
         QComboBox::hidePopup();
         setCurrentIndex(view()->currentIndex().row());
         emit popupClosed();

@@ -44,6 +44,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       void KProjectsComboBox::hidePopup()
       {
+        if(not view()->isVisible()){return;}
         QComboBox::hidePopup();
         setCurrentIndex ( view()->currentIndex().row() );
         emit popupClosed();
@@ -55,7 +56,7 @@ namespace dp
       {
         ProjectList projects = context()->projectManager()->allProjects();
         ProjectList::const_iterator it;
-        addItem ( "", uuid().toString() );
+        //addItem ( "", uuid().toString() );
         for ( it = projects.begin();it != projects.end();++it )
         {
           if ( it->isVisible() )
@@ -63,12 +64,11 @@ namespace dp
             addItem ( it->name(), QVariant ( it->id().toString() ) );
           }
         }
-        view()->installEventFilter ( this );
       }
       // ---------------------------------------------------------------------------------
-      QUuid KProjectsComboBox::selectedUuid() const
+      Uuid KProjectsComboBox::selectedUuid() const
       {
-        return QUuid ( itemData ( currentIndex() ).toString() );
+        return Uuid ( itemData ( currentIndex() ).toString() );
       }
       // ---------------------------------------------------------------------------------
     }
