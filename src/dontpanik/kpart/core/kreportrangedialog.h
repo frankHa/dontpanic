@@ -21,6 +21,7 @@
 #define DP_CORE_KTIMERANGEDIALOG_H
 
 #include <libdontpanic/defines.hpp>
+#include <libdontpanic/timerange.h>
 #include <KDialog>
 
 namespace Ui
