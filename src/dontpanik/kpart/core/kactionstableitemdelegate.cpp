@@ -51,6 +51,7 @@ namespace dp
           {
             QDateTimeEdit *edit = new QTimeEdit ( parent );
             edit->setCalendarPopup ( true );
+            edit->setDisplayFormat("hh:mm");
             return edit;
           }
           case PROJECT:
