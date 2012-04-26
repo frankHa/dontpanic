@@ -4,8 +4,8 @@
 
 MESSAGE(STATUS "checking for libuuid")
 
-SET(libuuid_INCLUDES STLPort_INCLUDES-NOTFOUND)
-SET(libuuid_LIB STLPort_LIB-NOTFOUND)
+SET(libuuid_INCLUDES LIBUUID_INCLUDES-NOTFOUND)
+SET(libuuid_LIB LIBUUID_LIB-NOTFOUND)
 
 FIND_PATH(libuuid_INCLUDES uuid/uuid.h
           PATHS
@@ -16,9 +16,9 @@ FIND_PATH(libuuid_INCLUDES uuid/uuid.h
 
 FIND_LIBRARY( libuuid_LIB
      NAMES uuid
-     PATHS
+     PATHS     
      /usr/lib
-     /usr/local/lib
+     /usr/local/lib     
      ENV PREFIX
 )
 

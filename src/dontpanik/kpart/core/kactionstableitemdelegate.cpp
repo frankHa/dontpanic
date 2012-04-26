@@ -56,6 +56,7 @@ namespace dp
           case PROJECT:
           {
             KProjectsComboBox *project = new KProjectsComboBox ( parent );
+            project->setMouseTracking(true);
             connect ( project, SIGNAL ( popupClosed() ), this, SLOT ( commit_and_close_editor() ) );
             return project;
           }

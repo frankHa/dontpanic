@@ -41,7 +41,7 @@ namespace dp
         public:
           QString start(Action const& a)
           {
-            return a.startTime().time().toString(Qt::SystemLocaleShortDate);
+            return a.startTime().time().toString("hh:mm");
           }
           QString end(Action const& a)
           {
@@ -50,7 +50,7 @@ namespace dp
             {
               anotherDayMarker = ">";
             }
-            QString result = QString("%1%2").arg(anotherDayMarker).arg(a.endTime().time().toString(Qt::SystemLocaleShortDate));
+            QString result = QString("%1%2").arg(anotherDayMarker).arg(a.endTime().time().toString("hh:mm"));
             return result;
           }
       };
