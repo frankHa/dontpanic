@@ -3,6 +3,8 @@
 : Bavarians please add the weekend keyword everywhere, and sprinkle
 : generously with more obscure catholic holidays.
 :
+country "DE-HE"
+language "de"
 small "Neujahr" weekend on 1.1.
 small "Hl. 3 Könige" on 6.1.
 blue "Sommerzeit" on last sunday in march
