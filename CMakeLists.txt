@@ -13,7 +13,7 @@ option(DP_USE_LIBUUID "Use libuuid instead of Qt's default Uuid creator(recommen
 option(DP_BUILD_TRAY_ICON_SUPPORT "Building tray icon support. (Requires KDE >= 4.4)" ON)
 option(DP_BUILD_KONTACT_PLUGIN "Building a kontact plugin. This will require the kdepim-dev files." ON)
 option(DP_BUILD_PLASMA_COMPONENTS "Building a plasmaengine and a corresponding plasmoid." ON)
-option(DP_BUILD_AKONADI_AGENT "Building an akonadi resource for accessing dontpanic data from within akonadi clients such as korganizer ." ON)
+option(DP_BUILD_AKONADI_AGENT "Building an akonadi resource for accessing dontpanic data from within akonadi clients such as korganizer ." OFF)
 option(DP_INSTALL_SYSTEM_FILES "Allows disabling the installation of files which needs root access and are rarely changed" ON)
 
 if(DP_USE_LIBUUID)
