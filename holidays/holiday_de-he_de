@@ -1,32 +1,50 @@
-:
-: German holiday file. Copy to ~/.holiday
-: Bavarians please add the weekend keyword everywhere, and sprinkle
-: generously with more obscure catholic holidays.
-:
-country "DE-HE"
-language "de"
-small "Neujahr" weekend on 1.1.
-small "Hl. 3 Könige" on 6.1.
-blue "Sommerzeit" on last sunday in march
-small "Rosenmontag" on easter minus 48 days
-small "Fasching" on easter minus 47 days
-small "Aschermittwoch" on easter minus 46 days
-small "Karfreitag" weekend on easter minus 2 days
-small "Ostern" weekend on easter length 2 days
-small "Pfingsten" weekend on easter plus 49 days length 2 days
-small "Himmelfahrt" weekend on easter plus 39 days
-small "Fronleichnam" weekend on easter plus 60 days
-small "1. Mai" weekend on 1.5.
-small "Muttertag" on second sunday in may
-blue "Winterzeit" on last sunday in october
-small "Tag d. Einheit" weekend on 3.10.
-small "Reformationstag" on 31.10.
-small "Allerheiligen" on 1.11.
-small "Buß & Bettag" on sunday before 24.12. minus 32 days
-small "1. Advent" on sunday before 24.12. minus 21 days
-small "2. Advent" on sunday before 24.12. minus 14 days
-small "3. Advent" on sunday before 24.12. minus 7 days
-small "4. Advent" on sunday before 24.12.
-small "Hl. Abend" on 24.12.
-small "Weihnachten" weekend on 25.12. length 2 days
-small "Silvester" on 31.12.
+::
+:: Country:  Germany, Hessen
+::
+:: Language: German
+::
+:: Author:   Frank Habel
+::
+:: Updated:
+::
+:: Source:
+::
+
+:: Metadata
+country     "DE-HE"
+language    "de"
+:name        "optional - defaults to country name"
+:description "(please add description in source language) National holiday file for Hessen"
+
+:: Public Holidays
+"Neujahr"                     weekend on january 1
+"Hl. 3 Könige"                weekend on january 6
+"Karfreitag"                  weekend on easter minus  2 days
+"Ostern"                      weekend on easter length 2 days
+"Pfingsten"                   weekend on easter plus 49 days length 2 days
+"Christi Himmelfahrt"         weekend on easter plus 39 days
+"Fronleichnam"                weekend on easter plus 60 days
+"1. Mai"                      weekend on may 1
+"Tag d. Einheit"                 weekend on october 3
+"Allerheiligen"               weekend on november 1
+"Buß- und Bettag"             weekend on sunday before december 24 minus 32 days
+"Weihnachten"                 weekend on december 25 length 2 days
+
+:: Religious
+"Rosenmontag"                 on easter minus 48 days
+"Fasching"                    on easter minus 47 days
+"Silvester"                   on december 31
+
+:: Financial
+
+:: Cultural
+
+:: School
+
+:: Daylight Saving
+:: Seasons
+"Sommerzeit"                  on last sunday in march
+"Winterzeit"                  on last sunday in october
+
+
+:: Name Days
