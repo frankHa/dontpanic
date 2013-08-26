@@ -18,7 +18,6 @@
 */
 
 #include "kholidayregioncombobox.h"
-#include "country.h"
 #include <KHolidays/Holidays>
 // ---------------------------------------------------------------------------------
 namespace dp

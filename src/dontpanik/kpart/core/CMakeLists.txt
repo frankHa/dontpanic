@@ -4,7 +4,6 @@ include_directories(${CMAKE_BINARY_DIR})
 set(dontpanikpart_LIB_SRCS 
     actiontemplateaction.cpp
     context.cpp 
-    country.cpp
     dayinfo.cpp 
     desktopnotificationmanager.cpp
     dont_panik_part_core.cpp
