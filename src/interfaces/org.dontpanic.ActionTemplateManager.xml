@@ -2,23 +2,23 @@
 <node>
   <interface name="org.dontpanic.ActionTemplateManager">
     <method name="store">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::ActionTemplate"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::ActionTemplate"/>
       <arg type="(si)" />
     </method>
     <method name="remove">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::ActionTemplate"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::ActionTemplate"/>
       <arg type="(si)" />
     </method>
     <method name="findAll">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="dp::TemplateList"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="dp::TemplateList"/>
       <arg type="(si)" direction="out" />
     </method>
     <signal name="stored">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::ActionTemplate"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::ActionTemplate"/>
       <arg type="(si)" />
     </signal>
     <signal name="removed">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::ActionTemplate"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::ActionTemplate"/>
       <arg type="(si)" />
     </signal>
     <signal name="error">

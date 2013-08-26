@@ -2,29 +2,29 @@
 <node>
   <interface name="org.dontpanic.ProjectManager">
     <method name="store">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::Project"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::Project"/>
       <arg type="(si)" />
     </method>
     <method name="remove">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::Project"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::Project"/>
       <arg type="(si)" />
     </method>
     <method name="load">
-    <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::Uuid"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::Uuid"/>
       <arg type="(si)" direction="in" />
-      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="dp::Project"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="dp::Project"/>
       <arg type="(si)" direction="out" />
     </method>
     <method name="findAll">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="dp::ProjectList"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="dp::ProjectList"/>
       <arg type="(si)" direction="out" />
     </method>
     <signal name="stored">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::Project"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::Project"/>
       <arg type="(si)" />
     </signal>
     <signal name="removed">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::Project"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::Project"/>
       <arg type="(si)" />
     </signal>
     <signal name="error">

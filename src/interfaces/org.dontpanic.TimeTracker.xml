@@ -2,7 +2,7 @@
 <node>
   <interface name="org.dontpanic.TimeTracker">
     <method name="store">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::Action"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::Action"/>
       <arg type="(si)" />
     </method>
     <method name="startNewAction">
@@ -12,44 +12,44 @@
     <method name="continueLastAction">
     </method>
     <method name="continueAction">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::Action"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::Action"/>
       <arg type="(si)" />
     </method>
     <method name="hasActionsFor">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="QDate"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="QDate"/>
       <arg type="(si)" />
       <arg type="b" direction="out" />
     </method>
     <method name="remove">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::Action"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::Action"/>
       <arg type="(si)" />
     </method>
     <method name="startNewActionFromTemplate">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::Uuid"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::Uuid"/>
       <arg type="(si)" />
     </method>
     <method name="startNewActionFromTemplate">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::ActionTemplate"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::ActionTemplate"/>
       <arg type="(si)" />
     </method>
     <method name="findCurrentlyActiveAction">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="dp::Action"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="dp::Action"/>
       <arg type="(si)" direction="out" />
     </method>
     <method name="findAll">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="QDateTime"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="QDateTime"/>
       <arg type="(si)" direction="in"/>
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In1" value="QDateTime"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="QDateTime"/>
       <arg type="(si)" direction="in"/>
-      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="dp::ActionList"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="dp::ActionList"/>
       <arg type="(si)" direction="out" />
     </method>
     <signal name="stored">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::Action"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::Action"/>
       <arg type="(si)" />
     </signal>
     <signal name="removed">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::Action"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::Action"/>
       <arg type="(si)" />
     </signal>
     <signal name="error">

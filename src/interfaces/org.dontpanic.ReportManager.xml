@@ -2,40 +2,40 @@
 <node>
   <interface name="org.dontpanic.ReportManager">    
     <method name="store">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::ReportType"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::ReportType"/>
       <arg type="(si)" />
     </method>
     <method name="remove">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::ReportType"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::ReportType"/>
       <arg type="(si)" />
     </method>
     <method name="load">
-    <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::Uuid"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::Uuid"/>
       <arg type="(si)" direction="in" />
-      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="dp::ReportType"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="dp::ReportType"/>
       <arg type="(si)" direction="out" />
     </method>
     <method name="findAll">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="dp::ReportTypeList"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="dp::ReportTypeList"/>
       <arg type="(si)" direction="out" />
     </method>
     <signal name="stored">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::ReportType"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::ReportType"/>
       <arg type="(si)" />
     </signal>
     <signal name="removed">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::ReportType"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::ReportType"/>
       <arg type="(si)" />
     </signal>
     <signal name="error">
       <arg type="s" />
     </signal>
     <method name="generateReport">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::ReportType"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::ReportType"/>
       <arg type="(si)" direction="in" />
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In1" value="dp::TimeRange"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="dp::TimeRange"/>
       <arg type="(si)" direction="in" />
-      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="dp::Report"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="dp::Report"/>
       <arg type="(si)" direction="out" />
     </method>
     

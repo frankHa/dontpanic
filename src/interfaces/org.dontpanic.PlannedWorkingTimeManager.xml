@@ -8,39 +8,39 @@
       <arg type="s" direction="out" />
     </method>
     <method name="isWorkDay">
-    <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="QDate"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="QDate"/>
       <arg type="(si)" direction="in" />
-      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="bool"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="bool"/>
       <arg type="(si)" direction="out" />
     </method>
     <method name="store">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::WorktimePerDay"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::WorktimePerDay"/>
       <arg type="(si)" />
     </method>
     <method name="store">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::WorktimePerDayList"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::WorktimePerDayList"/>
       <arg type="(si)" />
     </method>
     <method name="remove">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::WorktimePerDay"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::WorktimePerDay"/>
       <arg type="(si)" />
     </method>
     <method name="load">
-    <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="int"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="int"/>
       <arg type="(si)" direction="in" />
-      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="dp::WorktimePerDay"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="dp::WorktimePerDay"/>
       <arg type="(si)" direction="out" />
     </method>
     <method name="findAll">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="dp::WorktimePerDayList"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="dp::WorktimePerDayList"/>
       <arg type="(si)" direction="out" />
     </method>
     <signal name="stored">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::WorktimePerDay"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::WorktimePerDay"/>
       <arg type="(si)" />
     </signal>
     <signal name="removed">
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="dp::WorktimePerDay"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="dp::WorktimePerDay"/>
       <arg type="(si)" />
     </signal>
     <signal name="currentHolidayRegionStored">
