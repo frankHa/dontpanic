@@ -37,12 +37,12 @@ namespace dp
     {
       QString currentHolidayName;
       //QStringList holidayList;
-      QStringList countryList = KHolidays::HolidayRegion::locations();
+      QStringList countryList = KHolidays::HolidayRegion::regionCodes();
       QMap<QString, QString> holidayRegions;
 
       foreach ( const QString &country, countryList )
       {
-        QString regionName = dp::core::country(country).displayName();
+        QString regionName = KHolidays::HolidayRegion::name(country);
 
         holidayRegions[regionName] = country;
       }

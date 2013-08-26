@@ -13,7 +13,7 @@
 :: Metadata
 country     "DE-HE"
 language    "de"
-:name        "optional - defaults to country name"
+name        "Hessen"
 :description "(please add description in source language) National holiday file for Hessen"
 
 :: Public Holidays
