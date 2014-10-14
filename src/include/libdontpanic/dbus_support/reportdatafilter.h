@@ -4,7 +4,6 @@
 #include <libdontpanic/reportdatafilter.h>
 #include <QDBusArgument>
 
-Q_DECLARE_METATYPE ( dp::ReportDataFilter )
 // ---------------------------------------------------------------------------------
 namespace dp
 {

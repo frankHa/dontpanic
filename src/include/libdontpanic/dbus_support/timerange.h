@@ -4,7 +4,6 @@
 #include <libdontpanic/timerange.h>
 #include <QDBusArgument>
 
-Q_DECLARE_METATYPE ( dp::TimeRange )
 // ---------------------------------------------------------------------------------
 namespace dp
 {

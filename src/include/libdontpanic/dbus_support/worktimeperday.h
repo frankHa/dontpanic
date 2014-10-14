@@ -4,8 +4,6 @@
 #include <libdontpanic/worktimeperday.h>
 #include <QDBusArgument>
 
-Q_DECLARE_METATYPE ( dp::WorktimePerDay )
-Q_DECLARE_METATYPE ( dp::WorktimePerDayList )
 // ---------------------------------------------------------------------------------
 namespace dp
 {

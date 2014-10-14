@@ -6,8 +6,6 @@
 //Qt includes
 #include <QDBusArgument>
 // ---------------------------------------------------------------------------------
-Q_DECLARE_METATYPE ( dp::Task )
-Q_DECLARE_METATYPE ( dp::TaskList )
 namespace dp
 {
   // ---------------------------------------------------------------------------------

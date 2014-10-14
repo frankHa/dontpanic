@@ -4,7 +4,6 @@
 #include <libdontpanic/uuid.h>
 #include <QDBusArgument>
 
-Q_DECLARE_METATYPE ( dp::Uuid )
 // ---------------------------------------------------------------------------------
 namespace dp
 {

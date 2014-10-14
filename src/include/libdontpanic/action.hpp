@@ -11,6 +11,13 @@
 
 
 class QDBusArgument;
+namespace dp
+{
+  class Action;
+  class ActionList;
+}
+Q_DECLARE_METATYPE ( dp::Action )
+Q_DECLARE_METATYPE ( dp::ActionList )
 // ---------------------------------------------------------------------------------
 namespace dp
 {

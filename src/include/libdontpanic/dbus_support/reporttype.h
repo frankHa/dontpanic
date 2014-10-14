@@ -4,8 +4,6 @@
 #include <libdontpanic/reporttype.h>
 #include <QDBusArgument>
 
-Q_DECLARE_METATYPE ( dp::ReportType )
-Q_DECLARE_METATYPE ( dp::ReportTypeList )
 // ---------------------------------------------------------------------------------
 namespace dp
 {

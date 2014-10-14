@@ -6,8 +6,6 @@
 //Qt includes
 #include <QDBusArgument>
 // ---------------------------------------------------------------------------------
-Q_DECLARE_METATYPE ( dp::ActionTemplate )
-Q_DECLARE_METATYPE ( dp::TemplateList )
 namespace dp
 {
   // ---------------------------------------------------------------------------------

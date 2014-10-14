@@ -4,7 +4,7 @@
 #include <libdontpanic/report.h>
 #include <QDBusArgument>
 
-Q_DECLARE_METATYPE ( dp::Report )
+
 // ---------------------------------------------------------------------------------
 namespace dp
 {

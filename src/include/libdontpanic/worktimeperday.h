@@ -28,6 +28,15 @@ class QDBusArgument;
 // ---------------------------------------------------------------------------------
 namespace dp
 {
+  class WorktimePerDay;
+  typedef QList<WorktimePerDay> WorktimePerDayList;  
+}
+// ---------------------------------------------------------------------------------
+Q_DECLARE_METATYPE ( dp::WorktimePerDay )
+Q_DECLARE_METATYPE ( dp::WorktimePerDayList )
+// ---------------------------------------------------------------------------------
+namespace dp
+{
   // ---------------------------------------------------------------------------------
   class DP_EXPORT WorktimePerDay
   {
@@ -63,8 +72,6 @@ namespace dp
       QTime _M_time;
       // ---------------------------------------------------------------------------------
   };
-  // ---------------------------------------------------------------------------------
-  typedef QList<WorktimePerDay> WorktimePerDayList;
   // ---------------------------------------------------------------------------------
   bool DP_EXPORT operator == ( dp::WorktimePerDay const& lhs, dp::WorktimePerDay const& rhs );
   // ---------------------------------------------------------------------------------
