@@ -1,54 +1,79 @@
 #include "dontpanik.hpp"
-#include <kapplication.h>
-#include <kaboutdata.h>
-#include <kcmdlineargs.h>
-#include <klocale.h>
-#include <KDebug>
-static const char description[] =
-  I18N_NOOP ( "The KDE interface to the personal project based time tracking tool dontpanic" );
+#include <QApplication>
+#include <QCommandLineParser>
+#include <KAboutData>
+#include <KLocalizedString>
 
 static const char author_fh[] = "Frank Habel";
 static const char author_fh_email[] = "frank@bugplasma.de";
-static const char version[] = "0.0.1";
+static const char version[] = "0.0.2";
 
 int main ( int argc, char **argv )
 {
-  KAboutData about ( "dontpanik", 0, ki18n ( "Don't Panik" ), version, ki18n ( description ), KAboutData::License_GPL_V3, ki18n ( "(C) 2009-2010 The Don't Panik Authors" ), KLocalizedString(), 0, author_fh_email );
-  about.setCatalogName("dontpanic");
-  about.addAuthor ( ki18n ( author_fh ), KLocalizedString(), author_fh_email );
-  KCmdLineArgs::init ( argc, argv, &about );
+//   KAboutData about ( "dontpanik", 0, ki18n ( "Don't Panik" ), version, ki18n ( description ), KAboutData::License_GPL_V3, ki18n ( "(C) 2009-2010 The Don't Panik Authors" ), KLocalizedString(), 0, author_fh_email );
+//   about.setCatalogName("dontpanic");
+//   about.addAuthor ( ki18n ( author_fh ), KLocalizedString(), author_fh_email );
+//   KCmdLineArgs::init ( argc, argv, &about );
+// 
+//   QCommandLineParser parser;
+//   //options.add("+[URL]", ki18n( "Document to open" ));
+//   
+//   //KLocale::setMainCatalog("dontpanic");
+//   
+//   QApplication app;
+//   parser.process(app);
+//   // see if we are starting with session management
+//   if ( app.isSessionRestored() )
+//     RESTORE ( DontPanik )
+//     else
+//     {
+//       // no session.. just start up normally
+//       KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+// 
+//       if ( args->count() == 0 )
+//       {
+//         DontPanik *widget = new DontPanik();
+//         widget->show();
+//       }
+//       else
+//       {
+//         int i = 0;
+//         for ( ; i < args->count(); i++ )
+//         {
+//           DontPanik *widget = new DontPanik;
+//           widget->show();
+//           // widget->load( args->url( i ) );
+//         }
+//       }
+//       args->clear();
+//     }
+// 
+//   return app.exec();
+  QApplication application(argc, argv);
 
-  KCmdLineOptions options;
-  //options.add("+[URL]", ki18n( "Document to open" ));
-  KCmdLineArgs::addCmdLineOptions ( options );
-  //KLocale::setMainCatalog("dontpanic");
-  
-  KApplication app;
-  // see if we are starting with session management
-  if ( app.isSessionRestored() )
-    RESTORE ( DontPanik )
-    else
-    {
-      // no session.. just start up normally
-      KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+    KLocalizedString::setApplicationDomain("dontpanic");
+    KAboutData aboutData( QStringLiteral("dontpanik"),
+                          i18n("Don't Panik"),
+                          version,
+                          i18n ( "The KDE interface to the personal project based time tracking tool dontpanic" ),
+                          KAboutLicense::GPL_V3,
+                          i18n ( "(C) 2009-2014 The Don't Panik Authors"),
+                          QString(),
+                          QString(),
+                          author_fh_email
+                        );
 
-      if ( args->count() == 0 )
-      {
-        DontPanik *widget = new DontPanik();
-        widget->show();
-      }
-      else
-      {
-        int i = 0;
-        for ( ; i < args->count(); i++ )
-        {
-          DontPanik *widget = new DontPanik;
-          widget->show();
-          // widget->load( args->url( i ) );
-        }
-      }
-      args->clear();
-    }
+    aboutData.addAuthor(i18n(author_fh), QString(), author_fh_email);
+    KAboutData::setApplicationData(aboutData);    
+    application.setWindowIcon(QIcon::fromTheme("dontpanik"));
+    QCommandLineParser parser;
+    parser.addHelpOption();
+    parser.addVersionOption();
+    aboutData.setupCommandLine(&parser);
+    parser.process(application);
+    aboutData.processCommandLine(&parser);
 
-  return app.exec();
+    DontPanik *widget = new DontPanik();
+    widget->show();
+    return application.exec();
 }

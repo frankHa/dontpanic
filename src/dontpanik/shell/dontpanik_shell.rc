@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="dontpanik_shell" version="2">
+<kpartgui name="dontpanik_shell" version="2" translationDomain="dontpanic">
 <MenuBar>
   <Menu name="file"><text>&amp;File</text>
   <Separator/>

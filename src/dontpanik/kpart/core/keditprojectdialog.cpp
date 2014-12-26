@@ -21,21 +21,17 @@
 #include "ui_keditprojectdialog.h"
 #include <libdontpanic/project.hpp>
 #include "context.h"
-#include <KDebug>
 namespace dp
 {
   namespace core
   {
     KEditProjectDialog::KEditProjectDialog(QWidget *parent)
-    :KDialog(parent)
+    :QDialog(parent)
     , _M_ui (new Ui::KEditProjectDialog())
     , _M_current_project(NullProject())
     {
-      QWidget *w = new QWidget(this);
-      _M_ui->setupUi(w);
-      setMainWidget(w);
-      setButtons(Ok|Cancel);
-      setCaption(i18n("Project"));
+      _M_ui->setupUi(this);
+      setWindowTitle(i18n("Project"));
       _M_ui->creation_date->setDateTime(QDateTime::currentDateTime());
       setup_actions();
     }
@@ -56,8 +52,8 @@ namespace dp
     
     void KEditProjectDialog::setup_actions()
     {
-      connect(this, SIGNAL(accepted()), this, SLOT(accepted()));
-      connect(this, SIGNAL(rejected()), this, SLOT(rejected()));
+      connect(_M_ui->buttons, SIGNAL(accepted()), this, SLOT(accepted()));
+      connect(_M_ui->buttons, SIGNAL(rejected()), this, SLOT(rejected()));
     }
     
     void KEditProjectDialog::accepted()
@@ -76,10 +72,11 @@ namespace dp
         .setComment(_M_ui->comment->text());        
         context()->projectManager()->store(p);
       }
+      accept();
     }
     void KEditProjectDialog::rejected()
     {
-      close();
+      reject();
     }
   }//core
 }//dp

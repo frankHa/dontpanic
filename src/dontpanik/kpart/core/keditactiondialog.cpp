@@ -26,14 +26,11 @@ namespace dp
   namespace core
   {
     KEditActionDialog::KEditActionDialog ( QWidget* parent, Qt::WindowFlags f)
-    : KDialog(parent, f)
+    : QDialog(parent, f)
     , _M_ui(new Ui::KEditActionDialog())
     {
-      QWidget *w = new QWidget(this);
-      _M_ui->setupUi(w);
-      setMainWidget(w);
-      setCaption(i18n("Action"));
-      setButtons(Ok | Cancel);
+      _M_ui->setupUi(this);
+      setWindowTitle(i18n("Action"));
       init_ui();
       setup_actions();
     }
@@ -71,7 +68,8 @@ namespace dp
     
     void KEditActionDialog::setup_actions()
     {
-      connect(this, SIGNAL(accepted()), this, SLOT(accepted()));
+      connect(_M_ui->buttons, SIGNAL(accepted()), this, SLOT(accepted()));
+      connect(_M_ui->buttons, SIGNAL(rejected()), this, SLOT(reject()));
     }
     
     QDate KEditActionDialog::currentDate() const
@@ -98,7 +96,9 @@ namespace dp
       a.setTask(_M_ui->worktype->selectedUuid());
       a.setComment(_M_ui->comment->text());
       context()->timeTracker()->store(a);
+      accept();
     }
+    
   }
 }
 

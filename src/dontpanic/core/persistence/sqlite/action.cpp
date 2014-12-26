@@ -6,7 +6,6 @@
 #include <persistence/sqlite/project.hpp>
 #include <QVariant>
 #include <QSqlQuery>
-#include <KDebug>
 namespace dp
 {
   // ---------------------------------------------------------------------------------
@@ -117,14 +116,14 @@ namespace dp
       // ---------------------------------------------------------------------------------
       success Action::findAll ( dp::ActionList &l, QDateTime const& from, QDateTime const& to ) const
       {
-        kDebug() << "from: " << from << " to: " << to;
+        qDebug() << "from: " << from << " to: " << to;
         QSqlQuery query;
         query.prepare ( SELECT_RANGE_OF_ACTIONS );
         bindTimeValue ( query, from );
         bindTimeValue ( query, to );
         if ( execute ( query ).has_failed() )
         {
-          kWarning() << "last error: " << query.lastError();
+          qWarning() << "last error: " << query.lastError();
           return error();
         }
         while ( query.next() )
@@ -142,18 +141,18 @@ namespace dp
         query.prepare ( SELECT_LAST_ACTION );
         if ( execute ( query ).has_failed() )
         {
-          kWarning() << "query SELECT_LAST_ACTION failed";
+          qWarning() << "query SELECT_LAST_ACTION failed";
           return dp::NullAction();
         }
         if ( !query.first() )
         {
-          kWarning() << "no action found";
+          qWarning() << "no action found";
           return dp::NullAction();
         }
         QUuid const&id = query.value ( 0 ).toString();
         dp::Action _a ( id );
         assign_query_values_to_entity ( query, _a );
-        kDebug() << "loaded last action " << id.toString();
+        qDebug() << "loaded last action " << id.toString();
         return _a;
       }
       // ---------------------------------------------------------------------------------
@@ -206,7 +205,7 @@ namespace dp
           {
             return error();
           }
-          kDebug() << _a.id().toString();
+          qDebug() << _a.id().toString();
           QSqlQuery query;
           query.prepare ( INSERT_ACTION );
           query.addBindValue ( _a.id().toString() );
@@ -233,7 +232,7 @@ namespace dp
         {
           return error();
         }
-        kDebug() << _a.id().toString();
+        qDebug() << _a.id().toString();
         QSqlQuery query;
         query.prepare ( UPDATE_ACTION );
         query.addBindValue ( _a.task().toString() );

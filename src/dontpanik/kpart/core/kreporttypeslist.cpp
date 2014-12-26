@@ -22,7 +22,7 @@
 #include "kreportrangedialog.h"
 #include "editreporttypedialog.h"
 #include "context.h"
-#include <KAction>
+#include <QAction>
 #include <QMenu>
 #include <QContextMenuEvent>
 #include <KMessageBox>
@@ -44,13 +44,13 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void KReportTypesList::init_menu_actions()
     {
-      _M_generate_report = new KAction(i18n("Generate Report"), this );
+      _M_generate_report = new QAction(i18n("Generate Report"), this );
       connect(_M_generate_report, SIGNAL(triggered()), this, SLOT(generate_report_of_selected_type()));
-      _M_add_report_type = new KAction(i18n("Define a new Report Type"), this);
+      _M_add_report_type = new QAction(i18n("Define a new Report Type"), this);
       connect(_M_add_report_type, SIGNAL(triggered()), this, SLOT(on_new_report_type()));
-      _M_edit_selected_report_type = new KAction(i18n("Edit Report Type"), this);
+      _M_edit_selected_report_type = new QAction(i18n("Edit Report Type"), this);
       connect(_M_edit_selected_report_type, SIGNAL(triggered()), this, SLOT(on_edit_selected_report_type()));
-      _M_remove_selected_report_type = new KAction(i18n("Remove Report Type"), this);
+      _M_remove_selected_report_type = new QAction(i18n("Remove Report Type"), this);
       connect(_M_remove_selected_report_type, SIGNAL(triggered()), this, SLOT(on_delete_selected_report_type()));
     }
     // ---------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ namespace dp
       ReportType current_selection = _M_model->at(currentIndex());  
       if(KMessageBox::questionYesNo(this, i18n("Do you really want to remove the selected report type?"), i18n("Remove Report Type"))==KMessageBox::Yes)
       {
-        kDebug()<<"attempting to delete report type"<<current_selection.id().toString();
+        qDebug()<<"attempting to delete report type"<<current_selection.id().toString();
         context()->reportManager()->remove(current_selection);
       }
     }

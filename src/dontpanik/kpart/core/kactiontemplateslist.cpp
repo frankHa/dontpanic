@@ -23,7 +23,7 @@
 #include "context.h"
 #include <QMenu>
 #include <QContextMenuEvent>
-#include <KAction>
+#include <QWidgetAction>
 #include <KMessageBox>
 // ---------------------------------------------------------------------------------
 namespace dp
@@ -43,11 +43,11 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void KActionTemplatesList::init_menu_actions()
     {
-      _M_new_action_template = new KAction("Create new Favorite", this);
+      _M_new_action_template = new QAction("Create new Favorite", this);
       connect(_M_new_action_template, SIGNAL(triggered()), this, SLOT(on_create_new_action_template()));
-      _M_remove_selected_action_template = new KAction("Remove...", this);
+      _M_remove_selected_action_template = new QAction("Remove...", this);
       connect(_M_remove_selected_action_template, SIGNAL(triggered()), this, SLOT(on_remove_selected_action_template()));
-      _M_edit_selected_action_template = new KAction("Properties...", this);
+      _M_edit_selected_action_template = new QAction("Properties...", this);
       connect(_M_edit_selected_action_template, SIGNAL(triggered()), this, SLOT(on_edit_selected_action_template()));
     }
     // ---------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ namespace dp
     void KActionTemplatesList::on_double_clicked(QModelIndex const& index)
     {
       ActionTemplate const& at = _M_model->at(index);
-      kDebug()<<"starting action from template "<<at.id().toString();
+      qDebug()<<"starting action from template "<<at.id().toString();
       context()->timeTracker()->startActionFromTemplate(at);
     }
     // ---------------------------------------------------------------------------------
@@ -91,7 +91,7 @@ namespace dp
       ActionTemplate current_selection = _M_model->at(currentIndex());  
       if(KMessageBox::questionYesNo(this, i18n("Do you really want to remove the selected favorite definition?"), i18n("Remove Favorite"))==KMessageBox::Yes)
       {
-        kDebug()<<"attempting to delete action template "<<current_selection.id().toString();
+        qDebug()<<"attempting to delete action template "<<current_selection.id().toString();
         context()->actionTemplateManager()->remove(current_selection);
       }
     }

@@ -17,11 +17,10 @@
 
 */
 #include "statusnotifieritem.h"
-#ifdef DP_BUILD_TRAY_ICON_SUPPORT
 #include "context.h"
 #include "actiontemplateaction.h"
 #include <libdontpanic/durationformatter.h>
-#include <KMenu>
+#include <QMenu>
 
 namespace dp
 {
@@ -51,19 +50,19 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void StatusNotifierItem::onCurrentProjectChanged ( QString const& project_description )
     {
-      kDebug() << project_description;
+      qDebug() << project_description;
       setToolTipSubTitle ( project_description );
     }
     // ---------------------------------------------------------------------------------
     void StatusNotifierItem::onTodaysDurationChanged ( int duration )
     {
-      kDebug() << duration;
+      qDebug() << duration;
       setToolTipTitle ( duration_formatter().format ( duration ) );
     }
     // ---------------------------------------------------------------------------------
     void StatusNotifierItem::onIconChanged ( QString const& icon )
     {
-      kDebug() << icon;
+      qDebug() << icon;
       setIconByName ( icon );
       setToolTipIconByName ( icon );
     }
@@ -73,7 +72,7 @@ namespace dp
     void StatusNotifierItem::init()
     {
       setIconByName ( "dontpanik" );
-      KMenu *menu = contextMenu();
+      QMenu *menu = contextMenu();
       menu->addAction ( context()->globalActions()->action ( "start_new_action" ) );
       menu->addAction ( context()->globalActions()->action ( "stop_current_action" ) );
       menu->addAction ( context()->globalActions()->action ( "continue_action" ) );
@@ -85,9 +84,9 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void StatusNotifierItem::initFavoritesMenu()
     {
-      KMenu *menu = contextMenu();
+      QMenu *menu = contextMenu();
       menu->addSeparator();
-      _M_fav_menu = new KMenu ( i18n ( "switch activity to..." ), menu );
+      _M_fav_menu = new QMenu ( i18n ( "switch activity to..." ), menu );
       populateFavoritesMenu();
       menu->addMenu ( _M_fav_menu );
     }
@@ -101,7 +100,7 @@ namespace dp
       }
     }
     // ---------------------------------------------------------------------------------
-    KAction* StatusNotifierItem::actionFor ( ActionTemplate const& a )
+    QAction* StatusNotifierItem::actionFor ( ActionTemplate const& a )
     {
       ActionTemplateAction * ata = new ActionTemplateAction ( this );
       ata->setFavorite ( a );
@@ -121,4 +120,3 @@ namespace dp
     // ---------------------------------------------------------------------------------
   }
 }
-#endif //DP_BUILD_TRAY_ICON_SUPPORT

@@ -20,8 +20,8 @@
 #ifndef DP_KMAINWIDGET_H
 #define DP_KMAINWIDGET_H
 
-#include <QtGui/QWidget>
-#include <QtGui/QStackedWidget>
+#include <QtWidgets/QWidget>
+#include <QtWidgets/QStackedWidget>
 #include <QDate>
 #include <kparts/statusbarextension.h>
 // ---------------------------------------------------------------------------------

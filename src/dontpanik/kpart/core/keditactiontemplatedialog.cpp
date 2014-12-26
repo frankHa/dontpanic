@@ -21,21 +21,17 @@
 #include "ui_keditactiontemplatedialog.h"
 #include "context.h"
 #include <QVariant>
-#include <KDebug>
 namespace dp
 {
    namespace core
    {
      KEditActionTemplateDialog::KEditActionTemplateDialog(QWidget *parent)
-     :KDialog(parent)
+     :QDialog(parent)
      , _M_ui(new Ui::KEditActionTemplateDialog())
      , _M_current_template(NullActionTemplate())
      {
-       QWidget *w = new QWidget(this);
-       _M_ui->setupUi(w);
-       setMainWidget(w);
-       setButtons(Ok | Cancel);
-       setCaption(i18n("Favorite"));
+       _M_ui->setupUi(this);
+       setWindowTitle(i18n("Favorite"));
        _M_ui->icon->setIconType(KIconLoader::NoGroup, KIconLoader::Emote);
        setup_actions();
      }
@@ -58,13 +54,13 @@ namespace dp
      
      void KEditActionTemplateDialog::setup_actions()
      {
-       connect(this, SIGNAL(accepted()), this, SLOT(accepted()));
-       connect(this, SIGNAL(rejected()), this, SLOT(rejected()));
+       connect(_M_ui->buttons, SIGNAL(accepted()), this, SLOT(accepted()));
+       connect(_M_ui->buttons, SIGNAL(rejected()), this, SLOT(rejected()));
      }
      
      void KEditActionTemplateDialog::accepted()
      {
-       kDebug()<<"";
+       qDebug()<<"";
        QString const& name = _M_ui->name->text();
        if(!name.isEmpty())
        {
@@ -82,11 +78,12 @@ namespace dp
          t.setIcon(_M_ui->icon->icon());
          context()->actionTemplateManager()->store(t);
        }
+       accept();
      }
      
      void KEditActionTemplateDialog::rejected()
      {
-       close();
+       reject();
      }
    }//core
 }//dp

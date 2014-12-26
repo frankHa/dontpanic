@@ -20,10 +20,10 @@
 #ifndef DP_KACTIONSTABLE_H
 #define DP_KACTIONSTABLE_H
 
-#include <QtGui/QTableView>
+#include <QtWidgets/QTableView>
 #include <kactionstablesortmodel.h>
 #include <kactionstablemodel.h>
-#include <KAction>
+#include <QAction>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -79,9 +79,9 @@ namespace dp
         // ---------------------------------------------------------------------------------
       private:
         // ---------------------------------------------------------------------------------
-        KAction *_M_remove_selected_action;
+        QAction *_M_remove_selected_action;
         // ---------------------------------------------------------------------------------
-        KAction *_M_edit_selected_action;
+        QAction *_M_edit_selected_action;
         // ---------------------------------------------------------------------------------
     };
   // ---------------------------------------------------------------------------------

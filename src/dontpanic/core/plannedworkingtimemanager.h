@@ -4,7 +4,7 @@
 #include <libdontpanic/defines.hpp>
 #include <libdontpanic/worktimeperday.h>
 #include <QObject>
-#include <kholidays/holidays.h>
+//#include <kholidays/holidays.h>
 
 
 namespace dp
@@ -52,7 +52,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
     private:
       // ---------------------------------------------------------------------------------
-      KHolidays::HolidayRegion *_M_holidays;
+      //KHolidays::HolidayRegion *_M_holidays;
       // ---------------------------------------------------------------------------------
   };
   // ---------------------------------------------------------------------------------

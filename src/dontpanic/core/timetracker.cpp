@@ -1,7 +1,6 @@
 #include "timetracker.h"
 #include "libdontpanic/action.hpp"
 #include "persistencebackend.hpp"
-#include <KDebug>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -57,8 +56,8 @@ namespace dp
     ActionTemplate templ(_template_id);
     if(persistence().load(templ).has_failed())
     {
-      kWarning()<<"unable to find template id :" << _template_id.toString();
-      kWarning()<<"not starting a new action here";
+      qWarning()<<"unable to find template id :" << _template_id.toString();
+      qWarning()<<"not starting a new action here";
       return;
     }
     startNewActionFromTemplate(templ);
@@ -66,15 +65,15 @@ namespace dp
   // ---------------------------------------------------------------------------------
   void TimeTracker::stopCurrentAction()
   {
-    kDebug() <<"";
+    qDebug() <<"";
     if ( !_M_current_action.isActive() )
     {
-      kDebug()<<"current action not active->doing nothing...";
+      qDebug()<<"current action not active->doing nothing...";
       return;
     }
     _M_current_action.setEndTime ( QDateTime::currentDateTime() );
     store(_M_current_action);
-    kDebug()<<"current action stopped";
+    qDebug()<<"current action stopped";
   }
   // ---------------------------------------------------------------------------------
   void TimeTracker::continueLastAction()
@@ -120,14 +119,14 @@ namespace dp
   void TimeTracker::load_last_action()
   {
     _M_current_action = persistence().lastAction();
-    kDebug()<<"last action:"<<_M_current_action.id().toString()
+    qDebug()<<"last action:"<<_M_current_action.id().toString()
     <<", starting:"<< _M_current_action.startTime()<<", ended: "<<_M_current_action.endTime()
     <<", is Active:"<<_M_current_action.isActive();
   }
   // ---------------------------------------------------------------------------------
   void TimeTracker::start_action(Action const& _a)
   {
-    kDebug() << __FUNCTION__;
+    qDebug() << __FUNCTION__;
     if ( _M_current_action.isValid())
     {
       stopCurrentAction();

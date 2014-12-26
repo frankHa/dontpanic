@@ -22,7 +22,7 @@
 #include <libdontpanic/defines.hpp>
 #include "dayinfo.h"
 
-#include <QtGui/QWidget>
+#include <QtWidgets/QWidget>
 #include <QDate>
 // ---------------------------------------------------------------------------------
 namespace Ui

@@ -1,7 +1,6 @@
 #include "taskmanager.h"
 #include "persistencebackend.hpp"
 
-#include <KDebug>
 // ---------------------------------------------------------------------------------
 namespace dp
 {

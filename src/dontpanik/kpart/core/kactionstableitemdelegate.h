@@ -20,7 +20,7 @@
 #ifndef DP_CORE_DETAIL_KACTIONSTABLEITEMDELEGATE_H
 #define DP_CORE_DETAIL_KACTIONSTABLEITEMDELEGATE_H
 
-#include <QtGui/QStyledItemDelegate>
+#include <QtWidgets/QStyledItemDelegate>
 
 
 namespace dp

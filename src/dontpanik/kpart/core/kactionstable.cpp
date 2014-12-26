@@ -90,9 +90,9 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void KActionsTable::init_menu_actions()
     {
-      _M_remove_selected_action = new KAction("Remove...", this);
+      _M_remove_selected_action = new QAction("Remove...", this);
       connect(_M_remove_selected_action, SIGNAL(triggered()), this, SLOT(on_remove_selected_action()));
-      _M_edit_selected_action = new KAction("Properties...", this);
+      _M_edit_selected_action = new QAction("Properties...", this);
       connect(_M_edit_selected_action, SIGNAL(triggered()), this, SLOT(on_edit_selected_action()));
       
     }

@@ -29,15 +29,12 @@ namespace dp
   namespace core
   {
     KReportRangeDialog::KReportRangeDialog ( QWidget* parent, Qt::WindowFlags f)
-    :KDialog(parent, f)
+    :QDialog(parent, f)
     , _M_ui(new Ui::KReportRangeDialog())
     , _M_range(LAST_MONTH)
     {
-      QWidget *w= new QWidget(this);
-      _M_ui->setupUi(w);
-      setMainWidget(w);
-      setButtons(Ok|Cancel);
-      setCaption(i18n("Choose Report Range"));
+      _M_ui->setupUi(this);
+      setWindowTitle(i18n("Choose Report Range"));
       init_actions();
       init_presets();
       init_ui();
@@ -88,6 +85,8 @@ namespace dp
     {
       connect(_M_ui->preset_range, SIGNAL(toggled(bool)), this, SLOT(on_use_preset_toggled(bool)));
       connect(_M_ui->preset_choice, SIGNAL(currentIndexChanged(int)), this, SLOT(on_preset_chosen(int)));
+      connect(_M_ui->buttons, SIGNAL(accepted()), this, SLOT(accept()));
+      connect(_M_ui->buttons, SIGNAL(rejected()), this, SLOT(reject()));
     }
     
     TimeRange KReportRangeDialog::custom_range() const

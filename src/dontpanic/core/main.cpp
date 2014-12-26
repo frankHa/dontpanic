@@ -3,7 +3,6 @@
 #include "libdontpanic/dbus.hpp"
 //Qt includes
 #include <QDebug>
-#include <KLocale>
 // ---------------------------------------------------------------------------------
 int main(int argc, char* argv[])
 {

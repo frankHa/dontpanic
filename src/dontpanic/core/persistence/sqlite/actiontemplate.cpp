@@ -4,7 +4,6 @@
 
 #include <QVariant>
 #include <QSqlQuery>
-#include <KDebug>
 namespace dp
 {
   // ---------------------------------------------------------------------------------
@@ -77,7 +76,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       success ActionTemplate::remove ( dp::ActionTemplate const& _a ) const
       {
-        kDebug() << _a.id().toString();
+        qDebug() << _a.id().toString();
         if ( !_a.isValid() )
         {
           return error();

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>KTasksDialog</class>
- <widget class="QWidget" name="KTasksDialog">
+ <widget class="QDialog" name="KTasksDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -35,14 +35,14 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="KPushButton" name="b_add">
+        <widget class="QPushButton" name="b_add">
          <property name="text">
           <string>+</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="KPushButton" name="b_remove">
+        <widget class="QPushButton" name="b_remove">
          <property name="text">
           <string>-</string>
          </property>
@@ -65,14 +65,16 @@
      </item>
     </layout>
    </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttons">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Close</set>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>KPushButton</class>
-   <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
-  </customwidget>
   <customwidget>
    <class>dp::core::KTasksTable</class>
    <extends>QTableView</extends>
@@ -80,38 +82,5 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>KTasksDialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>KTasksDialog</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

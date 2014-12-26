@@ -22,6 +22,7 @@
 #include "context.h"
 #include <QSettings>
 #include <KConfigGroup>
+#include <KSharedConfig>
 // ---------------------------------------------------------------------------------
 namespace dp
 {

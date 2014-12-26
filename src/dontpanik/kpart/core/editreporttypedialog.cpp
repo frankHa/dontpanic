@@ -24,7 +24,9 @@
 #include <libdontpanic/reportgroupingtimeinterval.h>
 #include "selectprojectsdialog.h"
 #include "selecttasksdialog.h"
-#include <kfiledialog.h>
+//Qt includes
+#include <QUrl>
+#include <QFileDialog>
 
 namespace dp
 {
@@ -33,15 +35,13 @@ namespace dp
   {
     // ---------------------------------------------------------------------------------
     EditReportTypeDialog::EditReportTypeDialog ( QWidget* parent, Qt::WindowFlags f)
-    :KDialog(parent, f)
+    :QDialog(parent, f)
     ,_M_ui(new Ui::EditReportTypeDialog)
     , _M_current_report_type(NullReportType())
     {
-      QWidget *w = new QWidget(this);
-        _M_ui->setupUi(w);
-        setMainWidget(w);
-        setCaption(i18n("Report Type"));
-        setButtons(Ok | Cancel);
+        _M_ui->setupUi(this);
+        //setMainWidget(w);
+        setWindowTitle(i18n("Report Type"));
         enableButtonOk(false);
         _M_ui->icon->setIconType(KIconLoader::NoGroup, KIconLoader::Emote);
         setup_actions();
@@ -51,6 +51,11 @@ namespace dp
     EditReportTypeDialog::~EditReportTypeDialog()
     {
       delete _M_ui;
+    }
+    // ---------------------------------------------------------------------------------
+    void EditReportTypeDialog::enableButtonOk ( bool enabled )
+    {
+      _M_ui->buttons->button(QDialogButtonBox::Ok)->setEnabled(enabled);
     }
     // ---------------------------------------------------------------------------------
     void EditReportTypeDialog::setReportType(ReportType const& at)
@@ -71,7 +76,8 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void EditReportTypeDialog::setup_actions()
     {
-      connect(this, SIGNAL(accepted()), this, SLOT(accepted()));
+      connect(_M_ui->buttons, SIGNAL(accepted()), this, SLOT(accepted()));
+      connect(_M_ui->buttons, SIGNAL(rejected()), this, SLOT(rejected()));
       connect(_M_ui->select_tasks, SIGNAL(clicked()), this, SLOT(select_tasks()));
       connect(_M_ui->select_projects, SIGNAL(clicked()), this, SLOT(select_projects()));
       connect(_M_ui->task_filter_type, SIGNAL(currentIndexChanged(int)), this, SLOT(update_select_tasks_enabled_state(int)));
@@ -92,7 +98,7 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void EditReportTypeDialog::accepted()
     {
-      kDebug()<<"";
+      qDebug()<<"";
       QString const& name = _M_ui->name->text();
       if(!name.isEmpty())
       {
@@ -113,11 +119,12 @@ namespace dp
         t.setExportDataFileTemplate(_M_ui->export_data_file->text());        
         context()->reportManager()->store(t);
       }
+      accept();
     }
     // ---------------------------------------------------------------------------------
     void EditReportTypeDialog::rejected()
     {
-      close();
+      reject();
     }
     // ---------------------------------------------------------------------------------
     void EditReportTypeDialog::select_projects()
@@ -157,8 +164,8 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void EditReportTypeDialog::select_target_file()
     {
-      KUrl url(_M_ui->export_data_file->text());
-      QString const& selection = KFileDialog::getSaveFileName(url);
+      QString path = _M_ui->export_data_file->text();
+      QString const& selection = QFileDialog::getSaveFileName(this, i18n("Save File"), path);
       if(!selection.isEmpty())
       {
         _M_ui->export_data_file->setText(selection);

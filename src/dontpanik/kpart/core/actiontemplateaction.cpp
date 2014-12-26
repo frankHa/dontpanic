@@ -19,14 +19,14 @@
 
 #include "actiontemplateaction.h"
 
-#include <KIcon>
+#include <QIcon>
 
 namespace dp
 {
 namespace core
 {
 ActionTemplateAction::ActionTemplateAction(QObject* parent)
-        : KAction(parent)
+        : QWidgetAction(parent)
         ,_M_favorite(NullActionTemplate())
 {
     connect(this, SIGNAL(triggered()), this, SLOT(on_triggered()));
@@ -34,7 +34,7 @@ ActionTemplateAction::ActionTemplateAction(QObject* parent)
 ActionTemplateAction& ActionTemplateAction::setFavorite(const ActionTemplate& fav)
 {
     _M_favorite = fav;
-    setIcon(KIcon(fav.icon()));
+    setIcon(QIcon::fromTheme(fav.icon()));
     setText(fav.name());
     return *this;
 }

@@ -2,6 +2,7 @@
 #define DONTPANIC_H
 
 #include <kparts/mainwindow.h>
+#include <kparts/readonlypart.h>
 
 /**
  * This is the application "Shell".  It has a menubar, toolbar, and

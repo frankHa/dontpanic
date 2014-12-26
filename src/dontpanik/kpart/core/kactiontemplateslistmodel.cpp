@@ -20,7 +20,6 @@
 #include "kactiontemplateslistmodel.h"
 #include "context.h"
 #include <KLocalizedString>
-#include <KDebug>
 #include <KIconLoader>
 #include <QPixmap>
 // ---------------------------------------------------------------------------------
@@ -37,7 +36,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       KActionTemplatesListModel::KActionTemplatesListModel ( QObject *parent )
           : QAbstractListModel ( parent )
-          , _M_icon_loader ( new KIconLoader ( "", 0, this ) )
+          , _M_icon_loader ( new KIconLoader ( "", QStringList(), this ) )
       {
         init_header_data();
         subscribe_to_action_template_manager_signals();
@@ -141,7 +140,7 @@ namespace dp
       void KActionTemplatesListModel::updated ( dp::ActionTemplate const&p )
       {
         int row = _M_action_templates.indexOf ( p );
-        kDebug() << "updating action template [" << row << "]";
+        qDebug() << "updating action template [" << row << "]";
         QModelIndex const& i = index ( row );
         _M_action_templates.replace ( row, p );
         emit dataChanged ( i, i );

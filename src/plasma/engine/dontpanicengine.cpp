@@ -4,6 +4,8 @@
 #include <QTime>
 
 #include <libdontpanic/dbus.hpp>
+#include <libdontpanic/durationformatter.h>
+#include <libdontpanic/time.hpp>
 #include <libdontpanic_client/actionscache.h>
 #include <libdontpanic_client/actiontemplatemanager.h>
 #include <libdontpanic_client/timetracker.h>
@@ -11,20 +13,22 @@
 #include <libdontpanic_client/taskmanager.h>
 #include <libdontpanic_client/plannedworkingtimemanager.h>
 
+#include "dontpanicservice.h"
 #include <Plasma/DataContainer>
 #include <QTimerEvent>
 namespace dp
 {
   namespace plasma
   {
-    QString src_today ( "dp/today" );
-    QString src_current_activity ( "dp/current activity" );
-    QString src_favorites ( "dp/favorites/" );
-
+    QString src_today ( "today" );
+    QString src_current_activity ( "current_activity" );
+    QString src_favorites ( "favorites" );
+    QString src_icon("icon");
+    // ---------------------------------------------------------------------------------
     DontPanicEngine::DontPanicEngine ( QObject* parent, const QVariantList& args )
-        : Plasma::DataEngine ( parent, args )
-        , _M_timer_id ( 0 )
-        , _M_cached_duration ( 0 )
+      : Plasma::DataEngine ( parent, args )
+      , _M_timer_id ( 0 )
+      , _M_cached_duration ( 0 )
     {
       // We ignore any arguments - data engines do not have much use for them
       Q_UNUSED ( args )
@@ -33,12 +37,13 @@ namespace dp
       // update interval and using too much CPU.
       // In the case of a clock that only has second precision,
       // a third of a second should be more than enough.
-      setMinimumPollingInterval ( 500 );
-      _M_sources << src_today << src_current_activity;
+      init();
     }
-
+    // ---------------------------------------------------------------------------------
     void DontPanicEngine::init()
     {
+      setMinimumPollingInterval ( 500 );
+      _M_sources <<src_icon << src_today << src_current_activity;
       dbus().register_dp_custom_types();
       _M_action_template_manager = new dp::client::ActionTemplateManager ( this );
       _M_project_manager = new dp::client::ProjectManager ( this );
@@ -49,15 +54,18 @@ namespace dp
       _M_actions_cache->setSourceTimeTracker ( _M_timetracker );
       _M_actions_cache->initCache ();
       init_favorites();
-
     }
-
+    // ---------------------------------------------------------------------------------
     bool DontPanicEngine::sourceRequestEvent ( const QString &name )
     {
       if ( name == src_current_activity )
       {
         connect ( _M_timetracker, SIGNAL ( currentlyActiveActionChanged ( dp::Action ) ), this, SLOT ( updateCurrentActivity() ) );
         return updateCurrentActivity();
+      }
+      if(name == src_icon)
+      {
+        return updateIcon();
       }
       if ( name == src_today )
       {
@@ -73,9 +81,19 @@ namespace dp
       }
       return updateSourceEvent ( name );
     }
-
+    // ---------------------------------------------------------------------------------
+    Plasma::Service* DontPanicEngine::serviceForSource(const QString& source)
+    {
+      qDebug()<<"creating new DontPanicService";
+      return new DontPanicService(this, source);
+    }
+    // ---------------------------------------------------------------------------------
     bool DontPanicEngine::updateSourceEvent ( const QString &name )
     {
+      if(name == src_icon)
+      {
+        return updateIcon();
+      }
       if ( name == src_today )
       {
         return updateTodaysDuration();
@@ -100,7 +118,7 @@ namespace dp
     bool DontPanicEngine::updateTodaysDuration()
     {
       _M_cached_duration = _M_actions_cache->duration();
-      setData ( src_today, "Time", _M_cached_duration );
+      setData ( src_today, "Time", duration_formatter().format(_M_cached_duration) );
       setData ( src_today, "Planned working time", _M_planned_working_time_manager->plannedWorkHoursToday() );
       ensure_correct_timer_state();
       return true;
@@ -111,7 +129,7 @@ namespace dp
       connect ( _M_action_template_manager, SIGNAL ( stored ( dp::ActionTemplate ) ), this, SLOT ( updateFavorite ( dp::ActionTemplate const& ) ) );
       connect ( _M_action_template_manager, SIGNAL ( removed ( dp::ActionTemplate ) ), this, SLOT ( removeFavorite ( dp::ActionTemplate const& ) ) );
       TemplateList list = _M_action_template_manager->allActionTemplates();
-      for ( int i = 0;i < list.length();++i )
+      for ( int i = 0; i < list.length(); ++i )
       {
         updateFavorite ( list.value ( i ) );
       }
@@ -126,8 +144,26 @@ namespace dp
       setData ( src_current_activity, "project", _M_project_manager->load ( a.project() ).name() );
       setData ( src_current_activity, "task", _M_task_manager->load ( a.task() ).name() );
       setData ( src_current_activity, "start", a.startTime() );
-      setData ( src_current_activity, "duration", a.duration() );
+      setData ( src_current_activity, "duration", duration_formatter().format(a.duration()) );
       ensure_correct_timer_state();
+      return true;
+    }
+
+    bool DontPanicEngine::updateIcon()
+    {
+      QString icon = "dontpanik";
+      if ( _M_timetracker->currentlyActiveAction().isActive() )
+      {
+        if ( _M_cached_duration < dp::time::minutes(_M_planned_working_time_manager->plannedWorkHoursToday()) )
+        {
+          icon = "dontpanik-green";
+        }
+        else
+        {
+          icon = "dontpanik-red";
+        }
+      }
+      setData(src_icon, "source", icon);
       return true;
     }
 
@@ -149,6 +185,7 @@ namespace dp
       {
         _M_sources << key;
       }
+      setData ( key, "id", at.id().toString());
       setData ( key, "name", at.name() );
       setData ( key, "icon", at.icon() );
       return true;
@@ -199,7 +236,7 @@ namespace dp
 // This does the magic that allows Plasma to load
 // this plugin.  The first argument must match
 // the X-Plasma-EngineName in the .desktop file.
-K_EXPORT_PLASMA_DATAENGINE ( dontpanic, dp::plasma::DontPanicEngine )
+K_EXPORT_PLASMA_DATAENGINE_WITH_JSON ( dontpanic, dp::plasma::DontPanicEngine, "plasma-dataengine-dontpanic.json")
 
 // this is needed since DontPanicEngine is a QObject
 #include "dontpanicengine.moc"

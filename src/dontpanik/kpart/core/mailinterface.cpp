@@ -90,7 +90,7 @@ namespace dp
         ( "org.kde.kmail", "/KMail", QDBusConnection::sessionBus(), this );
         if ( !_M_remote->isValid() )
         {
-          kWarning() << _M_remote->lastError();
+          qWarning() << _M_remote->lastError();
         }
       }
       return _M_remote;
