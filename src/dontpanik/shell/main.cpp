@@ -14,12 +14,12 @@ int main ( int argc, char **argv )
 //   about.setCatalogName("dontpanic");
 //   about.addAuthor ( ki18n ( author_fh ), KLocalizedString(), author_fh_email );
 //   KCmdLineArgs::init ( argc, argv, &about );
-// 
+//
 //   QCommandLineParser parser;
 //   //options.add("+[URL]", ki18n( "Document to open" ));
-//   
+//
 //   //KLocale::setMainCatalog("dontpanic");
-//   
+//
 //   QApplication app;
 //   parser.process(app);
 //   // see if we are starting with session management
@@ -29,7 +29,7 @@ int main ( int argc, char **argv )
 //     {
 //       // no session.. just start up normally
 //       KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-// 
+//
 //       if ( args->count() == 0 )
 //       {
 //         DontPanik *widget = new DontPanik();
@@ -47,33 +47,40 @@ int main ( int argc, char **argv )
 //       }
 //       args->clear();
 //     }
-// 
+//
 //   return app.exec();
-  QApplication application(argc, argv);
+  QApplication application ( argc, argv );
 
-    KLocalizedString::setApplicationDomain("dontpanic");
-    KAboutData aboutData( QStringLiteral("dontpanik"),
-                          i18n("Don't Panik"),
-                          version,
-                          i18n ( "The KDE interface to the personal project based time tracking tool dontpanic" ),
-                          KAboutLicense::GPL_V3,
-                          i18n ( "(C) 2009-2014 The Don't Panik Authors"),
-                          QString(),
-                          QString(),
-                          author_fh_email
-                        );
+  KLocalizedString::setApplicationDomain ( "dontpanic" );
+  KAboutData aboutData ( QStringLiteral ( "dontpanik" ),
+                         i18n ( "Don't Panik" ),
+                         version,
+                         i18n ( "The KDE interface to the personal project based time tracking tool dontpanic" ),
+                         KAboutLicense::GPL_V3,
+                         i18n ( "(C) 2009-2014 The Don't Panik Authors" ),
+                         QString(),
+                         QString(),
+                         author_fh_email
+                       );
 
-    aboutData.addAuthor(i18n(author_fh), QString(), author_fh_email);
-    KAboutData::setApplicationData(aboutData);    
-    application.setWindowIcon(QIcon::fromTheme("dontpanik"));
-    QCommandLineParser parser;
-    parser.addHelpOption();
-    parser.addVersionOption();
-    aboutData.setupCommandLine(&parser);
-    parser.process(application);
-    aboutData.processCommandLine(&parser);
+  aboutData.addAuthor ( i18n ( author_fh ), QString(), author_fh_email );
+  KAboutData::setApplicationData ( aboutData );
+  application.setWindowIcon ( QIcon::fromTheme ( "dontpanik" ) );
+  QCommandLineParser parser;
+  parser.addHelpOption();
+  parser.addVersionOption();
+  aboutData.setupCommandLine ( &parser );
+  parser.process ( application );
+  aboutData.processCommandLine ( &parser );
 
+  if ( application.isSessionRestored() )
+  {
+    RESTORE ( DontPanik );
+  }
+  else
+  {
     DontPanik *widget = new DontPanik();
     widget->show();
-    return application.exec();
+  }
+  return application.exec();
 }
