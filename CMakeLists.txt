@@ -28,7 +28,6 @@ add_subdirectory( doc )
 add_subdirectory( src )
 add_subdirectory( icons )
 add_subdirectory( i18n )
-add_subdirectory( holidays )
 
 message(STATUS "************************************************************")
 message(STATUS "Configuration Summary:")
