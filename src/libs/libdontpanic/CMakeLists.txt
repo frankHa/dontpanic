@@ -40,8 +40,8 @@ set(libdontpanic_SRCS
     dbus_support/worktimeperday.cpp
    )
 
-kde4_add_library(dontpanic_lib SHARED ${libdontpanic_SRCS})
-target_link_libraries(dontpanic_lib ${KDE4_KDECORE_LIBS} ${SQLITE_LIBRARIES} ${libuuid_LIB})
+add_library(dontpanic_lib SHARED ${libdontpanic_SRCS})
+target_link_libraries(dontpanic_lib KF5::I18n Qt5::Core Qt5::DBus ${SQLITE_LIBRARIES} ${libuuid_LIB})
 set_target_properties(dontpanic_lib PROPERTIES OUTPUT_NAME dontpanic)
 
 install(TARGETS dontpanic_lib DESTINATION ${LIB_INSTALL_DIR})

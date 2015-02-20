@@ -5,7 +5,6 @@
 //Qt includes
 #include <QVariant>
 //KDE includes
-#include <KDebug>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -150,12 +149,12 @@ namespace dp
         query.addBindValue ( _rt.id().toString() );
         if ( execute ( query ).has_failed() )
         {
-          kWarning() << "last error: " << query.lastError();
+          qWarning() << "last error: " << query.lastError();
           return error();
         }
         if ( !query.first() )
         {
-          kWarning() << "last error: " << query.lastError();
+          qWarning() << "last error: " << query.lastError();
           return error();
         }
         success result = assign_query_values_to_entity ( query, _rt );

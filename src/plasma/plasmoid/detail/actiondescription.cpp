@@ -32,11 +32,11 @@ QString ActionDescription::forAction(Action const& action) const
 {
     if ( action.active )
     {
-        QString tooltip = i18n ( "Currently working on:<br/><b>%1 / %2</b><br/>since: <b>%3 (%4h)</b>" )
-                          .arg ( projectOf(action) )
-                          .arg ( taskOf(action) )
-                          .arg ( action.start.time().toString ( Qt::SystemLocaleShortDate ) )
-                          .arg ( duration_formatter().format ( action.duration ) );
+        QString tooltip = i18n ( "Currently working on:<br/><b>%1 / %2</b><br/>since: <b>%3 (%4h)</b>"
+                          ,projectOf(action) 
+                          ,taskOf(action) 
+                          ,action.start.time().toString ( Qt::SystemLocaleShortDate ) 
+                          ,duration_formatter().format ( action.duration ) );
         return ( tooltip );
     }
     else

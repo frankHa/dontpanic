@@ -23,7 +23,6 @@
 #include <libdontpanic/durationformatter.h>
 #include <QFont>
 #include <KLocalizedString>
-#include <KDebug>
 #include <QPalette>
 #include <QApplication>
 // ---------------------------------------------------------------------------------
@@ -201,7 +200,8 @@ namespace dp
       void KActionsTableModel::set_current_day(QDate const& day)
       {
         _M_actions=_M_timetracker.initCache(day).cachedActions();
-        reset();
+        beginResetModel();
+        endResetModel();
       }
       // ---------------------------------------------------------------------------------
       Action KActionsTableModel::at(QModelIndex const& index) const

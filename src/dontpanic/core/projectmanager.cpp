@@ -1,7 +1,6 @@
 #include "projectmanager.h"
 #include "persistencebackend.hpp"
 
-#include <KDebug>
 // ---------------------------------------------------------------------------------
 namespace dp
 {

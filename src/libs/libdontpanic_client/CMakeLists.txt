@@ -13,7 +13,7 @@ set(libdontpanic_client_SRCS
     timetracker.cpp
    )
 
-qt4_wrap_cpp(libdontpanic_client_SRCS
+qt5_wrap_cpp(libdontpanic_client_SRCS
           ../../include/libdontpanic_client/actionscache.h
 	     ../../include/libdontpanic_client/actiontemplatemanager.h
          ../../include/libdontpanic_client/projectmanager.h
@@ -23,7 +23,7 @@ qt4_wrap_cpp(libdontpanic_client_SRCS
 	     ../../include/libdontpanic_client/timetracker.h
              )
 
-qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS
+qt5_add_dbus_interface_with_includes(libdontpanic_client_SRCS
                                     ${DBUS_INTERFACES_PATH}/org.dontpanic.TimeTracker.xml
                                     remote_timetracker
                                     libdontpanic/dbus_support/action.hpp
@@ -32,13 +32,13 @@ qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS
                                     libdontpanic/dbus_support/uuid.h
                                     )
 
-qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS
+qt5_add_dbus_interface_with_includes(libdontpanic_client_SRCS
                                     ${DBUS_INTERFACES_PATH}/org.dontpanic.ProjectManager.xml
                                     remote_projectmanager
                                     libdontpanic/dbus_support/project.hpp
                                     libdontpanic/dbus_support/uuid.h
                                     )
-qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS
+qt5_add_dbus_interface_with_includes(libdontpanic_client_SRCS
                                     ${DBUS_INTERFACES_PATH}/org.dontpanic.ReportManager.xml
                                     remote_reportmanager
                                     libdontpanic/dbus_support/report.h
@@ -46,27 +46,27 @@ qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS
                                     libdontpanic/dbus_support/timerange.h
                                     libdontpanic/dbus_support/uuid.h
                                     )
-qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS
+qt5_add_dbus_interface_with_includes(libdontpanic_client_SRCS
                                     ${DBUS_INTERFACES_PATH}/org.dontpanic.TaskManager.xml
                                     remote_taskmanager
                                     libdontpanic/dbus_support/task.hpp
                                     libdontpanic/dbus_support/uuid.h
                                     )
-qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS
+qt5_add_dbus_interface_with_includes(libdontpanic_client_SRCS
                                     ${DBUS_INTERFACES_PATH}/org.dontpanic.ActionTemplateManager.xml
                                     remote_action_template_manager
                                     libdontpanic/dbus_support/actiontemplate.hpp
                                     libdontpanic/dbus_support/uuid.h
                                     )
                                    
-qt4_add_dbus_interface_with_includes(libdontpanic_client_SRCS
+qt5_add_dbus_interface_with_includes(libdontpanic_client_SRCS
                                    ${DBUS_INTERFACES_PATH}/org.dontpanic.PlannedWorkingTimeManager.xml
                                   remote_planned_working_time_manager
                                    libdontpanic/dbus_support/worktimeperday.h
                                    )
 
 #add_definitions(-fPIC)
-kde4_add_library(dontpanic_client_lib SHARED ${libdontpanic_client_SRCS})
-target_link_libraries(dontpanic_client_lib ${KDE4_KDECORE_LIBS} dontpanic_lib)
+add_library(dontpanic_client_lib SHARED ${libdontpanic_client_SRCS})
+target_link_libraries(dontpanic_client_lib dontpanic_lib)
 set_target_properties(dontpanic_client_lib PROPERTIES OUTPUT_NAME dontpanic_client)
 install(TARGETS dontpanic_client_lib DESTINATION ${LIB_INSTALL_DIR})

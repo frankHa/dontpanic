@@ -26,6 +26,7 @@ ELSE(NOT GETTEXT_MSGFMT_EXECUTABLE)
                                 COMMAND ${GETTEXT_MSGFMT_EXECUTABLE} --check -o ${_gmoFile} ${_poFile}
                                 DEPENDS ${_poFile})
                         INSTALL(FILES ${_gmoFile} DESTINATION ${LOCALE_INSTALL_DIR}/${_langCode}/LC_MESSAGES/ RENAME ${catalogname}.mo)
+                        INSTALL(FILES ${_gmoFile} DESTINATION ${LOCALE_INSTALL_DIR}/${_langCode}/LC_MESSAGES/ RENAME plasma_applet_${catalogname}.mo)
                 ENDIF( _langCode )
  
         ENDFOREACH(_poFile ${PO_FILES})

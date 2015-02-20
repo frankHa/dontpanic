@@ -6,18 +6,19 @@
 #include "dontpanik.hpp"
 #include "dontpanik.moc"
 
-#include <kaction.h>
+#include <QAction>
 #include <kactioncollection.h>
 #include <kconfig.h>
 #include <kedittoolbar.h>
-#include <kfiledialog.h>
+#include <QFileDialog>
 #include <kshortcutsdialog.h>
-#include <klibloader.h>
-#include <kmessagebox.h>
+#include <KPluginLoader>
+#include <KPluginFactory>
+#include <KMessageBox>
 #include <kstandardaction.h>
-#include <kstatusbar.h>
-#include <kurl.h>
-#include <klocale.h>
+#include <QStatusBar>
+#include <QUrl>
+#include <KLocalizedString>
 
 #include <QApplication>
 #include <QString>
@@ -34,7 +35,8 @@ DontPanik::DontPanik()
   // this routine will find and load our Part.  it finds the Part by
   // name which is a bad idea usually.. but it's alright in this
   // case since our Part is made for this Shell
-  KLibFactory *factory = KLibLoader::self()->factory ( "dontpanikpart" );
+  KPluginLoader loader("dontpanikpart");
+  KPluginFactory *factory = loader.factory();
   if ( factory )
   {
     // now that the Part is loaded, we cast it to a Part to get
@@ -54,7 +56,7 @@ DontPanik::DontPanik()
   {
     // if we couldn't find our Part, we exit since the Shell by
     // itself can't do anything useful
-    KMessageBox::error ( this, i18n ( "Unable to find the 'Don't Panic' KPart!" ) );
+    KMessageBox::error ( this, i18n ( "Unable to find the 'Don't Panic' KPart!" )+ " " + loader.errorString() );
     qApp->quit();
     // we return here, cause qApp->quit() only means "exit the
     // next time we enter the event loop...

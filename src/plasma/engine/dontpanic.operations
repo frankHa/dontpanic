@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE kcfg SYSTEM
+    "http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+<kcfg>
+  <group name="stopCurrentAction">    
+  </group>
+  
+  <group name="continueLastAction">    
+  </group>
+  
+  <group name="startFromFavorite">
+    <entry name="favId" type="String">
+      <label>Uuid of the favorite.</label>
+    </entry>
+  </group>
+</kcfg>

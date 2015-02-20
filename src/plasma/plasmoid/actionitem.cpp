@@ -204,7 +204,7 @@ void ActionItem::addPossibleAction ( KAction *action )
 void ActionItem::updatePossibleActionsText()
 {
   static int const PASSIVE_LAYOUT_ITEMS = 3;
-  _M_possible_actions->setText(i18n("%1 possible actions...").arg(_M_actions_layout->count() -  PASSIVE_LAYOUT_ITEMS));
+  _M_possible_actions->setText(i18n("%1 possible actions..."), (_M_actions_layout->count() -  PASSIVE_LAYOUT_ITEMS));
 }
 
 

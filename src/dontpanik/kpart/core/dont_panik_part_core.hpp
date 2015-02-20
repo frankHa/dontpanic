@@ -4,7 +4,7 @@
 #include "libdontpanic/defines.hpp"
 //Qt includes
 #include <QObject>
-#include <kparts/part.h>
+#include <kparts/readonlypart.h>
 // ---------------------------------------------------------------------------------
 //forward decl:
 class QTextEdit;

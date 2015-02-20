@@ -20,11 +20,10 @@
 #include "context.h"
 #include <persistencebackend.hpp>
 #include <libdontpanic/dbus.hpp>
-#include <kglobal.h>
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  K_GLOBAL_STATIC(Context, _instance);
+  Q_GLOBAL_STATIC(Context, _instance);
   // ---------------------------------------------------------------------------------
   Context* context()
   {

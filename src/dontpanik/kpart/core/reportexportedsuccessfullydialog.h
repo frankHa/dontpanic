@@ -20,7 +20,7 @@
 #ifndef DP_CORE_REPORTEXPORTEDSUCCESSFULLYDIALOG_H
 #define DP_CORE_REPORTEXPORTEDSUCCESSFULLYDIALOG_H
 #include <libdontpanic/defines.hpp>
-#include <KDialog>
+#include <QDialog>
 #include <QFileInfo>
 
 namespace dp
@@ -29,13 +29,13 @@ namespace dp
   namespace core
   {
 
-    class ReportExportedSuccessfullyDialog : public KDialog
+    class ReportExportedSuccessfullyDialog : public QDialog
     {
         Q_OBJECT
         // ---------------------------------------------------------------------------------
       public:
         // ---------------------------------------------------------------------------------
-        ReportExportedSuccessfullyDialog ( QFileInfo const& report_file, QWidget* parent = 0, Qt::WFlags flags = 0 );
+        ReportExportedSuccessfullyDialog ( QFileInfo const& report_file, QWidget* parent = 0, Qt::WindowFlags flags = 0 );
         // ---------------------------------------------------------------------------------
       private slots:
         // ---------------------------------------------------------------------------------

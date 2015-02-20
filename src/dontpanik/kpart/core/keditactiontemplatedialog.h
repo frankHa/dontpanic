@@ -21,7 +21,7 @@
 #define KEDITACTIONTEMPLATEDIALOG_H
 #include <libdontpanic/defines.hpp>
 #include <libdontpanic/actiontemplate.hpp>
-#include <KDialog>
+#include <QDialog>
 namespace Ui
 {
   class KEditActionTemplateDialog;
@@ -35,7 +35,7 @@ namespace dp
   namespace core
   {
     class KEditActionTemplateDialog
-    : public KDialog
+    : public QDialog
     {
       Q_OBJECT
       public:

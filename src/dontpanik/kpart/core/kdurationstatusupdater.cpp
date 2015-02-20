@@ -20,7 +20,7 @@
 #include "kdurationstatusupdater.h"
 #include <libdontpanic/durationformatter.h>
 #include "context.h"
-#include <KStatusBar>
+#include <QStatusBar>
 #include <QToolTip>
 
 namespace dp

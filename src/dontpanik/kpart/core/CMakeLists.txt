@@ -22,7 +22,7 @@ set(dontpanikpart_LIB_SRCS
     keditactiontemplatedialog.cpp 
     keditprojectdialog.cpp
     kedittaskdialog.cpp
-    kholidayregioncombobox.cpp
+    #kholidayregioncombobox.cpp
     kprojectscombobox.cpp 
     kprojectsdialog.cpp
     kdayview.cpp
@@ -41,7 +41,7 @@ set(dontpanikpart_LIB_SRCS
     ktaskstablemodel.cpp    
     mailinterface.cpp 
     plannedworkingtimesdialog.cpp
-    reportexportedsuccessfullydialog.cpp
+    #reportexportedsuccessfullydialog.cpp
     selectprojectsdialog.cpp
     selecttasksdialog.cpp
     selectentitydialog.cpp
@@ -54,7 +54,7 @@ set(dontpanikpart_LIB_SRCS
 set(dontpanikpart_LIB_UIS
     ui/editreporttypedialog.ui
     ui/kdayview.ui
-    ui/keditactiondialog.ui
+    ui/keditactiondialog.ui    
     ui/keditactiontemplatedialog.ui
     ui/keditprojectdialog.ui
     ui/kedittaskdialog.ui
@@ -66,17 +66,17 @@ set(dontpanikpart_LIB_UIS
     ui/plannedworkingtimesdialog.ui
     ui/selectentitiesdialog.ui
    )
+ki18n_wrap_ui(dontpanikpart_LIB_SRCS ${dontpanikpart_LIB_UIS})
 
-qt4_wrap_ui(dontpanikpart_LIB_SRCS ${dontpanikpart_LIB_UIS})
-
-qt4_add_dbus_interface(dontpanikpart_LIB_SRCS
+set (KDEPIMLIBS_DBUS_INTERFACES_DIR "/usr/share/dbus-1/interfaces")
+qt5_add_dbus_interface(dontpanikpart_LIB_SRCS
                        ${KDEPIMLIBS_DBUS_INTERFACES_DIR}/org.kde.kmail.kmail.xml
                        remote_kmail
 )
 
 
-kde4_add_library(dontpanikpartprivate SHARED ${dontpanikpart_LIB_SRCS})
-target_link_libraries(dontpanikpartprivate ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KPARTS_LIBS} ${KDEPIMLIBS_KHOLIDAYS_LIBS} dontpanic_client_lib dontpanic_lib)
+add_library(dontpanikpartprivate SHARED ${dontpanikpart_LIB_SRCS})
+target_link_libraries(dontpanikpartprivate KF5::ConfigCore KF5::IconThemes KF5::Notifications KF5::Parts KF5::XmlGui KF5::WidgetsAddons dontpanic_client_lib dontpanic_lib)
 install(TARGETS dontpanikpartprivate ${INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)
 
 

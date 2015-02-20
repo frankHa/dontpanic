@@ -22,7 +22,7 @@
 
 #include <libdontpanic/defines.hpp>
 #include <libdontpanic/timerange.h>
-#include <KDialog>
+#include <QDialog>
 
 namespace Ui
 {
@@ -35,7 +35,7 @@ namespace dp
   namespace core
   {
     class KReportRangeDialog 
-    : public KDialog
+    : public QDialog
     {
       Q_OBJECT
       

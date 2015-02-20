@@ -53,7 +53,7 @@ namespace dp
       reply.waitForFinished();
       if(reply.isError())
       {
-        kWarning()<<reply.error();
+        qWarning()<<reply.error();
         emit error(QDBusError::errorString(reply.error().type()));
       }
     }
@@ -69,7 +69,7 @@ namespace dp
       reply.waitForFinished();
       if(reply.isError())
       {
-        kWarning()<<reply.error();
+        qWarning()<<reply.error();
         emit error(QDBusError::errorString(reply.error().type()));
       }
       Report const& rep = reply.value();
@@ -87,7 +87,7 @@ namespace dp
         ( "org.dontpanic", "/ReportManager", QDBusConnection::sessionBus(), this );
         if(!_M_remote->isValid())
         {
-          kWarning()<<_M_remote->lastError();
+          qWarning()<<_M_remote->lastError();
         }
          connect(_M_remote, SIGNAL( stored ( dp::ReportType ) ), this, SLOT( on_stored ( dp::ReportType ) ));
          connect(_M_remote, SIGNAL(removed(dp::ReportType)), this, SLOT(on_removed(dp::ReportType)));

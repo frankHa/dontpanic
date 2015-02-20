@@ -43,7 +43,7 @@ namespace dp
       Q_ASSERT ( _M_source );
       _M_current_time_range = timerange;
       _M_actions = _M_source->findAll ( timerange.from(), timerange.to() );
-      kDebug() << "action cache initialized with " << _M_actions.size() << " entries";
+      qDebug() << "action cache initialized with " << _M_actions.size() << " entries";
       _M_is_live_cache = false;
       return *this;
     }
@@ -65,7 +65,7 @@ namespace dp
     // ---------------------------------------------------------------------------------
     int ActionsCache::duration() const
     {
-      kDebug() << _M_actions.size() << "in current action cache";
+      //qDebug() << _M_actions.size() << "in current action cache";
       return _M_actions.duration();
     }
     // ---------------------------------------------------------------------------------

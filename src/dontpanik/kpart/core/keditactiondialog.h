@@ -22,7 +22,7 @@
 
 #include <libdontpanic/defines.hpp>
 #include <libdontpanic/action.hpp>
-#include <KDialog>
+#include <QDialog>
 #include <QDate>
 
 namespace Ui
@@ -35,7 +35,7 @@ namespace dp
     namespace core
     {
 
-        class KEditActionDialog:public KDialog
+        class KEditActionDialog:public QDialog
         {
           Q_OBJECT
           

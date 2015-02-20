@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="dontpanik_part" version="2">
+<kpartgui name="dontpanik_part" version="2" translationDomain="dontpanic" >
 <MenuBar>
   <Menu name="edit"><text>&amp;Edit</text>
     <Action name="edit_projects" />

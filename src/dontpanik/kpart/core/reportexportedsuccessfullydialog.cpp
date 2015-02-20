@@ -26,8 +26,8 @@ namespace dp
   namespace core
   {
     // ---------------------------------------------------------------------------------
-    ReportExportedSuccessfullyDialog::ReportExportedSuccessfullyDialog ( QFileInfo const& report_file, QWidget* parent, Qt::WFlags flags )
-    :KDialog(parent, flags)
+    ReportExportedSuccessfullyDialog::ReportExportedSuccessfullyDialog ( QFileInfo const& report_file, QWidget* parent, Qt::WindowFlags flags )
+    :QDialog(parent, flags)
     , _M_report_file(report_file)
     {
       init();
@@ -35,21 +35,19 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void ReportExportedSuccessfullyDialog::init()
     {
-      setCaption(i18n("Report Export"));
-      setButtons(Ok|User1);
-      setButtonText(User1, i18n("Send via Email"));
+      setWindowTitle(i18n("Report Export"));
       connect(this, SIGNAL(user1Clicked()), SLOT(on_send_via_mail()));
     }
     // ---------------------------------------------------------------------------------
     void ReportExportedSuccessfullyDialog::on_send_via_mail()
     {      
-//       QFileInfo report = _M_report_file;      
-      this->done(User1);           
-//       Mail mail;
-//       mail.setSubject(report.fileName());
-//       mail.addAttachement(report.absoluteFilePath());
-//       MailInterface interface;
-//       interface.send(mail); 
+       QFileInfo report = _M_report_file;            
+      Mail mail;
+      mail.setSubject(report.fileName());
+      mail.addAttachement(report.absoluteFilePath());
+      MailInterface interface;
+      interface.send(mail); 
+      this->accept();
     }
     // ---------------------------------------------------------------------------------
   }

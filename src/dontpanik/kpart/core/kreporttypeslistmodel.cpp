@@ -34,7 +34,7 @@ namespace dp
       // ---------------------------------------------------------------------------------
       KReportTypesListModel::KReportTypesListModel ( QObject *parent )
           : QAbstractListModel ( parent )
-          , _M_icon_loader ( new KIconLoader ( "", 0, this ) )
+          , _M_icon_loader ( new KIconLoader ( "", QStringList(), this ) )
       {
         init_header_data();
         subscribe_to_report_manager_signals();
@@ -134,7 +134,7 @@ namespace dp
       void KReportTypesListModel::updated ( dp::ReportType const&p )
       {
         int row = _M_report_types.indexOf ( p );
-        kDebug() << "updating report type [" << row << "]";
+        qDebug() << "updating report type [" << row << "]";
         QModelIndex const& i = index ( row );
         _M_report_types.replace ( row, p );
         emit dataChanged ( i, i );

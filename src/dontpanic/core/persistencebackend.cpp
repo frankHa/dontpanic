@@ -3,12 +3,11 @@
 //Qt includes
 #include <QDebug>
 #include <libdontpanic/action.hpp>
-#include <kglobal.h>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
   // ---------------------------------------------------------------------------------
-  K_GLOBAL_STATIC(PersistenceBackend, _instance);
+  Q_GLOBAL_STATIC(PersistenceBackend, _instance);
   // ---------------------------------------------------------------------------------  
   PersistenceBackend & persistence()
   {

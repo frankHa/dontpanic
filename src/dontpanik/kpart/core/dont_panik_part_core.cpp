@@ -17,8 +17,10 @@
 #include "ktasksdialog.h"
 #include "plannedworkingtimesdialog.h"
 #include "statusnotifieritem.h"
-#include <KStatusBar>
-#include <KAction>
+#include <QStatusBar>
+#include <QWidgetAction>
+//KDE includes
+#include <KAboutData>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -122,12 +124,10 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void dont_panik_core::init_status_notifier_item ( QWidget *parent_widget )
     {
-#ifdef DP_BUILD_TRAY_ICON_SUPPORT
       _M_status_notifier_item = new StatusNotifierItem ( this );
       connect ( _M_status, SIGNAL ( currentProjectChanged ( QString ) ), _M_status_notifier_item, SLOT ( onCurrentProjectChanged ( QString ) ) );
       connect ( _M_status, SIGNAL ( todaysDurationChanged ( int ) ), _M_status_notifier_item, SLOT ( onTodaysDurationChanged ( int ) ) );
       connect ( _M_status, SIGNAL ( iconChanged ( QString const& ) ), _M_status_notifier_item, SLOT ( onIconChanged ( QString const& ) ) );
-#endif //DP_BUILD_TRAY_ICON_SUPPORT
     }
     // ---------------------------------------------------------------------------------
     void dont_panik_core::init_statusbar_label()
@@ -138,7 +138,7 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void dont_panik_core::init_desktop_notification_manager()
     {
-      _M_desktop_notification_manager->setComponentData(_M_gui_client->componentData());
+      _M_desktop_notification_manager->setComponentName(_M_gui_client->componentData().componentName());
       connect ( _M_status, SIGNAL ( noJobTrackingsWarning(QString)), _M_desktop_notification_manager, SLOT ( showNoJobTrackingWarning ( QString ) ) );
     }
     // ---------------------------------------------------------------------------------

@@ -5,12 +5,11 @@ Type=Service
  
 X-KDE-ServiceTypes=Plasma/DataEngine
 X-KDE-Library=plasma_engine_dontpanic
-X-Plasma-EngineName=dontpanic
 X-KDE-PluginInfo-Author=Frank Habel
 X-KDE-PluginInfo-Email=frank@bugplasma.de
 X-KDE-PluginInfo-Name=dontpanic
-X-KDE-PluginInfo-Version=0.1
-X-KDE-PluginInfo-Category=DontPanic
+X-KDE-PluginInfo-Version=0.2
+X-KDE-PluginInfo-Category=Date and Time
 X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPLv3
 X-KDE-PluginInfo-EnabledByDefault=true

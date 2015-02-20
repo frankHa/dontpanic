@@ -1,0 +1,18 @@
+[Desktop Entry]
+Name=Don't Panic
+Comment=Plasmoid to access common functions of Don't Panic
+Type=Service
+Icon=dontpanik
+ServiceTypes=Plasma/Applet
+ 
+X-KDE-PluginInfo-Author=Frank Habel
+X-KDE-PluginInfo-Email=frank@bugplasma.de
+X-KDE-PluginInfo-Name=dontpanic
+X-KDE-PluginInfo-Version=0.2
+X-KDE-PluginInfo-Category=Date And Time
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPLv3
+X-KDE-PluginInfo-EnabledByDefault=true
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+X-Plasma-NotificationArea=true

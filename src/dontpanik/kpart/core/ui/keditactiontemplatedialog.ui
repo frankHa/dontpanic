@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>KEditActionTemplateDialog</class>
- <widget class="QWidget" name="KEditActionTemplateDialog">
+ <widget class="QDialog" name="KEditActionTemplateDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -109,7 +109,7 @@
          <property name="text">
           <string/>
          </property>
-         <property name="strictIconSize">
+         <property name="strictIconSize" stdset="0">
           <bool>false</bool>
          </property>
         </widget>
@@ -140,14 +140,21 @@
       </layout>
      </item>
     </layout>
-   </item>   
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttons">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>
   <customwidget>
    <class>KIconButton</class>
    <extends>QPushButton</extends>
-   <header>kicondialog.h</header>
+   <header>KIconButton</header>
   </customwidget>
   <customwidget>
    <class>dp::core::detail::KProjectsComboBox</class>
@@ -161,38 +168,5 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>KEditActionTemplateDialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>KEditActionTemplateDialog</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

@@ -19,7 +19,7 @@
 
 #include "desktopnotificationmanager.h"
 #include <KNotification>
-#include <KIcon>
+#include <QIcon>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -30,14 +30,14 @@ namespace dp
     DesktopNotificationManager::DesktopNotificationManager ( QObject* parent )
         : QObject ( parent ){}
     // ---------------------------------------------------------------------------------
-    void DesktopNotificationManager::setComponentData(KComponentData const& data)
+    void DesktopNotificationManager::setComponentName(QString const& name)
     {
-      _M_component = data;
+      _M_component_name = name;
     }
     // ---------------------------------------------------------------------------------
     void DesktopNotificationManager::showNoJobTrackingWarning ( QString const& msg )
     {
-      KNotification::event("NoJobTracking", i18n("Don't Panik Reminder"), msg, KIcon("dontpanik").pixmap(48), 0, KNotification::Persistent, _M_component);
+      KNotification::event("NoJobTracking", i18n("Don't Panik Reminder"), msg, QIcon::fromTheme("dontpanik").pixmap(48), 0, KNotification::Persistent, "dontpanikpartd"/*_M_component_name*/);
     }
     // ---------------------------------------------------------------------------------
   }

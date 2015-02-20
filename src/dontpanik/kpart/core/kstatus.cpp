@@ -137,11 +137,11 @@ namespace dp
       }
       else
       {
-        description = i18n ( "<html>Currently working on:<br/><b>%1 / %2</b><br/>since: <b>%3 (%4h)</b></html>" )
-                      .arg ( context()->projectManager()->load ( ca.project() ).name() )
-                      .arg ( context()->taskManager()->load ( ca.task() ).name() )
-                      .arg ( ca.startTime().time().toString ( Qt::SystemLocaleShortDate ) )
-                      .arg ( duration_formatter().format ( ca.duration() ) );
+        description = i18n ( "<html>Currently working on:<br/><b>%1 / %2</b><br/>since: <b>%3 (%4h)</b></html>"
+                      ,context()->projectManager()->load ( ca.project() ).name()
+                      ,context()->taskManager()->load ( ca.task() ).name()
+                      ,ca.startTime().time().toString ( Qt::SystemLocaleShortDate )
+                      ,duration_formatter().format ( ca.duration() ) );
       }
       if ( _M_cached_project != description )
       {
@@ -235,7 +235,7 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void KStatus::updateNoJobTrackingsWarning()
     {
-      kDebug()<<"emitting: 15 minutes passed without job tracking!";
+      qDebug()<<"emitting: 15 minutes passed without job tracking!";
       emit noJobTrackingsWarning(i18n("15 minutes passed without job tracking!"));
       stopTimer(_M_no_job_warning_timer_id);
     }

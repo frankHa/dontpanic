@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>KReportRangeDialog</class>
- <widget class="QWidget" name="KReportRangeDialog">
+ <widget class="QDialog" name="KReportRangeDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -19,7 +19,7 @@
      <item row="0" column="0">
       <widget class="QRadioButton" name="preset_range">
        <property name="text">
-        <string>preset range</string>
+        <string>prese&amp;t range</string>
        </property>
        <property name="checked">
         <bool>true</bool>
@@ -32,7 +32,7 @@
      <item row="1" column="0">
       <widget class="QRadioButton" name="custom_range">
        <property name="text">
-        <string>custom range</string>
+        <string>c&amp;ustom range</string>
        </property>
       </widget>
      </item>
@@ -79,41 +79,15 @@
      </property>
     </spacer>
    </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttons">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>KReportRangeDialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>KReportRangeDialog</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

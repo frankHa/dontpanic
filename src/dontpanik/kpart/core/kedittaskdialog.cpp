@@ -21,21 +21,17 @@
 #include "ui_kedittaskdialog.h"
 #include <libdontpanic/task.hpp>
 #include "context.h"
-#include <KDebug>
 namespace dp
 {
   namespace core
   {
     KEditTaskDialog::KEditTaskDialog(QWidget *parent)
-    :KDialog(parent)
+    :QDialog(parent)
     , _M_ui (new Ui::KEditTaskDialog())
     , _M_current_task(NullTask())
     {
-      QWidget *w = new QWidget(this);
-      _M_ui->setupUi(w);
-      setMainWidget(w);
-      setButtons(Ok|Cancel);
-      setCaption(i18n("Worktype"));
+      _M_ui->setupUi(this);
+      setWindowTitle(i18n("Worktype"));
       _M_ui->creation_date->setDateTime(QDateTime::currentDateTime());
       setup_actions();
     }
@@ -56,8 +52,8 @@ namespace dp
     
     void KEditTaskDialog::setup_actions()
     {
-      connect(this, SIGNAL(accepted()), this, SLOT(accepted()));
-      connect(this, SIGNAL(rejected()), this, SLOT(rejected()));
+      connect(_M_ui->buttons, SIGNAL(accepted()), this, SLOT(accepted()));
+      connect(_M_ui->buttons, SIGNAL(rejected()), this, SLOT(rejected()));
     }
     
     void KEditTaskDialog::accepted()
@@ -76,10 +72,11 @@ namespace dp
         .setComment(_M_ui->comment->text());        
         context()->taskManager()->store(t);
       }
+      accept();
     }
     void KEditTaskDialog::rejected()
     {
-      close();
+      reject();
     }
   }//core
 }//dp

@@ -7,11 +7,11 @@ namespace dp
   PlannedWorkingTimeManager::PlannedWorkingTimeManager ( QObject *parent )
       : QObject ( parent )
   {
-    init_holidays();
+    //init_holidays();
   }
   PlannedWorkingTimeManager::~PlannedWorkingTimeManager()
   {
-    delete _M_holidays;
+    //delete _M_holidays;
   }
   // ---------------------------------------------------------------------------------
   void PlannedWorkingTimeManager::store ( WorktimePerDay const& t )
@@ -57,24 +57,25 @@ namespace dp
   // ---------------------------------------------------------------------------------
   void PlannedWorkingTimeManager::storeCurrentHolidayRegion ( QString const& r )
   {
-    if(persistence().persistCurrentHolidayRegion(r).was_successful())
-    {
-      init_holidays();
-      emit currentHolidayRegionChanged(r);
-    }
+//     if(persistence().persistCurrentHolidayRegion(r).was_successful())
+//     {
+//       init_holidays();
+//       emit currentHolidayRegionChanged(r);
+//     }
   }
   // ---------------------------------------------------------------------------------
   QString PlannedWorkingTimeManager::loadCurrentHolidayRegion()
   {
     QString region("");
-    persistence().loadCurrentHolidayRegion(region);
+    //persistence().loadCurrentHolidayRegion(region);
     return region;
   }
   // ---------------------------------------------------------------------------------
   bool PlannedWorkingTimeManager::isWorkDay ( const QDate& day )
   {
-    if ( !_M_holidays->isValid() ) return true;
-    return !_M_holidays->isHoliday ( day );
+    //if ( !_M_holidays->isValid() ) return true;
+    //return !_M_holidays->isHoliday ( day );
+    return true;
   }
 
   // ---------------------------------------------------------------------------------
@@ -82,7 +83,7 @@ namespace dp
   // ---------------------------------------------------------------------------------
   void PlannedWorkingTimeManager::init_holidays()
   {
-    _M_holidays = new KHolidays::HolidayRegion ( loadCurrentHolidayRegion() );
+    //_M_holidays = new KHolidays::HolidayRegion ( loadCurrentHolidayRegion() );
   }
   // ---------------------------------------------------------------------------------
 }//dp

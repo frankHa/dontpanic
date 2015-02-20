@@ -1,7 +1,6 @@
 #include "actiontemplatemanager.h"
 #include "persistencebackend.hpp"
 
-#include <KDebug>
 // ---------------------------------------------------------------------------------
 namespace dp
 {

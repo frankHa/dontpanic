@@ -2,7 +2,8 @@
 [Desktop Entry]
 Name=Don't Panik
 Name[x-test]=xxDontPanikxx
-Exec=dontpanik %i %m -caption "%c"
+Exec=dontpanik %m -qwindowtitle "%c"
+#Exec=dontpanik
 Icon=dontpanik
 Type=Application
 DocPath=dontpanik/index.html

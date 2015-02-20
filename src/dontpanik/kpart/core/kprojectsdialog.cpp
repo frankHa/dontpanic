@@ -28,15 +28,12 @@ namespace dp
   {
     // ---------------------------------------------------------------------------------
     KProjectsDialog::KProjectsDialog ( QWidget *parent )
-        : KDialog ( parent )
+        : QDialog ( parent )
         , _M_ui ( new Ui::KProjectsDialog () )
     {
-      QWidget *w= new QWidget(this);
-      _M_ui->setupUi ( w );
-      setMainWidget(w);
-      setButtons(Ok|Cancel);
-      setCaption(i18n("Projects"));
-      setInitialSize(QSize(470, 460));
+      _M_ui->setupUi ( this );
+      setWindowTitle(i18n("Projects"));
+      //this->setGeometry(QSize(470, 460));
       setup_actions();
     }
     // ---------------------------------------------------------------------------------
@@ -51,6 +48,7 @@ namespace dp
     {
       connect(_M_ui->b_add, SIGNAL(clicked()), this, SLOT(add()));
       connect(_M_ui->b_remove, SIGNAL(clicked()), _M_ui->tableView, SLOT(on_remove_selected_project()));
+      connect(_M_ui->buttons, SIGNAL(rejected()), this, SLOT(accept()));
     }
     // ---------------------------------------------------------------------------------
     void KProjectsDialog::add()

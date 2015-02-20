@@ -24,13 +24,14 @@
 #include "reportexportedsuccessfullydialog.h"
 #include <libdontpanic/report.h>
 #include <QSortFilterProxyModel>
-#include <KAction>
+#include <QAction>
 #include <QContextMenuEvent>
 #include <QMenu>
 #include <QFile>
 #include <QDir>
 #include <KMessageBox>
-#include <KFileDialog>
+#include <QFileDialog>
+#include <QPushButton>
 // ---------------------------------------------------------------------------------
 namespace dp
 {
@@ -40,15 +41,15 @@ namespace dp
     // ---------------------------------------------------------------------------------
     namespace detail
     {
-      KUrl url ( QString const& filename )
+      QUrl url ( QString const& filename )
       {
         QFileInfo fi ( filename );
         QDir const& parent = fi.absoluteDir();
         if ( parent.exists() )
         {
-          return KUrl ( filename );
+          return QUrl::fromLocalFile ( filename );
         }
-        return KUrl ( fi.fileName() );
+        return QUrl::fromLocalFile ( fi.fileName() );
       }
     }
     // ---------------------------------------------------------------------------------
@@ -90,7 +91,7 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void KReportTable::setup_actions()
     {
-      _M_export_data_action = new KAction ( i18n ( "Export Report Data to File" ), this );
+      _M_export_data_action = new QAction ( i18n ( "Export Report Data to File" ), this );
       connect ( _M_export_data_action, SIGNAL ( triggered() ), this, SLOT ( export_data_to_file() ) );
     }
     // ---------------------------------------------------------------------------------
@@ -100,7 +101,7 @@ namespace dp
       //fetching the target file name from the most recent representation of the report type (instead of using the cached report type definition):
       QString filename = context()->reportManager()->load ( id ).exportDataFileName ( _M_data_model->report() );
 
-      filename = KFileDialog::getSaveFileName ( detail::url ( filename ), QString(), 0, i18n ( "Export Report Data to" ) );
+      filename = QFileDialog::getSaveFileName ( this, i18n ( "Export Report Data to" ), detail::url ( filename ).toLocalFile());
       if ( filename.isEmpty() ) {return;}
       QFile out ( filename );
       QFileInfo out_info ( out );
@@ -113,27 +114,35 @@ namespace dp
       }
       if ( !out.open ( QIODevice::WriteOnly ) )
       {
-        KMessageBox::error ( 0, i18n ( "Unable to export Report Data to file <b>'%1'</b>." ).arg ( filename ), i18n ( "Report Export Error" ) );
+        KMessageBox::error ( 0, i18n ( "Unable to export Report Data to file <b>'%1'</b>.", filename ), i18n ( "Report Export Error" ) );
         return;
       }
-      out.write ( _M_data_model->report().reportData().exportDataString().toAscii() );
+      out.write ( _M_data_model->report().reportData().exportDataString().toLatin1() );
       out.close();
-      KDialog *dlg = new ReportExportedSuccessfullyDialog ( out_info, this );
-      int result = KMessageBox::createKMessageBox ( dlg
-                   , QMessageBox::Information
-                   , i18n ( "Report exported successfully to <b>'%1'</b>." ).arg ( filename )
-                   , QStringList()
-                   , QString ( "" )
-                   , 0
-                   , KMessageBox::Notify );
-      if ( result == KDialog::User1 )
-      {
-        Mail mail;
-        mail.setSubject ( out_info.fileName() );
-        mail.addAttachement ( out_info.absoluteFilePath() );
-        MailInterface interface;
-        interface.send ( mail );
-      }
+      _M_report_file = out_info;
+      QDialog *dlg = new QDialog();
+      dlg->setWindowTitle(i18n("Report Export"));
+      QDialogButtonBox *buttons = new QDialogButtonBox(dlg);
+      buttons->addButton(QDialogButtonBox::Ok);
+      QPushButton *send_via_mail = new QPushButton(i18n("Send via Email"));
+      connect(send_via_mail, SIGNAL(clicked(bool)), this, SLOT(on_send_via_mail()));
+      buttons->addButton(send_via_mail, QDialogButtonBox::AcceptRole);
+      KMessageBox::createKMessageBox(dlg,
+        buttons,
+        QMessageBox::Information,
+        i18n ( "Report exported successfully to <b>'%1'</b>." , filename ),
+                                     QStringList(),QString(),0,KMessageBox::Notify);      
+    }
+    // ---------------------------------------------------------------------------------
+    void KReportTable::on_send_via_mail()
+    {      
+       QFileInfo report = _M_report_file;            
+      Mail mail;
+      mail.setSubject(report.fileName());
+      mail.addAttachement(report.absoluteFilePath());
+      MailInterface interface;
+      interface.send(mail); 
+      //this->accept();
     }
     // ---------------------------------------------------------------------------------
   }

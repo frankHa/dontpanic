@@ -5,8 +5,10 @@
 #include "dp_export.hpp"
 #include "libdontpanic/success.hpp"
 //KDE includes
-#include <KDebug>
+#define TRANSLATION_DOMAIN "dontpanic"
 #include <KLocalizedString>
+//Qt includes
+#include <QLoggingCategory>
 // ---------------------------------------------------------------------------------
 #ifdef __GNUC__
 #undef __FUNCTION__

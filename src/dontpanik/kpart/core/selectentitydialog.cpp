@@ -29,15 +29,12 @@ namespace dp
   {
     // ---------------------------------------------------------------------------------
     SelectEntityDialog::SelectEntityDialog ( SelectEntityDialogModel *model, QWidget* parent, Qt::WindowFlags f )
-        : KDialog ( parent, f )
+        : QDialog ( parent, f )
         , _M_ui ( new Ui::SelectEntitiesDialog() )
         , _M_model ( model )
     {
-      QWidget *widget = new QWidget(this);
-      _M_ui->setupUi ( widget );
-      setMainWidget(widget);
-      setButtons(KDialog::None);
-      this->setInitialSize(QSize(460, 560));
+      _M_ui->setupUi ( this );
+      //this->setInitialSize(QSize(460, 560));
       connect(_M_ui->kdialogbuttonbox, SIGNAL(accepted()), this, SLOT(accept()));
       connect(_M_ui->kdialogbuttonbox, SIGNAL(rejected()), this, SLOT(reject()));
       _M_model->init ( this );
@@ -65,7 +62,7 @@ namespace dp
     {
       _M_ui->entities_table->setModel ( _M_model->tableModel() );
       _M_ui->entities_table->resizeColumnsToContents();
-      this->setCaption ( _M_model->windowTitle() );
+      this->setWindowTitle ( _M_model->windowTitle() );
       connect ( _M_ui->select_all, SIGNAL ( clicked() ), this, SLOT ( on_select_all() ) );
       connect ( _M_ui->deselect_all, SIGNAL ( clicked() ), this, SLOT ( on_unselect_all() ) );
     }

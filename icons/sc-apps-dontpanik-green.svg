@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="48px"
+   height="48px"
+   id="svg2816"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="sc-apps-dontpanik-red.svg"
+   inkscape:export-filename="/home/fh/Projekte/Develop/DontPanic/icons/hi48-app-dontpanik.png"
+   inkscape:export-xdpi="98.480576"
+   inkscape:export-ydpi="98.480576">
+  <defs
+     id="defs2818">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 24 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="48 : 24 : 1"
+       inkscape:persp3d-origin="24 : 16 : 1"
+       id="perspective2824" />
+    <filter
+       id="filter2918"
+       inkscape:menu-tooltip="Draws a black outline around"
+       inkscape:menu="ABCs"
+       inkscape:label="Black outline"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur2920"
+         stdDeviation="2"
+         in="SourceAlpha"
+         result="result0" />
+      <feComposite
+         id="feComposite2922"
+         in2="result0"
+         result="result3"
+         operator="arithmetic"
+         in="SourceGraphic"
+         k2="1"
+         k3="10" />
+      <feComposite
+         id="feComposite2924"
+         in2="result3"
+         k2="1"
+         operator="in"
+         in="result3"
+         result="result4" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="7"
+     inkscape:cx="24"
+     inkscape:cy="23.928571"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:grid-bbox="true"
+     inkscape:document-units="px"
+     inkscape:window-width="879"
+     inkscape:window-height="642"
+     inkscape:window-x="1037"
+     inkscape:window-y="323"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata2821">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer">
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="10.714286"
+       y="13.285714"
+       id="text2826"><tspan
+         sodipodi:role="line"
+         id="tspan2828"
+         x="10.714286"
+         y="13.285714" /></text>
+    <g
+       id="g2838"
+       style="fill:#00ff00;filter:url(#filter2918)">
+      <text
+         sodipodi:linespacing="125%"
+         id="text2830"
+         y="29.857141"
+         x="4.5714288"
+         style="font-size:36px;font-style:oblique;font-variant:normal;font-weight:bold;font-stretch:condensed;text-align:start;line-height:125%;writing-mode:lr;text-anchor:start;fill:#00ff00;fill-opacity:1;stroke:none;font-family:LMSans10;-inkscape-font-specification:LMSans10 Semi-Bold Oblique Condensed"
+         xml:space="preserve"><tspan
+           y="29.857141"
+           x="4.5714288"
+           id="tspan2832"
+           sodipodi:role="line">4</tspan></text>
+      <text
+         sodipodi:linespacing="125%"
+         id="text2834"
+         y="41.428574"
+         x="19.285715"
+         style="font-size:36px;font-style:oblique;font-variant:normal;font-weight:bold;font-stretch:condensed;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#00ff00;fill-opacity:1;stroke:none;font-family:LMSans10;-inkscape-font-specification:LMSans10 Semi-Bold Oblique Condensed"
+         xml:space="preserve"><tspan
+           y="41.428574"
+           x="19.285715"
+           id="tspan2836"
+           sodipodi:role="line">2</tspan></text>
+    </g>
+  </g>
+</svg>

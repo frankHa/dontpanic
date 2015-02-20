@@ -29,16 +29,15 @@ namespace dp
   {
     // ---------------------------------------------------------------------------------
     PlannedWorkingTimesDialog::PlannedWorkingTimesDialog ( QWidget* parent, Qt::WindowFlags f )
-        : KDialog ( parent, f )
+        : QDialog ( parent, f )
         , _M_ui ( new Ui::PlannedWorkingTimesDialog )
     {
-     QWidget *w=new QWidget(this); 
-      _M_ui->setupUi ( w );
-      setMainWidget(w);
-      setButtons(Ok|Cancel);
-      setCaption(i18n("Planned Working Times"));
+      _M_ui->setupUi ( this );
+      setWindowTitle(i18n("Planned Working Times"));
       init_planned_working_hours_per_day();
       init_holiday_region();
+      setup_actions();
+      _M_ui->gb_holidays->setVisible(false);
     }
     // ---------------------------------------------------------------------------------
     PlannedWorkingTimesDialog::~PlannedWorkingTimesDialog()
@@ -62,7 +61,7 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void PlannedWorkingTimesDialog::init_holiday_region()
     {
-      _M_ui->holiday_region->selectRegion ( context()->plannedWorkingtimeManager()->loadCurrentHolidayRegion() );
+      //_M_ui->holiday_region->selectRegion ( context()->plannedWorkingtimeManager()->loadCurrentHolidayRegion() );
     }
     // ---------------------------------------------------------------------------------
     void PlannedWorkingTimesDialog::init_time_values()
@@ -85,7 +84,12 @@ namespace dp
       store_time_values();
       store_holiday_region();
     }
-
+    // ---------------------------------------------------------------------------------
+    void PlannedWorkingTimesDialog::setup_actions()
+    {
+      connect(_M_ui->buttons, SIGNAL(accepted()), this, SLOT(accept()));
+      connect(_M_ui->buttons, SIGNAL(rejected()), this, SLOT(reject()));
+    }
     // ---------------------------------------------------------------------------------
     void PlannedWorkingTimesDialog::store_time_values()
     {
@@ -103,7 +107,7 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void PlannedWorkingTimesDialog::store_holiday_region()
     {
-      context()->plannedWorkingtimeManager()->storeCurrentHolidayRegion(_M_ui->holiday_region->selectedRegion());
+      //context()->plannedWorkingtimeManager()->storeCurrentHolidayRegion(_M_ui->holiday_region->selectedRegion());
     }
 
     // ---------------------------------------------------------------------------------

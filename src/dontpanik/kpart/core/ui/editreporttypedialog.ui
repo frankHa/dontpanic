@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>EditReportTypeDialog</class>
- <widget class="QWidget" name="EditReportTypeDialog">
+ <widget class="QDialog" name="EditReportTypeDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>490</width>
-    <height>438</height>
+    <height>494</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -65,7 +65,7 @@
           <property name="text">
            <string/>
           </property>
-          <property name="strictIconSize">
+          <property name="strictIconSize" stdset="0">
            <bool>false</bool>
           </property>
          </widget>
@@ -238,13 +238,20 @@
      </property>
     </spacer>
    </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttons">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>
   <customwidget>
    <class>KIconButton</class>
    <extends>QPushButton</extends>
-   <header>kicondialog.h</header>
+   <header location="global">KIconButton</header>
   </customwidget>
  </customwidgets>
  <resources/>

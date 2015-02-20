@@ -2,7 +2,7 @@
 #define DONTPANICPART_H
 
 #include <libdontpanic/defines.hpp>
-#include <kparts/part.h>
+#include <kparts/readonlypart.h>
 
 class QWidget;
 class QPainter;
@@ -36,7 +36,7 @@ class DP_EXPORT DontPanikPart : public KParts::ReadOnlyPart
     /**
      * Default constructor
      */
-    DontPanikPart ( QWidget *parentWidget, QObject *parent, const QStringList & );
+    DontPanikPart ( QWidget *parentWidget, QObject *parent, const QVariantList & );
 
     /**
      * Destructor

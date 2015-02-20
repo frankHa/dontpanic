@@ -20,7 +20,6 @@
 #include "libdontpanic_client/timetracker.h"
 #include <libdontpanic/actiontemplate.hpp>
 #include <QDBusConnection>
-#include <KDebug>
 #include <remote_timetracker.h>
 namespace dp
 {
@@ -198,7 +197,7 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void TimeTracker::reset_remote_object()
     {
-      kDebug()<<"resetting remote object";
+      qDebug()<<"resetting remote object";
       if(_M_remote != 0){delete _M_remote;}
       _M_remote = new org::dontpanic::TimeTracker
       ( "org.dontpanic", "/TimeTracker", QDBusConnection::sessionBus(), this );

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>PlannedWorkingTimesDialog</class>
- <widget class="QWidget" name="PlannedWorkingTimesDialog">
+ <widget class="QDialog" name="PlannedWorkingTimesDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>685</width>
-    <height>200</height>
+    <width>692</width>
+    <height>232</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,15 +33,15 @@
           </item>
           <item>
            <widget class="QTimeEdit" name="monday">
+            <property name="displayFormat">
+             <string>HH:mm</string>
+            </property>
             <property name="time">
              <time>
               <hour>8</hour>
               <minute>0</minute>
               <second>0</second>
              </time>
-            </property>
-            <property name="displayFormat">
-             <string>HH:mm</string>
             </property>
            </widget>
           </item>
@@ -58,15 +58,15 @@
           </item>
           <item>
            <widget class="QTimeEdit" name="tuesday">
+            <property name="displayFormat">
+             <string>HH:mm</string>
+            </property>
             <property name="time">
              <time>
               <hour>8</hour>
               <minute>0</minute>
               <second>0</second>
              </time>
-            </property>
-            <property name="displayFormat">
-             <string>HH:mm</string>
             </property>
            </widget>
           </item>
@@ -83,15 +83,15 @@
           </item>
           <item>
            <widget class="QTimeEdit" name="wednesday">
+            <property name="displayFormat">
+             <string>HH:mm</string>
+            </property>
             <property name="time">
              <time>
               <hour>8</hour>
               <minute>0</minute>
               <second>0</second>
              </time>
-            </property>
-            <property name="displayFormat">
-             <string>HH:mm</string>
             </property>
            </widget>
           </item>
@@ -108,15 +108,15 @@
           </item>
           <item>
            <widget class="QTimeEdit" name="thursday">
+            <property name="displayFormat">
+             <string>HH:mm</string>
+            </property>
             <property name="time">
              <time>
               <hour>8</hour>
               <minute>0</minute>
               <second>0</second>
              </time>
-            </property>
-            <property name="displayFormat">
-             <string>HH:mm</string>
             </property>
            </widget>
           </item>
@@ -133,15 +133,15 @@
           </item>
           <item>
            <widget class="QTimeEdit" name="friday">
+            <property name="displayFormat">
+             <string>HH:mm</string>
+            </property>
             <property name="time">
              <time>
               <hour>8</hour>
               <minute>0</minute>
               <second>0</second>
              </time>
-            </property>
-            <property name="displayFormat">
-             <string>HH:mm</string>
             </property>
            </widget>
           </item>
@@ -189,7 +189,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupBox_2">
+    <widget class="QGroupBox" name="gb_holidays">
      <property name="title">
       <string>Holidays</string>
      </property>
@@ -214,7 +214,7 @@
        </widget>
       </item>
       <item>
-       <widget class="dp::core::KHolidayRegionComboBox" name="holiday_region"/>
+       <widget class="QComboBox" name="holiday_region"/>
       </item>
      </layout>
     </widget>
@@ -232,15 +232,15 @@
      </property>
     </spacer>
    </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttons">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>dp::core::KHolidayRegionComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kholidayregioncombobox.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

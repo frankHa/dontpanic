@@ -19,7 +19,6 @@
 
 #include "libdontpanic_client/actiontemplatemanager.h"
 #include <QDBusConnection>
-#include <KDebug>
 #include <libdontpanic/actiontemplate.hpp>
 #include <remote_action_template_manager.h>
 namespace dp
@@ -54,7 +53,7 @@ namespace dp
       reply.waitForFinished();
       if(reply.isError())
       {
-        kWarning()<<reply.error();
+        qWarning()<<reply.error();
         emit error(QDBusError::errorString(reply.error().type()));
       }
     }

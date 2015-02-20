@@ -4,8 +4,8 @@ set(dontpanic_SRCS
     main.cpp    
    )
 
-kde4_add_executable(dontpanic ${dontpanic_SRCS})
-target_link_libraries(dontpanic libdontpanic_core ${libuuid_LIB} dontpanic_lib ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTSQL_LIBRARY} ${KDEPIMLIBS_KHOLIDAYS_LIBS})
+add_executable(dontpanic ${dontpanic_SRCS})
+target_link_libraries(dontpanic libdontpanic_core ${libuuid_LIB} dontpanic_lib)
 install(TARGETS dontpanic ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 

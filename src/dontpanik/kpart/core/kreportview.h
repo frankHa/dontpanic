@@ -20,7 +20,7 @@
 #ifndef DP_CORE_KREPORTVIEW_H
 #define DP_CORE_KREPORTVIEW_H
 
-#include <QtGui/QWidget>
+#include <QtWidgets/QWidget>
 #include <libdontpanic/defines.hpp>
 #include <libdontpanic/report.h>
 

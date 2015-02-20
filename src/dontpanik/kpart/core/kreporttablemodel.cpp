@@ -62,13 +62,15 @@ namespace dp
     void KReportTableModel::setReport ( const dp::Report& data )
     {
       _M_report = data;
-      reset();
+      beginResetModel();
+      endResetModel();
     }
     // ---------------------------------------------------------------------------------
     void KReportTableModel::resetReport()
     {
       _M_report = Report();
-      reset();
+      beginResetModel();
+      endResetModel();
     }
     // ---------------------------------------------------------------------------------
   }

@@ -21,13 +21,13 @@
 #define DP_CORE_ACTIONTEMPLATEACTION_H
 #include <libdontpanic/defines.hpp>
 #include <libdontpanic/actiontemplate.hpp>
-#include <KAction>
+#include <QWidgetAction>
 namespace dp {
 
   
 namespace core {
 
-  class ActionTemplateAction : public KAction
+  class ActionTemplateAction : public QWidgetAction
   {
     Q_OBJECT
     signals:
