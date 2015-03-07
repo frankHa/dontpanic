@@ -68,11 +68,12 @@ set(dontpanikpart_LIB_UIS
    )
 ki18n_wrap_ui(dontpanikpart_LIB_SRCS ${dontpanikpart_LIB_UIS})
 
-set (KDEPIMLIBS_DBUS_INTERFACES_DIR "/usr/share/dbus-1/interfaces")
-qt5_add_dbus_interface(dontpanikpart_LIB_SRCS
-                       ${KDEPIMLIBS_DBUS_INTERFACES_DIR}/org.kde.kmail.kmail.xml
-                       remote_kmail
+if(DP_KMAIL_INTEGRATION)
+  qt5_add_dbus_interface(dontpanikpart_LIB_SRCS
+                         ${KMAIL_DBUS_INTERFACE}
+                         remote_kmail                       
 )
+endif(DP_KMAIL_INTEGRATION)
 
 
 add_library(dontpanikpartprivate SHARED ${dontpanikpart_LIB_SRCS})

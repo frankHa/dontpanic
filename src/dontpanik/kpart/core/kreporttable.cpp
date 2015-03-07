@@ -124,17 +124,20 @@ namespace dp
       dlg->setWindowTitle(i18n("Report Export"));
       QDialogButtonBox *buttons = new QDialogButtonBox(dlg);
       buttons->addButton(QDialogButtonBox::Ok);
+#ifdef DP_KMAIL_INTEGRATION
       QPushButton *send_via_mail = new QPushButton(i18n("Send via Email"));
       connect(send_via_mail, SIGNAL(clicked(bool)), this, SLOT(on_send_via_mail()));
       buttons->addButton(send_via_mail, QDialogButtonBox::AcceptRole);
+#endif //DP_KMAIL_INTEGRATION
       KMessageBox::createKMessageBox(dlg,
         buttons,
         QMessageBox::Information,
         i18n ( "Report exported successfully to <b>'%1'</b>." , filename ),
                                      QStringList(),QString(),0,KMessageBox::Notify);      
     }
-    // ---------------------------------------------------------------------------------
-    void KReportTable::on_send_via_mail()
+    // ---------------------------------------------------------------------------------    
+#ifdef DP_KMAIL_INTEGRATION
+    void KReportTable::on_send_via_mail()    
     {      
        QFileInfo report = _M_report_file;            
       Mail mail;
@@ -145,6 +148,7 @@ namespace dp
       //this->accept();
     }
     // ---------------------------------------------------------------------------------
+#endif //DP_KMAIL_INTEGRATION
   }
   // ---------------------------------------------------------------------------------
 }

@@ -1,6 +1,6 @@
 #include "dontpanik_part.hpp"
 
-#include <config.h>
+#include <dontpanik/defines.hpp>
 
 #include "dont_panik_part_core.hpp"
 #include "statusnotifieritem.h"

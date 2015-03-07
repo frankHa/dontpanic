@@ -19,7 +19,7 @@
 
 #ifndef DP_CORE_KREPORTTABLE_H
 #define DP_CORE_KREPORTTABLE_H
-
+#include <dontpanik/defines.hpp>
 #include <QTableView>
 #include <QFileInfo>
 
@@ -63,7 +63,9 @@ namespace dp
         // ---------------------------------------------------------------------------------
         void export_data_to_file();
         // ---------------------------------------------------------------------------------
+#ifdef DP_KMAIL_INTEGRATION
         void on_send_via_mail();
+#endif //DP_KMAIL_INTEGRATION
         // ---------------------------------------------------------------------------------
       private:
         // ---------------------------------------------------------------------------------

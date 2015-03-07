@@ -19,7 +19,7 @@
 
 #ifndef DP_CORE_REPORTEXPORTEDSUCCESSFULLYDIALOG_H
 #define DP_CORE_REPORTEXPORTEDSUCCESSFULLYDIALOG_H
-#include <libdontpanic/defines.hpp>
+#include <dontpanik/defines.hpp>
 #include <QDialog>
 #include <QFileInfo>
 
@@ -41,7 +41,9 @@ namespace dp
         // ---------------------------------------------------------------------------------
         void init();
         // ---------------------------------------------------------------------------------
+#ifdef DP_KMAIL_INTEGRATION
         void on_send_via_mail();
+#endif //DP_KMAIL_INTEGRATION
         // ---------------------------------------------------------------------------------
       private:
         // ---------------------------------------------------------------------------------
