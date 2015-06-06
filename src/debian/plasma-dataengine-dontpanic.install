@@ -1,0 +1,3 @@
+/usr/lib/*/qt5/plugins/plasma/dataengine/plasma_engine_dontpanic.so
+/usr/share/kservices5/plasma-dataengine-dontpanic.desktop
+/usr/share/plasma/services/dontpanic.operations

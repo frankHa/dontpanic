@@ -1,0 +1,5 @@
+/usr/share/applications/dontpanik_part.desktop
+/usr/share/kxmlgui5/dontpanik/dontpanik_part.rc
+/usr/share/knotifications5/dontpanikpart.notifyrc
+/usr/lib/*/qt5/plugins/dontpanikpart.so
+/usr/lib/*/libdontpanikpartprivate.so
