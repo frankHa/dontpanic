@@ -1,2 +1,0 @@
-shlibs:Depends=libc6 (>= 2.14), libkf5i18n5 (>= 4.97.0), libqt5core5a (>= 5.4.0), libqt5dbus5 (>= 5.0.2), libqt5sql5 (>= 5.0.2), libstdc++6 (>= 4.1.1)
-misc:Depends=

@@ -1,3 +1,15 @@
+dontpanic (0.2-git20150607-1ppa1~vivid) vivid; urgency=medium
+
+  * packaging git snapshot 20150607
+
+ -- Frank Habel <frank@bugplasma.de>  Sun, 07 Jun 2015 23:46:09 +0200
+
+dontpanic (0.2-git20150606-1ppa2~vivid) vivid; urgency=medium
+
+  * removed libdontpanic.so from package libdontpanicclient
+
+ -- Frank Habel <frank@bugplasma.de>  Sun, 07 Jun 2015 23:06:54 +0200
+
 dontpanic (0.2-git20150606-1ppa1~vivid) vivid; urgency=low
 
   * Initial release
