@@ -1,0 +1,73 @@
+Source: dontpanic
+Section: misc
+Priority: optional
+Maintainer: Frank Habel <frank@bugplasma.de>
+Build-Depends: debhelper (>= 9),
+               cmake,
+               dbus-x11,
+               extra-cmake-modules,
+               libdbus-1-dev,
+               libkf5config-dev,
+               libkf5coreaddons-dev,
+               libkf5i18n-dev,
+               libkf5iconthemes-dev,
+               libkf5notifications-dev,
+               libkf5parts-dev,
+               libkf5widgetsaddons-dev,
+               libkf5xmlgui-dev,
+               libsqlite3-dev,
+               kdepim-dev,
+               pkg-config,
+               pkg-kde-tools (>= 0.15.15ubuntu1~),
+               plasma-framework-dev,
+               uuid-dev,
+               qtbase5-dev,
+               qtbase5-dev-tools
+Standards-Version: 3.9.5
+Vcs-Git: https://github.com/frankHa/dontpanic.git
+
+Package: dontpanic-common
+Architecture: all
+Description: Commonly used components
+
+Package: libdontpanic
+Architecture: any
+Depends: ${shlibs:Depends}, dontpanic-common
+Description: The dontpanic core library
+
+Package: libdontpanicclient
+Architecture: any
+Depends: ${shlibs:Depends}, libdontpanic (= ${binary:Version})
+Description: The dontpanic client library
+
+Package: dontpanic
+Architecture: any
+Depends: ${shlibs:Depends}, libdontpanic (= ${binary:Version})
+Description: The dontpanic core service
+
+Package: dontpanikpart
+Architecture: any
+Depends: ${shlibs:Depends}, dontpanic (= ${binary:Version}), libdontpanicclient (= ${binary:Version}), dontpanic-common (= ${binary:Version})
+Description: embeddable dontpanic client component
+
+
+Package: dontpanik
+Architecture: any
+Depends: ${shlibs:Depends}, dontpanikpart (= ${binary:Version})
+Suggests: kmail
+Description: Official GUI client for dontpanic
+
+Package: dontpanic-i18n
+Architecture: all
+Depends: dontpanic
+Description: Translation files for dontpanic
+
+Package: plasma-dataengine-dontpanic
+Architecture: any
+Depends: libdontpanicclient (= ${binary:Version}), dontpanic (= ${binary:Version})
+Description: Plasma dataengine to interact with dontpanic
+
+Package: plasma-widget-dontpanic
+Architecture: all
+Depends: plasma-dataengine-dontpanic (= ${binary:Version})
+Description: Plasma widget to interact with dontpanic
