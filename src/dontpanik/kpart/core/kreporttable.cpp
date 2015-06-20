@@ -127,6 +127,7 @@ namespace dp
 #ifdef DP_KMAIL_INTEGRATION
       QPushButton *send_via_mail = new QPushButton(i18n("Send via Email"));
       connect(send_via_mail, SIGNAL(clicked(bool)), this, SLOT(on_send_via_mail()));
+      connect(this, SIGNAL(mailHasBeenSent()), dlg, SLOT(accept()));
       buttons->addButton(send_via_mail, QDialogButtonBox::AcceptRole);
 #endif //DP_KMAIL_INTEGRATION
       KMessageBox::createKMessageBox(dlg,
@@ -145,7 +146,7 @@ namespace dp
       mail.addAttachement(report.absoluteFilePath());
       MailInterface interface;
       interface.send(mail); 
-      //this->accept();
+      emit mailHasBeenSent();
     }
     // ---------------------------------------------------------------------------------
 #endif //DP_KMAIL_INTEGRATION
