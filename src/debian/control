@@ -32,7 +32,7 @@ Description: Commonly used components
 
 Package: libdontpanic
 Architecture: any
-Depends: ${shlibs:Depends}
+Depends: ${shlibs:Depends}, dontpanic-common
 Description: The dontpanic core library
 
 Package: libdontpanicclient
