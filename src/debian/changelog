@@ -1,3 +1,10 @@
+dontpanic (0.2-git20150621-1ppa1~vivid) vivid; urgency=medium
+
+  * packaged latest git snapshot 
+  * refined dependencies
+
+ -- Frank Habel <frank@bugplasma.de>  Sun, 21 Jun 2015 00:43:33 +0200
+
 dontpanic (0.2-git20150607-1ppa2~vivid) vivid; urgency=medium
 
   * added missing plasma-applet-dontpanic.desktop to plasma-widget-dontpanic
