@@ -54,6 +54,7 @@ Description: embeddable dontpanic client component
 Package: dontpanik
 Architecture: any
 Depends: ${shlibs:Depends}, dontpanikpart (= ${binary:Version})
+Suggests: kmail
 Description: Official GUI client for dontpanic
 
 Package: dontpanic-i18n
