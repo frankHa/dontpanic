@@ -54,7 +54,7 @@ namespace dp
     }
     // ---------------------------------------------------------------------------------
     KReportTable::KReportTable ( QWidget* parent )
-        : QTableView ( parent )
+      : QTableView ( parent )
     {
       init();
     }
@@ -83,7 +83,7 @@ namespace dp
     {
       _M_data_model = new KReportTableModel ( this );
       _M_sort_model = new QSortFilterProxyModel ( this );
-      _M_sort_model->setSortRole(KReportTableModel::SortRole);
+      _M_sort_model->setSortRole ( KReportTableModel::SortRole );
       _M_sort_model->setSourceModel ( _M_data_model );
       this->setModel ( _M_sort_model );
       setup_actions();
@@ -101,7 +101,7 @@ namespace dp
       //fetching the target file name from the most recent representation of the report type (instead of using the cached report type definition):
       QString filename = context()->reportManager()->load ( id ).exportDataFileName ( _M_data_model->report() );
 
-      filename = QFileDialog::getSaveFileName ( this, i18n ( "Export Report Data to" ), detail::url ( filename ).toLocalFile());
+      filename = QFileDialog::getSaveFileName ( this, i18n ( "Export Report Data to" ), detail::url ( filename ).toLocalFile() );
       if ( filename.isEmpty() ) {return;}
       QFile out ( filename );
       QFileInfo out_info ( out );
@@ -121,31 +121,36 @@ namespace dp
       out.close();
       _M_report_file = out_info;
       QDialog *dlg = new QDialog();
-      dlg->setWindowTitle(i18n("Report Export"));
-      QDialogButtonBox *buttons = new QDialogButtonBox(dlg);
-      buttons->addButton(QDialogButtonBox::Ok);
+      dlg->setWindowTitle ( i18n ( "Report Export" ) );
+      QDialogButtonBox *buttons = new QDialogButtonBox ( dlg );
+      buttons->addButton ( QDialogButtonBox::Ok );
 #ifdef DP_KMAIL_INTEGRATION
-      QPushButton *send_via_mail = new QPushButton(i18n("Send via Email"));
-      connect(send_via_mail, SIGNAL(clicked(bool)), this, SLOT(on_send_via_mail()));
-      connect(this, SIGNAL(mailHasBeenSent()), dlg, SLOT(accept()));
-      buttons->addButton(send_via_mail, QDialogButtonBox::AcceptRole);
-#endif //DP_KMAIL_INTEGRATION
-      KMessageBox::createKMessageBox(dlg,
-        buttons,
-        QMessageBox::Information,
-        i18n ( "Report exported successfully to <b>'%1'</b>." , filename ),
-                                     QStringList(),QString(),0,KMessageBox::Notify);      
+      MailInterface mailInterface;
+      if ( mailInterface.isAvailable() )
+      {
+        QPushButton *send_via_mail = new QPushButton ( i18n ( "Send via Email" ) );
+        connect ( send_via_mail, SIGNAL ( clicked ( bool ) ), this, SLOT ( on_send_via_mail() ) );
+        connect ( this, SIGNAL ( mailHasBeenSent() ), dlg, SLOT ( accept() ) );
+        buttons->addButton ( send_via_mail, QDialogButtonBox::AcceptRole );
+      }
+#endif //DP_KMAIL_INTEGRATION      
+      KMessageBox::createKMessageBox ( dlg,
+                                       buttons,
+                                       QMessageBox::Information,
+                                       i18n ( "Report exported successfully to <b>'%1'</b>." , filename ),
+                                       QStringList(), QString(), 0, KMessageBox::Notify );
+
     }
-    // ---------------------------------------------------------------------------------    
+    // ---------------------------------------------------------------------------------
 #ifdef DP_KMAIL_INTEGRATION
-    void KReportTable::on_send_via_mail()    
-    {      
-       QFileInfo report = _M_report_file;            
+    void KReportTable::on_send_via_mail()
+    {
+      QFileInfo report = _M_report_file;
       Mail mail;
-      mail.setSubject(report.fileName());
-      mail.addAttachement(report.absoluteFilePath());
+      mail.setSubject ( report.fileName() );
+      mail.addAttachement ( report.absoluteFilePath() );
       MailInterface interface;
-      interface.send(mail); 
+      interface.send ( mail );
       emit mailHasBeenSent();
     }
     // ---------------------------------------------------------------------------------

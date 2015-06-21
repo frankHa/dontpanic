@@ -51,30 +51,35 @@ namespace dp
     // Mail interface:
     // ---------------------------------------------------------------------------------
     MailInterface::MailInterface ( QObject* parent )
-        : QObject ( parent )
-        , _M_remote ( 0 ) {}
-
+      : QObject ( parent )
+      , _M_remote ( 0 ) {}
+    // ---------------------------------------------------------------------------------
+    bool MailInterface::isAvailable()
+    {
+      bool binary_available = QProcess::execute("/bin/sh -c \"command -v kmail\"")==0;
+      return binary_available or remote()->isValid();
+    }
     // ---------------------------------------------------------------------------------
     void MailInterface::send ( Mail const& mail )
     {
       if ( remote()->isValid() )
       {
-        QString to("");
-        QString cc("");
-        QString bcc("");
+        QString to ( "" );
+        QString cc ( "" );
+        QString bcc ( "" );
         QString const& subject = mail.subject();
-        QString body("");
-        bool hidden(false);
-        QString messageFile("");
+        QString body ( "" );
+        bool hidden ( false );
+        QString messageFile ( "" );
         QStringList const& attachements = mail.attachements();
         QStringList customHeaders;
-        remote()->openComposer(to, cc, bcc, subject, body, hidden, messageFile, attachements, customHeaders);
+        remote()->openComposer ( to, cc, bcc, subject, body, hidden, messageFile, attachements, customHeaders );
       }
       else
       {
         QStringList arguments;
         arguments << "-s" << mail.subject();
-        foreach ( QString const& url, mail.attachements() )
+        foreach ( QString const & url, mail.attachements() )
         {
           arguments << "--attach" << url;
         }
