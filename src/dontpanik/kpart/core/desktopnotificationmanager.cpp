@@ -37,7 +37,7 @@ namespace dp
     // ---------------------------------------------------------------------------------
     void DesktopNotificationManager::showNoJobTrackingWarning ( QString const& msg )
     {
-      KNotification::event("NoJobTracking", i18n("Don't Panik Reminder"), msg, QIcon::fromTheme("dontpanik").pixmap(48), 0, KNotification::Persistent, "dontpanikpartd"/*_M_component_name*/);
+      KNotification::event("NoJobTracking", i18n("Don't Panik Reminder"), msg, QIcon::fromTheme("dontpanik").pixmap(48), 0, KNotification::Persistent, "dontpanikpart"/*_M_component_name*/);      
     }
     // ---------------------------------------------------------------------------------
   }
