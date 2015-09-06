@@ -1,3 +1,9 @@
+dontpanic (0.2-git20150828-1ppa1~vivid) vivid; urgency=medium
+
+  * packaged latest git snapshot (re-enabling 'no job tracking' notifications)
+
+ -- Frank Habel <frank@bugplasma.de>  Fri, 28 Aug 2015 01:01:24 +0200
+
 dontpanic (0.2-git20150621.2-1ppa1~vivid) vivid; urgency=medium
 
   * packaged latest git snapshot (detecting kmail availability at runtime) 
