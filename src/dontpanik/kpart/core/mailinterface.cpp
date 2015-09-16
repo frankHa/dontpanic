@@ -18,7 +18,7 @@
 */
 
 #include "mailinterface.h"
-#ifdef DP_KMAIL_INTEGRATION
+//#ifdef DP_KMAIL_INTEGRATION
 #include <QProcess>
 
 namespace dp
@@ -38,9 +38,9 @@ namespace dp
       return _M_subject;
     }
     // ---------------------------------------------------------------------------------
-    void Mail::addAttachement ( QString const& att )
+    void Mail::addAttachement ( QUrl const& att )
     {
-      _M_attachement_paths << att;
+      _M_attachement_paths << att.toString();
     }
     // ---------------------------------------------------------------------------------
     QStringList const& Mail::attachements() const
@@ -104,4 +104,4 @@ namespace dp
     // ---------------------------------------------------------------------------------
   }
 }
-#endif //DP_KMAIL_INTEGRATION
+//#endif //DP_KMAIL_INTEGRATION

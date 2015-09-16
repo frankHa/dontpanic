@@ -124,7 +124,6 @@ namespace dp
       dlg->setWindowTitle ( i18n ( "Report Export" ) );
       QDialogButtonBox *buttons = new QDialogButtonBox ( dlg );
       buttons->addButton ( QDialogButtonBox::Ok );
-#ifdef DP_KMAIL_INTEGRATION
       MailInterface mailInterface;
       if ( mailInterface.isAvailable() )
       {
@@ -133,7 +132,6 @@ namespace dp
         connect ( this, SIGNAL ( mailHasBeenSent() ), dlg, SLOT ( accept() ) );
         buttons->addButton ( send_via_mail, QDialogButtonBox::AcceptRole );
       }
-#endif //DP_KMAIL_INTEGRATION      
       KMessageBox::createKMessageBox ( dlg,
                                        buttons,
                                        QMessageBox::Information,
@@ -142,19 +140,17 @@ namespace dp
 
     }
     // ---------------------------------------------------------------------------------
-#ifdef DP_KMAIL_INTEGRATION
     void KReportTable::on_send_via_mail()
     {
       QFileInfo report = _M_report_file;
       Mail mail;
       mail.setSubject ( report.fileName() );
-      mail.addAttachement ( report.absoluteFilePath() );
+      mail.addAttachement ( QUrl::fromLocalFile(report.absoluteFilePath()) );
       MailInterface interface;
       interface.send ( mail );
       emit mailHasBeenSent();
     }
     // ---------------------------------------------------------------------------------
-#endif //DP_KMAIL_INTEGRATION
   }
   // ---------------------------------------------------------------------------------
 }

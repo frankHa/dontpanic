@@ -36,23 +36,23 @@ namespace dp
     void ReportExportedSuccessfullyDialog::init()
     {
       setWindowTitle(i18n("Report Export"));
-#ifdef DP_KMAIL_INTEGRATION
+//#ifdef DP_KMAIL_INTEGRATION
       connect(this, SIGNAL(user1Clicked()), SLOT(on_send_via_mail()));
-#endif//dDP_KMAIL_INTEGRATION
+//#endif//dDP_KMAIL_INTEGRATION
     }
     // ---------------------------------------------------------------------------------
-#ifdef DP_KMAIL_INTEGRATION
+//#ifdef DP_KMAIL_INTEGRATION
     void ReportExportedSuccessfullyDialog::on_send_via_mail()
     {      
        QFileInfo report = _M_report_file;            
       Mail mail;
       mail.setSubject(report.fileName());
-      mail.addAttachement(report.absoluteFilePath());
+      mail.addAttachement(QUrl::fromLocalFile(report.absoluteFilePath()));
       MailInterface interface;
       interface.send(mail); 
       this->accept();
     }
-#endif //DP_KMAIL_INTEGRATION
+//#endif //DP_KMAIL_INTEGRATION
     // ---------------------------------------------------------------------------------
   }
 }
