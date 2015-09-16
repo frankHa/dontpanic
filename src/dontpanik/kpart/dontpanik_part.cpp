@@ -49,7 +49,9 @@ DontPanikPart::DontPanikPart ( QWidget *parentWidget, QObject *parent, const QVa
   topLayout->addWidget ( _M_core->widget() );
   
   // set our XML-UI resource file
-  setXMLFile ( "dontpanik_part.rc" );
+  qDebug()<<"initializing UI from dontpanik_part.rc";
+  setComponentName(QStringLiteral("dontpanik"), QStringLiteral("Don't Panik"));
+  setXMLFile ( QStringLiteral("dontpanik_part.rc"), true );    
 }
 
 DontPanikPart::~DontPanikPart()
