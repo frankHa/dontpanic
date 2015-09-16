@@ -20,7 +20,7 @@
 #ifndef DP_CORE_MAILINTERFACE_H
 #define DP_CORE_MAILINTERFACE_H
 #include <dontpanik/defines.hpp>
-#ifdef DP_KMAIL_INTEGRATION
+//#ifdef DP_KMAIL_INTEGRATION
 #include <remote_kmail.h>
 #include <QObject>
 // ---------------------------------------------------------------------------------
@@ -85,5 +85,5 @@ namespace dp
   // ---------------------------------------------------------------------------------
 }//dp
 // ---------------------------------------------------------------------------------
-#endif //DP_KMAIL_INTEGRATION
+//#endif //DP_KMAIL_INTEGRATION
 #endif // DP_CORE_MAILINTERFACE_H

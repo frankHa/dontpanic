@@ -42,6 +42,7 @@ set(dontpanikpart_LIB_SRCS
     mailinterface.cpp 
     plannedworkingtimesdialog.cpp
     #reportexportedsuccessfullydialog.cpp
+    remote_kmail.cpp
     selectprojectsdialog.cpp
     selecttasksdialog.cpp
     selectentitydialog.cpp
@@ -68,12 +69,12 @@ set(dontpanikpart_LIB_UIS
    )
 ki18n_wrap_ui(dontpanikpart_LIB_SRCS ${dontpanikpart_LIB_UIS})
 
-if(DP_KMAIL_INTEGRATION)
-  qt5_add_dbus_interface(dontpanikpart_LIB_SRCS
-                         ${KMAIL_DBUS_INTERFACE}
-                         remote_kmail                       
-)
-endif(DP_KMAIL_INTEGRATION)
+# if(DP_KMAIL_INTEGRATION)
+#   qt5_add_dbus_interface(dontpanikpart_LIB_SRCS
+#                          ${KMAIL_DBUS_INTERFACE}
+#                          remote_kmail                       
+# )
+# endif(DP_KMAIL_INTEGRATION)
 
 
 add_library(dontpanikpartprivate SHARED ${dontpanikpart_LIB_SRCS})

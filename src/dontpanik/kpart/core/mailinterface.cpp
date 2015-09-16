@@ -18,7 +18,7 @@
 */
 
 #include "mailinterface.h"
-#ifdef DP_KMAIL_INTEGRATION
+//#ifdef DP_KMAIL_INTEGRATION
 #include <QProcess>
 
 namespace dp
@@ -104,4 +104,4 @@ namespace dp
     // ---------------------------------------------------------------------------------
   }
 }
-#endif //DP_KMAIL_INTEGRATION
+//#endif //DP_KMAIL_INTEGRATION
