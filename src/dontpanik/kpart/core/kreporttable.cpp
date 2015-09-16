@@ -145,7 +145,7 @@ namespace dp
       QFileInfo report = _M_report_file;
       Mail mail;
       mail.setSubject ( report.fileName() );
-      mail.addAttachement ( report.absoluteFilePath() );
+      mail.addAttachement ( QUrl::fromLocalFile(report.absoluteFilePath()) );
       MailInterface interface;
       interface.send ( mail );
       emit mailHasBeenSent();
