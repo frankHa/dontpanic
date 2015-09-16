@@ -1,13 +1,11 @@
-find_package(KdepimLibs REQUIRED)
-
 include_directories(../kpart)
 
 set(kontact_dontpanik_PART_SRCS dontpanik_plugin.cpp)
 
-kde4_add_plugin(kontact_dontpanik_plugin ${kontact_dontpanik_PART_SRCS})
+add_library(kontact_dontpanik_plugin MODULE ${kontact_dontpanik_PART_SRCS})
 
-target_link_libraries(kontact_dontpanik_plugin ${KDE4_KDEUI_LIBS} ${KDEPIMLIBS_KONTACTINTERFACE_LIBS})
+target_link_libraries(kontact_dontpanik_plugin KF5::KontactInterface)
 
-install(TARGETS kontact_dontpanik_plugin  DESTINATION ${PLUGIN_INSTALL_DIR})
+install(TARGETS kontact_dontpanik_plugin  DESTINATION ${KDE_INSTALL_PLUGINDIR})
 
-install(FILES dontpanik_plugin.desktop  DESTINATION ${SERVICES_INSTALL_DIR}/kontact)
+install(FILES dontpanik_plugin.desktop  DESTINATION ${KDE_INSTALL_KSERVICES5DIR}/kontact)

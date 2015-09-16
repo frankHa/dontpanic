@@ -1,8 +1,8 @@
 #ifndef DONTPANIK_PLUGIN_H
 #define DONTPANIK_PLUGIN_H
 
-#include <kontactinterface/plugin.h>
-#include <kparts/part.h>
+#include <KontactInterface/Plugin>
+#include <KParts/Part>
 
 class DontPanikPlugin : public KontactInterface::Plugin
 {

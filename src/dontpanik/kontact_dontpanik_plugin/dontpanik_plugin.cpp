@@ -2,20 +2,18 @@
 
 #include <dontpanik_part.hpp>
 
-#include <kontactinterface/core.h>
-#include <kontactinterface/plugin.h>
+#include <KontactInterface/Core>
+#include <KontactInterface/Plugin>
 
-#include <kactioncollection.h>
-#include <kgenericfactory.h>
-#include <kicon.h>
-#include <kparts/componentfactory.h>
+#include <KActionCollection>
+#include <QIcon>
 
 EXPORT_KONTACT_PLUGIN( DontPanikPlugin, dontpanik )
 
 DontPanikPlugin::DontPanikPlugin( KontactInterface::Core *core, const QVariantList & )
 : KontactInterface::Plugin( core, core, "DontPanik" )
 {
-  setComponentData( KontactPluginFactory::componentData() );
+  setComponentName( QStringLiteral("DontPanik"), QStringLiteral("DontPanik") );
 }
 
 DontPanikPlugin::~DontPanikPlugin()
@@ -51,3 +49,5 @@ void DontPanikPlugin::showPart()
 {
   core()->selectPlugin(this);
 }
+
+#include "dontpanik_plugin.moc"
