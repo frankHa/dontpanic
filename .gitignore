@@ -1,4 +1,5 @@
 build
+build_kf5
 *~
 *.deb
 *.build
@@ -23,3 +24,5 @@ src/debian/plasma-widget-dontpanic
 src/debian/stamp-man-pages
 src/debian/tmp
 
+.kdev4
+*.kdev4
