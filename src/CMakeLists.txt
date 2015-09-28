@@ -9,7 +9,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 
 set(DBUS_INTERFACES_PATH ${CMAKE_SOURCE_DIR}/interfaces)
 option(DP_USE_LIBUUID "Use libuuid instead of Qt's default Uuid creator(recommended at least on linux systems!)" ON)
-option(DP_BUILD_KONTACT_PLUGIN "Building a kontact plugin. This will require the kdepim-dev files." ON)
+option(DP_BUILD_KONTACT_PLUGIN "Building a kontact plugin. This will require the kdepim-dev files." ON))
 option(DP_BUILD_PLASMA_COMPONENTS "Building a plasmaengine and a corresponding plasmoid." ON)
 option(DP_KMAIL_INTEGRATION "Building with KMail integration to enable sending report files by mail." ON)
 

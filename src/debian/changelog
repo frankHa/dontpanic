@@ -1,6 +1,12 @@
+dontpanic (0.2-git20150928-1ppa1~wily) wily; urgency=medium
+
+  * kontact integration
+
+ -- Frank Habel <frank@abraham>  Mon, 28 Sep 2015 22:40:33 +0200
+
 dontpanic (0.2-git20150926-1ppa1~wily) wily; urgency=medium
 
-  * packaged first version targeting wily (return of kontact integration :)  )
+  * packaged first version targeting wily 
 
  -- Frank Habel <frank@abraham>  Sat, 26 Sep 2015 21:47:49 +0200
 
