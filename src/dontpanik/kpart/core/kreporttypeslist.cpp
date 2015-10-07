@@ -94,6 +94,7 @@ namespace dp
       ReportType current_selection = _M_model->at(currentIndex());
       EditReportTypeDialog dlg;
       dlg.setReportType(current_selection);
+      dlg.setWindowModality(Qt::WindowModal);
       dlg.exec();
     }
     // ---------------------------------------------------------------------------------
