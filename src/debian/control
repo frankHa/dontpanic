@@ -23,7 +23,7 @@ Build-Depends: debhelper (>= 9),
                uuid-dev,
                qtbase5-dev,
                qtbase5-dev-tools
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Vcs-Git: https://github.com/frankHa/dontpanic.git
 
 Package: dontpanic-common
@@ -57,7 +57,7 @@ Depends: ${shlibs:Depends}, dontpanikpart (= ${binary:Version})
 Description: Official GUI client for dontpanic
 
 Package: kontact-plugin-dontpanik
-Architecture: all
+Architecture: any
 Depends: ${shlibs:Depends}, dontpanikpart (= ${binary:Version}), kontact
 Description: Kontact integration for dontpanik
 
@@ -68,7 +68,7 @@ Description: Translation files for dontpanic
 
 Package: plasma-dataengine-dontpanic
 Architecture: any
-Depends: libdontpanicclient (= ${binary:Version}), dontpanic (= ${binary:Version})
+Depends: ${shlibs:Depends}, libdontpanicclient (= ${binary:Version}), dontpanic (= ${binary:Version})
 Description: Plasma dataengine to interact with dontpanic
 
 Package: plasma-widget-dontpanic

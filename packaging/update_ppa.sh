@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 cd src
 version=`dpkg-parsechangelog --show-field Version`
 baseversion=`echo ${version} | sed -n 's/-[0-9]*ppa[0-9]*~.*//p'`
