@@ -51,11 +51,15 @@ Depends: ${shlibs:Depends}, dontpanic (= ${binary:Version}), libdontpanicclient 
 Suggests: kmail
 Description: embeddable dontpanic client component
 
-
 Package: dontpanik
 Architecture: any
 Depends: ${shlibs:Depends}, dontpanikpart (= ${binary:Version})
 Description: Official GUI client for dontpanic
+
+Package: kontact-plugin-dontpanik
+Architecture: all
+Depends: ${shlibs:Depends}, dontpanikpart (= ${binary:Version}), kontact
+Description: Kontact integration for dontpanik
 
 Package: dontpanic-i18n
 Architecture: all
