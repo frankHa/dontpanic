@@ -15,9 +15,9 @@ Build-Depends: debhelper (>= 9),
                libkf5parts-dev,
                libkf5widgetsaddons-dev,
                libkf5xmlgui-dev,
-               libsqlite3-dev,
-               kdepim-dev,
+               libsqlite3-dev,               
                pkg-config,
+               libkf5kontactinterface-dev,
                pkg-kde-tools (>= 0.15.15ubuntu1~),
                plasma-framework-dev,
                uuid-dev,
@@ -48,13 +48,13 @@ Description: The dontpanic core service
 Package: dontpanikpart
 Architecture: any
 Depends: ${shlibs:Depends}, dontpanic (= ${binary:Version}), libdontpanicclient (= ${binary:Version}), dontpanic-common (= ${binary:Version})
+Suggests: kmail
 Description: embeddable dontpanic client component
 
 
 Package: dontpanik
 Architecture: any
 Depends: ${shlibs:Depends}, dontpanikpart (= ${binary:Version})
-Suggests: kmail
 Description: Official GUI client for dontpanic
 
 Package: dontpanic-i18n
