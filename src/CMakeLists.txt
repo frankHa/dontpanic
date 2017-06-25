@@ -1,5 +1,4 @@
 project(dontpanic)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 cmake_minimum_required(VERSION 2.8.12)
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
 include(Qt5Support)
@@ -21,6 +20,7 @@ find_package(KF5 REQUIRED COMPONENTS KontactInterface)
 endif(DP_BUILD_KONTACT_PLUGIN)
 include(KDEInstallDirs)
 include(KDECompilerSettings)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -foperator-names") #override some of the KDE settings
 include(KDECMakeSettings)
 include(FeatureSummary)
 include(ECMInstallIcons)
